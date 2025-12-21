@@ -1,0 +1,46 @@
+{
+  "track": "swe_engineer",
+  "company_style": "general",
+  "difficulty": "hard",
+  "questions": [
+    {
+      "title": "Design a Real-Time Chat System",
+      "prompt": "Design a real-time chat system. Cover: message delivery, ordering, online presence, and scaling.",
+      "tags": [
+        "system-design",
+        "scalability",
+        "websockets"
+      ],
+      "followups": [
+        "How do you handle offline delivery and retries?",
+        "What consistency guarantees can you provide?"
+      ]
+    },
+    {
+      "title": "Distributed Rate Limiter",
+      "prompt": "Design a distributed rate limiter for an API gateway. Explain how you keep counters consistent and fast.",
+      "tags": [
+        "system-design",
+        "scalability",
+        "api"
+      ],
+      "followups": [
+        "What storage do you use (Redis) and why?",
+        "How do you handle clock skew or bursts?"
+      ]
+    },
+    {
+      "title": "Top K Frequent Elements",
+      "prompt": "Given an integer array nums and an integer k, return the k most frequent elements. Discuss multiple approaches.",
+      "tags": [
+        "hashmap",
+        "heap",
+        "bucket-sort"
+      ],
+      "followups": [
+        "Can you do better than O(n log n)?",
+        "What\u2019s the complexity of each approach?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+    "track": "swe_intern",
+    "company_style": "microsoft",
+    "difficulty": "hard",
+    "questions": [
+      {
+        "title": "Design a Distributed File Storage System",
+        "prompt": "Design a distributed file storage system (upload, download, metadata, replication) with reliability and scalability in mind.",
+        "tags": ["system-design", "distributed-systems", "scalability"],
+        "followups": [
+          "How do you ensure durability under failures?",
+          "How do you handle large files and streaming?",
+          "What consistency guarantees do you provide?"
+        ]
+      },
+      {
+        "title": "Design a Real-Time Chat System",
+        "prompt": "Design a real-time chat system with online presence, message delivery guarantees, and read receipts.",
+        "tags": ["system-design", "reliability", "scalability"],
+        "followups": [
+          "How do you handle offline users?",
+          "How do you ensure message ordering per conversation?",
+          "How do you prevent duplicate deliveries?"
+        ]
+      },
+      {
+        "title": "Implement a Thread-Safe LRU Cache",
+        "prompt": "Implement an LRU cache and make it safe for concurrent access with minimal contention.",
+        "tags": ["concurrency", "design", "hashmap"],
+        "followups": [
+          "What lock granularity would you use?",
+          "What are potential deadlocks and how do you avoid them?",
+          "How do you measure contention?"
+        ]
+      },
+      {
+        "title": "Design a Job Scheduler",
+        "prompt": "Design a job scheduling system that supports retries, backoff, priority, and worker scaling.",
+        "tags": ["system-design", "reliability"],
+        "followups": [
+          "How do you ensure at-least-once vs exactly-once execution?",
+          "How do you avoid duplicate work on retries?",
+          "How do you monitor stuck jobs?"
+        ]
+      },
+      {
+        "title": "Design an Authentication System",
+        "prompt": "Design an authentication system (login, token issuance, refresh, revocation) for a web + mobile app.",
+        "tags": ["security", "system-design"],
+        "followups": [
+          "How do you store secrets/tokens securely?",
+          "How do you defend against replay attacks?",
+          "How do you handle account takeover scenarios?"
+        ]
+      },
+      {
+        "title": "Scalable Notifications Service",
+        "prompt": "Design a notifications system that supports email/SMS/push with retries, throttling, and user preferences.",
+        "tags": ["system-design", "scalability", "reliability"],
+        "followups": [
+          "How do you prevent spamming users?",
+          "How do you handle provider outages?",
+          "How do you ensure idempotency?"
+        ]
+      },
+      {
+        "title": "Debugging: Memory Leak Under Load",
+        "prompt": "A service slowly increases memory usage and crashes after hours under load. Describe how you would find the root cause and fix it.",
+        "tags": ["debugging", "memory", "performance"],
+        "followups": [
+          "How do you distinguish leak vs cache growth?",
+          "What tools/telemetry would you use?",
+          "How do you validate the fix in production safely?"
+        ]
+      },
+      {
+        "title": "Design a Multi-Tenant Database Strategy",
+        "prompt": "Design a multi-tenant system for enterprise customers. Explain data isolation, scaling, and migration strategy.",
+        "tags": ["databases", "system-design", "scalability"],
+        "followups": [
+          "Shared DB vs separate DB per tenant?",
+          "How do you handle noisy neighbors?",
+          "How do you backup and restore per tenant?"
+        ]
+      },
+      {
+        "title": "Implement a Mini Compiler Pipeline (High Level)",
+        "prompt": "Describe a high-level design for parsing an input language into an AST and evaluating it. Include error reporting.",
+        "tags": ["design", "parsing", "system-thinking"],
+        "followups": [
+          "How do you represent tokens and AST nodes?",
+          "How do you produce helpful error messages?",
+          "What tests would you write first?"
+        ]
+      },
+      {
+        "title": "Design a Feature Store for ML",
+        "prompt": "Design a feature store that serves features for training and for online inference with consistency considerations.",
+        "tags": ["system-design", "ml-thinking", "distributed-systems"],
+        "followups": [
+          "How do you avoid training/serving skew?",
+          "How do you version features?",
+          "How do you monitor feature drift?"
+        ]
+      },
+      {
+        "title": "High Throughput API Gateway",
+        "prompt": "Design an API gateway for multiple services with authentication, rate limiting, logging, and routing at high throughput.",
+        "tags": ["system-design", "security", "scalability"],
+        "followups": [
+          "Where do you enforce authz vs authn?",
+          "How do you implement rate limiting at scale?",
+          "How do you handle partial outages?"
+        ]
+      },
+      {
+        "title": "Distributed Rate Limiter",
+        "prompt": "Design a distributed rate limiter that is accurate enough but resilient under failures.",
+        "tags": ["distributed-systems", "system-design"],
+        "followups": [
+          "Token bucket vs leaky bucket?",
+          "How do you handle clock skew?",
+          "How do you prevent a thundering herd?"
+        ]
+      },
+      {
+        "title": "Consistency Trade-offs in Sync",
+        "prompt": "You are designing data sync across devices. Explain strong vs eventual consistency trade-offs and choose one for a notes app.",
+        "tags": ["distributed-systems", "system-thinking"],
+        "followups": [
+          "What user-facing bugs appear under eventual consistency?",
+          "How do you resolve conflicts?",
+          "How do you test concurrency issues?"
+        ]
+      },
+      {
+        "title": "Security: Threat Modeling an API",
+        "prompt": "Threat model a public API endpoint and propose mitigations (auth, validation, rate limiting, logging).",
+        "tags": ["security", "design", "system-thinking"],
+        "followups": [
+          "What is the highest-risk threat and why?",
+          "How do you handle secrets in logs?",
+          "How do you test security controls?"
+        ]
+      },
+      {
+        "title": "Performance: 99th Percentile Latency",
+        "prompt": "A service meets average latency targets but fails at p99. Explain how you diagnose and fix tail latency.",
+        "tags": ["performance", "system-thinking"],
+        "followups": [
+          "What causes tail latency in distributed systems?",
+          "How do you instrument p95/p99 effectively?",
+          "What mitigations reduce tail latency?"
+        ]
+      },
+      {
+        "title": "Design a Reliable Event Processing System",
+        "prompt": "Design an event processing system that ingests events, processes them, and stores results reliably with replay support.",
+        "tags": ["system-design", "reliability", "distributed-systems"],
+        "followups": [
+          "How do you ensure exactly-once vs at-least-once processing?",
+          "How do you handle schema evolution?",
+          "How do you support replay without double counting?"
+        ]
+      },
+      {
+        "title": "Concurrency: Deadlock Investigation",
+        "prompt": "A multi-threaded app occasionally deadlocks in production. Describe your process to identify and fix it.",
+        "tags": ["concurrency", "debugging"],
+        "followups": [
+          "What telemetry helps detect deadlocks?",
+          "How do you reproduce it?",
+          "What design changes prevent it long-term?"
+        ]
+      },
+      {
+        "title": "Design a Search Service (High Level)",
+        "prompt": "Design a search service that supports indexing, querying, ranking, and pagination.",
+        "tags": ["system-design", "scalability"],
+        "followups": [
+          "How do you build and update the index?",
+          "How do you rank results efficiently?",
+          "How do you handle spam/abuse?"
+        ]
+      },
+      {
+        "title": "Large-Scale Data Migration Plan",
+        "prompt": "You must migrate billions of records to a new schema with minimal downtime. Outline a safe plan.",
+        "tags": ["databases", "reliability", "system-thinking"],
+        "followups": [
+          "How do you validate correctness during migration?",
+          "How do you rollback if issues appear?",
+          "What metrics do you monitor?"
+        ]
+      },
+      {
+        "title": "Behavioral: Cross-Team Influence",
+        "prompt": "Tell me about a time you influenced a decision across teams without direct authority.",
+        "tags": ["behavioral", "communication", "collaboration"],
+        "followups": [
+          "How did you build trust?",
+          "How did you handle pushback?",
+          "What was the outcome?"
+        ]
+      }
+    ]
+  }
+  

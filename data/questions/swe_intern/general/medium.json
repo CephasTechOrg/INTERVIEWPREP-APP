@@ -1,0 +1,75 @@
+{
+  "track": "swe_intern",
+  "company_style": "general",
+  "difficulty": "medium",
+  "questions": [
+    {
+      "title": "Longest Substring Without Repeating Characters",
+      "prompt": "Given a string s, find the length of the longest substring without repeating characters.",
+      "tags": [
+        "strings",
+        "sliding-window",
+        "hashmap"
+      ],
+      "followups": [
+        "What is the invariant maintained by the sliding window?",
+        "What is the time complexity and why?",
+        "How would you return the substring itself, not just length?"
+      ]
+    },
+    {
+      "title": "Group Anagrams",
+      "prompt": "Given an array of strings, group the anagrams together. You can return the answer in any order.",
+      "tags": [
+        "strings",
+        "hashmap",
+        "sorting"
+      ],
+      "followups": [
+        "What key do you use for grouping?",
+        "What is the complexity of your approach?",
+        "How would you optimize for large alphabets?"
+      ]
+    },
+    {
+      "title": "Top K Frequent Elements",
+      "prompt": "Given an integer array nums and an integer k, return the k most frequent elements.",
+      "tags": [
+        "hashmap",
+        "heap",
+        "bucket-sort"
+      ],
+      "followups": [
+        "Can you do better than O(n log n)?",
+        "What is the time and space complexity?",
+        "How do you handle ties?"
+      ]
+    },
+    {
+      "title": "Binary Tree Level Order Traversal",
+      "prompt": "Given the root of a binary tree, return the level order traversal of its nodes' values (from left to right, level by level).",
+      "tags": [
+        "trees",
+        "bfs",
+        "queue"
+      ],
+      "followups": [
+        "Why is BFS a good fit here?",
+        "What is the time and space complexity?",
+        "How would you return a single flattened list instead?"
+      ]
+    },
+    {
+      "title": "Coin Change (Minimum Coins)",
+      "prompt": "Given an integer array coins representing coin denominations and an integer amount, return the fewest number of coins needed to make up that amount. If it\u2019s not possible, return -1.",
+      "tags": [
+        "dp"
+      ],
+      "followups": [
+        "What\u2019s the DP state and transition?",
+        "What is the complexity?",
+        "How would you also reconstruct the actual coins used?"
+      ]
+    }
+  ]
+}

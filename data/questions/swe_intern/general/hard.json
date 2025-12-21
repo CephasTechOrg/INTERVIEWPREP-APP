@@ -1,0 +1,49 @@
+{
+  "track": "swe_intern",
+  "company_style": "general",
+  "difficulty": "hard",
+  "questions": [
+    {
+      "title": "Merge K Sorted Lists",
+      "prompt": "Given an array of k linked-lists, each linked-list is sorted in ascending order, merge all the linked-lists into one sorted linked-list and return it.",
+      "tags": [
+        "linked-list",
+        "heap",
+        "divide-and-conquer"
+      ],
+      "followups": [
+        "Compare the heap approach vs divide-and-conquer.",
+        "What is the time complexity in terms of total nodes N and k?",
+        "What are edge cases (empty lists, null heads)?"
+      ]
+    },
+    {
+      "title": "Serialize and Deserialize Binary Tree",
+      "prompt": "Design an algorithm to serialize and deserialize a binary tree. There is no restriction on how your serialization/deserialization algorithm should work.",
+      "tags": [
+        "trees",
+        "design",
+        "dfs",
+        "bfs"
+      ],
+      "followups": [
+        "What representation do you choose and why?",
+        "How do you handle null children?",
+        "What is the complexity?"
+      ]
+    },
+    {
+      "title": "Word Ladder",
+      "prompt": "Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest transformation sequence from beginWord to endWord such that only one letter can be changed at a time and each transformed word must exist in the word list.",
+      "tags": [
+        "graphs",
+        "bfs"
+      ],
+      "followups": [
+        "Why is BFS appropriate here?",
+        "How can you optimize neighbor generation?",
+        "What is the complexity?"
+      ]
+    }
+  ]
+}

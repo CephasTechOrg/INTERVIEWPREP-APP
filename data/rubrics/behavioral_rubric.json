@@ -1,0 +1,56 @@
+{
+  "title": "Behavioral Interview Rubric",
+  "dimensions": [
+    {
+      "name": "communication",
+      "description": "Clarity, structure, and completeness of the story.",
+      "levels": [
+        { "range": "0-3", "description": "Disorganized story, missing context or outcome, hard to follow." },
+        { "range": "4-6", "description": "Basic structure and clarity, but gaps in context or results." },
+        { "range": "7-8", "description": "Clear, structured STAR response with good pacing and focus." },
+        { "range": "9-10", "description": "Concise, compelling narrative with strong clarity and reflection." }
+      ]
+    },
+    {
+      "name": "problem_solving",
+      "description": "Problem framing, options considered, and decision making.",
+      "levels": [
+        { "range": "0-3", "description": "Little framing; decisions unclear or arbitrary." },
+        { "range": "4-6", "description": "Explains some constraints and decisions, limited trade-offs." },
+        { "range": "7-8", "description": "Frames trade-offs and explains rationale for key decisions." },
+        { "range": "9-10", "description": "Shows strong judgment, anticipates alternatives and risks." }
+      ]
+    },
+    {
+      "name": "correctness_reasoning",
+      "description": "Evidence, results, and accountability for outcomes.",
+      "levels": [
+        { "range": "0-3", "description": "No results or unverifiable claims." },
+        { "range": "4-6", "description": "Some results or outcomes, limited evidence." },
+        { "range": "7-8", "description": "Clear outcomes with concrete impact or metrics." },
+        { "range": "9-10", "description": "Strong evidence, quantified impact, and ownership." }
+      ]
+    },
+    {
+      "name": "complexity",
+      "description": "Scope, scale, and difficulty of the situation handled.",
+      "levels": [
+        { "range": "0-3", "description": "Small scope or unclear impact." },
+        { "range": "4-6", "description": "Moderate scope with some impact." },
+        { "range": "7-8", "description": "Meaningful scope, cross-team or measurable impact." },
+        { "range": "9-10", "description": "Large scope, significant impact, sustained influence." }
+      ]
+    },
+    {
+      "name": "edge_cases",
+      "description": "Handling challenges, risks, and lessons learned.",
+      "levels": [
+        { "range": "0-3", "description": "Ignores challenges or risks." },
+        { "range": "4-6", "description": "Mentions obstacles but limited mitigation." },
+        { "range": "7-8", "description": "Addresses risks and mitigation with clear examples." },
+        { "range": "9-10", "description": "Proactively identifies risks, alternatives, and lessons." }
+      ]
+    }
+  ],
+  "overall_scoring": "Compute the overall score as the average of the five dimension scores, scaled to 0-100 and rounded."
+}

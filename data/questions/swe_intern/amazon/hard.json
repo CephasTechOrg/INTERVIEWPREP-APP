@@ -1,0 +1,208 @@
+{
+    "track": "swe_intern",
+    "company_style": "amazon",
+    "difficulty": "hard",
+    "questions": [
+      {
+        "title": "Design a Highly Available URL Shortener",
+        "prompt": "Design a URL shortener that supports billions of reads/day, strong abuse prevention, and high availability.",
+        "tags": ["system-design", "scalability", "reliability"],
+        "followups": [
+          "How do you generate unique short codes at scale?",
+          "How do you handle hot keys and caching strategy?",
+          "How do you prevent abuse and spam?"
+        ]
+      },
+      {
+        "title": "Design a Distributed Rate Limiter",
+        "prompt": "Design a distributed rate limiter across multiple regions with good accuracy under failures.",
+        "tags": ["distributed-systems", "system-design", "reliability"],
+        "followups": [
+          "How do you handle clock skew?",
+          "Token bucket vs sliding window trade-offs?",
+          "How do you avoid a single point of failure?"
+        ]
+      },
+      {
+        "title": "Design a Durable Event Processing System",
+        "prompt": "Design an event processing system with replay support and strong operational reliability.",
+        "tags": ["system-design", "distributed-systems", "reliability"],
+        "followups": [
+          "At-least-once vs exactly-once processing?",
+          "How do you design idempotency keys?",
+          "How do you handle schema evolution?"
+        ]
+      },
+      {
+        "title": "Design a Large-Scale Notification Platform",
+        "prompt": "Design a notifications platform supporting email/SMS/push with retries, throttling, and user preferences.",
+        "tags": ["system-design", "scalability", "reliability"],
+        "followups": [
+          "How do you prevent over-sending and respect preferences?",
+          "How do you handle provider outages and retries safely?",
+          "How do you ensure idempotency and deduplication?"
+        ]
+      },
+      {
+        "title": "Debugging: Heisenbug Under Load",
+        "prompt": "A bug appears only under heavy load and disappears when logging is enabled. Describe how you would find the root cause and ship a safe fix.",
+        "tags": ["debugging", "concurrency", "reliability"],
+        "followups": [
+          "What low-overhead signals would you add?",
+          "How do you reproduce deterministically?",
+          "How do you roll out the fix safely?"
+        ]
+      },
+      {
+        "title": "Tail Latency (p99) Investigation",
+        "prompt": "A service meets average latency but fails p99 targets. Explain how you diagnose and reduce tail latency.",
+        "tags": ["performance", "system-thinking", "distributed-systems"],
+        "followups": [
+          "What causes tail latency in distributed systems?",
+          "How do you instrument tracing effectively?",
+          "What mitigations reduce p99 without hurting throughput?"
+        ]
+      },
+      {
+        "title": "Concurrent Data Structure: Thread-Safe Cache",
+        "prompt": "Design a thread-safe cache with minimal contention that supports read-heavy workloads.",
+        "tags": ["concurrency", "design", "performance"],
+        "followups": [
+          "What lock granularity do you choose and why?",
+          "How do you prevent deadlocks?",
+          "How do you measure contention and throughput?"
+        ]
+      },
+      {
+        "title": "Design a Multi-Tenant Service",
+        "prompt": "Design a multi-tenant SaaS service for enterprise customers: data isolation, scaling, and noisy-neighbor mitigation.",
+        "tags": ["system-design", "databases", "scalability"],
+        "followups": [
+          "Shared DB vs DB-per-tenant trade-offs?",
+          "How do you enforce isolation and access control?",
+          "How do you handle backups and restores per tenant?"
+        ]
+      },
+      {
+        "title": "Distributed Cache Invalidation Strategy",
+        "prompt": "Design a caching layer in front of a database and describe invalidation/consistency strategies under concurrent updates.",
+        "tags": ["distributed-systems", "system-thinking", "design"],
+        "followups": [
+          "Write-through vs write-back vs cache-aside?",
+          "How do you avoid cache stampedes?",
+          "What consistency model do you target and why?"
+        ]
+      },
+      {
+        "title": "Graph: Critical Connections",
+        "prompt": "Given an undirected graph, find all critical connections whose removal disconnects the graph.",
+        "tags": ["graphs", "dfs", "algorithms"],
+        "followups": [
+          "What are low-link values conceptually?",
+          "Why is DFS the right tool here?",
+          "Time and space complexity?"
+        ]
+      },
+      {
+        "title": "DP: Edit Distance",
+        "prompt": "Given two strings, compute the minimum number of edits (insert/delete/replace) to convert one into the other.",
+        "tags": ["dp", "strings", "algorithms"],
+        "followups": [
+          "Define your DP state clearly.",
+          "How do you optimize space?",
+          "What edge cases do you test?"
+        ]
+      },
+      {
+        "title": "DP: Burst Balloons",
+        "prompt": "Given balloons with values, maximize coins by bursting them in optimal order.",
+        "tags": ["dp", "interval-dp", "algorithms"],
+        "followups": [
+          "What is the subproblem definition?",
+          "Why does greedy fail?",
+          "What is the complexity?"
+        ]
+      },
+      {
+        "title": "Design a Secure Auth System",
+        "prompt": "Design authentication for web/mobile: login, token issuance, refresh, revocation, and secure storage.",
+        "tags": ["security", "system-design", "reliability"],
+        "followups": [
+          "How do you defend against token theft?",
+          "How do you rotate keys and revoke sessions?",
+          "How do you store tokens safely on device?"
+        ]
+      },
+      {
+        "title": "Large-Scale Data Migration Plan",
+        "prompt": "You must migrate billions of records to a new schema with minimal downtime. Outline a safe plan.",
+        "tags": ["databases", "reliability", "system-thinking"],
+        "followups": [
+          "How do you validate correctness during migration?",
+          "How do you do rollback safely?",
+          "What metrics do you monitor?"
+        ]
+      },
+      {
+        "title": "Design a Search Service (High Level)",
+        "prompt": "Design a search service that supports indexing, querying, ranking, and pagination with operational considerations.",
+        "tags": ["system-design", "scalability", "performance"],
+        "followups": [
+          "How do you build and update the index?",
+          "How do you handle hot queries and caching?",
+          "How do you fight spam/abuse?"
+        ]
+      },
+      {
+        "title": "Behavioral (LP): Dive Deep (Hard Case)",
+        "prompt": "Tell me about the hardest root-cause analysis you\u2019ve done. What data did you use and how did you confirm the fix?",
+        "tags": ["behavioral", "leadership-principles", "debugging"],
+        "followups": [
+          "How did you prove causality (not correlation)?",
+          "What was the long-term preventative change?",
+          "How did you communicate the incident?"
+        ]
+      },
+      {
+        "title": "Behavioral (LP): Ownership (Failure Scenario)",
+        "prompt": "Tell me about a time you owned a failure. What happened, what did you do immediately, and what changed afterward?",
+        "tags": ["behavioral", "leadership-principles", "communication"],
+        "followups": [
+          "How did you manage stakeholders?",
+          "What did you change in process/tech to prevent recurrence?",
+          "What did you learn?"
+        ]
+      },
+      {
+        "title": "Behavioral (LP): Insist on the Highest Standards (Pushback)",
+        "prompt": "Tell me about a time you pushed for higher standards and faced pushback. How did you handle it?",
+        "tags": ["behavioral", "leadership-principles", "collaboration"],
+        "followups": [
+          "How did you quantify the quality risk?",
+          "What compromise (if any) did you accept?",
+          "What was the outcome?"
+        ]
+      },
+      {
+        "title": "Behavioral (LP): Deliver Results (Hard Constraints)",
+        "prompt": "Describe a time you delivered results under severe constraints (time, people, budget, or technical limits).",
+        "tags": ["behavioral", "leadership-principles"],
+        "followups": [
+          "What did you cut and why?",
+          "How did you ensure correctness and reliability?",
+          "How did you measure success?"
+        ]
+      },
+      {
+        "title": "Behavioral (LP): Earn Trust (Cross-Team)",
+        "prompt": "Tell me about a time you had to earn trust across teams to deliver a shared outcome.",
+        "tags": ["behavioral", "leadership-principles", "communication"],
+        "followups": [
+          "How did you align on goals and responsibilities?",
+          "How did you handle conflict or ambiguity?",
+          "What was the outcome?"
+        ]
+      }
+    ]
+  }
+  

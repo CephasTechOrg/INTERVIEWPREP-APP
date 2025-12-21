@@ -1,0 +1,198 @@
+{
+    "track": "swe_intern",
+    "company_style": "amazon",
+    "difficulty": "easy",
+    "questions": [
+      {
+        "title": "Two Sum (Amazon Basic)",
+        "prompt": "Given an array of integers and a target, return indices of two numbers that add up to the target. Assume exactly one solution.",
+        "tags": ["arrays", "hashmap"],
+        "followups": [
+          "What is the time and space complexity?",
+          "What edge cases would you test?",
+          "How would you explain your approach to a teammate?"
+        ]
+      },
+      {
+        "title": "Valid Parentheses",
+        "prompt": "Given a string containing parentheses/brackets/braces, determine if it is valid.",
+        "tags": ["stack", "strings"],
+        "followups": [
+          "Why is a stack a good fit?",
+          "What is the time and space complexity?",
+          "What inputs commonly break implementations?"
+        ]
+      },
+      {
+        "title": "First Unique Character",
+        "prompt": "Given a string, return the index of the first non-repeating character. If none exists, return -1.",
+        "tags": ["strings", "hashmap"],
+        "followups": [
+          "Why is a two-pass approach common?",
+          "How do you handle Unicode?",
+          "What is the complexity?"
+        ]
+      },
+      {
+        "title": "Merge Two Sorted Lists",
+        "prompt": "Given heads of two sorted linked lists, merge them and return the head of the merged list.",
+        "tags": ["linked-list", "two-pointers"],
+        "followups": [
+          "Iterative vs recursive trade-offs?",
+          "What is the complexity?",
+          "What edge cases would you test?"
+        ]
+      },
+      {
+        "title": "Reverse a String",
+        "prompt": "Reverse a string (or an array of characters) efficiently.",
+        "tags": ["strings", "two-pointers"],
+        "followups": [
+          "In-place vs extra space?",
+          "What about very large strings?",
+          "What is the complexity?"
+        ]
+      },
+      {
+        "title": "Move Zeroes",
+        "prompt": "Move all zeroes to the end of an array while maintaining relative order of non-zero elements (in-place).",
+        "tags": ["arrays", "two-pointers"],
+        "followups": [
+          "What invariant do you maintain?",
+          "How do you minimize writes?",
+          "What is the complexity?"
+        ]
+      },
+      {
+        "title": "Best Time to Buy and Sell Stock",
+        "prompt": "Given daily stock prices, return the max profit from one buy and one sell. If none, return 0.",
+        "tags": ["arrays", "greedy"],
+        "followups": [
+          "Why does tracking min-so-far work?",
+          "What is the complexity?",
+          "How would it change for multiple transactions?"
+        ]
+      },
+      {
+        "title": "Binary Search Basics",
+        "prompt": "Given a sorted array and a target, return the index if found; otherwise return -1.",
+        "tags": ["binary-search", "arrays"],
+        "followups": [
+          "Common off-by-one pitfalls?",
+          "How do you avoid infinite loops?",
+          "What is the complexity?"
+        ]
+      },
+      {
+        "title": "Hash Map Fundamentals",
+        "prompt": "Explain how a hash map works, including collisions and resizing, at a high level.",
+        "tags": ["hashmap", "data-structures"],
+        "followups": [
+          "Average vs worst-case complexity?",
+          "What collision strategies exist?",
+          "What makes a good hash function?"
+        ]
+      },
+      {
+        "title": "Big-O Notation",
+        "prompt": "Explain Big-O notation and what it captures vs what it does not capture.",
+        "tags": ["complexity", "fundamentals"],
+        "followups": [
+          "Give examples of O(n), O(n log n), O(n^2).",
+          "Why can constants matter in practice?",
+          "Worst-case vs average-case?"
+        ]
+      },
+      {
+        "title": "REST Basics",
+        "prompt": "What is REST and what makes an API RESTful?",
+        "tags": ["api", "rest", "fundamentals"],
+        "followups": [
+          "What is idempotency and why does it matter?",
+          "GET vs POST vs PUT vs DELETE?",
+          "What are common HTTP status codes?"
+        ]
+      },
+      {
+        "title": "Unit Testing Basics",
+        "prompt": "What is unit testing? What makes a unit test valuable and maintainable?",
+        "tags": ["testing", "fundamentals"],
+        "followups": [
+          "What are mocks and stubs?",
+          "How do you avoid flaky tests?",
+          "What is the difference between unit and integration tests?"
+        ]
+      },
+      {
+        "title": "Debugging Workflow",
+        "prompt": "A service is failing unexpectedly. Walk through your debugging approach step-by-step.",
+        "tags": ["debugging", "fundamentals", "communication"],
+        "followups": [
+          "How do you narrow down the root cause?",
+          "What signals do you add (logs/metrics/traces)?",
+          "How do you prevent regression?"
+        ]
+      },
+      {
+        "title": "Leadership Principle: Customer Obsession",
+        "prompt": "Tell me about a time you improved something based on user/customer feedback.",
+        "tags": ["behavioral", "leadership-principles", "communication"],
+        "followups": [
+          "How did you gather the feedback?",
+          "What trade-offs did you make?",
+          "How did you measure impact?"
+        ]
+      },
+      {
+        "title": "Leadership Principle: Ownership",
+        "prompt": "Tell me about a time you took ownership of a problem end-to-end.",
+        "tags": ["behavioral", "leadership-principles", "communication"],
+        "followups": [
+          "What was your scope and responsibility?",
+          "How did you handle obstacles?",
+          "What would you do differently next time?"
+        ]
+      },
+      {
+        "title": "Leadership Principle: Bias for Action",
+        "prompt": "Describe a time you had to move fast with incomplete information.",
+        "tags": ["behavioral", "leadership-principles"],
+        "followups": [
+          "How did you manage risk?",
+          "What did you do to validate quickly?",
+          "What was the outcome?"
+        ]
+      },
+      {
+        "title": "Leadership Principle: Learn and Be Curious",
+        "prompt": "Tell me about something technical you learned quickly to deliver a result.",
+        "tags": ["behavioral", "leadership-principles", "growth-mindset"],
+        "followups": [
+          "How did you structure your learning?",
+          "How did you validate your understanding?",
+          "What did you build or improve with it?"
+        ]
+      },
+      {
+        "title": "Leadership Principle: Dive Deep",
+        "prompt": "Tell me about a time you investigated a tricky bug or performance issue and found the root cause.",
+        "tags": ["behavioral", "leadership-principles", "debugging"],
+        "followups": [
+          "How did you reproduce the issue?",
+          "What data did you collect?",
+          "How did you prevent it from recurring?"
+        ]
+      },
+      {
+        "title": "Why Amazon?",
+        "prompt": "Why do you want to intern at Amazon? Be specific about teams, products, or values that motivate you.",
+        "tags": ["behavioral", "communication", "leadership-principles"],
+        "followups": [
+          "Which leadership principle resonates most and why?",
+          "What Amazon product would you improve and how?",
+          "How do you define impact?"
+        ]
+      }
+    ]
+  }
+  

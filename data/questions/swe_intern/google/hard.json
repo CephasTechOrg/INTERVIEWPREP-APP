@@ -1,0 +1,208 @@
+{
+    "track": "swe_intern",
+    "company_style": "google",
+    "difficulty": "hard",
+    "questions": [
+      {
+        "title": "Median of Two Sorted Arrays",
+        "prompt": "Given two sorted arrays nums1 and nums2 of size m and n, return the median of the two sorted arrays in O(log(min(m,n))) time.",
+        "tags": ["arrays", "binary-search", "divide-and-conquer"],
+        "followups": [
+          "Why is binary search applicable here?",
+          "What edge cases make this problem tricky?",
+          "How does your solution guarantee logarithmic time?"
+        ]
+      },
+      {
+        "title": "Word Ladder",
+        "prompt": "Given two words and a dictionary, find the length of the shortest transformation sequence from beginWord to endWord.",
+        "tags": ["graphs", "bfs", "hashset"],
+        "followups": [
+          "Why is BFS preferred over DFS?",
+          "How do you optimize adjacency generation?",
+          "What is the time and space complexity?"
+        ]
+      },
+      {
+        "title": "Course Schedule II",
+        "prompt": "Given prerequisites for courses, return a valid order to finish all courses or an empty array if impossible.",
+        "tags": ["graphs", "topological-sort", "dfs"],
+        "followups": [
+          "How do you detect cycles?",
+          "What is the difference between DFS and BFS solutions?",
+          "How does this scale with large inputs?"
+        ]
+      },
+      {
+        "title": "Serialize and Deserialize Binary Tree",
+        "prompt": "Design an algorithm to serialize and deserialize a binary tree.",
+        "tags": ["trees", "design", "dfs"],
+        "followups": [
+          "How do you handle null nodes?",
+          "What format would you choose and why?",
+          "What are the space implications?"
+        ]
+      },
+      {
+        "title": "Longest Increasing Path in a Matrix",
+        "prompt": "Find the length of the longest increasing path in a matrix.",
+        "tags": ["dfs", "dp", "graphs"],
+        "followups": [
+          "Why is memoization needed?",
+          "What is the time complexity?",
+          "How do you avoid recomputation?"
+        ]
+      },
+      {
+        "title": "Design Google Drive Sync (High-Level)",
+        "prompt": "Design a simplified file synchronization system like Google Drive.",
+        "tags": ["system-design", "scalability", "consistency"],
+        "followups": [
+          "How do you handle conflicts?",
+          "How do you optimize for offline usage?",
+          "What consistency guarantees would you provide?"
+        ]
+      },
+      {
+        "title": "Find All Critical Connections",
+        "prompt": "Given a network, find all critical connections whose removal disconnects the graph.",
+        "tags": ["graphs", "dfs", "tarjan"],
+        "followups": [
+          "What are low-link values?",
+          "Why does DFS work here?",
+          "What real-world systems resemble this?"
+        ]
+      },
+      {
+        "title": "Sliding Window Maximum",
+        "prompt": "Given an array and window size k, return the maximum for each sliding window.",
+        "tags": ["deque", "sliding-window"],
+        "followups": [
+          "Why does a deque work here?",
+          "What is the time complexity?",
+          "How does this compare to heap-based solutions?"
+        ]
+      },
+      {
+        "title": "Edit Distance",
+        "prompt": "Given two strings, compute the minimum number of operations required to convert one into the other.",
+        "tags": ["dp", "strings"],
+        "followups": [
+          "What is the DP state definition?",
+          "How do you optimize space?",
+          "What real-world applications use this?"
+        ]
+      },
+      {
+        "title": "Design a Rate Limiter (Distributed)",
+        "prompt": "Design a distributed rate limiter for a global service.",
+        "tags": ["system-design", "distributed-systems"],
+        "followups": [
+          "How do you handle clock skew?",
+          "What trade-offs exist between accuracy and performance?",
+          "How does this scale globally?"
+        ]
+      },
+      {
+        "title": "Trapping Rain Water",
+        "prompt": "Given an elevation map, compute how much water it can trap.",
+        "tags": ["two-pointers", "arrays"],
+        "followups": [
+          "Why does the two-pointer approach work?",
+          "What is the space complexity?",
+          "How would you explain this visually?"
+        ]
+      },
+      {
+        "title": "Design Search Autocomplete",
+        "prompt": "Design an autocomplete system that returns the top-k frequent search queries.",
+        "tags": ["tries", "system-design"],
+        "followups": [
+          "How do you rank results?",
+          "How do you update frequencies efficiently?",
+          "What are memory constraints?"
+        ]
+      },
+      {
+        "title": "Maximum Profit with K Transactions",
+        "prompt": "Given stock prices and k transactions, compute maximum profit.",
+        "tags": ["dp", "optimization"],
+        "followups": [
+          "What changes when k is large?",
+          "How do you reduce space complexity?",
+          "Why is greedy insufficient?"
+        ]
+      },
+      {
+        "title": "Design a Web Crawler",
+        "prompt": "Design a scalable web crawler that respects politeness and avoids duplicates.",
+        "tags": ["system-design", "graphs"],
+        "followups": [
+          "How do you avoid crawling the same URL twice?",
+          "How do you scale crawling?",
+          "How do you handle failures?"
+        ]
+      },
+      {
+        "title": "Alien Dictionary",
+        "prompt": "Given a sorted list of words from an alien language, derive the order of characters.",
+        "tags": ["graphs", "topological-sort"],
+        "followups": [
+          "What makes this problem tricky?",
+          "How do you detect invalid input?",
+          "What is the complexity?"
+        ]
+      },
+      {
+        "title": "Design YouTube Recommendation (High-Level)",
+        "prompt": "Explain how you would design a recommendation system for YouTube.",
+        "tags": ["system-design", "ml-thinking"],
+        "followups": [
+          "What signals would you use?",
+          "How do you avoid filter bubbles?",
+          "How do you measure success?"
+        ]
+      },
+      {
+        "title": "Burst Balloons",
+        "prompt": "Given balloons with values, compute maximum coins by bursting them optimally.",
+        "tags": ["dp", "interval-dp"],
+        "followups": [
+          "What is the subproblem definition?",
+          "Why does greedy fail?",
+          "What is the complexity?"
+        ]
+      },
+      {
+        "title": "Design a Global Counter",
+        "prompt": "Design a counter system that handles billions of increments per day.",
+        "tags": ["distributed-systems", "scalability"],
+        "followups": [
+          "How do you ensure accuracy?",
+          "How do you reduce contention?",
+          "What consistency model would you use?"
+        ]
+      },
+      {
+        "title": "Minimum Window Substring",
+        "prompt": "Find the smallest substring of s that contains all characters of t.",
+        "tags": ["sliding-window", "hashmap"],
+        "followups": [
+          "What invariant does the window maintain?",
+          "What are common bugs?",
+          "What is the complexity?"
+        ]
+      },
+      {
+        "title": "Why Google (Deep Dive)",
+        "prompt": "Why Google, and how do Google’s engineering principles align with how you build software?",
+        "tags": ["behavioral", "communication"],
+        "followups": [
+          "Tell me about a time you optimized something significantly.",
+          "How do you approach ambiguous problems?",
+          "How do you measure engineering success?"
+        ]
+      }
+    ]
+  }
+  

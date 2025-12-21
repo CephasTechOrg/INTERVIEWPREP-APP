@@ -1,0 +1,207 @@
+{
+  "track": "swe_intern",
+  "company_style": "google",
+  "difficulty": "easy",
+  "questions": [
+    {
+      "title": "Two Sum",
+      "prompt": "Given an array and a target, return indices of two numbers that add up to the target.",
+      "tags": ["arrays", "hashmap"],
+      "followups": [
+        "Why does a hash map help?",
+        "Time complexity?",
+        "Edge cases?"
+      ]
+    },
+    {
+      "title": "Reverse a String",
+      "prompt": "Reverse a string.",
+      "tags": ["strings", "two-pointers"],
+      "followups": [
+        "In-place vs extra space?",
+        "Unicode?",
+        "Complexity?"
+      ]
+    },
+    {
+      "title": "Valid Parentheses",
+      "prompt": "Determine if parentheses are valid.",
+      "tags": ["stack"],
+      "followups": [
+        "Why stack?",
+        "Edge cases?",
+        "Complexity?"
+      ]
+    },
+    {
+      "title": "Binary Search",
+      "prompt": "Search for a target in a sorted array.",
+      "tags": ["binary-search"],
+      "followups": [
+        "Off-by-one errors?",
+        "Loop conditions?",
+        "Complexity?"
+      ]
+    },
+    {
+      "title": "Max in Array",
+      "prompt": "Find the maximum value in an array.",
+      "tags": ["arrays"],
+      "followups": [
+        "Empty input?",
+        "Single pass?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Check Palindrome",
+      "prompt": "Check if a string is a palindrome.",
+      "tags": ["strings"],
+      "followups": [
+        "Ignore punctuation?",
+        "Case sensitivity?",
+        "Complexity?"
+      ]
+    },
+    {
+      "title": "FizzBuzz",
+      "prompt": "Print numbers with FizzBuzz rules.",
+      "tags": ["fundamentals"],
+      "followups": [
+        "Why is this useful?",
+        "Edge cases?",
+        "Clean code?"
+      ]
+    },
+    {
+      "title": "Merge Two Sorted Arrays",
+      "prompt": "Merge two sorted arrays.",
+      "tags": ["arrays"],
+      "followups": [
+        "In-place?",
+        "Complexity?",
+        "Edge cases?"
+      ]
+    },
+    {
+      "title": "Hash Map Basics",
+      "prompt": "Explain how a hash map works.",
+      "tags": ["hashmap"],
+      "followups": [
+        "Collisions?",
+        "Complexity?",
+        "Real examples?"
+      ]
+    },
+    {
+      "title": "Recursion Basics",
+      "prompt": "Explain recursion with an example.",
+      "tags": ["recursion"],
+      "followups": [
+        "Base case?",
+        "Stack overflow?",
+        "Iterative alternative?"
+      ]
+    },
+    {
+      "title": "Stacks vs Queues",
+      "prompt": "Explain stacks and queues.",
+      "tags": ["stack", "queue"],
+      "followups": [
+        "Real-world usage?",
+        "Implementation?",
+        "Complexity?"
+      ]
+    },
+    {
+      "title": "Array vs Linked List",
+      "prompt": "Compare arrays and linked lists.",
+      "tags": ["data-structures"],
+      "followups": [
+        "Memory layout?",
+        "Access speed?",
+        "Insertion?"
+      ]
+    },
+    {
+      "title": "Time Complexity Basics",
+      "prompt": "Explain Big-O notation.",
+      "tags": ["complexity"],
+      "followups": [
+        "Examples?",
+        "Worst vs average?",
+        "Why it matters?"
+      ]
+    },
+    {
+      "title": "Tree Traversals",
+      "prompt": "Explain preorder, inorder, postorder traversal.",
+      "tags": ["trees"],
+      "followups": [
+        "When to use each?",
+        "DFS relation?",
+        "Complexity?"
+      ]
+    },
+    {
+      "title": "Detect Duplicate",
+      "prompt": "Detect if an array contains duplicates.",
+      "tags": ["hashset"],
+      "followups": [
+        "Sorting alternative?",
+        "Complexity?",
+        "Memory trade-off?"
+      ]
+    },
+    {
+      "title": "Reverse Linked List",
+      "prompt": "Reverse a singly linked list.",
+      "tags": ["linked-list"],
+      "followups": [
+        "Pointer steps?",
+        "Recursive?",
+        "Edge cases?"
+      ]
+    },
+    {
+      "title": "Graphs Basics",
+      "prompt": "What is a graph?",
+      "tags": ["graphs"],
+      "followups": [
+        "Adjacency list vs matrix?",
+        "Examples?",
+        "Traversal?"
+      ]
+    },
+    {
+      "title": "Testing Basics",
+      "prompt": "Explain unit testing.",
+      "tags": ["testing"],
+      "followups": [
+        "Good tests?",
+        "Edge cases?",
+        "Automation?"
+      ]
+    },
+    {
+      "title": "Handling Errors",
+      "prompt": "How do you handle errors in code?",
+      "tags": ["fundamentals"],
+      "followups": [
+        "Exceptions?",
+        "Logging?",
+        "Fail fast?"
+      ]
+    },
+    {
+      "title": "Why Google?",
+      "prompt": "Why do you want to intern at Google?",
+      "tags": ["behavioral"],
+      "followups": [
+        "Favorite Google product?",
+        "Problem-solving culture?",
+        "Learning goals?"
+      ]
+    }
+  ]
+}

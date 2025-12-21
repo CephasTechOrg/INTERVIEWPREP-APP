@@ -1,0 +1,356 @@
+{
+  "track": "behavioral",
+  "company_style": "general",
+  "difficulty": "easy",
+  "questions": [
+    {
+      "title": "Why This Company?",
+      "prompt": "Why do you want to work for {company}? Be specific about what excites you (product, culture, problems, growth).",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "What specific team or area would you be excited to join, and why?",
+        "What\u2019s one value of {company} that resonates with you?"
+      ]
+    },
+    {
+      "title": "Why Are You Leaving?",
+      "prompt": "Why do you want to leave your current/last company or role? Keep it professional and growth-focused.",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "What are you looking for that you can\u2019t get in your current role?",
+        "What did you learn from your current/last role?"
+      ]
+    },
+    {
+      "title": "What Are You Looking For Next?",
+      "prompt": "What are you looking for in your next role? Talk about scope, learning, mentorship, impact, and collaboration.",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "What kind of work energizes you the most?",
+        "What environment helps you do your best work?"
+      ]
+    },
+    {
+      "title": "Conflict With a Coworker",
+      "prompt": "Tell me about a time when you had a conflict with a coworker. What happened and how did you resolve it?",
+      "tags": [
+        "behavioral",
+        "collaboration"
+      ],
+      "followups": [
+        "What would you do differently next time?",
+        "How did you ensure the relationship stayed productive?"
+      ]
+    },
+    {
+      "title": "Influencing Others",
+      "prompt": "Tell me about a time you had a conflict and needed to influence somebody else. How did you approach it?",
+      "tags": [
+        "behavioral",
+        "collaboration",
+        "communication"
+      ],
+      "followups": [
+        "How did you build trust or alignment?",
+        "What data or reasoning helped you convince them?"
+      ]
+    },
+    {
+      "title": "Current Project",
+      "prompt": "What project are you currently working on (or most recently worked on)? Summarize the goal, your role, and impact.",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "What trade-offs did you make and why?",
+        "How did you measure success?"
+      ]
+    },
+    {
+      "title": "Most Challenging Aspect",
+      "prompt": "What is the most challenging aspect of your current/most recent project?",
+      "tags": [
+        "behavioral",
+        "problem-solving"
+      ],
+      "followups": [
+        "How did you break the problem down?",
+        "What did you learn from dealing with it?"
+      ]
+    },
+    {
+      "title": "Hard Bug You Fixed",
+      "prompt": "What was the most difficult bug you fixed recently? Walk through how you diagnosed it and the final fix.",
+      "tags": [
+        "behavioral",
+        "debugging"
+      ],
+      "followups": [
+        "How did you validate the fix and prevent regressions?",
+        "What tools helped you the most?"
+      ]
+    },
+    {
+      "title": "Tough Challenge",
+      "prompt": "Tell me about a difficult challenge you faced on a project, how you overcame it, and what you learned.",
+      "tags": [
+        "behavioral",
+        "problem-solving"
+      ],
+      "followups": [
+        "What was the key decision that helped you succeed?",
+        "How did you communicate progress to others?"
+      ]
+    },
+    {
+      "title": "What Excites You?",
+      "prompt": "What are you excited about right now (technology, product area, learning goal)?",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "How have you been pursuing that interest?",
+        "How does it relate to this role?"
+      ]
+    },
+    {
+      "title": "What Frustrates You?",
+      "prompt": "What frustrates you at work, and how do you handle it constructively?",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "How do you prevent frustration from impacting the team?",
+        "Give an example of turning frustration into an improvement."
+      ]
+    },
+    {
+      "title": "First Day at {company}",
+      "prompt": "Imagine it is your first day at {company}. What do you want to work on? What feature would you improve and why?",
+      "tags": [
+        "behavioral",
+        "product-thinking"
+      ],
+      "followups": [
+        "How would you validate the problem with users or data?",
+        "How would you measure success?"
+      ]
+    },
+    {
+      "title": "Most Interesting Projects",
+      "prompt": "What are the most interesting projects you have worked on, and how might they be relevant to {company}?",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "What was your specific contribution?",
+        "What did you learn that you\u2019d apply again?"
+      ]
+    },
+    {
+      "title": "Disagreement With Manager",
+      "prompt": "Tell me about a time you had a disagreement with your manager. How did you handle it?",
+      "tags": [
+        "behavioral",
+        "collaboration"
+      ],
+      "followups": [
+        "How did you keep it constructive and respectful?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Project You're Passionate About",
+      "prompt": "Talk about a project you are most passionate about or one where you did your best work.",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "What made it meaningful to you?",
+        "What would you improve if you had more time?"
+      ]
+    },
+    {
+      "title": "Best Day of Work",
+      "prompt": "What does your best day of work look like? Describe the environment, tasks, and collaboration style.",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "How do you create more days like that for yourself and your team?",
+        "What habits help you be productive?"
+      ]
+    },
+    {
+      "title": "Pushing for Something",
+      "prompt": "Tell me about something you had to push for in a previous project (a decision, improvement, or change).",
+      "tags": [
+        "behavioral",
+        "influence"
+      ],
+      "followups": [
+        "How did you build alignment?",
+        "What did you learn about influencing without authority?"
+      ]
+    },
+    {
+      "title": "Constructive Feedback",
+      "prompt": "What is the most constructive feedback you have received, and how did you apply it?",
+      "tags": [
+        "behavioral",
+        "growth-mindset"
+      ],
+      "followups": [
+        "What changed as a result?",
+        "How do you ask for feedback proactively?"
+      ]
+    },
+    {
+      "title": "Perseverance Over Months",
+      "prompt": "Tell me about something you had to persevere at for multiple months. How did you stay motivated?",
+      "tags": [
+        "behavioral",
+        "growth-mindset"
+      ],
+      "followups": [
+        "What was the hardest moment and how did you handle it?",
+        "What did you learn about yourself?"
+      ]
+    },
+    {
+      "title": "Tight Deadline",
+      "prompt": "Tell me about a time you met a tight deadline. How did you plan and execute?",
+      "tags": [
+        "behavioral",
+        "time-management"
+      ],
+      "followups": [
+        "What trade-offs did you make?",
+        "How did you communicate risk and progress?"
+      ]
+    },
+    {
+      "title": "First Annual Review",
+      "prompt": "If this were your first annual review at {company}, what would I be telling you right now? (strengths + areas to improve)",
+      "tags": [
+        "behavioral",
+        "self-awareness"
+      ],
+      "followups": [
+        "What would you do in the first 90 days to be successful?",
+        "How do you measure your own growth?"
+      ]
+    },
+    {
+      "title": "Time Management Skill",
+      "prompt": "Give an example of a time-management skill you've learned and applied at work or school.",
+      "tags": [
+        "behavioral",
+        "time-management"
+      ],
+      "followups": [
+        "What changed after you applied it?",
+        "How do you prioritize when everything feels urgent?"
+      ]
+    },
+    {
+      "title": "Getting Along With an Associate",
+      "prompt": "Tell me about a problem you've had getting along with a work associate. What did you do to improve the situation?",
+      "tags": [
+        "behavioral",
+        "collaboration"
+      ],
+      "followups": [
+        "How did you ensure the work still got done?",
+        "What did you learn about communication styles?"
+      ]
+    },
+    {
+      "title": "Work Criticized Most Often",
+      "prompt": "What aspects of your work are most often criticized? How have you addressed it?",
+      "tags": [
+        "behavioral",
+        "growth-mindset"
+      ],
+      "followups": [
+        "What concrete steps did you take?",
+        "How do you track improvement?"
+      ]
+    },
+    {
+      "title": "Handling Criticism",
+      "prompt": "How have you handled criticism of your work? Give a specific example.",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "How do you separate feedback from emotion?",
+        "How do you respond when you disagree?"
+      ]
+    },
+    {
+      "title": "Strengths for the Role",
+      "prompt": "What strengths do you think are most important for this role, and which of those are your strengths?",
+      "tags": [
+        "behavioral",
+        "self-awareness"
+      ],
+      "followups": [
+        "Give an example of using that strength on a project.",
+        "What strength are you currently working to improve?"
+      ]
+    },
+    {
+      "title": "How Colleagues Describe You",
+      "prompt": "What words would your colleagues or classmates use to describe you? Give evidence for each.",
+      "tags": [
+        "behavioral",
+        "self-awareness"
+      ],
+      "followups": [
+        "What feedback have you received that supports this?",
+        "How do you want to be known on a team?"
+      ]
+    },
+    {
+      "title": "First Six Months Goals",
+      "prompt": "What would you hope to achieve in the first six months after being hired at {company}?",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "How would you learn the codebase quickly?",
+        "How would you build relationships across the team?"
+      ]
+    },
+    {
+      "title": "Why You're a Good Fit",
+      "prompt": "Tell me why you will be a good fit for this position. Connect your experience to the role requirements.",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "What is one gap you\u2019re working on right now?",
+        "What\u2019s an example that demonstrates your fit?"
+      ]
+    }
+  ]
+}

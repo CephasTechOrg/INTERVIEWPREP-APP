@@ -1,0 +1,407 @@
+{
+  "track": "swe_intern",
+  "company_style": "microsoft",
+  "difficulty": "easy",
+  "questions": [
+    {
+      "title": "What Is OOP?",
+      "prompt": "What is Object-Oriented Programming (OOP)? What problems does it solve, and what are its core principles?",
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
+      "followups": [
+        "Give an example from a project where OOP helped.",
+        "When might OOP be a poor fit?",
+        "How do you choose between OOP and a functional approach?"
+      ]
+    },
+    {
+      "title": "Inheritance",
+      "prompt": "Explain inheritance with an example. When is inheritance useful, and when does it cause problems?",
+      "tags": [
+        "oop",
+        "design"
+      ],
+      "followups": [
+        "What\u2019s the difference between inheritance and composition?",
+        "How does inheritance affect testing and maintainability?",
+        "When would you prefer an interface over a base class?"
+      ]
+    },
+    {
+      "title": "Abstraction",
+      "prompt": "What is abstraction? Explain how abstraction helps manage complexity in software systems.",
+      "tags": [
+        "oop",
+        "design"
+      ],
+      "followups": [
+        "How is abstraction different from encapsulation?",
+        "Give an example of a good abstraction you\u2019ve seen.",
+        "What are signs of a bad abstraction?"
+      ]
+    },
+    {
+      "title": "Interfaces",
+      "prompt": "What is an interface? Why are interfaces useful in software design?",
+      "tags": [
+        "oop",
+        "design"
+      ],
+      "followups": [
+        "How do interfaces improve testability?",
+        "Give an example of interface usage in real code.",
+        "What is dependency injection and how does it relate?"
+      ]
+    },
+    {
+      "title": "Abstract Class vs Interface",
+      "prompt": "What is the difference between an abstract class and an interface? When would you use each?",
+      "tags": [
+        "oop",
+        "design"
+      ],
+      "followups": [
+        "How do default implementations change the decision?",
+        "How does multiple inheritance affect this topic?",
+        "What does this look like in your favorite language?"
+      ]
+    },
+    {
+      "title": "Exception Handling",
+      "prompt": "What is exception handling? How do you use exceptions responsibly in production code?",
+      "tags": [
+        "fundamentals",
+        "debugging"
+      ],
+      "followups": [
+        "When should you throw vs return an error value?",
+        "How do you avoid swallowing errors?",
+        "How do you log exceptions safely?"
+      ]
+    },
+    {
+      "title": "Garbage Collection",
+      "prompt": "What is garbage collection? Explain how GC works at a high level and what trade-offs it introduces.",
+      "tags": [
+        "memory",
+        "fundamentals"
+      ],
+      "followups": [
+        "How can GC pauses affect performance?",
+        "What is a memory leak in a GC language?",
+        "How can you reduce allocations?"
+      ]
+    },
+    {
+      "title": "Stacks",
+      "prompt": "What is a stack? Explain LIFO behavior and give examples of common stack use-cases.",
+      "tags": [
+        "stack",
+        "data-structures"
+      ],
+      "followups": [
+        "How would you implement a stack using an array?",
+        "What\u2019s the time complexity of push/pop?",
+        "Give an example of a stack-based interview problem."
+      ]
+    },
+    {
+      "title": "Queues",
+      "prompt": "What is a queue? Explain FIFO behavior and give examples of common queue use-cases.",
+      "tags": [
+        "queue",
+        "data-structures"
+      ],
+      "followups": [
+        "How would you implement a queue efficiently?",
+        "What\u2019s the time complexity of enqueue/dequeue?",
+        "Where does a queue show up in real systems?"
+      ]
+    },
+    {
+      "title": "Hash Tables",
+      "prompt": "What is a hash table (hash map)? Explain hashing, collisions, and resizing at a high level.",
+      "tags": [
+        "hashmap",
+        "data-structures"
+      ],
+      "followups": [
+        "What collision strategies do you know?",
+        "What are average vs worst-case complexities?",
+        "What makes a good hash function?"
+      ]
+    },
+    {
+      "title": "Linked Lists",
+      "prompt": "What is a linked list? Compare it to an array in terms of memory layout and common operations.",
+      "tags": [
+        "linked-list",
+        "data-structures"
+      ],
+      "followups": [
+        "When are linked lists a good choice in practice?",
+        "Why are arrays often faster even when big-O looks similar?",
+        "What\u2019s the complexity of inserting at the head vs searching?"
+      ]
+    },
+    {
+      "title": "Big-O Notation",
+      "prompt": "What is Big-O notation? Explain what it captures and what it doesn\u2019t capture.",
+      "tags": [
+        "complexity",
+        "fundamentals"
+      ],
+      "followups": [
+        "Give an example of O(n), O(n log n), and O(n^2).",
+        "Why can a worse big-O sometimes be faster in practice?",
+        "What\u2019s the difference between average-case and worst-case complexity?"
+      ]
+    },
+    {
+      "title": "Hash Map Insert Complexity",
+      "prompt": "What is the time complexity of inserting into a hash map? Explain average-case vs worst-case and why resizing matters.",
+      "tags": [
+        "hashmap",
+        "complexity"
+      ],
+      "followups": [
+        "What triggers a resize/rehash?",
+        "How do collisions impact performance?",
+        "How would you measure this in a real program?"
+      ]
+    },
+    {
+      "title": "What Is an API?",
+      "prompt": "What is an API? Explain it in simple terms and give a real example from an app you\u2019ve used or built.",
+      "tags": [
+        "api",
+        "fundamentals",
+        "communication"
+      ],
+      "followups": [
+        "What\u2019s the difference between an API and a library?",
+        "What makes an API easy to use?",
+        "How do you version an API?"
+      ]
+    },
+    {
+      "title": "REST",
+      "prompt": "What is REST? Explain REST principles and what makes an API RESTful.",
+      "tags": [
+        "api",
+        "rest",
+        "fundamentals"
+      ],
+      "followups": [
+        "What are common HTTP status codes and when do you use them?",
+        "What is idempotency and why does it matter?",
+        "How do you design resource-oriented URLs?"
+      ]
+    },
+    {
+      "title": "GET vs POST",
+      "prompt": "What is the difference between GET and POST? Explain use-cases and how they behave in HTTP.",
+      "tags": [
+        "api",
+        "rest",
+        "http"
+      ],
+      "followups": [
+        "Which methods should be idempotent?",
+        "How do query parameters differ from request bodies?",
+        "How do caches treat GET vs POST?"
+      ]
+    },
+    {
+      "title": "Version Control",
+      "prompt": "What is version control? Why is it important for software teams?",
+      "tags": [
+        "git",
+        "collaboration",
+        "fundamentals"
+      ],
+      "followups": [
+        "What is a branch and why do we use it?",
+        "What\u2019s the difference between merge and rebase?",
+        "How do code reviews fit into version control workflows?"
+      ]
+    },
+    {
+      "title": "How Git Helps Teams Collaborate",
+      "prompt": "How does Git help teams collaborate effectively? Describe a typical workflow you\u2019ve used (feature branches, PRs, reviews).",
+      "tags": [
+        "git",
+        "collaboration",
+        "communication"
+      ],
+      "followups": [
+        "How do you resolve merge conflicts safely?",
+        "What are good commit message practices?",
+        "How do you keep a branch up to date?"
+      ]
+    },
+    {
+      "title": "Unit Testing",
+      "prompt": "What is unit testing? What makes a unit test valuable and maintainable?",
+      "tags": [
+        "testing",
+        "fundamentals"
+      ],
+      "followups": [
+        "How do you test code that depends on external services?",
+        "What are mocks and stubs?",
+        "How do you avoid flaky tests?"
+      ]
+    },
+    {
+      "title": "Debugging a Failing Program",
+      "prompt": "How do you debug a failing program? Walk through your approach step-by-step.",
+      "tags": [
+        "debugging",
+        "fundamentals",
+        "communication"
+      ],
+      "followups": [
+        "How do you narrow down a flaky issue?",
+        "What tools do you use (logs, debugger, profiling)?",
+        "How do you prevent the issue from happening again?"
+      ]
+    },
+    {
+      "title": "Coding Challenge You Faced",
+      "prompt": "Tell me about a challenge you faced while coding. What was hard, and how did you solve it?",
+      "tags": [
+        "behavioral",
+        "communication",
+        "growth-mindset"
+      ],
+      "followups": [
+        "What did you learn from it?",
+        "What would you do differently next time?",
+        "How did you validate your solution?"
+      ]
+    },
+    {
+      "title": "Handling Feedback",
+      "prompt": "How do you handle feedback? Share an example of feedback you received and how you acted on it.",
+      "tags": [
+        "behavioral",
+        "communication",
+        "growth-mindset"
+      ],
+      "followups": [
+        "How do you respond to feedback you disagree with?",
+        "How do you ask for feedback proactively?",
+        "How do you balance speed and quality under feedback?"
+      ]
+    },
+    {
+      "title": "Teamwork Experience",
+      "prompt": "Describe a time you worked in a team. What was your role, how did you collaborate, and what was the outcome?",
+      "tags": [
+        "behavioral",
+        "collaboration",
+        "communication"
+      ],
+      "followups": [
+        "What conflict came up and how did you handle it?",
+        "How did you divide work and keep alignment?",
+        "What did you learn about teamwork?"
+      ]
+    },
+    {
+      "title": "Why Microsoft?",
+      "prompt": "Why do you want to intern at Microsoft? Be specific about products, teams, or values that motivate you.",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "What Microsoft product would you improve and why?",
+        "Tell me about a time you built something user-focused.",
+        "How do you measure impact in your work?"
+      ]
+    },
+    {
+      "title": "What Do You Want to Learn?",
+      "prompt": "What do you want to learn during this internship? How will you approach learning and growth?",
+      "tags": [
+        "behavioral",
+        "growth-mindset",
+        "communication"
+      ],
+      "followups": [
+        "How do you learn a new technology quickly?",
+        "How do you handle uncertainty when you\u2019re stuck?",
+        "How do you balance learning with delivering results?"
+      ]
+    },
+    {
+      "title": "Reverse a String",
+      "prompt": "Write a function that reverses a string. Explain your approach and complexity.",
+      "tags": [
+        "strings",
+        "two-pointers"
+      ],
+      "followups": [
+        "How would you handle very large strings?",
+        "What\u2019s the time and space complexity?",
+        "How would you reverse words instead of characters?"
+      ]
+    },
+    {
+      "title": "Move Zeroes",
+      "prompt": "Given an integer array nums, move all 0s to the end while maintaining the relative order of the non-zero elements. Do this in-place.",
+      "tags": [
+        "arrays",
+        "two-pointers"
+      ],
+      "followups": [
+        "What invariants does your two-pointer method maintain?",
+        "What is the complexity?",
+        "How would you adapt this if you had to keep stable order but minimize writes?"
+      ]
+    },
+    {
+      "title": "First Unique Character in a String",
+      "prompt": "Given a string s, find the first non-repeating character and return its index. If it does not exist, return -1.",
+      "tags": [
+        "strings",
+        "hashmap"
+      ],
+      "followups": [
+        "Why is two-pass counting useful here?",
+        "What is the time complexity?",
+        "How would you handle Unicode?"
+      ]
+    },
+    {
+      "title": "Climbing Stairs",
+      "prompt": "You are climbing a staircase. It takes n steps to reach the top. Each time you can climb 1 or 2 steps. How many distinct ways can you climb to the top?",
+      "tags": [
+        "dp"
+      ],
+      "followups": [
+        "Can you derive the recurrence?",
+        "How can you reduce space usage?",
+        "What is the time complexity?"
+      ]
+    },
+    {
+      "title": "Invert Binary Tree",
+      "prompt": "Given the root of a binary tree, invert the tree and return its root.",
+      "tags": [
+        "trees",
+        "dfs",
+        "bfs"
+      ],
+      "followups": [
+        "Can you do it iteratively?",
+        "What\u2019s the time and space complexity?",
+        "What test cases would you use?"
+      ]
+    }
+  ]
+}

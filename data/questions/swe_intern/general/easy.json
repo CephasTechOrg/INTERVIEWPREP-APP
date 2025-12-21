@@ -1,0 +1,1472 @@
+{
+  "track": "swe_intern",
+  "company_style": "general",
+  "difficulty": "easy",
+  "questions": [
+    {
+      "title": "Two Sum",
+      "prompt": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. Assume exactly one solution and you may not use the same element twice.",
+      "tags": [
+        "arrays",
+        "hashmap"
+      ],
+      "followups": [
+        "What is the time complexity and why?",
+        "What edge cases should we consider?"
+      ]
+    },
+    {
+      "title": "Valid Parentheses",
+      "prompt": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.",
+      "tags": [
+        "stack",
+        "strings"
+      ],
+      "followups": [
+        "Why is a stack the right data structure here?",
+        "What is the time complexity?"
+      ]
+    },
+    {
+      "title": "Contains Duplicate",
+      "prompt": "Given an integer array nums, return true if any value appears at least twice, and return false if every element is distinct.",
+      "tags": [
+        "arrays",
+        "hashset"
+      ],
+      "followups": [
+        "What is the time and space complexity?",
+        "How would you solve this if memory was limited?"
+      ]
+    },
+    {
+      "title": "Palindrome Number",
+      "prompt": "Given an integer x, return true if x is a palindrome, and false otherwise. Try to avoid converting the number to a string.",
+      "tags": [
+        "math"
+      ],
+      "followups": [
+        "How do you handle negative numbers?",
+        "What is the complexity of your approach?"
+      ]
+    },
+    {
+      "title": "Majority Element",
+      "prompt": "Given an array nums of size n, return the majority element (appears more than n/2 times). Assume it always exists.",
+      "tags": [
+        "arrays",
+        "greedy"
+      ],
+      "followups": [
+        "Explain the Boyer\u2013Moore voting idea.",
+        "What's the time and space complexity?"
+      ]
+    },
+    {
+      "title": "Reverse String",
+      "prompt": "Write a function that reverses a string in-place.",
+      "tags": [
+        "strings",
+        "two pointers"
+      ],
+      "followups": [
+        "What is the time complexity?",
+        "How would you handle Unicode characters?"
+      ]
+    },
+    {
+      "title": "Binary Search",
+      "prompt": "Given a sorted array and a target value, return the index if found, otherwise return -1.",
+      "tags": [
+        "arrays",
+        "binary search"
+      ],
+      "followups": [
+        "Why does binary search require sorted data?",
+        "What happens with duplicate values?"
+      ]
+    },
+    {
+      "title": "Linked List Cycle",
+      "prompt": "Given a linked list, determine if it has a cycle.",
+      "tags": [
+        "linked list",
+        "two pointers"
+      ],
+      "followups": [
+        "Explain Floyd's cycle detection algorithm.",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Valid Anagram",
+      "prompt": "Given two strings s and t, return true if t is an anagram of s.",
+      "tags": [
+        "strings",
+        "hashmap"
+      ],
+      "followups": [
+        "What's the time and space complexity?",
+        "Can you solve with constant space?"
+      ]
+    },
+    {
+      "title": "First Unique Character",
+      "prompt": "Given a string s, find the first non-repeating character and return its index.",
+      "tags": [
+        "strings",
+        "hashmap"
+      ],
+      "followups": [
+        "What's the time and space complexity?",
+        "What if the string is very long?"
+      ]
+    },
+    {
+      "title": "Move Zeroes",
+      "prompt": "Move all zeros in an array to the end while maintaining relative order of non-zero elements.",
+      "tags": [
+        "arrays",
+        "two pointers"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "Can you minimize operations?"
+      ]
+    },
+    {
+      "title": "Missing Number",
+      "prompt": "Given array nums containing n distinct numbers from 0 to n, find the missing number.",
+      "tags": [
+        "arrays",
+        "math"
+      ],
+      "followups": [
+        "What's the mathematical solution?",
+        "What about XOR solution?"
+      ]
+    },
+    {
+      "title": "Reverse Linked List",
+      "prompt": "Reverse a singly linked list.",
+      "tags": [
+        "linked list"
+      ],
+      "followups": [
+        "What's the iterative approach?",
+        "What's the recursive approach?"
+      ]
+    },
+    {
+      "title": "First Bad Version",
+      "prompt": "Given n versions where version i is bad if version i-1 is good, find first bad version.",
+      "tags": [
+        "binary search"
+      ],
+      "followups": [
+        "Why use binary search?",
+        "What about overflow in midpoint calculation?"
+      ]
+    },
+    {
+      "title": "Ransom Note",
+      "prompt": "Given ransomNote and magazine strings, return true if ransomNote can be constructed from magazine.",
+      "tags": [
+        "strings",
+        "hashmap"
+      ],
+      "followups": [
+        "What's the time and space complexity?",
+        "What if magazine is very large?"
+      ]
+    },
+    {
+      "title": "Single Number",
+      "prompt": "Given non-empty array where every element appears twice except one, find that single one.",
+      "tags": [
+        "bit manipulation",
+        "arrays"
+      ],
+      "followups": [
+        "Why does XOR work?",
+        "What if numbers appear three times?"
+      ]
+    },
+    {
+      "title": "Happy Number",
+      "prompt": "A happy number is defined by replacing number with sum of squares of digits until equals 1 or loops.",
+      "tags": [
+        "math",
+        "hashset"
+      ],
+      "followups": [
+        "How to detect cycles?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Power of Two",
+      "prompt": "Given integer n, return true if it is a power of two.",
+      "tags": [
+        "math",
+        "bit manipulation"
+      ],
+      "followups": [
+        "What's the bit manipulation solution?",
+        "What about negative numbers?"
+      ]
+    },
+    {
+      "title": "Excel Sheet Column Number",
+      "prompt": "Given column title as appear in Excel sheet, return corresponding column number.",
+      "tags": [
+        "math",
+        "strings"
+      ],
+      "followups": [
+        "What's the mathematical formula?",
+        "How would you do reverse conversion?"
+      ]
+    },
+    {
+      "title": "Valid Palindrome",
+      "prompt": "Given string s, determine if it is palindrome considering only alphanumeric characters and ignoring case.",
+      "tags": [
+        "strings",
+        "two pointers"
+      ],
+      "followups": [
+        "What's the time and space complexity?",
+        "Can you solve with constant space?"
+      ]
+    },
+    {
+      "title": "Longest Common Prefix",
+      "prompt": "Find longest common prefix string amongst array of strings.",
+      "tags": [
+        "strings"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "What if strings are very long?"
+      ]
+    },
+    {
+      "title": "Remove Duplicates from Sorted Array",
+      "prompt": "Remove duplicates in-place from sorted array and return new length.",
+      "tags": [
+        "arrays",
+        "two pointers"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "What if array isn't sorted?"
+      ]
+    },
+    {
+      "title": "Maximum Depth of Binary Tree",
+      "prompt": "Given binary tree, find its maximum depth.",
+      "tags": [
+        "tree",
+        "recursion"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "Can you solve iteratively?"
+      ]
+    },
+    {
+      "title": "Invert Binary Tree",
+      "prompt": "Invert a binary tree (mirror).",
+      "tags": [
+        "tree",
+        "recursion"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "Can you solve iteratively?"
+      ]
+    },
+    {
+      "title": "Same Tree",
+      "prompt": "Given two binary trees, check if they are identical.",
+      "tags": [
+        "tree",
+        "recursion"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "Can you solve iteratively?"
+      ]
+    },
+    {
+      "title": "Convert Sorted Array to BST",
+      "prompt": "Convert sorted integer array to height-balanced BST.",
+      "tags": [
+        "tree",
+        "recursion"
+      ],
+      "followups": [
+        "Why is middle element root?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Merge Sorted Array",
+      "prompt": "Merge nums2 into nums1 as one sorted array (nums1 has extra space).",
+      "tags": [
+        "arrays",
+        "two pointers"
+      ],
+      "followups": [
+        "Why merge from end?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Pascal's Triangle",
+      "prompt": "Given numRows, generate first numRows of Pascal's triangle.",
+      "tags": [
+        "arrays",
+        "dynamic programming"
+      ],
+      "followups": [
+        "What's the mathematical formula?",
+        "What if we only need specific row?"
+      ]
+    },
+    {
+      "title": "Length of Last Word",
+      "prompt": "Given string s consisting of words and spaces, return length of last word.",
+      "tags": [
+        "strings"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "Can you solve without splitting?"
+      ]
+    },
+    {
+      "title": "Add Binary",
+      "prompt": "Given two binary strings a and b, return their sum as binary string.",
+      "tags": [
+        "math",
+        "strings"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "How handle very large strings?"
+      ]
+    },
+    {
+      "title": "Merge Two Sorted Lists",
+      "prompt": "Given two sorted linked lists, merge them into a single sorted linked list.",
+      "tags": [
+        "linked list",
+        "two pointers"
+      ],
+      "followups": [
+        "What is the time and space complexity?"
+      ]
+    },
+    {
+      "title": "Maximum Subarray",
+      "prompt": "Find the contiguous subarray with the largest sum and return its sum.",
+      "tags": [
+        "arrays",
+        "dynamic programming"
+      ],
+      "followups": [
+        "Explain Kadane's algorithm."
+      ]
+    },
+    {
+      "title": "Climbing Stairs",
+      "prompt": "You are climbing a staircase with n steps. Each time you can climb 1 or 2 steps. How many distinct ways to reach the top?",
+      "tags": [
+        "dynamic programming",
+        "math"
+      ],
+      "followups": [
+        "How does this relate to Fibonacci?"
+      ]
+    },
+    {
+      "title": "Best Time to Buy Sell Stock",
+      "prompt": "Given prices where prices[i] is stock price on day i, find maximum profit with one transaction.",
+      "tags": [
+        "arrays",
+        "greedy"
+      ],
+      "followups": [
+        "What if you could buy and sell multiple times?"
+      ]
+    },
+    {
+      "title": "Palindrome Linked List",
+      "prompt": "Given a singly linked list, determine if it is a palindrome.",
+      "tags": [
+        "linked list",
+        "two pointers"
+      ],
+      "followups": [
+        "What's the time and space complexity?"
+      ]
+    },
+    {
+      "title": "Implement Queue using Stacks",
+      "prompt": "Implement a queue using two stacks.",
+      "tags": [
+        "stack",
+        "design"
+      ],
+      "followups": [
+        "What's the amortized time complexity?"
+      ]
+    },
+    {
+      "title": "Number of 1 Bits",
+      "prompt": "Write a function that takes unsigned integer and returns number of '1' bits.",
+      "tags": [
+        "bit manipulation"
+      ],
+      "followups": [
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Counting Bits",
+      "prompt": "Given integer n, return array of length n+1 where arr[i] = number of 1's in binary representation of i.",
+      "tags": [
+        "dynamic programming",
+        "bit manipulation"
+      ],
+      "followups": [
+        "What's the DP relation?"
+      ]
+    },
+    {
+      "title": "Plus One",
+      "prompt": "Given large integer represented as integer array digits, increment and return resulting array.",
+      "tags": [
+        "arrays",
+        "math"
+      ],
+      "followups": [
+        "What's the worst-case scenario?"
+      ]
+    },
+    {
+      "title": "Intersection of Two Arrays",
+      "prompt": "Given two arrays, return their intersection.",
+      "tags": [
+        "arrays",
+        "hashset"
+      ],
+      "followups": [
+        "What if arrays are sorted?"
+      ]
+    },
+    {
+      "title": "Remove Element",
+      "prompt": "Remove all instances of val in-place from array and return new length.",
+      "tags": [
+        "arrays",
+        "two pointers"
+      ],
+      "followups": [
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Search Insert Position",
+      "prompt": "Given sorted array and target value, return index if found, otherwise return where it would be.",
+      "tags": [
+        "arrays",
+        "binary search"
+      ],
+      "followups": [
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Path Sum",
+      "prompt": "Given binary tree and target sum, determine if tree has root-to-leaf path summing to target.",
+      "tags": [
+        "tree",
+        "dfs"
+      ],
+      "followups": [
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Balanced Binary Tree",
+      "prompt": "Determine if binary tree is height-balanced.",
+      "tags": [
+        "tree",
+        "recursion"
+      ],
+      "followups": [
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Best Time to Buy Sell Stock II",
+      "prompt": "Maximize profit with unlimited transactions (buy and sell multiple times).",
+      "tags": [
+        "arrays",
+        "greedy"
+      ],
+      "followups": [
+        "Explain greedy approach."
+      ]
+    },
+    {
+      "title": "Sqrt(x)",
+      "prompt": "Compute and return square root of x, rounded down to nearest integer.",
+      "tags": [
+        "math",
+        "binary search"
+      ],
+      "followups": [
+        "Why binary search?"
+      ]
+    },
+    {
+      "title": "Range Sum Query Immutable",
+      "prompt": "Design class to handle multiple range sum queries on immutable array efficiently.",
+      "tags": [
+        "arrays",
+        "prefix sum"
+      ],
+      "followups": [
+        "What's the preprocessing time?"
+      ]
+    },
+    {
+      "title": "Middle of Linked List",
+      "prompt": "Given non-empty singly linked list, return middle node. If two middles, return second.",
+      "tags": [
+        "linked list",
+        "two pointers"
+      ],
+      "followups": [
+        "Explain fast-slow pointer approach."
+      ]
+    },
+    {
+      "title": "Last Stone Weight",
+      "prompt": "Simulate game where smash two heaviest stones and continue until one or zero stones remain.",
+      "tags": [
+        "heap"
+      ],
+      "followups": [
+        "Why use max-heap?"
+      ]
+    },
+    {
+      "title": "Find the Difference",
+      "prompt": "Given two strings s and t where t is s with one random character added, find added character.",
+      "tags": [
+        "strings",
+        "bit manipulation"
+      ],
+      "followups": [
+        "What's the XOR solution?"
+      ]
+    },
+    {
+      "title": "Third Maximum Number",
+      "prompt": "Return third maximum number in array. If doesn't exist, return maximum.",
+      "tags": [
+        "arrays"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Find All Numbers Disappeared",
+      "prompt": "Given array nums of n integers where nums[i] in range [1, n], return numbers not in array.",
+      "tags": [
+        "arrays"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Assign Cookies",
+      "prompt": "Distribute cookies to children with greed factors. Each child gets at most one cookie.",
+      "tags": [
+        "arrays",
+        "greedy"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Island Perimeter",
+      "prompt": "Given grid representing island, calculate perimeter of island.",
+      "tags": [
+        "arrays",
+        "matrix"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Heaters",
+      "prompt": "Given houses and heaters positions on horizontal line, find minimum radius so all houses covered.",
+      "tags": [
+        "arrays",
+        "binary search"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Number Complement",
+      "prompt": "Given positive integer, return its complement (flip bits in binary representation).",
+      "tags": [
+        "bit manipulation"
+      ],
+      "followups": []
+    },
+    {
+      "title": "License Key Formatting",
+      "prompt": "Format license key string by grouping characters and adding dashes.",
+      "tags": [
+        "strings"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Max Consecutive Ones",
+      "prompt": "Given binary array, find maximum number of consecutive 1s.",
+      "tags": [
+        "arrays"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Construct Quad Tree",
+      "prompt": "Construct quad tree from n x n binary grid.",
+      "tags": [
+        "tree",
+        "recursion"
+      ],
+      "followups": []
+    },
+    {
+      "title": "N-ary Tree Preorder",
+      "prompt": "Return preorder traversal of n-ary tree.",
+      "tags": [
+        "tree",
+        "recursion"
+      ],
+      "followups": []
+    },
+    {
+      "title": "To Lower Case",
+      "prompt": "Implement function to convert string to lowercase.",
+      "tags": [
+        "strings"
+      ],
+      "followups": []
+    },
+    {
+      "title": "What is API?",
+      "prompt": "Define what an API is in software engineering.",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Define JSON",
+      "prompt": "Explain what JSON is and its role in software systems.",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Describe OOP",
+      "prompt": "Describe the main principles of Object-Oriented Programming.",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "REST vs GraphQL",
+      "prompt": "Compare REST and GraphQL API design approaches.",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Explain Git",
+      "prompt": "What is Git and what are its main purposes in software development?",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "What is a Database?",
+      "prompt": "Define what a database is and why it's important in applications.",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "SQL vs NoSQL",
+      "prompt": "Compare SQL and NoSQL database types.",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "What is HTTPS?",
+      "prompt": "Explain what HTTPS is and how it differs from HTTP.",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Define DNS",
+      "prompt": "Explain what DNS is and its role in internet infrastructure.",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "What is MVC?",
+      "prompt": "Explain the Model-View-Controller design pattern.",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Explain Agile",
+      "prompt": "What is Agile software development methodology?",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "What is Testing?",
+      "prompt": "Explain the importance of testing in software development.",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Define Algorithm",
+      "prompt": "What is an algorithm in computer science?",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "What is Big O?",
+      "prompt": "Explain Big O notation and its importance.",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Explain Recursion",
+      "prompt": "What is recursion and when is it used?",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "What is a Framework?",
+      "prompt": "Define what a software framework is.",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Explain Cloud Computing",
+      "prompt": "What is cloud computing and its main benefits?",
+      "tags": [
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Variables",
+      "prompt": "What is a variable? Explain how variables are used to store and manipulate data.",
+      "tags": [
+        "fundamentals"
+      ],
+      "followups": [
+        "Can you give an example of a variable in a real program?",
+        "What are common bugs related to variables (scope, shadowing)?",
+        "How do you choose good variable names?"
+      ]
+    },
+    {
+      "title": "Variable vs Constant",
+      "prompt": "What is the difference between a variable and a constant? When should you use a constant?",
+      "tags": [
+        "fundamentals"
+      ],
+      "followups": [
+        "Why do constants improve maintainability?",
+        "How do constants relate to immutability?",
+        "What\u2019s an example of a constant you\u2019d define in an API client?"
+      ]
+    },
+    {
+      "title": "Data Types",
+      "prompt": "What is a data type? Why do data types matter in programming?",
+      "tags": [
+        "fundamentals"
+      ],
+      "followups": [
+        "What are examples of common primitive types?",
+        "How do types prevent bugs?",
+        "What\u2019s the difference between static and dynamic typing?"
+      ]
+    },
+    {
+      "title": "Primitive vs Non-Primitive Types",
+      "prompt": "What are primitive vs non-primitive data types? Give examples and explain differences in memory/storage behavior.",
+      "tags": [
+        "fundamentals",
+        "memory"
+      ],
+      "followups": [
+        "How does pass-by-value vs pass-by-reference relate?",
+        "What kinds of bugs come from mutating non-primitive types?",
+        "How do arrays/objects behave differently from primitives?"
+      ]
+    },
+    {
+      "title": "Array vs List",
+      "prompt": "What is the difference between an array and a list (ArrayList/vector/linked list depending on language)? Discuss access, insertion, and memory layout.",
+      "tags": [
+        "arrays",
+        "data-structures"
+      ],
+      "followups": [
+        "Why are arrays often faster due to cache locality?",
+        "What happens when a dynamic array grows?",
+        "When would a linked list be a better fit?"
+      ]
+    },
+    {
+      "title": "Functions",
+      "prompt": "What is a function? Why do we use functions, and what makes a function well-designed?",
+      "tags": [
+        "fundamentals"
+      ],
+      "followups": [
+        "What is a function signature?",
+        "What is purity and side effects?",
+        "How do you choose function parameters vs global state?"
+      ]
+    },
+    {
+      "title": "Function vs Method",
+      "prompt": "What is the difference between a function and a method? When does it matter?",
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
+      "followups": [
+        "What does 'this' / 'self' mean in a method?",
+        "How does method overriding relate to polymorphism?",
+        "When should behavior live on an object vs be a standalone function?"
+      ]
+    },
+    {
+      "title": "Recursion Basics",
+      "prompt": "What is recursion? Explain base case vs recursive case, and common recursion pitfalls.",
+      "tags": [
+        "recursion",
+        "fundamentals"
+      ],
+      "followups": [
+        "How does recursion relate to the call stack?",
+        "What is stack overflow and when can it happen?",
+        "Give an example of a naturally recursive problem."
+      ]
+    },
+    {
+      "title": "Recursion vs Loop",
+      "prompt": "When would you use recursion instead of a loop? Discuss readability, stack usage, and constraints.",
+      "tags": [
+        "recursion",
+        "fundamentals"
+      ],
+      "followups": [
+        "What is tail recursion (and does your language optimize it)?",
+        "How do you convert recursion to iteration?",
+        "What are the trade-offs for performance?"
+      ]
+    },
+    {
+      "title": "Stack vs Heap Memory",
+      "prompt": "What is the difference between stack and heap memory? Explain allocations, lifetimes, and typical use-cases.",
+      "tags": [
+        "memory",
+        "fundamentals"
+      ],
+      "followups": [
+        "How does garbage collection relate to heap memory?",
+        "What is a memory leak?",
+        "How does stack allocation impact performance?"
+      ]
+    },
+    {
+      "title": "Object-Oriented Programming (OOP)",
+      "prompt": "What is Object-Oriented Programming (OOP)? What problems does it solve, and what are its core principles?",
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
+      "followups": [
+        "Give a real example where OOP helped.",
+        "When might OOP be a poor fit?",
+        "How do you choose between OOP and functional style?"
+      ]
+    },
+    {
+      "title": "Four Pillars of OOP",
+      "prompt": "What are the four pillars of OOP? Define each: encapsulation, inheritance, polymorphism, abstraction.",
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
+      "followups": [
+        "Which pillar do you use most in real projects and why?",
+        "What\u2019s a common misuse of inheritance?",
+        "How do these pillars relate to maintainable code?"
+      ]
+    },
+    {
+      "title": "Encapsulation",
+      "prompt": "What is encapsulation? Explain how it helps maintain invariants and reduces coupling.",
+      "tags": [
+        "oop",
+        "design"
+      ],
+      "followups": [
+        "How is encapsulation different from abstraction?",
+        "What does 'private' mean and why is it useful?",
+        "Give an example of hiding internal state safely."
+      ]
+    },
+    {
+      "title": "Inheritance",
+      "prompt": "What is inheritance? When is it useful, and when should you prefer composition?",
+      "tags": [
+        "oop",
+        "design"
+      ],
+      "followups": [
+        "What is method overriding?",
+        "How can inheritance cause fragile code?",
+        "Give an example where composition is better."
+      ]
+    },
+    {
+      "title": "Polymorphism",
+      "prompt": "What is polymorphism? Explain how polymorphism improves extensibility with an example.",
+      "tags": [
+        "oop",
+        "design"
+      ],
+      "followups": [
+        "What\u2019s the difference between compile-time and runtime polymorphism?",
+        "How do interfaces enable polymorphism?",
+        "When can polymorphism hurt performance or clarity?"
+      ]
+    },
+    {
+      "title": "Abstraction",
+      "prompt": "What is abstraction? Explain how it helps manage complexity by focusing on essential behavior.",
+      "tags": [
+        "oop",
+        "design"
+      ],
+      "followups": [
+        "How do you design a good abstraction?",
+        "What are signs of a leaky abstraction?",
+        "Give an example of a clean abstraction you\u2019ve used."
+      ]
+    },
+    {
+      "title": "Class",
+      "prompt": "What is a class? Explain what a class defines and what it typically contains.",
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
+      "followups": [
+        "What is a field/property vs a method?",
+        "How do access modifiers apply?",
+        "How does a class relate to a type?"
+      ]
+    },
+    {
+      "title": "Object",
+      "prompt": "What is an object? Explain object state and behavior with an example.",
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
+      "followups": [
+        "What is object identity vs equality?",
+        "How does mutability affect object state?",
+        "How do you avoid unintended shared state?"
+      ]
+    },
+    {
+      "title": "Class vs Object",
+      "prompt": "What is the difference between a class and an object? Give a concrete example.",
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
+      "followups": [
+        "How do you create an object from a class?",
+        "Can you have multiple objects from the same class?",
+        "How does this relate to memory allocation?"
+      ]
+    },
+    {
+      "title": "Constructor",
+      "prompt": "What is a constructor? When is it called, and what should (and shouldn\u2019t) happen inside it?",
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
+      "followups": [
+        "What are common pitfalls of heavy work in constructors?",
+        "How do you handle failures during initialization?",
+        "How does dependency injection relate to construction?"
+      ]
+    },
+    {
+      "title": "What Is a Data Structure?",
+      "prompt": "What is a data structure? Why do data structures matter for performance and maintainability?",
+      "tags": [
+        "data-structures",
+        "fundamentals"
+      ],
+      "followups": [
+        "Give examples of data structures you\u2019ve used recently.",
+        "How do you choose the right data structure?",
+        "How do data structures affect complexity?"
+      ]
+    },
+    {
+      "title": "Array vs Linked List",
+      "prompt": "What is the difference between an array and a linked list? Compare memory layout and operation costs.",
+      "tags": [
+        "arrays",
+        "linked-list",
+        "data-structures"
+      ],
+      "followups": [
+        "Why are arrays often faster in practice?",
+        "What changes if the array is dynamic (vector/ArrayList)?",
+        "When is a linked list a good choice?"
+      ]
+    },
+    {
+      "title": "Stack",
+      "prompt": "What is a stack? Explain LIFO behavior and common use-cases.",
+      "tags": [
+        "stack",
+        "data-structures"
+      ],
+      "followups": [
+        "How would you implement a stack?",
+        "What\u2019s the time complexity of push/pop?",
+        "Give an example where a stack naturally appears."
+      ]
+    },
+    {
+      "title": "Queue",
+      "prompt": "What is a queue? Explain FIFO behavior and common use-cases.",
+      "tags": [
+        "queue",
+        "data-structures"
+      ],
+      "followups": [
+        "How would you implement a queue efficiently?",
+        "What\u2019s the time complexity of enqueue/dequeue?",
+        "Where do queues appear in systems?"
+      ]
+    },
+    {
+      "title": "Hash Table / Hash Map",
+      "prompt": "What is a hash table (hash map)? Explain hashing, collisions, and resizing.",
+      "tags": [
+        "hashmap",
+        "data-structures"
+      ],
+      "followups": [
+        "What collision strategies do you know?",
+        "What\u2019s average-case vs worst-case complexity?",
+        "What makes a good hash function?"
+      ]
+    },
+    {
+      "title": "Stack vs Queue",
+      "prompt": "What is the difference between a stack and a queue? Give examples of where each is used.",
+      "tags": [
+        "stack",
+        "queue",
+        "data-structures"
+      ],
+      "followups": [
+        "What real-world process behaves like a queue?",
+        "What real-world process behaves like a stack?",
+        "How does BFS relate to queues and DFS relate to stacks?"
+      ]
+    },
+    {
+      "title": "Tree",
+      "prompt": "What is a tree? Explain basic terminology (root, leaf, height) and common traversals.",
+      "tags": [
+        "trees",
+        "data-structures"
+      ],
+      "followups": [
+        "What\u2019s the difference between a binary tree and a BST?",
+        "When do you use BFS vs DFS on a tree?",
+        "Give an example of a tree problem."
+      ]
+    },
+    {
+      "title": "Binary Tree",
+      "prompt": "What is a binary tree? How is it different from a general tree?",
+      "tags": [
+        "trees",
+        "data-structures"
+      ],
+      "followups": [
+        "What\u2019s the difference between a binary tree and a binary search tree?",
+        "What are in-order, pre-order, and post-order traversals?",
+        "What is the typical complexity of operations in a balanced BST?"
+      ]
+    },
+    {
+      "title": "Graph",
+      "prompt": "What is a graph? Explain directed vs undirected graphs and common representations.",
+      "tags": [
+        "graphs",
+        "data-structures"
+      ],
+      "followups": [
+        "Adjacency list vs adjacency matrix: when would you choose each?",
+        "What\u2019s the complexity of BFS/DFS in terms of V and E?",
+        "Give a real-world example modeled as a graph."
+      ]
+    },
+    {
+      "title": "Big-O Notation (Data Structures)",
+      "prompt": "What is Big-O notation? How do you use it to compare data structure operations?",
+      "tags": [
+        "complexity",
+        "fundamentals"
+      ],
+      "followups": [
+        "Give examples: array access, hash map lookup, tree traversal.",
+        "How do constants and cache locality matter in practice?",
+        "What is amortized analysis?"
+      ]
+    },
+    {
+      "title": "What Is an Algorithm?",
+      "prompt": "What is an algorithm? Explain how you evaluate correctness and efficiency.",
+      "tags": [
+        "algorithms",
+        "fundamentals"
+      ],
+      "followups": [
+        "What makes an algorithm correct?",
+        "How do you estimate time complexity?",
+        "How do you test edge cases?"
+      ]
+    },
+    {
+      "title": "Linear Search vs Binary Search",
+      "prompt": "What is the difference between linear search and binary search? When can you use each?",
+      "tags": [
+        "binary-search",
+        "algorithms",
+        "arrays"
+      ],
+      "followups": [
+        "What are the prerequisites for binary search?",
+        "What\u2019s the time complexity of each?",
+        "What are common binary search pitfalls?"
+      ]
+    },
+    {
+      "title": "Sorting",
+      "prompt": "What is sorting? Why is sorting useful in problem solving?",
+      "tags": [
+        "sorting",
+        "algorithms"
+      ],
+      "followups": [
+        "How does sorting enable faster searching?",
+        "What is a stable sort and why might it matter?",
+        "Give an example problem where sorting is a key step."
+      ]
+    },
+    {
+      "title": "Sorting Algorithms",
+      "prompt": "Name some sorting algorithms you know. Compare them by time complexity and stability.",
+      "tags": [
+        "sorting",
+        "algorithms"
+      ],
+      "followups": [
+        "When would you choose quicksort vs mergesort?",
+        "What\u2019s the difference between comparison sorts and non-comparison sorts?",
+        "What is the worst-case complexity of quicksort and how do you avoid it?"
+      ]
+    },
+    {
+      "title": "Time Complexity",
+      "prompt": "What is time complexity? How do you analyze the runtime of an algorithm?",
+      "tags": [
+        "complexity",
+        "fundamentals"
+      ],
+      "followups": [
+        "What is the dominant term and why do we ignore constants?",
+        "How do nested loops affect complexity?",
+        "How does recursion affect complexity?"
+      ]
+    },
+    {
+      "title": "Space Complexity",
+      "prompt": "What is space complexity? How do you analyze extra memory usage of an algorithm?",
+      "tags": [
+        "complexity",
+        "fundamentals"
+      ],
+      "followups": [
+        "What counts as auxiliary space?",
+        "Give an example of a time-space tradeoff.",
+        "How do recursion and call stacks factor in?"
+      ]
+    },
+    {
+      "title": "Binary Search Complexity",
+      "prompt": "What is the time complexity of binary search? Explain why.",
+      "tags": [
+        "binary-search",
+        "complexity"
+      ],
+      "followups": [
+        "When does binary search not apply?",
+        "What are common off-by-one errors?",
+        "What\u2019s the space complexity (iterative vs recursive)?"
+      ]
+    },
+    {
+      "title": "Linear Search Complexity",
+      "prompt": "What is the time complexity of linear search? Explain best-case vs worst-case scenarios.",
+      "tags": [
+        "complexity",
+        "algorithms"
+      ],
+      "followups": [
+        "What is the average-case complexity and what does it depend on?",
+        "How does data distribution affect average-case?",
+        "When is linear search still the best option?"
+      ]
+    },
+    {
+      "title": "Greedy Algorithms",
+      "prompt": "What is a greedy algorithm? Explain the idea and give an example problem where greedy works.",
+      "tags": [
+        "greedy",
+        "algorithms"
+      ],
+      "followups": [
+        "How do you prove a greedy choice is correct?",
+        "Give an example where greedy fails.",
+        "How do greedy approaches compare to dynamic programming?"
+      ]
+    },
+    {
+      "title": "Dynamic Programming (Basic Idea)",
+      "prompt": "What is dynamic programming? Explain overlapping subproblems and optimal substructure with a simple example.",
+      "tags": [
+        "dp",
+        "algorithms"
+      ],
+      "followups": [
+        "Top-down vs bottom-up: what\u2019s the difference?",
+        "How do you define DP state and transition?",
+        "What are common DP pitfalls?"
+      ]
+    },
+    {
+      "title": "Database Basics",
+      "prompt": "What is a database? Why do applications use databases instead of plain files?",
+      "tags": [
+        "databases",
+        "fundamentals"
+      ],
+      "followups": [
+        "What are common operations (CRUD) in databases?",
+        "What does consistency mean?",
+        "What\u2019s the difference between OLTP and OLAP (high level)?"
+      ]
+    },
+    {
+      "title": "SQL",
+      "prompt": "What is SQL? What kinds of operations do you commonly perform with SQL?",
+      "tags": [
+        "databases",
+        "sql"
+      ],
+      "followups": [
+        "What is SELECT/INSERT/UPDATE/DELETE?",
+        "What is a JOIN and why is it useful?",
+        "How do you prevent SQL injection (high level)?"
+      ]
+    },
+    {
+      "title": "Primary Key",
+      "prompt": "What is a primary key? Why is it important in relational databases?",
+      "tags": [
+        "databases",
+        "sql"
+      ],
+      "followups": [
+        "Can a table have multiple primary keys?",
+        "What makes a good primary key?",
+        "What is a composite key?"
+      ]
+    },
+    {
+      "title": "Foreign Key",
+      "prompt": "What is a foreign key? How does it help maintain relationships and integrity between tables?",
+      "tags": [
+        "databases",
+        "sql"
+      ],
+      "followups": [
+        "What is referential integrity?",
+        "What happens on delete/update (CASCADE vs RESTRICT)?",
+        "Give an example of a one-to-many relationship."
+      ]
+    },
+    {
+      "title": "Normalization",
+      "prompt": "What is normalization? Why do we normalize relational database schemas?",
+      "tags": [
+        "databases",
+        "sql"
+      ],
+      "followups": [
+        "What problems does normalization prevent?",
+        "When would you denormalize and why?",
+        "What is 1NF/2NF/3NF (high level)?"
+      ]
+    },
+    {
+      "title": "Database Index",
+      "prompt": "What is an index in a database? How does an index speed up queries and what are the trade-offs?",
+      "tags": [
+        "databases",
+        "performance"
+      ],
+      "followups": [
+        "Why do indexes slow down writes?",
+        "What kinds of queries benefit most from indexes?",
+        "What is a composite index?"
+      ]
+    },
+    {
+      "title": "API",
+      "prompt": "What is an API? Explain it in simple terms and give an example of an API you\u2019ve used.",
+      "tags": [
+        "api",
+        "fundamentals"
+      ],
+      "followups": [
+        "What\u2019s the difference between an API and a library?",
+        "What makes an API easy to use?",
+        "How do you version an API?"
+      ]
+    },
+    {
+      "title": "REST",
+      "prompt": "What is REST? Explain REST principles and what makes an API RESTful.",
+      "tags": [
+        "api",
+        "rest"
+      ],
+      "followups": [
+        "What are common HTTP status codes and when do you use them?",
+        "What is idempotency and why does it matter?",
+        "How do you design resource-oriented URLs?"
+      ]
+    },
+    {
+      "title": "HTTP vs HTTPS",
+      "prompt": "What is HTTP and HTTPS? What problem does HTTPS solve?",
+      "tags": [
+        "http",
+        "security"
+      ],
+      "followups": [
+        "What is TLS at a high level?",
+        "What kinds of attacks does HTTPS help prevent?",
+        "What is a certificate?"
+      ]
+    },
+    {
+      "title": "GET vs POST",
+      "prompt": "What is the difference between GET and POST? Discuss semantics, caching, and when to use each.",
+      "tags": [
+        "http",
+        "rest",
+        "api"
+      ],
+      "followups": [
+        "Which methods should be idempotent?",
+        "How do query parameters differ from request bodies?",
+        "How do caches treat GET vs POST?"
+      ]
+    },
+    {
+      "title": "JSON",
+      "prompt": "What is JSON? Why is it commonly used in web APIs, and what does a JSON document look like?",
+      "tags": [
+        "json",
+        "api"
+      ],
+      "followups": [
+        "How is JSON different from XML?",
+        "What are common pitfalls when parsing JSON?",
+        "How do you validate JSON data?"
+      ]
+    }
+  ]
+}

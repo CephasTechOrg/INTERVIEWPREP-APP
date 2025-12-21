@@ -1,0 +1,1033 @@
+{
+  "track": "swe_engineer",
+  "company_style": "general",
+  "difficulty": "easy",
+  "questions": [
+    {
+      "title": "Implement an LRU Cache (Design + Core Ops)",
+      "prompt": "Design an LRU cache with get(key) and put(key, value) in O(1). Explain the data structures you would use and why.",
+      "tags": [
+        "design",
+        "hashmap",
+        "linked-list"
+      ],
+      "followups": [
+        "What are the time/space complexities and key invariants?",
+        "How would you make it thread-safe?"
+      ]
+    },
+    {
+      "title": "Rate Limiter (High Level)",
+      "prompt": "Design a simple API rate limiter. Describe the algorithm (token bucket/leaky bucket/fixed window) and what you would store.",
+      "tags": [
+        "system-design",
+        "scalability",
+        "api"
+      ],
+      "followups": [
+        "What trade-offs exist between fixed window and token bucket?",
+        "How would you implement this in a distributed system?"
+      ]
+    },
+    {
+      "title": "Detect Duplicate Requests (Idempotency)",
+      "prompt": "Your service receives duplicate POST requests due to retries. How do you make the endpoint idempotent?",
+      "tags": [
+        "api",
+        "system-thinking",
+        "databases"
+      ],
+      "followups": [
+        "What would you store as an idempotency key and where?",
+        "What edge cases exist (expiry, collisions)?"
+      ]
+    },
+    {
+      "title": "Find the Most Frequent Element",
+      "prompt": "Given an array of integers, return the most frequent element. Explain your approach and complexity.",
+      "tags": [
+        "hashmap",
+        "arrays"
+      ],
+      "followups": [
+        "How does this change if you need the top K frequent elements?",
+        "What's the complexity?"
+      ]
+    },
+    {
+      "title": "Validate Input and Errors",
+      "prompt": "In a backend endpoint, how do you validate user input and return helpful errors without leaking sensitive info?",
+      "tags": [
+        "backend",
+        "security",
+        "api"
+      ],
+      "followups": [
+        "What status codes would you use for validation errors?",
+        "How do you log safely?"
+      ]
+    },
+    {
+      "title": "Simple Load Balancer",
+      "prompt": "Explain how a basic load balancer works and different strategies (round-robin, least connections).",
+      "tags": [
+        "system-design",
+        "networking"
+      ],
+      "followups": [
+        "What metrics would you monitor on a load balancer?",
+        "How does sticky sessions work?"
+      ]
+    },
+    {
+      "title": "Database Indexing",
+      "prompt": "What is a database index and when should you add one?",
+      "tags": [
+        "databases",
+        "performance"
+      ],
+      "followups": [
+        "What are the trade-offs of adding indexes?",
+        "What makes a good index?"
+      ]
+    },
+    {
+      "title": "API Versioning",
+      "prompt": "How would you version your API? Discuss different approaches.",
+      "tags": [
+        "api",
+        "design"
+      ],
+      "followups": [
+        "What are pros/cons of URL vs header versioning?",
+        "How do you handle breaking changes?"
+      ]
+    },
+    {
+      "title": "Caching Strategy",
+      "prompt": "Describe when and why you would use caching in a web application.",
+      "tags": [
+        "system-design",
+        "performance"
+      ],
+      "followups": [
+        "What are cache invalidation strategies?",
+        "What's write-through vs write-behind caching?"
+      ]
+    },
+    {
+      "title": "Microservices vs Monolith",
+      "prompt": "Compare microservices and monolithic architectures at a high level.",
+      "tags": [
+        "system-design",
+        "architecture"
+      ],
+      "followups": [
+        "When would you choose microservices?",
+        "What challenges come with microservices?"
+      ]
+    },
+    {
+      "title": "REST Principles",
+      "prompt": "What are the key principles of RESTful API design?",
+      "tags": [
+        "api",
+        "design"
+      ],
+      "followups": [
+        "What HTTP methods map to CRUD operations?",
+        "What makes an API RESTful vs RPC?"
+      ]
+    },
+    {
+      "title": "Database Transactions",
+      "prompt": "What is ACID in databases and why is it important?",
+      "tags": [
+        "databases"
+      ],
+      "followups": [
+        "What's the difference between rollback and commit?",
+        "When would you use transactions?"
+      ]
+    },
+    {
+      "title": "SQL vs NoSQL",
+      "prompt": "Compare SQL and NoSQL databases and when to use each.",
+      "tags": [
+        "databases"
+      ],
+      "followups": [
+        "What are examples of each type?",
+        "What's eventual consistency?"
+      ]
+    },
+    {
+      "title": "Dependency Injection",
+      "prompt": "What is dependency injection and what problems does it solve?",
+      "tags": [
+        "design-patterns",
+        "architecture"
+      ],
+      "followups": [
+        "What are different ways to implement it?",
+        "What's inversion of control?"
+      ]
+    },
+    {
+      "title": "Observer Pattern",
+      "prompt": "Explain the observer pattern with a real-world example.",
+      "tags": [
+        "design-patterns"
+      ],
+      "followups": [
+        "What's the difference between push and pull models?",
+        "What problems can this pattern solve?"
+      ]
+    },
+    {
+      "title": "Factory Pattern",
+      "prompt": "What is the factory pattern and when would you use it?",
+      "tags": [
+        "design-patterns"
+      ],
+      "followups": [
+        "What's the difference between factory and abstract factory?",
+        "Give a real example where it's useful."
+      ]
+    },
+    {
+      "title": "Singleton Pattern",
+      "prompt": "Explain the singleton pattern and its use cases.",
+      "tags": [
+        "design-patterns"
+      ],
+      "followups": [
+        "What are thread safety concerns?",
+        "When should you avoid singletons?"
+      ]
+    },
+    {
+      "title": "Reverse Linked List",
+      "prompt": "Reverse a singly linked list. Discuss iterative and recursive approaches.",
+      "tags": [
+        "data-structures",
+        "linked-list"
+      ],
+      "followups": [
+        "What's the time and space complexity for each?",
+        "How would you handle a doubly linked list?"
+      ]
+    },
+    {
+      "title": "Binary Tree Traversal",
+      "prompt": "Explain different ways to traverse a binary tree (in-order, pre-order, post-order).",
+      "tags": [
+        "data-structures",
+        "tree"
+      ],
+      "followups": [
+        "When would you use each type?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "HashMap Implementation",
+      "prompt": "How does a hash map work internally? Discuss hash functions and collision resolution.",
+      "tags": [
+        "data-structures",
+        "hashmap"
+      ],
+      "followups": [
+        "What's the time complexity for operations?",
+        "What happens when the load factor is high?"
+      ]
+    },
+    {
+      "title": "Stack vs Queue",
+      "prompt": "Compare stack and queue data structures with real-world examples.",
+      "tags": [
+        "data-structures"
+      ],
+      "followups": [
+        "What operations are supported for each?",
+        "When would you use one over the other?"
+      ]
+    },
+    {
+      "title": "BFS vs DFS",
+      "prompt": "Compare breadth-first search and depth-first search algorithms.",
+      "tags": [
+        "algorithms",
+        "graph"
+      ],
+      "followups": [
+        "What data structures does each use?",
+        "When would you choose BFS over DFS?"
+      ]
+    },
+    {
+      "title": "Merge Sort vs Quick Sort",
+      "prompt": "Compare merge sort and quick sort algorithms.",
+      "tags": [
+        "algorithms",
+        "sorting"
+      ],
+      "followups": [
+        "What's the time and space complexity for each?",
+        "When would you use one over the other?"
+      ]
+    },
+    {
+      "title": "Binary Search",
+      "prompt": "Explain binary search algorithm and its requirements.",
+      "tags": [
+        "algorithms",
+        "search"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "What if the array isn't sorted?"
+      ]
+    },
+    {
+      "title": "Dijkstra's Algorithm",
+      "prompt": "Explain Dijkstra's algorithm at a high level and what it solves.",
+      "tags": [
+        "algorithms",
+        "graph"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "What data structure is typically used?"
+      ]
+    },
+    {
+      "title": "Two Sum",
+      "prompt": "Given an array of integers and a target, find two numbers that sum to target.",
+      "tags": [
+        "algorithms",
+        "arrays"
+      ],
+      "followups": [
+        "What's the optimal solution?",
+        "What if the array is sorted?"
+      ]
+    },
+    {
+      "title": "Valid Parentheses",
+      "prompt": "Check if a string containing parentheses is properly balanced.",
+      "tags": [
+        "algorithms",
+        "stack"
+      ],
+      "followups": [
+        "What data structure would you use?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Palindrome Check",
+      "prompt": "Check if a string is a palindrome (reads the same forwards and backwards).",
+      "tags": [
+        "algorithms",
+        "strings"
+      ],
+      "followups": [
+        "What's the optimal solution?",
+        "How would you handle case sensitivity?"
+      ]
+    },
+    {
+      "title": "Fibonacci Sequence",
+      "prompt": "Write a function to compute the nth Fibonacci number.",
+      "tags": [
+        "algorithms",
+        "dynamic-programming"
+      ],
+      "followups": [
+        "What's the naive approach and its problem?",
+        "How can you optimize it?"
+      ]
+    },
+    {
+      "title": "Anagram Check",
+      "prompt": "Check if two strings are anagrams of each other.",
+      "tags": [
+        "algorithms",
+        "strings"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "Can you solve with constant space?"
+      ]
+    },
+    {
+      "title": "HTTP Methods",
+      "prompt": "Explain common HTTP methods (GET, POST, PUT, DELETE, PATCH).",
+      "tags": [
+        "web",
+        "api"
+      ],
+      "followups": [
+        "What's idempotent vs safe?"
+      ]
+    },
+    {
+      "title": "Status Codes",
+      "prompt": "Explain common HTTP status codes (200, 201, 400, 401, 404, 500).",
+      "tags": [
+        "web",
+        "api"
+      ],
+      "followups": [
+        "When would you use 201 vs 200?"
+      ]
+    },
+    {
+      "title": "Cookies vs Session",
+      "prompt": "Compare cookies and sessions in web applications.",
+      "tags": [
+        "web",
+        "security"
+      ],
+      "followups": [
+        "Where is each stored?"
+      ]
+    },
+    {
+      "title": "JWT Tokens",
+      "prompt": "What are JWT tokens and how are they used for authentication?",
+      "tags": [
+        "security",
+        "api"
+      ],
+      "followups": [
+        "What are the parts of a JWT?"
+      ]
+    },
+    {
+      "title": "SQL Joins",
+      "prompt": "Explain different types of SQL joins (INNER, LEFT, RIGHT, FULL).",
+      "tags": [
+        "databases",
+        "sql"
+      ],
+      "followups": [
+        "When would you use LEFT JOIN vs INNER JOIN?"
+      ]
+    },
+    {
+      "title": "Database Normalization",
+      "prompt": "What is database normalization and why is it important?",
+      "tags": [
+        "databases"
+      ],
+      "followups": [
+        "What are the normal forms?"
+      ]
+    },
+    {
+      "title": "Primary Key vs Foreign Key",
+      "prompt": "Compare primary keys and foreign keys in databases.",
+      "tags": [
+        "databases"
+      ],
+      "followups": [
+        "Can a table have multiple primary keys?"
+      ]
+    },
+    {
+      "title": "Git Branching Strategy",
+      "prompt": "Describe a simple Git branching strategy for a team.",
+      "tags": [
+        "version-control",
+        "git"
+      ],
+      "followups": [
+        "What's feature branching?"
+      ]
+    },
+    {
+      "title": "Merge vs Rebase",
+      "prompt": "Compare git merge and git rebase.",
+      "tags": [
+        "version-control",
+        "git"
+      ],
+      "followups": [
+        "When would you use each?"
+      ]
+    },
+    {
+      "title": "Docker Basics",
+      "prompt": "What is Docker and what problems does it solve?",
+      "tags": [
+        "devops",
+        "containers"
+      ],
+      "followups": [
+        "What's a Dockerfile?"
+      ]
+    },
+    {
+      "title": "CI/CD Pipeline",
+      "prompt": "What is CI/CD and why is it important?",
+      "tags": [
+        "devops"
+      ],
+      "followups": [
+        "What are typical stages in a pipeline?"
+      ]
+    },
+    {
+      "title": "Unit Testing",
+      "prompt": "What is unit testing and what makes a good unit test?",
+      "tags": [
+        "testing"
+      ],
+      "followups": [
+        "What's the difference between unit and integration tests?"
+      ]
+    },
+    {
+      "title": "Test-Driven Development",
+      "prompt": "What is TDD and what are its benefits?",
+      "tags": [
+        "testing",
+        "methodology"
+      ],
+      "followups": [
+        "What are the red-green-refactor steps?"
+      ]
+    },
+    {
+      "title": "Agile Methodology",
+      "prompt": "Explain Agile software development at a high level.",
+      "tags": [
+        "methodology"
+      ],
+      "followups": [
+        "What are sprints and standups?"
+      ]
+    },
+    {
+      "title": "Scrum vs Kanban",
+      "prompt": "Compare Scrum and Kanban methodologies.",
+      "tags": [
+        "methodology"
+      ],
+      "followups": [
+        "When would you choose one over the other?"
+      ]
+    },
+    {
+      "title": "Object-Oriented Principles",
+      "prompt": "Explain the four main principles of OOP.",
+      "tags": [
+        "programming",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Functional Programming",
+      "prompt": "What is functional programming and its key concepts?",
+      "tags": [
+        "programming",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "SOLID Principles",
+      "prompt": "What does SOLID stand for in software design?",
+      "tags": [
+        "design-principles"
+      ],
+      "followups": []
+    },
+    {
+      "title": "DRY Principle",
+      "prompt": "What is the DRY principle and why is it important?",
+      "tags": [
+        "design-principles"
+      ],
+      "followups": []
+    },
+    {
+      "title": "YAGNI Principle",
+      "prompt": "What does YAGNI mean in software development?",
+      "tags": [
+        "design-principles"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Big O Notation",
+      "prompt": "Explain Big O notation and why it's important.",
+      "tags": [
+        "algorithms",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Time vs Space Complexity",
+      "prompt": "What's the difference between time and space complexity?",
+      "tags": [
+        "algorithms",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Recursion",
+      "prompt": "What is recursion and when would you use it?",
+      "tags": [
+        "algorithms",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Garbage Collection",
+      "prompt": "What is garbage collection in programming languages?",
+      "tags": [
+        "programming",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Static vs Dynamic Typing",
+      "prompt": "Compare statically and dynamically typed languages.",
+      "tags": [
+        "programming",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Compiled vs Interpreted",
+      "prompt": "Compare compiled and interpreted programming languages.",
+      "tags": [
+        "programming",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "REST vs GraphQL",
+      "prompt": "Compare REST and GraphQL API architectures.",
+      "tags": [
+        "api",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "SOAP vs REST",
+      "prompt": "Compare SOAP and REST web services.",
+      "tags": [
+        "api",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Monolith vs Microservices",
+      "prompt": "Compare monolithic and microservices architectures.",
+      "tags": [
+        "architecture",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Vertical vs Horizontal Scaling",
+      "prompt": "Compare vertical and horizontal scaling strategies.",
+      "tags": [
+        "scalability",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Synchronous vs Asynchronous",
+      "prompt": "Compare synchronous and asynchronous programming.",
+      "tags": [
+        "programming",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Blocking vs Non-blocking",
+      "prompt": "Compare blocking and non-blocking I/O operations.",
+      "tags": [
+        "programming",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "TCP vs UDP",
+      "prompt": "Compare TCP and UDP protocols.",
+      "tags": [
+        "networking",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "HTTP vs HTTPS",
+      "prompt": "Compare HTTP and HTTPS protocols.",
+      "tags": [
+        "web",
+        "security"
+      ],
+      "followups": []
+    },
+    {
+      "title": "SQL Injection",
+      "prompt": "What is SQL injection and how can it be prevented?",
+      "tags": [
+        "security",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Cross-Site Scripting (XSS)",
+      "prompt": "What is XSS and how can it be prevented?",
+      "tags": [
+        "security",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Cross-Site Request Forgery (CSRF)",
+      "prompt": "What is CSRF and how can it be prevented?",
+      "tags": [
+        "security",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Authentication vs Authorization",
+      "prompt": "What's the difference between authentication and authorization?",
+      "tags": [
+        "security",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "OAuth 2.0",
+      "prompt": "What is OAuth 2.0 and how does it work?",
+      "tags": [
+        "security",
+        "api"
+      ],
+      "followups": []
+    },
+    {
+      "title": "API Gateway",
+      "prompt": "What is an API gateway and what problems does it solve?",
+      "tags": [
+        "architecture",
+        "api"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Message Queue",
+      "prompt": "What is a message queue and when would you use one?",
+      "tags": [
+        "architecture",
+        "messaging"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Event-Driven Architecture",
+      "prompt": "What is event-driven architecture?",
+      "tags": [
+        "architecture",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Domain-Driven Design",
+      "prompt": "What is Domain-Driven Design at a high level?",
+      "tags": [
+        "architecture",
+        "design"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Test Pyramid",
+      "prompt": "What is the test pyramid in software testing?",
+      "tags": [
+        "testing",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "Mocking in Tests",
+      "prompt": "What is mocking in unit testing and why is it used?",
+      "tags": [
+        "testing",
+        "concepts"
+      ],
+      "followups": []
+    },
+    {
+      "title": "API Pagination (Offset vs Cursor)",
+      "prompt": "You have a GET /items endpoint returning thousands of rows. How would you implement pagination and sorting, and what would you choose: offset/limit or cursor-based pagination?",
+      "tags": [
+        "api",
+        "backend",
+        "pagination",
+        "databases"
+      ],
+      "followups": [
+        "What are the trade-offs between offset and cursor pagination?",
+        "How do you keep pagination stable when new rows are inserted?"
+      ]
+    },
+    {
+      "title": "HTTP Status Codes and Error Responses",
+      "prompt": "For a REST API, what status codes would you return for: validation error, unauthorized, forbidden, not found, conflict, and server error? Describe a consistent JSON error response shape.",
+      "tags": [
+        "api",
+        "http",
+        "backend"
+      ],
+      "followups": [
+        "When would you use 400 vs 422?",
+        "What should you avoid returning in error messages?"
+      ]
+    },
+    {
+      "title": "Graceful Degradation for Downstream Failures",
+      "prompt": "Your service calls a third-party API that sometimes times out. What do you do to keep your endpoint responsive and reliable?",
+      "tags": [
+        "reliability",
+        "timeouts",
+        "resilience",
+        "api"
+      ],
+      "followups": [
+        "What timeout and retry policy would you start with?",
+        "When should you NOT retry?"
+      ]
+    },
+    {
+      "title": "Feature Flags (Basics)",
+      "prompt": "How would you add a feature flag to enable/disable a new feature safely in production?",
+      "tags": [
+        "release",
+        "feature-flags",
+        "backend"
+      ],
+      "followups": [
+        "How do you roll out to 1% then 100%?",
+        "How do you prevent flags from becoming permanent?"
+      ]
+    },
+    {
+      "title": "Health Check vs Readiness Check",
+      "prompt": "What is the difference between liveness and readiness checks? What should each one verify?",
+      "tags": [
+        "devops",
+        "reliability",
+        "health-check"
+      ],
+      "followups": [
+        "What are examples of bad health checks?",
+        "Should readiness check the database? Why or why not?"
+      ]
+    },
+    {
+      "title": "Logging and Correlation IDs",
+      "prompt": "How do you add request IDs / correlation IDs to logs across services?",
+      "tags": [
+        "observability",
+        "logging",
+        "distributed-systems"
+      ],
+      "followups": [
+        "How do you propagate the ID across HTTP calls?",
+        "What log fields are most useful for debugging incidents?"
+      ]
+    },
+    {
+      "title": "Avoiding N+1 Database Queries",
+      "prompt": "What is the N+1 query problem? How would you detect it and fix it in an ORM-based backend?",
+      "tags": [
+        "databases",
+        "performance",
+        "orm"
+      ],
+      "followups": [
+        "When is eager loading the right fix?",
+        "What is the trade-off of joining too much data?"
+      ]
+    },
+    {
+      "title": "Basic Transactions",
+      "prompt": "When do you need a database transaction? Give an example of a bug that happens without one.",
+      "tags": [
+        "databases",
+        "transactions",
+        "consistency"
+      ],
+      "followups": [
+        "What is atomicity?",
+        "How do you handle retries for transaction conflicts?"
+      ]
+    },
+    {
+      "title": "Design a Simple TTL Cache (In-Memory)",
+      "prompt": "Design an in-memory cache with TTL expiration. What data structures do you use and how do you remove expired items?",
+      "tags": [
+        "caching",
+        "hashmap",
+        "data-structures"
+      ],
+      "followups": [
+        "How do you handle a large number of expired keys efficiently?",
+        "What happens if the server restarts?"
+      ]
+    },
+    {
+      "title": "SQL: Find Duplicate Emails",
+      "prompt": "You have a users table with an email column. Write a SQL query to find duplicate emails, and how would you prevent duplicates going forward?",
+      "tags": [
+        "sql",
+        "databases"
+      ],
+      "followups": [
+        "What index or constraint would you add?",
+        "How would you clean existing duplicates safely?"
+      ]
+    },
+    {
+      "title": "Race Condition (Simple Example)",
+      "prompt": "Explain a race condition using a counter or balance update example. How do you fix it?",
+      "tags": [
+        "concurrency",
+        "backend",
+        "reliability"
+      ],
+      "followups": [
+        "What is a deadlock?",
+        "How would you test concurrent code?"
+      ]
+    },
+    {
+      "title": "Caching HTTP Responses (ETag)",
+      "prompt": "How would you use ETags or Cache-Control to cache GET responses?",
+      "tags": [
+        "http",
+        "caching",
+        "api"
+      ],
+      "followups": [
+        "What is a 304 response?",
+        "When is caching dangerous?"
+      ]
+    },
+    {
+      "title": "Write Unit Tests (Small Function)",
+      "prompt": "Given a function that parses input and returns an object, how would you write unit tests for it?",
+      "tags": [
+        "testing",
+        "unit-testing"
+      ],
+      "followups": [
+        "What edge cases should always be tested?",
+        "When do you use mocks vs real dependencies?"
+      ]
+    },
+    {
+      "title": "Refactor a Large Function",
+      "prompt": "You inherit a large function that does many things. How do you refactor it safely?",
+      "tags": [
+        "clean-code",
+        "refactoring"
+      ],
+      "followups": [
+        "What tests do you add before refactoring?",
+        "How do you avoid changing behavior?"
+      ]
+    },
+    {
+      "title": "Design a Many-to-Many Schema",
+      "prompt": "Model users and roles where a user can have many roles and a role can belong to many users. What tables and constraints do you create?",
+      "tags": [
+        "databases",
+        "schema-design"
+      ],
+      "followups": [
+        "How do you enforce uniqueness in the join table?",
+        "What indexes help common queries?"
+      ]
+    },
+    {
+      "title": "Backpressure and Rate Limits (Conceptual)",
+      "prompt": "What is backpressure in systems? How do you protect your service when traffic spikes?",
+      "tags": [
+        "reliability",
+        "scalability"
+      ],
+      "followups": [
+        "Where would you apply rate limits (client, gateway, service)?",
+        "How do you communicate throttling to clients?"
+      ]
+    },
+    {
+      "title": "Input Sanitization vs Validation",
+      "prompt": "What is the difference between validating input and sanitizing input? Give examples.",
+      "tags": [
+        "security",
+        "backend"
+      ],
+      "followups": [
+        "How do you prevent SQL injection and XSS?",
+        "What should you log for invalid input?"
+      ]
+    },
+    {
+      "title": "Design an Audit Log (Basic)",
+      "prompt": "You need to record who changed what and when. How would you store audit log entries?",
+      "tags": [
+        "databases",
+        "audit",
+        "compliance"
+      ],
+      "followups": [
+        "What fields are essential?",
+        "How do you prevent audit logs from being edited?"
+      ]
+    },
+    {
+      "title": "Timeouts vs Retries vs Circuit Breakers",
+      "prompt": "Explain the difference between timeouts, retries, and circuit breakers. When do you use each?",
+      "tags": [
+        "reliability",
+        "resilience"
+      ],
+      "followups": [
+        "What metrics would you monitor?",
+        "What is exponential backoff with jitter?"
+      ]
+    }
+  ]
+}

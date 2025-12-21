@@ -1,0 +1,56 @@
+{
+  "title": "SWE Engineer Technical Rubric",
+  "dimensions": [
+    {
+      "name": "communication",
+      "description": "Clarity, structure, and ability to articulate trade-offs.",
+      "levels": [
+        { "range": "0-3", "description": "Unclear narrative, missing steps, hard to follow." },
+        { "range": "4-6", "description": "Explains key steps but lacks structure or precision." },
+        { "range": "7-8", "description": "Clear, structured explanation with good trade-off discussion." },
+        { "range": "9-10", "description": "Concise, polished explanation with strong technical clarity." }
+      ]
+    },
+    {
+      "name": "problem_solving",
+      "description": "Ability to frame the problem, choose strategies, and adapt under constraints.",
+      "levels": [
+        { "range": "0-3", "description": "Weak framing or incorrect approach." },
+        { "range": "4-6", "description": "Reasonable approach but limited optimization or alternatives." },
+        { "range": "7-8", "description": "Solid strategy with trade-offs and optimization awareness." },
+        { "range": "9-10", "description": "Elegant, scalable approach with strong insight and adaptability." }
+      ]
+    },
+    {
+      "name": "correctness_reasoning",
+      "description": "Soundness of reasoning, invariants, and proof of correctness.",
+      "levels": [
+        { "range": "0-3", "description": "Incorrect or lacks reasoning." },
+        { "range": "4-6", "description": "Some reasoning but incomplete or shaky." },
+        { "range": "7-8", "description": "Clear correctness reasoning with key invariants." },
+        { "range": "9-10", "description": "Rigorous, complete, and convincing proof." }
+      ]
+    },
+    {
+      "name": "complexity",
+      "description": "Accuracy of time/space analysis and optimization decisions.",
+      "levels": [
+        { "range": "0-3", "description": "Missing or incorrect analysis." },
+        { "range": "4-6", "description": "Basic analysis with minor errors or omissions." },
+        { "range": "7-8", "description": "Accurate analysis with reasonable optimization choices." },
+        { "range": "9-10", "description": "Thorough analysis with strong optimization and scalability." }
+      ]
+    },
+    {
+      "name": "edge_cases",
+      "description": "Identification and handling of edge cases, constraints, and failures.",
+      "levels": [
+        { "range": "0-3", "description": "Misses critical edge cases or constraints." },
+        { "range": "4-6", "description": "Covers some edge cases, incomplete handling." },
+        { "range": "7-8", "description": "Covers major edge cases and constraints well." },
+        { "range": "9-10", "description": "Comprehensive coverage and robust handling." }
+      ]
+    }
+  ],
+  "overall_scoring": "Compute the overall score as the average of the five dimension scores, scaled to 0-100 and rounded."
+}

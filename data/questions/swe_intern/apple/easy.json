@@ -1,0 +1,207 @@
+{
+  "track": "swe_intern",
+  "company_style": "apple",
+  "difficulty": "easy",
+  "questions": [
+    {
+      "title": "Two Sum",
+      "prompt": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. Assume exactly one solution and you may not use the same element twice.",
+      "tags": ["arrays", "hashmap"],
+      "followups": [
+        "What is the time and space complexity of your approach?",
+        "What edge cases would you test?",
+        "Can you solve this without using extra space? What trade-offs would that introduce?"
+      ]
+    },
+    {
+      "title": "Valid Parentheses",
+      "prompt": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.",
+      "tags": ["stack", "strings"],
+      "followups": [
+        "Why is a stack a good fit here?",
+        "What is the time and space complexity?",
+        "What edge cases would you test?"
+      ]
+    },
+    {
+      "title": "Reverse a String",
+      "prompt": "How would you reverse a string? Discuss approaches and trade-offs depending on language/runtime.",
+      "tags": ["strings", "two-pointers"],
+      "followups": [
+        "How would you reverse words instead of characters?",
+        "How do you handle Unicode properly?",
+        "What is the time and space complexity?"
+      ]
+    },
+    {
+      "title": "Palindrome Check",
+      "prompt": "How would you check if a string is a palindrome? Consider case sensitivity, punctuation, and whitespace.",
+      "tags": ["strings", "two-pointers"],
+      "followups": [
+        "How would you do it in-place with two pointers?",
+        "What\u2019s the complexity?",
+        "How would you test this thoroughly?"
+      ]
+    },
+    {
+      "title": "Binary Search Basics",
+      "prompt": "Given a sorted array and a target value, explain how binary search works and implement it.",
+      "tags": ["binary-search", "arrays", "complexity"],
+      "followups": [
+        "What are common off-by-one errors?",
+        "What is the time and space complexity?",
+        "What changes if the array contains duplicates?"
+      ]
+    },
+    {
+      "title": "Remove Duplicates from a Sorted Array",
+      "prompt": "Given a sorted array, remove duplicates in-place so that each element appears only once. Return the new length.",
+      "tags": ["arrays", "two-pointers"],
+      "followups": [
+        "Why does sorting matter for this approach?",
+        "What is the time and space complexity?",
+        "How would the solution change if the array were not sorted?"
+      ]
+    },
+    {
+      "title": "Merge Two Sorted Arrays",
+      "prompt": "Given two sorted arrays, merge them into one sorted array. Discuss an in-place option if one array has extra space at the end.",
+      "tags": ["arrays", "two-pointers"],
+      "followups": [
+        "What is the time complexity?",
+        "How do you avoid overwriting values when merging in-place?",
+        "What edge cases would you test?"
+      ]
+    },
+    {
+      "title": "Find the Maximum Subarray Sum (Intro)",
+      "prompt": "Given an integer array, find the contiguous subarray with the largest sum and return that sum.",
+      "tags": ["arrays", "dp", "fundamentals"],
+      "followups": [
+        "What is the core intuition behind your approach?",
+        "What is the time and space complexity?",
+        "How would you handle the case where all numbers are negative?"
+      ]
+    },
+    {
+      "title": "Hash Map Fundamentals",
+      "prompt": "What is a hash map and how does it work? Explain hashing, buckets, collisions, and resizing.",
+      "tags": ["data-structures", "hashmap"],
+      "followups": [
+        "What collision strategies do you know?",
+        "What is a good hash function and why?",
+        "What are worst-case and average-case complexities?"
+      ]
+    },
+    {
+      "title": "Arrays vs Linked Lists",
+      "prompt": "Explain arrays vs linked lists. Compare their memory layout and common operation complexities (access/insert/delete).",
+      "tags": ["data-structures", "arrays", "linked-list"],
+      "followups": [
+        "When would a linked list be a good choice in practice?",
+        "Why are arrays often faster even when big-O looks similar?",
+        "What changes if the array is dynamic (like a vector/ArrayList)?"
+      ]
+    },
+    {
+      "title": "Big-O Notation",
+      "prompt": "What is Big-O notation? Explain what it captures and what it does not capture.",
+      "tags": ["fundamentals", "complexity"],
+      "followups": [
+        "What\u2019s the difference between O, \u03a9, and \u0398?",
+        "How do constants matter in real systems?",
+        "Give an example where a theoretically worse big-O can be faster in practice."
+      ]
+    },
+    {
+      "title": "What Is Object-Oriented Programming?",
+      "prompt": "Explain Object-Oriented Programming (OOP). What problems does it solve, and what are its core principles?",
+      "tags": ["oop", "fundamentals"],
+      "followups": [
+        "Can you give a real example from a project where OOP helped?",
+        "When might OOP be a poor fit?",
+        "How do you decide between an OOP design and a functional approach?"
+      ]
+    },
+    {
+      "title": "Encapsulation",
+      "prompt": "Explain encapsulation with an example. Why does encapsulation matter for maintainable code?",
+      "tags": ["oop", "design"],
+      "followups": [
+        "How does encapsulation relate to invariants?",
+        "What\u2019s the difference between encapsulation and abstraction?",
+        "How do access modifiers help here?"
+      ]
+    },
+    {
+      "title": "Class vs Struct (Value vs Reference)",
+      "prompt": "What is the difference between a class and a struct? When would you choose one over the other?",
+      "tags": ["oop", "memory", "design"],
+      "followups": [
+        "How do value vs reference semantics affect performance and correctness?",
+        "How does copying behavior influence bugs?",
+        "Give an example of a type that should be a struct/value and one that should be a class/reference."
+      ]
+    },
+    {
+      "title": "Immutability (Basics)",
+      "prompt": "What is immutability and why is it helpful? Give a simple example where it makes code safer.",
+      "tags": ["fundamentals", "design", "concurrency"],
+      "followups": [
+        "What is a common trade-off of immutability?",
+        "How does immutability reduce bugs in shared code?",
+        "How do you design APIs to encourage immutability?"
+      ]
+    },
+    {
+      "title": "Debugging Approach",
+      "prompt": "How do you debug a program that crashes? Walk through your approach step-by-step.",
+      "tags": ["debugging", "fundamentals"],
+      "followups": [
+        "How do you narrow down a flaky issue?",
+        "What tools do you use (logs, debugger, profiling)?",
+        "How do you prevent similar crashes in the future?"
+      ]
+    },
+    {
+      "title": "Writing Tests (Basics)",
+      "prompt": "How do you write tests for a function? Explain unit tests vs integration tests and give examples.",
+      "tags": ["testing", "fundamentals", "code-quality"],
+      "followups": [
+        "What makes a test flaky and how do you fix it?",
+        "How do you choose good test cases?",
+        "How do you use tests to support refactoring?"
+      ]
+    },
+    {
+      "title": "Clean and Maintainable Code",
+      "prompt": "How do you write clean and maintainable code? What principles or practices do you follow?",
+      "tags": ["fundamentals", "code-quality"],
+      "followups": [
+        "How do you balance speed of delivery vs code quality?",
+        "How do you structure code for testability?",
+        "What does 'readability' mean to you in practice?"
+      ]
+    },
+    {
+      "title": "Why Apple?",
+      "prompt": "Why do you want to intern at Apple? Be specific about teams, products, or values that motivate you.",
+      "tags": ["behavioral", "product-thinking", "communication"],
+      "followups": [
+        "What Apple product feature would you improve and why?",
+        "Tell me about a time you worked on something user-focused.",
+        "How do you measure impact in your projects?"
+      ]
+    },
+    {
+      "title": "Project You're Proud Of (Structured)",
+      "prompt": "Tell me about a project you\u2019re proud of. Explain the problem, your role, constraints, and the result.",
+      "tags": ["behavioral", "communication"],
+      "followups": [
+        "What trade-offs did you make and why?",
+        "If you had more time, what would you improve?",
+        "How did you validate correctness and performance?"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "title": "SWE Intern Technical Rubric",
+  "dimensions": [
+    {
+      "name": "communication",
+      "description": "Clarity, structure, and precision of explanations.",
+      "levels": [
+        { "range": "0-3", "description": "Unclear, disorganized, or missing key steps." },
+        { "range": "4-6", "description": "Understands basics but explanations have gaps." },
+        { "range": "7-8", "description": "Clear, structured explanation with good pacing." },
+        { "range": "9-10", "description": "Concise, precise, and easy to follow end-to-end." }
+      ]
+    },
+    {
+      "name": "problem_solving",
+      "description": "Ability to frame the problem, plan an approach, and adapt.",
+      "levels": [
+        { "range": "0-3", "description": "Struggles to frame the problem or choose an approach." },
+        { "range": "4-6", "description": "Finds a workable approach with some guidance." },
+        { "range": "7-8", "description": "Solid plan with good decomposition and trade-offs." },
+        { "range": "9-10", "description": "Elegant strategy with strong insight and flexibility." }
+      ]
+    },
+    {
+      "name": "correctness_reasoning",
+      "description": "Soundness of reasoning, correctness proof, and invariants.",
+      "levels": [
+        { "range": "0-3", "description": "Incorrect or lacks reasoning for correctness." },
+        { "range": "4-6", "description": "Some reasoning but gaps or unsupported claims." },
+        { "range": "7-8", "description": "Clear reasoning with key invariants covered." },
+        { "range": "9-10", "description": "Rigorous, complete correctness reasoning." }
+      ]
+    },
+    {
+      "name": "complexity",
+      "description": "Accuracy of time/space analysis and optimization awareness.",
+      "levels": [
+        { "range": "0-3", "description": "No complexity analysis or clearly incorrect." },
+        { "range": "4-6", "description": "Basic analysis but incomplete or slightly off." },
+        { "range": "7-8", "description": "Accurate time and space analysis, mentions trade-offs." },
+        { "range": "9-10", "description": "Thorough analysis with optimization insight." }
+      ]
+    },
+    {
+      "name": "edge_cases",
+      "description": "Identification and handling of edge cases and constraints.",
+      "levels": [
+        { "range": "0-3", "description": "Misses key edge cases or constraints." },
+        { "range": "4-6", "description": "Mentions some edge cases, incomplete coverage." },
+        { "range": "7-8", "description": "Covers major edge cases and constraints." },
+        { "range": "9-10", "description": "Comprehensive edge cases and robust handling." }
+      ]
+    }
+  ],
+  "overall_scoring": "Compute the overall score as the average of the five dimension scores, scaled to 0-100 and rounded."
+}

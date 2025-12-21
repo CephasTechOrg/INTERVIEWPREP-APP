@@ -1,0 +1,208 @@
+{
+    "track": "swe_intern",
+    "company_style": "google",
+    "difficulty": "medium",
+    "questions": [
+      {
+        "title": "Longest Substring Without Repeating Characters",
+        "prompt": "Given a string, find the length of the longest substring without repeating characters.",
+        "tags": ["sliding-window", "hashmap"],
+        "followups": [
+          "What invariant does the window maintain?",
+          "What is the time complexity?",
+          "How does Unicode affect your solution?"
+        ]
+      },
+      {
+        "title": "Kth Largest Element",
+        "prompt": "Find the kth largest element in an unsorted array.",
+        "tags": ["heap", "quickselect"],
+        "followups": [
+          "Heap vs quickselect?",
+          "Worst-case complexity?",
+          "How would you handle streaming data?"
+        ]
+      },
+      {
+        "title": "Merge Intervals",
+        "prompt": "Merge overlapping intervals.",
+        "tags": ["sorting", "arrays"],
+        "followups": [
+          "Why is sorting required?",
+          "What edge cases exist?",
+          "Time complexity?"
+        ]
+      },
+      {
+        "title": "Binary Tree Level Order Traversal",
+        "prompt": "Return the level order traversal of a binary tree.",
+        "tags": ["trees", "bfs"],
+        "followups": [
+          "DFS vs BFS?",
+          "Space complexity?",
+          "How do you modify it for zigzag?"
+        ]
+      },
+      {
+        "title": "Detect Cycle in Graph",
+        "prompt": "Detect if a graph contains a cycle.",
+        "tags": ["graphs", "dfs"],
+        "followups": [
+          "Directed vs undirected?",
+          "How do you track visited states?",
+          "Complexity?"
+        ]
+      },
+      {
+        "title": "Product of Array Except Self",
+        "prompt": "Return an array where each element is the product of all other elements.",
+        "tags": ["arrays", "prefix-sum"],
+        "followups": [
+          "Why not division?",
+          "Space optimization?",
+          "Edge cases with zeros?"
+        ]
+      },
+      {
+        "title": "Design a Simple Cache",
+        "prompt": "Design a basic cache with get and put.",
+        "tags": ["design", "hashmap"],
+        "followups": [
+          "What eviction policy?",
+          "Time complexity?",
+          "Thread safety?"
+        ]
+      },
+      {
+        "title": "Search in Rotated Sorted Array",
+        "prompt": "Search a target in a rotated sorted array.",
+        "tags": ["binary-search"],
+        "followups": [
+          "What invariant remains?",
+          "Why is it logarithmic?",
+          "Edge cases?"
+        ]
+      },
+      {
+        "title": "Backtracking: Permutations",
+        "prompt": "Generate all permutations of a list of numbers.",
+        "tags": ["backtracking"],
+        "followups": [
+          "Time complexity?",
+          "How do you avoid duplicates?",
+          "Stack depth concerns?"
+        ]
+      },
+      {
+        "title": "Design URL Shortener",
+        "prompt": "Design a URL shortening service.",
+        "tags": ["system-design"],
+        "followups": [
+          "Key generation?",
+          "Handling scale?",
+          "Abuse prevention?"
+        ]
+      },
+      {
+        "title": "Thread Safety Basics",
+        "prompt": "Explain race conditions and how to avoid them.",
+        "tags": ["concurrency"],
+        "followups": [
+          "Locks vs atomics?",
+          "Deadlocks?",
+          "Performance trade-offs?"
+        ]
+      },
+      {
+        "title": "Top K Frequent Elements",
+        "prompt": "Return the k most frequent elements in an array.",
+        "tags": ["heap", "hashmap"],
+        "followups": [
+          "Bucket sort approach?",
+          "Complexity?",
+          "Memory usage?"
+        ]
+      },
+      {
+        "title": "Design Metrics for a Feature",
+        "prompt": "Pick a Google product feature and define success metrics.",
+        "tags": ["product-thinking"],
+        "followups": [
+          "Leading vs lagging metrics?",
+          "Avoiding vanity metrics?",
+          "Experiment design?"
+        ]
+      },
+      {
+        "title": "Implement Trie",
+        "prompt": "Implement a trie with insert and search.",
+        "tags": ["tries"],
+        "followups": [
+          "Memory trade-offs?",
+          "Prefix search?",
+          "Deletion?"
+        ]
+      },
+      {
+        "title": "Matrix Traversal",
+        "prompt": "Traverse a matrix in spiral order.",
+        "tags": ["arrays"],
+        "followups": [
+          "Boundary management?",
+          "Edge cases?",
+          "Complexity?"
+        ]
+      },
+      {
+        "title": "Find Duplicate Number",
+        "prompt": "Find the duplicate number in an array without modifying it.",
+        "tags": ["two-pointers"],
+        "followups": [
+          "Why does cycle detection work?",
+          "Space complexity?",
+          "Alternative approaches?"
+        ]
+      },
+      {
+        "title": "Design Logging System",
+        "prompt": "Design a logging system for a backend service.",
+        "tags": ["design"],
+        "followups": [
+          "Log levels?",
+          "Performance concerns?",
+          "Storage?"
+        ]
+      },
+      {
+        "title": "Validate Binary Search Tree",
+        "prompt": "Check if a binary tree is a valid BST.",
+        "tags": ["trees", "dfs"],
+        "followups": [
+          "Why bounds matter?",
+          "Recursive vs iterative?",
+          "Edge cases?"
+        ]
+      },
+      {
+        "title": "Handling Large Data Files",
+        "prompt": "How do you process files larger than memory?",
+        "tags": ["system-thinking"],
+        "followups": [
+          "Streaming?",
+          "Chunking?",
+          "Failure recovery?"
+        ]
+      },
+      {
+        "title": "Behavioral: Learning Fast",
+        "prompt": "Tell me about a time you had to learn something complex quickly.",
+        "tags": ["behavioral"],
+        "followups": [
+          "How did you validate understanding?",
+          "What was challenging?",
+          "Outcome?"
+        ]
+      }
+    ]
+  }
+  

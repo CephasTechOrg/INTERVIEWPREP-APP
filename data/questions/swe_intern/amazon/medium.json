@@ -1,0 +1,198 @@
+{
+    "track": "swe_intern",
+    "company_style": "amazon",
+    "difficulty": "medium",
+    "questions": [
+      {
+        "title": "LRU Cache",
+        "prompt": "Design and implement an LRU cache supporting get and put in O(1) average time.",
+        "tags": ["hashmap", "linked-list", "design"],
+        "followups": [
+          "Why do you need both a hash map and a linked list?",
+          "What edge cases would you test (capacity 0/1, updates, repeats)?",
+          "How would you make it thread-safe?"
+        ]
+      },
+      {
+        "title": "Top K Frequent Elements",
+        "prompt": "Given an array of integers, return the k most frequent elements.",
+        "tags": ["hashmap", "heap", "arrays"],
+        "followups": [
+          "Can you do better than sorting?",
+          "How do you handle ties deterministically?",
+          "Time and space complexity?"
+        ]
+      },
+      {
+        "title": "Longest Substring Without Repeating Characters",
+        "prompt": "Given a string, find the length of the longest substring without repeating characters.",
+        "tags": ["sliding-window", "hashmap", "strings"],
+        "followups": [
+          "What invariant does your window maintain?",
+          "Time/space complexity?",
+          "How would you adapt for Unicode?"
+        ]
+      },
+      {
+        "title": "Merge Intervals",
+        "prompt": "Given a list of intervals, merge all overlapping intervals.",
+        "tags": ["sorting", "arrays"],
+        "followups": [
+          "Why does sorting help?",
+          "What tricky edge cases exist (touching endpoints, nested)?",
+          "Complexity?"
+        ]
+      },
+      {
+        "title": "Search in Rotated Sorted Array",
+        "prompt": "Search for a target in a rotated sorted array in O(log n) time.",
+        "tags": ["binary-search", "arrays"],
+        "followups": [
+          "What invariant keeps it logarithmic?",
+          "How do duplicates change the approach?",
+          "What edge cases would you test?"
+        ]
+      },
+      {
+        "title": "Product of Array Except Self",
+        "prompt": "Return an array output where output[i] is the product of all elements except nums[i], without using division.",
+        "tags": ["arrays", "prefix-sum"],
+        "followups": [
+          "How do zeros affect the solution?",
+          "Space optimization (excluding output array)?",
+          "Complexity?"
+        ]
+      },
+      {
+        "title": "Validate Binary Search Tree",
+        "prompt": "Given a binary tree, determine if it is a valid BST.",
+        "tags": ["trees", "dfs"],
+        "followups": [
+          "Why do bounds matter?",
+          "Iterative vs recursive?",
+          "Edge cases?"
+        ]
+      },
+      {
+        "title": "Lowest Common Ancestor (Binary Tree)",
+        "prompt": "Given a binary tree and two nodes, find their lowest common ancestor.",
+        "tags": ["trees", "dfs", "recursion"],
+        "followups": [
+          "How does it differ for a BST?",
+          "What if nodes might not exist in the tree?",
+          "How do you avoid recursion depth issues?"
+        ]
+      },
+      {
+        "title": "Design a Rate Limiter (Single Region)",
+        "prompt": "Design a rate limiter for an API: N requests per minute per user. Provide a workable design and trade-offs.",
+        "tags": ["system-design", "scalability", "design"],
+        "followups": [
+          "Fixed window vs sliding window vs token bucket?",
+          "How do you avoid retry storms?",
+          "How do you test correctness?"
+        ]
+      },
+      {
+        "title": "Design a Queue-Based Worker System",
+        "prompt": "Design a system where requests are enqueued and processed by workers with retries and dead-letter handling.",
+        "tags": ["system-design", "reliability", "scalability"],
+        "followups": [
+          "How do you ensure idempotency?",
+          "At-least-once vs exactly-once processing?",
+          "How do you monitor stuck jobs?"
+        ]
+      },
+      {
+        "title": "SQL: Top Customers by Spend",
+        "prompt": "Given tables Orders(user_id, amount, created_at) and Users(id, name), write a query to return top 10 users by total spend in the last 30 days.",
+        "tags": ["sql", "databases"],
+        "followups": [
+          "What indexes would you add and why?",
+          "How do you handle ties?",
+          "How would you paginate results?"
+        ]
+      },
+      {
+        "title": "Concurrency: Producer-Consumer",
+        "prompt": "Explain how you would implement producer-consumer with a bounded buffer safely.",
+        "tags": ["concurrency", "design"],
+        "followups": [
+          "How do you prevent deadlocks?",
+          "What are condition variables used for?",
+          "How do you reduce contention?"
+        ]
+      },
+      {
+        "title": "Object Design: Notification Service",
+        "prompt": "Design classes/interfaces for sending notifications (email/SMS/push) with extensibility and testability.",
+        "tags": ["oop", "design", "api-design"],
+        "followups": [
+          "Where do interfaces help here?",
+          "How would you test integrations?",
+          "How do you handle retries and failures?"
+        ]
+      },
+      {
+        "title": "Behavioral (LP): Deliver Results",
+        "prompt": "Tell me about a time you delivered a result under a tight deadline or constraints.",
+        "tags": ["behavioral", "leadership-principles", "communication"],
+        "followups": [
+          "What did you prioritize and why?",
+          "How did you handle trade-offs?",
+          "How did you measure success?"
+        ]
+      },
+      {
+        "title": "Behavioral (LP): Earn Trust",
+        "prompt": "Tell me about a time you earned trust from teammates or stakeholders.",
+        "tags": ["behavioral", "leadership-principles"],
+        "followups": [
+          "What actions built trust?",
+          "How did you handle misunderstandings?",
+          "What was the outcome?"
+        ]
+      },
+      {
+        "title": "Behavioral (LP): Are Right, A Lot",
+        "prompt": "Tell me about a decision you made with limited data. How did you reason and what happened?",
+        "tags": ["behavioral", "leadership-principles"],
+        "followups": [
+          "What assumptions did you make?",
+          "How did you validate quickly?",
+          "What did you learn?"
+        ]
+      },
+      {
+        "title": "Behavioral (LP): Invent and Simplify",
+        "prompt": "Tell me about a time you simplified a process/system to improve speed or reliability.",
+        "tags": ["behavioral", "leadership-principles", "system-thinking"],
+        "followups": [
+          "What was complex before?",
+          "How did you prove the simplification worked?",
+          "What trade-offs did you accept?"
+        ]
+      },
+      {
+        "title": "Behavioral (LP): Insist on the Highest Standards",
+        "prompt": "Tell me about a time you raised the quality bar in a project (testing, reviews, performance, security).",
+        "tags": ["behavioral", "leadership-principles", "code-quality"],
+        "followups": [
+          "What standard did you enforce?",
+          "How did you bring others along?",
+          "What was the outcome?"
+        ]
+      },
+      {
+        "title": "Behavioral (LP): Think Big",
+        "prompt": "Tell me about a time you proposed a big improvement or long-term idea beyond immediate requirements.",
+        "tags": ["behavioral", "leadership-principles", "communication"],
+        "followups": [
+          "How did you influence stakeholders?",
+          "What risks did you identify?",
+          "What was the outcome or next step?"
+        ]
+      }
+    ]
+  }
+  

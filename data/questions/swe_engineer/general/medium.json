@@ -1,0 +1,333 @@
+{
+  "track": "swe_engineer",
+  "company_style": "general",
+  "difficulty": "medium",
+  "questions": [
+    {
+      "title": "Design a URL Shortener",
+      "prompt": "Design a URL shortener. Cover: APIs, storage schema, key generation, and scaling reads/writes.",
+      "tags": [
+        "system-design",
+        "scalability",
+        "databases",
+        "api"
+      ],
+      "followups": [
+        "How do you handle hot keys and caching?",
+        "How do you prevent abuse/spam?"
+      ]
+    },
+    {
+      "title": "Queue-Based Background Jobs",
+      "prompt": "You need to process uploads asynchronously. How would you design a background job system using a queue?",
+      "tags": [
+        "system-design",
+        "queues",
+        "reliability"
+      ],
+      "followups": [
+        "How do you handle retries and poison messages?",
+        "How would you ensure at-least-once vs exactly-once behavior?"
+      ]
+    },
+    {
+      "title": "Database Indexing Strategy",
+      "prompt": "A query is slow on a large table. How do you decide what index to add and validate it helped?",
+      "tags": [
+        "databases",
+        "performance"
+      ],
+      "followups": [
+        "What are trade-offs of adding indexes (writes/storage)?",
+        "What is a composite index and when is it useful?"
+      ]
+    },
+    {
+      "title": "Consistent Hashing (Conceptual)",
+      "prompt": "Explain consistent hashing and why it's used in distributed systems.",
+      "tags": [
+        "system-design",
+        "scalability"
+      ],
+      "followups": [
+        "How does it reduce rebalancing when nodes change?",
+        "Where have you seen it used (caches, sharding)?"
+      ]
+    },
+    {
+      "title": "Merge Intervals",
+      "prompt": "Given a list of intervals, merge all overlapping intervals. Explain your approach and complexity.",
+      "tags": [
+        "sorting",
+        "arrays"
+      ],
+      "followups": [
+        "What edge cases would you test?",
+        "Can you do it in-place?"
+      ]
+    },
+    {
+      "title": "Webhook Delivery System",
+      "prompt": "Design a webhook system: events are generated internally and delivered to customer endpoints. Cover retries, backoff, and deduplication.",
+      "tags": [
+        "system-design",
+        "reliability",
+        "api",
+        "queues"
+      ],
+      "followups": [
+        "How do you sign webhooks securely?",
+        "How do you handle customer endpoints that are slow or down?"
+      ]
+    },
+    {
+      "title": "Chunked File Uploads",
+      "prompt": "Design an upload service that supports large files, resumable uploads, and virus scanning.",
+      "tags": [
+        "system-design",
+        "storage",
+        "api",
+        "reliability"
+      ],
+      "followups": [
+        "How do you handle partial uploads and cleanup?",
+        "Where do you store upload state (DB, Redis)?"
+      ]
+    },
+    {
+      "title": "Design an Email Verification Flow",
+      "prompt": "Design email verification for new users: token generation, expiry, and resend behavior.",
+      "tags": [
+        "system-design",
+        "security",
+        "backend"
+      ],
+      "followups": [
+        "How do you prevent token leakage and replay?",
+        "How do you rate limit resends?"
+      ]
+    },
+    {
+      "title": "Design a Notification Service",
+      "prompt": "Design a notifications system that can send email/push/in-app notifications. Cover APIs and storage at a high level.",
+      "tags": [
+        "system-design",
+        "scalability",
+        "queues"
+      ],
+      "followups": [
+        "How do you avoid duplicate notifications?",
+        "How do you handle user preferences and unsubscribes?"
+      ]
+    },
+    {
+      "title": "Design a Comment System",
+      "prompt": "Design a comments feature for a post: create, delete, list with pagination, and moderation.",
+      "tags": [
+        "system-design",
+        "databases",
+        "api",
+        "pagination"
+      ],
+      "followups": [
+        "How would you index for fast reads?",
+        "How do you handle soft delete vs hard delete?"
+      ]
+    },
+    {
+      "title": "Zero-Downtime Database Migration",
+      "prompt": "You need to add a non-null column to a large table without downtime. What steps do you follow?",
+      "tags": [
+        "databases",
+        "migrations",
+        "reliability"
+      ],
+      "followups": [
+        "How do you backfill safely?",
+        "How do you deploy app changes around the migration?"
+      ]
+    },
+    {
+      "title": "Design a Multi-Tenant SaaS Schema",
+      "prompt": "How do you design a database schema for multi-tenant data? Compare shared tables with tenant_id vs separate schemas/databases.",
+      "tags": [
+        "databases",
+        "multi-tenant",
+        "security"
+      ],
+      "followups": [
+        "How do you prevent tenant data leaks?",
+        "How do you handle noisy neighbors?"
+      ]
+    },
+    {
+      "title": "Caching Strategy for a Read-Heavy Endpoint",
+      "prompt": "An endpoint is read-heavy and slow. Design a caching strategy (what to cache, TTL, invalidation).",
+      "tags": [
+        "caching",
+        "performance",
+        "system-design"
+      ],
+      "followups": [
+        "Cache-aside vs write-through: when would you choose each?",
+        "How do you handle stale data?"
+      ]
+    },
+    {
+      "title": "Design a Leaderboard (Top N)",
+      "prompt": "Design a leaderboard that shows top N users by score and supports score updates.",
+      "tags": [
+        "system-design",
+        "databases",
+        "performance"
+      ],
+      "followups": [
+        "What storage fits best (sorted set, DB index) and why?",
+        "How do you handle ties and pagination?"
+      ]
+    },
+    {
+      "title": "Implement Kth Largest Element",
+      "prompt": "Given an array of integers and k, return the kth largest element. Explain complexity and approaches.",
+      "tags": [
+        "heap",
+        "algorithms",
+        "arrays"
+      ],
+      "followups": [
+        "When is quickselect better than a heap?",
+        "What edge cases do you test?"
+      ]
+    },
+    {
+      "title": "Design Search Autocomplete",
+      "prompt": "Design autocomplete for a search box. Discuss data structures and ranking at a high level.",
+      "tags": [
+        "system-design",
+        "search",
+        "performance"
+      ],
+      "followups": [
+        "Trie vs prefix index: trade-offs?",
+        "How do you keep results fresh as data changes?"
+      ]
+    },
+    {
+      "title": "Per-User Rate Limits Across Servers",
+      "prompt": "You want per-user rate limits across multiple servers. Outline a design that is accurate and fast.",
+      "tags": [
+        "system-design",
+        "scalability",
+        "api",
+        "caching"
+      ],
+      "followups": [
+        "What trade-off between accuracy and speed is acceptable?",
+        "How do you handle burst traffic?"
+      ]
+    },
+    {
+      "title": "Delayed Job Scheduler (Simple)",
+      "prompt": "Design a system to schedule jobs to run at a future time (delayed jobs).",
+      "tags": [
+        "system-design",
+        "queues",
+        "reliability"
+      ],
+      "followups": [
+        "How do you handle retries and duplicates?",
+        "How do you scale workers safely?"
+      ]
+    },
+    {
+      "title": "Idempotency in a Multi-Instance API",
+      "prompt": "Design idempotency for a POST endpoint in a multi-instance deployment, including data storage and expiry.",
+      "tags": [
+        "api",
+        "databases",
+        "reliability"
+      ],
+      "followups": [
+        "How do you choose idempotency key TTL?",
+        "How do you handle large request bodies?"
+      ]
+    },
+    {
+      "title": "Observability: Metrics, Logs, Traces",
+      "prompt": "What metrics/logs/traces would you add to debug latency in a production API?",
+      "tags": [
+        "observability",
+        "performance"
+      ],
+      "followups": [
+        "How do you identify the slow dependency?",
+        "What SLOs would you define?"
+      ]
+    },
+    {
+      "title": "Cache Consistency for User Profiles",
+      "prompt": "You cache user profiles in Redis. How do you keep cache consistent when user updates happen?",
+      "tags": [
+        "caching",
+        "redis",
+        "system-design"
+      ],
+      "followups": [
+        "What cache invalidation strategies would you consider?",
+        "How do you prevent cache stampedes?"
+      ]
+    },
+    {
+      "title": "Design a Recommendation Endpoint (Simple)",
+      "prompt": "Design an endpoint that returns recommended items for a user. Discuss what you would precompute vs compute on request.",
+      "tags": [
+        "system-design",
+        "performance",
+        "databases"
+      ],
+      "followups": [
+        "How do you evaluate quality and latency?",
+        "How do you handle cold start users?"
+      ]
+    },
+    {
+      "title": "Debugging a Production Incident",
+      "prompt": "A service started returning 500s after a deploy. Walk through your incident response and debugging steps.",
+      "tags": [
+        "debugging",
+        "reliability",
+        "process"
+      ],
+      "followups": [
+        "What signals do you check first?",
+        "How do you prevent this next time?"
+      ]
+    },
+    {
+      "title": "Design a Large Backfill Job",
+      "prompt": "You need to backfill a new derived field for 50 million rows. How do you design the backfill job?",
+      "tags": [
+        "databases",
+        "reliability",
+        "jobs"
+      ],
+      "followups": [
+        "How do you make it resumable?",
+        "How do you monitor progress and failures?"
+      ]
+    },
+    {
+      "title": "Merge K Sorted Lists",
+      "prompt": "Merge k sorted linked lists. Explain your approach and complexity.",
+      "tags": [
+        "heap",
+        "linked-list",
+        "algorithms"
+      ],
+      "followups": [
+        "What if lists are very long?",
+        "How do you test performance?"
+      ]
+    }
+  ]
+}

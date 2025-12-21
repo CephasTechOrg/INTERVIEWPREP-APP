@@ -1,0 +1,208 @@
+{
+    "track": "swe_intern",
+    "company_style": "microsoft",
+    "difficulty": "medium",
+    "questions": [
+      {
+        "title": "Design a REST API for a Todo App",
+        "prompt": "Design REST endpoints for a Todo application (create, read, update, delete). Include request/response shapes at a high level.",
+        "tags": ["api", "rest", "design"],
+        "followups": [
+          "How do you handle validation and error responses?",
+          "How do you version this API?",
+          "How do you secure the endpoints?"
+        ]
+      },
+      {
+        "title": "LRU Cache",
+        "prompt": "Implement an LRU cache supporting get and put in O(1) average time.",
+        "tags": ["hashmap", "linked-list", "design"],
+        "followups": [
+          "Why do you need both a hash map and a linked list?",
+          "What edge cases would you test?",
+          "How would you make it thread-safe?"
+        ]
+      },
+      {
+        "title": "Top K Frequent Elements",
+        "prompt": "Given an array of integers, return the k most frequent elements.",
+        "tags": ["hashmap", "heap", "arrays"],
+        "followups": [
+          "Can you do better than sorting?",
+          "What is the time complexity?",
+          "How would you handle ties deterministically?"
+        ]
+      },
+      {
+        "title": "Validate BST",
+        "prompt": "Given a binary tree, determine if it is a valid binary search tree.",
+        "tags": ["trees", "dfs"],
+        "followups": [
+          "Why do bounds matter?",
+          "How would you do this iteratively?",
+          "What edge cases would you test?"
+        ]
+      },
+      {
+        "title": "Lowest Common Ancestor",
+        "prompt": "Given a binary tree and two nodes, find their lowest common ancestor.",
+        "tags": ["trees", "dfs", "recursion"],
+        "followups": [
+          "How does this change for a BST?",
+          "What if one node is not present?",
+          "How do you avoid recursion depth issues?"
+        ]
+      },
+      {
+        "title": "Detect Cycle in a Linked List",
+        "prompt": "Detect if a linked list has a cycle and return the node where the cycle begins (if any).",
+        "tags": ["linked-list", "two-pointers"],
+        "followups": [
+          "Why does Floyd\u2019s algorithm work?",
+          "Time and space complexity?",
+          "How would you test it?"
+        ]
+      },
+      {
+        "title": "Search in Rotated Sorted Array",
+        "prompt": "Search for a target in a rotated sorted array in O(log n) time.",
+        "tags": ["binary-search", "arrays"],
+        "followups": [
+          "What invariant lets you keep logarithmic time?",
+          "What tricky edge cases exist?",
+          "How does duplicates change the solution?"
+        ]
+      },
+      {
+        "title": "String Compression",
+        "prompt": "Compress a string by replacing repeated characters with the character followed by count. Return original if not shorter.",
+        "tags": ["strings", "two-pointers"],
+        "followups": [
+          "What is the time complexity?",
+          "How would you handle very large inputs efficiently?",
+          "What test cases catch bugs?"
+        ]
+      },
+      {
+        "title": "Concurrency: Producer-Consumer",
+        "prompt": "Explain how you would implement a producer-consumer system safely in a multi-threaded environment.",
+        "tags": ["concurrency", "design"],
+        "followups": [
+          "How do you prevent deadlocks?",
+          "What are the trade-offs of bounded vs unbounded queues?",
+          "When would you use condition variables?"
+        ]
+      },
+      {
+        "title": "Design a Logging Pipeline (High Level)",
+        "prompt": "Design a basic logging pipeline for a service: ingestion, storage, query, and retention.",
+        "tags": ["system-design", "scalability"],
+        "followups": [
+          "How do you handle high write volume?",
+          "How do you secure sensitive logs?",
+          "How do you design retention policies?"
+        ]
+      },
+      {
+        "title": "Database Indexing Trade-offs",
+        "prompt": "Explain what a database index is and how it improves reads but can hurt writes. Give an example.",
+        "tags": ["databases", "performance"],
+        "followups": [
+          "What types of indexes do you know?",
+          "How do you choose what to index?",
+          "How do you measure whether an index helps?"
+        ]
+      },
+      {
+        "title": "API Reliability and Retries",
+        "prompt": "Your service calls another service that sometimes fails. How do you design retries and timeouts safely?",
+        "tags": ["reliability", "system-thinking"],
+        "followups": [
+          "What is exponential backoff and why is it used?",
+          "How do you avoid retry storms?",
+          "When should you fail fast?"
+        ]
+      },
+      {
+        "title": "Behavioral: Ownership",
+        "prompt": "Tell me about a time you took ownership of a problem that wasn\u2019t clearly assigned to you.",
+        "tags": ["behavioral", "communication", "collaboration"],
+        "followups": [
+          "How did you align stakeholders?",
+          "What trade-offs did you make?",
+          "What was the outcome?"
+        ]
+      },
+      {
+        "title": "Behavioral: Conflict Resolution",
+        "prompt": "Describe a disagreement with a teammate about a technical decision. How did you handle it?",
+        "tags": ["behavioral", "communication", "collaboration"],
+        "followups": [
+          "How did you reach a decision?",
+          "What would you do differently next time?",
+          "How do you keep relationships strong during conflict?"
+        ]
+      },
+      {
+        "title": "System Thinking: Feature Flag Rollout",
+        "prompt": "Explain how you would roll out a risky feature safely using feature flags.",
+        "tags": ["system-thinking", "reliability"],
+        "followups": [
+          "How do you monitor the rollout?",
+          "How do you rollback quickly?",
+          "What metrics would you track?"
+        ]
+      },
+      {
+        "title": "Object Design: Shopping Cart",
+        "prompt": "Design classes/interfaces for a shopping cart system. Emphasize extensibility and testability.",
+        "tags": ["oop", "design"],
+        "followups": [
+          "Where would you use interfaces and why?",
+          "How would you test pricing rules?",
+          "How do you avoid tight coupling?"
+        ]
+      },
+      {
+        "title": "Implement Min Stack",
+        "prompt": "Design a stack that supports push, pop, top, and retrieving the minimum element in O(1).",
+        "tags": ["stack", "design"],
+        "followups": [
+          "What extra data do you store?",
+          "How do duplicates of the minimum affect your solution?",
+          "Complexities?"
+        ]
+      },
+      {
+        "title": "Design: Email Validator Service",
+        "prompt": "Design a service that validates emails (format, domain checks) with caching and rate limiting.",
+        "tags": ["design", "system-thinking"],
+        "followups": [
+          "What checks are safe to do synchronously?",
+          "How do you handle abuse?",
+          "How do you test it?"
+        ]
+      },
+      {
+        "title": "Performance: Reduce Latency",
+        "prompt": "A web endpoint is slow. Describe how you would profile and reduce latency end-to-end.",
+        "tags": ["performance", "debugging"],
+        "followups": [
+          "What do you measure first?",
+          "How do you differentiate CPU vs IO bottlenecks?",
+          "How do you prevent regressions?"
+        ]
+      },
+      {
+        "title": "Why Microsoft (Engineering Focus)",
+        "prompt": "Why Microsoft? Connect your interests to Microsoft engineering culture (growth mindset, customer obsession, inclusive collaboration).",
+        "tags": ["behavioral", "communication"],
+        "followups": [
+          "What Microsoft product would you improve and why?",
+          "Tell me about a time you improved something based on user feedback.",
+          "How do you define impact?"
+        ]
+      }
+    ]
+  }
+  
