@@ -1214,6 +1214,28 @@ function renderPerformanceDashboard(sessions) {
   renderDifficultyChips("#perfDifficulty", stats.byDifficulty);
   renderScoreBands("#perfBands", stats.byBand, stats.completed);
   renderRecentPerformance(stats.recent);
+  renderDashboardQuickStats(stats);
+}
+
+function renderDashboardQuickStats(stats) {
+  if (!stats) return;
+  const setText = (selector, value) => {
+    const el = qs(selector);
+    if (el) el.textContent = value;
+  };
+  const avgScore = stats.avg !== null ? Math.round(stats.avg) : "--";
+  const bestScore = stats.best !== null ? Math.round(stats.best) : "--";
+  const lastScore =
+    stats.last && typeof stats.last.overall_score === "number"
+      ? Math.round(Number(stats.last.overall_score || 0))
+      : null;
+  const lastSessionLabel = stats.last
+    ? `${safeLocaleString(stats.last.created_at) || "Recent"} · ${lastScore ?? "--"}/100`
+    : "No sessions yet";
+  setText("#dashAvgScore", avgScore);
+  setText("#dashDayStreak", stats.streak ?? 0);
+  setText("#dashBestScore", bestScore);
+  setText("#dashLastSession", lastSessionLabel);
 }
 
 function setComposerEnabled(enabled) {
@@ -1709,10 +1731,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     qs("#profileRolePref").value = profile.role_pref || "SWE Intern";
 
     modal.classList.remove("hidden");
+    modal.classList.add("active");
   }
 
   function closeProfileModal() {
-    qs("#profileModal")?.classList.add("hidden");
+    const modal = qs("#profileModal");
+    modal?.classList.add("hidden");
+    modal?.classList.remove("active");
   }
 
   // Avatar click shows profile
@@ -1747,6 +1772,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Dashboard start
   qs("#startInterviewBtn")?.addEventListener("click", () => {
     handleStartFromDashboard().catch((err) => showNotification(err?.message || "Failed to start session", "error"));
+  });
+
+  qs("#viewDetailedBtn")?.addEventListener("click", () => {
+    navigateTo("results");
+  });
+  qs("#performanceViewDetailsBtn")?.addEventListener("click", () => {
+    navigateTo("results");
   });
 
   // Session history
