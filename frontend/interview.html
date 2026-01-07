@@ -22,28 +22,28 @@
       </div>
 
       <nav class="nav-menu">
-        <a href="#" class="nav-item active" data-page="dashboard">
+        <a href="./dashboard.html" class="nav-item" data-page="dashboard">
           <i class="nav-icon fas fa-home"></i>
           <span>Dashboard</span>
         </a>
-        <a href="#" class="nav-item" data-page="history">
+        <a href="./dashboard.html#history" class="nav-item" data-page="history">
           <i class="nav-icon fas fa-clock-rotate-left"></i>
           <span>History</span>
         </a>
-        <a href="#" class="nav-item" data-page="performance">
+        <a href="./dashboard.html#performance" class="nav-item" data-page="performance">
           <i class="nav-icon fas fa-chart-pie"></i>
           <span>Performance</span>
         </a>
-        <a href="#" class="nav-item" data-page="interview">
+        <a href="./interview.html" class="nav-item active" data-page="interview">
           <i class="nav-icon fas fa-comments"></i>
           <span>Interview</span>
           <span class="nav-badge active">Live</span>
         </a>
-        <a href="#" class="nav-item" data-page="results">
+        <a href="./results.html" class="nav-item" data-page="results">
           <i class="nav-icon fas fa-chart-line"></i>
           <span>Results</span>
         </a>
-        <a href="#" class="nav-item" data-page="settings">
+        <a href="./settings.html" class="nav-item" data-page="settings">
           <i class="nav-icon fas fa-sliders"></i>
           <span>Settings</span>
         </a>
@@ -74,7 +74,7 @@
             <i class="fas fa-bars"></i>
           </button>
           <div class="page-title" id="pageTitle">
-            <span>Dashboard</span>
+            <span>Live Interview</span>
             <div class="page-subtitle">Practice your technical interviews</div>
           </div>
         </div>
@@ -100,323 +100,8 @@
 
       <!-- Content Area -->
       <div class="content-area">
-        <!-- Dashboard Page -->
-        <div class="page active" id="dashboardPage">
-          <div class="dashboard-header">
-            <h1 class="dashboard-title">Welcome to Interview Prep AI</h1>
-            <p class="dashboard-subtitle">Practice technical interviews with AI-powered feedback and scoring</p>
-          </div>
-
-          <div class="dashboard-grid">
-            <div class="dashboard-card main-card">
-              <div class="card-header">
-                <h3 class="card-title">Start New Interview</h3>
-                <p class="card-subtitle">Practice with a stage-based interviewer (dynamic questions + follow-ups)</p>
-              </div>
-              <div class="card-body">
-                <div class="form-grid">
-                  <div class="form-group">
-                    <label class="form-label">
-                      <i class="fas fa-user-tie"></i> Role
-                    </label>
-                    <select id="roleSelect" class="form-control">
-                      <option>SWE Intern</option>
-                      <option>Software Engineer</option>
-                      <option>Senior Engineer</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="form-label">
-                      <i class="fas fa-building"></i> Company Style
-                    </label>
-                    <select id="companySelect" class="form-control">
-                      <option value="general" selected>General Tech</option>
-                      <option value="amazon">Amazon</option>
-                      <option value="apple">Apple</option>
-                      <option value="google">Google</option>
-                      <option value="microsoft">Microsoft</option>
-                      <option value="meta">Meta</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="form-label">
-                      <i class="fas fa-signal"></i> Difficulty
-                    </label>
-                    <select id="difficultySelect" class="form-control">
-                      <option value="easy" selected>Easy</option>
-                      <option value="medium">Medium</option>
-                      <option value="hard">Hard</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="form-label">
-                      <i class="fas fa-comment-dots"></i> Behavioral Questions
-                    </label>
-                    <select id="behavioralSelect" class="form-control">
-                      <option value="0">0 (All technical)</option>
-                      <option value="1">1</option>
-                      <option value="2" selected>2 (Recommended)</option>
-                      <option value="3">3</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="coverage-hint" id="coverageHint">
-                  <i class="fas fa-info-circle"></i>
-                  <span>Checking question coverage...</span>
-                </div>
-
-                <button class="btn btn-primary btn-start" id="startInterviewBtn">
-                  <i class="fas fa-play"></i> Start Interview Session
-                </button>
-              </div>
-            </div>
-
-            <div class="dashboard-card profile-card">
-              <div class="card-header">
-                <h3 class="card-title">Your Profile</h3>
-                <p class="card-subtitle">Manage your preferences and settings</p>
-              </div>
-              <div class="card-body">
-                <div class="profile-info">
-                  <div class="profile-avatar">
-                    <i class="fas fa-user"></i>
-                  </div>
-                  <div class="profile-details">
-                    <div class="profile-name" id="dashProfileName">-</div>
-                    <div class="profile-email" id="dashProfileEmail">-</div>
-                  </div>
-                </div>
-
-                <div class="profile-stats">
-                  <div class="stat-item">
-                    <div class="stat-label">Role Preference</div>
-                    <div class="stat-value" id="dashRolePref">-</div>
-                  </div>
-                  <div class="stat-item">
-                    <div class="stat-label">Interviews Completed</div>
-                    <div class="stat-value">-</div>
-                  </div>
-                </div>
-
-                <button class="btn btn-outline btn-edit-profile" id="editProfileBtn">
-                  <i class="fas fa-user-pen"></i> Edit Profile
-                </button>
-              </div>
-            </div>
-
-            <div class="dashboard-card stats-card">
-              <div class="card-header">
-                <h3 class="card-title">Quick Stats</h3>
-                <p class="card-subtitle">Your interview performance overview</p>
-              </div>
-              <div class="card-body">
-                <div class="stats-grid">
-                  <div class="stat-card">
-                    <div class="stat-icon">
-                      <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="stat-content">
-                      <div class="stat-number" id="dashAvgScore">-</div>
-                      <div class="stat-label">Avg Score</div>
-                    </div>
-                  </div>
-                  <div class="stat-card">
-                    <div class="stat-icon">
-                      <i class="fas fa-fire"></i>
-                    </div>
-                    <div class="stat-content">
-                      <div class="stat-number" id="dashDayStreak">0</div>
-                      <div class="stat-label">Day Streak</div>
-                    </div>
-                  </div>
-                  <div class="stat-card">
-                    <div class="stat-icon">
-                      <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-content">
-                      <div class="stat-number" id="dashLastSession">-</div>
-                      <div class="stat-label">Last Session</div>
-                    </div>
-                  </div>
-                  <div class="stat-card">
-                    <div class="stat-icon">
-                      <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="stat-content">
-                      <div class="stat-number" id="dashBestScore">-</div>
-                      <div class="stat-label">Best Score</div>
-                    </div>
-                  </div>
-                </div>
-                </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- History Page -->
-        <div class="page" id="historyPage">
-          <div class="page-header">
-            <h1>Session History</h1>
-            <p>Resume any session, or open results from a completed one</p>
-          </div>
-          
-          <div class="history-container">
-            <div class="history-actions">
-              <button class="btn btn-refresh" id="refreshSessionsBtn" type="button">
-                <i class="fas fa-rotate"></i> Refresh
-              </button>
-            </div>
-            
-            <div class="sessions-list" id="sessionHistoryList">
-              <div class="session-loading">
-                <i class="fas fa-spinner fa-spin"></i>
-                <span>Loading sessions...</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Performance Page -->
-        <div class="page" id="performancePage">
-          <div class="page-header">
-            <div class="header-content">
-              <h1>Performance Overview</h1>
-              <p>Aggregate view of your interviews and scores</p>
-            </div>
-            <button class="btn btn-refresh" id="refreshPerformanceBtn" type="button">
-              <i class="fas fa-rotate"></i> Refresh Data
-            </button>
-          </div>
-
-          <div class="performance-grid">
-            <div class="performance-header">
-              <div class="performance-header__copy">
-                <h1>Interview Results & Analysis</h1>
-                <p>Track your progress and dig into the performance breakdown that matters most.</p>
-              </div>
-              <button class="btn btn-outline performance-view-btn" id="performanceViewDetailsBtn">
-                <i class="fas fa-chart-line"></i> View Results & Analysis
-              </button>
-            </div>
-            <!-- Main metrics cards -->
-            <div class="metrics-grid">
-              <div class="metric-card primary">
-                <div class="metric-header">
-                  <i class="fas fa-chart-bar"></i>
-                  <span class="metric-label">Total interviews</span>
-                </div>
-                <div class="metric-value" id="perfTotal">0</div>
-                <div class="metric-sub" id="perfCompleted">0 completed</div>
-              </div>
-              
-              <div class="metric-card success">
-                <div class="metric-header">
-                  <i class="fas fa-star"></i>
-                  <span class="metric-label">Average score</span>
-                </div>
-                <div class="metric-value" id="perfAverage">--</div>
-                <div class="metric-sub">Across completed interviews</div>
-              </div>
-              
-              <div class="metric-card warning">
-                <div class="metric-header">
-                  <i class="fas fa-trophy"></i>
-                  <span class="metric-label">Best score</span>
-                </div>
-                <div class="metric-value" id="perfBest">--</div>
-                <div class="metric-sub" id="perfBestLabel">Keep pushing upward</div>
-              </div>
-              
-              <div class="metric-card info">
-                <div class="metric-header">
-                  <i class="fas fa-chart-pie"></i>
-                  <span class="metric-label">Median score</span>
-                </div>
-                <div class="metric-value" id="perfMedian">--</div>
-                <div class="metric-sub">Middle of your distribution</div>
-              </div>
-              
-              <div class="metric-card secondary">
-                <div class="metric-header">
-                  <i class="fas fa-clock-rotate-left"></i>
-                  <span class="metric-label">Last score</span>
-                </div>
-                <div class="metric-value" id="perfLastScore">--</div>
-                <div class="metric-sub" id="perfLastDate">Most recent completed</div>
-              </div>
-              
-              <div class="metric-card accent">
-                <div class="metric-header">
-                  <i class="fas fa-fire"></i>
-                  <span class="metric-label">Current streak</span>
-                </div>
-                <div class="metric-value" id="perfStreak">0</div>
-                <div class="metric-sub">Consecutive days with an interview</div>
-              </div>
-              
-              <div class="metric-card">
-                <div class="metric-header">
-                  <i class="fas fa-percentage"></i>
-                  <span class="metric-label">Completion rate</span>
-                </div>
-                <div class="metric-value" id="perfCompletion">--</div>
-                <div class="progress-bar">
-                  <div class="progress-fill" id="perfCompletionBar"></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Charts and breakdown -->
-            <div class="charts-grid">
-              <div class="chart-card">
-                <div class="chart-header">
-                  <h3>Score Trend</h3>
-                  <span class="chart-subtitle">Last 10 completed interviews</span>
-                </div>
-                <div class="chart-body">
-                  <div id="perfSparkline" class="sparkline-chart"></div>
-                </div>
-              </div>
-              
-              <div class="chart-card">
-                <div class="chart-header">
-                  <h3>Difficulty Breakdown</h3>
-                  <span class="chart-subtitle">By difficulty level</span>
-                </div>
-                <div class="chart-body">
-                  <div class="difficulty-chips" id="perfDifficulty"></div>
-                </div>
-              </div>
-              
-              <div class="chart-card">
-                <div class="chart-header">
-                  <h3>Recent Results</h3>
-                  <span class="chart-subtitle">Most recent completed sessions</span>
-                </div>
-                <div class="chart-body">
-                  <div id="perfRecentList" class="recent-list"></div>
-                </div>
-              </div>
-              
-              <div class="chart-card">
-                <div class="chart-header">
-                  <h3>Score Distribution</h3>
-                  <span class="chart-subtitle">Score bands performance</span>
-                </div>
-                <div class="chart-body">
-                  <div class="score-bands" id="perfBands"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- Interview Page -->
-        <div class="page" id="interviewPage">
+        <div class="page active" id="interviewPage">
           <div class="interview-container">
             <!-- Interview Header -->
             <div class="interview-header">
@@ -608,95 +293,6 @@
           </div>
         </div>
 
-        <!-- Results Page -->
-        <div class="page" id="resultsPage">
-          <div class="results-container">
-            <div class="results-header">
-              <h1>Results & Analysis</h1>
-              <p id="resultsSubtitle">Finalize an interview to see detailed results</p>
-            </div>
-            
-            <div class="results-grid">
-              <!-- Score Overview -->
-              <div class="score-overview">
-                <div class="score-card">
-                  <div class="score-header">
-                    <h3>Overall Score</h3>
-                    <div class="score-badge">
-                      <span id="overall_score">0</span>/100
-                    </div>
-                  </div>
-                  <div class="score-progress">
-                    <div class="progress-circle">
-                      <svg class="progress-ring" width="120" height="120">
-                        <circle class="progress-ring-circle" stroke-width="8" fill="transparent" r="52" cx="60" cy="60"/>
-                      </svg>
-                      <div class="progress-text">
-                        <span id="overallScoreText">0</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="rubric_wrap" class="rubric-bars"></div>
-                </div>
-              </div>
-              
-              <!-- Feedback Section -->
-              <div class="feedback-section">
-                <div class="feedback-card">
-                  <div class="feedback-header">
-                    <h3>Strengths</h3>
-                    <i class="fas fa-thumbs-up"></i>
-                  </div>
-                  <div class="feedback-content" id="strengths">
-                    <div class="empty-state">
-                      <i class="fas fa-star"></i>
-                      <p>Complete an interview to see your strengths</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="feedback-card">
-                  <div class="feedback-header">
-                    <h3>Weaknesses</h3>
-                    <i class="fas fa-thumbs-down"></i>
-                  </div>
-                  <div class="feedback-content" id="weaknesses">
-                    <div class="empty-state">
-                      <i class="fas fa-lightbulb"></i>
-                      <p>Areas to improve will appear here</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="feedback-card">
-                  <div class="feedback-header">
-                    <h3>Next Steps</h3>
-                    <i class="fas fa-arrow-right"></i>
-                  </div>
-                  <div class="feedback-content" id="next_steps">
-                    <div class="empty-state">
-                      <i class="fas fa-flag-checkered"></i>
-                      <p>Actionable steps will be shown here</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Action Buttons -->
-              <div class="action-buttons">
-                <button class="btn btn-primary" id="viewDetailedBtn">
-                  <i class="fas fa-chart-line"></i> View Detailed Report
-                </button>
-                <button class="btn btn-outline" id="backToDashboardBtn">
-                  <i class="fas fa-home"></i> Back to Dashboard
-                </button>
-                <button class="btn btn-outline">
-                  <i class="fas fa-download"></i> Export Results
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 

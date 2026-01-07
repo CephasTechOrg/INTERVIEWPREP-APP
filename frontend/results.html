@@ -15,13 +15,14 @@
     }
     
     .results-container {
+      width: min(1200px, 100%);
       max-width: 1200px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 28px 24px;
     }
     
     .results-header {
-      margin-bottom: 40px;
+      margin-bottom: 28px;
       text-align: center;
     }
     
@@ -45,22 +46,29 @@
     
     .results-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 32px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 28px;
     }
     
     .score-hero {
       grid-column: 1 / -1;
       background: white;
-      border-radius: 24px;
-      padding: 40px;
+      border-radius: 20px;
+      padding: 28px;
       display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 40px;
-      align-items: center;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      gap: 24px;
+      align-items: start;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-lg);
+    }
+
+    @media (max-width: 1024px) {
+      .score-hero {
+        padding: 24px;
+        gap: 24px;
+      }
     }
     
     @media (max-width: 768px) {
@@ -76,6 +84,7 @@
       flex-direction: column;
       align-items: center;
       gap: 20px;
+      min-width: 0;
     }
     
     .gauge-container {
@@ -142,7 +151,8 @@
     .hero-content {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 14px;
+      min-width: 0;
     }
     
     .hero-title {
@@ -153,7 +163,7 @@
     }
     
     .hero-description {
-      font-size: 16px;
+      font-size: 15px;
       color: var(--text-muted);
       line-height: 1.6;
     }
@@ -161,60 +171,61 @@
     .meta-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 16px;
-      margin-top: 20px;
+      gap: 10px;
+      margin-top: 14px;
     }
     
     .meta-item {
       background: var(--light-gray);
       border-radius: 12px;
-      padding: 16px;
+      padding: 10px;
       border: 1px solid var(--border);
     }
     
     .meta-label {
       font-size: 12px;
       color: var(--text-muted);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     
     .meta-value {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--text);
+      word-break: break-word;
     }
     
     .actions-row {
       display: flex;
-      gap: 16px;
-      margin-top: 24px;
+      gap: 10px;
+      margin-top: 14px;
       flex-wrap: wrap;
     }
     
     .rating-callout {
       background: white;
-      border-radius: 20px;
-      padding: 24px;
+      border-radius: 16px;
+      padding: 18px;
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
-      margin-bottom: 32px;
+      margin-bottom: 20px;
     }
     
     .callout-icon {
-      width: 60px;
-      height: 60px;
+      width: 52px;
+      height: 52px;
       border-radius: 16px;
       background: var(--primary-ultralight);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--primary);
-      font-size: 24px;
+      font-size: 20px;
     }
     
     .callout-content {
@@ -229,7 +240,7 @@
     }
     
     .callout-text {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
       color: var(--text);
     }
@@ -256,16 +267,18 @@
     
     .results-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 8px;
+      align-items: stretch;
     }
     
     .results-card {
       background: white;
-      border-radius: 20px;
+      border-radius: 16px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
       overflow: hidden;
+      min-width: 0;
       transition: var(--transition);
     }
     
@@ -275,52 +288,83 @@
     }
     
     .card-header {
-      padding: 24px;
+      padding: 12px;
       border-bottom: 1px solid var(--border-light);
       background: var(--light-gray);
     }
     
     .card-header h3 {
-      font-size: 20px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 8px;
+      margin-bottom: 3px;
     }
     
     .card-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 12px;
+      padding: 2px 6px;
       background: var(--primary-ultralight);
       color: var(--primary);
       border-radius: 50px;
-      font-size: 12px;
+      font-size: 9px;
       font-weight: 600;
     }
     
     .card-body {
-      padding: 24px;
+      padding: 10px;
     }
     
     .radar-container {
       width: 100%;
-      height: 300px;
       display: flex;
       align-items: center;
       justify-content: center;
+      max-width: 240px;
+      margin: 0 auto 6px;
+      aspect-ratio: 1 / 1;
+      min-height: 160px;
+    }
+
+    .radar-svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .radar-grid {
+      fill: none;
+      stroke: var(--border-light);
+      stroke-width: 1;
+    }
+
+    .radar-axis {
+      stroke: var(--border);
+      stroke-width: 1;
+    }
+
+    .radar-label {
+      fill: var(--text-muted);
+      font-size: 10px;
+      letter-spacing: 0.2px;
+    }
+
+    .radar-shape {
+      fill: rgba(37, 99, 235, 0.18);
+      stroke: var(--primary);
+      stroke-width: 2;
     }
     
     .rubric-bars {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 5px;
     }
     
     .rubric-item {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 2px;
     }
     
     .rubric-header {
@@ -330,17 +374,19 @@
     }
     
     .rubric-label {
+      font-size: 13px;
       font-weight: 600;
       color: var(--text);
     }
     
     .rubric-score {
+      font-size: 13px;
       font-weight: 700;
       color: var(--primary);
     }
     
     .rubric-bar {
-      height: 8px;
+      height: 4px;
       background: var(--light-gray);
       border-radius: 4px;
       overflow: hidden;
@@ -357,22 +403,42 @@
     .feedback-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 8px;
     }
-    
+
+    .feedback-section {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .feedback-section h4 {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .strength-list,
+    .weakness-list,
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
     .feedback-item {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      padding: 16px;
+      gap: 5px;
+      padding: 5px 6px;
       background: var(--light-gray);
-      border-radius: 12px;
-      border: 1px solid var(--border);
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
     }
-    
+
     .feedback-icon {
-      width: 32px;
-      height: 32px;
+      width: 20px;
+      height: 20px;
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -397,11 +463,16 @@
     
     .feedback-content {
       flex: 1;
+      min-width: 0;
+      min-height: 0;
     }
-    
+
     .feedback-text {
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.25;
+      font-size: 13px;
+      font-weight: 500;
+      word-break: break-word;
     }
     
     .results-footer {
@@ -437,7 +508,7 @@
       }
       
       .score-hero {
-        padding: 24px;
+        padding: 22px;
       }
       
       .hero-title {
@@ -445,7 +516,12 @@
       }
       
       .actions-row {
-        justify-content: center;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .actions-row .btn {
+        width: 100%;
       }
       
       .rating-callout {
@@ -453,9 +529,74 @@
         text-align: center;
         gap: 16px;
       }
+
+      .card-header,
+      .card-body {
+        padding: 10px;
+      }
       
       .footer-actions {
         flex-direction: column;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gauge-container {
+        width: 160px;
+        height: 160px;
+      }
+
+      .gauge-score {
+        font-size: 40px;
+      }
+
+      .radar-container {
+        max-width: 200px;
+        margin-bottom: 8px;
+        min-height: 140px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .results-title {
+        font-size: 28px;
+      }
+
+      .results-subtitle {
+        font-size: 14px;
+      }
+
+      .score-hero {
+        padding: 18px;
+      }
+
+      .hero-description {
+        font-size: 14px;
+      }
+
+      .card-header,
+      .card-body {
+        padding: 8px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .gauge-container {
+        width: 140px;
+        height: 140px;
+      }
+
+      .gauge-score {
+        font-size: 32px;
+      }
+
+      .session-badge {
+        padding: 6px 14px;
+        font-size: 12px;
       }
     }
   </style>
@@ -611,24 +752,75 @@
   <script>
     // Initialize results page
     document.addEventListener('DOMContentLoaded', async () => {
+      requireAuthOrRedirect();
+
       // Get session ID from URL or localStorage
       function getSessionIdFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('session_id') || localStorage.getItem('current_session_id');
+        return urlParams.get('session_id');
+      }
+
+      function formatCompanyStyle(value) {
+        const raw = String(value || '').trim();
+        if (!raw) return '--';
+        if (raw.toLowerCase() === 'general') return 'General';
+        return raw.slice(0, 1).toUpperCase() + raw.slice(1);
+      }
+
+      function pickLatestCompletedSession(sessions) {
+        const completed = (sessions || []).filter((s) => typeof s.overall_score === 'number');
+        if (!completed.length) return null;
+        const toTime = (value) => {
+          if (!value) return 0;
+          const t = new Date(value).getTime();
+          return Number.isNaN(t) ? 0 : t;
+        };
+        return completed.sort((a, b) => {
+          const byDate = toTime(b.created_at) - toTime(a.created_at);
+          if (byDate) return byDate;
+          return Number(b.id || 0) - Number(a.id || 0);
+        })[0];
+      }
+
+      async function loadSessions(limit = 200) {
+        return apiFetch(`/sessions?limit=${limit}`, { method: 'GET' });
+      }
+
+      async function resolveSessionId() {
+        const fromUrl = getSessionIdFromUrl();
+        if (fromUrl) return { sessionId: fromUrl, sessions: null };
+
+        const stored = localStorage.getItem('current_session_id');
+        let sessions = null;
+        try {
+          sessions = await loadSessions();
+        } catch {
+          sessions = null;
+        }
+
+        if (stored && sessions) {
+          const match = sessions.find((s) => Number(s.id) === Number(stored));
+          if (match && typeof match.overall_score === 'number') {
+            return { sessionId: stored, sessions };
+          }
+        }
+
+        const latest = pickLatestCompletedSession(sessions || []);
+        return { sessionId: latest?.id || null, sessions };
       }
       
       // Load session metadata
-      async function loadSessionMeta(sessionId) {
+      async function loadSessionMeta(sessionId, sessionsOverride = null) {
         try {
-          const sessions = await apiFetch('/sessions?limit=200', { method: 'GET' });
+          const sessions = sessionsOverride || (await loadSessions());
           const match = (sessions || []).find((s) => Number(s.id) === Number(sessionId));
           if (!match) return;
-          
+
           document.getElementById('metaRole').textContent = match.role || '--';
-          document.getElementById('metaCompany').textContent = match.company_style || '--';
+          document.getElementById('metaCompany').textContent = formatCompanyStyle(match.company_style);
           document.getElementById('metaDifficulty').textContent = match.difficulty || '--';
           document.getElementById('metaStage').textContent = (match.stage || '').replaceAll('_', ' ') || '--';
-          document.getElementById('metaQuestions').textContent = 
+          document.getElementById('metaQuestions').textContent =
             `${Number(match.questions_asked_count ?? 0)}/${Number(match.max_questions ?? 7)}`;
           
           document.getElementById('session_badge').innerHTML = 
@@ -643,9 +835,9 @@
         const progress = document.querySelector('.gauge-progress');
         const scoreElement = document.getElementById('overall_score');
         const progressValue = 565 - (score / 100) * 565;
-        
-        progress.style.strokeDashoffset = progressValue;
-        scoreElement.textContent = Math.round(score);
+
+        if (progress) progress.style.strokeDashoffset = progressValue;
+        if (scoreElement) scoreElement.textContent = Math.round(score);
       }
       
       // Render feedback items
@@ -716,13 +908,13 @@
             ...Object.entries(data?.rubric || {}).map(([k, v]) => `  ${k}: ${v}/10`),
             `---`,
             `Strengths:`,
-            ...(data?.summary?.strengths || []).map(s => `  • ${s}`),
+            ...(data?.summary?.strengths || []).map(s => `  - ${s}`),
             `---`,
             `Weaknesses:`,
-            ...(data?.summary?.weaknesses || []).map(w => `  • ${w}`),
+            ...(data?.summary?.weaknesses || []).map(w => `  - ${w}`),
             `---`,
             `Next Steps:`,
-            ...(data?.summary?.next_steps || []).map(n => `  • ${n}`),
+            ...(data?.summary?.next_steps || []).map(n => `  - ${n}`),
           ].join('\n');
           
           await navigator.clipboard.writeText(summary);
@@ -734,15 +926,14 @@
       }
       
       // Main initialization
-      const sessionId = getSessionIdFromUrl();
-      
+      const { sessionId, sessions } = await resolveSessionId();
       if (!sessionId) {
-        document.getElementById('resultsSubtitle').textContent = 'No session data available. Please complete an interview first.';
+        document.getElementById('resultsSubtitle').textContent = 'No completed sessions yet. Finish an interview to see results.';
         return;
       }
       
       // Load metadata
-      loadSessionMeta(sessionId);
+      loadSessionMeta(sessionId, sessions);
       
       try {
         // Load results data
@@ -762,7 +953,7 @@
         // Set up button handlers
         document.getElementById('btnCopySummary').addEventListener('click', () => copySummary(data));
         document.getElementById('btnOpenPerformance').addEventListener('click', () => {
-          window.location.href = './interview.html#performance';
+          window.location.href = './dashboard.html#performance';
         });
         document.getElementById('btnNewSession').addEventListener('click', () => {
           window.location.href = './interview.html';

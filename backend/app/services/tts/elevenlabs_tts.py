@@ -2,11 +2,13 @@ import logging
 import os
 import time
 from io import BytesIO
+from pathlib import Path
 from typing import Tuple
 
 from dotenv import load_dotenv
 
-load_dotenv()
+_ENV_PATH = Path(__file__).resolve().parents[3] / ".env"
+load_dotenv(dotenv_path=_ENV_PATH)
 
 logger = logging.getLogger(__name__)
 

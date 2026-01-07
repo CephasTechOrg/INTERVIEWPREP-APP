@@ -1,5 +1,6 @@
 import logging
 import os
+from pathlib import Path
 from typing import Tuple
 
 from dotenv import load_dotenv
@@ -7,8 +8,9 @@ from dotenv import load_dotenv
 from app.services.tts.elevenlabs_tts import elevenlabs_tts, is_elevenlabs_enabled
 from app.services.tts.default_tts import default_tts
 
-# Load environment variables early for standalone usage (keeps keys out of code).
-load_dotenv()
+# Load backend/.env regardless of the current working directory.
+_ENV_PATH = Path(__file__).resolve().parents[3] / ".env"
+load_dotenv(dotenv_path=_ENV_PATH)
 
 logger = logging.getLogger(__name__)
 

@@ -14,6 +14,7 @@ from app.services.llm_client import LLMClientError
 from app.crud.message import list_messages
 from app.crud.evaluation import get_evaluation
 from app.crud import message as message_crud
+from app.crud import question as question_crud
 
 router = APIRouter(prefix="/sessions")
 
@@ -32,8 +33,40 @@ def _validate_session_inputs(track: str, company_style: str, difficulty: str) ->
         raise HTTPException(status_code=422, detail=f"Invalid difficulty '{difficulty}'.")
 
 
+def _clamp_limit(value: int | None, default: int, maximum: int) -> int:
+    try:
+        val = int(value) if value is not None else default
+    except (TypeError, ValueError):
+        return default
+    return max(1, min(val, maximum))
+
+
+def _apply_pool_state(db: Session, session, pool: dict) -> None:
+    if not pool or not isinstance(pool, dict):
+        return
+    try:
+        state = session.skill_state if isinstance(session.skill_state, dict) else {}
+    except Exception:
+        state = {}
+    state = dict(state)
+    state["pool"] = pool
+    session.skill_state = state
+
+    if pool.get("status") != "empty":
+        eff = pool.get("effective_difficulty")
+        if isinstance(eff, str):
+            eff_norm = eff.strip().lower()
+            if eff_norm in ("easy", "medium", "hard"):
+                session.difficulty_current = eff_norm
+
+    db.add(session)
+    db.commit()
+    db.refresh(session)
+
+
 @router.get("", response_model=list[SessionSummaryOut])
 def list_user_sessions(limit: int = 50, db: Session = Depends(get_db), user=Depends(get_current_user)):
+    limit = _clamp_limit(limit, 50, 200)
     sessions = session_crud.list_sessions(db, user_id=user.id, limit=limit)
     out: list[SessionSummaryOut] = []
     for s in sessions:
@@ -64,6 +97,7 @@ def list_session_messages(
     db: Session = Depends(get_db),
     user=Depends(get_current_user),
 ):
+    limit = _clamp_limit(limit, 2000, 2000)
     s = session_crud.get_session(db, session_id)
     if not s or s.user_id != user.id:
         raise HTTPException(status_code=404, detail="Session not found.")
@@ -83,6 +117,7 @@ def list_session_messages(
 
 @router.post("", response_model=SessionOut)
 def create_session(payload: CreateSessionRequest, db: Session = Depends(get_db), user=Depends(get_current_user)):
+    role = (payload.role or "").strip() or "SWE Intern"
     track = (payload.track or "").strip().lower()
     company_style = (payload.company_style or "").strip().lower()
     difficulty = (payload.difficulty or "").strip().lower()
@@ -90,12 +125,18 @@ def create_session(payload: CreateSessionRequest, db: Session = Depends(get_db),
     s = session_crud.create_session(
         db=db,
         user_id=user.id,
-        role=payload.role,
+        role=role,
         track=track,
         company_style=company_style,
         difficulty=difficulty,
         behavioral_questions_target=payload.behavioral_questions_target,
     )
+    try:
+        pool = question_crud.preflight_question_pool(db, track, company_style, difficulty)
+        _apply_pool_state(db, s, pool)
+    except Exception:
+        # Preflight is best-effort; never block session creation.
+        pass
     return SessionOut(
         id=s.id,
         role=s.role,
@@ -138,9 +179,13 @@ async def send_message(session_id: int, payload: SendMessageRequest, db: Session
     if not s or s.user_id != user.id:
         raise HTTPException(status_code=404, detail="Session not found.")
 
+    content = (payload.content or "").strip()
+    if not content:
+        raise HTTPException(status_code=422, detail="Message content is required.")
+
     logger.info("Session message user_id=%s session_id=%s", user.id, session_id)
     try:
-        await engine.handle_student_message(db, s, payload.content, user_name=getattr(user, "full_name", None))
+        await engine.handle_student_message(db, s, content, user_name=getattr(user, "full_name", None))
     except LLMClientError as e:
         # return a clear frontend-friendly message (no crash)
         raise HTTPException(status_code=502, detail=f"AI service error: {str(e)}")

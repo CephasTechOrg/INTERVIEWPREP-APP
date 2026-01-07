@@ -50,11 +50,21 @@ Each file should contain:
       "title": "...",
       "prompt": "...",
       "tags": ["..."],
-      "followups": ["...", "..."]
+      "followups": ["...", "..."],
+      "question_type": "coding" | "system_design" | "behavioral" | "conceptual",
+      "expected_topics": ["..."],
+      "evaluation_focus": ["..."],
+      "company_bar": "..."
     }
   ]
 }
 ```
+
+Optional fields:
+- `question_type`: drives system-design vs coding selection (defaults inferred from tags).
+- `expected_topics`: what the interviewer expects the candidate to cover.
+- `evaluation_focus`: dimensions to emphasize in follow-ups (e.g., correctness, complexity).
+- `company_bar`: short label for company-specific expectations.
 
 Use explicit, consistent names--no vague labels. This keeps future additions unambiguous and easy to validate.
 

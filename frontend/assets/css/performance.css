@@ -33,23 +33,40 @@
   white-space: nowrap;
 }
 
+.performance-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.performance-columns .metrics-grid,
+.performance-columns .charts-grid {
+  width: 100%;
+}
+
 /* Metrics Grid */
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  gap: 12px;
   width: 100%;
+  align-items: start;
+  align-content: start;
+  grid-auto-rows: max-content;
 }
 
 .metric-card {
   background: white;
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: 10px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  align-self: start;
+  height: max-content;
 }
 
 .metric-card:hover {
@@ -120,16 +137,16 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 6px;
 }
 
 .metric-header i {
-  font-size: 20px;
+  font-size: 18px;
   color: var(--text);
 }
 
 .metric-label {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text);
   text-transform: uppercase;
@@ -137,26 +154,27 @@
 }
 
 .metric-value {
-  font-size: 42px;
+  font-size: 34px;
   font-weight: 800;
   color: var(--text);
-  line-height: 1;
-  margin-bottom: 8px;
+  line-height: 0.9;
+  margin-bottom: 2px;
   font-feature-settings: "tnum";
 }
 
 .metric-sub {
-  font-size: 14px;
+  font-size: 11px;
   color: var(--text-muted);
+  line-height: 1.15;
 }
 
 /* Progress Bar */
 .progress-bar {
-  height: 8px;
+  height: 5px;
   background: var(--light-gray);
   border-radius: var(--radius-full);
   overflow: hidden;
-  margin-top: 12px;
+  margin-top: 6px;
 }
 
 .progress-fill {
@@ -172,6 +190,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 24px;
+  grid-auto-rows: minmax(220px, auto);
 }
 
 .chart-body {
@@ -698,28 +717,12 @@
   }
 }
 
-@media (max-width: 768px) {
-  .charts-grid {
+@media (max-width: 1023px) {
+  .performance-columns {
     grid-template-columns: 1fr;
   }
-  
-  .performance-indicators {
-    flex-direction: column;
-  }
-  
-  .indicator {
-    min-width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .metric-value {
-    font-size: 32px;
-  }
-  
-  .session-meta {
-    flex-direction: column;
-    gap: 8px;
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -732,11 +735,14 @@
     width: 100%;
     justify-content: center;
   }
-  .metrics-grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
   .charts-grid {
     grid-template-columns: 1fr;
+  }
+  .performance-indicators {
+    flex-direction: column;
+  }
+  .indicator {
+    min-width: 100%;
   }
   .recent-item {
     flex-direction: column;
@@ -746,5 +752,28 @@
     margin-left: 0;
     width: 100%;
     justify-content: space-between;
+  }
+}
+
+@media (max-width: 767px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .metric-value {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .metric-value {
+    font-size: 32px;
+  }
+  
+  .session-meta {
+    flex-direction: column;
+    gap: 8px;
   }
 }

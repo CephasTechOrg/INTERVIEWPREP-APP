@@ -11,7 +11,9 @@
   <style>
     .login-page {
       min-height: 100vh;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background:
+        linear-gradient(120deg, rgba(6, 12, 28, 0.42) 0%, rgba(16, 26, 52, 0.36) 45%, rgba(6, 12, 28, 0.48) 100%),
+        url("https://images.pexels.com/photos/5915239/pexels-photo-5915239.jpeg") center/cover no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -24,10 +26,12 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       min-height: 700px;
-      background: white;
+      background: rgba(10, 18, 36, 0.25);
       border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(12px);
       animation: fadeIn 0.6s ease-out;
     }
     
@@ -35,11 +39,12 @@
       .login-container {
         grid-template-columns: 1fr;
         max-width: 600px;
+        min-height: auto;
       }
     }
     
     .hero-panel {
-      background: linear-gradient(135deg, #4361ee 0%, #3a56d4 100%);
+      background: transparent;
       padding: 60px 40px;
       display: flex;
       flex-direction: column;
@@ -57,7 +62,7 @@
       height: 200%;
       background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
       background-size: 40px 40px;
-      opacity: 0.1;
+      opacity: 0.08;
       animation: moveGrid 20s linear infinite;
     }
     
@@ -161,6 +166,7 @@
       margin-top: 40px;
       color: white;
     }
+
     
     .stat {
       text-align: center;
@@ -180,11 +186,12 @@
     
     .auth-panel {
       padding: 60px 40px;
-      background: white;
+      background: rgba(255, 255, 255, 0.95);
       display: flex;
       flex-direction: column;
       justify-content: center;
       position: relative;
+      backdrop-filter: blur(8px);
     }
     
     .auth-header {
@@ -409,7 +416,7 @@
         flex-direction: column;
         gap: 20px;
       }
-      
+
       .auth-tab {
         font-size: 14px;
         padding: 12px;
@@ -443,7 +450,7 @@
       .hero-logo-text {
         font-size: 28px;
       }
-      
+
       .links-row {
         flex-direction: column;
         text-align: center;
@@ -634,7 +641,7 @@
           
           <div class="form-actions">
             <button class="btn btn-outline btn-full" type="button" id="btn_resend">
-              <i class="fas fa-paper-plane"></i> Send verification code
+              <i class="fas fa-paper-plane"></i> Send verification token
             </button>
           </div>
           
@@ -644,8 +651,8 @@
           
           <form id="verify_form" class="stacked">
             <div class="form-group">
-              <label class="form-label">Verification code</label>
-              <input id="ver_token" class="form-control" type="text" placeholder="Enter 6-digit code" required/>
+              <label class="form-label">Verification token</label>
+              <input id="ver_token" class="form-control" type="text" placeholder="Paste verification token" required/>
             </div>
             
             <div class="form-actions">
@@ -680,8 +687,8 @@
 
           <form id="reset_form" class="stacked">
             <div class="form-group">
-              <label class="form-label">Reset code</label>
-              <input id="rp_token" class="form-control" type="text" placeholder="Enter reset code" required/>
+              <label class="form-label">Reset token</label>
+              <input id="rp_token" class="form-control" type="text" placeholder="Paste reset token" required/>
             </div>
             
             <div class="form-group">

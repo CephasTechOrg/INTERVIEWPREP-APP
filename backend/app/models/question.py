@@ -18,6 +18,8 @@ class Question(Base):
 
     tags_csv: Mapped[str] = mapped_column(String(500), default="")  # store tags as "arrays,hashmap"
     followups: Mapped[list] = mapped_column(JSON, default=list)  # optional dataset-driven followups
+    question_type: Mapped[str] = mapped_column(String(50), default="coding")  # coding|system_design|behavioral|conceptual
+    meta: Mapped[dict] = mapped_column(JSON, default=dict)  # optional extra metadata
 
     created_at: Mapped[str] = mapped_column(DateTime(timezone=True), server_default=func.now())
 

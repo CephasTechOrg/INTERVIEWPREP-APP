@@ -50,8 +50,143 @@ function escapeHtml(str) {
 // UI state keys
 const VOICE_TOGGLE_KEY = "tts_enabled";
 const QUESTION_PIN_COLLAPSED_KEY = "question_pin_collapsed";
+const SESSION_PREFS_KEY = "last_session_prefs";
+const ROLE_OPTIONS = new Set(["SWE Intern", "Software Engineer", "Senior Engineer"]);
+const COMPANY_OPTIONS = new Set(["general", "amazon", "google", "apple", "microsoft", "meta"]);
+const DIFFICULTY_OPTIONS = new Set(["easy", "medium", "hard"]);
 let lastAiMessage = "";
 let currentTtsAudio = null;
+let pendingTtsText = null;
+let pendingTtsNoticeShown = false;
+let ttsUnlockBound = false;
+let manualUserActivation = false;
+
+function hasUserActivation() {
+  if (typeof document === "undefined") return true;
+  if ("userActivation" in document) {
+    return !!document.userActivation?.hasBeenActive;
+  }
+  return manualUserActivation;
+}
+
+function markUserActivation() {
+  manualUserActivation = true;
+}
+
+if (typeof document !== "undefined") {
+  document.addEventListener("pointerdown", markUserActivation, { once: true });
+  document.addEventListener("keydown", markUserActivation, { once: true });
+}
+
+function bindTtsUnlock() {
+  if (ttsUnlockBound) return;
+  ttsUnlockBound = true;
+
+  const handler = () => {
+    if (!pendingTtsText) return;
+    const text = pendingTtsText;
+    pendingTtsText = null;
+    ttsUnlockBound = false;
+    document.removeEventListener("pointerdown", handler);
+    document.removeEventListener("keydown", handler);
+    if (typeof speakText === "function") {
+      speakText(text);
+    } else {
+      speakWithBackendTts(text);
+    }
+  };
+
+  document.addEventListener("pointerdown", handler, { once: true });
+  document.addEventListener("keydown", handler, { once: true });
+}
+
+function deferTts(text) {
+  const value = String(text || "").trim();
+  if (!value) return;
+  pendingTtsText = value;
+  bindTtsUnlock();
+  if (!pendingTtsNoticeShown) {
+    pendingTtsNoticeShown = true;
+    showNotification("Tap anywhere to enable audio output.", "info");
+  }
+}
+
+function normalizeSessionPrefs(raw) {
+  if (!raw || typeof raw !== "object") return null;
+  const role = ROLE_OPTIONS.has(raw.role) ? raw.role : null;
+  const company_style = COMPANY_OPTIONS.has(raw.company_style) ? raw.company_style : null;
+  const difficulty = DIFFICULTY_OPTIONS.has(raw.difficulty) ? raw.difficulty : null;
+
+  let behavioral = null;
+  if (raw.behavioral_questions_target !== undefined) {
+    behavioral = Number(raw.behavioral_questions_target);
+  } else if (raw.behavioralSelect !== undefined) {
+    behavioral = Number(raw.behavioralSelect);
+  }
+  if (Number.isNaN(behavioral)) behavioral = null;
+  if (behavioral !== null) behavioral = Math.max(0, Math.min(3, behavioral));
+
+  if (!role && !company_style && !difficulty && behavioral === null) return null;
+  return { role, company_style, difficulty, behavioral_questions_target: behavioral };
+}
+
+function saveSessionPrefs(prefs) {
+  try {
+    const normalized = normalizeSessionPrefs(prefs);
+    if (!normalized) return;
+    localStorage.setItem(SESSION_PREFS_KEY, JSON.stringify(normalized));
+  } catch {}
+}
+
+function loadSessionPrefs() {
+  try {
+    const raw = localStorage.getItem(SESSION_PREFS_KEY);
+    return raw ? normalizeSessionPrefs(JSON.parse(raw)) : null;
+  } catch {
+    return null;
+  }
+}
+
+function applySessionPrefs(prefs) {
+  if (!prefs) return;
+  if (prefs.role) {
+    if (qs("#roleSelect")) qs("#roleSelect").value = prefs.role;
+    if (qs("#interviewRole")) qs("#interviewRole").value = prefs.role;
+  }
+  if (prefs.company_style) {
+    if (qs("#companySelect")) qs("#companySelect").value = prefs.company_style;
+    if (qs("#interviewCompany")) qs("#interviewCompany").value = prefs.company_style;
+  }
+  if (prefs.difficulty) {
+    if (qs("#difficultySelect")) qs("#difficultySelect").value = prefs.difficulty;
+    if (qs("#interviewDifficulty")) qs("#interviewDifficulty").value = prefs.difficulty;
+  }
+  if (prefs.behavioral_questions_target !== null && prefs.behavioral_questions_target !== undefined) {
+    if (qs("#behavioralSelect")) qs("#behavioralSelect").value = String(prefs.behavioral_questions_target);
+  }
+}
+
+function readSessionPrefsFromUI() {
+  const role = qs("#roleSelect")?.value || qs("#interviewRole")?.value || "SWE Intern";
+  const company_style = qs("#companySelect")?.value || qs("#interviewCompany")?.value || "general";
+  const difficulty = qs("#difficultySelect")?.value || qs("#interviewDifficulty")?.value || "easy";
+
+  let behavioral_questions_target = null;
+  if (qs("#behavioralSelect")) {
+    behavioral_questions_target = Number(qs("#behavioralSelect")?.value ?? 2);
+  } else {
+    const stored = loadSessionPrefs();
+    if (stored && stored.behavioral_questions_target !== null && stored.behavioral_questions_target !== undefined) {
+      behavioral_questions_target = stored.behavioral_questions_target;
+    }
+  }
+  if (behavioral_questions_target === null || Number.isNaN(behavioral_questions_target)) {
+    behavioral_questions_target = 2;
+  }
+  behavioral_questions_target = Math.max(0, Math.min(3, behavioral_questions_target));
+
+  return { role, company_style, difficulty, behavioral_questions_target };
+}
 
 // Best-effort voice playback:
 // 1) Try backend TTS (ElevenLabs) and play the MP3.
@@ -336,7 +471,6 @@ async function refreshAiStatus() {
 }
 
 let currentQuestionId = null;
-let currentQuestionTags = [];
 let currentQuestionIsBehavioral = false;
 
 const FLOW_STEPS = [
@@ -395,7 +529,6 @@ function updateGuidanceVisibility(hasQuestion) {
 
 function setQuestionContext(question) {
   const tags = Array.isArray(question?.tags) ? question.tags.map((t) => String(t).toLowerCase()) : [];
-  currentQuestionTags = tags;
   currentQuestionIsBehavioral = tags.includes("behavioral");
   resetGuidanceState();
   updateGuidanceVisibility(!!question);
@@ -639,8 +772,12 @@ function addMessage(text, sender, timeLabel = null) {
   }
 
   if (sender === "ai" && qs("#voiceToggle")?.checked) {
-    // Try backend TTS first; fallback to browser speech if unavailable.
-    speakWithBackendTts(text);
+    // Browser auto-play policies block audio on fresh page loads. Defer until user interacts.
+    if (hasUserActivation()) {
+      speakWithBackendTts(text);
+    } else {
+      deferTts(text);
+    }
   }
 
   if (sender === "ai") {
@@ -691,6 +828,46 @@ function stopTimer() {
   timerInterval = null;
 }
 
+const PAGE_LINKS = {
+  dashboard: "./dashboard.html",
+  history: "./dashboard.html#history",
+  performance: "./dashboard.html#performance",
+  interview: "./interview.html",
+  results: "./results.html",
+  settings: "./settings.html",
+};
+
+function pageHasSection(page) {
+  return !!qs(`#${page}Page`);
+}
+
+function goToPage(page) {
+  const href = PAGE_LINKS[page];
+  if (href) window.location.href = href;
+}
+
+function goToInterviewPage(sessionId) {
+  const href = PAGE_LINKS.interview || "./interview.html";
+  if (!sessionId) {
+    window.location.href = href;
+    return;
+  }
+  const url = new URL(href, window.location.href);
+  url.searchParams.set("session_id", String(sessionId));
+  window.location.href = url.toString();
+}
+
+function goToResultsPage(sessionId) {
+  const href = PAGE_LINKS.results || "./results.html";
+  if (!sessionId) {
+    window.location.href = href;
+    return;
+  }
+  const url = new URL(href, window.location.href);
+  url.searchParams.set("session_id", String(sessionId));
+  window.location.href = url.toString();
+}
+
 function navigateTo(page) {
   const pages = {
     dashboard: qs("#dashboardPage"),
@@ -700,7 +877,14 @@ function navigateTo(page) {
     results: qs("#resultsPage"),
   };
 
-  if (!pages[page] && page !== "settings") return;
+  if (page === "settings") {
+    goToPage("settings");
+    return;
+  }
+  if (!pages[page]) {
+    goToPage(page);
+    return;
+  }
 
   Object.values(pages).forEach((p) => p?.classList.remove("active"));
   pages[page]?.classList.add("active");
@@ -726,12 +910,14 @@ function navigateTo(page) {
   }
 }
 
-async function createSession({ role, company_style, difficulty }) {
+async function createSession({ role, company_style, difficulty, behavioral_questions_target }) {
   const track = role === "SWE Intern" ? "swe_intern" : "swe_engineer";
-  const behavioral_questions_target = Number(qs("#behavioralSelect")?.value ?? 2);
+  const behavioral = Number(
+    behavioral_questions_target ?? qs("#behavioralSelect")?.value ?? 2
+  );
   return apiFetch("/sessions", {
     method: "POST",
-    body: { role, track, company_style, difficulty, behavioral_questions_target },
+    body: { role, track, company_style, difficulty, behavioral_questions_target: behavioral },
   });
 }
 
@@ -804,6 +990,10 @@ function safeLocaleString(value) {
   }
 }
 
+const COVERAGE_TRACKS = new Set(["swe_intern", "swe_engineer", "behavioral"]);
+const COVERAGE_COMPANIES = new Set(["general", "amazon", "apple", "google", "microsoft", "meta"]);
+const COVERAGE_DIFFICULTIES = new Set(["easy", "medium", "hard"]);
+
 async function updateCoverageHint() {
   const hint = qs("#coverageHint");
   if (!hint) return;
@@ -814,6 +1004,14 @@ async function updateCoverageHint() {
 
   hint.style.color = "var(--text-muted)";
   hint.textContent = "Checking question coverage...";
+  if (
+    !COVERAGE_TRACKS.has(track) ||
+    !COVERAGE_COMPANIES.has(company_style) ||
+    !COVERAGE_DIFFICULTIES.has(difficulty)
+  ) {
+    hint.textContent = "Coverage check unavailable.";
+    return;
+  }
   try {
     const data = await fetchCoverage({ track, company_style, difficulty });
     const count = Number(data?.count || 0);
@@ -939,6 +1137,52 @@ async function refreshSessionHistory() {
     if (list) list.innerHTML = `<div style="color: var(--danger); font-weight:600;">${escapeHtml(msg)}</div>`;
     showNotification(msg, "error");
   }
+}
+
+function pickLatestCompletedSession(sessions) {
+  const list = Array.isArray(sessions) ? sessions : [];
+  const completed = list.filter((s) => typeof s.overall_score === "number");
+  if (!completed.length) return null;
+  const toTime = (value) => {
+    if (!value) return 0;
+    const t = new Date(value).getTime();
+    return Number.isNaN(t) ? 0 : t;
+  };
+  return completed.sort((a, b) => {
+    const byDate = toTime(b.created_at) - toTime(a.created_at);
+    if (byDate) return byDate;
+    return Number(b.id || 0) - Number(a.id || 0);
+  })[0];
+}
+
+async function resolveResultsSessionId() {
+  const current = getSessionId();
+  if (current) return current;
+  const cached = pickLatestCompletedSession(sessionHistoryCache);
+  if (cached) return cached.id;
+  try {
+    const sessions = await fetchSessions(50);
+    sessionHistoryCache = Array.isArray(sessions) ? sessions : [];
+    const latest = pickLatestCompletedSession(sessionHistoryCache);
+    return latest?.id || null;
+  } catch {
+    return null;
+  }
+}
+
+async function openResultsView() {
+  const sessionId = await resolveResultsSessionId();
+  if (!pageHasSection("results")) {
+    goToResultsPage(sessionId);
+    return;
+  }
+  if (sessionId) {
+    await handleLoadResultsAndNavigate(sessionId);
+    return;
+  }
+  navigateTo("results");
+  const subtitle = qs("#resultsSubtitle");
+  if (subtitle) subtitle.textContent = "No completed sessions yet.";
 }
 
 function performanceStats(sessions) {
@@ -1223,19 +1467,35 @@ function renderDashboardQuickStats(stats) {
     const el = qs(selector);
     if (el) el.textContent = value;
   };
+  const setLastSession = (label, scoreText) => {
+    const el = qs("#dashLastSession");
+    if (!el) return;
+    const safeLabel = escapeHtml(label || "");
+    const safeScore = scoreText ? escapeHtml(scoreText) : "";
+    if (!safeLabel) {
+      el.textContent = "--";
+      return;
+    }
+    el.innerHTML = safeScore
+      ? `<span class="stat-value-primary">${safeLabel}</span><span class="stat-value-secondary">${safeScore}</span>`
+      : `<span class="stat-value-primary">${safeLabel}</span>`;
+  };
   const avgScore = stats.avg !== null ? Math.round(stats.avg) : "--";
   const bestScore = stats.best !== null ? Math.round(stats.best) : "--";
   const lastScore =
     stats.last && typeof stats.last.overall_score === "number"
       ? Math.round(Number(stats.last.overall_score || 0))
       : null;
-  const lastSessionLabel = stats.last
-    ? `${safeLocaleString(stats.last.created_at) || "Recent"} · ${lastScore ?? "--"}/100`
-    : "No sessions yet";
   setText("#dashAvgScore", avgScore);
   setText("#dashDayStreak", stats.streak ?? 0);
   setText("#dashBestScore", bestScore);
-  setText("#dashLastSession", lastSessionLabel);
+  if (stats.last) {
+    const dateLabel = safeLocaleString(stats.last.created_at) || "Recent";
+    const scoreLabel = `Score: ${lastScore ?? "--"}/100`;
+    setLastSession(dateLabel, scoreLabel);
+  } else {
+    setLastSession("No sessions yet", "");
+  }
 }
 
 function setComposerEnabled(enabled) {
@@ -1287,7 +1547,22 @@ async function resumeSessionById(sessionId) {
   const id = Number(sessionId);
   if (!id) return;
 
-  const info = (sessionHistoryCache || []).find((x) => Number(x.id) === id);
+  let startedNewSession = false;
+
+  if (!pageHasSection("interview")) {
+    setSessionId(id);
+    goToInterviewPage(id);
+    return;
+  }
+
+  let info = (sessionHistoryCache || []).find((x) => Number(x.id) === id);
+  if (!info) {
+    try {
+      const sessions = await fetchSessions(200);
+      sessionHistoryCache = sessions || [];
+      info = sessionHistoryCache.find((x) => Number(x.id) === id);
+    } catch {}
+  }
   const stage = String(info?.stage || "").toLowerCase();
   const isDone = stage === "done";
   const isWrapup = stage === "wrapup";
@@ -1297,6 +1572,8 @@ async function resumeSessionById(sessionId) {
     if (qs("#difficultySelect")) qs("#difficultySelect").value = info.difficulty || "easy";
     if (qs("#behavioralSelect")) qs("#behavioralSelect").value = String(info.behavioral_questions_target ?? 2);
     syncInterviewSelectorsFromDashboard();
+  } else {
+    applySessionPrefs(loadSessionPrefs());
   }
 
   setSessionId(id);
@@ -1317,6 +1594,10 @@ async function resumeSessionById(sessionId) {
         // If the session never started, start it now so the user sees the first question.
         const first = await startInterview(id);
         addMessage(first.content, "ai");
+        if (first?.current_question_id) {
+          maybeUpdateCurrentQuestion(first.current_question_id).catch(() => {});
+        }
+        startedNewSession = true;
       }
     } else {
       msgs.forEach((m) => {
@@ -1335,9 +1616,13 @@ async function resumeSessionById(sessionId) {
       setInlineStatus("Ready to finalize. Submit & Evaluate to score this session.");
     } else {
       setInterviewStatus("Waiting for your response", true);
-      setInlineStatus("Session resumed. Continue the conversation.");
+      setInlineStatus(
+        startedNewSession
+          ? "Interview started. Reply with your approach and code."
+          : "Session resumed. Continue the conversation."
+      );
     }
-    if (info?.current_question_id) {
+    if (!startedNewSession && info?.current_question_id) {
       maybeUpdateCurrentQuestion(info.current_question_id).catch(() => {});
     }
     refreshAiStatus().catch(() => {});
@@ -1382,65 +1667,24 @@ async function handleDeleteSession(sessionId) {
   }
 }
 
-function renderList(selector, items) {
-  const el = qs(selector);
-  if (!el) return;
-  el.innerHTML = "";
-  if (!items || !items.length) {
-    el.innerHTML = `<div style="color: var(--text-muted); font-size: 14px;">Nothing yet.</div>`;
-    return;
-  }
-  const ul = document.createElement("ul");
-  ul.style.margin = "0";
-  ul.style.paddingLeft = "18px";
-  items.forEach((it) => {
-    const li = document.createElement("li");
-    li.style.marginBottom = "8px";
-    li.textContent = it;
-    ul.appendChild(li);
-  });
-  el.appendChild(ul);
-}
-
-function renderRubricBars(rubric) {
-  const wrap = qs("#rubric_wrap");
-  if (!wrap) return;
-  wrap.innerHTML = "";
-
-  const keys = Object.keys(rubric || {});
-  if (!keys.length) {
-    wrap.innerHTML = `<div style="color: var(--text-muted); font-size: 14px;">No rubric data yet.</div>`;
-    return;
-  }
-
-  keys.forEach((k) => {
-    const val = Number(rubric[k] ?? 0);
-    const pct = Math.max(0, Math.min(100, (val / 10) * 100));
-    const row = document.createElement("div");
-    row.style.marginBottom = "12px";
-    row.innerHTML = `
-      <div class="flex justify-between items-center" style="margin-bottom:8px;">
-        <div style="font-weight:600;">${escapeHtml(k)}</div>
-        <div class="badge primary">${val}/10</div>
-      </div>
-      <div style="height:8px; background: var(--light-gray); border-radius: 999px; overflow:hidden;">
-        <div style="height:100%; width:${pct}%; background: var(--gradient-primary);"></div>
-      </div>
-    `;
-    wrap.appendChild(row);
-  });
-}
-
 async function handleStartFromDashboard() {
-  const role = qs("#roleSelect")?.value || "SWE Intern";
-  const company_style = qs("#companySelect")?.value || "general";
-  const difficulty = qs("#difficultySelect")?.value || "easy";
+  const prefs = readSessionPrefsFromUI();
+  const role = prefs.role;
+  const company_style = prefs.company_style;
+  const difficulty = prefs.difficulty;
+  const behavioral_questions_target = prefs.behavioral_questions_target;
+  saveSessionPrefs(prefs);
 
   showNotification("Starting interview session...", "info");
   setInlineStatus("Creating session...");
 
-  const s = await createSession({ role, company_style, difficulty });
+  const s = await createSession({ role, company_style, difficulty, behavioral_questions_target });
   setSessionId(s.id);
+
+  if (!pageHasSection("interview")) {
+    goToInterviewPage(s.id);
+    return;
+  }
 
   setSessionBadge(`Session #${s.id}`, true);
   setInlineStatus("Starting interview...");
@@ -1470,6 +1714,12 @@ function syncInterviewSelectorsFromDashboard() {
   if (role && qs("#interviewRole")) qs("#interviewRole").value = role;
   if (company_style && qs("#interviewCompany")) qs("#interviewCompany").value = company_style;
   if (difficulty && qs("#interviewDifficulty")) qs("#interviewDifficulty").value = difficulty;
+  saveSessionPrefs({
+    role,
+    company_style,
+    difficulty,
+    behavioral_questions_target: Number(qs("#behavioralSelect")?.value ?? 2),
+  });
   updateCoverageHint().catch(() => {});
 }
 
@@ -1481,6 +1731,12 @@ function syncDashboardSelectorsFromInterview() {
   if (role && qs("#roleSelect")) qs("#roleSelect").value = role;
   if (company_style && qs("#companySelect")) qs("#companySelect").value = company_style;
   if (difficulty && qs("#difficultySelect")) qs("#difficultySelect").value = difficulty;
+  saveSessionPrefs({
+    role,
+    company_style,
+    difficulty,
+    behavioral_questions_target: Number(qs("#behavioralSelect")?.value ?? 2),
+  });
   updateCoverageHint().catch(() => {});
 }
 
@@ -1558,12 +1814,24 @@ async function handleFinalize() {
 }
 
 async function handleLoadResultsAndNavigate(sessionId) {
+  if (!pageHasSection("results")) {
+    goToResultsPage(sessionId);
+    return;
+  }
+  if (!sessionId) {
+    navigateTo("results");
+    const subtitle = qs("#resultsSubtitle");
+    if (subtitle) subtitle.textContent = "No completed sessions yet.";
+    return;
+  }
   navigateTo("results");
 
   const subtitle = qs("#resultsSubtitle");
   if (subtitle) subtitle.textContent = `Session #${sessionId}`;
 
   qs("#overall_score").textContent = "0";
+  const overallText = qs("#overallScoreText");
+  if (overallText) overallText.textContent = "0";
   qs("#rubric_wrap").innerHTML = "";
   qs("#strengths").innerHTML = "";
   qs("#weaknesses").innerHTML = "";
@@ -1571,14 +1839,20 @@ async function handleLoadResultsAndNavigate(sessionId) {
 
   try {
     const data = await loadResults(sessionId);
-    qs("#overall_score").textContent = data.overall_score ?? 0;
+    const scoreVal = data.overall_score ?? 0;
+    qs("#overall_score").textContent = scoreVal;
+    if (overallText) overallText.textContent = scoreVal;
     renderRubricBars(data.rubric || {});
     renderList("#strengths", data.summary?.strengths || []);
     renderList("#weaknesses", data.summary?.weaknesses || []);
     renderList("#next_steps", data.summary?.next_steps || []);
   } catch (err) {
     const msg = err?.message || "Failed to load results.";
-    qs("#rubric_wrap").innerHTML = `<div style="color: var(--danger); font-weight:600;">${escapeHtml(msg)}</div>`;
+    const fail = `<div style="color: var(--danger); font-weight:600;">${escapeHtml(msg)}</div>`;
+    qs("#rubric_wrap").innerHTML = fail;
+    qs("#strengths").innerHTML = fail;
+    qs("#weaknesses").innerHTML = fail;
+    qs("#next_steps").innerHTML = fail;
     showNotification(msg, "error");
   }
 }
@@ -1609,13 +1883,11 @@ function initNav() {
       e.preventDefault();
       const page = item.getAttribute("data-page");
       if (page === "settings") {
-        openSettingsDrawer();
+        goToPage("settings");
         return;
       }
       if (page === "results") {
-        const sessionId = getSessionId();
-        if (sessionId) handleLoadResultsAndNavigate(sessionId);
-        else navigateTo("results");
+        openResultsView().catch(() => navigateTo("results"));
         return;
       }
       navigateTo(page);
@@ -1775,20 +2047,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   qs("#viewDetailedBtn")?.addEventListener("click", () => {
-    navigateTo("results");
+    openResultsView().catch(() => navigateTo("results"));
   });
   qs("#performanceViewDetailsBtn")?.addEventListener("click", () => {
-    navigateTo("results");
+    openResultsView().catch(() => navigateTo("results"));
   });
 
   // Session history
   qs("#refreshSessionsBtn")?.addEventListener("click", () => refreshSessionHistory());
   qs("#refreshPerformanceBtn")?.addEventListener("click", () => refreshSessionHistory());
-  qsa("#roleSelect,#companySelect,#difficultySelect").forEach((el) => {
-    el.addEventListener("change", () => {
-      syncInterviewSelectorsFromDashboard();
-    });
-  });
   qs("#sessionHistoryList")?.addEventListener("click", (e) => {
     const btn = e.target?.closest?.("button[data-action]");
     if (!btn) return;
@@ -1874,6 +2141,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const profile = ensureProfileDefaults(email);
   renderDashboardProfile(profile);
   applyRolePrefToSelectors(profile);
+  applySessionPrefs(loadSessionPrefs());
   updateCoverageHint().catch(() => {});
 
   refreshSessionHistory();
@@ -1881,5 +2149,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   // hash navigation support (e.g., results page "Open Performance" link)
   if (window.location.hash === "#performance") {
     navigateTo("performance");
+  } else if (window.location.hash === "#history") {
+    navigateTo("history");
+  } else if (window.location.hash === "#dashboard") {
+    navigateTo("dashboard");
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const sessionFromUrl = params.get("session_id");
+  const storedSession = getSessionId();
+  if (pageHasSection("interview")) {
+    const targetSession = sessionFromUrl || storedSession;
+    if (targetSession) {
+      resumeSessionById(targetSession);
+    }
   }
 });

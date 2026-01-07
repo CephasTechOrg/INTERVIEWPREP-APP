@@ -82,13 +82,13 @@ def main() -> int:
         db.commit()
         db.refresh(session)
 
-        engine = InterviewEngine()
-        engine.llm = StubLLM()
+        engine_obj = InterviewEngine()
+        engine_obj.llm = StubLLM()
 
-        msg1 = asyncio.run(engine.ensure_question_and_intro(db, session, user_name=user.full_name))
+        msg1 = asyncio.run(engine_obj.ensure_question_and_intro(db, session, user_name=user.full_name))
         assert_contains(msg1, "how are you", "greeting")
 
-        msg2 = asyncio.run(engine.handle_student_message(db, session, "I am fine.", user_name=user.full_name))
+        msg2 = asyncio.run(engine_obj.handle_student_message(db, session, "I am fine.", user_name=user.full_name))
         assert_contains(msg2, "i am doing well", "warmup reply")
         assert_contains(msg2, "your interviewer", "warmup reply")
         assert_contains(msg2, "behavioral question", "warmup question")
@@ -104,7 +104,7 @@ def main() -> int:
             raise AssertionError("warmup behavioral question not marked as asked")
 
         msg3 = asyncio.run(
-            engine.handle_student_message(db, session, "Because I want to grow as an engineer.", user_name=user.full_name)
+            engine_obj.handle_student_message(db, session, "Because I want to grow as an engineer.", user_name=user.full_name)
         )
         assert_contains(msg3, "resta", "technical transition")
 

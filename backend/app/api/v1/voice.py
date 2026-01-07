@@ -1,7 +1,8 @@
-from fastapi import APIRouter, Body
+from fastapi import APIRouter, Body, Depends
 from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel
 
+from app.api.deps import get_current_user
 from app.services.tts.tts_service import generate_speech
 
 router = APIRouter()
@@ -12,7 +13,7 @@ class TTSRequest(BaseModel):
 
 
 @router.post("/tts")
-def tts(payload: TTSRequest | None = Body(None), text: str | None = None):
+def tts(payload: TTSRequest | None = Body(None), text: str | None = None, _user=Depends(get_current_user)):
     """
     Returns audio when available (ElevenLabs primary, default fallback), otherwise JSON with the text.
     Accepts either JSON body {"text": "..."} or a query/form "text=...".

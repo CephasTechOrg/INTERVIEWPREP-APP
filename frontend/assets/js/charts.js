@@ -47,7 +47,7 @@ function renderList(selector, items) {
   const ul = document.createElement("ul");
   ul.style.margin = "0";
   ul.style.paddingLeft = "18px";
-  ul.style.color = "rgba(255,255,255,0.85)";
+  ul.style.color = "var(--text)";
   items.forEach((it) => {
     const li = document.createElement("li");
     li.style.marginBottom = "8px";
@@ -55,79 +55,6 @@ function renderList(selector, items) {
     ul.appendChild(li);
   });
   el.appendChild(ul);
-}
-
-function renderPills(selector, items, variant = "info") {
-  const el = qs(selector);
-  if (!el) return;
-  el.innerHTML = "";
-
-  if (!items || !items.length) {
-    el.innerHTML = `<div style="color: var(--text-muted); font-size: 14px;">Nothing here yet.</div>`;
-    return;
-  }
-
-  items.forEach((it) => {
-    const pill = document.createElement("span");
-    pill.className = `pill pill-${variant}`;
-    pill.innerHTML =
-      variant === "good"
-        ? `<i class="fas fa-check-circle"></i> ${escapeHtml(it)}`
-        : variant === "warn"
-          ? `<i class="fas fa-triangle-exclamation"></i> ${escapeHtml(it)}`
-          : `<i class="fas fa-circle"></i> ${escapeHtml(it)}`;
-    el.appendChild(pill);
-  });
-}
-
-function renderSteps(selector, items) {
-  const el = qs(selector);
-  if (!el) return;
-  el.innerHTML = "";
-
-  if (!items || !items.length) {
-    el.innerHTML = `<div style="color: var(--text-muted); font-size: 14px;">Nothing here yet.</div>`;
-    return;
-  }
-
-  const ol = document.createElement("ol");
-  ol.className = "ordered";
-  items.forEach((it) => {
-    const li = document.createElement("li");
-    li.textContent = it;
-    ol.appendChild(li);
-  });
-  el.appendChild(ol);
-}
-
-function _rating(score) {
-  const s = Number(score) || 0;
-  if (s >= 90) return { label: "Excellent", cls: "great" };
-  if (s >= 80) return { label: "Great", cls: "great" };
-  if (s >= 70) return { label: "Good", cls: "good" };
-  if (s >= 55) return { label: "Fair", cls: "warn" };
-  return { label: "Needs focus", cls: "danger" };
-}
-
-function renderGauge(selector, score) {
-  const el = typeof selector === "string" ? qs(selector) : selector;
-  if (!el) return;
-  const val = Math.max(0, Math.min(100, Number(score) || 0));
-  const deg = (val / 100) * 360;
-  const rating = _rating(val);
-
-  el.innerHTML = `
-    <div class="gauge-arc"></div>
-    <div class="gauge-center">
-      <div class="gauge-score">${Math.round(val)}</div>
-      <div class="gauge-label">${rating.label}</div>
-    </div>
-  `;
-  el.className = `gauge ${rating.cls}`;
-  const arc = el.querySelector(".gauge-arc");
-  if (arc) {
-    arc.style.background = `conic-gradient(var(--brand2) ${deg}deg, rgba(255,255,255,0.08) ${deg}deg 360deg)`;
-  }
 }
 
 function renderRadar(selector, rubric) {

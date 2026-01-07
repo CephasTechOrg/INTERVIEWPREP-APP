@@ -9,6 +9,7 @@ class QuestionOut(BaseModel):
     title: str
     prompt: str
     tags: list[str]
+    question_type: str | None = None
 
 
 class QuestionCoverageOut(BaseModel):

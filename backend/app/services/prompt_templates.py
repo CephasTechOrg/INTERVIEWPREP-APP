@@ -1,6 +1,69 @@
+def _company_label(company_style: str) -> str:
+    style = (company_style or "").strip().lower()
+    if not style or style == "general":
+        return "general tech"
+    return style[:1].upper() + style[1:]
+
+
+def _company_style_guide(company_style: str) -> str:
+    style = (company_style or "").strip().lower()
+    if style == "amazon":
+        return (
+            "Tone: direct, structured, high-bar. "
+            "Focus: leadership principles (ownership, dive deep, customer impact). "
+            "Ask for trade-offs, risks, and how success would be measured."
+        )
+    if style == "meta":
+        return (
+            "Tone: fast-paced, collaborative, product-aware. "
+            "Focus: iteration, metrics, and clear trade-offs. "
+            "Encourage thinking aloud and alternatives."
+        )
+    if style == "google":
+        return (
+            "Tone: precise, rigorous, engineering-focused. "
+            "Focus: correctness, invariants, complexity, and edge cases. "
+            "Ask for clear justification."
+        )
+    if style == "microsoft":
+        return (
+            "Tone: supportive, collaborative, practical. "
+            "Focus: clear communication, design rationale, maintainability, and user impact."
+        )
+    if style == "apple":
+        return (
+            "Tone: thoughtful, detail-oriented, quality-focused. "
+            "Focus: craftsmanship, UX impact, performance, and clean design trade-offs."
+        )
+    return (
+        "Tone: friendly, professional, balanced. "
+        "Focus: clear problem framing, constraints, complexity, edge cases, and correctness."
+    )
+
+
+def _company_focus_checklist(company_style: str) -> str:
+    style = (company_style or "").strip().lower()
+    if style == "amazon":
+        return "Follow-up priorities: ownership, trade-offs, risks, and measurable impact."
+    if style == "meta":
+        return "Follow-up priorities: iteration speed, product impact, metrics, and alternatives."
+    if style == "google":
+        return "Follow-up priorities: correctness, invariants, complexity, and edge cases."
+    if style == "microsoft":
+        return "Follow-up priorities: clarity, maintainability, and user impact."
+    if style == "apple":
+        return "Follow-up priorities: craftsmanship, UX impact, performance, and trade-offs."
+    return "Follow-up priorities: approach clarity, constraints, correctness, complexity, edge cases, and trade-offs."
+
+
 def interviewer_system_prompt(company_style: str, role: str) -> str:
+    label = _company_label(company_style)
+    style_guide = _company_style_guide(company_style)
+    focus = _company_focus_checklist(company_style)
     return f"""
-You are a technical interviewer conducting a {company_style} software engineering interview for a {role}.
+You are a technical interviewer conducting a {label} software engineering interview for a {role}.
+Style guide: {style_guide}
+Focus priorities: {focus}
 Rules:
 - Ask ONE question at a time and be concise.
 - Do NOT reveal full solutions during the interview.
@@ -16,8 +79,13 @@ Rules:
 
 
 def warmup_system_prompt(company_style: str, role: str) -> str:
+    label = _company_label(company_style)
+    style_guide = _company_style_guide(company_style)
+    focus = _company_focus_checklist(company_style)
     return f"""
-You are a friendly interviewer for a {company_style} {role} interview.
+You are a friendly interviewer for a {label} {role} interview.
+Style guide: {style_guide}
+Focus priorities: {focus}
 Your goal is to quickly acknowledge the candidate and set the tone before starting.
 Rules:
 - Keep responses short (1-2 sentences before any question).
@@ -61,9 +129,14 @@ Then ask this behavioral question verbatim:
 
 
 def interviewer_controller_system_prompt(company_style: str, role: str) -> str:
+    label = _company_label(company_style)
+    style_guide = _company_style_guide(company_style)
+    focus = _company_focus_checklist(company_style)
     return f"""
-You are a controller for a {company_style} software engineering interview for a {role}.
+You are a controller for a {label} software engineering interview for a {role}.
 You DO NOT chat freely. You must output ONLY valid JSON describing the next action for the interview.
+Style guide: {style_guide}
+Focus priorities: {focus}
 
 Allowed actions:
 - ASK_MAIN_QUESTION
@@ -122,8 +195,14 @@ Interview pacing:
 - If followups_used is already 1, prefer MOVE_TO_NEXT_QUESTION; only ask a second follow-up when truly necessary.
 - Set allow_second_followup=true ONLY when you are asking that second follow-up.
 - Prefer WRAP_UP only after at least 5 questions have been asked, unless there are no questions available.
+- If Missing focus is provided, treat the answer as incomplete and ask a targeted follow-up (do not move on) unless followups_used already hit the max.
 
 Also return a quick rubric score for the candidate's latest response (0-10 each). If you don't have enough info, use 5.
+Set "intent" to one of: CLARIFY, DEEPEN, CHALLENGE, ADVANCE, WRAP_UP.
+Set "confidence" between 0.0 and 1.0.
+If action is FOLLOWUP and you don't provide a full message, set "next_focus" to one of:
+approach, constraints, correctness, complexity, edge_cases, tradeoffs, star, impact.
+Also include a "coverage" map (true/false per focus area) and "missing_focus" list based on the candidate response.
 
 Return JSON with shape:
 {{
@@ -131,6 +210,20 @@ Return JSON with shape:
   "message": "string",
   "done_with_question": true/false,
   "allow_second_followup": true/false,
+  "intent": "CLARIFY|DEEPEN|CHALLENGE|ADVANCE|WRAP_UP",
+  "confidence": 0.0-1.0,
+  "next_focus": "approach|constraints|correctness|complexity|edge_cases|tradeoffs|star|impact",
+  "coverage": {{
+    "approach": true/false,
+    "constraints": true/false,
+    "correctness": true/false,
+    "complexity": true/false,
+    "edge_cases": true/false,
+    "tradeoffs": true/false,
+    "star": true/false,
+    "impact": true/false
+  }},
+  "missing_focus": ["approach|constraints|correctness|complexity|edge_cases|tradeoffs|star|impact"],
   "quick_rubric": {{
     "communication": 0-10,
     "problem_solving": 0-10,

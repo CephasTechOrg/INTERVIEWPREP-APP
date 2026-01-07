@@ -34,6 +34,15 @@ async function apiFetch(path, { method = "GET", body = null, auth = true } = {})
 
   if (!res.ok) {
     const msg = data?.detail || data?.message || `Request failed (${res.status})`;
+    if (auth && (res.status === 401 || res.status === 403)) {
+      const lower = String(msg || "").toLowerCase();
+      clearToken();
+      if (lower.includes("verify")) {
+        window.location.href = "./login.html#verify";
+      } else {
+        window.location.href = "./login.html";
+      }
+    }
     throw new Error(msg);
   }
   return data;

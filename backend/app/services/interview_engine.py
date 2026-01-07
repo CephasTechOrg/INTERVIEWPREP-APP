@@ -49,6 +49,18 @@ class InterviewEngine:
         "complexity",
         "edge_cases",
     )
+    _SYSTEM_DESIGN_TAGS: set[str] = {
+        "system-design",
+        "distributed-systems",
+        "system-thinking",
+        "scalability",
+        "reliability",
+        "architecture",
+        "observability",
+        "databases",
+        "api",
+    }
+    _CONCEPTUAL_TAGS: set[str] = {"fundamentals", "concepts", "oop"}
 
     def _clamp_int(self, value: Any, default: int, lo: int, hi: int) -> int:
         try:
@@ -60,6 +72,80 @@ class InterviewEngine:
     def _coerce_quick_rubric(self, raw: Any) -> dict:
         raw_dict = raw if isinstance(raw, dict) else {}
         return {k: self._clamp_int(raw_dict.get(k), default=5, lo=0, hi=10) for k in self._RUBRIC_KEYS}
+
+    def _pool_state(self, session: InterviewSession) -> dict:
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        pool = state.get("pool")
+        return pool if isinstance(pool, dict) else {}
+
+    def _reanchor_state(self, session: InterviewSession) -> dict:
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        raw = state.get("reanchor")
+        return raw if isinstance(raw, dict) else {}
+
+    def _get_reanchor_count(self, session: InterviewSession, question_id: int | None) -> int:
+        if not question_id:
+            return 0
+        state = self._reanchor_state(session)
+        try:
+            qid = int(state.get("qid") or 0)
+        except Exception:
+            qid = 0
+        if qid != int(question_id):
+            return 0
+        try:
+            return max(0, int(state.get("count") or 0))
+        except Exception:
+            return 0
+
+    def _set_reanchor_count(self, db: Session, session: InterviewSession, question_id: int, count: int) -> None:
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        state = dict(state)
+        state["reanchor"] = {"qid": int(question_id), "count": max(0, int(count))}
+        session.skill_state = state
+        db.add(session)
+        db.commit()
+        db.refresh(session)
+
+    def _pool_allowed_difficulties(self, session: InterviewSession) -> list[str]:
+        pool = self._pool_state(session)
+        raw = pool.get("available_difficulties")
+        if not isinstance(raw, list):
+            return []
+        allowed: list[str] = []
+        for item in raw:
+            diff = str(item).strip().lower()
+            if diff in ("easy", "medium", "hard") and diff not in allowed:
+                allowed.append(diff)
+        return allowed
+
+    def _pool_cap_override(self, session: InterviewSession) -> str | None:
+        pool = self._pool_state(session)
+        raw = pool.get("difficulty_cap_override")
+        if not raw:
+            return None
+        diff = str(raw).strip().lower()
+        if diff in ("easy", "medium", "hard"):
+            return diff
+        return None
+
+    def _effective_company_style(self, session: InterviewSession) -> str:
+        pool = self._pool_state(session)
+        raw = pool.get("effective_company_style")
+        if raw:
+            company = str(raw).strip().lower()
+            if company:
+                return company
+        return (session.company_style or "general").strip().lower() or "general"
 
     def _update_skill_state(
         self,
@@ -80,15 +166,28 @@ class InterviewEngine:
             state = {}
         warm = state.get("warmup") if isinstance(state.get("warmup"), dict) else None
         focus = state.get("focus") if isinstance(state.get("focus"), dict) else None
+        pool = state.get("pool") if isinstance(state.get("pool"), dict) else None
+        reanchor = state.get("reanchor") if isinstance(state.get("reanchor"), dict) else None
+        plan = state.get("plan") if isinstance(state.get("plan"), dict) else None
         streak = state.get("streak") if isinstance(state.get("streak"), dict) else {}
 
         n_prev = self._clamp_int(state.get("n"), default=0, lo=0, hi=10_000)
         sum_prev = state.get("sum") if isinstance(state.get("sum"), dict) else {}
+        ema_prev = state.get("ema") if isinstance(state.get("ema"), dict) else {}
 
         last = self._coerce_quick_rubric(quick_rubric_raw)
         sums: dict[str, int] = {}
         for k in self._RUBRIC_KEYS:
             sums[k] = self._clamp_int(sum_prev.get(k), default=0, lo=0, hi=1_000_000) + int(last[k])
+
+        alpha = 0.35
+        ema: dict[str, float] = {}
+        for k in self._RUBRIC_KEYS:
+            try:
+                prev_val = float(ema_prev.get(k))
+            except Exception:
+                prev_val = float(last[k])
+            ema[k] = (alpha * float(last[k])) + ((1.0 - alpha) * prev_val)
 
         good_prev = self._clamp_int(streak.get("good"), default=0, lo=0, hi=10_000)
         weak_prev = self._clamp_int(streak.get("weak"), default=0, lo=0, hi=10_000)
@@ -114,12 +213,19 @@ class InterviewEngine:
             "n": n_prev + 1,
             "sum": sums,
             "last": last,
+            "ema": ema,
             "streak": {"good": good_prev, "weak": weak_prev},
         }
         if warm:
             new_state["warmup"] = warm
         if focus:
             new_state["focus"] = focus
+        if pool:
+            new_state["pool"] = pool
+        if reanchor:
+            new_state["reanchor"] = reanchor
+        if plan:
+            new_state["plan"] = plan
         session.skill_state = new_state
         db.add(session)
         db.commit()
@@ -148,6 +254,9 @@ class InterviewEngine:
         harder values up to the cap (to avoid "no questions found" when a dataset is sparse).
         """
         cap_rank = self._difficulty_rank(getattr(session, "difficulty", "easy"))
+        cap_override = self._pool_cap_override(session)
+        if cap_override:
+            cap_rank = max(cap_rank, self._difficulty_rank(cap_override))
         cur_rank = self._difficulty_rank(getattr(session, "difficulty_current", "easy"))
         cur_rank = min(cur_rank, cap_rank)
 
@@ -164,6 +273,11 @@ class InterviewEngine:
                 continue
             seen.add(r)
             out.append(self._rank_to_difficulty(r))
+        allowed = self._pool_allowed_difficulties(session)
+        if allowed:
+            filtered = [d for d in out if d in allowed]
+            if filtered:
+                return filtered
         return out
 
     def _skill_last_overall(self, session: InterviewSession) -> float | None:
@@ -214,6 +328,22 @@ class InterviewEngine:
         state = session.skill_state if isinstance(getattr(session, "skill_state", None), dict) else None
         if not state:
             return None
+
+        ema = state.get("ema") if isinstance(state.get("ema"), dict) else None
+        if ema:
+            weakest: str | None = None
+            weakest_avg: float | None = None
+            for k in self._RUBRIC_KEYS:
+                try:
+                    avg = float(ema.get(k))
+                except Exception:
+                    continue
+                if weakest_avg is None or avg < weakest_avg:
+                    weakest_avg = avg
+                    weakest = k
+            if weakest:
+                return weakest
+
         try:
             n = int(state.get("n") or 0)
         except Exception:
@@ -301,6 +431,43 @@ class InterviewEngine:
         except Exception:
             return False
 
+    def _question_type(self, q: Question) -> str:
+        """
+        Normalize question type for selection logic.
+        Priority: explicit question_type (if set) else tags/track inference.
+        """
+        raw = getattr(q, "question_type", None)
+        if raw:
+            qt = str(raw).strip().lower()
+        else:
+            qt = ""
+        if qt and qt != "coding":
+            return qt
+
+        try:
+            tags = {t.strip().lower() for t in (q.tags() or []) if str(t).strip()}
+        except Exception:
+            tags = set()
+
+        if self._is_behavioral(q) or "behavioral" in tags or (q.track or "") == "behavioral":
+            return "behavioral"
+        if tags & self._SYSTEM_DESIGN_TAGS:
+            return "system_design"
+        if tags & self._CONCEPTUAL_TAGS:
+            return "conceptual"
+        return "coding"
+
+    def _matches_desired_type(self, q: Question, desired_type: str | None) -> bool:
+        if not desired_type:
+            return True
+        target = (desired_type or "").strip().lower()
+        if not target:
+            return True
+        qt = self._question_type(q)
+        if target == "coding":
+            return qt in ("coding", "conceptual")
+        return qt == target
+
     def _company_name(self, company_style: str) -> str:
         if not company_style or company_style == "general":
             return "this company"
@@ -338,21 +505,149 @@ class InterviewEngine:
         return any(k in t for k in keywords)
 
     def _is_non_informative(self, text: str) -> bool:
-        t = (text or "").strip().lower()
-        if not t:
+        tokens = self._clean_tokens(text)
+        if not tokens:
             return True
-        short = {"ok", "okay", "k", "kk", "sure", "yeah", "yep", "alright", "cool", "fine", "thanks"}
-        return t in short or len(t.split()) <= 2
+        short = {
+            "ok",
+            "okay",
+            "k",
+            "kk",
+            "sure",
+            "yes",
+            "yeah",
+            "yep",
+            "yup",
+            "alright",
+            "cool",
+            "fine",
+            "thanks",
+            "thank",
+            "please",
+            "no",
+            "nah",
+            "maybe",
+        }
+        if len(tokens) <= 2:
+            return True
+        if len(tokens) <= 4 and all(t in short for t in tokens):
+            return True
+        return False
 
     def _is_vague(self, text: str) -> bool:
-        t = (text or "").strip()
-        if not t:
+        tokens = self._clean_tokens(text)
+        if not tokens:
             return True
-        words = t.split()
-        return len(words) < 6
+        return len(tokens) < 6
 
     def _normalize_text(self, text: str | None) -> str:
         return " ".join((text or "").lower().split())
+
+    def _clean_tokens(self, text: str | None) -> list[str]:
+        raw = (text or "").lower().replace("```", " ")
+        tokens = [re.sub(r"[^a-z0-9']+", "", w) for w in raw.split()]
+        return [t for t in tokens if t]
+
+    def _keyword_tokens(self, text: str | None) -> set[str]:
+        stop = {
+            "the",
+            "a",
+            "an",
+            "and",
+            "or",
+            "to",
+            "of",
+            "for",
+            "in",
+            "on",
+            "with",
+            "without",
+            "is",
+            "are",
+            "was",
+            "were",
+            "be",
+            "been",
+            "it",
+            "this",
+            "that",
+            "as",
+            "by",
+            "from",
+            "at",
+            "you",
+            "your",
+            "i",
+            "we",
+            "they",
+            "he",
+            "she",
+            "them",
+            "our",
+            "their",
+            "can",
+            "could",
+            "should",
+            "would",
+            "about",
+            "into",
+            "over",
+            "under",
+            "than",
+            "then",
+            "if",
+            "else",
+            "when",
+            "while",
+        }
+        tokens = self._clean_tokens(text)
+        return {t for t in tokens if len(t) > 2 and t not in stop}
+
+    def _overlap_ratio(self, base: set[str], text: str | None) -> float:
+        if not base:
+            return 0.0
+        other = self._keyword_tokens(text)
+        if not other:
+            return 0.0
+        return len(base & other) / float(len(base))
+
+    def _is_off_topic(self, q: Question, text: str | None, signals: dict[str, bool]) -> bool:
+        if self._is_behavioral(q):
+            return False
+        if signals.get("has_code") or signals.get("mentions_approach") or signals.get("mentions_correctness"):
+            return False
+        q_text = f"{q.title}\n{q.prompt}\n{q.tags_csv or ''}"
+        base = self._keyword_tokens(q_text)
+        if len(base) < 6:
+            return False
+        ratio = self._overlap_ratio(base, text)
+        return ratio < 0.05
+
+    def _is_thin_response(
+        self,
+        text: str | None,
+        signals: dict[str, bool],
+        is_behavioral: bool,
+        behavioral_missing: list[str],
+    ) -> bool:
+        tokens = self._clean_tokens(text)
+        if not tokens:
+            return True
+        if is_behavioral:
+            return len(behavioral_missing) >= 2
+        if signals.get("has_code") and not signals.get("mentions_approach"):
+            return True
+        content_signals = [
+            "mentions_approach",
+            "mentions_constraints",
+            "mentions_correctness",
+            "mentions_complexity",
+            "mentions_edge_cases",
+            "mentions_tradeoffs",
+        ]
+        if any(signals.get(k) for k in content_signals):
+            return False
+        return True
 
     def _sanitize_ai_text(self, text: str | None) -> str:
         if not text:
@@ -513,9 +808,32 @@ class InterviewEngine:
             missing.append("tradeoffs")
         return missing
 
-    def _prioritize_missing_focus(self, missing: list[str], session: InterviewSession) -> list[str]:
+    def _question_focus_keys(self, q: Question) -> list[str]:
+        meta = getattr(q, "meta", None)
+        if not isinstance(meta, dict):
+            return []
+        raw = meta.get("evaluation_focus")
+        if not isinstance(raw, list):
+            return []
+        out: list[str] = []
+        for item in raw:
+            key = self._normalize_focus_key(str(item))
+            if key and key not in out:
+                out.append(key)
+        return out
+
+    def _prioritize_missing_focus(
+        self,
+        missing: list[str],
+        session: InterviewSession,
+        prefer: list[str] | None = None,
+    ) -> list[str]:
         if not missing:
             return []
+        if prefer:
+            ordered = [p for p in prefer if p in missing]
+            if ordered:
+                return ordered + [m for m in missing if m not in ordered]
         focus_key = self._dimension_to_missing_key(self._focus_dimension(session))
         if focus_key and focus_key in missing:
             return [focus_key] + [m for m in missing if m != focus_key]
@@ -542,6 +860,86 @@ class InterviewEngine:
             parts = ", ".join(behavioral_missing)
             return f"STAR parts missing: {parts}"
         return ", ".join(missing)
+
+    def _missing_from_coverage(self, coverage: dict, is_behavioral: bool) -> list[str]:
+        if not coverage or not isinstance(coverage, dict):
+            return []
+        if is_behavioral:
+            keys = ["star", "impact"]
+        else:
+            keys = ["approach", "constraints", "correctness", "complexity", "edge_cases", "tradeoffs"]
+        missing: list[str] = []
+        for key in keys:
+            if coverage.get(key) is False:
+                missing.append(key)
+        return missing
+
+    def _normalize_focus_key(self, key: str | None) -> str | None:
+        k = (key or "").strip().lower()
+        if not k:
+            return None
+        mapping = {
+            "edge case": "edge_cases",
+            "edge cases": "edge_cases",
+            "edge": "edge_cases",
+            "edges": "edge_cases",
+            "complexity": "complexity",
+            "runtime": "complexity",
+            "big o": "complexity",
+            "correctness": "correctness",
+            "proof": "correctness",
+            "invariant": "correctness",
+            "trade-off": "tradeoffs",
+            "tradeoff": "tradeoffs",
+            "tradeoffs": "tradeoffs",
+            "approach": "approach",
+            "plan": "approach",
+            "constraints": "constraints",
+            "assumptions": "constraints",
+            "star": "star",
+            "impact": "impact",
+            "outcome": "impact",
+        }
+        if k in mapping:
+            return mapping[k]
+        if k in {"approach", "constraints", "correctness", "complexity", "edge_cases", "tradeoffs", "star", "impact"}:
+            return k
+        return None
+
+    def _soft_nudge_prompt(
+        self,
+        is_behavioral: bool,
+        missing_keys: list[str],
+        behavioral_missing: list[str],
+    ) -> str:
+        if is_behavioral:
+            if behavioral_missing:
+                parts = ", ".join(behavioral_missing[:2])
+                return (
+                    "I want to make sure I understood. Can you briefly add the "
+                    f"{parts} and the outcome?"
+                )
+            return "Can you frame that with STAR (Situation, Task, Action, Result) and the outcome?"
+
+        focus_bits = []
+        if "approach" in missing_keys:
+            focus_bits.append("your approach")
+        if "constraints" in missing_keys:
+            focus_bits.append("constraints")
+        if "correctness" in missing_keys:
+            focus_bits.append("why it works")
+        if "complexity" in missing_keys:
+            focus_bits.append("complexity")
+        if "edge_cases" in missing_keys:
+            focus_bits.append("edge cases")
+        if "tradeoffs" in missing_keys:
+            focus_bits.append("trade-offs")
+
+        if focus_bits:
+            focus_line = ", ".join(focus_bits[:3])
+            return f"I might be missing your core idea. Can you restate it and cover {focus_line}?"
+
+        return "I might be missing your core idea. Can you restate the problem and outline your plan and constraints?"
 
     def _missing_focus_question(self, key: str, behavioral_missing: list[str]) -> str | None:
         if key == "star":
@@ -1017,6 +1415,92 @@ class InterviewEngine:
 
         return set(slots)
 
+    def _plan_state(self, session: InterviewSession) -> dict:
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        plan = state.get("plan")
+        return plan if isinstance(plan, dict) else {}
+
+    def _system_design_slots(self, session: InterviewSession, max_questions: int, behavioral_slots: set[int]) -> set[int]:
+        track = (session.track or "").strip().lower()
+        if track != "swe_engineer":
+            return set()
+
+        target = 1 if max_questions < 6 else 2
+        candidates = [2, 4, 6, 5, 3, 7]
+        slots: list[int] = []
+        for pos in candidates:
+            if pos in behavioral_slots:
+                continue
+            if pos < 2 or pos > max_questions:
+                continue
+            slots.append(pos)
+            if len(slots) >= target:
+                break
+        return set(slots)
+
+    def _build_plan(self, session: InterviewSession) -> dict:
+        max_questions = max(1, int(session.max_questions or 7))
+        behavioral_target = self._behavioral_target(session)
+        behavioral_slots = self._behavioral_slots(max_questions, behavioral_target)
+        system_design_slots = self._system_design_slots(session, max_questions, behavioral_slots)
+
+        slots: list[dict[str, str]] = []
+        for num in range(1, max_questions + 1):
+            if num in behavioral_slots:
+                slots.append({"kind": "behavioral"})
+                continue
+            tech_type = "system_design" if num in system_design_slots else "coding"
+            slots.append({"kind": "technical", "tech_type": tech_type})
+
+        return {
+            "version": 1,
+            "max_questions": max_questions,
+            "behavioral_target": behavioral_target,
+            "slots": slots,
+        }
+
+    def _ensure_plan(self, db: Session, session: InterviewSession) -> dict:
+        plan = self._plan_state(session)
+        if isinstance(plan.get("slots"), list) and plan.get("slots"):
+            return plan
+
+        plan = self._build_plan(session)
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        state = dict(state)
+        state["plan"] = plan
+        session.skill_state = state
+        try:
+            db.add(session)
+            db.commit()
+            db.refresh(session)
+        except Exception:
+            try:
+                db.rollback()
+            except Exception:
+                pass
+        return plan
+
+    def _desired_tech_type_for_slot(self, plan: dict, slot_num: int) -> str | None:
+        slots = plan.get("slots")
+        if not isinstance(slots, list):
+            return None
+        idx = int(slot_num) - 1
+        if idx < 0 or idx >= len(slots):
+            return None
+        slot = slots[idx]
+        if not isinstance(slot, dict):
+            return None
+        if slot.get("kind") != "technical":
+            return None
+        tech_type = str(slot.get("tech_type") or "").strip().lower()
+        return tech_type or None
+
     def _seen_question_subquery(self, session: InterviewSession):
         return select(UserQuestionSeen.question_id).where(UserQuestionSeen.user_id == session.user_id)
 
@@ -1079,6 +1563,13 @@ class InterviewEngine:
         session_crud.set_current_question(db, session, question_id)
         session.followups_used = 0
         session.stage = "question"
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        state = dict(state)
+        state["reanchor"] = {"qid": int(question_id), "count": 0}
+        session.skill_state = state
         db.add(session)
         db.commit()
         db.refresh(session)
@@ -1101,13 +1592,16 @@ class InterviewEngine:
     def _max_followups_reached(self, session: InterviewSession) -> bool:
         return int(session.followups_used or 0) >= int(session.max_followups_per_question or 2)
 
-    def _session_asked_state(self, db: Session, session: InterviewSession) -> tuple[set[int], list[Question], set[str], int]:
+    def _session_asked_state(
+        self, db: Session, session: InterviewSession
+    ) -> tuple[set[int], list[Question], set[str], int, dict[str, int]]:
         asked_ids = set(session_question_crud.list_asked_question_ids(db, session.id))
         warmup_id = self._warmup_behavioral_question_id(session)
         if warmup_id:
             asked_ids.add(warmup_id)
         asked_questions: list[Question] = []
         used_tags: set[str] = set()
+        tag_counts: dict[str, int] = {}
         behavioral_used = 0
 
         if asked_ids:
@@ -1115,10 +1609,12 @@ class InterviewEngine:
             for aq in asked_questions:
                 tags = self._tag_set(aq)
                 used_tags.update(tags)
+                for tag in tags:
+                    tag_counts[tag] = tag_counts.get(tag, 0) + 1
                 if "behavioral" in tags and aq.id != warmup_id:
                     behavioral_used += 1
 
-        return asked_ids, asked_questions, used_tags, behavioral_used
+        return asked_ids, asked_questions, used_tags, behavioral_used, tag_counts
 
     def _tag_set(self, q: Question) -> set[str]:
         try:
@@ -1165,107 +1661,128 @@ class InterviewEngine:
         session: InterviewSession,
         asked_ids: set[int],
         used_tags: set[str],
+        tag_counts: dict[str, int],
+        desired_type: str | None = None,
     ) -> Question | None:
         seen = self._seen_question_subquery(session)
         weakness = self._weakest_dimension(session)
         weakness_keywords = self._weakness_keywords(weakness)
         focus_tags = self._focus_tags(session)
         last_tags = self._last_asked_technical_tags(db, session)
+        company_style = self._effective_company_style(session)
 
-        def choose_from_pool(pool: list[Question]) -> Question:
+        def choose_from_pool(pool: list[Question], used_seen: bool) -> Question:
             if not pool:
                 raise ValueError("empty pool")
 
-            # For the first question, pick uniformly at random for variety.
-            if not asked_ids:
+            seen_ids: set[int] = set()
+            if used_seen:
+                try:
+                    seen_ids = set(user_question_seen_crud.list_seen_question_ids(db, session.user_id))
+                except Exception:
+                    seen_ids = set()
+
+            def score_candidate(cand: Question) -> float:
+                cand_tags = self._tag_set(cand)
+                weakness_score = self._weakness_score(cand, weakness_keywords) if weakness_keywords else 0
+                focus_overlap = len(cand_tags & focus_tags) if focus_tags else 0
+                diversity_bonus = len(cand_tags - used_tags) if used_tags else len(cand_tags)
+                last_overlap = len(cand_tags & last_tags) if last_tags else 0
+                if cand_tags:
+                    avg_freq = sum(tag_counts.get(t, 0) for t in cand_tags) / float(len(cand_tags))
+                else:
+                    avg_freq = 0.0
+                rarity_bonus = 1.0 / (1.0 + avg_freq)
+                seen_penalty = 1.4 if cand.id in seen_ids else 0.0
+
+                score = (
+                    (1.2 * weakness_score)
+                    + (1.0 * focus_overlap)
+                    + (0.8 * diversity_bonus)
+                    + (0.6 * rarity_bonus)
+                    - (0.8 * last_overlap)
+                    - seen_penalty
+                )
+                return score + (random.random() * 0.15)
+
+            ranked = sorted(pool, key=score_candidate, reverse=True)
+            if not ranked:
                 return random.choice(pool)
 
-            weak_scores = {cand.id: self._weakness_score(cand, weakness_keywords) for cand in pool} if weakness_keywords else {}
-            best_weak = max(weak_scores.values(), default=0)
-            targeted = [c for c in pool if weak_scores.get(c.id, 0) == best_weak] if best_weak > 0 else pool
+            bucket_size = max(3, min(len(ranked), max(3, len(ranked) // 4)))
+            bucket = ranked[:bucket_size]
+            return random.choice(bucket)
 
-            if focus_tags:
-                focus_scores = {}
-                for cand in targeted:
-                    cand_tags = self._tag_set(cand)
-                    focus_scores[cand.id] = len(cand_tags & focus_tags)
-                best_focus = max(focus_scores.values(), default=0)
-                if best_focus > 0:
-                    targeted = [c for c in targeted if focus_scores.get(c.id, 0) == best_focus]
+        def pick_from_company(style: str, require_type: bool) -> Question | None:
+            for diff in self._adaptive_difficulty_try_order(session):
+                base = db.query(Question).filter(
+                    Question.track == session.track,
+                    Question.company_style == style,
+                    Question.difficulty == diff,
+                    ~Question.tags_csv.ilike("%behavioral%"),
+                )
+                if asked_ids:
+                    base = base.filter(~Question.id.in_(asked_ids))
 
-            if last_tags:
-                overlap_scores = {}
-                for cand in targeted:
-                    cand_tags = self._tag_set(cand)
-                    overlap_scores[cand.id] = len(cand_tags & last_tags)
-                min_overlap = min(overlap_scores.values(), default=0)
-                filtered = [c for c in targeted if overlap_scores.get(c.id, 0) == min_overlap]
-                if filtered:
-                    targeted = filtered
+                pool = base.filter(~Question.id.in_(seen)).all()
+                used_seen = False
+                if not pool:
+                    # Fall back to allowing repeats across sessions (still no repeats within this session).
+                    pool = base.all()
+                    used_seen = True
 
-            best_div = -1
-            best: list[Question] = []
-            for cand in targeted:
-                cand_tags = self._tag_set(cand)
-                div = len(cand_tags - used_tags)
-                if div > best_div:
-                    best_div = div
-                    best = [cand]
-                elif div == best_div:
-                    best.append(cand)
-            return random.choice(best) if best else random.choice(targeted)
+                if require_type:
+                    pool = [cand for cand in pool if self._matches_desired_type(cand, desired_type)]
+
+                if pool:
+                    return choose_from_pool(pool, used_seen)
+            return None
+
+        if desired_type:
+            preferred = pick_from_company(company_style, True)
+            if preferred:
+                return preferred
+            if company_style != "general":
+                preferred = pick_from_company("general", True)
+                if preferred:
+                    return preferred
 
         # Try company-specific first, with adaptive difficulty order.
-        for diff in self._adaptive_difficulty_try_order(session):
-            base = db.query(Question).filter(
-                Question.track == session.track,
-                Question.company_style == session.company_style,
-                Question.difficulty == diff,
-                ~Question.tags_csv.ilike("%behavioral%"),
-            )
-            if asked_ids:
-                base = base.filter(~Question.id.in_(asked_ids))
-
-            pool = base.filter(~Question.id.in_(seen)).all()
-            if not pool:
-                # Fall back to allowing repeats across sessions (still no repeats within this session).
-                pool = base.all()
-            if pool:
-                return choose_from_pool(pool)
+        any_match = pick_from_company(company_style, False)
+        if any_match:
+            return any_match
 
         # Fallback to general style for technical questions (still prefer unseen for this user)
-        for diff in self._adaptive_difficulty_try_order(session):
-            base2 = db.query(Question).filter(
-                Question.track == session.track,
-                Question.company_style == "general",
-                Question.difficulty == diff,
-                ~Question.tags_csv.ilike("%behavioral%"),
-            )
-            if asked_ids:
-                base2 = base2.filter(~Question.id.in_(asked_ids))
-            q2 = base2.filter(~Question.id.in_(seen)).order_by(func.random()).first()
-            if q2:
-                return q2
-            q2b = base2.order_by(func.random()).first()
-            if q2b:
-                return q2b
+        if company_style != "general":
+            any_match = pick_from_company("general", False)
+            if any_match:
+                return any_match
 
         return None
 
     def _pick_next_main_question(self, db: Session, session: InterviewSession) -> Question | None:
-        asked_ids, _asked_questions, used_tags, behavioral_used = self._session_asked_state(db, session)
+        asked_ids, _asked_questions, used_tags, behavioral_used, tag_counts = self._session_asked_state(db, session)
 
         behavioral_target = self._behavioral_target(session)
         next_num = int(session.questions_asked_count or 0) + 1
         behavioral_slots = self._behavioral_slots(int(session.max_questions or 7), behavioral_target)
         behavioral_slot = next_num in behavioral_slots
+        plan = self._ensure_plan(db, session)
+        desired_type = self._desired_tech_type_for_slot(plan, next_num)
 
         if behavioral_slot and behavioral_used < behavioral_target:
             q_b = self._pick_next_behavioral_question(db, session, asked_ids)
             if q_b:
                 return q_b
 
-        q_t = self._pick_next_technical_question(db, session, asked_ids, used_tags)
+        q_t = self._pick_next_technical_question(
+            db,
+            session,
+            asked_ids,
+            used_tags,
+            tag_counts,
+            desired_type=desired_type,
+        )
         if q_t:
             return q_t
 
@@ -1276,7 +1793,8 @@ class InterviewEngine:
             return q_b2
 
         diff = getattr(session, "difficulty_current", None) or session.difficulty
-        return question_crud.pick_next_question(db, session.track, session.company_style, diff)
+        company_style = self._effective_company_style(session)
+        return question_crud.pick_next_question(db, session.track, company_style, diff)
 
     async def _ask_new_main_question(
         self,
@@ -1420,6 +1938,7 @@ Question context: {title}. {prompt}
             if last:
                 return last
 
+        reply: str | None = None
         if session.questions_asked_count == 0 or session.current_question_id is None:
             q = self._pick_next_main_question(db, session)
             if not q:
@@ -1479,6 +1998,15 @@ Question context: {title}. {prompt}
                 cleaned = preface.strip()
                 if cleaned and cleaned.lower() not in (reply or "").lower():
                     reply = f"{cleaned}\n\n{reply}"
+
+        if reply is None:
+            last = self._last_interviewer_message(db, session.id)
+            if last:
+                return last
+            msg = "No interviewer message available. Please send a response or restart the session."
+            message_crud.add_message(db, session.id, "system", msg)
+            return msg
+
         message_crud.add_message(db, session.id, "interviewer", reply)
         session_crud.update_stage(db, session, "candidate_solution")
         return reply
@@ -1541,6 +2069,23 @@ Question context: {title}. {prompt}
 
         q = question_crud.get_question(db, session.current_question_id) if session.current_question_id else None
         if q:
+            if self._is_behavioral(q):
+                allowed_tracks = {session.track, "behavioral"}
+                if q.track not in allowed_tracks:
+                    q = None
+            else:
+                if q.track != session.track:
+                    q = None
+            if q:
+                allowed_companies = {
+                    (session.company_style or "").strip().lower() or "general",
+                    self._effective_company_style(session),
+                    "general",
+                }
+                if (q.company_style or "").strip().lower() not in allowed_companies:
+                    q = None
+
+        if q:
             qt, qp = self._render_question(session, q)
             question_context = f"\nQuestion: {qt}\n{qp}\n"
         else:
@@ -1575,14 +2120,22 @@ Question context: {title}. {prompt}
             return await self._advance_to_next_question(db, session, history, user_name=user_name, preface=preface)
 
         if self._is_non_informative(student_text):
-            reply = "I'll need a fuller response. Please outline your approach, key steps, and any assumptions."
+            if self._max_followups_reached(session):
+                preface = "Let's move on for now. Please share more detail in your next response."
+                session_crud.update_stage(db, session, "next_question")
+                return await self._advance_to_next_question(db, session, history, user_name=user_name, preface=preface)
+            reply = "I'll need a fuller response before we move on. Please outline your approach, key steps, and any assumptions."
             message_crud.add_message(db, session.id, "interviewer", reply)
             self._increment_followups_used(db, session)
             session_crud.update_stage(db, session, "followups")
             return reply
 
         if self._is_vague(student_text):
-            reply = "Can you add more detail on your approach, complexity, and edge cases? A few sentences would help."
+            if self._max_followups_reached(session):
+                preface = "Let's move on for now. Please share more detail in your next response."
+                session_crud.update_stage(db, session, "next_question")
+                return await self._advance_to_next_question(db, session, history, user_name=user_name, preface=preface)
+            reply = "Can you add more detail on your approach, complexity, and edge cases before we move on?"
             message_crud.add_message(db, session.id, "interviewer", reply)
             self._increment_followups_used(db, session)
             session_crud.update_stage(db, session, "followups")
@@ -1595,7 +2148,8 @@ Question context: {title}. {prompt}
         signals = self._candidate_signals(student_text)
         behavioral_missing = self._behavioral_missing_parts(student_text) if self._is_behavioral(q) else []
         missing_keys = self._missing_focus_keys(q, signals, behavioral_missing)
-        missing_keys = self._prioritize_missing_focus(missing_keys, session)
+        focus_keys = self._question_focus_keys(q)
+        missing_keys = self._prioritize_missing_focus(missing_keys, session, prefer=focus_keys)
         last_overall = self._skill_last_overall(session)
         if (
             last_overall is not None
@@ -1610,12 +2164,45 @@ Question context: {title}. {prompt}
         signal_summary = self._signal_summary(signals, missing_keys, behavioral_missing)
         skill_summary = self._skill_summary(session)
 
+        if self._is_off_topic(q, student_text, signals):
+            reanchor_count = self._get_reanchor_count(session, q.id)
+            if reanchor_count < 1 and not self._max_followups_reached(session):
+                nudge = "I may be missing how that answers the question. Can you restate the problem and outline your approach?"
+                message_crud.add_message(db, session.id, "interviewer", nudge)
+                self._increment_followups_used(db, session)
+                self._set_reanchor_count(db, session, q.id, reanchor_count + 1)
+                session_crud.update_stage(db, session, "followups")
+                return nudge
+            if self._max_followups_reached(session):
+                preface = "Let's move on for now. Please answer the next question directly."
+                session_crud.update_stage(db, session, "next_question")
+                return await self._advance_to_next_question(db, session, history, user_name=user_name, preface=preface)
+
+        is_behavioral = self._is_behavioral(q)
+        thin_response = self._is_thin_response(
+            student_text,
+            signals,
+            is_behavioral,
+            behavioral_missing,
+        )
+
+        if thin_response:
+            if self._max_followups_reached(session):
+                preface = "Let's move on for now. Please share more detail in your next response."
+                session_crud.update_stage(db, session, "next_question")
+                return await self._advance_to_next_question(db, session, history, user_name=user_name, preface=preface)
+            nudge = self._soft_nudge_prompt(is_behavioral, missing_keys, behavioral_missing)
+            message_crud.add_message(db, session.id, "interviewer", nudge)
+            self._increment_followups_used(db, session)
+            session_crud.update_stage(db, session, "followups")
+            return nudge
+
         if int(session.followups_used or 0) == 0 and not self._max_followups_reached(session):
             targeted = None
-            if self._is_behavioral(q) and behavioral_missing:
+            if is_behavioral and behavioral_missing:
                 targeted = self._missing_focus_question("star", behavioral_missing)
             elif signals.get("has_code") and not signals.get("mentions_approach"):
-                targeted = "Thanks for the code. Walk me through your approach and key steps."
+                targeted = "Walk me through your approach and key steps."
             else:
                 targeted = self._phase_followup(
                     q,
@@ -1648,6 +2235,11 @@ Question context: {title}. {prompt}
             is_behavioral=self._is_behavioral(q),
         )
 
+        intent = ""
+        confidence = 0.6
+        next_focus = None
+        coverage = {}
+        missing_focus_llm: list[str] = []
         try:
             data = await self.llm.chat_json(ctrl_sys, ctrl_user, history=history)
             ctrl = InterviewControllerOutput.model_validate(data)
@@ -1656,12 +2248,19 @@ Question context: {title}. {prompt}
             done_with_question = bool(ctrl.done_with_question)
             allow_second_followup = bool(ctrl.allow_second_followup)
             quick_rubric_raw = ctrl.quick_rubric.model_dump()
+            intent = (ctrl.intent or "").strip().upper() if ctrl.intent else ""
+            confidence = float(ctrl.confidence or 0.6)
+            next_focus = ctrl.next_focus
+            coverage = ctrl.coverage or {}
+            missing_focus_llm = ctrl.missing_focus or []
         except Exception:
             action = ""
             message = ""
             done_with_question = False
             allow_second_followup = False
             quick_rubric_raw = None
+            coverage = {}
+            missing_focus_llm = []
 
         # Store rolling rubric (used later for adaptive difficulty and weakness targeting).
         if student_text and student_text.strip():
@@ -1669,6 +2268,39 @@ Question context: {title}. {prompt}
                 self._update_skill_state(db, session, quick_rubric_raw, is_behavioral=self._is_behavioral(q))
             except Exception:
                 pass
+
+        if intent == "WRAP_UP":
+            action = "WRAP_UP"
+        elif intent == "ADVANCE" and action == "FOLLOWUP":
+            action = "MOVE_TO_NEXT_QUESTION"
+        elif intent in ("CLARIFY", "DEEPEN", "CHALLENGE") and action in ("MOVE_TO_NEXT_QUESTION", "WRAP_UP"):
+            action = "FOLLOWUP"
+
+        if confidence < 0.5:
+            allow_second_followup = False
+        if confidence < 0.3 and action == "FOLLOWUP" and int(session.followups_used or 0) >= 1:
+            action = "MOVE_TO_NEXT_QUESTION"
+
+        if confidence >= 0.55:
+            if missing_focus_llm:
+                missing_keys = self._prioritize_missing_focus(missing_focus_llm, session, prefer=focus_keys)
+                missing_focus = self._missing_focus_summary(missing_keys, behavioral_missing)
+            elif coverage:
+                inferred = self._missing_from_coverage(coverage, is_behavioral)
+                if inferred:
+                    missing_keys = self._prioritize_missing_focus(inferred, session, prefer=focus_keys)
+                    missing_focus = self._missing_focus_summary(missing_keys, behavioral_missing)
+
+        if missing_keys and confidence < 0.6 and not self._max_followups_reached(session):
+            if action in ("MOVE_TO_NEXT_QUESTION", "WRAP_UP"):
+                action = "FOLLOWUP"
+            if not message:
+                message = self._missing_focus_question(missing_keys[0], behavioral_missing) or ""
+
+        if not message:
+            focus_key = self._normalize_focus_key(next_focus)
+            if focus_key:
+                message = self._missing_focus_question(focus_key, behavioral_missing) or ""
 
         if not message:
             if isinstance(getattr(q, "followups", None), list) and q.followups:

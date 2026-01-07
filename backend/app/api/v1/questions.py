@@ -36,29 +36,10 @@ def get_questions(
             title=q.title,
             prompt=q.prompt,
             tags=q.tags(),
+            question_type=getattr(q, "question_type", None),
         )
         for q in qs
     ]
-
-
-@router.get("/{question_id}", response_model=QuestionOut)
-def get_question_by_id(
-    question_id: int,
-    db: Session = Depends(get_db),
-    _user=Depends(get_current_user),
-):
-    q = get_question(db, question_id)
-    if not q:
-        raise HTTPException(status_code=404, detail="Question not found.")
-    return QuestionOut(
-        id=q.id,
-        track=q.track,
-        company_style=q.company_style,
-        difficulty=q.difficulty,
-        title=q.title,
-        prompt=q.prompt,
-        tags=q.tags(),
-    )
 
 
 @router.get("/coverage", response_model=QuestionCoverageOut)
@@ -102,4 +83,25 @@ def get_question_coverage(
         difficulty=d,
         count=int(count or 0),
         fallback_general=int(fallback or 0),
+    )
+
+
+@router.get("/{question_id}", response_model=QuestionOut)
+def get_question_by_id(
+    question_id: int,
+    db: Session = Depends(get_db),
+    _user=Depends(get_current_user),
+):
+    q = get_question(db, question_id)
+    if not q:
+        raise HTTPException(status_code=404, detail="Question not found.")
+    return QuestionOut(
+        id=q.id,
+        track=q.track,
+        company_style=q.company_style,
+        difficulty=q.difficulty,
+        title=q.title,
+        prompt=q.prompt,
+        tags=q.tags(),
+        question_type=getattr(q, "question_type", None),
     )

@@ -26,6 +26,52 @@ class QuickRubric(BaseModel):
 
 
 InterviewAction = Literal["ASK_MAIN_QUESTION", "FOLLOWUP", "MOVE_TO_NEXT_QUESTION", "WRAP_UP"]
+InterviewIntent = Literal["CLARIFY", "DEEPEN", "CHALLENGE", "ADVANCE", "WRAP_UP"]
+_FOCUS_KEYS = {
+    "approach",
+    "constraints",
+    "correctness",
+    "complexity",
+    "edge_cases",
+    "tradeoffs",
+    "star",
+    "impact",
+}
+
+
+def _normalize_focus_key(raw) -> str | None:  # noqa: ANN001
+    if raw is None:
+        return None
+    key = str(raw).strip().lower()
+    if not key:
+        return None
+    mapping = {
+        "edge case": "edge_cases",
+        "edge cases": "edge_cases",
+        "edge": "edge_cases",
+        "edges": "edge_cases",
+        "complexity": "complexity",
+        "runtime": "complexity",
+        "big o": "complexity",
+        "correctness": "correctness",
+        "proof": "correctness",
+        "invariant": "correctness",
+        "trade-off": "tradeoffs",
+        "tradeoff": "tradeoffs",
+        "tradeoffs": "tradeoffs",
+        "approach": "approach",
+        "plan": "approach",
+        "constraints": "constraints",
+        "assumptions": "constraints",
+        "star": "star",
+        "impact": "impact",
+        "outcome": "impact",
+    }
+    if key in mapping:
+        return mapping[key]
+    if key in _FOCUS_KEYS:
+        return key
+    return None
 
 
 class InterviewControllerOutput(BaseModel):
@@ -34,6 +80,11 @@ class InterviewControllerOutput(BaseModel):
     done_with_question: bool = False
     allow_second_followup: bool = False
     quick_rubric: QuickRubric = Field(default_factory=QuickRubric)
+    intent: str | None = None
+    confidence: float = Field(default=0.6, ge=0, le=1)
+    next_focus: str | None = None
+    coverage: dict[str, bool] = Field(default_factory=dict)
+    missing_focus: list[str] = Field(default_factory=list)
 
     @field_validator("action", mode="before")
     @classmethod
@@ -46,6 +97,72 @@ class InterviewControllerOutput(BaseModel):
         if v is None:
             return ""
         return str(v)
+
+    @field_validator("intent", mode="before")
+    @classmethod
+    def _normalize_intent(cls, v):  # noqa: ANN001
+        if v is None:
+            return None
+        raw = str(v).strip().upper()
+        if raw in InterviewIntent.__args__:
+            return raw
+        return None
+
+    @field_validator("confidence", mode="before")
+    @classmethod
+    def _coerce_confidence(cls, v):  # noqa: ANN001
+        if v is None:
+            return 0.6
+        try:
+            n = float(v)
+        except Exception:
+            return 0.6
+        return max(0.0, min(1.0, n))
+
+    @field_validator("next_focus", mode="before")
+    @classmethod
+    def _coerce_next_focus(cls, v):  # noqa: ANN001
+        if v is None:
+            return None
+        s = str(v).strip()
+        return s or None
+
+    @field_validator("coverage", mode="before")
+    @classmethod
+    def _coerce_coverage(cls, v):  # noqa: ANN001
+        if v is None:
+            return {}
+        if isinstance(v, dict):
+            out: dict[str, bool] = {}
+            for key, val in v.items():
+                nk = _normalize_focus_key(key)
+                if nk:
+                    out[nk] = bool(val)
+            return out
+        if isinstance(v, list):
+            out = {}
+            for item in v:
+                nk = _normalize_focus_key(item)
+                if nk:
+                    out[nk] = True
+            return out
+        if isinstance(v, str):
+            nk = _normalize_focus_key(v)
+            return {nk: True} if nk else {}
+        return {}
+
+    @field_validator("missing_focus", mode="before")
+    @classmethod
+    def _coerce_missing_focus(cls, v):  # noqa: ANN001
+        if v is None:
+            return []
+        items = v if isinstance(v, list) else [v]
+        out: list[str] = []
+        for item in items:
+            nk = _normalize_focus_key(item)
+            if nk and nk not in out:
+                out.append(nk)
+        return out
 
 
 class EvaluationOutput(BaseModel):
@@ -82,4 +199,3 @@ class EvaluationOutput(BaseModel):
                     out.append(s)
             return out
         return []
-

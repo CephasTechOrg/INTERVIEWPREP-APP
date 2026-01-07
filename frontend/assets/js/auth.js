@@ -12,12 +12,14 @@ async function handleSignup(e) {
 
   setNotice("#signup_notice", "Creating account...", "");
   try {
-    const data = await apiFetch("/auth/signup", {
+    await apiFetch("/auth/signup", {
       method: "POST",
       auth: false,
       body: { email, password, full_name: full_name || null },
     });
-    setToken(data.access_token);
+    try {
+      localStorage.setItem("last_auth_email", email);
+    } catch {}
     // Save profile locally (frontend-only)
     try {
       const key = `user_profile_${email.toLowerCase()}`;
@@ -37,8 +39,9 @@ async function handleSignup(e) {
         })
       );
     } catch {}
-    setNotice("#signup_notice", "Account created. Redirecting...", "ok");
-    setTimeout(() => (window.location.href = "./interview.html"), 450);
+    setNotice("#signup_notice", "Account created. Check your email or console for the token.", "ok");
+    if (qs("#ver_email")) qs("#ver_email").value = email;
+    showView("verify");
   } catch (err) {
     setNotice("#signup_notice", err.message, "error");
   }
@@ -57,6 +60,9 @@ async function handleLogin(e) {
       body: { email, password },
     });
     setToken(data.access_token);
+    try {
+      localStorage.setItem("last_auth_email", email);
+    } catch {}
     // Ensure a local profile exists for this email (frontend-only)
     try {
       const key = `user_profile_${email.toLowerCase()}`;
@@ -232,4 +238,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const token = getToken();
   const quick = qs("#quick_go");
   if (quick) quick.style.display = token ? "inline-flex" : "none";
+
+  const params = new URLSearchParams(window.location.search);
+  const viewParam = params.get("view");
+  const hash = window.location.hash.replace("#", "");
+  const requestedView = viewParam || hash;
+  const lastEmail = (() => {
+    try {
+      return localStorage.getItem("last_auth_email") || "";
+    } catch {
+      return "";
+    }
+  })();
+  if (requestedView === "verify") {
+    if (qs("#ver_email") && lastEmail) qs("#ver_email").value = lastEmail;
+    showView("verify");
+    return;
+  }
+  if (requestedView === "reset") {
+    if (qs("#rp_email") && lastEmail) qs("#rp_email").value = lastEmail;
+    showView("reset");
+    return;
+  }
 });

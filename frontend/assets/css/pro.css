@@ -748,6 +748,7 @@ html, body {
 
 .stat-content {
   flex: 1;
+  min-width: 0;
 }
 
 .stat-number {
@@ -755,6 +756,29 @@ html, body {
   font-weight: 800;
   color: var(--text);
   margin-bottom: 2px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+#dashLastSession {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+#dashLastSession .stat-value-primary {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+#dashLastSession .stat-value-secondary {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
 }
 
 /* Interview Page Styles */

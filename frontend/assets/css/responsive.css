@@ -51,9 +51,9 @@
     order: 1;
     min-height: 500px;
   }
-  
-  .metrics-grid {
-    grid-template-columns: repeat(2, 1fr);
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
   
   .dashboard-grid {
@@ -116,14 +116,6 @@
   .interview-actions {
     flex-wrap: wrap;
     justify-content: center;
-  }
-  
-  .metrics-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .charts-grid {
-    grid-template-columns: 1fr;
   }
   
   .dashboard-grid {
@@ -223,14 +215,6 @@
     display: inline;
   }
   
-  .metrics-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .charts-grid {
-    grid-template-columns: 1fr;
-  }
-  
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
@@ -273,6 +257,10 @@
   .status-badge {
     font-size: 12px;
     padding: 6px 10px;
+  }
+
+  #dashLastSession {
+    align-items: center;
   }
   
   .content-area {
@@ -382,6 +370,10 @@
     text-align: center;
     gap: 8px;
   }
+
+  #dashLastSession {
+    align-items: center;
+  }
   
   .stat-icon {
     width: 36px;
@@ -417,10 +409,6 @@
     flex-direction: column;
     gap: 16px;
     text-align: center;
-  }
-  
-  .metric-value {
-    font-size: 36px;
   }
   
   /* Results Page */
@@ -472,10 +460,6 @@
   
   .stats-grid {
     grid-template-columns: 1fr;
-  }
-  
-  .metric-value {
-    font-size: 32px;
   }
   
   .status-badge {

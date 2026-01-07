@@ -64,7 +64,9 @@ def _startup_init_db() -> None:
                 text(
                     """
                     ALTER TABLE IF EXISTS questions
-                      ADD COLUMN IF NOT EXISTS followups JSONB NOT NULL DEFAULT '[]'::jsonb;
+                      ADD COLUMN IF NOT EXISTS followups JSONB NOT NULL DEFAULT '[]'::jsonb,
+                      ADD COLUMN IF NOT EXISTS question_type VARCHAR(50) NOT NULL DEFAULT 'coding',
+                      ADD COLUMN IF NOT EXISTS meta JSONB NOT NULL DEFAULT '{}'::jsonb;
                     """
                 )
             )

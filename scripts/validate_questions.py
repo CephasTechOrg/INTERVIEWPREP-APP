@@ -7,6 +7,7 @@ from pathlib import Path
 ALLOWED_TRACKS = {"behavioral", "swe_intern", "swe_engineer"}
 ALLOWED_COMPANIES = {"general", "amazon", "apple", "google", "microsoft", "meta"}
 ALLOWED_DIFFICULTIES = {"easy", "medium", "hard"}
+ALLOWED_QUESTION_TYPES = {"coding", "system_design", "behavioral", "conceptual"}
 
 
 def _path_hints(base: Path, file: Path):
@@ -139,6 +140,30 @@ def validate_file(path: Path, base: Path, seen):
             for f in followups:
                 if not _as_str(f):
                     warnings.append(f"{path}: question {idx} has empty followup")
+
+        q_type = _as_str(q.get("question_type") or q.get("type")).lower()
+        if q_type and q_type not in ALLOWED_QUESTION_TYPES:
+            warnings.append(f"{path}: question {idx} unknown question_type '{q_type}'")
+        if track == "behavioral" and q_type and q_type != "behavioral":
+            warnings.append(f"{path}: question {idx} behavioral track but question_type='{q_type}'")
+
+        expected_topics = q.get("expected_topics")
+        if expected_topics is not None:
+            if not isinstance(expected_topics, list):
+                warnings.append(f"{path}: question {idx} expected_topics should be a list")
+            elif not [t for t in expected_topics if _as_str(t)]:
+                warnings.append(f"{path}: question {idx} expected_topics is empty")
+
+        evaluation_focus = q.get("evaluation_focus")
+        if evaluation_focus is not None:
+            if not isinstance(evaluation_focus, list):
+                warnings.append(f"{path}: question {idx} evaluation_focus should be a list")
+            elif not [t for t in evaluation_focus if _as_str(t)]:
+                warnings.append(f"{path}: question {idx} evaluation_focus is empty")
+
+        company_bar = q.get("company_bar")
+        if company_bar is not None and not _as_str(company_bar):
+            warnings.append(f"{path}: question {idx} company_bar is empty")
 
         if track == "behavioral":
             tag_set = {str(t).strip().lower() for t in tags if _as_str(t)}
