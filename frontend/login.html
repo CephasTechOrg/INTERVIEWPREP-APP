@@ -202,7 +202,7 @@
     .auth-title {
       font-size: 36px;
       font-weight: 800;
-      color: var(--text);
+      color: var(--dark);
       margin-bottom: 12px;
     }
     
@@ -236,7 +236,7 @@
     }
     
     .auth-tab.active {
-      color: var(--primary);
+      color: var(--dark-light);
     }
     
     .tab-indicator {
@@ -266,7 +266,7 @@
     
     .form-label {
       font-weight: 600;
-      color: var(--text);
+      color: var(--dark-light);
       margin-bottom: 8px;
       display: block;
       font-size: 14px;
@@ -399,9 +399,13 @@
     }
     
     @media (max-width: 768px) {
+      .login-page{
+        padding: 10px;
+      }
+
       .hero-panel,
       .auth-panel {
-        padding: 40px 24px;
+        padding: 30px 12px;
       }
       
       .hero-title {
@@ -426,7 +430,7 @@
     @media (max-width: 480px) {
       .hero-panel,
       .auth-panel {
-        padding: 30px 20px;
+        padding: 22px 10px;
       }
       
       .hero-title {

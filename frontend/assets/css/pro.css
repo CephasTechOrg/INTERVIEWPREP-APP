@@ -69,7 +69,6 @@
 }
 
 html, body {
-  height: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
   color: var(--text);
   background: var(--light-gray);
@@ -539,7 +538,7 @@ html, body {
 .form-label {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--dark-light);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -623,12 +622,13 @@ html, body {
 .btn-outline {
   background: transparent;
   border: 2px solid var(--border);
-  color: var(--text);
+  color: var(--text-muted);
 }
 
 .btn-outline:hover {
   background: var(--light-gray);
   border-color: var(--text-muted);
+  color: var(--text);
 }
 
 .btn-start {
@@ -713,8 +713,8 @@ html, body {
 }
 
 .stat-value {
-  font-size: 16px;
-  font-weight: 700;
+  /* font-size: 16px; */
+  /* font-weight: 700; */
   color: var(--text);
 }
 
