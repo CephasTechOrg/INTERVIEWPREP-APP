@@ -1,11 +1,158 @@
+# Emergency Recovery Plan — after unintended pull overwrite (2026-01-11)
+
+Context
+- A collaborator’s pull overwrote local updates, causing breakages, especially in backend/app/main.py (startup schema patch block is corrupted and brittle).
+- Do NOT ship further code changes until recovery is completed and verified.
+
+Immediate Recovery Options (choose one)
+1) Recover prior local state via Git reflog (preferred)
+   - Commands:
+     ```bash
+     # Show recent HEAD positions
+     git reflog
+
+     # Create a safety branch at the pre-pull state (replace <HASH> with the commit/HEAD you want)
+     git checkout -b recovery/<date>-pre-pull <HASH>
+
+     # Inspect differences to current work
+     git diff main...HEAD -- backend/app/main.py
+
+     # Option A: cherry-pick specific commits you authored back onto main (or a new branch)
+     git checkout main
+     git checkout -b hotfix/recover-after-pull
+     git cherry-pick <COMMIT1> <COMMIT2> ...
+
+     # Option B: if you want to fully reset main to the last good state (only if safe)
+     git branch backup/main-before-reset
+     git reset --hard <GOOD_HASH>
+     ```
+   - Acceptance:
+     - The recovered branch contains your lost local updates.
+     - You can open a PR from hotfix/recover-after-pull to main with your restored changes.
+
+2) Minimal hotfix to unblock local dev (temporary)
+   - Create a new branch:
+     ```bash
+     git checkout -b hotfix/main-startup
+     ```
+   - In backend/app/main.py: temporarily disable the malformed “schema upgrade”/DO block that runs in startup (keep only Base.metadata.create_all in dev, or better: rely on Alembic).
+   - Objective is to start the API locally while a proper migration is prepared.
+   - Acceptance:
+     - uvicorn boots, GET /health returns {"status":"ok"}.
+     - No startup crash due to invalid SQL blocks.
+
+Definitive Fix for backend/app/main.py (replace runtime patching with Alembic)
+- Problem: The startup-time SQL block is corrupted (undefined vars, malformed DO, stray END IF). Runtime schema patching is brittle.
+- Required actions:
+  1) Make Alembic migrations the single source of truth.
+  2) Remove all runtime schema-alter SQL from app startup.
+  3) Keep only safe, idempotent tasks (e.g., optional question seeding).
+- Steps:
+  ```bash
+  cd backend
+  # Ensure alembic is configured (alembic.ini, alembic/env.py)
+  alembic revision --autogenerate -m "initial schema"
+  alembic upgrade head
+  ```
+- Acceptance:
+  - From a clean DB, `alembic upgrade head` produces the schema.
+  - App startup does not alter schema dynamically.
+
+Tests Alignment (to resolve current import error)
+- Current error: tests/test_crud.py imports get_questions_by_filters which does not exist in app.crud.question (code exposes list_questions and get_question).
+- Choose one:
+  - A) Update tests to import and use list_questions(...) and get_question(...).
+  - B) Add a thin wrapper in code:
+    ```python
+    # app/crud/question.py
+    def get_questions_by_filters(db, track=None, company_style=None, difficulty=None, **_):
+        return list_questions(db, track, company_style, difficulty)
+    ```
+- Acceptance:
+  - `cd backend && pytest -q` collects tests without import errors.
+
+Compose and Env sanity
+- docker-compose.yml:
+  - Replace ambiguous port mapping with explicit:
+    - "5432:5432" or "${HOST_DB_PORT:-5432}:5432"
+- backend/.env.example:
+  - Add variables: SECRET_KEY, DATABASE_URL, DEEPSEEK_API_KEY, DEEPSEEK_* knobs, ELEVENLABS_* knobs, TTS_TIMEOUT_SECONDS, TTS_SOFT_TIMEOUT_MS, SMTP_*.
+
+Verification Checklist (post-fix)
+- Backend boots:
+  - uvicorn app.main:app --reload
+  - GET http://127.0.0.1:8000/health -> {"status":"ok"}
+- Database:
+  - `alembic upgrade head` on a clean DB completes without error.
+- Tests:
+  - `cd backend && pytest -q` collects and runs without import errors.
+- Data:
+  - `python scripts/validate_questions.py` passes (and with --strict in CI).
+- Frontend:
+  - API_BASE in frontend/assets/js/api.js points to 127.0.0.1:8000/api/v1 for local testing.
+
+Prevention (process hardening)
+- Protect main with branch rules; require PRs, CI green, and at least one review.
+- Add CI workflow to run: validate_questions, pytest, ruff/black, mypy, and Alembic status check (alembic current == head).
+- Encourage feature branches and frequent commits to avoid losing local work.
+
+If you want, I can script the reflog recovery flow and prepare the exact cherry-pick commands once you share your desired baseline commit.
+
+# Review Update — Findings and Pending Details (2026-01-11)
+
+Summary of pending details
+
+- Migrations not authoritative: backend/app/main.py still performs runtime schema patching with a corrupted DO block; replace with Alembic-only migrations and remove runtime ALTER statements.
+- Alembic: env.py exists, but ensure Alembic is the single source of truth (generate initial migration from models; document “alembic upgrade head” before first run).
+- Docker Compose: current mapping uses ${HOST_DB_PORT:-5432}:${POSTGRES_PORT}; ensure POSTGRES_PORT is set to 5432 or map to 5432 explicitly. Consider adding a backend service container wired to db.
+- Missing .env.example: backend/.env.example should document required/optional variables (SECRET*KEY, DATABASE_URL, DEEPSEEK*_, ELEVENLABS\__, TTS*\*, SMTP*\*), with safe example values and comments.
+- Testing status: backend tests exist and collect, but there is 1 remaining import error:
+  - tests/test_crud.py imports get_questions_by_filters (not present); code exposes list_questions and get_question. Align tests or add thin wrappers in code.
+  - Running pytest from repo root triggers mark warnings (pytest.ini is in backend/). Either run from backend/ or duplicate pytest.ini at root.
+  - TTS path is function-based (elevenlabs_tts/default_tts); tests should avoid non-existent classes.
+- Logging and CORS: replace print with structured logging; keep CORS \* only for dev, restrict in prod.
+- CI: no workflow defined; add a basic pipeline to execute lint, format checks, validate_questions, pytest, and alembic status check.
+
+Actionable updates to this TODO
+
+- Make migrations authoritative (Pending)
+  - Remove runtime schema patching in app.main; rely on Alembic only.
+  - Acceptance: alembic upgrade head from clean DB yields a working schema; app no longer alters schema on startup.
+- Fix docker-compose mapping and optionally add backend service (Pending)
+  - Map host:container to 5432:5432 (or set POSTGRES_PORT=5432). Optionally add a backend service running uvicorn with depends_on: db.
+- Add backend/.env.example (Pending)
+  - Include: SECRET*KEY, DATABASE_URL, DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL, DEEPSEEK_TIMEOUT_SECONDS, DEEPSEEK_MAX_RETRIES, DEEPSEEK_RETRY_BACKOFF_SECONDS, ELEVENLABS_API_KEY, ELEVENLABS_VOICE_ID, ELEVENLABS_MODEL_ID, ELEVENLABS_OUTPUT_FORMAT, TTS_TIMEOUT_SECONDS, TTS_SOFT_TIMEOUT_MS, SMTP*\*.
+- Align tests with code APIs (Pending)
+  - tests/test_crud.py: use list_questions and get_question or provide wrappers.
+  - Reduce pytest mark warnings by running from backend/ or moving pytest.ini to repo root.
+- Add CI (Pending)
+  - GitHub Actions workflow: install deps, run scripts/validate_questions.py --strict, run pytest, ruff, black --check, mypy, and alembic current vs head check.
+- Logging/CORS hardening (Pending)
+  - Ensure core logging is configured at startup; restrict CORS via env for prod.
+
+Testing status and next steps (per checklist)
+
+- Already tested:
+  - Pytest collection from backend shows 95 items collected with 1 import error (tests/test_crud.py expects get_questions_by_filters).
+  - Warnings appear when running from repo root due to pytest.ini not being picked up.
+- Remaining areas to cover (for thorough testing):
+  - Frontend/Web: login.html, dashboard.html, interview.html, results.html, settings.html — navigation, forms, auth redirects, voice/TTS UI states.
+  - Backend/API: /api/v1/auth, /sessions, /questions, /analytics, /ai, /tts — happy paths, error paths, auth failures, edge cases (empty pools, offline LLM/TTS).
+  - External services: DeepSeek health, retries, fallbacks; ElevenLabs timeouts and fallback to default/browser.
+  - Database/Migrations: clean DB bootstrap via Alembic; preflight_question_pool across tracks/companies/difficulties.
+  - CI: end-to-end execution of validation, tests, and style checks on PR.
+- Proposed options:
+  - Critical-path testing: key auth/session flow and main endpoints.
+  - Thorough testing: full coverage as listed above, including edge cases.
+
 # Project TODO & Development Guide
 
-Purpose
--------
+## Purpose
+
 A short, actionable guide to advance the project from MVP to a more robust, testable, and production-ready state. Each top-level task lists recommended sub-steps, commands, and quick verification checks.
 
-How to use
-----------
+## How to use
+
 - Work items are ordered by priority (top = highest).
 - For each item: follow the sub-steps, run the commands, add tests, then check it off.
 - Ask for help to scaffold any item (migrations, tests, CI config, etc.).
@@ -15,6 +162,7 @@ How to use
 ## CRITICAL GAPS IDENTIFIED (High Priority)
 
 ### 1) Missing `.env.example` file ⚠️ URGENT
+
 - **Status**: NOT FOUND in backend directory
 - **Impact**: New developers cannot set up the project without knowing required environment variables
 - **Action Required**:
@@ -37,6 +185,7 @@ How to use
 - **Estimated**: 30 minutes
 
 ### 2) Alembic migrations fully implemented ✅ COMPLETED
+
 - **Status**: ✅ FULLY VALIDATED AND DEPLOYED
 - **Completed Actions**:
   1. ✅ Alembic configuration validated (`alembic.ini`, `alembic/env.py`, `alembic/versions/`)
@@ -55,6 +204,7 @@ How to use
   - Add CI step to assert `alembic current` equals `head` (see CI pipeline item below)
 
 ### 3) No test suite exists ⚠️ HIGH PRIORITY
+
 - **Status**: No `tests/` directory found in project root or backend
 - **Impact**: No automated testing; changes risk breaking existing functionality
 - **Action Required**:
@@ -71,6 +221,7 @@ How to use
 - **Estimated**: 6-10 hours for initial coverage
 
 ### 4) No CI/CD pipeline ⚠️ HIGH PRIORITY
+
 - **Status**: No `.github/workflows/` directory found
 - **Impact**: No automated quality checks on PRs; manual testing only
 - **Action Required**:
@@ -86,6 +237,7 @@ How to use
 - **Estimated**: 2-3 hours
 
 ### 5) Missing linting/formatting configuration ⚠️ MEDIUM PRIORITY
+
 - **Status**: No `pyproject.toml`, `ruff.toml`, `mypy.ini`, or `.pre-commit-config.yaml` found
 - **Impact**: Inconsistent code style; no automated type checking
 - **Action Required**:
@@ -99,6 +251,7 @@ How to use
 - **Estimated**: 2-4 hours
 
 ### 6) Backend code hygiene ⚠️ MEDIUM PRIORITY
+
 - **Status**: Stray files found in backend root directory
 - **Impact**: Confusing repository structure; potential version conflicts
 - **Action Required**:
@@ -115,6 +268,7 @@ How to use
 ## EXISTING TODO ITEMS (From Original File)
 
 ## 1) Add Alembic migrations and configure migrations folder ✅ COMPLETED
+
 - Goal: Replace runtime schema patching with versioned DB migrations.
 - **Current Status**: ✅ FULLY CONFIGURED AND DEPLOYED
 - **Completed Steps**:
@@ -145,6 +299,7 @@ How to use
 ---
 
 ## 2) Add unit tests (core services) ✅ COMPLETED
+
 - Goal: Add a small but meaningful test suite covering `InterviewEngine`, `llm_client`, TTS fallbacks, and CRUD.
 - **Current Status**: ✅ COMPREHENSIVE TEST SUITE IMPLEMENTED
 - **Completed Actions**:
@@ -208,10 +363,11 @@ How to use
 ---
 
 ## 3) Add CI pipeline (run tests, lint, validate_questions) ⚠️ HIGH PRIORITY
+
 - Goal: Enforce tests, linting, and question validation on PRs.
 - **Current Status**: NO `.github/workflows/` directory exists
 - Steps:
-  1. Create `.github/workflows/ci.yml` with steps: 
+  1. Create `.github/workflows/ci.yml` with steps:
      - checkout
      - setup python
      - install deps
@@ -229,6 +385,7 @@ How to use
 ---
 
 ## 4) Run & fix `scripts/validate_questions.py` results ✅
+
 - Goal: Ensure question JSONs are consistent and clean.
 - **Current Status**: Script exists and is well-implemented
 - Steps:
@@ -241,6 +398,7 @@ How to use
 ---
 
 ## 5) Document `.env.example` & confirm required env vars ⚠️ URGENT
+
 - Goal: Make dev onboarding frictionless.
 - **Current Status**: `.env.example` file DOES NOT EXIST
 - Steps:
@@ -264,6 +422,7 @@ How to use
 ---
 
 ## 6) Add integration tests or mocks for LLM/TTS fallbacks ✅
+
 - Goal: Verify graceful behavior when external APIs are down or return invalid responses.
 - **Current Status**: No tests exist
 - **Code Analysis**: `llm_client.py` has good error handling with `LLMClientError` and retry logic
@@ -278,26 +437,29 @@ How to use
 ---
 
 ## 7) Add type checking / linters and formatting ⚠️ MEDIUM PRIORITY
+
 - Goal: Maintain consistent style and catch type errors early.
 - **Current Status**: NO configuration files exist (no `pyproject.toml`, `ruff.toml`, `mypy.ini`)
 - Steps:
   1. Add dev tools to requirements.txt: `ruff` (lint), `black` (format), `mypy` (type checking).
   2. Create `backend/pyproject.toml` with tool configurations:
+
      ```toml
      [tool.black]
      line-length = 120
      target-version = ['py311']
-     
+
      [tool.ruff]
      line-length = 120
      target-version = "py311"
-     
+
      [tool.mypy]
      python_version = "3.11"
      warn_return_any = true
      warn_unused_configs = true
      disallow_untyped_defs = false
      ```
+
   3. Create `.pre-commit-config.yaml` for git hooks
   4. Run formatters on existing codebase: `black backend/` and `ruff check backend/ --fix`
   5. Add to CI pipeline
@@ -306,6 +468,7 @@ How to use
 ---
 
 ## 8) Add health checks & monitoring for LLM/TTS endpoints ✅
+
 - Goal: Surface LLM/TTS status for observability.
 - **Current Status**: ALREADY IMPLEMENTED
 - **Findings**:
@@ -319,6 +482,7 @@ How to use
 ---
 
 ## 9) Replace ad-hoc prints with structured logging ✅ COMPLETED
+
 - Goal: Use structured logs and levels instead of `print`.
 - **Current Status**: ✅ COMPLETED
 - **Completed Actions**:
@@ -333,6 +497,7 @@ How to use
 ## ADDITIONAL FINDINGS & RECOMMENDATIONS
 
 ### Architecture Strengths ✅
+
 1. **Well-structured backend**: Clean separation of concerns (models, schemas, CRUD, services, API)
 2. **Robust interview engine**: Sophisticated logic for adaptive difficulty, question selection, warmup flow
 3. **Graceful degradation**: LLM and TTS fallbacks work without external APIs
@@ -342,13 +507,14 @@ How to use
 7. **Migration system**: Alembic fully configured and runtime patching removed
 
 ### Code Quality Observations
+
 1. **Interview Engine** (`backend/app/services/interview_engine.py`):
    - 2000+ lines - consider splitting into smaller modules
    - Excellent adaptive difficulty logic
    - Good warmup flow implementation
    - Well-documented with inline comments
-   
 2. **Frontend** (`frontend/assets/js/interview.js`):
+
    - 1800+ lines - consider splitting into modules (api.js, state.js, ui.js, etc.)
    - Good separation of concerns with guidance system
    - Comprehensive error handling
@@ -360,6 +526,7 @@ How to use
    - JSON parsing with fallback strategies
 
 ### Security Considerations
+
 1. **CORS**: Currently set to allow all origins (`allow_origins=["*"]`) - TODO added in main.py to restrict in production
 2. **Rate limiting**: `backend/app/api/rate_limit.py` exists - ensure it's applied to all endpoints
 3. **JWT expiration**: Set to 7 days - consider shorter duration for production
@@ -367,11 +534,13 @@ How to use
 5. **Docker Compose**: Port mapping verified - POSTGRES_PORT is set to 5432 in .env ✅
 
 ### Performance Considerations
+
 1. **Database queries**: Consider adding query optimization and connection pooling
 2. **LLM timeout**: 45 seconds is reasonable but may need tuning based on usage
 3. **Frontend bundle size**: Consider code splitting for large JS files
 
 ### Documentation Gaps
+
 1. **API documentation**: Consider adding OpenAPI/Swagger docs (FastAPI supports this natively)
 2. **Architecture diagram**: Would help new developers understand system flow
 3. **Deployment guide**: Add production deployment instructions
@@ -382,6 +551,7 @@ How to use
 ## Quick development & verification commands
 
 ### Setup
+
 ```bash
 cd backend
 python -m venv .venv
@@ -396,6 +566,7 @@ pip install pytest pytest-asyncio pytest-mock respx ruff black mypy pre-commit
 ```
 
 ### Run validators & tests
+
 ```bash
 # From repo root
 python scripts/validate_questions.py
@@ -408,6 +579,7 @@ pytest --cov=backend/app --cov-report=html
 ```
 
 ### Linting & formatting
+
 ```bash
 # From backend/
 black . --check  # Check formatting
@@ -418,6 +590,7 @@ mypy .           # Type checking
 ```
 
 ### Database migrations
+
 ```bash
 # From backend/
 alembic upgrade head      # Apply all migrations
@@ -428,6 +601,7 @@ alembic revision --autogenerate -m "description"  # Create new migration
 ```
 
 ### Run application
+
 ```bash
 # Start database
 docker-compose up -d
@@ -449,11 +623,13 @@ python -m http.server 5173
 ## Priority Action Plan (Next 2 Weeks)
 
 ### Week 1: Critical Infrastructure
+
 1. **Day 1**: Create `.env.example` and clean up backend root artifacts
 2. **Day 2-3**: Set up test infrastructure and write core tests
 3. **Day 4-5**: Create CI pipeline and linting configuration
 
 ### Week 2: Quality & Documentation
+
 1. **Day 1-2**: Run and fix validation issues, add more tests
 2. **Day 3-4**: Add API documentation and architecture diagram
 3. **Day 5**: Code cleanup and refactoring
@@ -461,6 +637,7 @@ python -m http.server 5173
 ---
 
 ## Marking progress
+
 - Check items as you complete them in this file and update the checklist accordingly.
 - Update the "Current Status" field for each item as work progresses.
 - If you'd like, I can scaffold any of the above (e.g., a starter test, CI workflow, or config files).
@@ -468,4 +645,5 @@ python -m http.server 5173
 ---
 
 ## Need Help?
+
 If you want me to scaffold any file (examples: `backend/.env.example`, starter tests, CI workflow, `pyproject.toml`), tell me which item to start with and I will prepare the complete implementation for you.

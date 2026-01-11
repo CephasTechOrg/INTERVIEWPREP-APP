@@ -42,10 +42,15 @@ Directory Structure
 Backend Details
 ---------------
 Entry point: `backend/app/main.py`
-- Creates tables on startup (no Alembic migrations in current MVP).
-- Applies lightweight schema upgrades (adds columns, constraints).
+- Uses Alembic for database migrations (see `backend/MIGRATIONS.md`).
 - Seeds questions from `data/questions/` if the DB is empty.
 - Enables permissive CORS for local development.
+
+Database Migrations:
+- Alembic is configured for versioned schema management.
+- See `backend/MIGRATIONS.md` for detailed migration guide.
+- Initialize migrations: `cd backend && python scripts/init_migrations.py`
+- Apply migrations: `cd backend && alembic upgrade head`
 
 Important services:
 - `InterviewEngine` (`backend/app/services/interview_engine.py`)

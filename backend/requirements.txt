@@ -5,6 +5,7 @@ uvicorn==0.34.0
 # Database
 SQLAlchemy==2.0.36
 psycopg2-binary==2.9.10
+alembic>=1.18.0
 
 # Validation & settings
 pydantic==2.10.4
@@ -26,3 +27,5 @@ python-multipart==0.0.20
 # Text-to-Speech
 elevenlabs>=1.0.0
 python-dotenv>=1.0.0
+
+

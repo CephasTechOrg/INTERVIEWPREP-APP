@@ -12,10 +12,26 @@ Tests cover:
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
+from jose import jwt
 
-from app.core.security import verify_password, create_access_token, decode_access_token
+from app.core.security import verify_password, create_access_token, hash_password
+from app.core.config import settings
 from app.crud import user as user_crud
 from app.schemas.auth import SignupRequest
+
+
+# Helper function for decoding tokens (since it doesn't exist in security.py)
+def decode_access_token(token: str):
+    try:
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
+        return payload
+    except Exception:
+        return None
+
+
+# Helper function for hashing (alias)
+def get_password_hash(password: str) -> str:
+    return hash_password(password)
 
 
 @pytest.mark.unit
@@ -148,8 +164,6 @@ class TestAuthentication:
     
     def test_password_hashing(self):
         """Test password is properly hashed."""
-        from app.core.security import get_password_hash
-        
         password = "TestPassword123!"
         hashed = get_password_hash(password)
         
@@ -171,12 +185,10 @@ class TestAuthentication:
     
     def test_jwt_token_expiration(self):
         """Test JWT token expiration."""
-        from datetime import timedelta
-        
-        # Create token with very short expiration
+        # Create token with very short expiration (using expires_minutes parameter)
         token = create_access_token(
             subject="test@example.com",
-            expires_delta=timedelta(seconds=-1)  # Already expired
+            expires_minutes=-1  # Already expired
         )
         
         # Should fail to decode expired token
