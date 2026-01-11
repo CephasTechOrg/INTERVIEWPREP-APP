@@ -28,15 +28,83 @@ def get_user_by_id(db, user_id: int):
     return db.query(User).filter(User.id == user_id).first()
 from app.crud.session import create_session, get_session, update_stage
 from app.crud.question import list_questions, get_question as get_question_by_id
-from app.crud.message import create_message, get_session_messages
-from app.crud.evaluation import create_evaluation, get_evaluation_by_session
-from app.schemas.user import UserCreate
-from app.schemas.session import SessionCreate
-from app.schemas.message import MessageCreate
-from app.schemas.evaluation import EvaluationCreate
+from app.crud.message import add_message, list_messages
+from app.crud.evaluation import upsert_evaluation, get_evaluation
+from app.schemas.auth import SignupRequest
+from app.schemas.session import CreateSessionRequest
+from app.schemas.message import SendMessageRequest
 from app.models.user import User
 from app.models.interview_session import InterviewSession
 from app.models.question import Question
+from pydantic import BaseModel
+
+
+# Define test-specific schemas that don't exist in the actual app
+class UserCreate(BaseModel):
+    """Test schema for creating users."""
+    email: str
+    password: str
+    full_name: str | None = None
+
+
+class SessionCreate(BaseModel):
+    """Test schema for creating sessions."""
+    track: str
+    company_style: str
+    difficulty: str
+
+
+class MessageCreate(BaseModel):
+    """Test schema for creating messages."""
+    role: str
+    content: str
+
+
+class EvaluationCreate(BaseModel):
+    """Test schema for creating evaluations."""
+    overall_score: int
+    technical_score: int
+    communication_score: int
+    problem_solving_score: int
+    strengths: list[str]
+    weaknesses: list[str]
+    summary: str
+    rubric_scores: dict
+
+
+# Helper aliases for message CRUD to match test expectations
+def create_message(db, message_data, session_id):
+    """Alias for add_message that accepts MessageCreate schema."""
+    return add_message(db, session_id, message_data.role, message_data.content)
+
+
+def get_session_messages(db, session_id):
+    """Alias for list_messages."""
+    return list_messages(db, session_id)
+
+
+# Helper aliases for evaluation CRUD to match test expectations
+def create_evaluation(db, evaluation_data, session_id):
+    """Alias for upsert_evaluation that accepts EvaluationCreate schema."""
+    return upsert_evaluation(
+        db,
+        session_id,
+        evaluation_data.overall_score,
+        evaluation_data.rubric_scores,
+        {
+            "technical_score": evaluation_data.technical_score,
+            "communication_score": evaluation_data.communication_score,
+            "problem_solving_score": evaluation_data.problem_solving_score,
+            "strengths": evaluation_data.strengths,
+            "weaknesses": evaluation_data.weaknesses,
+            "summary": evaluation_data.summary
+        }
+    )
+
+
+def get_evaluation_by_session(db, session_id):
+    """Alias for get_evaluation."""
+    return get_evaluation(db, session_id)
 
 
 @pytest.mark.unit
@@ -194,8 +262,7 @@ class TestQuestionCRUD:
         questions = list_questions(
             db,
             track=None,
-            company_style="general"
-            ,
+            company_style="general",
             difficulty=None
         )
         
