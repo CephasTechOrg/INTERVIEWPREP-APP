@@ -32,5 +32,5 @@ def get_current_user(db: Session = Depends(get_db), token: str = Depends(oauth2_
     if not user:
         raise HTTPException(status_code=401, detail="User not found.")
     if not getattr(user, "is_verified", False):
-        raise HTTPException(status_code=403, detail="Email not verified. Check your email for a verification token.")
+        raise HTTPException(status_code=403, detail="Email not verified. Use the 6-digit verification code.")
     return user

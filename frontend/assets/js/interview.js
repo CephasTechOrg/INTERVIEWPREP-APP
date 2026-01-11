@@ -732,6 +732,12 @@ function timeLabelFromDate(value) {
   }
 }
 
+function roleToSender(role) {
+  if (role === "interviewer") return "ai";
+  if (role === "student") return "user";
+  return "system";
+}
+
 function addMessage(text, sender, timeLabel = null) {
   const wrap = qs("#chatMessages");
   if (!wrap) return;
@@ -1593,7 +1599,7 @@ async function resumeSessionById(sessionId) {
       } else {
         // If the session never started, start it now so the user sees the first question.
         const first = await startInterview(id);
-        addMessage(first.content, "ai");
+        addMessage(first.content, roleToSender(first?.role));
         if (first?.current_question_id) {
           maybeUpdateCurrentQuestion(first.current_question_id).catch(() => {});
         }
@@ -1601,7 +1607,7 @@ async function resumeSessionById(sessionId) {
       }
     } else {
       msgs.forEach((m) => {
-        const sender = m.role === "interviewer" ? "ai" : m.role === "student" ? "user" : "system";
+        const sender = roleToSender(m.role);
         addMessage(m.content, sender, timeLabelFromDate(m.created_at));
       });
     }
@@ -1695,7 +1701,7 @@ async function handleStartFromDashboard() {
   qs("#chatMessages").innerHTML = "";
 
   const msg = await startInterview(s.id);
-  addMessage(msg.content, "ai");
+  addMessage(msg.content, roleToSender(msg?.role));
   maybeUpdateCurrentQuestion(msg.current_question_id).catch(() => {});
   refreshAiStatus().catch(() => {});
   setInlineStatus("Interview started. Reply with your approach and code.");

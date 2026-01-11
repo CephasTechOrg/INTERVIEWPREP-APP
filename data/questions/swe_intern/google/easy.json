@@ -4,203 +4,286 @@
   "difficulty": "easy",
   "questions": [
     {
-      "title": "Two Sum",
-      "prompt": "Given an array and a target, return indices of two numbers that add up to the target.",
-      "tags": ["arrays", "hashmap"],
+      "title": "Two Numbers That Add Up (Explain)",
+      "prompt": "Explain how you would find two numbers in a list that add up to a target, without writing full code.",
+      "tags": ["arrays", "logic", "fundamentals"],
       "followups": [
-        "Why does a hash map help?",
-        "Time complexity?",
-        "Edge cases?"
+        "Why might remembering previous numbers help?",
+        "Give a small example.",
+        "What edge case would you test?"
       ]
     },
     {
-      "title": "Reverse a String",
-      "prompt": "Reverse a string.",
-      "tags": ["strings", "two-pointers"],
+      "title": "Reverse a String (Steps)",
+      "prompt": "Explain step by step how you would reverse a string like \"google\".",
+      "tags": ["strings", "logic"],
       "followups": [
-        "In-place vs extra space?",
-        "Unicode?",
-        "Complexity?"
+        "Where would you start?",
+        "How do you know when to stop?",
+        "How do you verify the result?"
       ]
     },
     {
-      "title": "Valid Parentheses",
-      "prompt": "Determine if parentheses are valid.",
-      "tags": ["stack"],
+      "title": "Valid Parentheses (Idea Level)",
+      "prompt": "Explain how you would check if parentheses in a string are correctly matched.",
+      "tags": ["stack", "strings"],
       "followups": [
-        "Why stack?",
-        "Edge cases?",
-        "Complexity?"
+        "Why does order matter?",
+        "Give a valid and invalid example.",
+        "How would you explain this simply?"
       ]
     },
     {
-      "title": "Binary Search",
-      "prompt": "Search for a target in a sorted array.",
-      "tags": ["binary-search"],
+      "title": "Binary Search (Concept)",
+      "prompt": "Explain how binary search works on a sorted list, without writing code.",
+      "tags": ["binary-search", "fundamentals"],
       "followups": [
-        "Off-by-one errors?",
-        "Loop conditions?",
-        "Complexity?"
+        "Why must the list be sorted?",
+        "What does cutting the list in half mean?",
+        "Give a real-world example."
       ]
     },
     {
-      "title": "Max in Array",
-      "prompt": "Find the maximum value in an array.",
-      "tags": ["arrays"],
+      "title": "Find Maximum Value",
+      "prompt": "Explain how you would find the maximum value in a list of numbers.",
+      "tags": ["arrays", "logic"],
       "followups": [
-        "Empty input?",
-        "Single pass?",
-        "Time complexity?"
+        "How do you track the largest value?",
+        "What if the list has one number?",
+        "Why is this approach simple?"
       ]
     },
     {
-      "title": "Check Palindrome",
-      "prompt": "Check if a string is a palindrome.",
-      "tags": ["strings"],
+      "title": "Palindrome Check",
+      "prompt": "Explain how you would check if a word is a palindrome.",
+      "tags": ["strings", "logic"],
       "followups": [
-        "Ignore punctuation?",
-        "Case sensitivity?",
-        "Complexity?"
+        "Would case matter?",
+        "Why compare from both ends?",
+        "Give a simple example."
       ]
     },
     {
-      "title": "FizzBuzz",
-      "prompt": "Print numbers with FizzBuzz rules.",
-      "tags": ["fundamentals"],
+      "title": "FizzBuzz (Reasoning)",
+      "prompt": "Explain the rules of FizzBuzz and how you would solve it.",
+      "tags": ["fundamentals", "logic"],
       "followups": [
-        "Why is this useful?",
-        "Edge cases?",
-        "Clean code?"
+        "Why is this question asked?",
+        "What common mistake do beginners make?",
+        "How do you keep the code readable?"
       ]
     },
     {
-      "title": "Merge Two Sorted Arrays",
-      "prompt": "Merge two sorted arrays.",
-      "tags": ["arrays"],
+      "title": "Merge Two Sorted Arrays (High Level)",
+      "prompt": "Explain how you would merge two sorted arrays into one sorted array.",
+      "tags": ["arrays", "logic"],
       "followups": [
-        "In-place?",
-        "Complexity?",
-        "Edge cases?"
+        "What do you compare first?",
+        "What happens when one array finishes?",
+        "Give a small example."
       ]
     },
     {
-      "title": "Hash Map Basics",
-      "prompt": "Explain how a hash map works.",
-      "tags": ["hashmap"],
+      "title": "Hash Map (Basic Use)",
+      "prompt": "Explain what a hash map is and when it is useful.",
+      "tags": ["hashmap", "fundamentals"],
       "followups": [
-        "Collisions?",
-        "Complexity?",
-        "Real examples?"
+        "What is stored as the key and value?",
+        "Why is lookup fast?",
+        "Give a simple use case."
       ]
     },
     {
-      "title": "Recursion Basics",
-      "prompt": "Explain recursion with an example.",
-      "tags": ["recursion"],
+      "title": "Recursion (Basic Idea)",
+      "prompt": "Explain recursion using a simple example.",
+      "tags": ["recursion", "fundamentals"],
       "followups": [
-        "Base case?",
-        "Stack overflow?",
-        "Iterative alternative?"
+        "What is a base case?",
+        "What happens if there is no base case?",
+        "Why can recursion be risky?"
+      ]
+    },
+
+    {
+      "title": "Stacks (Practical Understanding)",
+      "prompt": "Explain what a stack is using a real-life example.",
+      "tags": ["stack", "fundamentals"],
+      "followups": [
+        "What does LIFO mean?",
+        "Where are stacks used?",
+        "Why are stacks useful?"
       ]
     },
     {
-      "title": "Stacks vs Queues",
-      "prompt": "Explain stacks and queues.",
-      "tags": ["stack", "queue"],
+      "title": "Queues (Practical Understanding)",
+      "prompt": "Explain what a queue is using a real-life example.",
+      "tags": ["queue", "fundamentals"],
       "followups": [
-        "Real-world usage?",
-        "Implementation?",
-        "Complexity?"
+        "What does FIFO mean?",
+        "Where are queues used?",
+        "How is this different from a stack?"
       ]
     },
     {
-      "title": "Array vs Linked List",
-      "prompt": "Compare arrays and linked lists.",
-      "tags": ["data-structures"],
+      "title": "Array vs Linked List (Simple Difference)",
+      "prompt": "Explain one main difference between arrays and linked lists.",
+      "tags": ["data-structures", "fundamentals"],
       "followups": [
-        "Memory layout?",
-        "Access speed?",
-        "Insertion?"
+        "Which is easier to use?",
+        "Which is more flexible?",
+        "Why does memory layout matter?"
       ]
     },
     {
-      "title": "Time Complexity Basics",
-      "prompt": "Explain Big-O notation.",
-      "tags": ["complexity"],
+      "title": "Big-O (Plain English)",
+      "prompt": "Explain what Big-O helps programmers understand, without formulas.",
+      "tags": ["complexity", "fundamentals"],
       "followups": [
-        "Examples?",
-        "Worst vs average?",
-        "Why it matters?"
+        "Why does performance matter?",
+        "Is faster always better?",
+        "When is a simple solution enough?"
       ]
     },
     {
-      "title": "Tree Traversals",
-      "prompt": "Explain preorder, inorder, postorder traversal.",
-      "tags": ["trees"],
+      "title": "Tree Traversal (High Level)",
+      "prompt": "Explain how you might visit all nodes in a tree.",
+      "tags": ["trees", "fundamentals"],
       "followups": [
-        "When to use each?",
-        "DFS relation?",
-        "Complexity?"
+        "What does visiting a node mean?",
+        "Why start at the root?",
+        "Where are trees used?"
       ]
     },
     {
-      "title": "Detect Duplicate",
-      "prompt": "Detect if an array contains duplicates.",
-      "tags": ["hashset"],
+      "title": "Detect Duplicates",
+      "prompt": "Explain how you would check if a list contains duplicate values.",
+      "tags": ["arrays", "hashset"],
       "followups": [
-        "Sorting alternative?",
-        "Complexity?",
-        "Memory trade-off?"
+        "Why does tracking seen values help?",
+        "What happens if the list is large?",
+        "Give a small example."
       ]
     },
     {
-      "title": "Reverse Linked List",
-      "prompt": "Reverse a singly linked list.",
-      "tags": ["linked-list"],
+      "title": "Reverse a Linked List (Concept)",
+      "prompt": "Explain the idea behind reversing a linked list.",
+      "tags": ["linked-list", "fundamentals"],
       "followups": [
-        "Pointer steps?",
-        "Recursive?",
-        "Edge cases?"
+        "Why do pointers matter?",
+        "What is one tricky part?",
+        "What edge case would you test?"
       ]
     },
     {
-      "title": "Graphs Basics",
-      "prompt": "What is a graph?",
-      "tags": ["graphs"],
+      "title": "Graph Basics",
+      "prompt": "Explain what a graph is using a real-world example.",
+      "tags": ["graphs", "fundamentals"],
       "followups": [
-        "Adjacency list vs matrix?",
-        "Examples?",
-        "Traversal?"
+        "What are nodes and edges?",
+        "Where are graphs used?",
+        "Why are graphs powerful?"
       ]
     },
     {
-      "title": "Testing Basics",
-      "prompt": "Explain unit testing.",
-      "tags": ["testing"],
+      "title": "Unit Testing (Purpose)",
+      "prompt": "Explain why developers write unit tests.",
+      "tags": ["testing", "fundamentals"],
       "followups": [
-        "Good tests?",
-        "Edge cases?",
-        "Automation?"
+        "What makes a good test?",
+        "Why automate tests?",
+        "What happens without tests?"
       ]
     },
     {
       "title": "Handling Errors",
-      "prompt": "How do you handle errors in code?",
-      "tags": ["fundamentals"],
+      "prompt": "Explain how you would handle errors in a simple program.",
+      "tags": ["fundamentals", "debugging"],
       "followups": [
-        "Exceptions?",
-        "Logging?",
-        "Fail fast?"
+        "Why not ignore errors?",
+        "What is an exception?",
+        "Why is logging useful?"
       ]
     },
+
+    {
+      "title": "Loops vs Recursion",
+      "prompt": "Explain one difference between loops and recursion.",
+      "tags": ["fundamentals"],
+      "followups": [
+        "Which is easier to understand?",
+        "When might recursion be risky?",
+        "Why do both exist?"
+      ]
+    },
+    {
+      "title": "Variables Scope",
+      "prompt": "Explain what variable scope means.",
+      "tags": ["fundamentals"],
+      "followups": [
+        "Why does scope matter?",
+        "What problems happen with global variables?",
+        "Give a simple example."
+      ]
+    },
+    {
+      "title": "Functions (Design)",
+      "prompt": "Explain why small functions are better than very large ones.",
+      "tags": ["functions", "fundamentals"],
+      "followups": [
+        "How do small functions help testing?",
+        "How do they help teamwork?",
+        "What happens with very large functions?"
+      ]
+    },
+    {
+      "title": "APIs (Basic Use)",
+      "prompt": "Explain how an app might use an API to get data.",
+      "tags": ["api", "fundamentals"],
+      "followups": [
+        "Why not store all data locally?",
+        "What kind of data might an API return?",
+        "Give an example you’ve seen."
+      ]
+    },
+    {
+      "title": "REST APIs (Simple)",
+      "prompt": "Explain what a REST API is using a simple example.",
+      "tags": ["api", "rest"],
+      "followups": [
+        "What does GET do?",
+        "What does POST do?",
+        "Why is REST common?"
+      ]
+    },
+    {
+      "title": "Frontend vs Backend",
+      "prompt": "Explain how frontend and backend work together in an app.",
+      "tags": ["web", "fundamentals"],
+      "followups": [
+        "Which part handles user input?",
+        "Which part handles data?",
+        "How do they communicate?"
+      ]
+    },
+    {
+      "title": "Debugging Mindset",
+      "prompt": "Your code does not work. Explain how you would start debugging.",
+      "tags": ["debugging", "fundamentals"],
+      "followups": [
+        "Why start small?",
+        "What tools help?",
+        "When do you ask for help?"
+      ]
+    },
+
     {
       "title": "Why Google?",
       "prompt": "Why do you want to intern at Google?",
       "tags": ["behavioral"],
       "followups": [
-        "Favorite Google product?",
-        "Problem-solving culture?",
-        "Learning goals?"
+        "What Google product do you like?",
+        "What excites you about problem solving?",
+        "What do you want to learn at Google?"
       ]
     }
   ]

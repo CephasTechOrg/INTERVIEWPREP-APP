@@ -52,13 +52,6 @@ def _apply_pool_state(db: Session, session, pool: dict) -> None:
     state["pool"] = pool
     session.skill_state = state
 
-    if pool.get("status") != "empty":
-        eff = pool.get("effective_difficulty")
-        if isinstance(eff, str):
-            eff_norm = eff.strip().lower()
-            if eff_norm in ("easy", "medium", "hard"):
-                session.difficulty_current = eff_norm
-
     db.add(session)
     db.commit()
     db.refresh(session)

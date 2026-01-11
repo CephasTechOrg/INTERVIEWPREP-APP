@@ -12,7 +12,7 @@ async function handleSignup(e) {
 
   setNotice("#signup_notice", "Creating account...", "");
   try {
-    await apiFetch("/auth/signup", {
+    const data = await apiFetch("/auth/signup", {
       method: "POST",
       auth: false,
       body: { email, password, full_name: full_name || null },
@@ -39,9 +39,10 @@ async function handleSignup(e) {
         })
       );
     } catch {}
-    setNotice("#signup_notice", "Account created. Check your email or console for the token.", "ok");
+    setNotice("#signup_notice", data?.message || "Verification code sent. Check your email.", "ok");
     if (qs("#ver_email")) qs("#ver_email").value = email;
     showView("verify");
+    focusVerificationInputs();
   } catch (err) {
     setNotice("#signup_notice", err.message, "error");
   }
@@ -94,7 +95,7 @@ async function handleLogin(e) {
       if (qs("#ver_email")) qs("#ver_email").value = email;
       showView("verify");
       if (email) {
-        setNotice("#verify_notice", "Sending verification email...", "");
+        setNotice("#verify_notice", "Sending verification code...", "");
         handleResend().catch(() => {});
       }
     }
@@ -129,6 +130,7 @@ function showView(viewName) {
     const index = viewName === "signup" ? 1 : 0;
     indicator.style.transform = `translateX(${index * 100}%)`;
   }
+  if (viewName === "verify") focusVerificationInputs();
 }
 
 function showLoginOverlay(show = true) {
@@ -137,14 +139,93 @@ function showLoginOverlay(show = true) {
   overlay.classList.toggle("hidden", !show);
 }
 
+function focusVerificationInputs() {
+  const first = qs("#verifyCodeInputs .code-input");
+  if (first) first.focus();
+}
+
+function readVerificationCode() {
+  const inputs = qsa("#verifyCodeInputs .code-input");
+  if (!inputs.length) return "";
+  return inputs.map((i) => (i.value || "").trim()).join("").replace(/\D/g, "");
+}
+
+function setupVerificationInputs() {
+  const inputs = qsa("#verifyCodeInputs .code-input");
+  if (!inputs.length) return;
+
+  const fillFrom = (start, digits) => {
+    let idx = start;
+    for (const ch of digits) {
+      if (idx >= inputs.length) break;
+      inputs[idx].value = ch;
+      idx += 1;
+    }
+    const focusIdx = Math.min(idx, inputs.length) - 1;
+    if (focusIdx >= 0) inputs[focusIdx].focus();
+  };
+
+  inputs.forEach((input, index) => {
+    input.addEventListener("input", () => {
+      const digits = input.value.replace(/\D/g, "");
+      if (!digits) {
+        input.value = "";
+        return;
+      }
+      if (digits.length === 1) {
+        input.value = digits;
+        if (index < inputs.length - 1) inputs[index + 1].focus();
+        return;
+      }
+      fillFrom(index, digits);
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Backspace" && !input.value && index > 0) {
+        inputs[index - 1].value = "";
+        inputs[index - 1].focus();
+      }
+      if (e.key === "ArrowLeft" && index > 0) {
+        inputs[index - 1].focus();
+      }
+      if (e.key === "ArrowRight" && index < inputs.length - 1) {
+        inputs[index + 1].focus();
+      }
+    });
+
+    input.addEventListener("paste", (e) => {
+      const text = (e.clipboardData || window.clipboardData).getData("text");
+      const digits = String(text || "").replace(/\D/g, "");
+      if (!digits) return;
+      e.preventDefault();
+      fillFrom(index, digits);
+    });
+  });
+}
+
 async function handleVerify(e) {
   e.preventDefault();
-  const token = qs("#ver_token")?.value.trim();
-  if (!token) return;
+  const email = qs("#ver_email")?.value.trim();
+  const code = readVerificationCode();
+  if (!email) {
+    setNotice("#verify_notice", "Enter your email first.", "error");
+    return;
+  }
+  if (code.length !== 6) {
+    setNotice("#verify_notice", "Enter the 6-digit code.", "error");
+    return;
+  }
   setNotice("#verify_notice", "Verifying...", "");
   try {
-    await apiFetch("/auth/verify", { method: "POST", auth: false, body: { token } });
-    setNotice("#verify_notice", "Email verified!", "ok");
+    const data = await apiFetch("/auth/verify", {
+      method: "POST",
+      auth: false,
+      body: { email, code },
+    });
+    setToken(data.access_token);
+    setNotice("#verify_notice", "Verified. Signing you in...", "ok");
+    showLoginOverlay(true);
+    setTimeout(() => (window.location.href = "./interview.html"), 450);
   } catch (err) {
     setNotice("#verify_notice", err.message, "error");
   }
@@ -156,10 +237,10 @@ async function handleResend() {
     setNotice("#verify_notice", "Enter email to resend.", "error");
     return;
   }
-  setNotice("#verify_notice", "Sending verification...", "");
+  setNotice("#verify_notice", "Sending verification code...", "");
   try {
     await apiFetch("/auth/resend-verification", { method: "POST", auth: false, body: { email } });
-    setNotice("#verify_notice", "Verification email sent (or printed in console).", "ok");
+    setNotice("#verify_notice", "Verification code sent (or printed in console).", "ok");
   } catch (err) {
     setNotice("#verify_notice", err.message, "error");
   }
@@ -200,6 +281,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const resendBtn = qs("#btn_resend");
   const resetReqForm = qs("#reset_request_form");
   const resetForm = qs("#reset_form");
+
+  setupVerificationInputs();
 
   if (suForm) suForm.addEventListener("submit", handleSignup);
   if (liForm) liForm.addEventListener("submit", handleLogin);
@@ -253,6 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (requestedView === "verify") {
     if (qs("#ver_email") && lastEmail) qs("#ver_email").value = lastEmail;
     showView("verify");
+    focusVerificationInputs();
     return;
   }
   if (requestedView === "reset") {

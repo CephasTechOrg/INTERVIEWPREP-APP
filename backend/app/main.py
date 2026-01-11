@@ -21,6 +21,7 @@ from app.models.message import Message  # noqa: F401
 from app.models.evaluation import Evaluation  # noqa: F401
 from app.models.session_question import SessionQuestion  # noqa: F401
 from app.models.user_question_seen import UserQuestionSeen  # noqa: F401
+from app.models.pending_signup import PendingSignup  # noqa: F401
 from app.core.constants import ALLOWED_COMPANY_STYLES, ALLOWED_DIFFICULTIES, ALLOWED_TRACKS
 
 app = FastAPI(title=settings.APP_NAME)

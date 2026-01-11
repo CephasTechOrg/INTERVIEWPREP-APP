@@ -283,6 +283,31 @@
       transform: translateY(-50%);
       color: var(--text-muted);
     }
+
+    .code-inputs {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .code-input {
+      height: 50px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--dark);
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 0.02em;
+      transition: var(--transition);
+    }
+
+    .code-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+    }
     
     .auth-grid {
       display: grid;
@@ -645,7 +670,7 @@
           
           <div class="form-actions">
             <button class="btn btn-outline btn-full" type="button" id="btn_resend">
-              <i class="fas fa-paper-plane"></i> Send verification token
+              <i class="fas fa-paper-plane"></i> Send verification code
             </button>
           </div>
           
@@ -655,8 +680,15 @@
           
           <form id="verify_form" class="stacked">
             <div class="form-group">
-              <label class="form-label">Verification token</label>
-              <input id="ver_token" class="form-control" type="text" placeholder="Paste verification token" required/>
+              <label class="form-label">6-digit verification code</label>
+              <div class="code-inputs" id="verifyCodeInputs">
+                <input class="code-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="one-time-code" aria-label="Digit 1"/>
+                <input class="code-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 2"/>
+                <input class="code-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 3"/>
+                <input class="code-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 4"/>
+                <input class="code-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 5"/>
+                <input class="code-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 6"/>
+              </div>
             </div>
             
             <div class="form-actions">

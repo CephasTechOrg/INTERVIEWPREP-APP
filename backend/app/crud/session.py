@@ -10,10 +10,8 @@ from app.models.session_question import SessionQuestion
 
 def _initial_difficulty_current(difficulty: str) -> str:
     d = (difficulty or "").strip().lower()
-    if d == "hard":
-        return "medium"
-    if d == "medium":
-        return "easy"
+    if d in ("easy", "medium", "hard"):
+        return d
     return "easy"
 
 

@@ -6,17 +6,54 @@ from datetime import datetime, timedelta, timezone
 import secrets
 
 
+def _generate_verification_code() -> str:
+    return f"{secrets.randbelow(1000000):06d}"
+
+
 def get_by_email(db: Session, email: str) -> User | None:
     return db.query(User).filter(User.email == email).first()
 
 
-def create_user(db: Session, email: str, password: str, full_name: str | None) -> User:
-    token = secrets.token_urlsafe(32)
+def create_user(
+    db: Session,
+    email: str,
+    password: str,
+    full_name: str | None,
+    is_verified: bool = False,
+    verification_code: str | None = None,
+) -> User:
+    token = None
+    if not is_verified:
+        token = verification_code or _generate_verification_code()
     user = User(
         email=email,
         full_name=full_name,
         password_hash=hash_password(password),
-        is_verified=False,
+        is_verified=is_verified,
+        verification_token=token,
+    )
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    return user
+
+
+def create_user_from_hash(
+    db: Session,
+    email: str,
+    password_hash: str,
+    full_name: str | None,
+    is_verified: bool = True,
+    verification_code: str | None = None,
+) -> User:
+    token = None
+    if not is_verified:
+        token = verification_code or _generate_verification_code()
+    user = User(
+        email=email,
+        full_name=full_name,
+        password_hash=password_hash,
+        is_verified=is_verified,
         verification_token=token,
     )
     db.add(user)
@@ -39,7 +76,7 @@ def authenticate(db: Session, email: str, password: str) -> User | None:
 
 
 def set_verification_token(db: Session, user: User) -> str:
-    token = secrets.token_urlsafe(32)
+    token = _generate_verification_code()
     user.verification_token = token
     db.add(user)
     db.commit()
@@ -47,8 +84,8 @@ def set_verification_token(db: Session, user: User) -> str:
     return token
 
 
-def verify_user(db: Session, token: str) -> User | None:
-    user = db.query(User).filter(User.verification_token == token).first()
+def verify_user(db: Session, email: str, code: str) -> User | None:
+    user = db.query(User).filter(User.email == email, User.verification_token == code).first()
     if not user:
         return None
     user.is_verified = True

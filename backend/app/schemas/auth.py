@@ -7,6 +7,11 @@ class SignupRequest(BaseModel):
     full_name: str | None = None
 
 
+class SignupResponse(BaseModel):
+    ok: bool = True
+    message: str | None = None
+
+
 class LoginRequest(BaseModel):
     email: EmailStr
     password: str
@@ -18,7 +23,8 @@ class TokenResponse(BaseModel):
 
 
 class VerifyRequest(BaseModel):
-    token: str
+    email: EmailStr
+    code: str
 
 
 class ResendVerificationRequest(BaseModel):

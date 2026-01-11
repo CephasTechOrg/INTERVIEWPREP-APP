@@ -248,37 +248,12 @@ class InterviewEngine:
 
     def _adaptive_difficulty_try_order(self, session: InterviewSession) -> list[str]:
         """
-        Which technical difficulties to try, in order, bounded by the user's selected cap.
-
-        We start from `difficulty_current`, try easier fallbacks, then (if needed) try
-        harder values up to the cap (to avoid "no questions found" when a dataset is sparse).
+        Use only the user's selected difficulty (no cross-difficulty fallback).
         """
-        cap_rank = self._difficulty_rank(getattr(session, "difficulty", "easy"))
-        cap_override = self._pool_cap_override(session)
-        if cap_override:
-            cap_rank = max(cap_rank, self._difficulty_rank(cap_override))
-        cur_rank = self._difficulty_rank(getattr(session, "difficulty_current", "easy"))
-        cur_rank = min(cur_rank, cap_rank)
-
-        ranks: list[int] = [cur_rank]
-        for r in range(cur_rank - 1, -1, -1):
-            ranks.append(r)
-        for r in range(cur_rank + 1, cap_rank + 1):
-            ranks.append(r)
-
-        seen: set[int] = set()
-        out: list[str] = []
-        for r in ranks:
-            if r in seen:
-                continue
-            seen.add(r)
-            out.append(self._rank_to_difficulty(r))
-        allowed = self._pool_allowed_difficulties(session)
-        if allowed:
-            filtered = [d for d in out if d in allowed]
-            if filtered:
-                return filtered
-        return out
+        diff = (getattr(session, "difficulty", None) or "easy").strip().lower()
+        if diff not in ("easy", "medium", "hard"):
+            diff = "easy"
+        return [diff]
 
     def _skill_last_overall(self, session: InterviewSession) -> float | None:
         state = session.skill_state if isinstance(getattr(session, "skill_state", None), dict) else None
@@ -392,38 +367,18 @@ class InterviewEngine:
 
     def _maybe_bump_difficulty_current(self, db: Session, session: InterviewSession) -> None:
         """
-        Adaptive difficulty: start at easy, increase on strong streaks, decrease after repeated struggles.
+        Adaptive difficulty: start at the user's selected difficulty, increase on strong streaks,
+        decrease after repeated struggles.
         """
-        cap_rank = self._difficulty_rank(getattr(session, "difficulty", "easy"))
-        cur_rank = self._difficulty_rank(getattr(session, "difficulty_current", "easy"))
-        cur_rank = min(cur_rank, cap_rank)
-        if session.current_question_id:
-            try:
-                q_prev = question_crud.get_question(db, session.current_question_id)
-            except Exception:
-                q_prev = None
-            if q_prev and self._is_behavioral(q_prev):
-                return
-        last_overall = self._skill_last_overall(session)
-        if last_overall is None:
-            return
-
-        good_streak, weak_streak = self._skill_streaks(session)
-        new_rank = cur_rank
-        if weak_streak >= 2 and cur_rank > 0:
-            new_rank = cur_rank - 1
-        elif good_streak >= 2:
-            if cur_rank == 0 and cap_rank >= 1 and last_overall >= 8.0:
-                new_rank = 1
-            elif cur_rank == 1 and cap_rank >= 2 and last_overall >= 9.0:
-                new_rank = 2
-
-        if new_rank != cur_rank:
-            session.difficulty_current = self._rank_to_difficulty(new_rank)
-            self._reset_streaks(session)
+        selected = (getattr(session, "difficulty", None) or "easy").strip().lower()
+        if selected not in ("easy", "medium", "hard"):
+            selected = "easy"
+        if getattr(session, "difficulty_current", None) != selected:
+            session.difficulty_current = selected
             db.add(session)
             db.commit()
             db.refresh(session)
+        return
 
     def _is_behavioral(self, q: Question) -> bool:
         try:
@@ -1792,7 +1747,7 @@ class InterviewEngine:
         if q_b2:
             return q_b2
 
-        diff = getattr(session, "difficulty_current", None) or session.difficulty
+        diff = session.difficulty
         company_style = self._effective_company_style(session)
         return question_crud.pick_next_question(db, session.track, company_style, diff)
 
@@ -2107,6 +2062,11 @@ Question context: {title}. {prompt}
         min_questions = 5
 
         if not q:
+            # Clear stale question so we can pick a new one.
+            session.current_question_id = None
+            db.add(session)
+            db.commit()
+            db.refresh(session)
             return await self.ensure_question_and_intro(db, session, user_name=user_name)
 
         if stage in ("followups", "candidate_solution") and self._max_followups_reached(session):
