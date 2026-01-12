@@ -22,4 +22,3 @@ def mark_question_asked(db: Session, session_id: int, question_id: int) -> Sessi
 def list_asked_question_ids(db: Session, session_id: int) -> list[int]:
     rows = db.query(SessionQuestion.question_id).filter(SessionQuestion.session_id == session_id).all()
     return [r[0] for r in rows]
-

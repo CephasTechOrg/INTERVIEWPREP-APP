@@ -1,6 +1,5 @@
 import smtplib
 from email.mime.text import MIMEText
-from typing import Optional
 
 from app.core.config import settings
 

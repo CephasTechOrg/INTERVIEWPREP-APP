@@ -1,5 +1,5 @@
-from datetime import datetime, timedelta, timezone
 import secrets
+from datetime import UTC, datetime, timedelta
 
 from sqlalchemy.orm import Session
 
@@ -22,7 +22,7 @@ def upsert_pending_signup(
     expires_minutes: int = 30,
 ) -> tuple[PendingSignup, str]:
     code = _generate_verification_code()
-    expires_at = datetime.now(timezone.utc) + timedelta(minutes=expires_minutes)
+    expires_at = datetime.now(UTC) + timedelta(minutes=expires_minutes)
     existing = get_by_email(db, email)
     if existing:
         existing.password_hash = password_hash
@@ -52,7 +52,7 @@ def verify_pending(db: Session, email: str, code: str) -> PendingSignup | None:
     if not pending or pending.verification_code != code:
         return None
     if pending.expires_at:
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         if pending.expires_at < now:
             return None
     return pending

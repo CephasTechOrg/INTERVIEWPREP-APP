@@ -172,7 +172,9 @@ def interviewer_controller_user_prompt(
     signal_block = f"\nSignals: {signal_summary}\n" if signal_summary else ""
     missing_block = f"Missing focus: {missing_focus}\n" if missing_focus else ""
     skill_block = f"Skill summary: {skill_summary}\n" if skill_summary else ""
-    behavioral_block = "Behavioral focus: ensure STAR (Situation, Task, Action, Result) and outcomes.\n" if is_behavioral else ""
+    behavioral_block = (
+        "Behavioral focus: ensure STAR (Situation, Task, Action, Result) and outcomes.\n" if is_behavioral else ""
+    )
 
     return f"""
 Current stage: {stage}

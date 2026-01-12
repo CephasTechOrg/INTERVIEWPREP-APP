@@ -12,16 +12,17 @@ Usage:
     python scripts/init_migrations.py
 """
 
-import sys
 import subprocess
+import sys
 from pathlib import Path
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from sqlalchemy import text
-from app.db.session import engine
+
 from app.core.config import settings
+from app.db.session import engine
 
 
 def check_database_connection():
@@ -46,12 +47,7 @@ def check_alembic_installed():
     """Check if Alembic is installed."""
     print("\n🔍 Checking if Alembic is installed...")
     try:
-        result = subprocess.run(
-            ["alembic", "--version"],
-            capture_output=True,
-            text=True,
-            check=True
-        )
+        result = subprocess.run(["alembic", "--version"], capture_output=True, text=True, check=True)
         print(f"✅ Alembic installed: {result.stdout.strip()}")
         return True
     except (subprocess.CalledProcessError, FileNotFoundError):
@@ -66,7 +62,7 @@ def check_existing_migrations():
     versions_dir = Path(__file__).resolve().parents[1] / "alembic" / "versions"
     migrations = list(versions_dir.glob("*.py"))
     migrations = [m for m in migrations if m.name != "__pycache__"]
-    
+
     if migrations:
         print(f"\n⚠️  Found {len(migrations)} existing migration(s):")
         for migration in migrations:
@@ -84,7 +80,7 @@ def create_initial_migration():
             capture_output=True,
             text=True,
             check=True,
-            cwd=Path(__file__).resolve().parents[1]
+            cwd=Path(__file__).resolve().parents[1],
         )
         print("✅ Initial migration created")
         print(result.stdout)
@@ -105,7 +101,7 @@ def apply_migration():
             capture_output=True,
             text=True,
             check=True,
-            cwd=Path(__file__).resolve().parents[1]
+            cwd=Path(__file__).resolve().parents[1],
         )
         print("✅ Migration applied successfully")
         print(result.stdout)
@@ -122,11 +118,7 @@ def verify_migration():
     print("\n🔍 Verifying migration...")
     try:
         result = subprocess.run(
-            ["alembic", "current"],
-            capture_output=True,
-            text=True,
-            check=True,
-            cwd=Path(__file__).resolve().parents[1]
+            ["alembic", "current"], capture_output=True, text=True, check=True, cwd=Path(__file__).resolve().parents[1]
         )
         print("✅ Current migration status:")
         print(result.stdout)
@@ -142,39 +134,39 @@ def main():
     print("=" * 60)
     print("InterviewPrep-App: Alembic Migration Initialization")
     print("=" * 60)
-    
+
     # Step 1: Check database connection
     if not check_database_connection():
         sys.exit(1)
-    
+
     # Step 2: Check Alembic installation
     if not check_alembic_installed():
         sys.exit(1)
-    
+
     # Step 3: Check for existing migrations
     if check_existing_migrations():
         response = input("\n⚠️  Migrations already exist. Continue anyway? (y/N): ")
-        if response.lower() != 'y':
+        if response.lower() != "y":
             print("Aborted.")
             sys.exit(0)
-    
+
     # Step 4: Create initial migration
     if not create_initial_migration():
         sys.exit(1)
-    
+
     # Step 5: Ask user if they want to apply the migration
     print("\n" + "=" * 60)
     response = input("Apply migration to database now? (Y/n): ")
-    if response.lower() != 'n':
+    if response.lower() != "n":
         if not apply_migration():
             sys.exit(1)
-        
+
         # Step 6: Verify migration
         verify_migration()
     else:
         print("\nMigration created but not applied.")
         print("To apply later, run: alembic upgrade head")
-    
+
     print("\n" + "=" * 60)
     print("✅ Alembic setup complete!")
     print("=" * 60)

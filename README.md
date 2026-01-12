@@ -139,23 +139,137 @@ Optional (email):
 
 Note: The backend always loads `backend/.env` directly (even if you run from the repo root).
 
+Development Setup
+-----------------
+This project uses professional development tools for code quality, testing, and database management.
+
+### Pre-commit Hooks
+Pre-commit hooks automatically check and fix code quality issues before commits.
+
+**Installation:**
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+**What it does:**
+- **Black**: Formats Python code consistently
+- **Ruff**: Fast Python linter and fixer (replaces flake8, isort, etc.)
+- **MyPy**: Static type checking
+- **Question validation**: Ensures question datasets are valid
+- **Pytest**: Runs fast unit tests (Linux/macOS only, skipped on Windows)
+
+**Manual run:**
+```bash
+pre-commit run --all-files
+```
+
+### Database Migrations (Alembic)
+The project uses Alembic for versioned database schema management.
+
+**Initialize database:**
+```bash
+cd backend
+python scripts/init_migrations.py  # Creates initial migration
+alembic upgrade head              # Applies all migrations
+```
+
+**Migration commands:**
+```bash
+cd backend
+
+# Create new migration after schema changes
+alembic revision --autogenerate -m "description"
+
+# Apply migrations
+alembic upgrade head
+
+# Check current migration status
+alembic current
+
+# View migration history
+alembic history
+```
+
+**Important:** Always run migrations before starting the backend.
+
+### Testing (Pytest)
+Comprehensive test suite covering backend functionality.
+
+**Run tests:**
+```bash
+cd backend
+
+# Run all tests
+pytest
+
+# Run specific test categories
+pytest -m unit          # Unit tests only
+pytest -m integration   # Integration tests
+pytest -m "not slow"    # Skip slow tests
+
+# Run with coverage
+pytest --cov=app --cov-report=html
+
+# Run specific test file
+pytest tests/test_api_endpoints.py
+```
+
+**Test structure:**
+- `tests/test_api_endpoints.py` - API endpoint tests
+- `tests/test_interview_engine.py` - Interview logic tests
+- `tests/test_llm_client.py` - LLM integration tests
+- `tests/test_auth.py` - Authentication tests
+- `tests/test_crud.py` - Database CRUD tests
+
+### CI/CD Pipeline
+GitHub Actions automatically runs quality checks on every push and pull request.
+
+**What it checks:**
+- **Code formatting** with Black
+- **Linting** with Ruff
+- **Type checking** with MyPy
+- **Database migrations** status
+- **Question dataset validation**
+- **Test execution** with coverage reporting
+- **Security scanning** with bandit
+- **Frontend validation**
+
+**View CI results:**
+- Go to the "Actions" tab in GitHub
+- Click on the latest workflow run
+- Check test results and coverage reports
+
 Run Locally
 -----------
-1) Start Postgres:
+1) **Development Setup (One-time):**
+   - Install development dependencies: `pip install pre-commit`
+   - Set up pre-commit hooks: `pre-commit install`
+
+2) **Start Database:**
    - `docker-compose up -d`
 
-2) Backend:
+3) **Initialize Database (First time only):**
+   - `cd backend`
+   - `python scripts/init_migrations.py`  # Creates initial migration
+   - `alembic upgrade head`               # Applies migrations
+
+4) **Backend:**
    - `cd backend`
    - `python -m venv .venv`
    - Windows: `.\.venv\Scripts\activate`
    - macOS/Linux: `source .venv/bin/activate`
    - `pip install -r requirements.txt`
+   - `pip install -r requirements-dev.txt`  # For development tools
    - `uvicorn app.main:app --reload`
 
-3) Frontend:
+5) **Frontend:**
    - `cd frontend`
    - `python -m http.server 5173`
    - Open `http://127.0.0.1:5173/login.html`
+
+6) **Run Tests (Optional):**
+   - `cd backend && pytest`  # Run test suite
 
 Data and Questions
 ------------------

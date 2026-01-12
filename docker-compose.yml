@@ -1,4 +1,4 @@
-# version: '1.0'
+version: '3.8'
 services:
   db:
     image: postgres:16
@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "${HOST_DB_PORT:-5432}:${POSTGRES_PORT}" 
+      - "${HOST_DB_PORT:-5432}:${POSTGRES_PORT}"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:

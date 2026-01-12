@@ -1,12 +1,12 @@
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from jose import jwt, JWTError
+from jose import JWTError, jwt
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.core.security import ALGORITHM
-from app.db.session import SessionLocal
 from app.crud.user import get_by_email
+from app.db.session import SessionLocal
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
 

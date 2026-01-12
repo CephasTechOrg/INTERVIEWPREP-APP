@@ -1,29 +1,31 @@
+import contextlib
+
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_db
 from app.api.rate_limit import rate_limit
-from app.core.security import create_access_token, hash_password
 from app.core.email import send_email
+from app.core.security import create_access_token, hash_password
 from app.crud import pending_signup as pending_signup_crud
 from app.crud.user import (
     authenticate,
-    get_by_email,
     create_user_from_hash,
+    get_by_email,
+    reset_password,
+    set_reset_token,
     set_verification_token,
     verify_user,
-    set_reset_token,
-    reset_password,
 )
 from app.schemas.auth import (
-    SignupRequest,
-    SignupResponse,
     LoginRequest,
-    TokenResponse,
-    VerifyRequest,
+    PerformResetRequest,
     ResendVerificationRequest,
     ResetRequest,
-    PerformResetRequest,
+    SignupRequest,
+    SignupResponse,
+    TokenResponse,
+    VerifyRequest,
 )
 from app.utils.audit import log_audit
 
@@ -43,7 +45,7 @@ def signup(payload: SignupRequest, request: Request, db: Session = Depends(get_d
         password_hash=password_hash,
         full_name=payload.full_name,
     )
-    try:
+    with contextlib.suppress(Exception):
         send_email(
             email,
             "Verify your email",
@@ -53,8 +55,6 @@ def signup(payload: SignupRequest, request: Request, db: Session = Depends(get_d
                 "This code expires in 30 minutes."
             ),
         )
-    except Exception:
-        pass
     log_audit(db, "signup_pending", user_id=None, metadata={"email": email}, request=request)
     return SignupResponse(ok=True, message="Verification code sent. Enter the 6-digit code to finish signup.")
 
@@ -126,18 +126,12 @@ def resend_verification(payload: ResendVerificationRequest, request: Request, db
             password_hash=pending.password_hash,
             full_name=pending.full_name,
         )
-        try:
+        with contextlib.suppress(Exception):
             send_email(
                 email,
                 "Verify your email",
-                (
-                    "Use this 6-digit code to finish your signup:\n\n"
-                    f"{code}\n\n"
-                    "This code expires in 30 minutes."
-                ),
+                ("Use this 6-digit code to finish your signup:\n\n" f"{code}\n\n" "This code expires in 30 minutes."),
             )
-        except Exception:
-            pass
         log_audit(db, "resend_verification", user_id=None, metadata={"email": email}, request=request)
         return {"ok": True}
 
@@ -147,18 +141,12 @@ def resend_verification(payload: ResendVerificationRequest, request: Request, db
     if user.is_verified:
         raise HTTPException(status_code=400, detail="Email already verified. Please sign in.")
     token = set_verification_token(db, user)
-    try:
+    with contextlib.suppress(Exception):
         send_email(
             user.email,
             "Verify your email",
-            (
-                "Use this 6-digit code to verify your account:\n\n"
-                f"{token}\n\n"
-                "This code expires in 30 minutes."
-            ),
+            ("Use this 6-digit code to verify your account:\n\n" f"{token}\n\n" "This code expires in 30 minutes."),
         )
-    except Exception:
-        pass
     log_audit(db, "resend_verification", user_id=user.id, metadata={"email": user.email}, request=request)
     return {"ok": True}
 
@@ -171,14 +159,12 @@ def request_password_reset(payload: ResetRequest, request: Request, db: Session 
         # do not reveal existence
         return {"ok": True}
     token = set_reset_token(db, user)
-    try:
+    with contextlib.suppress(Exception):
         send_email(
             user.email,
             "Reset your password",
             f"Use this token to reset your password:\n\n{token}\n\nToken expires in 30 minutes.",
         )
-    except Exception:
-        pass
     log_audit(db, "request_password_reset", user_id=user.id, metadata={"email": user.email}, request=request)
     return {"ok": True}
 

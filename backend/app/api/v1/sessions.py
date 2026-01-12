@@ -3,18 +3,18 @@ import logging
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_db, get_current_user
-from app.crud import session as session_crud
-from app.schemas.session import CreateSessionRequest, SessionOut, SessionSummaryOut
-from app.schemas.message import SendMessageRequest, MessageOut, MessageHistoryOut
-from app.services.interview_engine import InterviewEngine
+from app.api.deps import get_current_user, get_db
 from app.core.constants import ALLOWED_COMPANY_STYLES, ALLOWED_DIFFICULTIES, ALLOWED_TRACKS
-from app.services.scoring_engine import ScoringEngine
-from app.services.llm_client import LLMClientError
-from app.crud.message import list_messages
-from app.crud.evaluation import get_evaluation
 from app.crud import message as message_crud
 from app.crud import question as question_crud
+from app.crud import session as session_crud
+from app.crud.evaluation import get_evaluation
+from app.crud.message import list_messages
+from app.schemas.message import MessageHistoryOut, MessageOut, SendMessageRequest
+from app.schemas.session import CreateSessionRequest, SessionOut, SessionSummaryOut
+from app.services.interview_engine import InterviewEngine
+from app.services.llm_client import LLMClientError
+from app.services.scoring_engine import ScoringEngine
 
 router = APIRouter(prefix="/sessions")
 
@@ -167,7 +167,9 @@ async def start_session(session_id: int, db: Session = Depends(get_db), user=Dep
 
 
 @router.post("/{session_id}/message", response_model=MessageOut)
-async def send_message(session_id: int, payload: SendMessageRequest, db: Session = Depends(get_db), user=Depends(get_current_user)):
+async def send_message(
+    session_id: int, payload: SendMessageRequest, db: Session = Depends(get_db), user=Depends(get_current_user)
+):
     s = session_crud.get_session(db, session_id)
     if not s or s.user_id != user.id:
         raise HTTPException(status_code=404, detail="Session not found.")

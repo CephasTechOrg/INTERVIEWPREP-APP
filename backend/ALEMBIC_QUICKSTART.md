@@ -70,10 +70,10 @@ alembic current
    ```bash
    # Apply
    alembic upgrade head
-   
+
    # Test rollback
    alembic downgrade -1
-   
+
    # Re-apply
    alembic upgrade head
    ```

@@ -1,9 +1,10 @@
+import secrets
+from datetime import UTC, datetime, timedelta
+
 from sqlalchemy.orm import Session
 
 from app.core.security import hash_password, verify_password
 from app.models.user import User
-from datetime import datetime, timedelta, timezone
-import secrets
 
 
 def _generate_verification_code() -> str:
@@ -68,7 +69,7 @@ def authenticate(db: Session, email: str, password: str) -> User | None:
         return None
     if not verify_password(password, user.password_hash):
         return None
-    user.last_login_at = datetime.now(timezone.utc)
+    user.last_login_at = datetime.now(UTC)
     db.add(user)
     db.commit()
     db.refresh(user)
@@ -99,7 +100,7 @@ def verify_user(db: Session, email: str, code: str) -> User | None:
 def set_reset_token(db: Session, user: User, expires_minutes: int = 30) -> str:
     token = secrets.token_urlsafe(32)
     user.reset_token = token
-    user.reset_token_expires_at = datetime.now(timezone.utc) + timedelta(minutes=expires_minutes)
+    user.reset_token_expires_at = datetime.now(UTC) + timedelta(minutes=expires_minutes)
     db.add(user)
     db.commit()
     db.refresh(user)
@@ -107,10 +108,10 @@ def set_reset_token(db: Session, user: User, expires_minutes: int = 30) -> str:
 
 
 def reset_password(db: Session, token: str, new_password: str) -> User | None:
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     user = (
         db.query(User)
-        .filter(User.reset_token == token, User.reset_token_expires_at != None, User.reset_token_expires_at > now)
+        .filter(User.reset_token == token, User.reset_token_expires_at is not None, User.reset_token_expires_at > now)
         .first()
     )
     if not user:

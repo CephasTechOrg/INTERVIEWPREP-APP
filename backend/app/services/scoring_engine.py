@@ -1,7 +1,7 @@
 import logging
 
-from sqlalchemy.orm import Session
 from pydantic import ValidationError
+from sqlalchemy.orm import Session
 
 from app.crud import evaluation as evaluation_crud
 from app.crud import message as message_crud

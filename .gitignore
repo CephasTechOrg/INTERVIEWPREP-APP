@@ -10,3 +10,20 @@ __pycache__/
 
 # TODO List
 todo.md
+
+# Dev Setup docs
+SETUP_COMPLETE.md
+
+# Database
+*.db
+*.db-journal
+
+# Pytest cache
+.pytest_cache/
+
+# Ruff cache
+.ruff_cache/
+
+
+# pre-commit for dev
+.pre-commit-config.yaml

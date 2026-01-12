@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_db, get_current_user
-from app.crud.question import list_questions, get_question, count_questions
-from app.schemas.question import QuestionOut, QuestionCoverageOut
+from app.api.deps import get_current_user, get_db
 from app.core.constants import ALLOWED_COMPANY_STYLES, ALLOWED_DIFFICULTIES, ALLOWED_TRACKS
+from app.crud.question import count_questions, get_question, list_questions
+from app.schemas.question import QuestionCoverageOut, QuestionOut
 
 router = APIRouter(prefix="/questions")
 

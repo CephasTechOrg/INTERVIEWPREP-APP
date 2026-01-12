@@ -1,3 +1,4 @@
+import contextlib
 import random
 import re
 from typing import Any
@@ -14,16 +15,16 @@ from app.models.interview_session import InterviewSession
 from app.models.question import Question
 from app.models.session_question import SessionQuestion
 from app.models.user_question_seen import UserQuestionSeen
+from app.services import interview_warmup
 from app.services.llm_client import DeepSeekClient, LLMClientError
 from app.services.llm_schemas import InterviewControllerOutput
-from app.services import interview_warmup
 from app.services.prompt_templates import (
     interviewer_controller_system_prompt,
     interviewer_controller_user_prompt,
     interviewer_system_prompt,
-    warmup_system_prompt,
     warmup_prompt_user_prompt,
     warmup_reply_user_prompt,
+    warmup_system_prompt,
 )
 
 
@@ -265,10 +266,8 @@ class InterviewEngine:
 
         vals: list[int] = []
         for k in self._RUBRIC_KEYS:
-            try:
+            with contextlib.suppress(Exception):
                 vals.append(int(last.get(k)))
-            except Exception:
-                pass
         if not vals:
             return None
         return sum(vals) / len(vals)
@@ -392,10 +391,7 @@ class InterviewEngine:
         Priority: explicit question_type (if set) else tags/track inference.
         """
         raw = getattr(q, "question_type", None)
-        if raw:
-            qt = str(raw).strip().lower()
-        else:
-            qt = ""
+        qt = str(raw).strip().lower() if raw else ""
         if qt and qt != "coding":
             return qt
 
@@ -430,12 +426,7 @@ class InterviewEngine:
 
     def _render_text(self, session: InterviewSession, text: str) -> str:
         company = self._company_name(session.company_style)
-        return (
-            (text or "")
-            .replace("{company}", company)
-            .replace("X company", company)
-            .replace("X Company", company)
-        )
+        return (text or "").replace("{company}", company).replace("X company", company).replace("X Company", company)
 
     def _render_question(self, session: InterviewSession, q: Question) -> tuple[str, str]:
         return self._render_text(session, q.title), self._render_text(session, q.prompt)
@@ -485,9 +476,7 @@ class InterviewEngine:
         }
         if len(tokens) <= 2:
             return True
-        if len(tokens) <= 4 and all(t in short for t in tokens):
-            return True
-        return False
+        return bool(len(tokens) <= 4 and all(t in short for t in tokens))
 
     def _is_vague(self, text: str) -> bool:
         tokens = self._clean_tokens(text)
@@ -600,9 +589,7 @@ class InterviewEngine:
             "mentions_edge_cases",
             "mentions_tradeoffs",
         ]
-        if any(signals.get(k) for k in content_signals):
-            return False
-        return True
+        return not any(signals.get(k) for k in content_signals)
 
     def _sanitize_ai_text(self, text: str | None) -> str:
         if not text:
@@ -610,8 +597,8 @@ class InterviewEngine:
         replacements = {
             "\u2019": "'",
             "\u2018": "'",
-            "\u201c": "\"",
-            "\u201d": "\"",
+            "\u201c": '"',
+            "\u201d": '"',
             "\u2014": "--",
             "\u2013": "-",
             "\u2026": "...",
@@ -695,7 +682,19 @@ class InterviewEngine:
         t = self._normalize_text(text)
         return self._contains_any(
             t,
-            ["approach", "algorithm", "strategy", "plan", "idea", "i would", "we can", "i will", "i can", "use a", "use an"],
+            [
+                "approach",
+                "algorithm",
+                "strategy",
+                "plan",
+                "idea",
+                "i would",
+                "we can",
+                "i will",
+                "i can",
+                "use a",
+                "use an",
+            ],
         )
 
     def _mentions_tradeoffs(self, text: str | None) -> bool:
@@ -800,9 +799,7 @@ class InterviewEngine:
             prefer = "complexity"
         elif weakest == "correctness_reasoning":
             prefer = "correctness"
-        elif weakest == "problem_solving":
-            prefer = "approach"
-        elif weakest == "communication":
+        elif weakest == "problem_solving" or weakest == "communication":
             prefer = "approach"
         if prefer and prefer in missing:
             return [prefer] + [m for m in missing if m != prefer]
@@ -870,10 +867,7 @@ class InterviewEngine:
         if is_behavioral:
             if behavioral_missing:
                 parts = ", ".join(behavioral_missing[:2])
-                return (
-                    "I want to make sure I understood. Can you briefly add the "
-                    f"{parts} and the outcome?"
-                )
+                return "I want to make sure I understood. Can you briefly add the " f"{parts} and the outcome?"
             return "Can you frame that with STAR (Situation, Task, Action, Result) and the outcome?"
 
         focus_bits = []
@@ -1237,10 +1231,8 @@ class InterviewEngine:
 
         q = self._pick_warmup_behavioral_question(db, session)
         if q:
-            try:
+            with contextlib.suppress(Exception):
                 self._set_warmup_behavioral_question_id(db, session, q.id)
-            except Exception:
-                pass
             title, prompt = self._render_question(session, q)
             return self._combine_question_text(title, prompt), q.id
 
@@ -1260,18 +1252,16 @@ class InterviewEngine:
             return "Thanks for sharing. Let's move into the technical interview."
         return "Thanks. Let's move into the technical interview."
 
-    def _mark_warmup_behavioral_asked(self, db: Session, session: InterviewSession, question_id: int | None = None) -> None:
+    def _mark_warmup_behavioral_asked(
+        self, db: Session, session: InterviewSession, question_id: int | None = None
+    ) -> None:
         qid = question_id or self._warmup_behavioral_question_id(session)
         if not qid:
             return
-        try:
+        with contextlib.suppress(Exception):
             session_question_crud.mark_question_asked(db, session.id, int(qid))
-        except Exception:
-            pass
-        try:
+        with contextlib.suppress(Exception):
             user_question_seen_crud.mark_question_seen(db, session.user_id, int(qid))
-        except Exception:
-            pass
 
     def _last_interviewer_message(self, db: Session, session_id: int) -> str | None:
         msgs = message_crud.list_messages(db, session_id, limit=200)
@@ -1378,7 +1368,9 @@ class InterviewEngine:
         plan = state.get("plan")
         return plan if isinstance(plan, dict) else {}
 
-    def _system_design_slots(self, session: InterviewSession, max_questions: int, behavioral_slots: set[int]) -> set[int]:
+    def _system_design_slots(
+        self, session: InterviewSession, max_questions: int, behavioral_slots: set[int]
+    ) -> set[int]:
         track = (session.track or "").strip().lower()
         if track != "swe_engineer":
             return set()
@@ -1435,10 +1427,8 @@ class InterviewEngine:
             db.commit()
             db.refresh(session)
         except Exception:
-            try:
+            with contextlib.suppress(Exception):
                 db.rollback()
-            except Exception:
-                pass
         return plan
 
     def _desired_tech_type_for_slot(self, plan: dict, slot_num: int) -> str | None:
@@ -1595,7 +1585,9 @@ class InterviewEngine:
                 return tags
         return set()
 
-    def _pick_next_behavioral_question(self, db: Session, session: InterviewSession, asked_ids: set[int]) -> Question | None:
+    def _pick_next_behavioral_question(
+        self, db: Session, session: InterviewSession, asked_ids: set[int]
+    ) -> Question | None:
         base = db.query(Question).filter(
             Question.tags_csv.ilike("%behavioral%"),
             Question.company_style.in_([session.company_style, "general"]),
@@ -1643,10 +1635,7 @@ class InterviewEngine:
                 focus_overlap = len(cand_tags & focus_tags) if focus_tags else 0
                 diversity_bonus = len(cand_tags - used_tags) if used_tags else len(cand_tags)
                 last_overlap = len(cand_tags & last_tags) if last_tags else 0
-                if cand_tags:
-                    avg_freq = sum(tag_counts.get(t, 0) for t in cand_tags) / float(len(cand_tags))
-                else:
-                    avg_freq = 0.0
+                avg_freq = sum(tag_counts.get(t, 0) for t in cand_tags) / float(len(cand_tags)) if cand_tags else 0.0
                 rarity_bonus = 1.0 / (1.0 + avg_freq)
                 seen_penalty = 1.4 if cand.id in seen_ids else 0.0
 
@@ -1825,10 +1814,8 @@ Question context: {title}. {prompt}
             return wrap
 
         # Adaptive difficulty: adjust for the next technical question if appropriate.
-        try:
+        with contextlib.suppress(Exception):
             self._maybe_bump_difficulty_current(db, session)
-        except Exception:
-            pass
 
         next_q = self._pick_next_main_question(db, session)
         if not next_q:
@@ -1839,10 +1826,8 @@ Question context: {title}. {prompt}
 
         self._reset_for_new_question(db, session, next_q.id)
         session_question_crud.mark_question_asked(db, session.id, next_q.id)
-        try:
+        with contextlib.suppress(Exception):
             user_question_seen_crud.mark_question_seen(db, session.user_id, next_q.id)
-        except Exception:
-            pass
         self._increment_questions_asked(db, session)
         if preface is None:
             preface = self._transition_preface(session)
@@ -1903,10 +1888,8 @@ Question context: {title}. {prompt}
 
             self._reset_for_new_question(db, session, q.id)
             session_question_crud.mark_question_asked(db, session.id, q.id)
-            try:
+            with contextlib.suppress(Exception):
                 user_question_seen_crud.mark_question_seen(db, session.user_id, q.id)
-            except Exception:
-                pass
             self._increment_questions_asked(db, session)
 
             sys = interviewer_system_prompt(session.company_style, session.role)
@@ -1966,7 +1949,9 @@ Question context: {title}. {prompt}
         session_crud.update_stage(db, session, "candidate_solution")
         return reply
 
-    async def handle_student_message(self, db: Session, session: InterviewSession, student_text: str, user_name: str | None = None) -> str:
+    async def handle_student_message(
+        self, db: Session, session: InterviewSession, student_text: str, user_name: str | None = None
+    ) -> str:
         """
         Store student message and decide next interviewer reply.
         Order of operations:
@@ -1984,10 +1969,8 @@ Question context: {title}. {prompt}
             focus = self._extract_focus(student_text)
             has_focus = bool(focus.get("dimensions") or focus.get("tags"))
             if has_focus:
-                try:
+                with contextlib.suppress(Exception):
                     self._store_focus(db, session, focus)
-                except Exception:
-                    pass
             preface = self._warmup_behavioral_ack(student_text)
             interview_warmup.set_state(db, session, max(warm_step, 2), True)
             session_crud.update_stage(db, session, "warmup_done")
@@ -1998,10 +1981,8 @@ Question context: {title}. {prompt}
             focus = self._extract_focus(student_text)
             has_focus = bool(focus.get("dimensions") or focus.get("tags"))
             if has_focus:
-                try:
+                with contextlib.suppress(Exception):
                     self._store_focus(db, session, focus)
-                except Exception:
-                    pass
 
             if warm_step <= 0:
                 msg = await self._warmup_prompt(session, user_name=user_name)
@@ -2224,10 +2205,8 @@ Question context: {title}. {prompt}
 
         # Store rolling rubric (used later for adaptive difficulty and weakness targeting).
         if student_text and student_text.strip():
-            try:
+            with contextlib.suppress(Exception):
                 self._update_skill_state(db, session, quick_rubric_raw, is_behavioral=self._is_behavioral(q))
-            except Exception:
-                pass
 
         if intent == "WRAP_UP":
             action = "WRAP_UP"
@@ -2262,19 +2241,21 @@ Question context: {title}. {prompt}
             if focus_key:
                 message = self._missing_focus_question(focus_key, behavioral_missing) or ""
 
-        if not message:
-            if isinstance(getattr(q, "followups", None), list) and q.followups:
-                idx = int(session.followups_used or 0)
-                if 0 <= idx < len(q.followups):
-                    message = self._render_text(session, str(q.followups[idx]).strip())
+        if not message and isinstance(getattr(q, "followups", None), list) and q.followups:
+            idx = int(session.followups_used or 0)
+            if 0 <= idx < len(q.followups):
+                message = self._render_text(session, str(q.followups[idx]).strip())
 
         if not message:
-            message = self._phase_followup(
-                q,
-                signals,
-                session,
-                int(session.followups_used or 0),
-            ) or ""
+            message = (
+                self._phase_followup(
+                    q,
+                    signals,
+                    session,
+                    int(session.followups_used or 0),
+                )
+                or ""
+            )
 
         if not message:
             missing_line = f"Missing focus: {missing_focus}" if missing_focus else ""

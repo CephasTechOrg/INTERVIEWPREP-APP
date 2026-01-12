@@ -4,27 +4,27 @@
   --primary-dark: #3a56d4;
   --primary-light: #4895ef;
   --primary-ultralight: #f0f4ff;
-  
+
   --secondary: #7209b7;
   --secondary-dark: #560bad;
   --secondary-light: #b5179e;
-  
+
   --success: #2ecc71;
   --success-dark: #27ae60;
   --success-light: #d5f4e6;
-  
+
   --warning: #f39c12;
   --warning-dark: #e67e22;
   --warning-light: #fef3cd;
-  
+
   --danger: #e74c3c;
   --danger-dark: #c0392b;
   --danger-light: #fde8e6;
-  
+
   --info: #3498db;
   --info-dark: #2980b9;
   --info-light: #e3f2fd;
-  
+
   /* Neutral Colors */
   --dark: #1a1d29;
   --dark-light: #2d3348;
@@ -35,27 +35,27 @@
   --light-gray: #f7fafc;
   --border: #e2e8f0;
   --border-light: #edf2f7;
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --shadow-xl: 0 20px 50px -12px rgba(0, 0, 0, 0.25);
   --shadow-primary: 0 10px 30px rgba(67, 97, 238, 0.2);
-  
+
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #4361ee, #4895ef);
   --gradient-success: linear-gradient(135deg, #2ecc71, #27ae60);
   --gradient-warning: linear-gradient(135deg, #f39c12, #e67e22);
   --gradient-danger: linear-gradient(135deg, #e74c3c, #c0392b);
-  
+
   /* Border Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-full: 9999px;
-  
+
   /* Transitions */
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-fast: all 0.15s ease;

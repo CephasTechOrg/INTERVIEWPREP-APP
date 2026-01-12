@@ -1,10 +1,12 @@
-from sqlalchemy.orm import Session
-from sqlalchemy import desc
+import contextlib
 
-from app.models.interview_session import InterviewSession
+from sqlalchemy import desc
+from sqlalchemy.orm import Session
+
 from app.crud import user_question_seen as user_question_seen_crud
-from app.models.message import Message
 from app.models.evaluation import Evaluation
+from app.models.interview_session import InterviewSession
+from app.models.message import Message
 from app.models.session_question import SessionQuestion
 
 
@@ -26,10 +28,8 @@ def create_session(
 ) -> InterviewSession:
     # Ensure historical sessions contribute to "seen questions" so new sessions
     # don't repeatedly start with the same prompt.
-    try:
+    with contextlib.suppress(Exception):
         user_question_seen_crud.backfill_user_seen_questions(db, user_id=user_id)
-    except Exception:
-        pass
 
     behavioral_target = max(0, min(int(behavioral_questions_target or 0), 3))
 

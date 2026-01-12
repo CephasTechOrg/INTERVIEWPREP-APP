@@ -1,13 +1,14 @@
-from pathlib import Path
+import contextlib
 import logging
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.router import router as v1_router
 from app.core.config import settings
-from app.db.session import SessionLocal
 from app.db.init_db import load_questions_from_folder
+from app.db.session import SessionLocal
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +30,7 @@ app.include_router(v1_router)
 def _startup_init_db() -> None:
     """
     Startup hook: Load questions from data/questions/ if DB is empty.
-    
+
     Note: Database schema is now managed by Alembic migrations.
     Run 'alembic upgrade head' before starting the application.
     """
@@ -46,10 +47,8 @@ def _startup_init_db() -> None:
         if settings.ENV == "dev":
             logger.warning(f"Question seeding skipped: {e}")
     finally:
-        try:
+        with contextlib.suppress(Exception):
             db.close()
-        except Exception:
-            pass
 
 
 @app.get("/health")

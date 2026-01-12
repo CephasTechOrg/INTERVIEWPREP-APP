@@ -27,5 +27,3 @@ python-multipart==0.0.20
 # Text-to-Speech
 elevenlabs>=1.0.0
 python-dotenv>=1.0.0
-
-

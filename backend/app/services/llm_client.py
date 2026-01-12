@@ -1,9 +1,10 @@
 import asyncio
-import httpx
 import json
 import logging
 import random
 import time
+
+import httpx
 
 from app.core.config import settings
 
@@ -12,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 class LLMClientError(RuntimeError):
     """Raised when an LLM call fails in a way the app should surface gracefully."""
+
     pass
 
 
@@ -101,7 +103,9 @@ class DeepSeekClient:
                 async with httpx.AsyncClient(timeout=self.timeout) as client:
                     r = await client.post(url, headers=headers, json=payload)
                 elapsed_ms = (time.perf_counter() - start) * 1000.0
-                logger.info("DeepSeek chat attempt=%s status=%s elapsed_ms=%.1f", attempt + 1, r.status_code, elapsed_ms)
+                logger.info(
+                    "DeepSeek chat attempt=%s status=%s elapsed_ms=%.1f", attempt + 1, r.status_code, elapsed_ms
+                )
 
                 if r.status_code < 400:
                     return r
@@ -127,7 +131,7 @@ class DeepSeekClient:
         if self.backoff <= 0:
             return 0.0
         jitter = random.random() * 0.25
-        return (self.backoff * (2 ** attempt)) + jitter
+        return (self.backoff * (2**attempt)) + jitter
 
     async def chat(self, system_prompt: str, user_prompt: str, history: list[dict] | None = None) -> str:
         if not self.api_key:

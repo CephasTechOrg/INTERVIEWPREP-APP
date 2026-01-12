@@ -12,10 +12,4 @@ def add_message(db: Session, session_id: int, role: str, content: str) -> Messag
 
 
 def list_messages(db: Session, session_id: int, limit: int = 40) -> list[Message]:
-    return (
-        db.query(Message)
-        .filter(Message.session_id == session_id)
-        .order_by(Message.id.asc())
-        .limit(limit)
-        .all()
-    )
+    return db.query(Message).filter(Message.session_id == session_id).order_by(Message.id.asc()).limit(limit).all()

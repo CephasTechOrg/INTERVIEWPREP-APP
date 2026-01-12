@@ -92,16 +92,16 @@ alembic revision -m "add default data"
 ### For New Features
 
 1. **Modify Models**: Update SQLAlchemy models in `app/models/`
-2. **Generate Migration**: 
+2. **Generate Migration**:
    ```bash
    alembic revision --autogenerate -m "add new_column to users"
    ```
 3. **Review Migration**: Check the generated file in `alembic/versions/`
-4. **Test Migration**: 
+4. **Test Migration**:
    ```bash
    alembic upgrade head
    ```
-5. **Test Rollback**: 
+5. **Test Rollback**:
    ```bash
    alembic downgrade -1
    alembic upgrade head
@@ -166,7 +166,7 @@ import sqlalchemy as sa
 def upgrade():
     # Insert default data
     op.execute("""
-        INSERT INTO roles (name, description) 
+        INSERT INTO roles (name, description)
         VALUES ('admin', 'Administrator role')
     """)
 
@@ -240,7 +240,7 @@ Add to your CI pipeline:
   run: |
     cd backend
     alembic upgrade head
-    
+
 - name: Test rollback
   run: |
     cd backend

@@ -1,9 +1,9 @@
+import contextlib
 import logging
 import os
 import time
 from io import BytesIO
 from pathlib import Path
-from typing import Tuple
 
 from dotenv import load_dotenv
 
@@ -61,14 +61,12 @@ def _consume_audio_stream(audio) -> bytes:
                 except Exception:
                     continue
     finally:
-        try:
+        with contextlib.suppress(Exception):
             buf.seek(0)
-        except Exception:
-            pass
     return buf.getvalue()
 
 
-def elevenlabs_tts(text: str) -> Tuple[bytes | None, str]:
+def elevenlabs_tts(text: str) -> tuple[bytes | None, str]:
     """
     Convert text to speech using ElevenLabs. Returns (audio_bytes, content_type).
     Raises on errors; caller handles fallback.
@@ -118,7 +116,7 @@ def elevenlabs_tts(text: str) -> Tuple[bytes | None, str]:
             return audio_bytes, "audio/mpeg"
         except Exception as e:  # noqa: BLE001
             last_err = e
-            elapsed = (time.perf_counter() - start)
+            elapsed = time.perf_counter() - start
             logger.exception(
                 "ElevenLabs TTS attempt %s/%s failed after %.1f ms (voice=%s, model=%s, format=%s): %s",
                 idx + 1,

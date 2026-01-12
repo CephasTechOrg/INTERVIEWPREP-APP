@@ -1,8 +1,8 @@
-from sqlalchemy.orm import Session
 from sqlalchemy import and_, func
+from sqlalchemy.orm import Session
 
-from app.models.question import Question
 from app.crud.session_question import list_asked_question_ids
+from app.models.question import Question
 
 
 def list_questions(db: Session, track: str | None, company_style: str | None, difficulty: str | None) -> list[Question]:
@@ -45,13 +45,10 @@ def pick_next_unseen_question(
     difficulty: str,
 ) -> Question | None:
     asked_ids = set(list_asked_question_ids(db, session_id))
-    q = (
-        db.query(Question)
-        .filter(
-            Question.track == track,
-            Question.company_style == company_style,
-            Question.difficulty == difficulty,
-        )
+    q = db.query(Question).filter(
+        Question.track == track,
+        Question.company_style == company_style,
+        Question.difficulty == difficulty,
     )
     if asked_ids:
         q = q.filter(~Question.id.in_(asked_ids))
@@ -116,9 +113,7 @@ def preflight_question_pool(db: Session, track: str, company_style: str, difficu
     company_total = sum(company_counts.values())
     general_total = sum(general_counts.values())
 
-    available_difficulties = [
-        diff for diff in DIFFICULTY_ORDER if (company_counts[diff] + general_counts[diff]) > 0
-    ]
+    available_difficulties = [diff for diff in DIFFICULTY_ORDER if (company_counts[diff] + general_counts[diff]) > 0]
 
     requested_rank = _difficulty_rank(d)
     cap_rank = requested_rank

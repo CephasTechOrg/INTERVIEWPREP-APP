@@ -280,10 +280,10 @@ def test_service_processes_data_correctly():
     # Arrange
     service = SomeService()
     input_data = {"key": "value"}
-    
+
     # Act
     result = service.process(input_data)
-    
+
     # Assert
     assert result["status"] == "success"
     assert "processed" in result
@@ -308,10 +308,10 @@ def test_create_user_in_database(db: Session):
         password="SecurePass123!",
         full_name="Test User"
     )
-    
+
     # Act
     user = create_user(db, user_data)
-    
+
     # Assert
     assert user.id is not None
     assert user.email == "test@example.com"
@@ -329,7 +329,7 @@ def test_api_endpoint_returns_data(client: TestClient, auth_headers):
     """Test API endpoint returns expected data."""
     # Act
     response = client.get("/api/v1/sessions", headers=auth_headers)
-    
+
     # Assert
     assert response.status_code == 200
     data = response.json()
@@ -350,14 +350,14 @@ async def test_llm_client_handles_timeout():
     """Test LLM client handles timeout gracefully."""
     import httpx
     from app.services.llm_client import DeepSeekClient, LLMClientError
-    
+
     # Arrange
     respx.post("https://api.deepseek.com/chat/completions").mock(
         side_effect=httpx.TimeoutException("Request timeout")
     )
-    
+
     client = DeepSeekClient()
-    
+
     # Act & Assert
     with pytest.raises(LLMClientError):
         await client.chat_completion(messages=[{"role": "user", "content": "test"}])
@@ -449,7 +449,7 @@ def test_with_logging(caplog):
     with caplog.at_level(logging.INFO):
         # Your test code
         pass
-    
+
     assert "expected log message" in caplog.text
 ```
 
@@ -467,26 +467,26 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-    
+
     - name: Install dependencies
       run: |
         cd backend
         pip install -r requirements.txt
         pip install -r requirements-dev.txt
-    
+
     - name: Run tests with coverage
       run: |
         cd backend
         pytest --cov=app --cov-report=xml --cov-report=term-missing
-    
+
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:

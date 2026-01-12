@@ -1,0 +1,68 @@
+# Pre-commit hooks for code quality
+# Install: pip install pre-commit
+# Setup: pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^backend/alembic/versions/
+      - id: end-of-file-fixer
+        exclude: ^backend/alembic/versions/
+      - id: check-yaml
+        args: ["--unsafe"] # Allow custom tags in docker-compose
+      - id: check-added-large-files
+        args: ["--maxkb=1000"]
+      - id: check-json
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: mixed-line-ending
+
+  - repo: https://github.com/psf/black
+    rev: 24.1.1
+    hooks:
+      - id: black
+        language_version: python3.11
+        files: ^backend/
+        exclude: ^backend/alembic/versions/
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.15
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+        files: ^backend/
+        exclude: ^backend/alembic/versions/
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        files: ^backend/app/
+        exclude: ^backend/(tests|alembic|crud)/
+        additional_dependencies:
+          - types-requests
+          - types-python-jose
+          - pydantic
+        args: [--ignore-missing-imports, --no-strict-optional]
+
+  - repo: local
+    hooks:
+      - id: validate-questions
+        name: Validate Question Datasets
+        entry: python scripts/validate_questions.py
+        language: system
+        pass_filenames: false
+        files: ^data/questions/.*\.json$
+        stages: [pre-commit]
+
+      # - id: pytest-check
+      #   name: Run Fast Tests
+      #   entry: bash -c 'cd backend && pytest -m "unit and not slow" --tb=short'
+      #   language: system
+      #   skip:
+      #     - id: pytest-check
+      #       if: 'sys.platform == "win32"'

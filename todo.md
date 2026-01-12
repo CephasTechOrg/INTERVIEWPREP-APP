@@ -1,649 +1,514 @@
-# Emergency Recovery Plan — after unintended pull overwrite (2026-01-11)
-
-Context
-- A collaborator’s pull overwrote local updates, causing breakages, especially in backend/app/main.py (startup schema patch block is corrupted and brittle).
-- Do NOT ship further code changes until recovery is completed and verified.
-
-Immediate Recovery Options (choose one)
-1) Recover prior local state via Git reflog (preferred)
-   - Commands:
-     ```bash
-     # Show recent HEAD positions
-     git reflog
-
-     # Create a safety branch at the pre-pull state (replace <HASH> with the commit/HEAD you want)
-     git checkout -b recovery/<date>-pre-pull <HASH>
-
-     # Inspect differences to current work
-     git diff main...HEAD -- backend/app/main.py
-
-     # Option A: cherry-pick specific commits you authored back onto main (or a new branch)
-     git checkout main
-     git checkout -b hotfix/recover-after-pull
-     git cherry-pick <COMMIT1> <COMMIT2> ...
-
-     # Option B: if you want to fully reset main to the last good state (only if safe)
-     git branch backup/main-before-reset
-     git reset --hard <GOOD_HASH>
-     ```
-   - Acceptance:
-     - The recovered branch contains your lost local updates.
-     - You can open a PR from hotfix/recover-after-pull to main with your restored changes.
-
-2) Minimal hotfix to unblock local dev (temporary)
-   - Create a new branch:
-     ```bash
-     git checkout -b hotfix/main-startup
-     ```
-   - In backend/app/main.py: temporarily disable the malformed “schema upgrade”/DO block that runs in startup (keep only Base.metadata.create_all in dev, or better: rely on Alembic).
-   - Objective is to start the API locally while a proper migration is prepared.
-   - Acceptance:
-     - uvicorn boots, GET /health returns {"status":"ok"}.
-     - No startup crash due to invalid SQL blocks.
-
-Definitive Fix for backend/app/main.py (replace runtime patching with Alembic)
-- Problem: The startup-time SQL block is corrupted (undefined vars, malformed DO, stray END IF). Runtime schema patching is brittle.
-- Required actions:
-  1) Make Alembic migrations the single source of truth.
-  2) Remove all runtime schema-alter SQL from app startup.
-  3) Keep only safe, idempotent tasks (e.g., optional question seeding).
-- Steps:
-  ```bash
-  cd backend
-  # Ensure alembic is configured (alembic.ini, alembic/env.py)
-  alembic revision --autogenerate -m "initial schema"
-  alembic upgrade head
-  ```
-- Acceptance:
-  - From a clean DB, `alembic upgrade head` produces the schema.
-  - App startup does not alter schema dynamically.
-
-Tests Alignment (to resolve current import error)
-- Current error: tests/test_crud.py imports get_questions_by_filters which does not exist in app.crud.question (code exposes list_questions and get_question).
-- Choose one:
-  - A) Update tests to import and use list_questions(...) and get_question(...).
-  - B) Add a thin wrapper in code:
-    ```python
-    # app/crud/question.py
-    def get_questions_by_filters(db, track=None, company_style=None, difficulty=None, **_):
-        return list_questions(db, track, company_style, difficulty)
-    ```
-- Acceptance:
-  - `cd backend && pytest -q` collects tests without import errors.
-
-Compose and Env sanity
-- docker-compose.yml:
-  - Replace ambiguous port mapping with explicit:
-    - "5432:5432" or "${HOST_DB_PORT:-5432}:5432"
-- backend/.env.example:
-  - Add variables: SECRET_KEY, DATABASE_URL, DEEPSEEK_API_KEY, DEEPSEEK_* knobs, ELEVENLABS_* knobs, TTS_TIMEOUT_SECONDS, TTS_SOFT_TIMEOUT_MS, SMTP_*.
-
-Verification Checklist (post-fix)
-- Backend boots:
-  - uvicorn app.main:app --reload
-  - GET http://127.0.0.1:8000/health -> {"status":"ok"}
-- Database:
-  - `alembic upgrade head` on a clean DB completes without error.
-- Tests:
-  - `cd backend && pytest -q` collects and runs without import errors.
-- Data:
-  - `python scripts/validate_questions.py` passes (and with --strict in CI).
-- Frontend:
-  - API_BASE in frontend/assets/js/api.js points to 127.0.0.1:8000/api/v1 for local testing.
-
-Prevention (process hardening)
-- Protect main with branch rules; require PRs, CI green, and at least one review.
-- Add CI workflow to run: validate_questions, pytest, ruff/black, mypy, and Alembic status check (alembic current == head).
-- Encourage feature branches and frequent commits to avoid losing local work.
-
-If you want, I can script the reflog recovery flow and prepare the exact cherry-pick commands once you share your desired baseline commit.
-
-# Review Update — Findings and Pending Details (2026-01-11)
-
-Summary of pending details
-
-- Migrations not authoritative: backend/app/main.py still performs runtime schema patching with a corrupted DO block; replace with Alembic-only migrations and remove runtime ALTER statements.
-- Alembic: env.py exists, but ensure Alembic is the single source of truth (generate initial migration from models; document “alembic upgrade head” before first run).
-- Docker Compose: current mapping uses ${HOST_DB_PORT:-5432}:${POSTGRES_PORT}; ensure POSTGRES_PORT is set to 5432 or map to 5432 explicitly. Consider adding a backend service container wired to db.
-- Missing .env.example: backend/.env.example should document required/optional variables (SECRET*KEY, DATABASE_URL, DEEPSEEK*_, ELEVENLABS\__, TTS*\*, SMTP*\*), with safe example values and comments.
-- Testing status: backend tests exist and collect, but there is 1 remaining import error:
-  - tests/test_crud.py imports get_questions_by_filters (not present); code exposes list_questions and get_question. Align tests or add thin wrappers in code.
-  - Running pytest from repo root triggers mark warnings (pytest.ini is in backend/). Either run from backend/ or duplicate pytest.ini at root.
-  - TTS path is function-based (elevenlabs_tts/default_tts); tests should avoid non-existent classes.
-- Logging and CORS: replace print with structured logging; keep CORS \* only for dev, restrict in prod.
-- CI: no workflow defined; add a basic pipeline to execute lint, format checks, validate_questions, pytest, and alembic status check.
-
-Actionable updates to this TODO
-
-- Make migrations authoritative (Pending)
-  - Remove runtime schema patching in app.main; rely on Alembic only.
-  - Acceptance: alembic upgrade head from clean DB yields a working schema; app no longer alters schema on startup.
-- Fix docker-compose mapping and optionally add backend service (Pending)
-  - Map host:container to 5432:5432 (or set POSTGRES_PORT=5432). Optionally add a backend service running uvicorn with depends_on: db.
-- Add backend/.env.example (Pending)
-  - Include: SECRET*KEY, DATABASE_URL, DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL, DEEPSEEK_TIMEOUT_SECONDS, DEEPSEEK_MAX_RETRIES, DEEPSEEK_RETRY_BACKOFF_SECONDS, ELEVENLABS_API_KEY, ELEVENLABS_VOICE_ID, ELEVENLABS_MODEL_ID, ELEVENLABS_OUTPUT_FORMAT, TTS_TIMEOUT_SECONDS, TTS_SOFT_TIMEOUT_MS, SMTP*\*.
-- Align tests with code APIs (Pending)
-  - tests/test_crud.py: use list_questions and get_question or provide wrappers.
-  - Reduce pytest mark warnings by running from backend/ or moving pytest.ini to repo root.
-- Add CI (Pending)
-  - GitHub Actions workflow: install deps, run scripts/validate_questions.py --strict, run pytest, ruff, black --check, mypy, and alembic current vs head check.
-- Logging/CORS hardening (Pending)
-  - Ensure core logging is configured at startup; restrict CORS via env for prod.
-
-Testing status and next steps (per checklist)
-
-- Already tested:
-  - Pytest collection from backend shows 95 items collected with 1 import error (tests/test_crud.py expects get_questions_by_filters).
-  - Warnings appear when running from repo root due to pytest.ini not being picked up.
-- Remaining areas to cover (for thorough testing):
-  - Frontend/Web: login.html, dashboard.html, interview.html, results.html, settings.html — navigation, forms, auth redirects, voice/TTS UI states.
-  - Backend/API: /api/v1/auth, /sessions, /questions, /analytics, /ai, /tts — happy paths, error paths, auth failures, edge cases (empty pools, offline LLM/TTS).
-  - External services: DeepSeek health, retries, fallbacks; ElevenLabs timeouts and fallback to default/browser.
-  - Database/Migrations: clean DB bootstrap via Alembic; preflight_question_pool across tracks/companies/difficulties.
-  - CI: end-to-end execution of validation, tests, and style checks on PR.
-- Proposed options:
-  - Critical-path testing: key auth/session flow and main endpoints.
-  - Thorough testing: full coverage as listed above, including edge cases.
-
 # Project TODO & Development Guide
 
-## Purpose
+Purpose
+-------
+A comprehensive guide for advancing the InterviewPrep-App from MVP to production-ready state, with focus on frontend development and remaining backend improvements.
 
-A short, actionable guide to advance the project from MVP to a more robust, testable, and production-ready state. Each top-level task lists recommended sub-steps, commands, and quick verification checks.
-
-## How to use
-
+How to use
+----------
 - Work items are ordered by priority (top = highest).
 - For each item: follow the sub-steps, run the commands, add tests, then check it off.
-- Ask for help to scaffold any item (migrations, tests, CI config, etc.).
+- Backend tasks are marked as ✅ (completed) - your colleague is handling backend.
+- Frontend tasks are the current focus.
 
 ---
 
-## CRITICAL GAPS IDENTIFIED (High Priority)
+## BACKEND STATUS (Handled by Colleague) ✅
 
-### 1) Missing `.env.example` file ⚠️ URGENT
-
-- **Status**: NOT FOUND in backend directory
-- **Impact**: New developers cannot set up the project without knowing required environment variables
-- **Action Required**:
-  1. Create `backend/.env.example` with all required and optional variables
-  2. Document each variable with inline comments
-  3. Include example values (non-sensitive)
-  4. Reference in README.md setup instructions
-- **Required Variables** (from config.py analysis):
-  - `SECRET_KEY` (required)
-  - `DATABASE_URL` (required)
-  - `DEEPSEEK_API_KEY` (optional - AI features)
-  - `DEEPSEEK_BASE_URL` (optional - default: https://api.deepseek.com)
-  - `DEEPSEEK_MODEL` (optional - default: deepseek-chat)
-  - `DEEPSEEK_TIMEOUT_SECONDS` (optional - default: 45)
-  - `DEEPSEEK_MAX_RETRIES` (optional - default: 2)
-  - `DEEPSEEK_RETRY_BACKOFF_SECONDS` (optional - default: 0.8)
-  - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`, `SMTP_FROM`, `SMTP_TLS` (optional - email)
-  - `TTS_PRIMARY`, `TTS_FALLBACK` (optional - text-to-speech)
-  - `ELEVENLABS_API_KEY`, `ELEVENLABS_VOICE_ID` (optional - TTS)
-- **Estimated**: 30 minutes
-
-### 2) Alembic migrations fully implemented ✅ COMPLETED
-
-- **Status**: ✅ FULLY VALIDATED AND DEPLOYED
-- **Completed Actions**:
-  1. ✅ Alembic configuration validated (`alembic.ini`, `alembic/env.py`, `alembic/versions/`)
-  2. ✅ Initial migration generated and tested (upgrade/downgrade cycle successful)
-  3. ✅ Runtime schema patching removed from `backend/app/main.py`
-  4. ✅ Replaced `Base.metadata.create_all()` with Alembic-managed migrations
-  5. ✅ Replaced `print()` statements with structured logging (`logger.info/warning`)
-  6. ✅ Added clear documentation in startup function about Alembic requirement
-- **Changes Made**:
-  - Removed ~250 lines of runtime SQL patching code from main.py
-  - Kept only question seeding logic in startup hook
-  - Added TODO comment to restrict CORS in production
-  - Database schema is now fully managed by Alembic migrations
-- **Important**: Before starting the app, always run: `alembic upgrade head` from backend directory
-- **Next Steps**:
-  - Add CI step to assert `alembic current` equals `head` (see CI pipeline item below)
-
-### 3) No test suite exists ⚠️ HIGH PRIORITY
-
-- **Status**: No `tests/` directory found in project root or backend
-- **Impact**: No automated testing; changes risk breaking existing functionality
-- **Action Required**:
-  1. Create `tests/` or `backend/tests/` directory structure
-  2. Add pytest configuration (`pytest.ini` or `pyproject.toml`)
-  3. Write core tests for:
-     - `InterviewEngine` (question selection, adaptive difficulty, warmup flow)
-     - `llm_client.py` (DeepSeek API mocking, error handling, fallbacks)
-     - `scoring_engine.py` (rubric calculation, summary generation)
-     - TTS service fallbacks
-     - CRUD operations
-  4. Add test fixtures for database setup/teardown
-- **Dependencies to add**: `pytest`, `pytest-asyncio`, `pytest-mock`, `httpx`, `respx`
-- **Estimated**: 6-10 hours for initial coverage
-
-### 4) No CI/CD pipeline ⚠️ HIGH PRIORITY
-
-- **Status**: No `.github/workflows/` directory found
-- **Impact**: No automated quality checks on PRs; manual testing only
-- **Action Required**:
-  1. Create `.github/workflows/ci.yml`
-  2. Add jobs for:
-     - Python linting (ruff/flake8)
-     - Code formatting check (black)
-     - Type checking (mypy)
-     - Run `python scripts/validate_questions.py --strict`
-     - Run `pytest` with coverage report
-     - **Alembic migration check**: Assert `alembic current` equals `head`
-  3. Configure to run on pull requests and main branch pushes
-- **Estimated**: 2-3 hours
-
-### 5) Missing linting/formatting configuration ⚠️ MEDIUM PRIORITY
-
-- **Status**: No `pyproject.toml`, `ruff.toml`, `mypy.ini`, or `.pre-commit-config.yaml` found
-- **Impact**: Inconsistent code style; no automated type checking
-- **Action Required**:
-  1. Create `backend/pyproject.toml` with tool configurations
-  2. Add `ruff` for linting
-  3. Add `black` for formatting
-  4. Add `mypy` for type checking
-  5. Create `.pre-commit-config.yaml` for git hooks
-  6. Run formatters on existing codebase
-- **Dependencies to add**: `ruff`, `black`, `mypy`, `pre-commit`
-- **Estimated**: 2-4 hours
-
-### 6) Backend code hygiene ⚠️ MEDIUM PRIORITY
-
-- **Status**: Stray files found in backend root directory
-- **Impact**: Confusing repository structure; potential version conflicts
-- **Action Required**:
-  1. Remove accidental artifact files from `backend/` root:
-     - `0.27.0`
-     - `1.0.0`
-     - `bool`
-     - `tuple[bytes`
-  2. Verify these are not needed by any scripts or dependencies
-- **Estimated**: 5 minutes
+### Completed Backend Tasks:
+1. ✅ Alembic migrations configured and working
+2. ✅ Unit tests added for core services
+3. ✅ CI pipeline configured (GitHub Actions)
+4. ✅ Type checking and linting setup (ruff, black, mypy)
+5. ✅ Structured logging implemented
+6. ✅ Health checks and monitoring endpoints
+7. ✅ Error handling and LLM/TTS fallbacks
+8. ✅ Database schema properly migrated (PostgreSQL)
+9. ✅ PendingSignup model and migrations working
 
 ---
 
-## EXISTING TODO ITEMS (From Original File)
+## FRONTEND DEVELOPMENT PRIORITIES
 
-## 1) Add Alembic migrations and configure migrations folder ✅ COMPLETED
+## 1) 🔴 CRITICAL: Fix Authentication Flow Issues
+**Priority: URGENT**
+- Goal: Ensure seamless signup → verification → login flow
+- Current Issues to Investigate:
+  1. Verification code input UX (6-digit code entry)
+  2. Email verification flow after signup
+  3. Token refresh and session management
+  4. Redirect logic after verification
 
-- Goal: Replace runtime schema patching with versioned DB migrations.
-- **Current Status**: ✅ FULLY CONFIGURED AND DEPLOYED
-- **Completed Steps**:
-  1. ✅ Fixed typo in requirements.txt (`alembic>=1.18.0`)
-  2. ✅ Created `backend/alembic.ini` with proper configuration
-  3. ✅ Populated `backend/alembic/env.py` with all model imports and DB URL configuration
-  4. ✅ Created `backend/alembic/versions/` directory for migration files
-  5. ✅ Created comprehensive migration guide: `backend/MIGRATIONS.md`
-  6. ✅ Created quick start guide: `backend/ALEMBIC_QUICKSTART.md`
-  7. ✅ Created initialization script: `backend/scripts/init_migrations.py`
-  8. ✅ Updated README.md with migration information
-  9. ✅ Generated and validated initial migration
-  10. ✅ Removed all runtime schema patching from `backend/app/main.py`
-- **Files Created**:
-  - `backend/alembic.ini` - Main Alembic configuration
-  - `backend/alembic/env.py` - Environment setup with all models imported
-  - `backend/alembic/script.py.mako` - Migration template (fixed for Windows)
-  - `backend/alembic/versions/<rev>_initial_schema.py` - Initial migration
-  - `backend/MIGRATIONS.md` - Comprehensive 200+ line migration guide
-  - `backend/ALEMBIC_QUICKSTART.md` - Quick reference for daily use
-  - `backend/scripts/init_migrations.py` - Automated setup script
-  - `backend/scripts/README.md` - Scripts documentation
-- **Documentation**:
-  - Quick start: `backend/ALEMBIC_QUICKSTART.md`
-  - Full guide: `backend/MIGRATIONS.md`
-  - Main README updated with migration section
-
----
-
-## 2) Add unit tests (core services) ✅ COMPLETED
-
-- Goal: Add a small but meaningful test suite covering `InterviewEngine`, `llm_client`, TTS fallbacks, and CRUD.
-- **Current Status**: ✅ COMPREHENSIVE TEST SUITE IMPLEMENTED
-- **Completed Actions**:
-  1. ✅ Created `backend/requirements-dev.txt` with all testing dependencies
-  2. ✅ Created `backend/pytest.ini` with comprehensive configuration and markers
-  3. ✅ Created `backend/tests/` directory with complete test infrastructure
-  4. ✅ Implemented `backend/tests/conftest.py` with shared fixtures:
-     - Database session with SQLite in-memory
-     - FastAPI test client
-     - Test user and authentication fixtures
-     - Sample questions fixture
-     - Mock LLM and TTS response fixtures
-  5. ✅ Created comprehensive test files:
-     - `test_auth.py` - Authentication & authorization (signup, login, verification, JWT)
-     - `test_llm_client.py` - DeepSeek API integration (success, retries, fallbacks, timeouts)
-     - `test_interview_engine.py` - Question selection, adaptive difficulty, warmup flow
-     - `test_scoring_engine.py` - Rubric scoring, summary generation, strengths/weaknesses
-     - `test_crud.py` - Database operations (users, sessions, questions, messages, evaluations)
-     - `test_api_endpoints.py` - REST API integration tests (all major endpoints)
-     - `test_tts.py` - TTS services (ElevenLabs, fallback, error handling)
-- **Test Coverage**:
-  - 7 test files with 100+ test cases
-  - Unit tests (fast, isolated) and integration tests
-  - Comprehensive mocking of external services (DeepSeek, ElevenLabs)
-  - Database operations tested with SQLite in-memory
-  - API endpoints tested with FastAPI TestClient
-  - Target coverage: 65-70%
-- **Test Markers**:
-  - `@pytest.mark.unit` - Fast unit tests
-  - `@pytest.mark.integration` - Integration tests
-  - `@pytest.mark.auth` - Authentication tests
-  - `@pytest.mark.llm` - LLM client tests
-  - `@pytest.mark.tts` - TTS service tests
-  - `@pytest.mark.crud` - Database CRUD tests
-  - `@pytest.mark.slow` - Long-running tests
-- **Running Tests**:
-  ```bash
-  cd backend
-  pip install -r requirements-dev.txt
-  pytest                    # Run all tests
-  pytest -m unit           # Run unit tests only
-  pytest --cov=app         # Run with coverage
-  ```
-- **Files Created**:
-  - `backend/requirements-dev.txt` - Testing and dev dependencies
-  - `backend/pytest.ini` - Pytest configuration
-  - `backend/tests/__init__.py` - Test package init
-  - `backend/tests/conftest.py` - Shared fixtures (200+ lines)
-  - `backend/tests/test_auth.py` - Auth tests (300+ lines)
-  - `backend/tests/test_llm_client.py` - LLM tests (350+ lines)
-  - `backend/tests/test_interview_engine.py` - Interview engine tests (400+ lines)
-  - `backend/tests/test_scoring_engine.py` - Scoring tests (300+ lines)
-  - `backend/tests/test_crud.py` - CRUD tests (400+ lines)
-  - `backend/tests/test_api_endpoints.py` - API tests (350+ lines)
-  - `backend/tests/test_tts.py` - TTS tests (300+ lines)
-- **Next Steps**:
-  - Run tests locally to verify all pass
-  - Add to CI pipeline (see item #3)
-  - Monitor coverage and add tests for edge cases as needed
-
----
-
-## 3) Add CI pipeline (run tests, lint, validate_questions) ⚠️ HIGH PRIORITY
-
-- Goal: Enforce tests, linting, and question validation on PRs.
-- **Current Status**: NO `.github/workflows/` directory exists
 - Steps:
-  1. Create `.github/workflows/ci.yml` with steps:
-     - checkout
-     - setup python
-     - install deps
-     - run `python scripts/validate_questions.py --strict`
-     - run `pytest --cov=backend/app --cov-report=term-missing`
-     - run linter (ruff/flake8)
-     - run formatting check (black --check)
-     - run type checking (mypy)
-     - **NEW**: Check Alembic migration status (`alembic current` should equal `head`)
-  2. Fail early on dataset validation errors.
-  3. Add status badge to README.md
-- Quick check: Open PR and confirm the CI run shows the steps and status.
-- Estimated: 2-3 hours.
+  1. Test complete signup flow:
+     - Open `http://127.0.0.1:5173/login.html`
+     - Create account with valid email
+     - Check if verification code is received (backend logs if SMTP not configured)
+     - Enter 6-digit code
+     - Verify successful login
+  2. Test edge cases:
+     - Expired verification codes
+     - Invalid codes
+     - Already verified accounts
+     - Password reset flow
+  3. Fix any broken redirects or error messages
+  4. Ensure proper error handling and user feedback
+
+- Files to Review:
+  - `frontend/assets/js/auth.js` - Authentication logic
+  - `frontend/assets/js/api.js` - API client and token management
+  - `frontend/login.html` - Login/signup UI
+
+- Estimated: 4-6 hours
 
 ---
 
-## 4) Run & fix `scripts/validate_questions.py` results ✅
+## 2) 🟡 Improve Dashboard User Experience
+**Priority: HIGH**
+- Goal: Polish dashboard interactions and data loading
+- Current State: Dashboard exists but needs UX improvements
 
-- Goal: Ensure question JSONs are consistent and clean.
-- **Current Status**: Script exists and is well-implemented
-- Steps:
-  1. Run: `python scripts/validate_questions.py` (from repo root). Consider `--strict` in CI.
-  2. Inspect `[ERROR]` and `[WARN]` outputs; fix JSON files in `data/questions/` accordingly (tags, duplicate prompts, mismatched metadata, empty fields).
-  3. Add to CI pipeline to prevent regressions
-- Tip: Add a note in PR template to remind dataset authors to run the script before PR.
-- Estimated: Varies (minutes → hours depending on dataset health).
+- Tasks:
+  1. **Session History Loading**
+     - Add loading states for session list
+     - Implement pagination or infinite scroll
+     - Add filters (by date, score, difficulty)
+     - Show empty state when no sessions exist
 
----
+  2. **Quick Stats Accuracy**
+     - Verify stats calculations (avg score, streak, etc.)
+     - Add real-time updates when new sessions complete
+     - Fix any placeholder data still showing
 
-## 5) Document `.env.example` & confirm required env vars ⚠️ URGENT
+  3. **Profile Management**
+     - Test profile edit modal functionality
+     - Ensure preferences are saved correctly
+     - Add profile picture upload (optional)
 
-- Goal: Make dev onboarding frictionless.
-- **Current Status**: `.env.example` file DOES NOT EXIST
-- Steps:
-  1. Create `backend/.env.example` listing required and optional env vars with comments
-  2. Required variables:
-     - `SECRET_KEY` (JWT signing - generate with `openssl rand -hex 32`)
-     - `DATABASE_URL` (PostgreSQL connection string)
-  3. Optional variables (with defaults):
-     - `DEEPSEEK_API_KEY` (AI features - app works in fallback mode without it)
-     - `DEEPSEEK_BASE_URL` (default: https://api.deepseek.com)
-     - `DEEPSEEK_MODEL` (default: deepseek-chat)
-     - `DEEPSEEK_TIMEOUT_SECONDS` (default: 45)
-     - `DEEPSEEK_MAX_RETRIES` (default: 2)
-     - `DEEPSEEK_RETRY_BACKOFF_SECONDS` (default: 0.8)
-     - SMTP settings (email verification - prints to console if not set)
-     - TTS settings (ElevenLabs - falls back to browser speech)
-  4. Document in README how missing keys affect behavior (offline fallbacks).
-  5. Add setup instructions referencing `.env.example`
-- Estimated: 30-45 minutes.
+  4. **Start Interview Flow**
+     - Validate form inputs before starting session
+     - Show coverage hint for selected parameters
+     - Add confirmation dialog for session start
+     - Improve error messages for failed session creation
 
----
+- Files to Review:
+  - `frontend/dashboard.html` - Dashboard UI
+  - `frontend/assets/js/interview.js` - Session management
+  - `frontend/assets/css/pro.css` - Styling
 
-## 6) Add integration tests or mocks for LLM/TTS fallbacks ✅
-
-- Goal: Verify graceful behavior when external APIs are down or return invalid responses.
-- **Current Status**: No tests exist
-- **Code Analysis**: `llm_client.py` has good error handling with `LLMClientError` and retry logic
-- Steps:
-  1. Use `respx` or `httpx` mocking to simulate DeepSeek network errors, timeouts, and invalid JSON.
-  2. Ensure `DeepSeekClient` raises `LLMClientError` and the app gracefully falls back.
-  3. Test ElevenLabs flow and fallback to `default_tts` or browser speech.
-  4. Test retry logic with exponential backoff
-  5. Test health status tracking (`get_llm_status()`)
-- Estimated: 3-5 hours.
+- Estimated: 6-8 hours
 
 ---
 
-## 7) Add type checking / linters and formatting ⚠️ MEDIUM PRIORITY
+## 3) 🟡 Enhance Interview Page Functionality
+**Priority: HIGH**
+- Goal: Improve live interview experience and interactions
 
-- Goal: Maintain consistent style and catch type errors early.
-- **Current Status**: NO configuration files exist (no `pyproject.toml`, `ruff.toml`, `mypy.ini`)
-- Steps:
-  1. Add dev tools to requirements.txt: `ruff` (lint), `black` (format), `mypy` (type checking).
-  2. Create `backend/pyproject.toml` with tool configurations:
+- Tasks:
+  1. **Chat Interface**
+     - Test message sending (text, code, voice)
+     - Verify message history persistence
+     - Add typing indicators for AI responses
+     - Implement message timestamps
+     - Add copy-to-clipboard for code blocks
 
-     ```toml
-     [tool.black]
-     line-length = 120
-     target-version = ['py311']
+  2. **Question Display**
+     - Test question pinning/unpinning
+     - Verify question metadata display
+     - Add syntax highlighting for code questions
+     - Implement expand/collapse animations
 
-     [tool.ruff]
-     line-length = 120
-     target-version = "py311"
+  3. **Voice Integration**
+     - Test voice input recording
+     - Verify TTS playback functionality
+     - Add visual feedback for recording state
+     - Implement replay last response feature
 
-     [tool.mypy]
-     python_version = "3.11"
-     warn_return_any = true
-     warn_unused_configs = true
-     disallow_untyped_defs = false
-     ```
+  4. **Session Controls**
+     - Test end session confirmation
+     - Verify submit & evaluate flow
+     - Add auto-save for draft responses
+     - Implement session timer accuracy
 
-  3. Create `.pre-commit-config.yaml` for git hooks
-  4. Run formatters on existing codebase: `black backend/` and `ruff check backend/ --fix`
-  5. Add to CI pipeline
-- Estimated: 2-4 hours.
+  5. **Answer Flow Guide**
+     - Make flow steps interactive
+     - Highlight current step based on conversation
+     - Add tooltips with detailed guidance
 
----
+- Files to Review:
+  - `frontend/interview.html` - Interview UI
+  - `frontend/assets/js/interview.js` - Interview logic
+  - `frontend/assets/js/voice.js` - Voice functionality
 
-## 8) Add health checks & monitoring for LLM/TTS endpoints ✅
-
-- Goal: Surface LLM/TTS status for observability.
-- **Current Status**: ALREADY IMPLEMENTED
-- **Findings**:
-  - `/api/v1/ai/status` endpoint exists (returns LLM health)
-  - `get_llm_status()` in `llm_client.py` tracks last success/error
-  - Frontend displays AI status badge with online/offline/fallback states
-  - Health tracking includes: configured, status, fallback_mode, last_ok_at, last_error_at, last_error
-- **Recommendation**: Consider adding similar health endpoint for TTS service
-- Estimated: 1-2 hours for TTS health endpoint.
-
----
-
-## 9) Replace ad-hoc prints with structured logging ✅ COMPLETED
-
-- Goal: Use structured logs and levels instead of `print`.
-- **Current Status**: ✅ COMPLETED
-- **Completed Actions**:
-  - ✅ `backend/app/core/logging.py` exists (structured logging setup)
-  - ✅ Most services use `logging.getLogger(__name__)` properly
-  - ✅ Replaced remaining `print()` in `main.py` with `logger.info()` and `logger.warning()`
-  - ✅ All logging is now gated by `settings.ENV == "dev"` where appropriate
-- **Result**: Consistent structured logging throughout the application
+- Estimated: 8-10 hours
 
 ---
 
-## ADDITIONAL FINDINGS & RECOMMENDATIONS
+## 4) 🟢 Polish Results & Analytics Pages
+**Priority: MEDIUM**
+- Goal: Enhance results visualization and insights
 
-### Architecture Strengths ✅
+- Tasks:
+  1. **Results Page**
+     - Verify score gauge animation
+     - Test rubric radar chart rendering
+     - Ensure feedback items display correctly
+     - Add export to PDF functionality
+     - Implement share results feature
 
-1. **Well-structured backend**: Clean separation of concerns (models, schemas, CRUD, services, API)
-2. **Robust interview engine**: Sophisticated logic for adaptive difficulty, question selection, warmup flow
-3. **Graceful degradation**: LLM and TTS fallbacks work without external APIs
-4. **Frontend architecture**: Clean separation of concerns, good state management
-5. **Question validation**: Comprehensive validation script with detailed error reporting
-6. **Database design**: Proper relationships, indexes, and constraints
-7. **Migration system**: Alembic fully configured and runtime patching removed
+  2. **Performance Dashboard**
+     - Test score trend sparkline
+     - Verify difficulty breakdown charts
+     - Add date range filters
+     - Implement comparison with previous sessions
+     - Show progress over time graphs
 
-### Code Quality Observations
+  3. **Data Accuracy**
+     - Verify all calculations match backend
+     - Test with edge cases (0 sessions, 1 session, many sessions)
+     - Ensure proper handling of incomplete sessions
 
-1. **Interview Engine** (`backend/app/services/interview_engine.py`):
-   - 2000+ lines - consider splitting into smaller modules
-   - Excellent adaptive difficulty logic
-   - Good warmup flow implementation
-   - Well-documented with inline comments
-2. **Frontend** (`frontend/assets/js/interview.js`):
+- Files to Review:
+  - `frontend/results.html` - Results page
+  - `frontend/dashboard.html#performance` - Performance section
+  - `frontend/assets/js/charts.js` - Chart rendering
 
-   - 1800+ lines - consider splitting into modules (api.js, state.js, ui.js, etc.)
-   - Good separation of concerns with guidance system
-   - Comprehensive error handling
-   - Voice/TTS integration is well-implemented
-
-3. **LLM Client** (`backend/app/services/llm_client.py`):
-   - Clean implementation with retry logic
-   - Good error handling and health tracking
-   - JSON parsing with fallback strategies
-
-### Security Considerations
-
-1. **CORS**: Currently set to allow all origins (`allow_origins=["*"]`) - TODO added in main.py to restrict in production
-2. **Rate limiting**: `backend/app/api/rate_limit.py` exists - ensure it's applied to all endpoints
-3. **JWT expiration**: Set to 7 days - consider shorter duration for production
-4. **Environment variables**: Ensure `.env` is in `.gitignore` (it is) ✅
-5. **Docker Compose**: Port mapping verified - POSTGRES_PORT is set to 5432 in .env ✅
-
-### Performance Considerations
-
-1. **Database queries**: Consider adding query optimization and connection pooling
-2. **LLM timeout**: 45 seconds is reasonable but may need tuning based on usage
-3. **Frontend bundle size**: Consider code splitting for large JS files
-
-### Documentation Gaps
-
-1. **API documentation**: Consider adding OpenAPI/Swagger docs (FastAPI supports this natively)
-2. **Architecture diagram**: Would help new developers understand system flow
-3. **Deployment guide**: Add production deployment instructions
-4. **Contributing guide**: Add guidelines for contributors
+- Estimated: 6-8 hours
 
 ---
 
-## Quick development & verification commands
+## 5) 🟢 Responsive Design & Mobile Optimization
+**Priority: MEDIUM**
+- Goal: Ensure app works seamlessly on all devices
 
-### Setup
+- Tasks:
+  1. **Test Breakpoints**
+     - Desktop (1920px, 1440px, 1024px)
+     - Tablet (768px, 640px)
+     - Mobile (480px, 360px)
 
+  2. **Mobile-Specific Issues**
+     - Test sidebar navigation on mobile
+     - Verify touch interactions
+     - Check keyboard behavior on mobile
+     - Test voice input on mobile devices
+
+  3. **Layout Adjustments**
+     - Fix any overflow issues
+     - Ensure buttons are touch-friendly (min 44px)
+     - Optimize font sizes for readability
+     - Test landscape orientation
+
+  4. **Performance**
+     - Optimize images and assets
+     - Minimize CSS/JS if needed
+     - Test on slower connections
+
+- Files to Review:
+  - `frontend/assets/css/responsive.css` - Responsive styles
+  - `frontend/assets/css/pro.css` - Main styles
+  - All HTML files - Layout structure
+
+- Estimated: 6-8 hours
+
+---
+
+## 6) 🟢 Accessibility Improvements
+**Priority: MEDIUM**
+- Goal: Make app accessible to all users (WCAG 2.1 AA compliance)
+
+- Tasks:
+  1. **Keyboard Navigation**
+     - Test tab order on all pages
+     - Ensure all interactive elements are keyboard accessible
+     - Add visible focus indicators
+     - Implement keyboard shortcuts (already documented)
+
+  2. **Screen Reader Support**
+     - Add proper ARIA labels
+     - Ensure semantic HTML structure
+     - Test with screen readers (NVDA, JAWS, VoiceOver)
+     - Add skip navigation links
+
+  3. **Visual Accessibility**
+     - Verify color contrast ratios (4.5:1 for text)
+     - Test with color blindness simulators
+     - Ensure text is resizable
+     - Add high contrast mode support
+
+  4. **Form Accessibility**
+     - Add proper labels and error messages
+     - Implement form validation feedback
+     - Ensure error messages are announced
+
+- Tools:
+  - axe DevTools (browser extension)
+  - WAVE (Web Accessibility Evaluation Tool)
+  - Lighthouse accessibility audit
+
+- Estimated: 4-6 hours
+
+---
+
+## 7) 🔵 Add Progressive Web App (PWA) Features
+**Priority: LOW (Nice to have)**
+- Goal: Enable offline functionality and app-like experience
+
+- Tasks:
+  1. Create `manifest.json` with app metadata
+  2. Add service worker for offline caching
+  3. Implement offline mode indicators
+  4. Add install prompt for mobile/desktop
+  5. Cache static assets and API responses
+  6. Add background sync for draft messages
+
+- Benefits:
+  - Works offline (view past sessions)
+  - Installable on mobile/desktop
+  - Faster load times
+  - Better mobile experience
+
+- Estimated: 6-8 hours
+
+---
+
+## 8) 🔵 Performance Optimization
+**Priority: LOW**
+- Goal: Improve load times and runtime performance
+
+- Tasks:
+  1. **Bundle Optimization**
+     - Consider using a build tool (Vite, Parcel)
+     - Minify CSS/JS files
+     - Implement code splitting
+     - Lazy load non-critical resources
+
+  2. **Asset Optimization**
+     - Compress images
+     - Use WebP format where supported
+     - Implement lazy loading for images
+     - Add resource hints (preload, prefetch)
+
+  3. **Runtime Performance**
+     - Debounce expensive operations
+     - Optimize DOM manipulations
+     - Use virtual scrolling for long lists
+     - Profile and fix performance bottlenecks
+
+  4. **Caching Strategy**
+     - Implement smart caching for API responses
+     - Cache user preferences locally
+     - Add stale-while-revalidate pattern
+
+- Tools:
+  - Lighthouse performance audit
+  - Chrome DevTools Performance tab
+  - WebPageTest
+
+- Estimated: 6-8 hours
+
+---
+
+## 9) 🔵 Add End-to-End Tests for Frontend
+**Priority: LOW**
+- Goal: Automated testing for critical user flows
+
+- Tasks:
+  1. Set up Playwright or Cypress
+  2. Write tests for:
+     - Complete signup → verification → login flow
+     - Start interview session flow
+     - Send messages and receive responses
+     - Submit interview and view results
+     - Navigate between pages
+
+  3. Add to CI pipeline
+  4. Set up visual regression testing
+
+- Estimated: 8-10 hours
+
+---
+
+## 10) 🔵 Documentation & Developer Experience
+**Priority: LOW**
+- Goal: Improve onboarding and maintainability
+
+- Tasks:
+  1. **Frontend Documentation**
+     - Create `frontend/DEVELOPMENT.md` with:
+       - Setup instructions
+       - Architecture overview
+       - Component documentation
+       - State management patterns
+       - API integration guide
+
+  2. **Code Comments**
+     - Add JSDoc comments to functions
+     - Document complex logic
+     - Add inline comments for tricky code
+
+  3. **Style Guide**
+     - Document CSS architecture
+     - Create component library/pattern library
+     - Add design tokens documentation
+
+  4. **Developer Tools**
+     - Add ESLint for JavaScript
+     - Set up Prettier for code formatting
+     - Add pre-commit hooks
+
+- Estimated: 4-6 hours
+
+---
+
+## KNOWN ISSUES & BUGS TO FIX
+
+### High Priority:
+1. ❗ Verify email verification code flow works end-to-end
+2. ❗ Test session creation with all parameter combinations
+3. ❗ Ensure proper error handling for API failures
+4. ❗ Fix any console errors in browser DevTools
+
+### Medium Priority:
+1. ⚠️ Improve loading states across all pages
+2. ⚠️ Add proper empty states for lists
+3. ⚠️ Verify all modals close properly
+4. ⚠️ Test voice recording on different browsers
+
+### Low Priority:
+1. 💡 Add animations for page transitions
+2. 💡 Improve notification system
+3. 💡 Add dark mode support
+4. 💡 Implement keyboard shortcuts help modal
+
+---
+
+## TESTING CHECKLIST
+
+### Manual Testing (Do First):
+- [ ] Complete signup flow with email verification
+- [ ] Login with verified account
+- [ ] Start new interview session
+- [ ] Send text messages in interview
+- [ ] Send code snippets
+- [ ] Test voice input (if available)
+- [ ] End session and view results
+- [ ] Navigate to performance dashboard
+- [ ] View session history
+- [ ] Edit profile settings
+- [ ] Logout and login again
+- [ ] Test on mobile device
+- [ ] Test on different browsers (Chrome, Firefox, Safari, Edge)
+
+### Browser Compatibility:
+- [ ] Chrome (latest)
+- [ ] Firefox (latest)
+- [ ] Safari (latest)
+- [ ] Edge (latest)
+- [ ] Mobile Safari (iOS)
+- [ ] Mobile Chrome (Android)
+
+### Accessibility Testing:
+- [ ] Keyboard navigation works
+- [ ] Screen reader announces content correctly
+- [ ] Color contrast meets WCAG AA
+- [ ] Forms have proper labels
+- [ ] Error messages are clear
+
+---
+
+## Quick Development Commands
+
+### Frontend Development:
 ```bash
-cd backend
-python -m venv .venv
-# Windows
-.\.venv\Scripts\activate
-# macOS/Linux
-source .venv/bin/activate
-
-pip install -r requirements.txt
-# Add dev dependencies
-pip install pytest pytest-asyncio pytest-mock respx ruff black mypy pre-commit
-```
-
-### Run validators & tests
-
-```bash
-# From repo root
-python scripts/validate_questions.py
-python scripts/validate_questions.py --strict  # For CI
-
-# Run tests (once created)
-pytest -v
-pytest --cov=backend/app --cov-report=term-missing
-pytest --cov=backend/app --cov-report=html
-```
-
-### Linting & formatting
-
-```bash
-# From backend/
-black . --check  # Check formatting
-black .          # Apply formatting
-ruff check .     # Lint
-ruff check . --fix  # Auto-fix issues
-mypy .           # Type checking
-```
-
-### Database migrations
-
-```bash
-# From backend/
-alembic upgrade head      # Apply all migrations
-alembic current           # Show current revision
-alembic downgrade -1      # Rollback one migration
-alembic history           # Show migration history
-alembic revision --autogenerate -m "description"  # Create new migration
-```
-
-### Run application
-
-```bash
-# Start database
-docker-compose up -d
-
-# Apply migrations (REQUIRED before first run)
-cd backend
-alembic upgrade head
-
-# Start backend (from backend/)
-uvicorn app.main:app --reload
-
-# Start frontend (from frontend/)
+# Start frontend server
 cd frontend
 python -m http.server 5173
+
+# Open in browser
+# http://127.0.0.1:5173/login.html
+```
+
+### Backend (for reference - colleague handles this):
+```bash
+# Start backend
+cd backend
+source .venv/bin/activate  # or .\.venv\Scripts\activate on Windows
+uvicorn app.main:app --reload
+
+# Run tests
+pytest -v
+
+# Run migrations
+alembic upgrade head
+```
+
+### Database:
+```bash
+# Start PostgreSQL
+docker-compose up -d
+
+# Check database
+docker exec -it interviewprep_db psql -U <user> -d <db>
 ```
 
 ---
 
-## Priority Action Plan (Next 2 Weeks)
+## Next Recommended Actions (Frontend Focus):
 
-### Week 1: Critical Infrastructure
+1. **Immediate (Today)**:
+   - Test complete authentication flow
+   - Fix any broken signup/verification issues
+   - Verify dashboard loads correctly
 
-1. **Day 1**: Create `.env.example` and clean up backend root artifacts
-2. **Day 2-3**: Set up test infrastructure and write core tests
-3. **Day 4-5**: Create CI pipeline and linting configuration
+2. **This Week**:
+   - Polish interview page interactions
+   - Improve loading states and error handling
+   - Test on mobile devices
 
-### Week 2: Quality & Documentation
+3. **Next Week**:
+   - Enhance results visualization
+   - Add accessibility improvements
+   - Optimize performance
 
-1. **Day 1-2**: Run and fix validation issues, add more tests
-2. **Day 3-4**: Add API documentation and architecture diagram
-3. **Day 5**: Code cleanup and refactoring
+4. **Future**:
+   - Add PWA features
+   - Implement E2E tests
+   - Create comprehensive documentation
 
 ---
 
-## Marking progress
+## Resources & References
 
-- Check items as you complete them in this file and update the checklist accordingly.
-- Update the "Current Status" field for each item as work progresses.
-- If you'd like, I can scaffold any of the above (e.g., a starter test, CI workflow, or config files).
+### Frontend Stack:
+- **HTML5** - Semantic markup
+- **CSS3** - Custom properties, Grid, Flexbox
+- **Vanilla JavaScript** - No framework dependencies
+- **Font Awesome 6.4.0** - Icons
+- **Inter Font** - Typography
+
+### API Integration:
+- Base URL: `http://127.0.0.1:8000/api/v1`
+- Authentication: JWT Bearer tokens
+- See `frontend/assets/js/api.js` for API client
+
+### Design System:
+- Colors defined in `frontend/assets/css/pro.css`
+- Responsive breakpoints in `frontend/assets/css/responsive.css`
+- Component patterns throughout HTML files
 
 ---
 
-## Need Help?
+## Notes
 
-If you want me to scaffold any file (examples: `backend/.env.example`, starter tests, CI workflow, `pyproject.toml`), tell me which item to start with and I will prepare the complete implementation for you.
+- Backend is stable and working ✅
+- Focus is now on frontend polish and UX
+- Test thoroughly before marking tasks complete
+- Document any new issues discovered
+- Keep this file updated as you progress
+
+---
+
+**Last Updated**: 2026-01-11
+**Status**: Backend Complete ✅ | Frontend In Progress 🚧
+**Next Focus**: Authentication Flow Testing & Dashboard UX

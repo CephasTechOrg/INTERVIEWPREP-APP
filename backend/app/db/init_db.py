@@ -1,12 +1,11 @@
 import json
 from json import JSONDecodeError
 from pathlib import Path
-from typing import Optional, Tuple
 
 from sqlalchemy.orm import Session
 
-from app.models.question import Question
 from app.core.constants import ALLOWED_COMPANY_STYLES, ALLOWED_DIFFICULTIES, ALLOWED_TRACKS
+from app.models.question import Question
 
 ALLOWED_QUESTION_TYPES = {"coding", "system_design", "behavioral", "conceptual"}
 SYSTEM_DESIGN_TAGS = {
@@ -23,7 +22,7 @@ SYSTEM_DESIGN_TAGS = {
 CONCEPTUAL_TAGS = {"fundamentals", "concepts", "oop"}
 
 
-def _path_hints(base: Path, file: Path) -> Tuple[Optional[str], Optional[str], Optional[str]]:
+def _path_hints(base: Path, file: Path) -> tuple[str | None, str | None, str | None]:
     """
     Extract (track, company, difficulty) hints from the nested path:
     data/questions/<track>/<company>/<difficulty>.json

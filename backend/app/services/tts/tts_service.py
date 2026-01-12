@@ -1,12 +1,11 @@
 import logging
 import os
 from pathlib import Path
-from typing import Tuple
 
 from dotenv import load_dotenv
 
-from app.services.tts.elevenlabs_tts import elevenlabs_tts, is_elevenlabs_enabled
 from app.services.tts.default_tts import default_tts
+from app.services.tts.elevenlabs_tts import elevenlabs_tts, is_elevenlabs_enabled
 
 # Load backend/.env regardless of the current working directory.
 _ENV_PATH = Path(__file__).resolve().parents[3] / ".env"
@@ -36,7 +35,7 @@ def _provider_order() -> list[str]:
     return order
 
 
-def generate_speech(text: str) -> Tuple[bytes | None, str | None, str]:
+def generate_speech(text: str) -> tuple[bytes | None, str | None, str]:
     """
     Returns (audio_bytes, content_type, provider_used)
     - provider_used: "elevenlabs" | "default" | "none"
@@ -74,7 +73,7 @@ def generate_speech(text: str) -> Tuple[bytes | None, str | None, str]:
 
 
 # Backwards-compatible helper used by voice endpoint (returns audio + error string).
-def synthesize_speech(text: str) -> Tuple[bytes | None, str | None]:
+def synthesize_speech(text: str) -> tuple[bytes | None, str | None]:
     audio, ctype, provider = generate_speech(text)
     if audio:
         return audio, None

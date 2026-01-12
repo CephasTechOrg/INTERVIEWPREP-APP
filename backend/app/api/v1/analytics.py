@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_db, get_current_user
-from app.crud.evaluation import get_evaluation
+from app.api.deps import get_current_user, get_db
 from app.crud import session as session_crud
+from app.crud.evaluation import get_evaluation
 from app.schemas.evaluation import EvaluationOut
 
 router = APIRouter(prefix="/analytics")

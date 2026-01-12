@@ -263,14 +263,14 @@
             <h1>Session History</h1>
             <p>Resume any session, or open results from a completed one</p>
           </div>
-          
+
           <div class="history-container">
             <div class="history-actions">
               <button class="btn btn-refresh" id="refreshSessionsBtn" type="button">
                 <i class="fas fa-rotate"></i> Refresh
               </button>
             </div>
-            
+
             <div class="sessions-list" id="sessionHistoryList">
               <div class="session-loading">
                 <i class="fas fa-spinner fa-spin"></i>
@@ -313,7 +313,7 @@
                 <div class="metric-value" id="perfTotal">0</div>
                 <div class="metric-sub" id="perfCompleted">0 completed</div>
               </div>
-              
+
               <div class="metric-card success">
                 <div class="metric-header">
                   <i class="fas fa-star"></i>
@@ -322,7 +322,7 @@
                 <div class="metric-value" id="perfAverage">--</div>
                 <div class="metric-sub">Across completed interviews</div>
               </div>
-              
+
               <div class="metric-card warning">
                 <div class="metric-header">
                   <i class="fas fa-trophy"></i>
@@ -331,7 +331,7 @@
                 <div class="metric-value" id="perfBest">--</div>
                 <div class="metric-sub" id="perfBestLabel">Keep pushing upward</div>
               </div>
-              
+
               <div class="metric-card info">
                 <div class="metric-header">
                   <i class="fas fa-chart-pie"></i>
@@ -340,7 +340,7 @@
                 <div class="metric-value" id="perfMedian">--</div>
                 <div class="metric-sub">Middle of your distribution</div>
               </div>
-              
+
               <div class="metric-card secondary">
                 <div class="metric-header">
                   <i class="fas fa-clock-rotate-left"></i>
@@ -349,7 +349,7 @@
                 <div class="metric-value" id="perfLastScore">--</div>
                 <div class="metric-sub" id="perfLastDate">Most recent completed</div>
               </div>
-              
+
               <div class="metric-card accent">
                 <div class="metric-header">
                   <i class="fas fa-fire"></i>
@@ -358,7 +358,7 @@
                 <div class="metric-value" id="perfStreak">0</div>
                 <div class="metric-sub">Consecutive days with an interview</div>
               </div>
-              
+
               <div class="metric-card">
                 <div class="metric-header">
                   <i class="fas fa-percentage"></i>
@@ -382,7 +382,7 @@
                   <div id="perfSparkline" class="sparkline-chart"></div>
                 </div>
               </div>
-              
+
               <div class="chart-card">
                 <div class="chart-header">
                   <h3>Difficulty Breakdown</h3>
@@ -392,7 +392,7 @@
                   <div class="difficulty-chips" id="perfDifficulty"></div>
                 </div>
               </div>
-              
+
               <div class="chart-card">
                 <div class="chart-header">
                   <h3>Recent Results</h3>
@@ -402,7 +402,7 @@
                   <div id="perfRecentList" class="recent-list"></div>
                 </div>
               </div>
-              
+
               <div class="chart-card">
                 <div class="chart-header">
                   <h3>Score Distribution</h3>
@@ -427,7 +427,7 @@
           <i class="fas fa-times"></i>
         </button>
       </div>
-      
+
       <div class="settings-content">
         <div class="settings-group">
           <label>Interview Role</label>
@@ -437,7 +437,7 @@
             <option>Senior Engineer</option>
           </select>
         </div>
-        
+
         <div class="settings-group">
           <label>Company Style</label>
           <select id="interviewCompany" class="form-control">
@@ -449,7 +449,7 @@
             <option value="meta">Meta</option>
           </select>
         </div>
-        
+
         <div class="settings-group">
           <label>Difficulty Level</label>
           <select id="interviewDifficulty" class="form-control">
@@ -458,7 +458,7 @@
             <option value="hard">Hard</option>
           </select>
         </div>
-        
+
         <div class="settings-group">
           <label class="toggle-label">
             <input type="checkbox" id="voiceToggle">
@@ -469,7 +469,7 @@
             Toggle once; it stays on until you turn it off
           </div>
         </div>
-        
+
         <div class="settings-group">
           <label>Keyboard Shortcuts</label>
           <div class="shortcuts-list">
@@ -487,7 +487,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="settings-group">
           <label>Session Status</label>
           <div class="status-display" id="status">
@@ -506,18 +506,18 @@
             <i class="fas fa-times"></i>
           </button>
         </div>
-        
+
         <div class="modal-body">
           <div class="form-group">
             <label>Email</label>
             <input id="profileEmail" class="form-control" type="text" disabled />
           </div>
-          
+
           <div class="form-group">
             <label>Full Name</label>
             <input id="profileName" class="form-control" type="text" placeholder="Your name" />
           </div>
-          
+
           <div class="form-group">
             <label>Role Preference</label>
             <select id="profileRolePref" class="form-control">
@@ -526,13 +526,13 @@
               <option>Senior Engineer</option>
             </select>
           </div>
-          
+
           <div class="form-note">
             <i class="fas fa-info-circle"></i>
             Saved locally in your browser (no backend changes)
           </div>
         </div>
-        
+
         <div class="modal-footer">
           <button class="btn btn-outline" id="profileLogoutBtn">
             <i class="fas fa-right-from-bracket"></i> Logout
