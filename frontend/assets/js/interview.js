@@ -1952,9 +1952,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   function renderDashboardProfile(profile) {
     if (!profile) return;
     const name = (profile.full_name || "").trim();
-    qs("#dashProfileName").textContent = name || initialsFromNameOrEmail("", profile.email);
-    qs("#dashProfileEmail").textContent = profile.email || "-";
-    qs("#dashRolePref").textContent = profile.role_pref || "SWE Intern";
+    const nameEl = qs("#dashProfileName");
+    const emailEl = qs("#dashProfileEmail");
+    const roleEl = qs("#dashRolePref");
+    if (nameEl) nameEl.textContent = name || initialsFromNameOrEmail("", profile.email);
+    if (emailEl) emailEl.textContent = profile.email || "-";
+    if (roleEl) roleEl.textContent = profile.role_pref || "SWE Intern";
   }
 
   function applyRolePrefToSelectors(profile) {

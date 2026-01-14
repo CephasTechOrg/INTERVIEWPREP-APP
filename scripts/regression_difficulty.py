@@ -66,7 +66,7 @@ def main() -> int:
             role="SWE Intern",
             track="swe_intern",
             company_style="general",
-            difficulty="hard",
+            difficulty="medium",
             difficulty_current="easy",
             stage="candidate_solution",
             questions_asked_count=1,
@@ -86,32 +86,22 @@ def main() -> int:
         weak = {k: 2 for k in engine_obj._RUBRIC_KEYS}
 
         engine_obj._update_skill_state(db, session, strong, is_behavioral=False)
+        engine_obj._maybe_bump_difficulty_current(db, session)
+        db.refresh(session)
+        if session.difficulty_current != "medium":
+            raise AssertionError(f"Expected selected difficulty 'medium', got {session.difficulty_current}")
+
         engine_obj._update_skill_state(db, session, strong, is_behavioral=False)
         engine_obj._maybe_bump_difficulty_current(db, session)
         db.refresh(session)
         if session.difficulty_current != "medium":
-            raise AssertionError(f"Expected bump to medium, got {session.difficulty_current}")
+            raise AssertionError(f"Expected selected difficulty 'medium', got {session.difficulty_current}")
 
-        engine_obj._update_skill_state(db, session, strong, is_behavioral=False)
-        engine_obj._update_skill_state(db, session, strong, is_behavioral=False)
-        engine_obj._maybe_bump_difficulty_current(db, session)
-        db.refresh(session)
-        if session.difficulty_current != "hard":
-            raise AssertionError(f"Expected bump to hard, got {session.difficulty_current}")
-
-        engine_obj._update_skill_state(db, session, weak, is_behavioral=False)
         engine_obj._update_skill_state(db, session, weak, is_behavioral=False)
         engine_obj._maybe_bump_difficulty_current(db, session)
         db.refresh(session)
         if session.difficulty_current != "medium":
-            raise AssertionError(f"Expected drop to medium, got {session.difficulty_current}")
-
-        engine_obj._update_skill_state(db, session, weak, is_behavioral=False)
-        engine_obj._update_skill_state(db, session, weak, is_behavioral=False)
-        engine_obj._maybe_bump_difficulty_current(db, session)
-        db.refresh(session)
-        if session.difficulty_current != "easy":
-            raise AssertionError(f"Expected drop to easy, got {session.difficulty_current}")
+            raise AssertionError(f"Expected selected difficulty 'medium', got {session.difficulty_current}")
 
         return 0
     except Exception as exc:
