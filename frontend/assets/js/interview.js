@@ -49,6 +49,7 @@ function escapeHtml(str) {
 
 // UI state keys
 const VOICE_TOGGLE_KEY = "tts_enabled";
+const THEME_TOGGLE_KEY = "dark_theme";
 const QUESTION_PIN_COLLAPSED_KEY = "question_pin_collapsed";
 const SESSION_PREFS_KEY = "last_session_prefs";
 const ROLE_OPTIONS = new Set(["SWE Intern", "Software Engineer", "Senior Engineer"]);
@@ -352,6 +353,29 @@ function loadVoiceToggle() {
     return localStorage.getItem(VOICE_TOGGLE_KEY) !== "0";
   } catch {
     return true;
+  }
+}
+
+function saveThemeToggle(isDark) {
+  try {
+    localStorage.setItem(THEME_TOGGLE_KEY, isDark ? "1" : "0");
+  } catch {}
+}
+
+function loadThemeToggle() {
+  try {
+    return localStorage.getItem(THEME_TOGGLE_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function applyTheme(isDark) {
+  const html = document.documentElement;
+  if (isDark) {
+    html.setAttribute("data-theme", "dark");
+  } else {
+    html.setAttribute("data-theme", "light");
   }
 }
 
@@ -1910,6 +1934,10 @@ function initShortcuts() {
   });
 }
 
+  // Apply saved theme on load
+  const savedTheme = loadThemeToggle();
+  applyTheme(savedTheme);
+
 document.addEventListener("DOMContentLoaded", async () => {
   requireAuthOrRedirect();
 
@@ -1952,9 +1980,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   function renderDashboardProfile(profile) {
     if (!profile) return;
     const name = (profile.full_name || "").trim();
-    qs("#dashProfileName").textContent = name || initialsFromNameOrEmail("", profile.email);
-    qs("#dashProfileEmail").textContent = profile.email || "-";
-    qs("#dashRolePref").textContent = profile.role_pref || "SWE Intern";
+    const nameEl = qs("#dashProfileName");
+    const emailEl = qs("#dashProfileEmail");
+    const roleEl = qs("#dashRolePref");
+    if (nameEl) nameEl.textContent = name || initialsFromNameOrEmail("", profile.email);
+    if (emailEl) emailEl.textContent = profile.email || "-";
+    if (roleEl) roleEl.textContent = profile.role_pref || "SWE Intern";
+    if (sessionHistoryCache.length) renderPerformanceDashboard(sessionHistoryCache);
+    else refreshSessionHistory().catch(() => {});
   }
 
   function applyRolePrefToSelectors(profile) {
@@ -1975,6 +2008,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     voiceToggle.checked = saved;
     voiceToggle.addEventListener("change", () => {
       saveVoiceToggle(voiceToggle.checked);
+    });
+  }
+
+  const themeToggle = qs("#themeToggle");
+  if (themeToggle) {
+    themeToggle.checked = savedTheme;
+    themeToggle.addEventListener("change", () => {
+      const isDark = themeToggle.checked;
+      saveThemeToggle(isDark);
+      applyTheme(isDark);
     });
   }
 
@@ -2149,6 +2192,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   applyRolePrefToSelectors(profile);
   applySessionPrefs(loadSessionPrefs());
   updateCoverageHint().catch(() => {});
+
+  // Load and set profile inline
+  if (profile) {
+    qs("#profileEmailInline").value = profile.email;
+    qs("#profileNameInline").value = profile.full_name || "";
+    qs("#profileRolePrefInline").value = profile.role_pref || "SWE Intern";
+  }
+
+  // Handlers
+  qs("#saveProfileInlineBtn")?.addEventListener("click", () => {
+    const name = qs("#profileNameInline").value.trim();
+    const rolePref = qs("#profileRolePrefInline").value;
+    saveLocalProfile(email, { full_name: name, role_pref: rolePref });
+    updateAvatarFromProfile();
+    renderDashboardProfile({ email, full_name: name, role_pref: rolePref });
+    applyRolePrefToSelectors({ role_pref: rolePref });
+    showNotification("Profile saved.", "success");
+  });
 
   refreshSessionHistory();
 

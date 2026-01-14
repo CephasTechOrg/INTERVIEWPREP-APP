@@ -61,6 +61,8 @@
   --transition-fast: all 0.15s ease;
 }
 
+
+
 /* Base Styles */
 * {
   margin: 0;
@@ -1509,13 +1511,14 @@ html, body {
   right: -400px;
   width: 380px;
   height: 100%;
-  background: white;
+  background: rgba(0, 0, 0, 0.03);
   border-left: 1px solid var(--border);
   box-shadow: var(--shadow-xl);
   z-index: 1000;
   display: flex;
   flex-direction: column;
   transition: var(--transition);
+  backdrop-filter: blur(20px);
 }
 
 .settings-drawer.open {
@@ -1582,6 +1585,10 @@ html, body {
   cursor: pointer;
 }
 
+.toggle-label input[type="checkbox"] {
+  display: none;
+}
+
 .toggle-slider {
   width: 44px;
   height: 24px;
@@ -1589,6 +1596,7 @@ html, body {
   border-radius: var(--radius-full);
   position: relative;
   transition: var(--transition);
+  border: 1px solid var(--border);
 }
 
 .toggle-slider::before {

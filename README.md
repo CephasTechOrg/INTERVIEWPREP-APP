@@ -244,8 +244,7 @@ GitHub Actions automatically runs quality checks on every push and pull request.
 
 1. **Development Setup (One-time):**
 
-   - Install development dependencies: `pip install pre-commit`
-   - Set up pre-commit hooks: `pre-commit install`
+   - Install development dependencies: `pip install -r backend/requirements-dev.txt`
 
 2. **Start Database:**
 

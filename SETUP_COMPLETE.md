@@ -70,27 +70,7 @@ Comprehensive tool configurations for:
   - Omits: tests, alembic, cache
   - Excludes common patterns
 
-### 3. Pre-commit Hooks (.pre-commit-config.yaml)
-**Status**: ✅ CREATED
 
-Automated git hooks that run before commits:
-
-- **Code Quality**:
-  - Trailing whitespace removal
-  - End-of-file fixer
-  - YAML/JSON/TOML validation
-  - Large file detection
-  - Merge conflict detection
-  - Private key detection
-
-- **Python Tools**:
-  - Black formatting
-  - Ruff linting with auto-fix
-  - Mypy type checking
-
-- **Custom Hooks**:
-  - Question dataset validation (on JSON changes)
-  - Fast test run (on push)
 
 ### 4. Documentation Updates
 
@@ -101,7 +81,7 @@ Added sections for:
 - CI/CD status badges (placeholder for YOUR_USERNAME)
 - Testing instructions
 - Code quality tools usage
-- Pre-commit hooks setup
+
 - Contributing guidelines
 - Detailed project structure
 - Enhanced troubleshooting
@@ -140,11 +120,7 @@ Comprehensive project status document with:
    - Line 5: Codecov badge
    ```
 
-2. **Install Pre-commit Hooks Locally**:
-   ```bash
-   pip install pre-commit
-   pre-commit install
-   ```
+
 
 3. **Run Initial Code Quality Checks**:
    ```bash
@@ -217,9 +193,7 @@ black app/ tests/
 # Type check
 mypy app/
 
-# Run all pre-commit hooks
-cd ..
-pre-commit run --all-files
+
 ```
 
 ### Validate Questions
@@ -244,7 +218,7 @@ alembic history                 # View history
 - [x] Comprehensive test suite (100+ tests)
 - [x] CI/CD pipeline with GitHub Actions
 - [x] Code quality tools (black, ruff, mypy)
-- [x] Pre-commit hooks
+
 - [x] Documentation (README, CI/CD, migrations, tests)
 - [x] backend/.gitignore
 - [x] backend/.env.example
@@ -263,7 +237,7 @@ alembic history                 # View history
 - ✅ Linting configured (ruff)
 - ✅ Formatting configured (black)
 - ✅ Type checking configured (mypy)
-- ✅ Pre-commit hooks installed
+
 
 ### Testing
 - ✅ 100+ test cases
@@ -290,7 +264,7 @@ alembic history                 # View history
 ### Configuration
 - `.github/workflows/ci.yml` - CI/CD pipeline
 - `backend/pyproject.toml` - Tool configurations
-- `.pre-commit-config.yaml` - Pre-commit hooks
+
 - `backend/pytest.ini` - Pytest configuration
 - `backend/alembic.ini` - Alembic configuration
 
@@ -315,7 +289,7 @@ alembic history                 # View history
 - [ruff](https://docs.astral.sh/ruff/)
 - [black](https://black.readthedocs.io/)
 - [mypy](https://mypy.readthedocs.io/)
-- [pre-commit](https://pre-commit.com/)
+
 - [Alembic](https://alembic.sqlalchemy.org/)
 
 ## 🙏 Acknowledgments
