@@ -33,12 +33,12 @@
   white-space: nowrap;
 }
 
-.performance-columns {
+/* .performance-columns {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 32px;
   align-items: start;
-}
+} */
 
 .performance-columns .metrics-grid,
 .performance-columns .charts-grid {
@@ -54,8 +54,13 @@
   align-items: start;
   align-content: start;
   grid-auto-rows: max-content;
+  margin-bottom: 30px;
 }
 
+.two-columns {
+ grid-column: span 2;
+}
+ 
 .metric-card {
   background: white;
   border-radius: var(--radius-lg);
@@ -160,12 +165,14 @@
   line-height: 0.9;
   margin-bottom: 2px;
   font-feature-settings: "tnum";
+  text-align: center;
 }
 
 .metric-sub {
   font-size: 11px;
   color: var(--text-muted);
   line-height: 1.15;
+  text-align: right;
 }
 
 /* Progress Bar */
@@ -188,7 +195,7 @@
 /* Charts Grid */
 .charts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 24px;
   grid-auto-rows: minmax(220px, auto);
 }
@@ -434,7 +441,7 @@
 
 /* History Page */
 .history-container {
-  background: white;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.06), transparent 10%);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   overflow: hidden;
@@ -460,6 +467,7 @@
   border-bottom: 1px solid var(--border-light);
   transition: var(--transition);
   cursor: pointer;
+  box-shadow: var(--shadow-sm)
 }
 
 .session-item:hover {
@@ -519,6 +527,9 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .session-status.active {
@@ -758,6 +769,9 @@
 @media (max-width: 767px) {
   .metrics-grid {
     grid-template-columns: 1fr;
+  }
+  .two-columns {
+    grid-column: span 1;
   }
 }
 
