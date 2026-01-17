@@ -337,10 +337,21 @@
         </div>
 
         <div class="settings-group">
-          <label class="toggle-label">
+          <label for="themeToggle" class="toggle-label">
+            <input type="checkbox" id="themeToggle">
+            <div class="toggle-slider"></div>
+            <div class="toggle-name">Dark Mode</div>
+          </label>
+          <div class="setting-note">
+            Toggle between light and dark themes
+          </div>
+        </div>
+        
+        <div class="settings-group">
+          <label for="voiceToggle" class="toggle-label">
             <input type="checkbox" id="voiceToggle">
-            <span class="toggle-slider"></span>
-            Enable Voice Output (TTS)
+            <div class="toggle-slider"></div>
+            <div class="toggle-name">Enable Voice Output (TTS)</div>
           </label>
           <div class="setting-note">
             Toggle once; it stays on until you turn it off
