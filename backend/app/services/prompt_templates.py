@@ -167,11 +167,13 @@ def interviewer_controller_user_prompt(
     signal_summary: str | None = None,
     missing_focus: str | None = None,
     skill_summary: str | None = None,
+    response_quality: str | None = None,
     is_behavioral: bool = False,
 ) -> str:
     signal_block = f"\nSignals: {signal_summary}\n" if signal_summary else ""
     missing_block = f"Missing focus: {missing_focus}\n" if missing_focus else ""
     skill_block = f"Skill summary: {skill_summary}\n" if skill_summary else ""
+    quality_block = f"Response quality (heuristic): {response_quality}\n" if response_quality else ""
     behavioral_block = (
         "Behavioral focus: ensure STAR (Situation, Task, Action, Result) and outcomes.\n" if is_behavioral else ""
     )
@@ -186,7 +188,7 @@ Prompt: {question_prompt}
 Candidate latest message:
 {candidate_latest}
 
-{signal_block}{missing_block}{skill_block}{behavioral_block}
+{signal_block}{missing_block}{skill_block}{quality_block}{behavioral_block}
 Progress:
 followups_used={followups_used} (max {max_followups})
 questions_asked_count={questions_asked_count} (max {max_questions})
@@ -198,6 +200,7 @@ Interview pacing:
 - Set allow_second_followup=true ONLY when you are asking that second follow-up.
 - Prefer WRAP_UP only after at least 5 questions have been asked, unless there are no questions available.
 - If Missing focus is provided, treat the answer as incomplete and ask a targeted follow-up (do not move on) unless followups_used already hit the max.
+- If response quality is strong and only optional items are missing, it is OK to MOVE_TO_NEXT_QUESTION.
 
 Also return a quick rubric score for the candidate's latest response (0-10 each). If you don't have enough info, use 5.
 Set "intent" to one of: CLARIFY, DEEPEN, CHALLENGE, ADVANCE, WRAP_UP.

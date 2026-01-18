@@ -591,6 +591,42 @@ class InterviewEngine:
         ]
         return not any(signals.get(k) for k in content_signals)
 
+    def _response_quality(
+        self,
+        text: str | None,
+        signals: dict[str, bool],
+        is_behavioral: bool,
+        behavioral_missing: list[str],
+    ) -> str:
+        tokens = self._clean_tokens(text)
+        if len(tokens) < 8:
+            return "weak"
+        if is_behavioral:
+            if len(behavioral_missing) >= 2:
+                return "weak"
+            if not behavioral_missing and len(tokens) >= 25:
+                return "strong"
+            return "ok"
+        if signals.get("has_code") and not signals.get("mentions_approach"):
+            return "weak"
+        if not signals.get("mentions_approach"):
+            return "weak"
+        coverage = 0
+        for key in (
+            "mentions_constraints",
+            "mentions_correctness",
+            "mentions_complexity",
+            "mentions_edge_cases",
+            "mentions_tradeoffs",
+        ):
+            if signals.get(key):
+                coverage += 1
+        if coverage >= 3:
+            return "strong"
+        if coverage >= 1 or len(tokens) >= 20:
+            return "ok"
+        return "weak"
+
     def _sanitize_ai_text(self, text: str | None) -> str:
         if not text:
             return ""
@@ -812,6 +848,25 @@ class InterviewEngine:
             parts = ", ".join(behavioral_missing)
             return f"STAR parts missing: {parts}"
         return ", ".join(missing)
+
+    def _missing_focus_tiers(
+        self,
+        missing: list[str],
+        is_behavioral: bool,
+        behavioral_missing: list[str],
+    ) -> tuple[list[str], list[str]]:
+        if not missing:
+            return ([], [])
+        if is_behavioral:
+            if len(behavioral_missing) >= 2:
+                critical = [k for k in missing if k == "star"]
+            else:
+                critical = []
+            optional = [k for k in missing if k not in critical]
+            return (critical, optional)
+        critical = [k for k in missing if k in ("approach", "correctness")]
+        optional = [k for k in missing if k not in critical]
+        return (critical, optional)
 
     def _missing_from_coverage(self, coverage: dict, is_behavioral: bool) -> list[str]:
         if not coverage or not isinstance(coverage, dict):
@@ -2087,19 +2142,40 @@ Question context: {title}. {prompt}
             return await self._advance_to_next_question(db, session, history, user_name=user_name, preface=preface)
 
         signals = self._candidate_signals(student_text)
-        behavioral_missing = self._behavioral_missing_parts(student_text) if self._is_behavioral(q) else []
-        missing_keys = self._missing_focus_keys(q, signals, behavioral_missing)
+        is_behavioral = self._is_behavioral(q)
+        behavioral_missing = self._behavioral_missing_parts(student_text) if is_behavioral else []
+        missing_keys_all = self._missing_focus_keys(q, signals, behavioral_missing)
         focus_keys = self._question_focus_keys(q)
-        missing_keys = self._prioritize_missing_focus(missing_keys, session, prefer=focus_keys)
+        missing_keys_all = self._prioritize_missing_focus(missing_keys_all, session, prefer=focus_keys)
         last_overall = self._skill_last_overall(session)
         if (
             last_overall is not None
             and last_overall >= 8.0
-            and not self._is_behavioral(q)
-            and "tradeoffs" not in missing_keys
+            and not is_behavioral
+            and "tradeoffs" not in missing_keys_all
             and not signals.get("mentions_tradeoffs")
         ):
-            missing_keys = ["tradeoffs"] + missing_keys
+            missing_keys_all = ["tradeoffs"] + missing_keys_all
+
+        response_quality = self._response_quality(
+            student_text,
+            signals,
+            is_behavioral,
+            behavioral_missing,
+        )
+        critical_missing, optional_missing = self._missing_focus_tiers(
+            missing_keys_all,
+            is_behavioral,
+            behavioral_missing,
+        )
+        missing_keys = missing_keys_all
+        if response_quality == "strong":
+            missing_keys = critical_missing
+        elif response_quality == "ok":
+            missing_keys = []
+            for key in critical_missing + optional_missing[:1]:
+                if key not in missing_keys:
+                    missing_keys.append(key)
 
         missing_focus = self._missing_focus_summary(missing_keys, behavioral_missing)
         signal_summary = self._signal_summary(signals, missing_keys, behavioral_missing)
@@ -2119,7 +2195,6 @@ Question context: {title}. {prompt}
                 session_crud.update_stage(db, session, "next_question")
                 return await self._advance_to_next_question(db, session, history, user_name=user_name, preface=preface)
 
-        is_behavioral = self._is_behavioral(q)
         thin_response = self._is_thin_response(
             student_text,
             signals,
@@ -2139,26 +2214,34 @@ Question context: {title}. {prompt}
             return nudge
 
         if int(session.followups_used or 0) == 0 and not self._max_followups_reached(session):
-            targeted = None
-            if is_behavioral and behavioral_missing:
-                targeted = self._missing_focus_question("star", behavioral_missing)
-            elif signals.get("has_code") and not signals.get("mentions_approach"):
-                targeted = "Walk me through your approach and key steps."
+            force_followup = False
+            if is_behavioral:
+                force_followup = len(behavioral_missing) >= 2
             else:
-                targeted = self._phase_followup(
-                    q,
-                    signals,
-                    session,
-                    int(session.followups_used or 0),
-                )
-                if not targeted and missing_keys:
-                    targeted = self._missing_focus_question(missing_keys[0], behavioral_missing)
+                force_followup = "approach" in critical_missing or "correctness" in critical_missing
+            if signals.get("has_code") and not signals.get("mentions_approach"):
+                force_followup = True
+            if force_followup:
+                targeted = None
+                if is_behavioral and behavioral_missing:
+                    targeted = self._missing_focus_question("star", behavioral_missing)
+                elif signals.get("has_code") and not signals.get("mentions_approach"):
+                    targeted = "Walk me through your approach and key steps."
+                else:
+                    targeted = self._phase_followup(
+                        q,
+                        signals,
+                        session,
+                        int(session.followups_used or 0),
+                    )
+                    if not targeted and missing_keys:
+                        targeted = self._missing_focus_question(missing_keys[0], behavioral_missing)
 
-            if targeted:
-                message_crud.add_message(db, session.id, "interviewer", targeted)
-                self._increment_followups_used(db, session)
-                session_crud.update_stage(db, session, "followups")
-                return targeted
+                if targeted:
+                    message_crud.add_message(db, session.id, "interviewer", targeted)
+                    self._increment_followups_used(db, session)
+                    session_crud.update_stage(db, session, "followups")
+                    return targeted
 
         ctrl_sys = interviewer_controller_system_prompt(session.company_style, session.role)
         ctrl_user = interviewer_controller_user_prompt(
@@ -2173,7 +2256,8 @@ Question context: {title}. {prompt}
             signal_summary=signal_summary or None,
             missing_focus=missing_focus or None,
             skill_summary=skill_summary or None,
-            is_behavioral=self._is_behavioral(q),
+            response_quality=response_quality,
+            is_behavioral=is_behavioral,
         )
 
         intent = ""
@@ -2229,6 +2313,18 @@ Question context: {title}. {prompt}
                 if inferred:
                     missing_keys = self._prioritize_missing_focus(inferred, session, prefer=focus_keys)
                     missing_focus = self._missing_focus_summary(missing_keys, behavioral_missing)
+
+        if response_quality in ("strong", "ok") and missing_keys:
+            crit_after, opt_after = self._missing_focus_tiers(missing_keys, is_behavioral, behavioral_missing)
+            if response_quality == "strong":
+                missing_keys = crit_after
+            else:
+                limited: list[str] = []
+                for key in crit_after + opt_after[:1]:
+                    if key not in limited:
+                        limited.append(key)
+                missing_keys = limited
+            missing_focus = self._missing_focus_summary(missing_keys, behavioral_missing)
 
         if missing_keys and confidence < 0.6 and not self._max_followups_reached(session):
             if action in ("MOVE_TO_NEXT_QUESTION", "WRAP_UP"):

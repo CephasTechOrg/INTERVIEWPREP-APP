@@ -5,6 +5,7 @@ This module provides shared fixtures for database setup, test client,
 authentication, and common test data.
 """
 
+import contextlib
 import os
 from collections.abc import Generator
 
@@ -210,4 +211,7 @@ def mock_tts_response():
 def pytest_sessionfinish(session, exitstatus):
     """Clean up test database file after test session."""
     if os.path.exists("./test.db"):
-        os.remove("./test.db")
+        with contextlib.suppress(Exception):
+            engine.dispose()
+        with contextlib.suppress(PermissionError):
+            os.remove("./test.db")
