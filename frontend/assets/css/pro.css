@@ -1079,6 +1079,7 @@ html, body {
   flex-direction: column;
   gap: 20px;
   background: var(--light-gray);
+  min-height: 100px;
 }
 
 /* Message Styles */
@@ -1331,6 +1332,38 @@ html, body {
   padding: 12px 24px;
   font-size: 14px;
   font-weight: 600;
+}
+
+/* Chat Panel Full Screen */
+.chat-panel.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 290px;
+  width: calc(100vw - 280px);
+  height: 100vh;
+  z-index: 9999;
+  background: var(--light);
+  border-radius: 0;
+  max-width: 1200px;
+}
+
+.chat-panel.fullscreen .chat-header {
+  background: var(--light);
+  border-bottom: 1px solid var(--border);
+}
+
+.chat-panel.fullscreen .chat-messages {
+  min-height: 200px;
+  max-height: 350px;
+}
+
+.chat-panel.fullscreen .chat-input {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--light);
+  border-top: 1px solid var(--border);
 }
 
 /* Results Page */

@@ -52,6 +52,16 @@
     min-height: 500px;
   }
 
+  .chat-panel.fullscreen{
+    left: 0;
+    width: 100vw;
+  }
+
+  .chat-panel.fullscreen .chat-messages {
+    min-height: 200px;
+    max-height: 650px;
+  }
+
   .stats-grid {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
@@ -104,7 +114,16 @@
 
   .chat-panel {
     order: 1;
-    min-height: 400px;
+    min-height: 800px;
+  }
+
+  .chat-panel.fullscreen {
+    left: 0;
+    width: 100vw;
+  }
+  .chat-panel.fullscreen .chat-messages {
+    min-height: 200px;
+    max-height: 650px;
   }
 
   .interview-header {
@@ -194,6 +213,16 @@
     min-height: 400px;
     width: 100%;
     margin: 0;
+  }
+
+  .chat-panel.fullscreen {
+    left: 0;
+    width: 100vw;
+  }
+
+  .chat-panel.fullscreen .chat-messages {
+    min-height: 200px;
+    max-height: 650px;
   }
 
   .interview-header {
@@ -704,6 +733,16 @@
     padding: 4px 8px;
   }
 
+  .chat-panel.fullscreen {
+    left: 0;
+    width: 100vw;
+  }
+
+  .chat-panel.fullscreen .chat-messages {
+    min-height: 200px;
+    max-height: 650px;
+  }
+
   .nav-item {
     padding: 12px;
     font-size: 14px;
@@ -1175,6 +1214,21 @@ html[data-theme="dark"] .toggle-label {
 html[data-theme="dark"] .setting-note {
   background: linear-gradient(to bottom, transparent 70%, var(--dark-light) 100%);
   color: var(--text-muted);
+}
+
+/* Dark Mode for Full Screen Chat */
+html[data-theme="dark"] .chat-panel.fullscreen {
+  background: var(--dark);
+}
+
+html[data-theme="dark"] .chat-panel.fullscreen .chat-header {
+  background: var(--dark);
+  border-color: var(--border);
+}
+
+html[data-theme="dark"] .chat-panel.fullscreen .chat-input {
+  background: var(--dark);
+  border-color: var(--border);
 }
 
 /* Foldable Devices */

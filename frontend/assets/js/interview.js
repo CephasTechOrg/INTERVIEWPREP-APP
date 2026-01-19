@@ -732,7 +732,7 @@ function initQuestionPin() {
     const expanded = prompt.classList.toggle("expanded");
     btnExpand.title = expanded ? "Collapse" : "Expand";
     const icon = btnExpand.querySelector("i");
-    if (icon) icon.className = expanded ? "fas fa-up-down-left-right" : "fas fa-up-down";
+    if (icon) icon.className = expanded ? "fas fa-compress" : "fas fa-expand";
   });
 }
 
@@ -1934,6 +1934,18 @@ function initShortcuts() {
   });
 }
 
+  // Full screen chat toggle
+  qs("#btnExpand")?.addEventListener("click", () => {
+    const chatPanel = qs(".chat-panel");
+    if (chatPanel) {
+      chatPanel.classList.toggle("fullscreen");
+      const icon = qs("#btnExpand i");
+      if (icon) {
+        icon.className = chatPanel.classList.contains("fullscreen") ? "fas fa-compress" : "fas fa-expand";
+      }
+    }
+  });
+
   // Apply saved theme on load
   const savedTheme = loadThemeToggle();
   applyTheme(savedTheme);
@@ -2195,7 +2207,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Load and set profile inline
   if (profile) {
-    qs("#profileEmailInline").value = profile.email;
+    qs("#profileEmailInline").value = profile.email || "";
     qs("#profileNameInline").value = profile.full_name || "";
     qs("#profileRolePrefInline").value = profile.role_pref || "SWE Intern";
   }
@@ -2210,6 +2222,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     applyRolePrefToSelectors({ role_pref: rolePref });
     showNotification("Profile saved.", "success");
   });
+
+
 
   refreshSessionHistory();
 
