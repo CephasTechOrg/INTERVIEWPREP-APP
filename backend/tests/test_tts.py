@@ -113,8 +113,7 @@ class TestTTSIntegration:
     """Integration tests for TTS services."""
 
     @respx.mock
-    @pytest.mark.asyncio
-    async def test_tts_fallback_chain(self):
+    def test_tts_fallback_chain(self):
         """Test TTS fallback from ElevenLabs to default."""
         # Mock ElevenLabs failure
         respx.post("https://api.elevenlabs.io/v1/text-to-speech/test-voice").mock(
@@ -139,7 +138,7 @@ class TestTTSIntegration:
 
         # All should complete without error
         assert len(results) == 3
-        for audio, provider in results:
+        for _audio, provider in results:
             assert provider in ["elevenlabs", "default", "none"]
 
     def test_tts_with_special_characters(self):

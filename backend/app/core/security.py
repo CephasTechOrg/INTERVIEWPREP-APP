@@ -1,4 +1,5 @@
 import hashlib
+import hmac
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
@@ -28,6 +29,22 @@ def hash_password(password: str) -> str:
 def verify_password(password: str, hashed: str) -> bool:
     safe = _prehash_password(password)
     return pwd_context.verify(safe, hashed)
+
+def hash_token(token: str) -> str:
+    key = settings.SECRET_KEY.encode("utf-8")
+    return hmac.new(key, token.encode("utf-8"), hashlib.sha256).hexdigest()
+
+
+def token_matches(raw: str, stored: str | None) -> bool:
+    if not raw or not stored:
+        return False
+    if hmac.compare_digest(stored, raw):
+        return True
+    try:
+        hashed = hash_token(raw)
+    except Exception:
+        return False
+    return hmac.compare_digest(stored, hashed)
 
 
 def create_access_token(subject: str, expires_minutes: int | None = None) -> str:

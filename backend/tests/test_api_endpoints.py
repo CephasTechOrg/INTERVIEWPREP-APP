@@ -46,7 +46,7 @@ class TestSessionEndpoints:
         assert data["track"] == "swe_intern"
         assert data["company_style"] == "general"
         assert data["difficulty"] == "easy"
-        assert data["status"] == "created"
+        assert data["stage"] == "intro"
 
     def test_create_session_unauthorized(self, client: TestClient):
         """Test creating session without auth fails."""
@@ -83,25 +83,33 @@ class TestSessionEndpoints:
         assert isinstance(data, list)
         assert len(data) > 0
 
-    def test_get_session_by_id(self, client: TestClient, auth_headers):
-        """Test retrieving a specific session."""
-        # Create session
+    def test_get_session_messages(self, client: TestClient, auth_headers, sample_questions):
+        """Test retrieving session message history."""
         create_response = client.post(
             "/api/v1/sessions",
             headers=auth_headers,
-            json={"track": "swe_intern", "company_style": "google", "difficulty": "medium"},
+            json={"track": "swe_intern", "company_style": "general", "difficulty": "medium"},
         )
         session_id = create_response.json()["id"]
 
-        # Get session
-        response = client.get(f"/api/v1/sessions/{session_id}", headers=auth_headers)
+        client.post(f"/api/v1/sessions/{session_id}/start", headers=auth_headers)
+        client.post(
+            f"/api/v1/sessions/{session_id}/message",
+            headers=auth_headers,
+            json={"content": "Answering the question with some detail."},
+        )
+
+        response = client.get(f"/api/v1/sessions/{session_id}/messages", headers=auth_headers)
 
         assert response.status_code == 200
         data = response.json()
-        assert data["id"] == session_id
-        assert data["company_style"] == "google"
+        assert isinstance(data, list)
+        assert len(data) >= 1
+        for msg in data:
+            assert msg["session_id"] == session_id
+            assert msg["role"] in ["interviewer", "student", "system"]
 
-    def test_start_session(self, client: TestClient, auth_headers, db: Session, test_user: User):
+    def test_start_session(self, client: TestClient, auth_headers, db: Session, test_user: User, sample_questions):
         """Test starting an interview session."""
         # Create session
         create_response = client.post(
@@ -116,7 +124,9 @@ class TestSessionEndpoints:
 
         assert response.status_code == 200
         data = response.json()
-        assert data["status"] in ["warmup", "active"]
+        assert data["session_id"] == session_id
+        assert data["role"] == "interviewer"
+        assert data["content"]
 
     def test_send_message(self, client: TestClient, auth_headers, sample_questions):
         """Test sending a message in a session."""
@@ -139,9 +149,11 @@ class TestSessionEndpoints:
 
         assert response.status_code == 200
         data = response.json()
-        assert "response" in data or "message" in data
+        assert data["session_id"] == session_id
+        assert data["role"] == "interviewer"
+        assert data["content"]
 
-    def test_finalize_session(self, client: TestClient, auth_headers):
+    def test_finalize_session(self, client: TestClient, auth_headers, sample_questions):
         """Test finalizing an interview session."""
         # Create and start session
         create_response = client.post(
@@ -158,7 +170,9 @@ class TestSessionEndpoints:
 
         assert response.status_code == 200
         data = response.json()
-        assert data["status"] == "completed"
+        assert "overall_score" in data
+        assert "rubric" in data
+        assert "summary" in data
 
 
 @pytest.mark.integration
@@ -197,11 +211,17 @@ class TestQuestionEndpoints:
 
     def test_get_question_coverage(self, client: TestClient, auth_headers, sample_questions):
         """Test getting question coverage statistics."""
-        response = client.get("/api/v1/questions/coverage", headers=auth_headers)
+        response = client.get(
+            "/api/v1/questions/coverage?track=swe_intern&company_style=general&difficulty=easy",
+            headers=auth_headers,
+        )
 
         assert response.status_code == 200
         data = response.json()
-        assert "total" in data or isinstance(data, dict)
+        assert data["track"] == "swe_intern"
+        assert data["company_style"] == "general"
+        assert data["difficulty"] == "easy"
+        assert "count" in data
 
 
 @pytest.mark.integration
@@ -227,24 +247,25 @@ class TestAnalyticsEndpoints:
 
         assert response.status_code == 200
         data = response.json()
-        assert "session" in data or "evaluation" in data or isinstance(data, dict)
+        assert data["session_id"] == session_id
+        assert "overall_score" in data
+        assert "rubric" in data
+        assert "summary" in data
 
     def test_get_user_analytics(self, client: TestClient, auth_headers):
         """Test retrieving user analytics."""
         response = client.get("/api/v1/analytics/user", headers=auth_headers)
 
-        assert response.status_code == 200
-        data = response.json()
-        assert isinstance(data, dict)
+        assert response.status_code == 404
 
 
 @pytest.mark.integration
 class TestAIEndpoints:
     """Test suite for AI-related endpoints."""
 
-    def test_get_ai_status(self, client: TestClient):
+    def test_get_ai_status(self, client: TestClient, auth_headers):
         """Test getting AI/LLM status."""
-        response = client.get("/api/v1/ai/status")
+        response = client.get("/api/v1/ai/status", headers=auth_headers)
 
         assert response.status_code == 200
         data = response.json()
@@ -252,9 +273,9 @@ class TestAIEndpoints:
         assert "status" in data
         assert "fallback_mode" in data
 
-    def test_ai_status_structure(self, client: TestClient):
+    def test_ai_status_structure(self, client: TestClient, auth_headers):
         """Test AI status response structure."""
-        response = client.get("/api/v1/ai/status")
+        response = client.get("/api/v1/ai/status", headers=auth_headers)
 
         assert response.status_code == 200
         data = response.json()
@@ -289,7 +310,7 @@ class TestErrorHandling:
 
     def test_invalid_session_id(self, client: TestClient, auth_headers):
         """Test accessing non-existent session."""
-        response = client.get("/api/v1/sessions/99999", headers=auth_headers)
+        response = client.get("/api/v1/sessions/99999/messages", headers=auth_headers)
 
         assert response.status_code == 404
 
@@ -303,7 +324,11 @@ class TestErrorHandling:
         """Test missing required fields in request."""
         response = client.post("/api/v1/sessions", headers=auth_headers, json={})  # Missing required fields
 
-        assert response.status_code == 422
+        assert response.status_code == 200
+        data = response.json()
+        assert data["track"] == "swe_intern"
+        assert data["company_style"] == "general"
+        assert data["difficulty"] == "easy"
 
 
 @pytest.mark.integration

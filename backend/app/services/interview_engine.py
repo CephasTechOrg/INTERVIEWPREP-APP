@@ -858,10 +858,7 @@ class InterviewEngine:
         if not missing:
             return ([], [])
         if is_behavioral:
-            if len(behavioral_missing) >= 2:
-                critical = [k for k in missing if k == "star"]
-            else:
-                critical = []
+            critical = [k for k in missing if k == "star"] if len(behavioral_missing) >= 2 else []
             optional = [k for k in missing if k not in critical]
             return (critical, optional)
         critical = [k for k in missing if k in ("approach", "correctness")]

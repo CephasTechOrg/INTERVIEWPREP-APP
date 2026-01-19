@@ -10,9 +10,17 @@ Tests cover:
 """
 
 import pytest
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
+from app.crud.evaluation import get_evaluation, upsert_evaluation
+from app.crud.message import add_message, list_messages
+from app.crud.question import get_question as get_question_by_id
+from app.crud.question import list_questions
+from app.crud.session import create_session, get_session, update_stage
 from app.crud.user import create_user, get_by_email
+from app.models.interview_session import InterviewSession
+from app.models.user import User
 
 
 # Helper functions to match test expectations (aliases for actual CRUD functions)
@@ -23,20 +31,7 @@ def get_user_by_email(db, email: str):
 
 def get_user_by_id(db, user_id: int):
     """Get user by ID."""
-    from app.models.user import User
-
     return db.query(User).filter(User.id == user_id).first()
-
-
-from pydantic import BaseModel
-
-from app.crud.evaluation import get_evaluation, upsert_evaluation
-from app.crud.message import add_message, list_messages
-from app.crud.question import get_question as get_question_by_id
-from app.crud.question import list_questions
-from app.crud.session import create_session, get_session, update_stage
-from app.models.interview_session import InterviewSession
-from app.models.user import User
 
 
 # Define test-specific schemas that don't exist in the actual app
@@ -67,13 +62,25 @@ class EvaluationCreate(BaseModel):
     """Test schema for creating evaluations."""
 
     overall_score: int
-    technical_score: int
-    communication_score: int
-    problem_solving_score: int
-    strengths: list[str]
-    weaknesses: list[str]
-    summary: str
-    rubric_scores: dict
+    rubric: dict
+    summary: dict
+
+
+def create_user_from_data(db, user_data):
+    """Adapter for create_user using test schema."""
+    return create_user(db, user_data.email, user_data.password, user_data.full_name)
+
+
+def create_session_from_data(db, session_data, user_id: int):
+    """Adapter for create_session using test schema."""
+    return create_session(
+        db=db,
+        user_id=user_id,
+        role="SWE Intern",
+        track=session_data.track,
+        company_style=session_data.company_style,
+        difficulty=session_data.difficulty,
+    )
 
 
 # Helper aliases for message CRUD to match test expectations
@@ -90,20 +97,7 @@ def get_session_messages(db, session_id):
 # Helper aliases for evaluation CRUD to match test expectations
 def create_evaluation(db, evaluation_data, session_id):
     """Alias for upsert_evaluation that accepts EvaluationCreate schema."""
-    return upsert_evaluation(
-        db,
-        session_id,
-        evaluation_data.overall_score,
-        evaluation_data.rubric_scores,
-        {
-            "technical_score": evaluation_data.technical_score,
-            "communication_score": evaluation_data.communication_score,
-            "problem_solving_score": evaluation_data.problem_solving_score,
-            "strengths": evaluation_data.strengths,
-            "weaknesses": evaluation_data.weaknesses,
-            "summary": evaluation_data.summary,
-        },
-    )
+    return upsert_evaluation(db, session_id, evaluation_data.overall_score, evaluation_data.rubric, evaluation_data.summary)
 
 
 def get_evaluation_by_session(db, session_id):
@@ -120,12 +114,12 @@ class TestUserCRUD:
         """Test creating a new user."""
         user_data = UserCreate(email="crud@example.com", password="CrudTest123!", full_name="CRUD Test User")
 
-        user = create_user(db, user_data)
+        user = create_user_from_data(db, user_data)
 
         assert user.id is not None
         assert user.email == "crud@example.com"
         assert user.full_name == "CRUD Test User"
-        assert user.hashed_password != "CrudTest123!"  # Should be hashed
+        assert user.password_hash != "CrudTest123!"  # Should be hashed
         assert user.is_verified is False  # Default
 
     def test_get_user_by_email(self, db: Session, test_user: User):
@@ -166,20 +160,20 @@ class TestSessionCRUD:
         """Test creating a new interview session."""
         session_data = SessionCreate(track="swe_intern", company_style="general", difficulty="easy")
 
-        session = create_session(db, session_data, test_user.id)
+        session = create_session_from_data(db, session_data, test_user.id)
 
         assert session.id is not None
         assert session.user_id == test_user.id
         assert session.track == "swe_intern"
         assert session.company_style == "general"
         assert session.difficulty == "easy"
-        assert session.status == "created"
+        assert session.stage == "intro"
 
     def test_get_session(self, db: Session, test_user: User):
         """Test retrieving a session by ID."""
         # Create session
         session_data = SessionCreate(track="swe_intern", company_style="google", difficulty="medium")
-        created_session = create_session(db, session_data, test_user.id)
+        created_session = create_session_from_data(db, session_data, test_user.id)
 
         # Retrieve session
         retrieved_session = get_session(db, created_session.id)
@@ -192,7 +186,7 @@ class TestSessionCRUD:
         """Test updating session status."""
         # Create session
         session_data = SessionCreate(track="swe_intern", company_style="general", difficulty="easy")
-        session = create_session(db, session_data, test_user.id)
+        session = create_session_from_data(db, session_data, test_user.id)
 
         # Update stage
         updated_session = update_stage(db, session, "active")
@@ -204,7 +198,7 @@ class TestSessionCRUD:
         # Create multiple sessions
         for _i in range(3):
             session_data = SessionCreate(track="swe_intern", company_style="general", difficulty="easy")
-            create_session(db, session_data, test_user.id)
+            create_session_from_data(db, session_data, test_user.id)
 
         # Get all sessions for user
         sessions = db.query(InterviewSession).filter(InterviewSession.user_id == test_user.id).all()
@@ -270,15 +264,15 @@ class TestMessageCRUD:
         """Test creating a message."""
         # Create session first
         session_data = SessionCreate(track="swe_intern", company_style="general", difficulty="easy")
-        session = create_session(db, session_data, test_user.id)
+        session = create_session_from_data(db, session_data, test_user.id)
 
         # Create message
-        message_data = MessageCreate(role="user", content="This is a test message")
+        message_data = MessageCreate(role="student", content="This is a test message")
         message = create_message(db, message_data, session.id)
 
         assert message.id is not None
         assert message.session_id == session.id
-        assert message.role == "user"
+        assert message.role == "student"
         assert message.content == "This is a test message"
         assert message.created_at is not None
 
@@ -286,13 +280,13 @@ class TestMessageCRUD:
         """Test retrieving all messages for a session."""
         # Create session
         session_data = SessionCreate(track="swe_intern", company_style="general", difficulty="easy")
-        session = create_session(db, session_data, test_user.id)
+        session = create_session_from_data(db, session_data, test_user.id)
 
         # Create multiple messages
         messages_data = [
-            MessageCreate(role="user", content="Message 1"),
-            MessageCreate(role="assistant", content="Message 2"),
-            MessageCreate(role="user", content="Message 3"),
+            MessageCreate(role="student", content="Message 1"),
+            MessageCreate(role="interviewer", content="Message 2"),
+            MessageCreate(role="student", content="Message 3"),
         ]
 
         for msg_data in messages_data:
@@ -310,11 +304,11 @@ class TestMessageCRUD:
         """Test that messages are retrieved in chronological order."""
         # Create session
         session_data = SessionCreate(track="swe_intern", company_style="general", difficulty="easy")
-        session = create_session(db, session_data, test_user.id)
+        session = create_session_from_data(db, session_data, test_user.id)
 
         # Create messages
         for i in range(5):
-            message_data = MessageCreate(role="user" if i % 2 == 0 else "assistant", content=f"Message {i}")
+            message_data = MessageCreate(role="student" if i % 2 == 0 else "interviewer", content=f"Message {i}")
             create_message(db, message_data, session.id)
 
         # Retrieve messages
@@ -334,44 +328,42 @@ class TestEvaluationCRUD:
         """Test creating an evaluation."""
         # Create session
         session_data = SessionCreate(track="swe_intern", company_style="general", difficulty="easy")
-        session = create_session(db, session_data, test_user.id)
+        session = create_session_from_data(db, session_data, test_user.id)
 
         # Create evaluation
         evaluation_data = EvaluationCreate(
             overall_score=85,
-            technical_score=80,
-            communication_score=90,
-            problem_solving_score=85,
-            strengths=["Good communication", "Clear thinking"],
-            weaknesses=["Could improve time complexity analysis"],
-            summary="Overall good performance",
-            rubric_scores={"clarity": 9, "correctness": 8},
+            rubric={"communication": 9, "problem_solving": 8},
+            summary={
+                "strengths": ["Good communication", "Clear thinking"],
+                "weaknesses": ["Could improve time complexity analysis"],
+                "next_steps": ["Discuss complexity trade-offs sooner"],
+            },
         )
         evaluation = create_evaluation(db, evaluation_data, session.id)
 
         assert evaluation.id is not None
         assert evaluation.session_id == session.id
         assert evaluation.overall_score == 85
-        assert evaluation.technical_score == 80
-        assert len(evaluation.strengths) == 2
-        assert len(evaluation.weaknesses) == 1
+        assert evaluation.rubric.get("communication") == 9
+        assert len(evaluation.summary.get("strengths", [])) == 2
+        assert len(evaluation.summary.get("weaknesses", [])) == 1
 
     def test_get_evaluation_by_session(self, db: Session, test_user: User):
         """Test retrieving evaluation by session ID."""
         # Create session
         session_data = SessionCreate(track="swe_intern", company_style="general", difficulty="easy")
-        session = create_session(db, session_data, test_user.id)
+        session = create_session_from_data(db, session_data, test_user.id)
 
         # Create evaluation
         evaluation_data = EvaluationCreate(
             overall_score=75,
-            technical_score=70,
-            communication_score=80,
-            problem_solving_score=75,
-            strengths=["Good effort"],
-            weaknesses=["Needs practice"],
-            summary="Decent performance",
-            rubric_scores={},
+            rubric={"communication": 8},
+            summary={
+                "strengths": ["Good effort"],
+                "weaknesses": ["Needs practice"],
+                "next_steps": ["Practice more mock interviews"],
+            },
         )
         created_eval = create_evaluation(db, evaluation_data, session.id)
 
@@ -392,14 +384,14 @@ class TestCRUDIntegration:
         """Test complete data flow: user -> session -> messages -> evaluation."""
         # 1. Create session
         session_data = SessionCreate(track="swe_intern", company_style="general", difficulty="easy")
-        session = create_session(db, session_data, test_user.id)
+        session = create_session_from_data(db, session_data, test_user.id)
         assert session.id is not None
 
         # 2. Add messages
         messages_data = [
-            MessageCreate(role="assistant", content="Hello! Let's start the interview."),
-            MessageCreate(role="user", content="I'm ready!"),
-            MessageCreate(role="assistant", content="Great! Here's your first question..."),
+            MessageCreate(role="interviewer", content="Hello! Let's start the interview."),
+            MessageCreate(role="student", content="I'm ready!"),
+            MessageCreate(role="interviewer", content="Great! Here's your first question..."),
         ]
 
         for msg_data in messages_data:
@@ -416,13 +408,12 @@ class TestCRUDIntegration:
         # 4. Create evaluation
         evaluation_data = EvaluationCreate(
             overall_score=88,
-            technical_score=85,
-            communication_score=90,
-            problem_solving_score=88,
-            strengths=["Excellent communication", "Strong problem-solving"],
-            weaknesses=["Could optimize solutions better"],
-            summary="Strong performance overall",
-            rubric_scores={"clarity": 9, "correctness": 8, "efficiency": 7},
+            rubric={"clarity": 9, "correctness": 8, "efficiency": 7},
+            summary={
+                "strengths": ["Excellent communication", "Strong problem-solving"],
+                "weaknesses": ["Could optimize solutions better"],
+                "next_steps": ["Practice explaining trade-offs earlier"],
+            },
         )
         evaluation = create_evaluation(db, evaluation_data, session.id)
         assert evaluation.id is not None

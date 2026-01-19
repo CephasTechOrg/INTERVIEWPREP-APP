@@ -4,20 +4,19 @@ Tests for LLM client (DeepSeek API integration).
 Tests cover:
 - Successful API calls
 - Error handling and retries
-- Fallback behavior
 - Health status tracking
-- JSON parsing with fallbacks
+- JSON parsing failures
 """
 
-import contextlib
 from unittest.mock import patch
 
+import httpx
 import pytest
 import respx
 from httpx import Response
 
 from app.core.config import settings
-from app.services.llm_client import DeepSeekClient, LLMClientError
+from app.services.llm_client import DeepSeekClient, LLMClientError, get_llm_status
 
 
 @pytest.mark.unit
@@ -34,7 +33,7 @@ class TestDeepSeekClient:
             assert client.model == settings.DEEPSEEK_MODEL
 
     def test_client_initialization_without_api_key(self):
-        """Test client initializes in fallback mode without API key."""
+        """Test client initializes without API key."""
         with patch.object(settings, "DEEPSEEK_API_KEY", None):
             client = DeepSeekClient()
             assert client.api_key is None
@@ -42,111 +41,101 @@ class TestDeepSeekClient:
     @respx.mock
     @pytest.mark.asyncio
     async def test_successful_chat_completion(self):
-        """Test successful chat completion request."""
-        mock_response = {
-            "choices": [{"message": {"content": '{"response": "Test response", "reasoning": "Test reasoning"}'}}]
-        }
-
-        respx.post(f"{settings.DEEPSEEK_BASE_URL}/chat/completions").mock(
+        """Test successful chat request."""
+        mock_response = {"choices": [{"message": {"content": '{"overall_score": 80}'}}]}
+        respx.post(f"{settings.DEEPSEEK_BASE_URL}/v1/chat/completions").mock(
             return_value=Response(200, json=mock_response)
         )
 
         with patch.object(settings, "DEEPSEEK_API_KEY", "test-key"):
             client = DeepSeekClient()
-            result = await client.chat_completion(
-                messages=[{"role": "user", "content": "Test"}], response_format={"type": "json_object"}
-            )
+            result = await client.chat_json("system", "user")
 
-            assert result is not None
-            assert "response" in result
-            assert result["response"] == "Test response"
+            assert result["overall_score"] == 80
 
     @respx.mock
     @pytest.mark.asyncio
     async def test_network_error_with_retry(self):
-        """Test retry logic on network errors."""
-        respx.post(f"{settings.DEEPSEEK_BASE_URL}/chat/completions").mock(
+        """Test retry logic on server errors."""
+        respx.post(f"{settings.DEEPSEEK_BASE_URL}/v1/chat/completions").mock(
             side_effect=[
                 Response(500, json={"error": "Internal server error"}),
                 Response(500, json={"error": "Internal server error"}),
-                Response(200, json={"choices": [{"message": {"content": '{"response": "Success after retry"}'}}]}),
+                Response(200, json={"choices": [{"message": {"content": "Success after retry"}}]}),
             ]
         )
 
-        with patch.object(settings, "DEEPSEEK_API_KEY", "test-key"):
-            with patch.object(settings, "DEEPSEEK_MAX_RETRIES", 3):
-                client = DeepSeekClient()
-                result = await client.chat_completion(messages=[{"role": "user", "content": "Test"}])
+        with (
+            patch.object(settings, "DEEPSEEK_API_KEY", "test-key"),
+            patch.object(settings, "DEEPSEEK_MAX_RETRIES", 2),
+        ):
+            client = DeepSeekClient()
+            result = await client.chat("system", "user")
 
-                assert result is not None
-                assert "response" in result
+            assert result == "Success after retry"
 
     @respx.mock
     @pytest.mark.asyncio
     async def test_max_retries_exceeded(self):
         """Test that LLMClientError is raised after max retries."""
-        respx.post(f"{settings.DEEPSEEK_BASE_URL}/chat/completions").mock(
+        respx.post(f"{settings.DEEPSEEK_BASE_URL}/v1/chat/completions").mock(
             return_value=Response(500, json={"error": "Internal server error"})
         )
 
-        with patch.object(settings, "DEEPSEEK_API_KEY", "test-key"):
-            with patch.object(settings, "DEEPSEEK_MAX_RETRIES", 2):
-                client = DeepSeekClient()
+        with (
+            patch.object(settings, "DEEPSEEK_API_KEY", "test-key"),
+            patch.object(settings, "DEEPSEEK_MAX_RETRIES", 1),
+        ):
+            client = DeepSeekClient()
 
-                with pytest.raises(LLMClientError):
-                    await client.chat_completion(messages=[{"role": "user", "content": "Test"}])
+            with pytest.raises(LLMClientError):
+                await client.chat("system", "user")
 
     @respx.mock
     @pytest.mark.asyncio
     async def test_invalid_json_response(self):
         """Test handling of invalid JSON in response."""
-        respx.post(f"{settings.DEEPSEEK_BASE_URL}/chat/completions").mock(
+        respx.post(f"{settings.DEEPSEEK_BASE_URL}/v1/chat/completions").mock(
             return_value=Response(200, json={"choices": [{"message": {"content": "Not valid JSON"}}]})
         )
 
         with patch.object(settings, "DEEPSEEK_API_KEY", "test-key"):
             client = DeepSeekClient()
-            result = await client.chat_completion(messages=[{"role": "user", "content": "Test"}])
-
-            # Should return raw content when JSON parsing fails
-            assert result is not None
-            assert isinstance(result, dict)
+            with pytest.raises(LLMClientError):
+                await client.chat_json("system", "user")
 
     @respx.mock
     @pytest.mark.asyncio
     async def test_timeout_handling(self):
         """Test timeout handling."""
-        import httpx
-
-        respx.post(f"{settings.DEEPSEEK_BASE_URL}/chat/completions").mock(
+        respx.post(f"{settings.DEEPSEEK_BASE_URL}/v1/chat/completions").mock(
             side_effect=httpx.TimeoutException("Request timeout")
         )
 
-        with patch.object(settings, "DEEPSEEK_API_KEY", "test-key"):
-            with patch.object(settings, "DEEPSEEK_MAX_RETRIES", 1):
-                client = DeepSeekClient()
+        with (
+            patch.object(settings, "DEEPSEEK_API_KEY", "test-key"),
+            patch.object(settings, "DEEPSEEK_MAX_RETRIES", 1),
+        ):
+            client = DeepSeekClient()
 
-                with pytest.raises(LLMClientError) as exc_info:
-                    await client.chat_completion(messages=[{"role": "user", "content": "Test"}])
+            with pytest.raises(LLMClientError) as exc_info:
+                await client.chat("system", "user")
 
-                assert "timeout" in str(exc_info.value).lower()
+            assert "timeout" in str(exc_info.value).lower()
 
     @pytest.mark.asyncio
-    async def test_fallback_when_no_api_key(self):
-        """Test fallback behavior when API key is not configured."""
+    async def test_no_api_key_raises(self):
+        """Test error when API key is not configured."""
         with patch.object(settings, "DEEPSEEK_API_KEY", None):
             client = DeepSeekClient()
 
-            # Should return None or fallback response
-            result = await client.chat_completion(messages=[{"role": "user", "content": "Test"}])
-
-            assert result is None or isinstance(result, dict)
+            with pytest.raises(LLMClientError):
+                await client.chat("system", "user")
 
     def test_get_llm_status_configured(self):
         """Test LLM status when API key is configured."""
         with patch.object(settings, "DEEPSEEK_API_KEY", "test-key"):
-            client = DeepSeekClient()
-            status = client.get_llm_status()
+            status = get_llm_status()
 
             assert status["configured"] is True
             assert "status" in status
@@ -155,70 +144,52 @@ class TestDeepSeekClient:
     def test_get_llm_status_not_configured(self):
         """Test LLM status when API key is not configured."""
         with patch.object(settings, "DEEPSEEK_API_KEY", None):
-            client = DeepSeekClient()
-            status = client.get_llm_status()
+            status = get_llm_status()
 
             assert status["configured"] is False
             assert status["fallback_mode"] is True
+            assert status["status"] == "offline"
 
     @respx.mock
     @pytest.mark.asyncio
     async def test_health_tracking_on_success(self):
-        """Test that health status is updated on successful request."""
-        respx.post(f"{settings.DEEPSEEK_BASE_URL}/chat/completions").mock(
-            return_value=Response(200, json={"choices": [{"message": {"content": '{"response": "Success"}'}}]})
+        """Test health status updated on successful request."""
+        respx.post(f"{settings.DEEPSEEK_BASE_URL}/v1/chat/completions").mock(
+            return_value=Response(200, json={"choices": [{"message": {"content": "Success"}}]})
         )
 
         with patch.object(settings, "DEEPSEEK_API_KEY", "test-key"):
             client = DeepSeekClient()
+            await client.chat("system", "user")
 
-            await client.chat_completion(messages=[{"role": "user", "content": "Test"}])
-
-            status = client.get_llm_status()
+            status = get_llm_status()
             assert status["last_ok_at"] is not None
 
     @respx.mock
     @pytest.mark.asyncio
     async def test_health_tracking_on_error(self):
-        """Test that health status is updated on error."""
-        respx.post(f"{settings.DEEPSEEK_BASE_URL}/chat/completions").mock(
+        """Test health status updated on error."""
+        respx.post(f"{settings.DEEPSEEK_BASE_URL}/v1/chat/completions").mock(
             return_value=Response(500, json={"error": "Server error"})
         )
 
-        with patch.object(settings, "DEEPSEEK_API_KEY", "test-key"):
-            with patch.object(settings, "DEEPSEEK_MAX_RETRIES", 1):
-                client = DeepSeekClient()
+        with (
+            patch.object(settings, "DEEPSEEK_API_KEY", "test-key"),
+            patch.object(settings, "DEEPSEEK_MAX_RETRIES", 0),
+        ):
+            client = DeepSeekClient()
 
-                with contextlib.suppress(LLMClientError):
-                    await client.chat_completion(messages=[{"role": "user", "content": "Test"}])
+            with pytest.raises(LLMClientError):
+                await client.chat("system", "user")
 
-                status = client.get_llm_status()
-                assert status["last_error_at"] is not None
-                assert status["last_error"] is not None
+            status = get_llm_status()
+            assert status["last_error_at"] is not None
+            assert status["last_error"] is not None
 
-    @respx.mock
-    @pytest.mark.asyncio
-    async def test_exponential_backoff(self):
-        """Test exponential backoff between retries."""
-        call_times = []
-
-        def track_call(*args, **kwargs):
-            import time
-
-            call_times.append(time.time())
-            return Response(500, json={"error": "Server error"})
-
-        respx.post(f"{settings.DEEPSEEK_BASE_URL}/chat/completions").mock(side_effect=track_call)
-
-        with patch.object(settings, "DEEPSEEK_API_KEY", "test-key"):
-            with patch.object(settings, "DEEPSEEK_MAX_RETRIES", 3):
-                with patch.object(settings, "DEEPSEEK_RETRY_BACKOFF_SECONDS", 0.1):
-                    client = DeepSeekClient()
-
-                    with contextlib.suppress(LLMClientError):
-                        await client.chat_completion(messages=[{"role": "user", "content": "Test"}])
-
-                    # Verify backoff increased between retries
-                    if len(call_times) >= 2:
-                        time_diff = call_times[1] - call_times[0]
-                        assert time_diff >= 0.1  # At least the backoff time
+    def test_retry_backoff_increases(self):
+        """Test retry backoff grows with attempts."""
+        with patch.object(settings, "DEEPSEEK_RETRY_BACKOFF_SECONDS", 0.1):
+            client = DeepSeekClient()
+            with patch("random.random", return_value=0.0):
+                assert client._retry_delay(0) == pytest.approx(0.1)
+                assert client._retry_delay(1) == pytest.approx(0.2)

@@ -13,6 +13,15 @@ from app.core.config import settings
 from app.db.base import Base
 
 # Import all models so Alembic can detect them
+from app.models.audit_log import AuditLog  # noqa: F401
+from app.models.evaluation import Evaluation  # noqa: F401
+from app.models.interview_session import InterviewSession  # noqa: F401
+from app.models.message import Message  # noqa: F401
+from app.models.pending_signup import PendingSignup  # noqa: F401
+from app.models.question import Question  # noqa: F401
+from app.models.session_question import SessionQuestion  # noqa: F401
+from app.models.user import User  # noqa: F401
+from app.models.user_question_seen import UserQuestionSeen  # noqa: F401
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

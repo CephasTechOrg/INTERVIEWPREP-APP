@@ -27,15 +27,15 @@ from app.db.session import engine
 
 def check_database_connection():
     """Check if database is accessible."""
-    print("🔍 Checking database connection...")
+    print("[...] Checking database connection...")
     try:
         with engine.connect() as conn:
             result = conn.execute(text("SELECT 1"))
             result.fetchone()
-        print("✅ Database connection successful")
+        print("[OK] Database connection successful")
         return True
     except Exception as e:
-        print(f"❌ Database connection failed: {e}")
+        print(f"[ERROR] Database connection failed: {e}")
         print("\nPlease ensure:")
         print("1. PostgreSQL is running (docker-compose up -d)")
         print("2. DATABASE_URL is correctly set in .env")
@@ -45,13 +45,13 @@ def check_database_connection():
 
 def check_alembic_installed():
     """Check if Alembic is installed."""
-    print("\n🔍 Checking if Alembic is installed...")
+    print("\n[...] Checking if Alembic is installed...")
     try:
         result = subprocess.run(["alembic", "--version"], capture_output=True, text=True, check=True)
-        print(f"✅ Alembic installed: {result.stdout.strip()}")
+        print(f"[OK] Alembic installed: {result.stdout.strip()}")
         return True
     except (subprocess.CalledProcessError, FileNotFoundError):
-        print("❌ Alembic not found")
+        print("[ERROR] Alembic not found")
         print("\nPlease install Alembic:")
         print("  pip install alembic>=1.18.0")
         return False
@@ -64,7 +64,7 @@ def check_existing_migrations():
     migrations = [m for m in migrations if m.name != "__pycache__"]
 
     if migrations:
-        print(f"\n⚠️  Found {len(migrations)} existing migration(s):")
+        print(f"\n[WARN] Found {len(migrations)} existing migration(s):")
         for migration in migrations:
             print(f"   - {migration.name}")
         return True
@@ -73,7 +73,7 @@ def check_existing_migrations():
 
 def create_initial_migration():
     """Create the initial migration."""
-    print("\n📝 Creating initial migration...")
+    print("\n[...] Creating initial migration...")
     try:
         result = subprocess.run(
             ["alembic", "revision", "--autogenerate", "-m", "initial schema"],
@@ -82,11 +82,11 @@ def create_initial_migration():
             check=True,
             cwd=Path(__file__).resolve().parents[1],
         )
-        print("✅ Initial migration created")
+        print("[OK] Initial migration created")
         print(result.stdout)
         return True
     except subprocess.CalledProcessError as e:
-        print(f"❌ Failed to create migration: {e}")
+        print(f"[ERROR] Failed to create migration: {e}")
         print(e.stdout)
         print(e.stderr)
         return False
@@ -94,7 +94,7 @@ def create_initial_migration():
 
 def apply_migration():
     """Apply the migration to the database."""
-    print("\n🚀 Applying migration to database...")
+    print("\n[...] Applying migration to database...")
     try:
         result = subprocess.run(
             ["alembic", "upgrade", "head"],
@@ -103,11 +103,11 @@ def apply_migration():
             check=True,
             cwd=Path(__file__).resolve().parents[1],
         )
-        print("✅ Migration applied successfully")
+        print("[OK] Migration applied successfully")
         print(result.stdout)
         return True
     except subprocess.CalledProcessError as e:
-        print(f"❌ Failed to apply migration: {e}")
+        print(f"[ERROR] Failed to apply migration: {e}")
         print(e.stdout)
         print(e.stderr)
         return False
@@ -115,16 +115,16 @@ def apply_migration():
 
 def verify_migration():
     """Verify the migration was applied."""
-    print("\n🔍 Verifying migration...")
+    print("\n[...] Verifying migration...")
     try:
         result = subprocess.run(
             ["alembic", "current"], capture_output=True, text=True, check=True, cwd=Path(__file__).resolve().parents[1]
         )
-        print("✅ Current migration status:")
+        print("[OK] Current migration status:")
         print(result.stdout)
         return True
     except subprocess.CalledProcessError as e:
-        print(f"❌ Failed to verify migration: {e}")
+        print(f"[ERROR] Failed to verify migration: {e}")
         print(e.stderr)
         return False
 
@@ -145,7 +145,7 @@ def main():
 
     # Step 3: Check for existing migrations
     if check_existing_migrations():
-        response = input("\n⚠️  Migrations already exist. Continue anyway? (y/N): ")
+        response = input("\nMigrations already exist. Continue anyway? (y/N): ")
         if response.lower() != "y":
             print("Aborted.")
             sys.exit(0)
@@ -168,7 +168,7 @@ def main():
         print("To apply later, run: alembic upgrade head")
 
     print("\n" + "=" * 60)
-    print("✅ Alembic setup complete!")
+    print("[OK] Alembic setup complete!")
     print("=" * 60)
     print("\nNext steps:")
     print("1. Review the generated migration in alembic/versions/")

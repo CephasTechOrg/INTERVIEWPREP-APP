@@ -151,7 +151,7 @@ async def start_session(session_id: int, db: Session = Depends(get_db), user=Dep
     try:
         await engine.ensure_question_and_intro(db, s, user_name=getattr(user, "full_name", None))
     except LLMClientError as e:
-        raise HTTPException(status_code=502, detail=f"AI service error: {str(e)}")
+        raise HTTPException(status_code=502, detail=f"AI service error: {str(e)}") from e
     # Return latest interviewer message
     msgs = list_messages(db, session_id, limit=200)
     if not msgs:
@@ -183,7 +183,7 @@ async def send_message(
         await engine.handle_student_message(db, s, content, user_name=getattr(user, "full_name", None))
     except LLMClientError as e:
         # return a clear frontend-friendly message (no crash)
-        raise HTTPException(status_code=502, detail=f"AI service error: {str(e)}")
+        raise HTTPException(status_code=502, detail=f"AI service error: {str(e)}") from e
 
     # Return the interviewer reply we just created
     msgs = list_messages(db, session_id, limit=200)
@@ -209,7 +209,7 @@ async def finalize(session_id: int, db: Session = Depends(get_db), user=Depends(
     try:
         result = await scorer.finalize(db, session_id)
     except LLMClientError as e:
-        raise HTTPException(status_code=502, detail=f"AI service error: {str(e)}")
+        raise HTTPException(status_code=502, detail=f"AI service error: {str(e)}") from e
     session_crud.update_stage(db, s, "done")
     return result
 
@@ -222,7 +222,7 @@ def delete_session(session_id: int, db: Session = Depends(get_db), user=Depends(
 
     try:
         session_crud.delete_session(db, s)
-    except Exception:
-        raise HTTPException(status_code=500, detail="Failed to delete session.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Failed to delete session.") from e
 
     return {"ok": True}

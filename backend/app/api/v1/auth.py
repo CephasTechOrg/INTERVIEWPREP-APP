@@ -32,10 +32,18 @@ from app.utils.audit import log_audit
 router = APIRouter(prefix="/auth")
 
 
+def _rate_key(request: Request, tag: str, email: str | None = None) -> str:
+    ip = request.client.host if request and request.client else "unknown"
+    e = (email or "").strip().lower()
+    if e:
+        return f"{tag}:{ip}:{e}"
+    return f"{tag}:{ip}"
+
+
 @router.post("/signup", response_model=SignupResponse)
 def signup(payload: SignupRequest, request: Request, db: Session = Depends(get_db)):
-    rate_limit(request)
     email = payload.email.strip().lower()
+    rate_limit(request, key=_rate_key(request, "signup", email), max_calls=6, window_sec=60)
     if get_by_email(db, email):
         raise HTTPException(status_code=400, detail="Email already registered.")
     password_hash = hash_password(payload.password)
@@ -61,15 +69,10 @@ def signup(payload: SignupRequest, request: Request, db: Session = Depends(get_d
 
 @router.post("/login", response_model=TokenResponse)
 def login(payload: LoginRequest, request: Request, db: Session = Depends(get_db)):
-    rate_limit(request)
-    user = authenticate(db, payload.email, payload.password)
+    email = payload.email.strip().lower()
+    rate_limit(request, key=_rate_key(request, "login", email), max_calls=10, window_sec=60)
+    user = authenticate(db, email, payload.password)
     if not user:
-        pending = pending_signup_crud.get_by_email(db, payload.email.strip().lower())
-        if pending:
-            raise HTTPException(
-                status_code=403,
-                detail="Email not verified. Enter the 6-digit code to finish signup.",
-            )
         raise HTTPException(status_code=401, detail="Invalid email or password.")
     if not user.is_verified:
         log_audit(db, "login_unverified", user_id=user.id, metadata={"email": user.email}, request=request)
@@ -82,8 +85,8 @@ def login(payload: LoginRequest, request: Request, db: Session = Depends(get_db)
 
 @router.post("/verify", response_model=TokenResponse)
 def verify(payload: VerifyRequest, request: Request, db: Session = Depends(get_db)):
-    rate_limit(request)
     email = payload.email.strip().lower()
+    rate_limit(request, key=_rate_key(request, "verify", email), max_calls=8, window_sec=60)
     code = (payload.code or "").strip()
     if not code.isdigit() or len(code) != 6:
         raise HTTPException(status_code=400, detail="Verification code must be 6 digits.")
@@ -116,8 +119,8 @@ def verify(payload: VerifyRequest, request: Request, db: Session = Depends(get_d
 
 @router.post("/resend-verification")
 def resend_verification(payload: ResendVerificationRequest, request: Request, db: Session = Depends(get_db)):
-    rate_limit(request)
     email = payload.email.strip().lower()
+    rate_limit(request, key=_rate_key(request, "resend", email), max_calls=4, window_sec=60)
     pending = pending_signup_crud.get_by_email(db, email)
     if pending:
         _, code = pending_signup_crud.upsert_pending_signup(
@@ -136,25 +139,23 @@ def resend_verification(payload: ResendVerificationRequest, request: Request, db
         return {"ok": True}
 
     user = get_by_email(db, email)
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found.")
-    if user.is_verified:
-        raise HTTPException(status_code=400, detail="Email already verified. Please sign in.")
-    token = set_verification_token(db, user)
-    with contextlib.suppress(Exception):
-        send_email(
-            user.email,
-            "Verify your email",
-            ("Use this 6-digit code to verify your account:\n\n" f"{token}\n\n" "This code expires in 30 minutes."),
-        )
-    log_audit(db, "resend_verification", user_id=user.id, metadata={"email": user.email}, request=request)
+    if user and not user.is_verified:
+        token = set_verification_token(db, user)
+        with contextlib.suppress(Exception):
+            send_email(
+                user.email,
+                "Verify your email",
+                ("Use this 6-digit code to verify your account:\n\n" f"{token}\n\n" "This code expires in 30 minutes."),
+            )
+        log_audit(db, "resend_verification", user_id=user.id, metadata={"email": user.email}, request=request)
     return {"ok": True}
 
 
 @router.post("/request-password-reset")
 def request_password_reset(payload: ResetRequest, request: Request, db: Session = Depends(get_db)):
-    rate_limit(request)
-    user = get_by_email(db, payload.email)
+    email = payload.email.strip().lower()
+    rate_limit(request, key=_rate_key(request, "reset_request", email), max_calls=6, window_sec=60)
+    user = get_by_email(db, email)
     if not user:
         # do not reveal existence
         return {"ok": True}
@@ -171,7 +172,7 @@ def request_password_reset(payload: ResetRequest, request: Request, db: Session 
 
 @router.post("/reset-password")
 def perform_password_reset(payload: PerformResetRequest, request: Request, db: Session = Depends(get_db)):
-    rate_limit(request)
+    rate_limit(request, key=_rate_key(request, "reset", None), max_calls=6, window_sec=60)
     user = reset_password(db, payload.token, payload.new_password)
     if not user:
         raise HTTPException(status_code=400, detail="Invalid or expired reset token.")

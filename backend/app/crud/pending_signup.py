@@ -3,6 +3,7 @@ from datetime import UTC, datetime, timedelta
 
 from sqlalchemy.orm import Session
 
+from app.core.security import token_matches
 from app.models.pending_signup import PendingSignup
 
 
@@ -49,11 +50,14 @@ def upsert_pending_signup(
 
 def verify_pending(db: Session, email: str, code: str) -> PendingSignup | None:
     pending = get_by_email(db, email)
-    if not pending or pending.verification_code != code:
+    if not pending or not token_matches(code, pending.verification_code):
         return None
     if pending.expires_at:
         now = datetime.now(UTC)
-        if pending.expires_at < now:
+        expires_at = pending.expires_at
+        if expires_at.tzinfo is None:
+            expires_at = expires_at.replace(tzinfo=UTC)
+        if expires_at < now:
             return None
     return pending
 

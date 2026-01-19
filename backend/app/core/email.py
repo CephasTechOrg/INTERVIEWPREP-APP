@@ -1,7 +1,10 @@
+import logging
 import smtplib
 from email.mime.text import MIMEText
 
 from app.core.config import settings
+
+logger = logging.getLogger(__name__)
 
 
 def send_email(to_email: str, subject: str, body: str) -> None:
@@ -15,7 +18,7 @@ def send_email(to_email: str, subject: str, body: str) -> None:
     sender = getattr(settings, "SMTP_FROM", None) or getattr(settings, "SMTP_USERNAME", None)
 
     if not host or not port or not sender:
-        print(f"[EMAIL DEV] To: {to_email}\nSubject: {subject}\n\n{body}")
+        logger.info("[EMAIL DEV] To: %s Subject: %s Body: %s", to_email, subject, body)
         return
 
     msg = MIMEText(body)
@@ -31,4 +34,4 @@ def send_email(to_email: str, subject: str, body: str) -> None:
                 server.login(user, pwd)
             server.sendmail(sender, [to_email], msg.as_string())
     except Exception as e:
-        print(f"[EMAIL ERROR] Failed to send to {to_email}: {e}")
+        logger.exception("EMAIL ERROR: Failed to send to %s: %s", to_email, str(e))

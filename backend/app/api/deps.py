@@ -26,7 +26,7 @@ def get_current_user(db: Session = Depends(get_db), token: str = Depends(oauth2_
         if not email:
             raise HTTPException(status_code=401, detail="Invalid token.")
     except JWTError:
-        raise HTTPException(status_code=401, detail="Invalid token.")
+        raise HTTPException(status_code=401, detail="Invalid token.") from None
 
     user = get_by_email(db, email)
     if not user:

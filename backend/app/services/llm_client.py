@@ -93,7 +93,7 @@ class DeepSeekClient:
         self.backoff = float(getattr(settings, "DEEPSEEK_RETRY_BACKOFF_SECONDS", 0.8) or 0.0)
 
         if settings.ENV == "dev":
-            print("DeepSeek key loaded:", bool(self.api_key))
+            logger.info("DeepSeek key loaded: %s", bool(self.api_key))
 
     async def _post_with_retries(self, url: str, headers: dict, payload: dict) -> httpx.Response:
         last_error: Exception | None = None
