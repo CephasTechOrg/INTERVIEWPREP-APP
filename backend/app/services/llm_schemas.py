@@ -27,6 +27,104 @@ class QuickRubric(BaseModel):
 
 InterviewAction = Literal["ASK_MAIN_QUESTION", "FOLLOWUP", "MOVE_TO_NEXT_QUESTION", "WRAP_UP"]
 InterviewIntent = Literal["CLARIFY", "DEEPEN", "CHALLENGE", "ADVANCE", "WRAP_UP"]
+
+WarmupTone = Literal["positive", "neutral", "negative", "stressed", "excited", "tired"]
+WarmupEnergy = Literal["low", "medium", "high"]
+
+
+def _normalize_tone(raw) -> str:  # noqa: ANN001
+    if raw is None:
+        return "neutral"
+    key = str(raw).strip().lower()
+    if not key:
+        return "neutral"
+    mapping = {
+        "positive": "positive",
+        "happy": "positive",
+        "good": "positive",
+        "great": "positive",
+        "neutral": "neutral",
+        "ok": "neutral",
+        "okay": "neutral",
+        "fine": "neutral",
+        "negative": "negative",
+        "sad": "negative",
+        "down": "negative",
+        "upset": "negative",
+        "stressed": "stressed",
+        "anxious": "stressed",
+        "nervous": "stressed",
+        "overwhelmed": "stressed",
+        "excited": "excited",
+        "pumped": "excited",
+        "energized": "excited",
+        "tired": "tired",
+        "sleepy": "tired",
+        "exhausted": "tired",
+    }
+    return mapping.get(key, "neutral")
+
+
+def _normalize_energy(raw) -> str:  # noqa: ANN001
+    if raw is None:
+        return "medium"
+    key = str(raw).strip().lower()
+    if not key:
+        return "medium"
+    mapping = {
+        "low": "low",
+        "low energy": "low",
+        "tired": "low",
+        "sleepy": "low",
+        "medium": "medium",
+        "mid": "medium",
+        "moderate": "medium",
+        "high": "high",
+        "high energy": "high",
+        "energetic": "high",
+        "excited": "high",
+        "pumped": "high",
+    }
+    return mapping.get(key, "medium")
+
+
+class WarmupToneProfile(BaseModel):
+    tone: WarmupTone = Field(default="neutral")
+    energy: WarmupEnergy = Field(default="medium")
+    confidence: float = Field(default=0.6, ge=0, le=1)
+
+    @field_validator("tone", mode="before")
+    @classmethod
+    def _coerce_tone(cls, v):  # noqa: ANN001
+        return _normalize_tone(v)
+
+    @field_validator("energy", mode="before")
+    @classmethod
+    def _coerce_energy(cls, v):  # noqa: ANN001
+        return _normalize_energy(v)
+
+    @field_validator("confidence", mode="before")
+    @classmethod
+    def _coerce_confidence(cls, v):  # noqa: ANN001
+        if v is None:
+            return 0.6
+        try:
+            n = float(v)
+        except Exception:
+            return 0.6
+        return max(0.0, min(1.0, n))
+
+
+class WarmupSmalltalkProfile(WarmupToneProfile):
+    topic: str = Field(default="")
+    smalltalk_question: str = Field(default="")
+
+    @field_validator("topic", "smalltalk_question", mode="before")
+    @classmethod
+    def _coerce_str(cls, v):  # noqa: ANN001
+        if v is None:
+            return ""
+        return str(v).strip()
 _FOCUS_KEYS = {
     "approach",
     "constraints",

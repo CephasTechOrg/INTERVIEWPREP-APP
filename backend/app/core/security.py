@@ -28,7 +28,16 @@ def hash_password(password: str) -> str:
 
 def verify_password(password: str, hashed: str) -> bool:
     safe = _prehash_password(password)
-    return pwd_context.verify(safe, hashed)
+    try:
+        if pwd_context.verify(safe, hashed):
+            return True
+    except Exception:
+        return False
+    # Legacy fallback for hashes created before pre-hashing was added.
+    try:
+        return pwd_context.verify(password, hashed)
+    except Exception:
+        return False
 
 def hash_token(token: str) -> str:
     key = settings.SECRET_KEY.encode("utf-8")

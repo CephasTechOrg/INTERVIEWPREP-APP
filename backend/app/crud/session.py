@@ -25,6 +25,7 @@ def create_session(
     company_style: str,
     difficulty: str,
     behavioral_questions_target: int = 2,
+    interviewer: dict | None = None,
 ) -> InterviewSession:
     # Ensure historical sessions contribute to "seen questions" so new sessions
     # don't repeatedly start with the same prompt.
@@ -32,6 +33,10 @@ def create_session(
         user_question_seen_crud.backfill_user_seen_questions(db, user_id=user_id)
 
     behavioral_target = max(0, min(int(behavioral_questions_target or 0), 3))
+
+    skill_state: dict = {}
+    if isinstance(interviewer, dict) and interviewer:
+        skill_state["interviewer"] = interviewer
 
     s = InterviewSession(
         user_id=user_id,
@@ -46,6 +51,7 @@ def create_session(
         max_questions=7,
         max_followups_per_question=2,
         behavioral_questions_target=behavioral_target,
+        skill_state=skill_state,
     )
     db.add(s)
     db.commit()

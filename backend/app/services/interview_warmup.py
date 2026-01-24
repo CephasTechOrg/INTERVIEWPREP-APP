@@ -45,14 +45,17 @@ def set_state(db: Session, session, step: int, done: bool) -> None:
     db.refresh(session)
 
 
-def prompt_for_step(step: int, user_name: str | None = None) -> str | None:
+def prompt_for_step(step: int, user_name: str | None = None, interviewer_name: str | None = None) -> str | None:
     """
     step=0 -> greeting
-    step=1 -> reserved (behavioral warmup handled by InterviewEngine)
+    step=1 -> small-talk follow-up handled by InterviewEngine
+    step=2 -> behavioral warmup handled by InterviewEngine
     """
     name = (user_name or "").strip() or "there"
     if step <= 0:
-        return f"Hi {name}! How are you doing today?"
+        if interviewer_name:
+            return f"Hi {name}! I'm {interviewer_name}, your interviewer today. How are you doing?"
+        return f"Hi {name}! I'm your interviewer today. How are you doing?"
     if step == 1:
         return None
     return None

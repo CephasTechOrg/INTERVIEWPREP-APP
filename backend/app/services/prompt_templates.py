@@ -56,12 +56,13 @@ def _company_focus_checklist(company_style: str) -> str:
     return "Follow-up priorities: approach clarity, constraints, correctness, complexity, edge cases, and trade-offs."
 
 
-def interviewer_system_prompt(company_style: str, role: str) -> str:
+def interviewer_system_prompt(company_style: str, role: str, interviewer_name: str | None = None) -> str:
     label = _company_label(company_style)
     style_guide = _company_style_guide(company_style)
     focus = _company_focus_checklist(company_style)
+    name_line = f"You are {interviewer_name}, a technical interviewer." if interviewer_name else "You are a technical interviewer."
     return f"""
-You are a technical interviewer conducting a {label} software engineering interview for a {role}.
+{name_line} You are conducting a {label} software engineering interview for a {role}.
 Style guide: {style_guide}
 Focus priorities: {focus}
 Rules:
@@ -78,30 +79,36 @@ Rules:
 """.strip()
 
 
-def warmup_system_prompt(company_style: str, role: str) -> str:
+def warmup_system_prompt(company_style: str, role: str, interviewer_name: str | None = None) -> str:
     label = _company_label(company_style)
     style_guide = _company_style_guide(company_style)
     focus = _company_focus_checklist(company_style)
+    intro = f"You are {interviewer_name}, a friendly interviewer" if interviewer_name else "You are a friendly interviewer"
     return f"""
-You are a friendly interviewer for a {label} {role} interview.
+{intro} for a {label} {role} interview.
 Style guide: {style_guide}
 Focus priorities: {focus}
 Your goal is to quickly acknowledge the candidate and set the tone before starting.
 Rules:
 - Keep responses short (1-2 sentences before any question).
 - Be warm, natural, and specific to what the candidate said.
-- When replying after the greeting, include "I am doing well." and "Today I am your interviewer."
-- Then ask the provided behavioral question.
+- After the greeting, acknowledge the candidate and transition directly into the provided behavioral question.
 - Do NOT use markdown in your response.
 """.strip()
 
 
-def warmup_prompt_user_prompt(user_name: str | None) -> str:
+def warmup_prompt_user_prompt(user_name: str | None, interviewer_name: str | None = None) -> str:
     name_hint = user_name or "there"
+    intro_hint = (
+        f"Introduce yourself as {interviewer_name} (the interviewer for today)."
+        if interviewer_name
+        else "Briefly introduce yourself as the interviewer for today."
+    )
     return f"""
 Start the warmup.
 Greet the candidate by name if available ({name_hint}).
-Ask how they are doing. Keep it brief and friendly.
+{intro_hint} (one short sentence).
+Ask one short check-in question (e.g., how they're doing or how their day is going).
 """.strip()
 
 
@@ -110,21 +117,75 @@ def warmup_reply_user_prompt(
     user_name: str | None,
     behavioral_question: str,
     focus_line: str | None = None,
+    tone_line: str | None = None,
 ) -> str:
     name_hint = user_name or "there"
     focus_hint = f"Focus line to include (if provided): {focus_line}" if focus_line else "Focus line: none"
+    tone_hint = f"Tone line to include (if provided): {tone_line}" if tone_line else "Tone line: none"
     return f"""
 Candidate said:
 {candidate_text}
 
-Greet the candidate by name if available ({name_hint}).
-Include exactly:
-- "I am doing well."
-- "Today I am your interviewer."
+Address the candidate by name if appropriate ({name_hint}); avoid a full greeting.
+Do not re-introduce yourself (you already did in the greeting).
+If a tone line is provided, include it verbatim as the first sentence (it counts as the acknowledgment).
+Otherwise, acknowledge the candidate in one short sentence.
 If a focus line is provided, include it as a short sentence before the question.
+{tone_hint}
+{focus_hint}
 Then ask this behavioral question verbatim:
 {behavioral_question}
-{focus_hint}
+""".strip()
+
+
+def warmup_smalltalk_system_prompt() -> str:
+    return """
+You are a warmup small-talk selector for an interview. Return ONLY valid JSON.
+Classify tone and energy, and propose a short small-talk question.
+Question rules:
+- One sentence, <= 12 words, must end with a question mark.
+- Friendly and light; avoid sensitive topics (health, politics, religion, money).
+Allowed tones: positive, neutral, negative, stressed, excited, tired.
+Allowed energy: low, medium, high.
+""".strip()
+
+
+def warmup_smalltalk_user_prompt(candidate_text: str) -> str:
+    return f"""
+Candidate message:
+{candidate_text}
+
+Return JSON with shape:
+{{
+  "tone": "positive|neutral|negative|stressed|excited|tired",
+  "energy": "low|medium|high",
+  "topic": "work|school|interview_prep|project|day|weekend|commute|weather|other",
+  "smalltalk_question": "string",
+  "confidence": 0.0-1.0
+}}
+""".strip()
+
+
+def warmup_tone_classifier_system_prompt() -> str:
+    return """
+You are a tone classifier. Return ONLY valid JSON.
+Classify the candidate's tone and energy level.
+Allowed tones: positive, neutral, negative, stressed, excited, tired.
+Allowed energy: low, medium, high.
+""".strip()
+
+
+def warmup_tone_classifier_user_prompt(candidate_text: str) -> str:
+    return f"""
+Candidate message:
+{candidate_text}
+
+Return JSON with shape:
+{{
+  "tone": "positive|neutral|negative|stressed|excited|tired",
+  "energy": "low|medium|high",
+  "confidence": 0.0-1.0
+}}
 """.strip()
 
 

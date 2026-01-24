@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./assets/css/pro.css"/>
   <link rel="stylesheet" href="./assets/css/performance.css"/>
   <link rel="stylesheet" href="./assets/css/responsive.css"/>
+  <link rel="stylesheet" href="./assets/css/mobile.css"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
 </head>
 <body>
@@ -162,6 +163,13 @@
                       <option value="3">3</option>
                     </select>
                   </div>
+
+                  <div class="form-group full-width">
+                    <label class="form-label">
+                      <i class="fas fa-user-group"></i> Choose Interviewer
+                    </label>
+                    <div class="interviewer-grid" id="interviewerGrid"></div>
+                  </div>
                 </div>
 
                 <div class="coverage-hint" id="coverageHint">
@@ -171,39 +179,6 @@
 
                 <button class="btn btn-primary btn-start" id="startInterviewBtn">
                   <i class="fas fa-play"></i> Start Interview Session
-                </button>
-              </div>
-            </div>
-
-            <div class="dashboard-card profile-card">
-              <div class="card-header">
-                <h3 class="card-title">Your Profile</h3>
-                <p class="card-subtitle">Manage your preferences and settings</p>
-              </div>
-              <div class="card-body">
-                <div class="profile-info">
-                  <div class="profile-avatar">
-                    <i class="fas fa-user"></i>
-                  </div>
-                  <div class="profile-details">
-                    <div class="profile-name" id="dashProfileName">-</div>
-                    <div class="profile-email" id="dashProfileEmail">-</div>
-                  </div>
-                </div>
-
-                <div class="profile-stats">
-                  <div class="stat-item">
-                    <div class="stat-label">Role Preference</div>
-                    <div class="stat-value" id="dashRolePref">-</div>
-                  </div>
-                  <div class="stat-item">
-                    <div class="stat-label">Interviews Completed</div>
-                    <div class="stat-value">-</div>
-                  </div>
-                </div>
-
-                <button class="btn btn-outline btn-edit-profile" id="editProfileBtn">
-                  <i class="fas fa-user-pen"></i> Edit Profile
                 </button>
               </div>
             </div>
@@ -538,9 +513,22 @@
             </select>
           </div>
 
+          <div class="form-group">
+            <label>Profile Photo</label>
+            <div class="avatar-input">
+              <div class="avatar-preview" id="profileAvatarPreview">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="avatar-actions">
+                <input id="profileAvatarInput" class="form-control" type="file" accept="image/*" />
+                <button class="btn btn-outline btn-small" type="button" id="profileAvatarClearBtn">Remove Photo</button>
+              </div>
+            </div>
+          </div>
+
           <div class="form-note">
             <i class="fas fa-info-circle"></i>
-            Saved locally in your browser (no backend changes)
+            Saved to your account and synced across sessions
           </div>
         </div>
 
@@ -566,6 +554,8 @@
   <script src="./assets/js/api.js"></script>
   <script src="./assets/js/charts.js"></script>
   <script src="./assets/js/voice.js"></script>
-  <script src="./assets/js/interview.js"></script>
+  <script src="./assets/js/interview.part1.js"></script>
+  <script src="./assets/js/interview.part2.js"></script>
+  <script src="./assets/js/interview.part3.js"></script>
 </body>
 </html>

@@ -32,6 +32,21 @@ class TestInterviewEngine:
         engine = InterviewEngine()
         assert engine.llm is not None
 
+    def test_warmup_profile_keeps_zero_confidence(self):
+        """Test warmup profile preserves 0.0 confidence values."""
+        engine = InterviewEngine()
+        session = InterviewSession(
+            user_id=1,
+            track="swe_intern",
+            company_style="general",
+            difficulty="easy",
+            stage="intro",
+        )
+        session.skill_state = {"warmup": {"tone": "neutral", "energy": "low", "tone_confidence": 0.0}}
+        profile = engine._warmup_profile_from_state(session)
+        assert profile is not None
+        assert profile.confidence == 0.0
+
     def test_select_warmup_question(self, db: Session, test_user: User, sample_questions):
         """Test warmup question selection."""
         session = InterviewSession(
@@ -293,12 +308,38 @@ class TestInterviewEngine:
 
         asyncio.run(engine.handle_student_message(db, session, "Doing well, thanks.", user_name="Test User"))
         db.refresh(session)
+        assert session.stage == "warmup_smalltalk"
+
+        asyncio.run(
+            engine.handle_student_message(db, session, "Pretty good, just wrapped some work.", user_name="Test User")
+        )
+        db.refresh(session)
         assert session.stage == "warmup_behavioral"
 
         asyncio.run(engine.handle_student_message(db, session, "Situation task action result.", user_name="Test User"))
         db.refresh(session)
         assert session.stage == "candidate_solution"
         assert session.questions_asked_count == 1
+
+    def test_warmup_smalltalk_fallback(self, db: Session, test_user: User, sample_questions):
+        """Test small-talk fallback when the LLM is unavailable."""
+        session = InterviewSession(
+            user_id=test_user.id, track="swe_intern", company_style="general", difficulty="easy", stage="intro"
+        )
+        db.add(session)
+        db.commit()
+
+        engine = InterviewEngine()
+        engine.llm.api_key = None
+
+        asyncio.run(engine.ensure_question_and_intro(db, session, user_name="Test User"))
+        db.refresh(session)
+        assert session.stage == "warmup"
+
+        msg = asyncio.run(engine.handle_student_message(db, session, "I'm doing okay.", user_name="Test User"))
+        db.refresh(session)
+        assert session.stage == "warmup_smalltalk"
+        assert "?" in msg
 
 
 @pytest.mark.integration

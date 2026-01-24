@@ -292,7 +292,7 @@ class TestVoiceEndpoints:
 
     def test_tts_endpoint_exists(self, client: TestClient, auth_headers):
         """Test TTS endpoint is accessible."""
-        response = client.post("/api/v1/voice/tts", headers=auth_headers, json={"text": "Hello, this is a test."})
+        response = client.post("/api/v1/tts", headers=auth_headers, json={"text": "Hello, this is a test."})
 
         # Should return 200 or appropriate status
         assert response.status_code in [200, 400, 404, 501]

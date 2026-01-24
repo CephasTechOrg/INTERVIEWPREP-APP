@@ -85,6 +85,10 @@ async function handleLogin(e) {
         );
       }
     } catch {}
+    try {
+      await syncProfileToServer(email);
+    } catch {}
+
     setNotice("#login_notice", "Signed in. Redirecting...", "ok");
     showLoginOverlay(true);
     setTimeout(() => (window.location.href = "./interview.html"), 450);
@@ -96,10 +100,33 @@ async function handleLogin(e) {
       showView("verify");
       if (email) {
         setNotice("#verify_notice", "Sending verification code...", "");
-        handleResend().catch(() => {});
+        handleResend().catch((e) => console.warn("[handleResend]", e?.message || e));
       }
     }
   }
+}
+
+async function syncProfileToServer(email) {
+  const token = getToken?.();
+  if (!token || !email) return;
+  const key = `user_profile_${email.toLowerCase()}`;
+  const raw = localStorage.getItem(key);
+  if (!raw) return;
+  const local = JSON.parse(raw);
+  const extras = { ...local };
+  delete extras.email;
+  delete extras.full_name;
+  delete extras.role_pref;
+  delete extras.updated_at;
+
+  await apiFetch("/users/me", {
+    method: "PATCH",
+    body: {
+      full_name: (local.full_name || "").trim() || null,
+      role_pref: local.role_pref || "SWE Intern",
+      profile: extras,
+    },
+  });
 }
 
 function handleLogout() {
@@ -252,8 +279,15 @@ async function handleResetRequest(e) {
   if (!email) return;
   setNotice("#reset_request_notice", "Requesting reset...", "");
   try {
-    await apiFetch("/auth/request-password-reset", { method: "POST", auth: false, body: { email } });
-    setNotice("#reset_request_notice", "If the email exists, a reset token was sent (or printed in console).", "ok");
+    const data = await apiFetch("/auth/request-password-reset", { method: "POST", auth: false, body: { email } });
+    const tokenEl = qs("#rp_token");
+    if (data?.token && tokenEl && !tokenEl.value) {
+      tokenEl.value = data.token;
+    }
+    const msg = data?.token
+      ? "Reset token ready. Enter a new password below."
+      : "If the email exists, a reset token was sent (or printed in console).";
+    setNotice("#reset_request_notice", msg, "ok");
   } catch (err) {
     setNotice("#reset_request_notice", err.message, "error");
   }
@@ -273,7 +307,31 @@ async function handleReset(e) {
   }
 }
 
+// Theme utilities for login page
+const THEME_TOGGLE_KEY = "dark_theme";
+
+function loadThemeToggle() {
+  try {
+    return localStorage.getItem(THEME_TOGGLE_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function applyTheme(isDark) {
+  const html = document.documentElement;
+  if (isDark) {
+    html.setAttribute("data-theme", "dark");
+  } else {
+    html.setAttribute("data-theme", "light");
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Apply theme first
+  const savedTheme = loadThemeToggle();
+  applyTheme(savedTheme);
+
   const suForm = qs("#signup_form");
   const liForm = qs("#login_form");
   const logoutBtn = qs("#btn_logout");
@@ -324,6 +382,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const params = new URLSearchParams(window.location.search);
   const viewParam = params.get("view");
+  const tokenParam = params.get("token");
+  const emailParam = params.get("email");
   const hash = window.location.hash.replace("#", "");
   const requestedView = viewParam || hash;
   const lastEmail = (() => {
@@ -339,8 +399,9 @@ document.addEventListener("DOMContentLoaded", () => {
     focusVerificationInputs();
     return;
   }
-  if (requestedView === "reset") {
-    if (qs("#rp_email") && lastEmail) qs("#rp_email").value = lastEmail;
+  if (requestedView === "reset" || tokenParam) {
+    if (qs("#rp_email")) qs("#rp_email").value = emailParam || lastEmail;
+    if (qs("#rp_token") && tokenParam) qs("#rp_token").value = tokenParam;
     showView("reset");
     return;
   }

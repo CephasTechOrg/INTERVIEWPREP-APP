@@ -2,7 +2,7 @@ import logging
 from contextlib import asynccontextmanager, suppress
 from pathlib import Path
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.router import router as v1_router
@@ -29,22 +29,29 @@ def _parse_origins(raw: str | None) -> list[str]:
 
 
 origins = _parse_origins(settings.FRONTEND_ORIGINS)
-if not origins and settings.ENV == "dev":
-    origins = [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:5500",
-        "http://127.0.0.1:5500",
-        "http://localhost:8000",
-        "http://127.0.0.1:8000",
-        "null",
-    ]
+origin_regex = None
+if settings.ENV == "dev":
+    if not origins:
+        origins = [
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "http://localhost:5500",
+            "http://127.0.0.1:5500",
+            "http://localhost:5501",
+            "http://127.0.0.1:5501",
+            "http://localhost:8000",
+            "http://127.0.0.1:8000",
+            "null",
+        ]
+    # Allow any localhost/127.0.0.1 port in dev so preflights don't 400.
+    origin_regex = r"^https?://(localhost|127\\.0\\.0\\.1)(:\\d+)?$|^null$"
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
+    allow_origin_regex=origin_regex,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -52,6 +59,18 @@ app.add_middleware(
 
 @app.middleware("http")
 async def add_security_headers(request: Request, call_next):
+    if settings.ENV == "dev" and request.method == "OPTIONS":
+        origin = request.headers.get("origin", "*")
+        req_method = request.headers.get("access-control-request-method", "*")
+        req_headers = request.headers.get("access-control-request-headers", "*")
+        headers = {
+            "Access-Control-Allow-Origin": origin,
+            "Access-Control-Allow-Methods": req_method,
+            "Access-Control-Allow-Headers": req_headers,
+            "Access-Control-Max-Age": "86400",
+            "Vary": "Origin",
+        }
+        return Response(status_code=204, headers=headers)
     response = await call_next(request)
     response.headers.setdefault("X-Content-Type-Options", "nosniff")
     response.headers.setdefault("X-Frame-Options", "DENY")

@@ -1,10 +1,12 @@
 import contextlib
+from urllib.parse import quote
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_db
 from app.api.rate_limit import rate_limit
+from app.core.config import settings
 from app.core.email import send_email
 from app.core.security import create_access_token, hash_password
 from app.crud import pending_signup as pending_signup_crud
@@ -160,14 +162,28 @@ def request_password_reset(payload: ResetRequest, request: Request, db: Session 
         # do not reveal existence
         return {"ok": True}
     token = set_reset_token(db, user)
+    reset_link = None
+    if settings.FRONTEND_URL:
+        base = settings.FRONTEND_URL.rstrip("/")
+        reset_link = f"{base}/login.html?view=reset&token={quote(token)}&email={quote(user.email)}"
     with contextlib.suppress(Exception):
-        send_email(
-            user.email,
-            "Reset your password",
-            f"Use this token to reset your password:\n\n{token}\n\nToken expires in 30 minutes.",
-        )
+        lines = [
+            "Use this token to reset your password:",
+            "",
+            token,
+            "",
+            "Token expires in 30 minutes.",
+        ]
+        if reset_link:
+            lines.extend(["", "Or open this link:", reset_link])
+        send_email(user.email, "Reset your password", "\n".join(lines))
     log_audit(db, "request_password_reset", user_id=user.id, metadata={"email": user.email}, request=request)
-    return {"ok": True}
+    resp: dict[str, str | bool] = {"ok": True}
+    if settings.ENV == "dev":
+        resp["token"] = token
+        if reset_link:
+            resp["reset_link"] = reset_link
+    return resp
 
 
 @router.post("/reset-password")

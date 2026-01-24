@@ -22,13 +22,18 @@ def create_user(
     full_name: str | None,
     is_verified: bool = False,
     verification_code: str | None = None,
+    role_pref: str | None = None,
+    profile: dict | None = None,
 ) -> User:
     token = None
     if not is_verified:
         token = verification_code or _generate_verification_code()
+    role_pref = (role_pref or "").strip() or "SWE Intern"
     user = User(
         email=email,
         full_name=full_name,
+        role_pref=role_pref,
+        profile=profile or {},
         password_hash=hash_password(password),
         is_verified=is_verified,
         verification_token=token,
@@ -46,13 +51,18 @@ def create_user_from_hash(
     full_name: str | None,
     is_verified: bool = True,
     verification_code: str | None = None,
+    role_pref: str | None = None,
+    profile: dict | None = None,
 ) -> User:
     token = None
     if not is_verified:
         token = verification_code or _generate_verification_code()
+    role_pref = (role_pref or "").strip() or "SWE Intern"
     user = User(
         email=email,
         full_name=full_name,
+        role_pref=role_pref,
+        profile=profile or {},
         password_hash=password_hash,
         is_verified=is_verified,
         verification_token=token,
@@ -70,6 +80,30 @@ def authenticate(db: Session, email: str, password: str) -> User | None:
     if not verify_password(password, user.password_hash):
         return None
     user.last_login_at = datetime.now(UTC)
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    return user
+
+
+def update_user_profile(
+    db: Session,
+    user: User,
+    full_name: str | None = None,
+    role_pref: str | None = None,
+    profile: dict | None = None,
+) -> User:
+    if full_name is not None:
+        cleaned = full_name.strip()
+        user.full_name = cleaned or None
+    if role_pref is not None:
+        cleaned = role_pref.strip()
+        user.role_pref = cleaned or "SWE Intern"
+    if profile is not None:
+        existing = user.profile if isinstance(user.profile, dict) else {}
+        merged = dict(existing)
+        merged.update(profile)
+        user.profile = merged
     db.add(user)
     db.commit()
     db.refresh(user)

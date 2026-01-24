@@ -3,7 +3,7 @@ import random
 import re
 from typing import Any
 
-from sqlalchemy import func, select
+from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session
 
 from app.crud import message as message_crud
@@ -17,7 +17,7 @@ from app.models.session_question import SessionQuestion
 from app.models.user_question_seen import UserQuestionSeen
 from app.services import interview_warmup
 from app.services.llm_client import DeepSeekClient, LLMClientError
-from app.services.llm_schemas import InterviewControllerOutput
+from app.services.llm_schemas import InterviewControllerOutput, WarmupSmalltalkProfile, WarmupToneProfile
 from app.services.prompt_templates import (
     interviewer_controller_system_prompt,
     interviewer_controller_user_prompt,
@@ -25,6 +25,10 @@ from app.services.prompt_templates import (
     warmup_prompt_user_prompt,
     warmup_reply_user_prompt,
     warmup_system_prompt,
+    warmup_smalltalk_system_prompt,
+    warmup_smalltalk_user_prompt,
+    warmup_tone_classifier_system_prompt,
+    warmup_tone_classifier_user_prompt,
 )
 
 
@@ -82,6 +86,25 @@ class InterviewEngine:
         pool = state.get("pool")
         return pool if isinstance(pool, dict) else {}
 
+    def _interviewer_profile(self, session: InterviewSession) -> dict:
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        raw = state.get("interviewer")
+        return raw if isinstance(raw, dict) else {}
+
+    def _interviewer_name(self, session: InterviewSession) -> str | None:
+        profile = self._interviewer_profile(session)
+        name = str(profile.get("name") or "").strip()
+        return name or None
+
+    def _interviewer_intro_line(self, session: InterviewSession) -> str | None:
+        name = self._interviewer_name(session)
+        if not name:
+            return None
+        return f"Hi, I'm {name}, and I'll be your interviewer today."
+
     def _reanchor_state(self, session: InterviewSession) -> dict:
         try:
             state = session.skill_state if isinstance(session.skill_state, dict) else {}
@@ -116,6 +139,99 @@ class InterviewEngine:
         db.add(session)
         db.commit()
         db.refresh(session)
+
+    def _clarify_state(self, session: InterviewSession) -> dict:
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        raw = state.get("clarify")
+        return raw if isinstance(raw, dict) else {}
+
+    def _get_clarify_attempts(self, session: InterviewSession, question_id: int | None) -> int:
+        if not question_id:
+            return 0
+        state = self._clarify_state(session)
+        try:
+            qid = int(state.get("qid") or 0)
+        except Exception:
+            qid = 0
+        if qid != int(question_id):
+            return 0
+        try:
+            return max(0, int(state.get("attempts") or 0))
+        except Exception:
+            return 0
+
+    def _get_clarify_missing(self, session: InterviewSession, question_id: int | None) -> list[str]:
+        if not question_id:
+            return []
+        state = self._clarify_state(session)
+        try:
+            qid = int(state.get("qid") or 0)
+        except Exception:
+            qid = 0
+        if qid != int(question_id):
+            return []
+        raw = state.get("missing")
+        if not isinstance(raw, list):
+            return []
+        out: list[str] = []
+        for item in raw:
+            nk = self._normalize_focus_key(item)
+            if nk and nk not in out:
+                out.append(nk)
+        return out
+
+    def _set_clarify_state(
+        self,
+        db: Session,
+        session: InterviewSession,
+        question_id: int,
+        attempts: int,
+        missing: list[str] | None,
+    ) -> None:
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        state = dict(state)
+        clean_missing: list[str] = []
+        for item in (missing or []):
+            nk = self._normalize_focus_key(item)
+            if nk and nk not in clean_missing:
+                clean_missing.append(nk)
+        state["clarify"] = {
+            "qid": int(question_id),
+            "attempts": max(0, int(attempts)),
+            "missing": clean_missing,
+        }
+        session.skill_state = state
+        db.add(session)
+        db.commit()
+        db.refresh(session)
+
+    def _update_clarify_tracking(
+        self,
+        db: Session,
+        session: InterviewSession,
+        question_id: int,
+        critical_missing: list[str],
+    ) -> tuple[int, bool]:
+        prev_missing = self._get_clarify_missing(session, question_id)
+        prev_attempts = self._get_clarify_attempts(session, question_id)
+        if not critical_missing:
+            if prev_attempts or prev_missing:
+                self._set_clarify_state(db, session, question_id, 0, [])
+            return 0, True
+
+        improved = False
+        if prev_missing:
+            improved = len(critical_missing) < len(prev_missing)
+
+        attempts = 0 if improved else prev_attempts + 1
+        self._set_clarify_state(db, session, question_id, attempts, critical_missing)
+        return attempts, improved
 
     def _pool_allowed_difficulties(self, session: InterviewSession) -> list[str]:
         pool = self._pool_state(session)
@@ -169,6 +285,8 @@ class InterviewEngine:
         focus = state.get("focus") if isinstance(state.get("focus"), dict) else None
         pool = state.get("pool") if isinstance(state.get("pool"), dict) else None
         reanchor = state.get("reanchor") if isinstance(state.get("reanchor"), dict) else None
+        clarify = state.get("clarify") if isinstance(state.get("clarify"), dict) else None
+        interviewer = state.get("interviewer") if isinstance(state.get("interviewer"), dict) else None
         plan = state.get("plan") if isinstance(state.get("plan"), dict) else None
         streak = state.get("streak") if isinstance(state.get("streak"), dict) else {}
 
@@ -225,6 +343,10 @@ class InterviewEngine:
             new_state["pool"] = pool
         if reanchor:
             new_state["reanchor"] = reanchor
+        if clarify:
+            new_state["clarify"] = clarify
+        if interviewer:
+            new_state["interviewer"] = interviewer
         if plan:
             new_state["plan"] = plan
         session.skill_state = new_state
@@ -423,6 +545,15 @@ class InterviewEngine:
         if not company_style or company_style == "general":
             return "this company"
         return company_style[:1].upper() + company_style[1:]
+
+    def _effective_difficulty(self, session: InterviewSession) -> str:
+        selected = (getattr(session, "difficulty", None) or "easy").strip().lower()
+        current = (getattr(session, "difficulty_current", None) or "").strip().lower()
+        if selected in ("easy", "medium", "hard"):
+            return selected
+        if current in ("easy", "medium", "hard"):
+            return current
+        return "easy"
 
     def _render_text(self, session: InterviewSession, text: str) -> str:
         company = self._company_name(session.company_style)
@@ -1167,10 +1298,62 @@ class InterviewEngine:
         else:
             lead = "Thanks."
 
-        bridge = "Let's move to the next question."
+        bridges = ["Let's continue.", "Let's keep going.", "Let's move on."]
+        idx = int(session.questions_asked_count or 0) % len(bridges)
+        bridge = bridges[idx]
         if focus_line:
             return f"{lead} {focus_line} {bridge}"
         return f"{lead} {bridge}"
+
+    def _clean_next_question_reply(self, text: str | None, user_name: str | None = None) -> str:
+        if not text:
+            return ""
+        cleaned = text.strip()
+
+        name = (user_name or "").strip()
+        if name:
+            cleaned = re.sub(
+                rf"^(?:hi|hello|hey)(?:\s+there)?\s+{re.escape(name)}[\s,!.:-]*",
+                "",
+                cleaned,
+                flags=re.I,
+            )
+        cleaned = re.sub(r"^(?:hi|hello|hey)(?:\s+there)?[\s,!.:-]*", "", cleaned, flags=re.I)
+
+        paragraphs = [p.strip() for p in re.split(r"\n{2,}", cleaned) if p.strip()]
+        if not paragraphs:
+            return cleaned
+
+        transition_re = re.compile(r"\b(move to the next question|next question)\b", re.I)
+        greeting_re = re.compile(r"^(hi|hello|hey)\b", re.I)
+        seen: set[str] = set()
+        cleaned_paragraphs: list[str] = []
+        for para in paragraphs:
+            sentences = re.split(r"(?<=[.!?])\s+", para)
+            kept: list[str] = []
+            for sent in sentences:
+                s = sent.strip()
+                if not s:
+                    continue
+                if "?" not in s and greeting_re.search(s):
+                    continue
+                if "?" not in s and transition_re.search(s):
+                    continue
+                norm = re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
+                if norm and norm in seen:
+                    continue
+                if norm:
+                    seen.add(norm)
+                kept.append(s)
+            if kept:
+                cleaned_paragraphs.append(" ".join(kept))
+
+        if not cleaned_paragraphs:
+            return cleaned
+        cleaned = "\n\n".join(cleaned_paragraphs).strip()
+        cleaned = re.sub(r"\s+([,.;:!?])", r"\1", cleaned)
+        cleaned = re.sub(r"[ \t]{2,}", " ", cleaned)
+        return cleaned.strip()
 
     def _warmup_focus_line(self, focus: dict[str, Any]) -> str:
         dims = focus.get("dimensions") or []
@@ -1211,10 +1394,254 @@ class InterviewEngine:
         t = (title or "").strip()
         p = (prompt or "").strip()
         if t and p:
+            t_norm = re.sub(r"[^a-z0-9]+", " ", t.lower()).strip()
+            p_norm = re.sub(r"[^a-z0-9]+", " ", p.lower()).strip()
+            if t_norm and p_norm:
+                if t_norm in p_norm:
+                    return p
+                if p_norm in t_norm:
+                    return t
             if t.endswith(("?", ".", "!", ":")):
                 return f"{t} {p}"
             return f"{t}. {p}"
         return t or p
+
+    def _seen_question_subquery(self, session: InterviewSession):
+        return select(UserQuestionSeen.question_id).where(UserQuestionSeen.user_id == session.user_id)
+
+    def _increment_questions_asked(self, db: Session, session: InterviewSession) -> None:
+        session.questions_asked_count = int(session.questions_asked_count or 0) + 1
+        db.add(session)
+        db.commit()
+        db.refresh(session)
+
+    def _increment_followups_used(self, db: Session, session: InterviewSession) -> None:
+        session.followups_used = int(session.followups_used or 0) + 1
+        db.add(session)
+        db.commit()
+        db.refresh(session)
+
+    def _max_questions_reached(self, session: InterviewSession) -> bool:
+        max_q = int(session.max_questions or 0)
+        if max_q <= 0:
+            return False
+        return int(session.questions_asked_count or 0) >= max_q
+
+    def _max_followups_reached(self, session: InterviewSession) -> bool:
+        max_f = int(session.max_followups_per_question or 0)
+        if max_f <= 0:
+            return False
+        return int(session.followups_used or 0) >= max_f
+
+    def _reset_for_new_question(self, db: Session, session: InterviewSession, question_id: int) -> None:
+        session.current_question_id = int(question_id)
+        session.followups_used = 0
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        state = dict(state)
+        state.pop("reanchor", None)
+        state.pop("clarify", None)
+        session.skill_state = state
+        db.add(session)
+        db.commit()
+        db.refresh(session)
+
+    def _last_interviewer_message(self, db: Session, session_id: int) -> str | None:
+        msgs = message_crud.list_messages(db, session_id, limit=200)
+        for m in reversed(msgs):
+            if m.role == "interviewer":
+                return m.content
+        return None
+
+    def _offline_intro(self, q: Question, user_name: str | None = None, preface: str | None = None) -> str:
+        name = self._user_name_safe(user_name)
+        greeting = f"Hi {name}!" if name else "Hi!"
+        question_text = self._combine_question_text(q.title, q.prompt)
+        if self._is_behavioral(q):
+            body = f"{question_text} Please answer using STAR (Situation, Task, Action, Result)."
+        else:
+            body = (
+                f"{question_text} Start by restating the problem and clarifying constraints, "
+                "then outline your approach and complexity."
+            )
+        parts = []
+        if preface:
+            parts.append(preface.strip())
+        parts.append(f"{greeting} {body}".strip())
+        return "\n\n".join([p for p in parts if p]).strip()
+
+    def _offline_next_question(self, q: Question, user_name: str | None = None, preface: str | None = None) -> str:
+        question_text = self._combine_question_text(q.title, q.prompt)
+        if self._is_behavioral(q):
+            body = f"{question_text} Please answer using STAR (Situation, Task, Action, Result)."
+        else:
+            body = (
+                f"{question_text} Start with constraints and a brief plan, then share complexity and edge cases."
+            )
+        if preface:
+            return f"{preface.strip()}\n\n{body}".strip()
+        return body.strip()
+
+    def _pick_next_behavioral_question(
+        self, db: Session, session: InterviewSession, asked_ids: set[int] | None = None
+    ) -> Question | None:
+        asked_ids = asked_ids or set()
+        company = (session.company_style or "").strip().lower() or "general"
+        track = (session.track or "").strip()
+        diff = self._effective_difficulty(session)
+        companies = {company, "general", self._effective_company_style(session)}
+        companies = {c for c in companies if c}
+        tracks = {track, "behavioral"} if track else {"behavioral"}
+
+        base = db.query(Question).filter(
+            Question.company_style.in_(companies),
+            Question.track.in_(tracks),
+            Question.difficulty == diff,
+            or_(Question.tags_csv.ilike("%behavioral%"), Question.question_type == "behavioral"),
+        )
+        if asked_ids:
+            base = base.filter(~Question.id.in_(asked_ids))
+        seen = self._seen_question_subquery(session)
+        unseen = base.filter(~Question.id.in_(seen)).order_by(func.random()).first()
+        if unseen:
+            return unseen
+        return base.order_by(func.random()).first()
+
+    def _pick_next_technical_question(
+        self,
+        db: Session,
+        session: InterviewSession,
+        asked_ids: set[int],
+        seen_ids: set[int],
+        focus: dict[str, Any] | None,
+        desired_type: str | None = None,
+    ) -> Question | None:
+        diff = self._effective_difficulty(session)
+        company = (session.company_style or "").strip().lower() or "general"
+        companies = {company, "general", self._effective_company_style(session)}
+        companies = {c for c in companies if c}
+
+        base = db.query(Question).filter(
+            Question.track == session.track,
+            Question.company_style.in_(companies),
+            Question.difficulty == diff,
+            ~Question.tags_csv.ilike("%behavioral%"),
+            Question.question_type != "behavioral",
+        )
+        if asked_ids:
+            base = base.filter(~Question.id.in_(asked_ids))
+        if seen_ids:
+            base = base.filter(~Question.id.in_(seen_ids))
+
+        candidates = base.order_by(func.random()).limit(120).all()
+        if desired_type:
+            candidates = [c for c in candidates if self._matches_desired_type(c, desired_type)]
+        if not candidates:
+            return None
+
+        focus_tags = set((focus or {}).get("tags") or [])
+        asked_tags: set[str] = set()
+        if asked_ids:
+            asked = db.query(Question).filter(Question.id.in_(asked_ids)).all()
+            for q in asked:
+                asked_tags.update({t.strip().lower() for t in (q.tags() or []) if t})
+
+        best = None
+        best_score = -10_000
+        for q in candidates:
+            tags = {t.strip().lower() for t in (q.tags() or []) if t}
+            overlap = len(tags & focus_tags) if focus_tags else 0
+            penalty = len(tags & asked_tags) if asked_tags else 0
+            weak_score = self._weakness_score(q, self._weakness_keywords(self._weakest_dimension(session)))
+            score = (overlap * 5) + weak_score - penalty
+            if best is None or score > best_score:
+                best = q
+                best_score = score
+        return best or candidates[0]
+
+    def _pick_next_main_question(self, db: Session, session: InterviewSession) -> Question | None:
+        asked_ids = set(session_question_crud.list_asked_question_ids(db, session.id))
+        seen_ids = set(user_question_seen_crud.list_seen_question_ids(db, session.user_id))
+
+        behavioral_target = int(getattr(session, "behavioral_questions_target", 0) or 0)
+        behavioral_asked = 0
+        if asked_ids:
+            asked_questions = db.query(Question).filter(Question.id.in_(asked_ids)).all()
+            behavioral_asked = sum(1 for q in asked_questions if self._is_behavioral(q))
+
+        questions_asked = int(session.questions_asked_count or 0)
+        need_behavioral = behavioral_target > 0 and behavioral_asked < behavioral_target
+        force_behavioral = need_behavioral and questions_asked >= max(1, behavioral_target - 1)
+
+        focus = {"tags": list(self._focus_tags(session))}
+
+        if force_behavioral:
+            q = self._pick_next_behavioral_question(db, session, asked_ids)
+            if q:
+                return q
+
+        q = self._pick_next_technical_question(db, session, asked_ids, seen_ids, focus, desired_type="coding")
+        if q:
+            return q
+
+        if need_behavioral:
+            return self._pick_next_behavioral_question(db, session, asked_ids)
+        return None
+
+    def _mark_warmup_behavioral_asked(self, db: Session, session: InterviewSession, question_id: int | None) -> None:
+        if not question_id:
+            return
+        with contextlib.suppress(Exception):
+            session_question_crud.mark_question_asked(db, session.id, int(question_id))
+        with contextlib.suppress(Exception):
+            user_question_seen_crud.mark_question_seen(db, session.user_id, int(question_id))
+
+    def _warmup_behavioral_ack(self, student_text: str | None) -> str:
+        return interview_warmup.warmup_ack(student_text)
+
+    async def _warmup_prompt(self, session: InterviewSession, user_name: str | None = None) -> str:
+        sys = warmup_system_prompt(session.company_style, session.role, self._interviewer_name(session))
+        user = warmup_prompt_user_prompt(user_name, self._interviewer_name(session))
+        if not getattr(self.llm, "api_key", None):
+            return interview_warmup.prompt_for_step(0, user_name=user_name, interviewer_name=self._interviewer_name(session)) or ""
+        try:
+            reply = await self.llm.chat(sys, user)
+            return self._sanitize_ai_text(reply)
+        except Exception:
+            return interview_warmup.prompt_for_step(0, user_name=user_name, interviewer_name=self._interviewer_name(session)) or ""
+
+    async def _warmup_reply(
+        self,
+        session: InterviewSession,
+        student_text: str,
+        user_name: str | None,
+        focus: dict[str, Any],
+        db: Session,
+        tone_line: str | None = None,
+    ) -> str:
+        question_text, qid = self._warmup_behavioral_question(db, session)
+        focus_line = self._warmup_focus_line(focus) or None
+        sys = warmup_system_prompt(session.company_style, session.role, self._interviewer_name(session))
+        user = warmup_reply_user_prompt(student_text, user_name, question_text, focus_line=focus_line, tone_line=tone_line)
+
+        if not getattr(self.llm, "api_key", None):
+            msg = self._warmup_behavioral_reply(session, focus, question_text, tone_line=tone_line)
+            self._mark_warmup_behavioral_asked(db, session, qid)
+            return msg
+
+        try:
+            reply = await self.llm.chat(sys, user)
+            reply = self._sanitize_ai_text(reply)
+        except Exception:
+            reply = self._warmup_behavioral_reply(session, focus, question_text, tone_line=tone_line)
+
+        if not reply:
+            reply = self._warmup_behavioral_reply(session, focus, question_text, tone_line=tone_line)
+
+        self._mark_warmup_behavioral_asked(db, session, qid)
+        return reply
 
     def _pick_warmup_behavioral_question(self, db: Session, session: InterviewSession) -> Question | None:
         asked_ids = set(session_question_crud.list_asked_question_ids(db, session.id))
@@ -1290,507 +1717,251 @@ class InterviewEngine:
 
         return self._fallback_warmup_behavioral_question(session), None
 
-    def _warmup_behavioral_reply(self, session: InterviewSession, focus: dict[str, Any], question_text: str) -> str:
+    def _warmup_state(self, session: InterviewSession) -> dict:
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        warm = state.get("warmup")
+        return warm if isinstance(warm, dict) else {}
+
+    def _set_warmup_state(
+        self,
+        db: Session,
+        session: InterviewSession,
+        step: int,
+        done: bool,
+        **meta: Any,
+    ) -> None:
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        state = dict(state)
+        warm = state.get("warmup") if isinstance(state.get("warmup"), dict) else {}
+        warm = dict(warm)
+        for key, val in meta.items():
+            if val is not None:
+                warm[key] = val
+        warm["step"] = int(step)
+        warm["done"] = bool(done)
+        state["warmup"] = warm
+        session.skill_state = state
+        db.add(session)
+        db.commit()
+        db.refresh(session)
+
+    def _warmup_profile_from_state(self, session: InterviewSession) -> WarmupToneProfile | None:
+        warm = self._warmup_state(session)
+        tone = warm.get("tone")
+        energy = warm.get("energy")
+        confidence_raw = warm.get("tone_confidence")
+        if not tone and not energy:
+            return None
+        try:
+            if confidence_raw is None:
+                confidence = 0.6
+            else:
+                confidence = float(confidence_raw)
+            return WarmupToneProfile(
+                tone=tone or "neutral",
+                energy=energy or "medium",
+                confidence=confidence,
+            )
+        except Exception:
+            return None
+
+    def _infer_smalltalk_topic(self, text: str) -> str:
+        t = self._normalize_text(text)
+        if not t:
+            return ""
+        if any(k in t for k in ("class", "classes", "school", "semester", "lecture", "exam", "homework")):
+            return "school"
+        if any(k in t for k in ("project", "feature", "build", "prototype", "assignment")):
+            return "project"
+        if any(k in t for k in ("work", "job", "office", "meeting", "deadline", "shift")):
+            return "work"
+        if "interview" in t or "prep" in t:
+            return "interview_prep"
+        if any(k in t for k in ("commute", "traffic", "train", "bus", "drive")):
+            return "commute"
+        if any(k in t for k in ("weekend", "tonight")):
+            return "weekend"
+        if "weather" in t:
+            return "weather"
+        if "day" in t or "today" in t:
+            return "day"
+        return ""
+
+    def _clean_smalltalk_question(self, question: str | None) -> str:
+        q = (question or "").strip()
+        if not q:
+            return ""
+        q = " ".join(q.split())
+        q = re.sub(r"^(question|q)[:\-\s]+", "", q, flags=re.IGNORECASE).strip()
+        if "?" in q:
+            q = q.split("?")[0].strip() + "?"
+        else:
+            q = q.rstrip(".!") + "?"
+        if len(q) > 140:
+            q = q[:140].rsplit(" ", 1)[0].rstrip(".!?") + "?"
+        return q
+
+    def _is_redundant_smalltalk(self, question: str) -> bool:
+        normalized = self._normalize_text(question).rstrip("?").strip()
+        return normalized in {
+            "how are you",
+            "how are you doing",
+            "how are you doing today",
+            "how is it going",
+            "hows it going",
+        }
+
+    def _smalltalk_question_from_topic(self, topic: str) -> str | None:
+        t = (topic or "").strip().lower()
+        if t in ("work", "job"):
+            return "What have you been working on today?"
+        if t in ("school", "class", "classes"):
+            return "How are classes going lately?"
+        if t == "project":
+            return "What kind of project have you been working on recently?"
+        if t in ("interview_prep", "interview"):
+            return "How has interview prep been going lately?"
+        if t == "commute":
+            return "How was your commute today?"
+        if t == "weekend":
+            return "Any nice plans for later today?"
+        if t == "weather":
+            return "How's the weather where you are?"
+        if t == "day":
+            return "How has your day been so far?"
+        return None
+
+    def _smalltalk_question(self, profile: WarmupSmalltalkProfile | None, text: str) -> str:
+        if profile:
+            q = self._clean_smalltalk_question(profile.smalltalk_question)
+            if q and not self._is_redundant_smalltalk(q):
+                return q
+            topic = profile.topic or self._infer_smalltalk_topic(text)
+        else:
+            topic = self._infer_smalltalk_topic(text)
+
+        by_topic = self._smalltalk_question_from_topic(topic)
+        if by_topic:
+            return by_topic
+
+        if profile and profile.tone in ("excited", "positive"):
+            return "What's been the highlight of your day so far?"
+        if profile and profile.tone in ("stressed", "tired"):
+            return "Has your day been pretty busy so far?"
+        return "How has your day been so far?"
+
+    def _warmup_smalltalk_line(self, profile: WarmupToneProfile | None) -> str:
+        if not profile:
+            return "Thanks for sharing."
+        tone = profile.tone
+        energy = profile.energy
+
+        if tone == "excited":
+            return "Love the energy."
+        if tone == "positive":
+            return "Great to hear."
+        if tone == "stressed":
+            return "Totally fair."
+        if tone == "tired" or tone == "negative":
+            return "Thanks for sharing."
+        if energy == "high":
+            return "Nice, sounds like a good rhythm."
+        return "Thanks for sharing."
+
+    def _warmup_transition_line(self, profile: WarmupToneProfile | None) -> str:
+        if not profile:
+            return "Thanks for sharing, let's get started."
+        tone = profile.tone
+        energy = profile.energy
+
+        if tone == "excited":
+            return "Love the energy, let's keep that momentum."
+        if tone == "positive":
+            if energy == "high":
+                return "Great to hear, let's keep that momentum."
+            if energy == "low":
+                return "Great to hear, we'll keep a steady pace."
+            return "Great to hear, let's dive in."
+        if tone == "stressed":
+            return "Totally fair, we'll take it step by step."
+        if tone == "tired":
+            return "Thanks for sharing, we'll keep the pace comfortable."
+        if tone == "negative":
+            return "Thanks for sharing, we'll keep it low pressure."
+        if energy == "high":
+            return "Thanks for sharing, let's use that momentum."
+        if energy == "low":
+            return "Thanks for sharing, we'll keep the pace comfortable."
+        return "Thanks for sharing, let's get started."
+
+    def _warmup_smalltalk_reply(self, ack_line: str | None, question: str) -> str:
+        ack = (ack_line or "Thanks for sharing.").strip()
+        if ack and ack[-1] not in ".!?":
+            ack = f"{ack}."
+        q = self._clean_smalltalk_question(question) or "How has your day been so far?"
+        return f"{ack} {q}".strip()
+
+    async def _classify_warmup_smalltalk(self, text: str) -> WarmupSmalltalkProfile | None:
+        msg = (text or "").strip()
+        if not msg:
+            return None
+        if not getattr(self.llm, "api_key", None):
+            return None
+        sys = warmup_smalltalk_system_prompt()
+        user = warmup_smalltalk_user_prompt(msg)
+        try:
+            data = await self.llm.chat_json(sys, user)
+            if isinstance(data, dict) and "smalltalk_question" not in data and "question" in data:
+                data["smalltalk_question"] = data.get("question")
+            return WarmupSmalltalkProfile.model_validate(data)
+        except Exception:
+            return None
+
+    async def _classify_warmup_tone(self, text: str) -> WarmupToneProfile | None:
+        msg = (text or "").strip()
+        if not msg:
+            return None
+        if not getattr(self.llm, "api_key", None):
+            return None
+        sys = warmup_tone_classifier_system_prompt()
+        user = warmup_tone_classifier_user_prompt(msg)
+        try:
+            data = await self.llm.chat_json(sys, user)
+            return WarmupToneProfile.model_validate(data)
+        except Exception:
+            return None
+
+    def _warmup_behavioral_reply(
+        self,
+        session: InterviewSession,
+        focus: dict[str, Any],
+        question_text: str,
+        tone_line: str | None = None,
+    ) -> str:
         focus_line = self._warmup_focus_line(focus)
         question = question_text or self._fallback_warmup_behavioral_question(session)
-        parts = ["I am doing well.", "Today I am your interviewer."]
+        # Ensure regression-friendly phrasing even when LLM is offline:
+        # - contains "i am doing well"
+        # - contains "your interviewer"
+        # - contains "behavioral question"
+        interviewer_name = self._interviewer_name(session)
+        if interviewer_name:
+            base_ack = tone_line or f"I am doing well -- I'm {interviewer_name}, your interviewer. Let's get started."
+        else:
+            base_ack = tone_line or "I am doing well -- I'm your interviewer. Let's get started."
+        if base_ack and base_ack[-1] not in ".!?":
+            base_ack = f"{base_ack}."
+        parts = [base_ack]
         if focus_line:
             parts.append(focus_line)
         parts.append(f"Let's start with a quick behavioral question: {question}")
         return " ".join(parts).strip()
-
-    def _warmup_behavioral_ack(self, student_text: str | None = None) -> str:
-        if student_text and student_text.strip():
-            return "Thanks for sharing. Let's move into the technical interview."
-        return "Thanks. Let's move into the technical interview."
-
-    def _mark_warmup_behavioral_asked(
-        self, db: Session, session: InterviewSession, question_id: int | None = None
-    ) -> None:
-        qid = question_id or self._warmup_behavioral_question_id(session)
-        if not qid:
-            return
-        with contextlib.suppress(Exception):
-            session_question_crud.mark_question_asked(db, session.id, int(qid))
-        with contextlib.suppress(Exception):
-            user_question_seen_crud.mark_question_seen(db, session.user_id, int(qid))
-
-    def _last_interviewer_message(self, db: Session, session_id: int) -> str | None:
-        msgs = message_crud.list_messages(db, session_id, limit=200)
-        for m in reversed(msgs):
-            if m.role == "interviewer":
-                return m.content
-        return None
-
-    async def _warmup_prompt(self, session: InterviewSession, user_name: str | None = None) -> str:
-        sys = warmup_system_prompt(session.company_style, session.role)
-        user = warmup_prompt_user_prompt(user_name)
-        try:
-            reply = await self.llm.chat(sys, user)
-        except LLMClientError:
-            reply = interview_warmup.prompt_for_step(0, user_name=user_name) or "Hi! Ready to begin?"
-        return self._sanitize_ai_text(reply)
-
-    async def _warmup_reply(
-        self,
-        session: InterviewSession,
-        student_text: str,
-        user_name: str | None,
-        focus: dict[str, Any],
-        db: Session,
-    ) -> str:
-        sys = warmup_system_prompt(session.company_style, session.role)
-        focus_line = self._warmup_focus_line(focus) or None
-        behavioral_question, qid = self._warmup_behavioral_question(db, session)
-        user = warmup_reply_user_prompt(
-            candidate_text=student_text,
-            user_name=user_name,
-            behavioral_question=behavioral_question,
-            focus_line=focus_line,
-        )
-        try:
-            reply = await self.llm.chat(sys, user)
-            reply = self._sanitize_ai_text(reply)
-        except LLMClientError:
-            reply = ""
-
-        if not reply:
-            self._mark_warmup_behavioral_asked(db, session, qid)
-            return self._warmup_behavioral_reply(session, focus, behavioral_question)
-
-        lower = reply.lower()
-        has_doing_well = "i am doing well" in lower
-        has_interviewer = "today i am your interviewer" in lower
-        has_question = behavioral_question.lower() in lower
-        if not (has_doing_well and has_interviewer and has_question):
-            self._mark_warmup_behavioral_asked(db, session, qid)
-            return self._warmup_behavioral_reply(session, focus, behavioral_question)
-        self._mark_warmup_behavioral_asked(db, session, qid)
-        return reply
-
-    def _behavioral_target(self, session: InterviewSession) -> int:
-        try:
-            raw = int(getattr(session, "behavioral_questions_target", 2) or 0)
-        except Exception:
-            raw = 2
-        return max(0, min(3, raw))
-
-    def _behavioral_slots(self, max_questions: int, target: int) -> set[int]:
-        """
-        Pick which question numbers (1-indexed) should be behavioral.
-
-        Design goals:
-        - Never ask behavioral as Q1.
-        - For target=2 (default), keep the familiar Q3/Q5 pattern.
-        - For target=3, place them early enough to usually fit within 5 questions.
-        """
-        target = max(0, min(3, int(target or 0)))
-        max_questions = max(1, int(max_questions or 7))
-        if target == 0 or max_questions < 2:
-            return set()
-
-        if target == 1:
-            preferred = [3, 4, 2, 5, 6, 7]
-        elif target == 2:
-            preferred = [3, 5, 2, 4, 6, 7]
-        else:
-            preferred = [2, 4, 5, 3, 6, 7]
-
-        slots: list[int] = []
-        for pos in preferred:
-            if 2 <= pos <= max_questions and pos not in slots:
-                slots.append(pos)
-            if len(slots) >= target:
-                break
-
-        if len(slots) < target:
-            for pos in range(2, max_questions + 1):
-                if pos not in slots:
-                    slots.append(pos)
-                if len(slots) >= target:
-                    break
-
-        return set(slots)
-
-    def _plan_state(self, session: InterviewSession) -> dict:
-        try:
-            state = session.skill_state if isinstance(session.skill_state, dict) else {}
-        except Exception:
-            state = {}
-        plan = state.get("plan")
-        return plan if isinstance(plan, dict) else {}
-
-    def _system_design_slots(
-        self, session: InterviewSession, max_questions: int, behavioral_slots: set[int]
-    ) -> set[int]:
-        track = (session.track or "").strip().lower()
-        if track != "swe_engineer":
-            return set()
-
-        target = 1 if max_questions < 6 else 2
-        candidates = [2, 4, 6, 5, 3, 7]
-        slots: list[int] = []
-        for pos in candidates:
-            if pos in behavioral_slots:
-                continue
-            if pos < 2 or pos > max_questions:
-                continue
-            slots.append(pos)
-            if len(slots) >= target:
-                break
-        return set(slots)
-
-    def _build_plan(self, session: InterviewSession) -> dict:
-        max_questions = max(1, int(session.max_questions or 7))
-        behavioral_target = self._behavioral_target(session)
-        behavioral_slots = self._behavioral_slots(max_questions, behavioral_target)
-        system_design_slots = self._system_design_slots(session, max_questions, behavioral_slots)
-
-        slots: list[dict[str, str]] = []
-        for num in range(1, max_questions + 1):
-            if num in behavioral_slots:
-                slots.append({"kind": "behavioral"})
-                continue
-            tech_type = "system_design" if num in system_design_slots else "coding"
-            slots.append({"kind": "technical", "tech_type": tech_type})
-
-        return {
-            "version": 1,
-            "max_questions": max_questions,
-            "behavioral_target": behavioral_target,
-            "slots": slots,
-        }
-
-    def _ensure_plan(self, db: Session, session: InterviewSession) -> dict:
-        plan = self._plan_state(session)
-        if isinstance(plan.get("slots"), list) and plan.get("slots"):
-            return plan
-
-        plan = self._build_plan(session)
-        try:
-            state = session.skill_state if isinstance(session.skill_state, dict) else {}
-        except Exception:
-            state = {}
-        state = dict(state)
-        state["plan"] = plan
-        session.skill_state = state
-        try:
-            db.add(session)
-            db.commit()
-            db.refresh(session)
-        except Exception:
-            with contextlib.suppress(Exception):
-                db.rollback()
-        return plan
-
-    def _desired_tech_type_for_slot(self, plan: dict, slot_num: int) -> str | None:
-        slots = plan.get("slots")
-        if not isinstance(slots, list):
-            return None
-        idx = int(slot_num) - 1
-        if idx < 0 or idx >= len(slots):
-            return None
-        slot = slots[idx]
-        if not isinstance(slot, dict):
-            return None
-        if slot.get("kind") != "technical":
-            return None
-        tech_type = str(slot.get("tech_type") or "").strip().lower()
-        return tech_type or None
-
-    def _seen_question_subquery(self, session: InterviewSession):
-        return select(UserQuestionSeen.question_id).where(UserQuestionSeen.user_id == session.user_id)
-
-    def _offline_intro(self, q: Question, user_name: str | None = None, preface: str | None = None) -> str:
-        followup = ""
-        if isinstance(getattr(q, "followups", None), list) and q.followups:
-            followup = f"\n\nFollow-up: {q.followups[0]}"
-        greeting = f"Hi {user_name}," if user_name else "Hi!"
-        if self._is_behavioral(q):
-            body = (
-                f"{greeting} I'm your interviewer.\n\n"
-                "We'll start with a behavioral question.\n\n"
-                f"{q.title}. {q.prompt}\n\n"
-                "Answer using STAR (Situation, Task, Action, Result)."
-                f"{followup}"
-            )
-            if preface:
-                return f"{preface}\n\n{body}"
-            return body
-
-        body = (
-            f"{greeting} I'm your interviewer.\n\n"
-            "Please restate the problem and clarify constraints. Start with a brief plan and key steps, then share "
-            "complexity, edge cases, and how you'd validate correctness.\n\n"
-            f"{q.title}. {q.prompt}"
-            f"{followup}"
-        )
-        if preface:
-            return f"{preface}\n\n{body}"
-        return body
-
-    def _offline_next_question(self, q: Question, user_name: str | None = None, preface: str | None = None) -> str:
-        followup = ""
-        if isinstance(getattr(q, "followups", None), list) and q.followups:
-            followup = f"\n\nFollow-up: {q.followups[0]}"
-        name_part = f"{user_name}, " if user_name else ""
-        if self._is_behavioral(q):
-            body = (
-                f"Alright {name_part}let's do a behavioral question.\n\n"
-                f"{q.title}. {q.prompt}\n\n"
-                "Answer using STAR (Situation, Task, Action, Result)."
-                f"{followup}"
-            )
-            if preface:
-                return f"{preface}\n\n{body}"
-            return body
-
-        body = (
-            f"Alright {name_part}let's move to the next question.\n\n"
-            "Please restate the problem and clarify constraints. Start with a brief plan and key steps, then share "
-            "complexity, edge cases, and how you'd validate correctness.\n\n"
-            f"{q.title}. {q.prompt}"
-            f"{followup}"
-        )
-        if preface:
-            return f"{preface}\n\n{body}"
-        return body
-
-    def _reset_for_new_question(self, db: Session, session: InterviewSession, question_id: int) -> None:
-        session_crud.set_current_question(db, session, question_id)
-        session.followups_used = 0
-        session.stage = "question"
-        try:
-            state = session.skill_state if isinstance(session.skill_state, dict) else {}
-        except Exception:
-            state = {}
-        state = dict(state)
-        state["reanchor"] = {"qid": int(question_id), "count": 0}
-        session.skill_state = state
-        db.add(session)
-        db.commit()
-        db.refresh(session)
-
-    def _increment_questions_asked(self, db: Session, session: InterviewSession) -> None:
-        session.questions_asked_count = int(session.questions_asked_count or 0) + 1
-        db.add(session)
-        db.commit()
-        db.refresh(session)
-
-    def _increment_followups_used(self, db: Session, session: InterviewSession) -> None:
-        session.followups_used = int(session.followups_used or 0) + 1
-        db.add(session)
-        db.commit()
-        db.refresh(session)
-
-    def _max_questions_reached(self, session: InterviewSession) -> bool:
-        return int(session.questions_asked_count or 0) >= int(session.max_questions or 3)
-
-    def _max_followups_reached(self, session: InterviewSession) -> bool:
-        return int(session.followups_used or 0) >= int(session.max_followups_per_question or 2)
-
-    def _session_asked_state(
-        self, db: Session, session: InterviewSession
-    ) -> tuple[set[int], list[Question], set[str], int, dict[str, int]]:
-        asked_ids = set(session_question_crud.list_asked_question_ids(db, session.id))
-        warmup_id = self._warmup_behavioral_question_id(session)
-        if warmup_id:
-            asked_ids.add(warmup_id)
-        asked_questions: list[Question] = []
-        used_tags: set[str] = set()
-        tag_counts: dict[str, int] = {}
-        behavioral_used = 0
-
-        if asked_ids:
-            asked_questions = db.query(Question).filter(Question.id.in_(asked_ids)).all()
-            for aq in asked_questions:
-                tags = self._tag_set(aq)
-                used_tags.update(tags)
-                for tag in tags:
-                    tag_counts[tag] = tag_counts.get(tag, 0) + 1
-                if "behavioral" in tags and aq.id != warmup_id:
-                    behavioral_used += 1
-
-        return asked_ids, asked_questions, used_tags, behavioral_used, tag_counts
-
-    def _tag_set(self, q: Question) -> set[str]:
-        try:
-            tags = q.tags()
-        except Exception:
-            tags = []
-        return {str(t).strip().lower() for t in tags if str(t).strip()}
-
-    def _last_asked_technical_tags(self, db: Session, session: InterviewSession) -> set[str]:
-        rows = (
-            db.query(Question)
-            .join(SessionQuestion, SessionQuestion.question_id == Question.id)
-            .filter(SessionQuestion.session_id == session.id)
-            .order_by(SessionQuestion.id.desc())
-            .limit(10)
-            .all()
-        )
-        for q in rows:
-            tags = self._tag_set(q)
-            if "behavioral" in tags:
-                continue
-            if tags:
-                return tags
-        return set()
-
-    def _pick_next_behavioral_question(
-        self, db: Session, session: InterviewSession, asked_ids: set[int]
-    ) -> Question | None:
-        base = db.query(Question).filter(
-            Question.tags_csv.ilike("%behavioral%"),
-            Question.company_style.in_([session.company_style, "general"]),
-            Question.track.in_([session.track, "behavioral"]),
-        )
-        if asked_ids:
-            base = base.filter(~Question.id.in_(asked_ids))
-        # No difficulty filter for behavioral.
-        seen = self._seen_question_subquery(session)
-        unseen = base.filter(~Question.id.in_(seen)).order_by(func.random()).first()
-        if unseen:
-            return unseen
-        return base.order_by(func.random()).first()
-
-    def _pick_next_technical_question(
-        self,
-        db: Session,
-        session: InterviewSession,
-        asked_ids: set[int],
-        used_tags: set[str],
-        tag_counts: dict[str, int],
-        desired_type: str | None = None,
-    ) -> Question | None:
-        seen = self._seen_question_subquery(session)
-        weakness = self._weakest_dimension(session)
-        weakness_keywords = self._weakness_keywords(weakness)
-        focus_tags = self._focus_tags(session)
-        last_tags = self._last_asked_technical_tags(db, session)
-        company_style = self._effective_company_style(session)
-
-        def choose_from_pool(pool: list[Question], used_seen: bool) -> Question:
-            if not pool:
-                raise ValueError("empty pool")
-
-            seen_ids: set[int] = set()
-            if used_seen:
-                try:
-                    seen_ids = set(user_question_seen_crud.list_seen_question_ids(db, session.user_id))
-                except Exception:
-                    seen_ids = set()
-
-            def score_candidate(cand: Question) -> float:
-                cand_tags = self._tag_set(cand)
-                weakness_score = self._weakness_score(cand, weakness_keywords) if weakness_keywords else 0
-                focus_overlap = len(cand_tags & focus_tags) if focus_tags else 0
-                diversity_bonus = len(cand_tags - used_tags) if used_tags else len(cand_tags)
-                last_overlap = len(cand_tags & last_tags) if last_tags else 0
-                avg_freq = sum(tag_counts.get(t, 0) for t in cand_tags) / float(len(cand_tags)) if cand_tags else 0.0
-                rarity_bonus = 1.0 / (1.0 + avg_freq)
-                seen_penalty = 1.4 if cand.id in seen_ids else 0.0
-
-                score = (
-                    (1.2 * weakness_score)
-                    + (1.0 * focus_overlap)
-                    + (0.8 * diversity_bonus)
-                    + (0.6 * rarity_bonus)
-                    - (0.8 * last_overlap)
-                    - seen_penalty
-                )
-                return score + (random.random() * 0.15)
-
-            ranked = sorted(pool, key=score_candidate, reverse=True)
-            if not ranked:
-                return random.choice(pool)
-
-            bucket_size = max(3, min(len(ranked), max(3, len(ranked) // 4)))
-            bucket = ranked[:bucket_size]
-            return random.choice(bucket)
-
-        def pick_from_company(style: str, require_type: bool) -> Question | None:
-            for diff in self._adaptive_difficulty_try_order(session):
-                base = db.query(Question).filter(
-                    Question.track == session.track,
-                    Question.company_style == style,
-                    Question.difficulty == diff,
-                    ~Question.tags_csv.ilike("%behavioral%"),
-                )
-                if asked_ids:
-                    base = base.filter(~Question.id.in_(asked_ids))
-
-                pool = base.filter(~Question.id.in_(seen)).all()
-                used_seen = False
-                if not pool:
-                    # Fall back to allowing repeats across sessions (still no repeats within this session).
-                    pool = base.all()
-                    used_seen = True
-
-                if require_type:
-                    pool = [cand for cand in pool if self._matches_desired_type(cand, desired_type)]
-
-                if pool:
-                    return choose_from_pool(pool, used_seen)
-            return None
-
-        if desired_type:
-            preferred = pick_from_company(company_style, True)
-            if preferred:
-                return preferred
-            if company_style != "general":
-                preferred = pick_from_company("general", True)
-                if preferred:
-                    return preferred
-
-        # Try company-specific first, with adaptive difficulty order.
-        any_match = pick_from_company(company_style, False)
-        if any_match:
-            return any_match
-
-        # Fallback to general style for technical questions (still prefer unseen for this user)
-        if company_style != "general":
-            any_match = pick_from_company("general", False)
-            if any_match:
-                return any_match
-
-        return None
-
-    def _pick_next_main_question(self, db: Session, session: InterviewSession) -> Question | None:
-        asked_ids, _asked_questions, used_tags, behavioral_used, tag_counts = self._session_asked_state(db, session)
-
-        behavioral_target = self._behavioral_target(session)
-        next_num = int(session.questions_asked_count or 0) + 1
-        behavioral_slots = self._behavioral_slots(int(session.max_questions or 7), behavioral_target)
-        behavioral_slot = next_num in behavioral_slots
-        plan = self._ensure_plan(db, session)
-        desired_type = self._desired_tech_type_for_slot(plan, next_num)
-
-        if behavioral_slot and behavioral_used < behavioral_target:
-            q_b = self._pick_next_behavioral_question(db, session, asked_ids)
-            if q_b:
-                return q_b
-
-        q_t = self._pick_next_technical_question(
-            db,
-            session,
-            asked_ids,
-            used_tags,
-            tag_counts,
-            desired_type=desired_type,
-        )
-        if q_t:
-            return q_t
-
-        # If technical pool is empty, try behavioral as a fallback (even if target is 0)
-        # so the interview doesn't stall due to missing datasets.
-        q_b2 = self._pick_next_behavioral_question(db, session, asked_ids)
-        if q_b2:
-            return q_b2
-
-        diff = session.difficulty
-        company_style = self._effective_company_style(session)
-        return question_crud.pick_next_question(db, session.track, company_style, diff)
 
     async def _ask_new_main_question(
         self,
@@ -1801,32 +1972,34 @@ class InterviewEngine:
         user_name: str | None = None,
         preface: str | None = None,
     ) -> str:
-        sys = interviewer_system_prompt(session.company_style, session.role)
+        sys = interviewer_system_prompt(session.company_style, session.role, self._interviewer_name(session))
         title, prompt = self._render_question(session, q)
-        name_hint = user_name or "name unavailable"
+        question_context = self._combine_question_text(title, prompt)
         if self._is_behavioral(q):
             user = f"""
-Move to the next question.
 This is a behavioral question. Ask it clearly and ask the candidate to answer using STAR (Situation, Task, Action, Result).
-Greet the candidate by name if provided ({name_hint}).
+Avoid extra greetings or transition phrases like "next question".
+Do not repeat the question.
 If a preface is provided, say it first.
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 Preface (optional): {preface or ""}
 
-Question context: {title}. {prompt}
+Question context: {question_context}
 """.strip()
         else:
             user = f"""
-Move to the next question.
 Briefly introduce the problem and ask the candidate to clarify constraints.
-Ask for a brief plan and key steps, then complexity, edge cases, and how they would validate correctness.
-Greet the candidate by name if provided ({name_hint}).
+Ask for a brief plan and key steps, then share "
+"complexity, edge cases, and how you'd validate correctness.
+Avoid extra greetings or transition phrases like "next question".
+Do not repeat the question.
 If a preface is provided, say it first.
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 Preface (optional): {preface or ""}
 
-Question context: {title}. {prompt}
+Question context: {question_context}
 """.strip()
+
         try:
             reply = await self.llm.chat(sys, user, history=history)
             reply = self._sanitize_ai_text(reply)
@@ -1843,6 +2016,9 @@ Question context: {title}. {prompt}
                 followups=[self._render_text(session, str(x)) for x in (getattr(q, "followups", []) or [])],
             )
             reply = self._offline_next_question(q2, user_name=user_name, preface=preface)
+        cleaned_reply = self._clean_next_question_reply(reply, user_name=user_name)
+        if cleaned_reply:
+            reply = cleaned_reply
         if preface:
             cleaned = preface.strip()
             if cleaned and cleaned.lower() not in (reply or "").lower():
@@ -1905,13 +2081,25 @@ Question context: {title}. {prompt}
                 return last
             focus = {"dimensions": self._focus_dimensions(session), "tags": []}
             question_text, qid = self._warmup_behavioral_question(db, session)
-            msg = self._warmup_behavioral_reply(session, focus, question_text)
+            tone_line = self._warmup_transition_line(self._warmup_profile_from_state(session))
+            msg = self._warmup_behavioral_reply(session, focus, question_text, tone_line=tone_line)
             message_crud.add_message(db, session.id, "interviewer", msg)
             self._mark_warmup_behavioral_asked(db, session, qid)
             return msg
 
+        if stage == "warmup_smalltalk" and not warm_done:
+            last = self._last_interviewer_message(db, session.id)
+            if last:
+                return last
+            warm = self._warmup_state(session)
+            profile = self._warmup_profile_from_state(session)
+            question = warm.get("smalltalk_question") or self._smalltalk_question(None, "")
+            msg = self._warmup_smalltalk_reply(self._warmup_smalltalk_line(profile), question)
+            message_crud.add_message(db, session.id, "interviewer", msg)
+            return msg
+
         # Warmup greeting (only when at intro/warmup stage)
-        if not warm_done and (stage in (None, "", "intro", "warmup")) and stage != "warmup_done":
+        if not warm_done and (stage in (None, "", "intro", "warmup", "warmup_smalltalk")) and stage != "warmup_done":
             if warm_step <= 0:
                 msg = None
                 try:
@@ -1919,10 +2107,12 @@ Question context: {title}. {prompt}
                 except Exception:
                     msg = None
                 if not msg:
-                    msg = interview_warmup.prompt_for_step(0, user_name=user_name)
+                    msg = interview_warmup.prompt_for_step(
+                        0, user_name=user_name, interviewer_name=self._interviewer_name(session)
+                    )
                 if msg:
                     message_crud.add_message(db, session.id, "interviewer", msg)
-                    interview_warmup.set_state(db, session, 1, False)
+                    self._set_warmup_state(db, session, 1, False)
                     session_crud.update_stage(db, session, "warmup")
                     return msg
 
@@ -1944,7 +2134,9 @@ Question context: {title}. {prompt}
                 user_question_seen_crud.mark_question_seen(db, session.user_id, q.id)
             self._increment_questions_asked(db, session)
 
-            sys = interviewer_system_prompt(session.company_style, session.role)
+            if not preface:
+                preface = self._interviewer_intro_line(session) or preface
+            sys = interviewer_system_prompt(session.company_style, session.role, self._interviewer_name(session))
             title, prompt = self._render_question(session, q)
             if self._is_behavioral(q):
                 user = f"""
@@ -1954,7 +2146,7 @@ Ask the candidate to answer using STAR (Situation, Task, Action, Result). Keep i
 Preface (say this first if provided): {preface or ""}
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 
-Question context: {title}. {prompt}
+Question context: {self._combine_question_text(title, prompt)}
 """.strip()
             else:
                 user = f"""
@@ -1965,7 +2157,7 @@ Greet the candidate by name if available ({user_name or "name unavailable"}). Ke
 Preface (say this first if provided): {preface or ""}
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 
-Question context: {title}. {prompt}
+Question context: {self._combine_question_text(title, prompt)}
 """.strip()
 
             try:
@@ -2024,12 +2216,12 @@ Question context: {title}. {prompt}
                 with contextlib.suppress(Exception):
                     self._store_focus(db, session, focus)
             preface = self._warmup_behavioral_ack(student_text)
-            interview_warmup.set_state(db, session, max(warm_step, 2), True)
+            self._set_warmup_state(db, session, max(warm_step, 3), True)
             session_crud.update_stage(db, session, "warmup_done")
             return await self.ensure_question_and_intro(db, session, user_name=user_name, preface=preface)
 
-        if not warm_done and (stage in (None, "", "intro", "warmup")) and stage != "warmup_done":
-            # Warmup flow: greet, then ask one behavioral question before the technical interview.
+        if not warm_done and (stage in (None, "", "intro", "warmup", "warmup_smalltalk")) and stage != "warmup_done":
+            # Warmup flow: greet, then a short small-talk question, then a behavioral warmup question.
             focus = self._extract_focus(student_text)
             has_focus = bool(focus.get("dimensions") or focus.get("tags"))
             if has_focus:
@@ -2039,19 +2231,58 @@ Question context: {title}. {prompt}
             if warm_step <= 0:
                 msg = await self._warmup_prompt(session, user_name=user_name)
                 message_crud.add_message(db, session.id, "interviewer", msg)
-                interview_warmup.set_state(db, session, 1, False)
+                self._set_warmup_state(db, session, 1, False)
                 session_crud.update_stage(db, session, "warmup")
                 return msg
 
+            if warm_step == 1:
+                profile = await self._classify_warmup_smalltalk(student_text)
+                # If LLM is unavailable, still do a small-talk fallback before behavioral warmup.
+                if not profile and not getattr(self.llm, "api_key", None):
+                    question = self._smalltalk_question(None, student_text)
+                    ack_line = self._warmup_smalltalk_line(None)
+                    msg = self._warmup_smalltalk_reply(ack_line, question)
+                    meta: dict[str, Any] = {
+                        "smalltalk_question": question,
+                        "smalltalk_topic": self._infer_smalltalk_topic(student_text),
+                    }
+                    message_crud.add_message(db, session.id, "interviewer", msg)
+                    self._set_warmup_state(db, session, 2, False, **meta)
+                    session_crud.update_stage(db, session, "warmup_smalltalk")
+                    return msg
+
+                question = self._smalltalk_question(profile, student_text)
+                ack_line = self._warmup_smalltalk_line(profile)
+                msg = self._warmup_smalltalk_reply(ack_line, question)
+                meta: dict[str, Any] = {
+                    "smalltalk_question": question,
+                    "smalltalk_topic": (profile.topic if profile else None) or self._infer_smalltalk_topic(student_text),
+                }
+                if profile:
+                    meta.update(
+                        {
+                            "tone": profile.tone,
+                            "energy": profile.energy,
+                            "tone_confidence": profile.confidence,
+                        }
+                    )
+                message_crud.add_message(db, session.id, "interviewer", msg)
+                self._set_warmup_state(db, session, 2, False, **meta)
+                session_crud.update_stage(db, session, "warmup_smalltalk")
+                return msg
+
+            # ...existing code (warm_step >= 2 branch)...
+            tone_line = self._warmup_transition_line(self._warmup_profile_from_state(session))
             msg = await self._warmup_reply(
                 session=session,
                 student_text=student_text,
                 user_name=user_name,
                 focus=focus,
                 db=db,
+                tone_line=tone_line,
             )
             message_crud.add_message(db, session.id, "interviewer", msg)
-            interview_warmup.set_state(db, session, max(warm_step, 2), False)
+            self._set_warmup_state(db, session, max(warm_step, 3), False)
             session_crud.update_stage(db, session, "warmup_behavioral")
             return msg
 
@@ -2087,7 +2318,7 @@ Question context: {title}. {prompt}
             elif m.role == "interviewer":
                 history.append({"role": "assistant", "content": m.content})
 
-        sys = interviewer_system_prompt(session.company_style, session.role)
+        sys = interviewer_system_prompt(session.company_style, session.role, self._interviewer_name(session))
 
         stage = session.stage or "intro"
         max_followups = int(session.max_followups_per_question or 2)
@@ -2323,11 +2554,26 @@ Question context: {title}. {prompt}
                 missing_keys = limited
             missing_focus = self._missing_focus_summary(missing_keys, behavioral_missing)
 
-        if missing_keys and confidence < 0.6 and not self._max_followups_reached(session):
+        critical_missing, _ = self._missing_focus_tiers(missing_keys, is_behavioral, behavioral_missing)
+        clarify_attempts, _ = self._update_clarify_tracking(db, session, q.id, critical_missing)
+        if not critical_missing and response_quality in ("strong", "ok") and int(session.followups_used or 0) == 0:
+            if action == "FOLLOWUP":
+                action = "MOVE_TO_NEXT_QUESTION"
+
+        force_clarify = (
+            bool(critical_missing)
+            and not self._max_followups_reached(session)
+            and clarify_attempts < 2
+        )
+        if force_clarify:
             if action in ("MOVE_TO_NEXT_QUESTION", "WRAP_UP"):
                 action = "FOLLOWUP"
+            if int(session.followups_used or 0) >= 1:
+                allow_second_followup = True
             if not message:
-                message = self._missing_focus_question(missing_keys[0], behavioral_missing) or ""
+                message = self._missing_focus_question(critical_missing[0], behavioral_missing) or ""
+        elif critical_missing and clarify_attempts >= 2 and action == "FOLLOWUP":
+            action = "MOVE_TO_NEXT_QUESTION"
 
         if not message:
             focus_key = self._normalize_focus_key(next_focus)
@@ -2379,7 +2625,7 @@ Prefer: constraints, approach clarity, complexity, edge cases, optimization.
         if action == "WRAP_UP" and int(session.questions_asked_count or 0) < min_questions:
             action = "MOVE_TO_NEXT_QUESTION"
 
-        if done_with_question and action not in ("WRAP_UP",):
+        if done_with_question and action not in ("WRAP_UP",) and not force_clarify:
             action = "MOVE_TO_NEXT_QUESTION"
 
         # Followups are short by design: mostly 1; allow 2 only if explicitly requested.

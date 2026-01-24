@@ -41,6 +41,24 @@ def _clamp_limit(value: int | None, default: int, maximum: int) -> int:
     return max(1, min(val, maximum))
 
 
+def _session_interviewer(session) -> dict | None:
+    try:
+        state = session.skill_state if isinstance(session.skill_state, dict) else {}
+    except Exception:
+        state = {}
+    raw = state.get("interviewer")
+    if not isinstance(raw, dict):
+        return None
+    if not raw.get("id") or not raw.get("name"):
+        return None
+    return {
+        "id": str(raw.get("id")),
+        "name": str(raw.get("name")),
+        "gender": raw.get("gender"),
+        "image_url": raw.get("image_url"),
+    }
+
+
 def _apply_pool_state(db: Session, session, pool: dict) -> None:
     if not pool or not isinstance(pool, dict):
         return
@@ -78,6 +96,7 @@ def list_user_sessions(limit: int = 50, db: Session = Depends(get_db), user=Depe
                 behavioral_questions_target=int(getattr(s, "behavioral_questions_target", 2) or 2),
                 overall_score=ev.overall_score if ev else None,
                 created_at=getattr(s, "created_at", None),
+                interviewer=_session_interviewer(s),
             )
         )
     return out
@@ -115,6 +134,7 @@ def create_session(payload: CreateSessionRequest, db: Session = Depends(get_db),
     company_style = (payload.company_style or "").strip().lower()
     difficulty = (payload.difficulty or "").strip().lower()
     _validate_session_inputs(track, company_style, difficulty)
+    interviewer = payload.interviewer.model_dump() if payload.interviewer else None
     s = session_crud.create_session(
         db=db,
         user_id=user.id,
@@ -123,6 +143,7 @@ def create_session(payload: CreateSessionRequest, db: Session = Depends(get_db),
         company_style=company_style,
         difficulty=difficulty,
         behavioral_questions_target=payload.behavioral_questions_target,
+        interviewer=interviewer,
     )
     try:
         pool = question_crud.preflight_question_pool(db, track, company_style, difficulty)
@@ -138,6 +159,7 @@ def create_session(payload: CreateSessionRequest, db: Session = Depends(get_db),
         difficulty=s.difficulty,
         stage=s.stage,
         current_question_id=s.current_question_id,
+        interviewer=_session_interviewer(s),
     )
 
 

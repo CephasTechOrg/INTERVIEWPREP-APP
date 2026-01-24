@@ -57,6 +57,12 @@ def main() -> int:
     if missing:
         return _fail(f"Missing tables: {', '.join(sorted(missing))}. Run: alembic upgrade head")
 
+    user_cols = {c["name"] for c in inspect(engine).get_columns("users")}
+    required_user_cols = {"role_pref", "profile"}
+    missing_cols = required_user_cols - user_cols
+    if missing_cols:
+        return _fail(f"Missing users columns: {', '.join(sorted(missing_cols))}. Run: alembic upgrade head")
+
     db = SessionLocal()
     user = None
     session = None

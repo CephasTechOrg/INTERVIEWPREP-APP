@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./assets/css/pro.css"/>
   <link rel="stylesheet" href="./assets/css/performance.css"/>
   <link rel="stylesheet" href="./assets/css/responsive.css"/>
+  <link rel="stylesheet" href="./assets/css/mobile.css"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
 </head>
 <body>
@@ -420,9 +421,22 @@
             </select>
           </div>
 
+          <div class="form-group">
+            <label>Profile Photo</label>
+            <div class="avatar-input">
+              <div class="avatar-preview" id="profileAvatarPreview">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="avatar-actions">
+                <input id="profileAvatarInput" class="form-control" type="file" accept="image/*" />
+                <button class="btn btn-outline btn-small" type="button" id="profileAvatarClearBtn">Remove Photo</button>
+              </div>
+            </div>
+          </div>
+
           <div class="form-note">
             <i class="fas fa-info-circle"></i>
-            Saved locally in your browser (no backend changes)
+            Saved to your account and synced across sessions
           </div>
         </div>
 
@@ -448,6 +462,8 @@
   <script src="./assets/js/api.js"></script>
   <script src="./assets/js/charts.js"></script>
   <script src="./assets/js/voice.js"></script>
-  <script src="./assets/js/interview.js"></script>
+  <script src="./assets/js/interview.part1.js"></script>
+  <script src="./assets/js/interview.part2.js"></script>
+  <script src="./assets/js/interview.part3.js"></script>
 </body>
 </html>
