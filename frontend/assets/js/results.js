@@ -1,29 +1,32 @@
 
-    // Theme utilities for results page
-    const THEME_TOGGLE_KEY = "dark_theme";
-    
-    function loadThemeToggle() {
-      try {
-        return localStorage.getItem(THEME_TOGGLE_KEY) === "1";
-      } catch {
-        return false;
-      }
-    }
+// Results page script (scoped to avoid global name collisions).
+(() => {
+  // Theme utilities for results page
+  const THEME_KEY = "dark_theme";
+  const loadThemeToggleSafe =
+    typeof loadThemeToggle === "function"
+      ? loadThemeToggle
+      : () => {
+          try {
+            return localStorage.getItem(THEME_KEY) === "1";
+          } catch {
+            return false;
+          }
+        };
 
-    function applyTheme(isDark) {
-      const html = document.documentElement;
-      if (isDark) {
-        html.setAttribute("data-theme", "dark");
-      } else {
-        html.setAttribute("data-theme", "light");
-      }
-    }
+  const applyThemeSafe =
+    typeof applyTheme === "function"
+      ? applyTheme
+      : (isDark) => {
+          const html = document.documentElement;
+          html.setAttribute("data-theme", isDark ? "dark" : "light");
+        };
 
-    // Initialize results page
-    document.addEventListener('DOMContentLoaded', async () => {
-      // Apply theme first
-      const savedTheme = loadThemeToggle();
-      applyTheme(savedTheme);
+  // Initialize results page
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Apply theme first
+    const savedTheme = loadThemeToggleSafe();
+    applyThemeSafe(savedTheme);
 
       requireAuthOrRedirect();
 
@@ -281,9 +284,10 @@
       }
 
       // Logout handler
-      document.getElementById('btn_logout').addEventListener('click', () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('current_session_id');
-        window.location.href = './login.html';
-      });
+    document.getElementById("btn_logout").addEventListener("click", () => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("current_session_id");
+      window.location.href = "./login.html";
     });
+  });
+})();
