@@ -61,14 +61,16 @@
 
       async function resolveSessionId() {
         const fromUrl = getSessionIdFromUrl();
-        if (fromUrl) return { sessionId: fromUrl, sessions: null };
-
         const stored = localStorage.getItem('current_session_id');
         let sessions = null;
         try {
           sessions = await loadSessions();
         } catch {
           sessions = null;
+        }
+
+        if (fromUrl) {
+          return { sessionId: fromUrl, sessions };
         }
 
         if (stored && sessions) {
@@ -207,7 +209,15 @@
           const msg = String(err?.message || '').toLowerCase();
           const isNoEval = msg.includes('no evaluation') || msg.includes('not found');
           if (isNoEval) {
-            const latest = pickLatestCompletedSession(sessionsOverride || []);
+            let sessions = sessionsOverride;
+            if (!sessions) {
+              try {
+                sessions = await loadSessions();
+              } catch {
+                sessions = null;
+              }
+            }
+            const latest = pickLatestCompletedSession(sessions || []);
             if (latest && Number(latest.id) !== Number(primaryId)) {
               const data = await apiFetch(`/analytics/sessions/${latest.id}/results`, { method: 'GET' });
               return { data, sessionId: latest.id, fallback: true };
