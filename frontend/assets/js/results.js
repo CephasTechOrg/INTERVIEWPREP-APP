@@ -88,6 +88,15 @@
       }
 
       // Load session metadata
+      function sessionReadyForResults(sessionMeta) {
+        if (!sessionMeta) return false;
+        const stage = String(sessionMeta.stage || "").toLowerCase();
+        if (stage === "wrapup" || stage === "done") return true;
+        const asked = Number(sessionMeta.questions_asked_count || 0);
+        const maxQ = Number(sessionMeta.max_questions || 0);
+        return maxQ > 0 && asked >= maxQ;
+      }
+
       async function loadSessionMeta(sessionId, sessionsOverride = null) {
         try {
           const sessions = sessionsOverride || (await loadSessions());
@@ -103,6 +112,7 @@
 
           document.getElementById('session_badge').innerHTML =
             `<i class="fas fa-hashtag"></i><span>Session #${sessionId}</span>`;
+          return match;
         } catch (err) {
           console.warn('Failed to load session metadata:', err);
         }
@@ -220,6 +230,27 @@
                 sessions = null;
               }
             }
+            const meta = (sessions || []).find((s) => Number(s.id) === Number(primaryId));
+            if (sessionReadyForResults(meta)) {
+              const subtitle = document.getElementById('resultsSubtitle');
+              if (subtitle) {
+                subtitle.textContent = 'Generating your results...';
+              }
+              try {
+                await apiFetch(`/sessions/${primaryId}/finalize`, { method: 'POST' });
+                const data = await apiFetch(`/analytics/sessions/${primaryId}/results`, { method: 'GET' });
+                return { data, sessionId: primaryId, fallback: false };
+              } catch (finalizeErr) {
+                console.warn('Auto-finalize failed:', finalizeErr);
+              }
+            }
+            if (!sessions) {
+              try {
+                sessions = await loadSessions();
+              } catch {
+                sessions = null;
+              }
+            }
             const latest = pickLatestCompletedSession(sessions || []);
             if (latest && Number(latest.id) !== Number(primaryId)) {
               const data = await apiFetch(`/analytics/sessions/${latest.id}/results`, { method: 'GET' });
@@ -238,11 +269,11 @@
       }
 
       // Load metadata
-      loadSessionMeta(sessionId, sessions);
+      const sessionMeta = await loadSessionMeta(sessionId, sessions);
 
       try {
         // Load results data
-        const result = await loadResultsData(sessionId, sessions);
+        const result = await loadResultsData(sessionId, sessions || (sessionMeta ? [sessionMeta] : null));
         const data = result.data;
         if (result.fallback) {
           loadSessionMeta(result.sessionId, sessions);
