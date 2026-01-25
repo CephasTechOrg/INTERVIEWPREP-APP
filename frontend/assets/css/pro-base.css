@@ -355,13 +355,19 @@ html, body {
   flex-direction: column;
   gap: 4px;
   padding: 0 16px;
+  overflow-y: auto; /* Allow menu to scroll */
+  min-height: 0; /* Crucial for flex scrolling */
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+.nav-menu::-webkit-scrollbar {
+  display: none; /* Hide scrollbar Chrome/Safari */
 }
 
 .nav-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 16px;
+  padding: 16px 20px; /* Comfortable padding */
   border-radius: var(--radius-md);
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
@@ -369,6 +375,7 @@ html, body {
   font-weight: 500;
   cursor: pointer;
   position: relative;
+  flex-shrink: 0; /* Prevent items from shrinking */
 }
 
 .nav-item:hover {
@@ -643,5 +650,30 @@ html, body {
 
 .page.active {
   display: block;
+}
+
+/* Responsive Adjustments for Short Screens (Laptops) */
+@media (max-height: 800px) {
+  .sidebar {
+    padding: 12px 0;
+  }
+  
+  .logo {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+  }
+  
+  .help-card {
+    display: none; /* Hide help card to save space */
+  }
+  
+  .sidebar-footer {
+    padding-top: 12px;
+    padding-bottom: 12px; /* Ensure bottom padding */
+  }
+
+  .nav-item {
+     padding: 12px 18px; /* Comfortable on laptops too */
+  }
 }
 

@@ -692,7 +692,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Chat send
   qs("#sendBtn")?.addEventListener("click", handleSendMessage);
   qs("#chatInput")?.addEventListener("keydown", (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") handleSendMessage();
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
   });
   qs("#codeInput")?.addEventListener("keydown", (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === "Enter") handleSendMessage();

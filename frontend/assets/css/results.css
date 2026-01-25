@@ -524,16 +524,23 @@
 .feedback-list {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 8px; /* Reduced from 12px */
+}
+
+.feedback-section {
+  margin: 0;
+  padding: 0;
 }
 
 .feedback-section h4 {
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 11px; /* Smaller font */
+  font-weight: 800;
   color: var(--text-muted);
   text-transform: uppercase;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
+  letter-spacing: 0.5px;
+  margin-top: 0;
+  margin-bottom: 4px; /* Reduced from 6px */
+  padding-bottom: 2px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -541,14 +548,31 @@
   border-color: rgba(255,255,255,0.1);
 }
 
+/* Feedback Lists Containers */
+.strength-list,
+.weakness-list,
+.step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* Let items control spacing or use minimal gap */
+}
+
 .feedback-item {
   display: flex;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 8px;
+  margin-bottom: 0; /* Remove margin, use padding only */
   align-items: flex-start;
-  padding: 10px;
-  border-radius: 8px;
-  transition: background 0.2s;
+  padding: 6px 6px; /* Vertical padding handles the rhythm */
+  border-radius: 4px;
+  border-bottom: 1px solid rgba(0,0,0,0.03); /* Subtle separator */
+}
+
+.feedback-item:last-child {
+  border-bottom: none;
+}
+
+[data-theme="dark"] .feedback-item {
+  border-bottom-color: rgba(255,255,255,0.03);
 }
 
 .feedback-item:hover {
@@ -556,7 +580,7 @@
 }
 
 [data-theme="dark"] .feedback-item:hover {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.03);
 }
 
 .feedback-icon {
@@ -585,9 +609,27 @@
 }
 
 .feedback-text {
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px; /* Smaller text */
+  line-height: 1.4; /* Tighter lines */
   color: var(--text);
+  margin-top: -1px; /* Visual alignment with icon */
+}
+
+/* Tighten empty-state spacing inside feedback lists */
+.feedback-list .empty-state {
+  padding: 12px 12px;
+  margin: 6px 0 10px;
+}
+
+.feedback-list .empty-state p {
+  margin: 0;
+}
+
+/* If feedback items are rendered as <p>, remove default margins */
+#strengths p,
+#weaknesses p,
+#next_steps p {
+  margin: 0 0 6px;
 }
 
 /* Footer */
