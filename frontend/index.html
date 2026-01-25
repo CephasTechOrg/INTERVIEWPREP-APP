@@ -1,34 +1,320 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Interview Prep AI | Redirecting</title>
-  <meta http-equiv="refresh" content="0; url=./login.html"/>
-  <style>
-    body {
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f8fafc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      color: #1e293b;
-    }
-    .note {
-      padding: 16px 20px;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      background: #fff;
-      box-shadow: 0 10px 25px -12px rgba(0,0,0,0.25);
-    }
-    .note a { color: #2563eb; font-weight: 700; text-decoration: none; }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interview Prep AI - Master Your Technical Interviews</title>
+  <meta name="description"
+    content="Practice realistic technical and behavioral interviews with AI-powered feedback. Get instant scoring, adaptive difficulty, and company-specific interview simulations." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/css/landing.css" />
 </head>
+
 <body>
-  <div class="note">
-    Redirecting to <a href="./login.html">login</a>...
-  </div>
-  <script>window.location.replace("./login.html");</script>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">
+      <i class="fas fa-brain"></i>
+      Interview Prep AI
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+      </button>
+      <a href="./login.html" class="btn-primary">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Master Your Technical Interviews</h1>
+    <p>Practice realistic technical and behavioral interviews with AI-powered feedback. Get instant scoring, adaptive
+      difficulty, and company-specific interview simulations.</p>
+    <div class="hero-buttons">
+      <a href="./login.html" class="btn-primary">Start Free Practice</a>
+      <button class="btn-secondary"
+        onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">Learn More</button>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <h2>Powerful Features</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <i class="fas fa-robot feature-icon"></i>
+        <h3>AI-Powered Interviewer</h3>
+        <p>Practice with an intelligent AI that conducts realistic interviews, generates follow-up questions, and adapts
+          to your responses.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-chart-bar feature-icon"></i>
+        <h3>Instant Scoring & Feedback</h3>
+        <p>Get detailed evaluations of your performance including strengths, weaknesses, and actionable improvement
+          suggestions.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-bullseye feature-icon"></i>
+        <h3>Adaptive Difficulty</h3>
+        <p>Questions automatically adjust based on your performance level, ensuring optimal challenge and learning.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-building feature-icon"></i>
+        <h3>Company-Specific Interviews</h3>
+        <p>Practice with question styles tailored to major tech companies like Amazon, Google, Apple, Meta, and
+          Microsoft.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-microphone feature-icon"></i>
+        <h3>Voice & Speech Recognition</h3>
+        <p>Practice speaking your answers naturally with integrated speech recognition and text-to-speech support.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-chart-line feature-icon"></i>
+        <h3>Performance Analytics</h3>
+        <p>Track your progress with comprehensive analytics, performance metrics, and interview history.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interview Types Section -->
+  <section class="interview-types">
+    <h2>Interview Types</h2>
+    <div class="types-grid">
+      <div class="type-card">
+        <h3><i class="fas fa-handshake"></i> Behavioral Interviews</h3>
+        <p>Learn how to discuss your past experiences effectively using the STAR method. Perfect for understanding team
+          dynamics and communication skills.</p>
+        <ul>
+          <li>Leadership and initiative</li>
+          <li>Conflict resolution</li>
+          <li>Teamwork and collaboration</li>
+          <li>Problem-solving approach</li>
+        </ul>
+      </div>
+      <div class="type-card">
+        <h3><i class="fas fa-code"></i> Technical Interviews</h3>
+        <p>Master data structures, algorithms, and coding problems. Practice with real-world scenarios and optimize your
+          solutions.</p>
+        <ul>
+          <li>Data structures & algorithms</li>
+          <li>System design</li>
+          <li>Code optimization</li>
+          <li>Explanation & communication</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Companies Section -->
+  <section class="companies">
+    <h2>Practice for Leading Companies</h2>
+    <div class="company-logos">
+      <div class="company-logo">
+        <i class="fab fa-amazon"></i> Amazon
+      </div>
+      <div class="company-logo">
+        <i class="fab fa-google"></i> Google
+      </div>
+      <div class="company-logo">
+        <i class="fab fa-apple"></i> Apple
+      </div>
+      <div class="company-logo">
+        <i class="fas fa-share-nodes"></i> Meta
+      </div>
+      <div class="company-logo">
+        <i class="fab fa-microsoft"></i> Microsoft
+      </div>
+      <div class="company-logo">
+        <i class="fas fa-star"></i> General
+      </div>
+    </div>
+  </section>
+
+  <!-- Tracks Section -->
+  <section class="tracks">
+    <h2>Career Tracks</h2>
+    <div class="tracks-grid">
+      <div class="track-card">
+        <h3><i class="fas fa-graduation-cap"></i> Internship Track</h3>
+        <p>Prepare for internship interviews with beginner to intermediate difficulty questions tailored for students.
+        </p>
+      </div>
+      <div class="track-card">
+        <h3><i class="fas fa-briefcase"></i> Engineer Track</h3>
+        <p>Master senior-level interviews with challenging problems and advanced concepts for experienced engineers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="stat">
+      <div class="stat-number">6+</div>
+      <div class="stat-label">Companies Supported</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">5</div>
+      <div class="stat-label">Interview Types</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Difficulty Levels</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">Real-time</div>
+      <div class="stat-label">AI Scoring</div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works" id="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Create Account</h3>
+        <p>Sign up and get instant access to all interview practice sessions.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Start Interview</h3>
+        <p>Choose your track, company style, and difficulty level.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Practice Interview</h3>
+        <p>Answer questions while the AI evaluates your responses and generates follow-ups.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Get Feedback</h3>
+        <p>Receive detailed scoring, strengths analysis, and improvement suggestions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <h2>Simple, Transparent Pricing</h2>
+    <p class="pricing-subtitle">
+      Choose the perfect plan for your interview prep journey
+    </p>
+  
+    <div class="pricing-grid">
+      <!-- Starter Plan -->
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <h3 class="plan-name"><i class="fas fa-rocket"></i> Starter</h3>
+          <div class="plan-price">
+            <span class="currency">$</span><span class="amount">9</span><span class="period">/month</span>
+          </div>
+          <p class="plan-description">Perfect for beginners starting their interview prep</p>
+        </div>
+  
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> <span>10 mock interviews/month</span></li>
+          <li><i class="fas fa-check"></i> <span>3 companies supported</span></li>
+          <li><i class="fas fa-check"></i> <span>Basic AI feedback</span></li>
+          <li><i class="fas fa-check"></i> <span>Text-based responses</span></li>
+          <li><i class="fas fa-check"></i> <span>Performance analytics</span></li>
+          <li class="disabled"><i class="fas fa-times"></i> <span>Voice & speech recognition</span></li>
+          <li class="disabled"><i class="fas fa-times"></i> <span>Priority support</span></li>
+        </ul>
+  
+        <div class="plan-actions">
+          <button class="btn-subscribe" data-plan="starter" data-price="900">
+            <i class="fas fa-credit-card"></i> Get Started
+          </button>
+          <p class="payment-methods">Stripe • Paystack</p>
+        </div>
+      </div>
+  
+      <!-- Pro Plan (Featured) -->
+      <div class="pricing-card featured">
+        <div class="featured-badge">
+          <i class="fas fa-crown"></i> Most Popular
+        </div>
+  
+        <div class="pricing-header">
+          <h3 class="plan-name"><i class="fas fa-star"></i> Pro</h3>
+          <div class="plan-price">
+            <span class="currency">$</span><span class="amount">19</span><span class="period">/month</span>
+          </div>
+          <p class="plan-description">Recommended for serious interview preparation</p>
+        </div>
+  
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> <span>Unlimited mock interviews</span></li>
+          <li><i class="fas fa-check"></i> <span>All 6 companies</span></li>
+          <li><i class="fas fa-check"></i> <span>Advanced AI feedback</span></li>
+          <li><i class="fas fa-check"></i> <span>Voice & speech recognition</span></li>
+          <li><i class="fas fa-check"></i> <span>Detailed performance analytics</span></li>
+          <li><i class="fas fa-check"></i> <span>Custom difficulty levels</span></li>
+          <li class="disabled"><i class="fas fa-times"></i> <span>Priority support</span></li>
+        </ul>
+  
+        <div class="plan-actions">
+          <button class="btn-subscribe btn-featured" data-plan="pro" data-price="1900">
+            <i class="fas fa-crown"></i> Upgrade to Pro
+          </button>
+          <p class="payment-methods">Stripe • Paystack</p>
+        </div>
+      </div>
+  
+      <!-- Elite Plan -->
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <h3 class="plan-name"><i class="fas fa-gem"></i> Elite</h3>
+          <div class="plan-price">
+            <span class="currency">$</span><span class="amount">39</span><span class="period">/month</span>
+          </div>
+          <p class="plan-description">For professionals targeting top companies</p>
+        </div>
+  
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> <span>Unlimited everything</span></li>
+          <li><i class="fas fa-check"></i> <span>All companies + custom</span></li>
+          <li><i class="fas fa-check"></i> <span>Expert AI feedback</span></li>
+          <li><i class="fas fa-check"></i> <span>Voice, video & text modes</span></li>
+          <li><i class="fas fa-check"></i> <span>Advanced analytics & insights</span></li>
+          <li><i class="fas fa-check"></i> <span>1-on-1 coaching sessions</span></li>
+          <li><i class="fas fa-check"></i> <span>Priority support 24/7</span></li>
+        </ul>
+  
+        <div class="plan-actions">
+          <button class="btn-subscribe" data-plan="elite" data-price="3900">
+            <i class="fas fa-gem"></i> Choose Elite
+          </button>
+          <p class="payment-methods">Stripe • Paystack</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-container">
+      <h2>Ready to Ace Your Interviews?</h2>
+      <p>Start practicing with Interview Prep AI today and land your dream job</p>
+      <a href="./login.html" class="btn-cta">Start Free Now</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Interview Prep AI. All rights reserved. | <a href="./login.html">Login</a></p>
+  </footer>
+
+  <script src="./assets/js/landing.js"></script>
+  <!-- Payment Gateway Scripts -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://checkout.paystack.com/js/paystack.js"></script>
 </body>
+
 </html>
