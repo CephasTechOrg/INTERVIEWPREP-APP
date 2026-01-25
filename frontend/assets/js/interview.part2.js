@@ -284,8 +284,19 @@ function navigateTo(page) {
   }
 }
 
+function roleToTrack(role) {
+  const raw = String(role || "").trim().toLowerCase();
+  if (raw === "swe intern") return "swe_intern";
+  if (raw === "software engineer" || raw === "senior engineer" || raw === "senior software engineer") return "swe_engineer";
+  if (raw === "cybersecurity") return "cybersecurity";
+  if (raw === "data science") return "data_science";
+  if (raw === "devops / cloud" || raw === "devops" || raw === "devops cloud") return "devops_cloud";
+  if (raw === "product management") return "product_management";
+  return "swe_engineer";
+}
+
 async function createSession({ role, company_style, difficulty, behavioral_questions_target, interviewer }) {
-  const track = role === "SWE Intern" ? "swe_intern" : "swe_engineer";
+  const track = roleToTrack(role);
   const behavioral = Number(
     behavioral_questions_target ?? qs("#behavioralSelect")?.value ?? 2
   );
@@ -371,7 +382,15 @@ function safeLocaleString(value) {
   }
 }
 
-const COVERAGE_TRACKS = new Set(["swe_intern", "swe_engineer", "behavioral"]);
+const COVERAGE_TRACKS = new Set([
+  "swe_intern",
+  "swe_engineer",
+  "behavioral",
+  "cybersecurity",
+  "data_science",
+  "devops_cloud",
+  "product_management",
+]);
 const COVERAGE_COMPANIES = new Set(["general", "amazon", "apple", "google", "microsoft", "meta"]);
 const COVERAGE_DIFFICULTIES = new Set(["easy", "medium", "hard"]);
 
@@ -381,7 +400,7 @@ async function updateCoverageHint() {
   const role = qs("#roleSelect")?.value || "SWE Intern";
   const company_style = qs("#companySelect")?.value || "general";
   const difficulty = qs("#difficultySelect")?.value || "easy";
-  const track = role === "SWE Intern" ? "swe_intern" : "swe_engineer";
+  const track = roleToTrack(role);
 
   hint.style.color = "var(--text-muted)";
   hint.textContent = "Checking question coverage...";
@@ -399,11 +418,6 @@ async function updateCoverageHint() {
     const fallback = Number(data?.fallback_general || 0);
     if (count > 0) {
       hint.textContent = `${count} ${labelCompanyStyle(company_style)} ${difficulty} questions available.`;
-      return;
-    }
-    if (fallback > 0) {
-      hint.style.color = "var(--warning)";
-      hint.textContent = `No ${labelCompanyStyle(company_style)} ${difficulty} questions. We'll use General instead.`;
       return;
     }
     hint.style.color = "var(--danger)";

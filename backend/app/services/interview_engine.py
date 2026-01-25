@@ -256,12 +256,6 @@ class InterviewEngine:
         return None
 
     def _effective_company_style(self, session: InterviewSession) -> str:
-        pool = self._pool_state(session)
-        raw = pool.get("effective_company_style")
-        if raw:
-            company = str(raw).strip().lower()
-            if company:
-                return company
         return (session.company_style or "general").strip().lower() or "general"
 
     def _update_skill_state(
@@ -488,8 +482,7 @@ class InterviewEngine:
 
     def _maybe_bump_difficulty_current(self, db: Session, session: InterviewSession) -> None:
         """
-        Adaptive difficulty: start at the user's selected difficulty, increase on strong streaks,
-        decrease after repeated struggles.
+        Difficulty is locked to the user's selected value for the entire session.
         """
         selected = (getattr(session, "difficulty", None) or "easy").strip().lower()
         if selected not in ("easy", "medium", "hard"):
@@ -503,6 +496,8 @@ class InterviewEngine:
 
     def _is_behavioral(self, q: Question) -> bool:
         try:
+            if str(getattr(q, "question_type", "")).strip().lower() == "behavioral":
+                return True
             return "behavioral" in set(q.tags())
         except Exception:
             return False
@@ -1491,12 +1486,10 @@ class InterviewEngine:
         company = (session.company_style or "").strip().lower() or "general"
         track = (session.track or "").strip()
         diff = self._effective_difficulty(session)
-        companies = {company, "general", self._effective_company_style(session)}
-        companies = {c for c in companies if c}
         tracks = {track, "behavioral"} if track else {"behavioral"}
 
         base = db.query(Question).filter(
-            Question.company_style.in_(companies),
+            Question.company_style == company,
             Question.track.in_(tracks),
             Question.difficulty == diff,
             or_(Question.tags_csv.ilike("%behavioral%"), Question.question_type == "behavioral"),
@@ -1520,12 +1513,10 @@ class InterviewEngine:
     ) -> Question | None:
         diff = self._effective_difficulty(session)
         company = (session.company_style or "").strip().lower() or "general"
-        companies = {company, "general", self._effective_company_style(session)}
-        companies = {c for c in companies if c}
 
         base = db.query(Question).filter(
             Question.track == session.track,
-            Question.company_style.in_(companies),
+            Question.company_style == company,
             Question.difficulty == diff,
             ~Question.tags_csv.ilike("%behavioral%"),
             Question.question_type != "behavioral",
@@ -1572,22 +1563,27 @@ class InterviewEngine:
             behavioral_asked = sum(1 for q in asked_questions if self._is_behavioral(q))
 
         questions_asked = int(session.questions_asked_count or 0)
-        need_behavioral = behavioral_target > 0 and behavioral_asked < behavioral_target
-        force_behavioral = need_behavioral and questions_asked >= max(1, behavioral_target - 1)
+        questions_remaining = max(0, int(session.max_questions or 0) - questions_asked)
+        behavioral_remaining = max(0, behavioral_target - behavioral_asked)
 
         focus = {"tags": list(self._focus_tags(session))}
 
-        if force_behavioral:
-            q = self._pick_next_behavioral_question(db, session, asked_ids)
+        if behavioral_remaining > 0:
+            # If all remaining slots must be behavioral, do it now.
+            if behavioral_remaining >= questions_remaining:
+                q = self._pick_next_behavioral_question(db, session, asked_ids)
+                if q:
+                    return q
+            # Otherwise, prefer technical first, then behavioral.
+            q = self._pick_next_technical_question(db, session, asked_ids, seen_ids, focus, desired_type="coding")
             if q:
                 return q
+            return self._pick_next_behavioral_question(db, session, asked_ids)
 
+        # Behavioral target already satisfied: only technical questions.
         q = self._pick_next_technical_question(db, session, asked_ids, seen_ids, focus, desired_type="coding")
         if q:
             return q
-
-        if need_behavioral:
-            return self._pick_next_behavioral_question(db, session, asked_ids)
         return None
 
     def _mark_warmup_behavioral_asked(self, db: Session, session: InterviewSession, question_id: int | None) -> None:
@@ -1649,39 +1645,17 @@ class InterviewEngine:
         if warmup_id:
             asked_ids.add(warmup_id)
         seen = self._seen_question_subquery(session)
-
-        def choose(company_style: str, track: str) -> Question | None:
-            base = db.query(Question).filter(
-                Question.company_style == company_style,
-                Question.track == track,
-                Question.tags_csv.ilike("%behavioral%"),
-            )
-            if asked_ids:
-                base = base.filter(~Question.id.in_(asked_ids))
-            unseen = base.filter(~Question.id.in_(seen)).order_by(func.random()).first()
-            if unseen:
-                return unseen
-            return base.order_by(func.random()).first()
-
         company = (session.company_style or "").strip().lower() or "general"
         track = (session.track or "").strip()
-        choices: list[tuple[str, str]] = []
-        if company != "general":
-            if track:
-                choices.append((company, track))
-            choices.append((company, "behavioral"))
-            if track:
-                choices.append(("general", track))
-        choices.append(("general", "behavioral"))
+        tracks = [track, "behavioral"] if track else ["behavioral"]
+        diff = (session.difficulty or "easy").strip().lower()
 
-        for company_style, track_val in choices:
-            if not track_val:
-                continue
-            q = choose(company_style, track_val)
-            if q:
-                return q
-
-        base = db.query(Question).filter(Question.tags_csv.ilike("%behavioral%"))
+        base = db.query(Question).filter(
+            Question.company_style == company,
+            Question.track.in_(tracks),
+            Question.difficulty == diff,
+            or_(Question.tags_csv.ilike("%behavioral%"), Question.question_type == "behavioral"),
+        )
         if asked_ids:
             base = base.filter(~Question.id.in_(asked_ids))
         unseen = base.filter(~Question.id.in_(seen)).order_by(func.random()).first()
@@ -1792,6 +1766,24 @@ class InterviewEngine:
         if "day" in t or "today" in t:
             return "day"
         return ""
+
+    def _greeting_ack(self, text: str | None) -> str | None:
+        t = self._normalize_text(text)
+        if not t:
+            return None
+        if any(
+            phrase in t
+            for phrase in (
+                "how are you",
+                "how are you doing",
+                "how are you doing today",
+                "how is it going",
+                "hows it going",
+                "how's it going",
+            )
+        ):
+            return "I'm doing well, thanks for asking."
+        return None
 
     def _clean_smalltalk_question(self, question: str | None) -> str:
         q = (question or "").strip()
@@ -2240,7 +2232,7 @@ Question context: {self._combine_question_text(title, prompt)}
                 # If LLM is unavailable, still do a small-talk fallback before behavioral warmup.
                 if not profile and not getattr(self.llm, "api_key", None):
                     question = self._smalltalk_question(None, student_text)
-                    ack_line = self._warmup_smalltalk_line(None)
+                    ack_line = self._greeting_ack(student_text) or self._warmup_smalltalk_line(None)
                     msg = self._warmup_smalltalk_reply(ack_line, question)
                     meta: dict[str, Any] = {
                         "smalltalk_question": question,
@@ -2252,7 +2244,7 @@ Question context: {self._combine_question_text(title, prompt)}
                     return msg
 
                 question = self._smalltalk_question(profile, student_text)
-                ack_line = self._warmup_smalltalk_line(profile)
+                ack_line = self._greeting_ack(student_text) or self._warmup_smalltalk_line(profile)
                 msg = self._warmup_smalltalk_reply(ack_line, question)
                 meta: dict[str, Any] = {
                     "smalltalk_question": question,
@@ -2272,7 +2264,14 @@ Question context: {self._combine_question_text(title, prompt)}
                 return msg
 
             # ...existing code (warm_step >= 2 branch)...
+            behavioral_target = int(getattr(session, "behavioral_questions_target", 0) or 0)
             tone_line = self._warmup_transition_line(self._warmup_profile_from_state(session))
+            if behavioral_target <= 0:
+                # Skip behavioral warmup if none are requested.
+                self._set_warmup_state(db, session, max(warm_step, 3), True)
+                session_crud.update_stage(db, session, "warmup_done")
+                return await self.ensure_question_and_intro(db, session, user_name=user_name, preface=tone_line)
+
             msg = await self._warmup_reply(
                 session=session,
                 student_text=student_text,
@@ -2296,12 +2295,12 @@ Question context: {self._combine_question_text(title, prompt)}
                 if q.track != session.track:
                     q = None
             if q:
-                allowed_companies = {
-                    (session.company_style or "").strip().lower() or "general",
-                    self._effective_company_style(session),
-                    "general",
-                }
-                if (q.company_style or "").strip().lower() not in allowed_companies:
+                desired_diff = (session.difficulty or "easy").strip().lower()
+                if (q.difficulty or "").strip().lower() != desired_diff:
+                    q = None
+            if q:
+                allowed_company = (session.company_style or "").strip().lower() or "general"
+                if (q.company_style or "").strip().lower() != allowed_company:
                     q = None
 
         if q:

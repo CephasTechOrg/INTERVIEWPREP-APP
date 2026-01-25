@@ -114,7 +114,16 @@ const VOICE_TOGGLE_KEY = "tts_enabled";
 const THEME_TOGGLE_KEY = "dark_theme";
 const QUESTION_PIN_COLLAPSED_KEY = "question_pin_collapsed";
 const SESSION_PREFS_KEY = "last_session_prefs";
-const ROLE_OPTIONS = new Set(["SWE Intern", "Software Engineer", "Senior Engineer"]);
+const ROLE_OPTIONS = new Set([
+  "SWE Intern",
+  "Software Engineer",
+  "Senior Engineer",
+  "Senior Software Engineer",
+  "Cybersecurity",
+  "Data Science",
+  "DevOps / Cloud",
+  "Product Management",
+]);
 const COMPANY_OPTIONS = new Set(["general", "amazon", "google", "apple", "microsoft", "meta"]);
 const DIFFICULTY_OPTIONS = new Set(["easy", "medium", "hard"]);
 const INTERVIEWER_IMAGE_URL = "https://i.imgur.com/ZCLzsF6.jpeg";

@@ -1,4 +1,4 @@
-from sqlalchemy import and_, func
+from sqlalchemy import and_, func, or_
 from sqlalchemy.orm import Session
 
 from app.crud.session_question import list_asked_question_ids
@@ -69,7 +69,29 @@ def count_questions(
         Question.difficulty == difficulty,
     )
     if exclude_behavioral:
-        q = q.filter(~Question.tags_csv.ilike("%behavioral%"))
+        q = q.filter(~Question.tags_csv.ilike("%behavioral%"), Question.question_type != "behavioral")
+    return int(q.scalar() or 0)
+
+
+def count_behavioral_questions(db: Session, track: str, company_style: str, difficulty: str) -> int:
+    q = db.query(func.count(Question.id)).filter(
+        Question.company_style == company_style,
+        Question.difficulty == difficulty,
+        or_(Question.tags_csv.ilike("%behavioral%"), Question.question_type == "behavioral"),
+    )
+    # Allow role-specific behavioral banks (track == role) and generic behavioral (track == "behavioral").
+    q = q.filter(Question.track.in_([track, "behavioral"]))
+    return int(q.scalar() or 0)
+
+
+def count_technical_questions(db: Session, track: str, company_style: str, difficulty: str) -> int:
+    q = db.query(func.count(Question.id)).filter(
+        Question.track == track,
+        Question.company_style == company_style,
+        Question.difficulty == difficulty,
+        ~Question.tags_csv.ilike("%behavioral%"),
+        Question.question_type != "behavioral",
+    )
     return int(q.scalar() or 0)
 
 

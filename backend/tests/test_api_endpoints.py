@@ -29,6 +29,7 @@ class TestHealthEndpoint:
 
 
 @pytest.mark.integration
+@pytest.mark.usefixtures("sample_questions")
 class TestSessionEndpoints:
     """Test suite for session-related endpoints."""
 
@@ -225,6 +226,7 @@ class TestQuestionEndpoints:
 
 
 @pytest.mark.integration
+@pytest.mark.usefixtures("sample_questions")
 class TestAnalyticsEndpoints:
     """Test suite for analytics endpoints."""
 

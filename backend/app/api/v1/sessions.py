@@ -135,6 +135,30 @@ def create_session(payload: CreateSessionRequest, db: Session = Depends(get_db),
     difficulty = (payload.difficulty or "").strip().lower()
     _validate_session_inputs(track, company_style, difficulty)
     interviewer = payload.interviewer.model_dump() if payload.interviewer else None
+    behavioral_target = max(0, int(payload.behavioral_questions_target or 0))
+
+    tech_count = question_crud.count_technical_questions(db, track, company_style, difficulty)
+    behavioral_count = question_crud.count_behavioral_questions(db, track, company_style, difficulty)
+    if behavioral_target > behavioral_count:
+        raise HTTPException(
+            status_code=422,
+            detail=(
+                f"Not enough behavioral questions for {company_style}/{difficulty} {track}. "
+                f"Requested {behavioral_target}, available {behavioral_count}."
+            ),
+        )
+    if tech_count == 0 and behavioral_target == 0:
+        raise HTTPException(
+            status_code=422,
+            detail=(
+                f"No technical questions available for {company_style}/{difficulty} {track}. "
+                "Choose a different company or difficulty."
+            ),
+        )
+
+    max_questions = max(7, behavioral_target)
+    if tech_count == 0 and behavioral_target > 0:
+        max_questions = behavioral_target
     s = session_crud.create_session(
         db=db,
         user_id=user.id,
@@ -142,15 +166,10 @@ def create_session(payload: CreateSessionRequest, db: Session = Depends(get_db),
         track=track,
         company_style=company_style,
         difficulty=difficulty,
-        behavioral_questions_target=payload.behavioral_questions_target,
+        behavioral_questions_target=behavioral_target,
+        max_questions=max_questions,
         interviewer=interviewer,
     )
-    try:
-        pool = question_crud.preflight_question_pool(db, track, company_style, difficulty)
-        _apply_pool_state(db, s, pool)
-    except Exception:
-        # Preflight is best-effort; never block session creation.
-        pass
     return SessionOut(
         id=s.id,
         role=s.role,

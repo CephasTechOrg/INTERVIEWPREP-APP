@@ -15,7 +15,7 @@ class CreateSessionRequest(BaseModel):
     track: str = "swe_intern"
     company_style: str = "general"
     difficulty: str = "easy"
-    behavioral_questions_target: int = Field(default=2, ge=0, le=3)
+    behavioral_questions_target: int = Field(default=2, ge=0, le=10)
     interviewer: InterviewerProfile | None = None
 
 

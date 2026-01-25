@@ -166,6 +166,17 @@ def sample_questions(db: Session) -> list[Question]:
             "followups": [],
             "meta": {},
         },
+        {
+            "title": "Conflict resolution",
+            "prompt": "Tell me about a time you handled a conflict on a team.",
+            "difficulty": "easy",
+            "track": "swe_intern",
+            "company_style": "general",
+            "tags_csv": "behavioral,teamwork",
+            "question_type": "behavioral",
+            "followups": [],
+            "meta": {},
+        },
     ]
 
     questions = []

@@ -40,6 +40,23 @@ class ScoringEngine:
             ],
         }
 
+    def _calibrate_overall_score(self, overall_score: int, rubric: dict) -> int:
+        """
+        Apply a light calibration so scores are not overly harsh when rubric signals strong performance.
+        Keeps adjustments conservative and bounded.
+        """
+        try:
+            scores = [int(v) for v in rubric.values() if isinstance(v, (int, float))]
+        except Exception:
+            scores = []
+        if not scores:
+            return overall_score
+        avg = sum(scores) / float(len(scores))
+        rubric_score = int(round(avg * 10))
+        if overall_score < (rubric_score - 5):
+            return max(0, min(100, rubric_score - 2))
+        return max(0, min(100, overall_score))
+
     async def finalize(self, db: Session, session_id: int) -> dict:
         msgs = message_crud.list_messages(db, session_id, limit=200)
 
@@ -82,6 +99,7 @@ class ScoringEngine:
 
         overall_score = int(parsed.overall_score or 0)
         rubric = parsed.rubric.model_dump()
+        overall_score = self._calibrate_overall_score(overall_score, rubric)
         summary = {
             "strengths": parsed.strengths,
             "weaknesses": parsed.weaknesses,

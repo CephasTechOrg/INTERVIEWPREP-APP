@@ -196,7 +196,7 @@ class TestInterviewEngine:
         selected_q = engine._pick_next_technical_question(db, session, set(), set(), {}, desired_type="coding")
 
         assert selected_q is not None
-        assert selected_q.company_style in ["google", "general"]
+        assert selected_q.company_style == "google"
 
     def test_tag_diversity(self, db: Session, test_user: User):
         """Test that questions with diverse tags are selected."""
@@ -247,7 +247,8 @@ class TestInterviewEngine:
             difficulty="easy",
             stage="intro",
             behavioral_questions_target=2,
-            questions_asked_count=2,
+            max_questions=2,
+            questions_asked_count=0,
         )
         db.add(session)
         db.commit()

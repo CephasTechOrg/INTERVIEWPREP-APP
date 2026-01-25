@@ -25,6 +25,7 @@ def create_session(
     company_style: str,
     difficulty: str,
     behavioral_questions_target: int = 2,
+    max_questions: int | None = None,
     interviewer: dict | None = None,
 ) -> InterviewSession:
     # Ensure historical sessions contribute to "seen questions" so new sessions
@@ -32,7 +33,10 @@ def create_session(
     with contextlib.suppress(Exception):
         user_question_seen_crud.backfill_user_seen_questions(db, user_id=user_id)
 
-    behavioral_target = max(0, min(int(behavioral_questions_target or 0), 3))
+    behavioral_target = max(0, int(behavioral_questions_target or 0))
+    max_questions_val = max(1, int(max_questions or 7))
+    if behavioral_target > max_questions_val:
+        max_questions_val = behavioral_target
 
     skill_state: dict = {}
     if isinstance(interviewer, dict) and interviewer:
@@ -48,7 +52,7 @@ def create_session(
         stage="intro",
         questions_asked_count=0,
         followups_used=0,
-        max_questions=7,
+        max_questions=max_questions_val,
         max_followups_per_question=2,
         behavioral_questions_target=behavioral_target,
         skill_state=skill_state,
