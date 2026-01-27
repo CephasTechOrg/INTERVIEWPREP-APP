@@ -291,6 +291,12 @@
         renderFeedbackItems('weaknesses', data.summary?.weaknesses || [], 'weakness');
         renderFeedbackItems('next_steps', data.summary?.next_steps || [], 'step');
 
+        // Initialize feedback widget with the session ID
+        const feedbackSessionId = result.fallback ? result.sessionId : sessionId;
+        if (typeof window.initFeedbackWidget === 'function') {
+          window.initFeedbackWidget(feedbackSessionId);
+        }
+
         // Set up button handlers
         document.getElementById('btnCopySummary').addEventListener('click', () => copySummary(data));
         document.getElementById('btnOpenPerformance').addEventListener('click', () => {

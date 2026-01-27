@@ -100,7 +100,7 @@
 }
 
 .performance-header__copy h1 {
-  font-size: 18px; /* Considerably smaller */
+  font-size: 20px; /* Considerably smaller */
   font-weight: 700;
   margin-bottom: 2px;
   color: var(--text);
@@ -112,7 +112,7 @@
 
 .performance-header__copy p {
   margin: 0;
-  font-size: 11px; /* Tiny subtext */
+  font-size: 13px; /* Tiny subtext */
   color: var(--text-muted);
   font-weight: 500;
 }
@@ -344,7 +344,7 @@
 }
 
 .metric-label {
-  font-size: 11px; /* Tiny label */
+  font-size: 13px; /* Tiny label */
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -385,7 +385,7 @@
 }
 
 .metric-sub {
-  font-size: 11px; /* Tiny */
+  font-size: 13px; /* Tiny */
   color: var(--text-muted);
   line-height: 1.2;
   text-align: right;
@@ -530,7 +530,7 @@
 }
 
 .chart-subtitle {
-  font-size: 12px; /* Smaller subtitle */
+  font-size: 13px; /* Smaller subtitle */
   color: var(--text-muted);
   font-weight: 500;
   padding-left: 12px;
@@ -1004,7 +1004,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  font-size: 11px; /* Tiny meta */
+  font-size: 13px; /* Tiny meta */
   color: var(--text-muted);
   font-weight: 500;
 }
@@ -1017,7 +1017,7 @@
   background: rgba(0, 0, 0, 0.03);
   border-radius: var(--radius-full);
   white-space: nowrap;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .session-meta-item i {

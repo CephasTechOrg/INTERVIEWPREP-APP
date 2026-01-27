@@ -21,24 +21,23 @@
 }
 
 .dashboard-title {
-  font-size: 24px; /* Reduced from 32 */
-  font-weight: 800;
-  color: var(--text);
-  margin-bottom: 6px;
-  letter-spacing: -0.5px;
-  line-height: 1.2;
-}
+  font-size: 26px; /* Slightly increased */
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
 
-.dashboard-title span {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+  .dashboard-title span {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
-.dashboard-subtitle {
-  font-size: 14px; /* Reduced from 16 */
-  color: var(--text-muted);
+  .dashboard-subtitle {
+  font-size: 15px; /* Slightly increased */
   line-height: 1.5;
   max-width: 600px;
 }
@@ -125,23 +124,22 @@
 }
 
 .card-title {
-  font-size: 16px; /* Reduced from 20 */
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+  font-size: 17px; 
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
-.card-title i {
-  color: var(--primary);
-  font-size: 16px;
-}
+  .card-title i {
+    color: var(--primary);
+    font-size: 17px;
+  }
 
-.card-subtitle {
-  font-size: 12px; /* Reduced from 14 */
-  color: var(--text-muted);
+  .card-subtitle {
+  font-size: 13px;
   line-height: 1.4;
 }
 
@@ -195,7 +193,7 @@
 }
 
 .form-label {
-  font-size: 11px; /* Reduced from 13 */
+  font-size: 13px;
   font-weight: 700;
   color: var(--text);
   display: flex;
@@ -207,7 +205,7 @@
 
 .form-label i {
   color: var(--primary);
-  font-size: 12px;
+  font-size: 13px;
   width: 16px;
   text-align: center;
 }
@@ -446,7 +444,7 @@ select.form-control {
 }
 
 .interviewer-card__role {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-muted);
   font-weight: 500;
 }
@@ -733,7 +731,7 @@ select.form-control {
 }
 
 .stat-label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
   margin-bottom: 6px;
@@ -852,7 +850,7 @@ select.form-control {
 }
 
 .stat-label {
-  font-size: 10px; /* Reduced from 11 */
+  font-size: 11px; /* Reduced from 11 */
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;

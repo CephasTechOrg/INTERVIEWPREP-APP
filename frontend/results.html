@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="./assets/css/pro.css"/>
   <link rel="stylesheet" href="./assets/css/results.css"/>
+  <link rel="stylesheet" href="./assets/css/feedback.css"/>
   <link rel="stylesheet" href="./assets/css/responsive.css"/>
   <link rel="stylesheet" href="./assets/css/mobile.css"/>
 </head>
@@ -89,6 +90,28 @@
       </div>
     </div>
 
+    <!-- Feedback Request Card -->
+    <div class="feedback-request-card" id="feedbackRequestCard">
+      <div class="feedback-request-content">
+        <div class="feedback-request-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <div class="feedback-request-text">
+          <h4>How was this interview session?</h4>
+          <p>Your feedback helps us improve the AI interviewer</p>
+        </div>
+        <button class="btn btn-primary" id="btnOpenFeedback">
+          <i class="fas fa-comment"></i> Give Feedback
+        </button>
+      </div>
+      <div class="feedback-submitted-content" style="display: none;">
+        <div class="feedback-submitted-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <span>Thanks for your feedback!</span>
+      </div>
+    </div>
+
     <!-- Results Cards -->
     <div class="results-cards">
       <!-- Rubric Card -->
@@ -155,9 +178,91 @@
     </div>
   </div>
 
+  <!-- Feedback Modal -->
+  <div class="modal-overlay" id="feedbackModal">
+    <div class="modal-content feedback-modal">
+      <div class="modal-header">
+        <h3><i class="fas fa-star"></i> Rate Your Interview</h3>
+        <button class="modal-close" id="closeFeedbackModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="rating-section">
+          <label>Overall Experience</label>
+          <div class="star-rating" id="starRating">
+            <button class="star" data-value="1"><i class="fas fa-star"></i></button>
+            <button class="star" data-value="2"><i class="fas fa-star"></i></button>
+            <button class="star" data-value="3"><i class="fas fa-star"></i></button>
+            <button class="star" data-value="4"><i class="fas fa-star"></i></button>
+            <button class="star" data-value="5"><i class="fas fa-star"></i></button>
+          </div>
+          <div class="rating-label" id="ratingValueLabel">Click to rate</div>
+        </div>
+
+        <div class="thumbs-section">
+          <label>Quick Feedback</label>
+          <div class="thumbs-buttons">
+            <button class="thumb-btn" id="thumbUp" data-value="up">
+              <i class="fas fa-thumbs-up"></i>
+              <span>Helpful</span>
+            </button>
+            <button class="thumb-btn" id="thumbDown" data-value="down">
+              <i class="fas fa-thumbs-down"></i>
+              <span>Needs Work</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="detail-ratings">
+          <div class="detail-rating-item">
+            <label>Question Quality</label>
+            <div class="mini-stars" data-target="rating_questions">
+              <button data-value="1"><i class="fas fa-star"></i></button>
+              <button data-value="2"><i class="fas fa-star"></i></button>
+              <button data-value="3"><i class="fas fa-star"></i></button>
+              <button data-value="4"><i class="fas fa-star"></i></button>
+              <button data-value="5"><i class="fas fa-star"></i></button>
+            </div>
+          </div>
+          <div class="detail-rating-item">
+            <label>AI Feedback Quality</label>
+            <div class="mini-stars" data-target="rating_feedback">
+              <button data-value="1"><i class="fas fa-star"></i></button>
+              <button data-value="2"><i class="fas fa-star"></i></button>
+              <button data-value="3"><i class="fas fa-star"></i></button>
+              <button data-value="4"><i class="fas fa-star"></i></button>
+              <button data-value="5"><i class="fas fa-star"></i></button>
+            </div>
+          </div>
+          <div class="detail-rating-item">
+            <label>Difficulty Level</label>
+            <div class="mini-stars" data-target="rating_difficulty">
+              <button data-value="1"><i class="fas fa-star"></i></button>
+              <button data-value="2"><i class="fas fa-star"></i></button>
+              <button data-value="3"><i class="fas fa-star"></i></button>
+              <button data-value="4"><i class="fas fa-star"></i></button>
+              <button data-value="5"><i class="fas fa-star"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="comment-section">
+          <label>Additional Comments (optional)</label>
+          <textarea id="feedbackComment" placeholder="What could we improve? What did you like?"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="cancelFeedback">Cancel</button>
+        <button class="btn btn-primary" id="submitFeedback" disabled>
+          <i class="fas fa-paper-plane"></i> Submit Feedback
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script src="./assets/js/api.js"></script>
   <script src="./assets/js/charts.js"></script>
   <script src="./assets/js/auth.js"></script>
+  <script src="./assets/js/feedback.js"></script>
   <script src="./assets/js/results.js"></script>
 </body>
 </html>

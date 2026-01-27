@@ -64,29 +64,9 @@ async function handleLogin(e) {
     try {
       localStorage.setItem("last_auth_email", email);
     } catch {}
-    // Ensure a local profile exists for this email (frontend-only)
+    // Fetch user profile from server and merge with local profile
     try {
-      const key = `user_profile_${email.toLowerCase()}`;
-      if (!localStorage.getItem(key)) {
-        const guessName = email.split("@")[0].replaceAll(".", " ").replaceAll("_", " ");
-        localStorage.setItem(
-          key,
-          JSON.stringify({
-            email,
-            full_name: guessName ? guessName.replace(/\b\w/g, (c) => c.toUpperCase()) : "",
-            role_pref: "SWE Intern",
-            company_pref: "general",
-            difficulty_pref: "easy",
-            focus_pref: "algorithms",
-            years_experience: "",
-            location: "",
-            updated_at: Date.now(),
-          })
-        );
-      }
-    } catch {}
-    try {
-      await syncProfileToServer(email);
+      await fetchAndMergeServerProfile(email);
     } catch {}
 
     setNotice("#login_notice", "Signed in. Redirecting...", "ok");
@@ -104,6 +84,48 @@ async function handleLogin(e) {
       }
     }
   }
+}
+
+async function fetchAndMergeServerProfile(email) {
+  const token = getToken?.();
+  if (!token || !email) return;
+  
+  // Fetch the user's profile from the server (contains the real name from signup)
+  const serverProfile = await apiFetch("/users/me", { method: "GET" });
+  
+  const key = `user_profile_${email.toLowerCase()}`;
+  const existingRaw = localStorage.getItem(key);
+  const existing = existingRaw ? JSON.parse(existingRaw) : {};
+  
+  // Server profile takes precedence for full_name (it's the real name from signup)
+  // Only use guessed name as fallback if server has no name stored
+  let finalName = serverProfile.full_name;
+  if (!finalName) {
+    // Fallback: use existing local name or guess from email
+    finalName = existing.full_name;
+    if (!finalName) {
+      const guessName = email.split("@")[0].replaceAll(".", " ").replaceAll("_", " ");
+      finalName = guessName ? guessName.replace(/\b\w/g, (c) => c.toUpperCase()) : "";
+    }
+  }
+  
+  // Merge server profile extras into local profile
+  const serverExtras = serverProfile.profile || {};
+  
+  localStorage.setItem(
+    key,
+    JSON.stringify({
+      email,
+      full_name: finalName,
+      role_pref: serverProfile.role_pref || existing.role_pref || "SWE Intern",
+      company_pref: serverExtras.company_pref || existing.company_pref || "general",
+      difficulty_pref: serverExtras.difficulty_pref || existing.difficulty_pref || "easy",
+      focus_pref: serverExtras.focus_pref || existing.focus_pref || "algorithms",
+      years_experience: serverExtras.years_experience || existing.years_experience || "",
+      location: serverExtras.location || existing.location || "",
+      updated_at: Date.now(),
+    })
+  );
 }
 
 async function syncProfileToServer(email) {

@@ -247,38 +247,70 @@ html.dark-mode nav {
 .hero {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 80px 40px;
-    text-align: center;
+    padding: 100px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
     animation: fadeInUp 0.8s ease-out;
 }
 
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    animation: slideInRight 1s ease-out;
+}
+
+.hero-img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    transform: rotateY(-5deg) rotateX(2deg);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.hero-img:hover {
+    transform: rotateY(0) rotateX(0) scale(1.02);
+    box-shadow: 0 30px 60px -12px rgba(37, 99, 235, 0.2);
+}
+
 .hero h1 {
-    font-size: 56px;
+    font-size: 64px;
     font-weight: 800;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, var(--text-dark), var(--primary-color));
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary-color) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    line-height: 1.2;
+    line-height: 1.1;
+    letter-spacing: -1px;
     animation: slideInScale 0.8s ease-out 0.1s backwards;
 }
 
 .hero p {
     font-size: 20px;
     color: var(--text-muted);
-    margin-bottom: 30px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-bottom: 32px;
+    max-width: 90%;
+    line-height: 1.6;
     animation: slideInScale 0.8s ease-out 0.2s backwards;
 }
 
 .hero-buttons {
     display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 60px;
+    gap: 16px;
+    justify-content: flex-start;
+    margin-bottom: 0;
     animation: slideInScale 0.8s ease-out 0.3s backwards;
     flex-wrap: wrap;
 }
@@ -1779,5 +1811,248 @@ html.dark-mode .payment-info {
     .btn-pay {
         padding: 12px;
         font-size: 14px;
+    }
+}
+@media (max-width: 968px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 60px;
+        padding-bottom: 60px;
+        gap: 40px;
+    }
+
+    .hero-content {
+        margin-bottom: 0;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .hero p {
+        max-width: 100%;
+        font-size: 18px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .hero-img {
+        transform: none; /* Reset 3D transform on mobile for clarity */
+        max-width: 100%;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin-top: 20px;
+    }
+    
+    .hero-image-container {
+        width: 100%;
+    }
+}
+
+/* ============================================
+   UPDATED STYLES (Clean & Big)
+   ============================================ */
+
+/* Logo Update */
+.nav-logo-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.logo {
+    font-size: 28px; /* Larger text */
+    gap: 12px;
+}
+
+/* Nav Cleanliness */
+nav {
+    padding: 20px 60px; /* More breathing room */
+    background: rgba(255, 255, 255, 0.95); /* Less transparent for cleanliness */
+}
+
+.nav-links {
+    gap: 40px; /* More space between links */
+}
+
+.nav-links a {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Theme Toggle - Small & Subtle */
+.theme-toggle {
+    padding: 6px;
+    font-size: 14px;
+    opacity: 0.6;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--border-color);
+}
+
+.theme-toggle:hover {
+    opacity: 1;
+    background: var(--bg-lighter);
+}
+
+/* Hero Section Updates */
+.hero {
+    padding: 120px 60px; /* Bigger vertical spacing */
+    max-width: 1400px; /* Wider container */
+    gap: 80px;
+}
+
+.hero-image-container {
+    perspective: 1500px;
+    flex: 1.2; /* Give image more space */
+}
+
+.hero-img {
+    max-width: 100%; /* Take full available width */
+    width: 800px; /* Make it significantly bigger */
+    border-radius: 24px;
+    box-shadow: 0 40px 80px -20px rgba(37, 99, 235, 0.25); /* Richer shadow */
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* Big Footer Styles */
+.main-footer {
+    background: var(--footer-bg);
+    color: #e2e8f0;
+    padding: 80px 60px 30px;
+    margin-top: 100px;
+    font-size: 15px;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+}
+
+.footer-column h4 {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 24px;
+    font-weight: 700;
+}
+
+.footer-column a {
+    display: block;
+    color: #94a3b8;
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: color 0.2s;
+}
+
+.footer-column a:hover {
+    color: var(--primary-color);
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.footer-logo img {
+    height: 40px;
+}
+
+.footer-desc {
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    max-width: 300px;
+}
+
+.social-links {
+    display: flex;
+    gap: 16px;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 20px;
+    opacity: 0.7;
+    margin-bottom: 0;
+}
+
+.social-links a:hover {
+    opacity: 1;
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.footer-bottom a {
+    color: #64748b;
+}
+
+/* Responsive Overrides for new changes */
+@media (max-width: 1024px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+    
+    .hero {
+        padding: 80px 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        padding: 15px 20px;
+    }
+    
+    .nav-logo-img {
+        height: 40px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-desc {
+        margin: 0 auto 24px;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .footer-logo {
+        justify-content: center;
     }
 }

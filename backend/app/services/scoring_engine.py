@@ -16,6 +16,35 @@ from app.services.rubric_loader import build_rubric_context
 logger = logging.getLogger(__name__)
 
 
+def _get_rag_context_safe(db: Session, session_id: int) -> str | None:
+    """Safely get RAG context, returning None if unavailable."""
+    try:
+        from app.services.rag_service import get_rag_context_for_session
+        context = get_rag_context_for_session(db, session_id)
+        if context:
+            logger.info("RAG context retrieved for session_id=%s (%d chars)", session_id, len(context))
+        return context
+    except Exception as e:
+        logger.debug("RAG context unavailable for session_id=%s: %s", session_id, e)
+        return None
+
+
+def _trigger_embedding_generation(db: Session, session_id: int) -> None:
+    """Trigger embedding generation for a completed session."""
+    try:
+        from app.services.session_embedder import embed_completed_session
+        result = embed_completed_session(db, session_id)
+        if result:
+            logger.info(
+                "Session embeddings created for session_id=%s: session=%s, responses=%d",
+                session_id, 
+                result.get("session_embedded", False),
+                result.get("response_examples_created", 0)
+            )
+    except Exception as e:
+        logger.debug("Embedding generation skipped for session_id=%s: %s", session_id, e)
+
+
 class ScoringEngine:
     def __init__(self) -> None:
         self.llm = DeepSeekClient()
@@ -87,7 +116,10 @@ class ScoringEngine:
         except Exception:
             rubric_context = ""
 
-        sys = evaluator_system_prompt()
+        # Get RAG context from similar sessions (Phase 5)
+        rag_context = _get_rag_context_safe(db, session_id)
+
+        sys = evaluator_system_prompt(rag_context=rag_context)
         user = evaluator_user_prompt(transcript, rubric_context=rubric_context or None)
 
         try:
@@ -108,4 +140,8 @@ class ScoringEngine:
 
         evaluation_crud.upsert_evaluation(db, session_id, overall_score, rubric, summary)
         logger.info("Evaluation stored session_id=%s score=%s", session_id, overall_score)
+        
+        # Generate embeddings for this session (Phase 5: builds RAG knowledge base)
+        _trigger_embedding_generation(db, session_id)
+        
         return {"overall_score": overall_score, "rubric": rubric, "summary": summary}

@@ -1,4 +1,5 @@
 import contextlib
+import logging
 import random
 import re
 from typing import Any
@@ -30,6 +31,23 @@ from app.services.prompt_templates import (
     warmup_tone_classifier_system_prompt,
     warmup_tone_classifier_user_prompt,
 )
+
+_engine_logger = logging.getLogger(__name__)
+
+
+def _get_rag_context_for_interview(db: Session, session_id: int) -> str | None:
+    """
+    Safely get RAG context for live interview.
+    Returns None if RAG is unavailable or not enough data.
+    """
+    try:
+        from app.services.rag_service import get_rag_context_for_session
+        context = get_rag_context_for_session(db, session_id)
+        if context:
+            _engine_logger.debug("RAG context available for session_id=%s", session_id)
+        return context
+    except Exception:
+        return None
 
 
 class InterviewEngine:
@@ -2470,7 +2488,10 @@ Question context: {self._combine_question_text(title, prompt)}
                     session_crud.update_stage(db, session, "followups")
                     return targeted
 
-        ctrl_sys = interviewer_controller_system_prompt(session.company_style, session.role)
+        # Get RAG context for smarter follow-ups (Phase 5)
+        rag_context = _get_rag_context_for_interview(db, session.id)
+        
+        ctrl_sys = interviewer_controller_system_prompt(session.company_style, session.role, rag_context=rag_context)
         ctrl_user = interviewer_controller_user_prompt(
             stage=stage,
             question_title=self._render_text(session, q.title),

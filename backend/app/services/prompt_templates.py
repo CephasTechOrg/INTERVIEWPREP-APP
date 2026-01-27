@@ -189,16 +189,31 @@ Return JSON with shape:
 """.strip()
 
 
-def interviewer_controller_system_prompt(company_style: str, role: str) -> str:
+def interviewer_controller_system_prompt(company_style: str, role: str, rag_context: str | None = None) -> str:
     label = _company_label(company_style)
     style_guide = _company_style_guide(company_style)
     focus = _company_focus_checklist(company_style)
+    
+    rag_section = ""
+    if rag_context:
+        rag_section = f"""
+
+CONTEXT FROM SIMILAR SESSIONS:
+{rag_context}
+
+Use these patterns to:
+- Calibrate follow-up depth based on what worked in similar sessions
+- Apply consistent standards for similar question types
+- Identify common gaps that benefit from targeted follow-ups
+Do not mention "past sessions" or "historical data" in your responses.
+"""
+    
     return f"""
 You are a controller for a {label} software engineering interview for a {role}.
 You DO NOT chat freely. You must output ONLY valid JSON describing the next action for the interview.
 Style guide: {style_guide}
 Focus priorities: {focus}
-
+{rag_section}
 Allowed actions:
 - ASK_MAIN_QUESTION
 - FOLLOWUP
@@ -301,11 +316,27 @@ Return JSON with shape:
 """.strip()
 
 
-def evaluator_system_prompt() -> str:
-    return """
+def evaluator_system_prompt(rag_context: str | None = None) -> str:
+    rag_section = ""
+    if rag_context:
+        rag_section = f"""
+
+LEARNING FROM PAST SESSIONS:
+You have access to context from similar past interviews. Use this to:
+- Maintain consistent scoring standards across similar responses
+- Apply calibrated expectations based on historical performance patterns
+- Identify common strengths/weaknesses in similar question types
+
+Past Session Context:
+{rag_context}
+
+Apply these insights subtly - do not mention "past sessions" in your output.
+"""
+    return f"""
 You are an interview evaluator. Grade the candidate fairly and consistently using the provided rubric.
 Be balanced: avoid overly harsh scoring when the rubric signals strong performance.
 If the candidate performs well across most dimensions, scores should land in the 80s+ range.
+{rag_section}
 Return ONLY valid JSON. No markdown. No extra text.
 """.strip()
 

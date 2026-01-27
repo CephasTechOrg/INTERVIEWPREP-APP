@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interview Prep AI - Master Your Technical Interviews</title>
+  <title>IntervIQ AI — Smart Interview Coach</title>
   <meta name="description"
     content="Practice realistic technical and behavioral interviews with AI-powered feedback. Get instant scoring, adaptive difficulty, and company-specific interview simulations." />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -15,12 +15,14 @@
   <!-- Navigation -->
   <nav>
     <div class="logo">
-      <i class="fas fa-brain"></i>
-      Interview Prep AI
+      <img src="./assets/images/logo1.png.png" alt="IntervIQ Logo" class="nav-logo-img">
+      IntervIQ
     </div>
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="#how-it-works">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="./login.html">Sign In</a>
     </div>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle">
@@ -32,13 +34,18 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <h1>Master Your Technical Interviews</h1>
-    <p>Practice realistic technical and behavioral interviews with AI-powered feedback. Get instant scoring, adaptive
-      difficulty, and company-specific interview simulations.</p>
-    <div class="hero-buttons">
-      <a href="./login.html" class="btn-primary">Start Free Practice</a>
-      <button class="btn-secondary"
-        onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">Learn More</button>
+    <div class="hero-content">
+      <h1>IntervIQ AI — Smart Interview Coach</h1>
+      <p>Practice realistic technical and behavioral interviews with AI-powered feedback. Get instant scoring, adaptive
+        difficulty, and company-specific interview simulations.</p>
+      <div class="hero-buttons">
+        <a href="./login.html" class="btn-primary">Start Free Practice</a>
+        <button class="btn-secondary"
+          onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">Learn More</button>
+      </div>
+    </div>
+    <div class="hero-image-container">
+      <img src="./assets/images/hero.png" alt="IntervIQ Dashboard Preview" class="hero-img">
     </div>
   </section>
 
@@ -149,26 +156,6 @@
         <h3><i class="fas fa-briefcase"></i> Engineer Track</h3>
         <p>Master senior-level interviews with challenging problems and advanced concepts for experienced engineers.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- Stats Section -->
-  <section class="stats">
-    <div class="stat">
-      <div class="stat-number">6+</div>
-      <div class="stat-label">Companies Supported</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">5</div>
-      <div class="stat-label">Interview Types</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">3</div>
-      <div class="stat-label">Difficulty Levels</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">Real-time</div>
-      <div class="stat-label">AI Scoring</div>
     </div>
   </section>
 
@@ -301,14 +288,55 @@
   <section class="cta">
     <div class="cta-container">
       <h2>Ready to Ace Your Interviews?</h2>
-      <p>Start practicing with Interview Prep AI today and land your dream job</p>
+      <p>Start practicing with IntervIQ AI today and land your dream job</p>
       <a href="./login.html" class="btn-cta">Start Free Now</a>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 Interview Prep AI. All rights reserved. | <a href="./login.html">Login</a></p>
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <div class="footer-logo">
+          <img src="./assets/images/logo1.png.png" alt="IntervIQ Logo">
+          <span>IntervIQ</span>
+        </div>
+        <p class="footer-desc">Your personal AI coach for mastering technical interviews. Practice smarter, not harder.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="./login.html">Live Demo</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <a href="#">Interview Guide</a>
+        <a href="#">System Design</a>
+        <a href="#">Career Tracks</a>
+        <a href="#">Blog</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 IntervIQ AI. All rights reserved.</p>
+    </div>
   </footer>
 
   <script src="./assets/js/landing.js"></script>
