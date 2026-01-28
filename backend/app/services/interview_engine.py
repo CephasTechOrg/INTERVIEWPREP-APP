@@ -18,11 +18,13 @@ from app.models.session_question import SessionQuestion
 from app.models.user_question_seen import UserQuestionSeen
 from app.services import interview_warmup
 from app.services.llm_client import DeepSeekClient, LLMClientError
-from app.services.llm_schemas import InterviewControllerOutput, WarmupSmalltalkProfile, WarmupToneProfile
+from app.services.llm_schemas import InterviewControllerOutput, UserIntentClassification, WarmupSmalltalkProfile, WarmupToneProfile
 from app.services.prompt_templates import (
     interviewer_controller_system_prompt,
     interviewer_controller_user_prompt,
     interviewer_system_prompt,
+    user_intent_classifier_system_prompt,
+    user_intent_classifier_user_prompt,
     warmup_prompt_user_prompt,
     warmup_reply_user_prompt,
     warmup_system_prompt,
@@ -580,53 +582,83 @@ class InterviewEngine:
             return ""
         return name.strip()
 
+    def _is_clarification_request(self, text: str) -> bool:
+        """Check if user is asking for question clarification/repetition."""
+        t = (text or "").strip().lower()
+        if not t:
+            return False
+        # Clarification keywords
+        clarify_keywords = [
+            "repeat", "again", "clarify", "explain", "rephrase", "restate",
+            "what was", "what is", "can you repeat", "say that again",
+            "didn't catch", "didnt catch", "missed that", "understand the question",
+            "what's the question", "whats the question", "confus", "unclear",
+            "elaborate", "more detail", "tell me more about", "what do you mean"
+        ]
+        return any(k in t for k in clarify_keywords)
+
     def _is_move_on(self, text: str) -> bool:
         t = (text or "").strip().lower()
         if not t:
             return False
+        # Only match explicit move-on requests
         keywords = ["move on", "next question", "skip", "pass", "go next", "next please", "next pls"]
+        # Ensure these aren't part of a longer sentence asking for help
+        if self._is_clarification_request(text):
+            return False
         return any(k in t for k in keywords)
 
     def _is_dont_know(self, text: str) -> bool:
         t = (text or "").strip().lower()
         if not t:
             return False
-        keywords = ["don't know", "dont know", "do not know", "no idea", "not sure", "i dunno", "unsure"]
+        keywords = ["don't know", "dont know", "do not know", "no idea", "i dunno"]
+        # Allow "not sure" and "unsure" only if they're not part of a longer reasoning
+        tokens_count = len(self._clean_tokens(text))
+        if tokens_count > 10:  # If it's a longer response, they're probably thinking through it
+            return False
+        if "not sure" in t or "unsure" in t:
+            return tokens_count <= 5  # Only flag if very short
         return any(k in t for k in keywords)
 
     def _is_non_informative(self, text: str) -> bool:
+        """Check if response is too short to be meaningful."""
         tokens = self._clean_tokens(text)
         if not tokens:
             return True
-        short = {
-            "ok",
-            "okay",
-            "k",
-            "kk",
-            "sure",
-            "yes",
-            "yeah",
-            "yep",
-            "yup",
-            "alright",
-            "cool",
-            "fine",
-            "thanks",
-            "thank",
-            "please",
-            "no",
-            "nah",
-            "maybe",
-        }
-        if len(tokens) <= 2:
+        # Single word responses
+        if len(tokens) == 1:
             return True
-        return bool(len(tokens) <= 4 and all(t in short for t in tokens))
+        # Very short non-substantive responses
+        short = {
+            "ok", "okay", "k", "kk", "sure", "yes", "yeah", "yep", "yup",
+            "alright", "cool", "fine", "thanks", "thank", "no", "nah"
+        }
+        # Only flag if 2 tokens or less AND all are filler words
+        if len(tokens) <= 2 and all(t in short for t in tokens):
+            return True
+        return False
 
     def _is_vague(self, text: str) -> bool:
+        """Check if response is too vague/short to be useful."""
         tokens = self._clean_tokens(text)
         if not tokens:
             return True
-        return len(tokens) < 6
+        # Very short responses (less than 5 words) are vague
+        # But allow them if they contain technical terms or questions
+        if len(tokens) < 5:
+            # Check for clarification requests
+            if self._is_clarification_request(text):
+                return False
+            # Check for technical keywords (user might be answering concisely)
+            technical_patterns = ["array", "hash", "map", "list", "tree", "graph", "stack", "queue",
+                                 "o(", "time", "space", "complexity", "algorithm", "function",
+                                 "class", "object", "pointer", "node", "edge", "vertex"]
+            t_lower = text.lower()
+            if any(pattern in t_lower for pattern in technical_patterns):
+                return False  # Technical response, even if short
+            return True
+        return False
 
     def _normalize_text(self, text: str | None) -> str:
         return " ".join((text or "").lower().split())
@@ -718,9 +750,23 @@ class InterviewEngine:
         is_behavioral: bool,
         behavioral_missing: list[str],
     ) -> bool:
+        """Check if response lacks substance - but allow clarifications."""
+        # Don't flag clarification requests as thin
+        if self._is_clarification_request(text or ""):
+            return False
+        
         tokens = self._clean_tokens(text)
         if not tokens:
             return True
+        
+        # Short responses with technical content are acceptable
+        if len(tokens) >= 3:
+            t_lower = (text or "").lower()
+            technical_patterns = ["array", "hash", "map", "dict", "list", "tree", "graph",
+                                 "o(n)", "o(1)", "o(log", "time", "space", "algorithm"]
+            if any(pattern in t_lower for pattern in technical_patterns):
+                return False  # Has technical content, not thin
+        
         if is_behavioral:
             return len(behavioral_missing) >= 2
         if signals.get("has_code") and not signals.get("mentions_approach"):
@@ -742,6 +788,11 @@ class InterviewEngine:
         is_behavioral: bool,
         behavioral_missing: list[str],
     ) -> str:
+        """Assess response quality - but don't penalize clarifications."""
+        # Clarification requests are neutral quality
+        if self._is_clarification_request(text or ""):
+            return "ok"
+        
         tokens = self._clean_tokens(text)
         if len(tokens) < 8:
             return "weak"
@@ -1947,6 +1998,43 @@ class InterviewEngine:
         except Exception:
             return None
 
+    async def _classify_user_intent(self, text: str, question_context: str | None = None) -> UserIntentClassification | None:
+        """
+        AI-powered intent classification. Understands context like a human.
+        Falls back to keyword heuristics if LLM unavailable.
+        """
+        if not text or not text.strip():
+            return None
+        
+        # Try AI classification first
+        sys = user_intent_classifier_system_prompt()
+        user = user_intent_classifier_user_prompt(text, question_context)
+        try:
+            data = await self.llm.chat_json(sys, user)
+            classification = UserIntentClassification.model_validate(data)
+            _engine_logger.debug(
+                "Intent classified: %s (%.2f confidence) - %s",
+                classification.intent,
+                classification.confidence,
+                classification.reasoning
+            )
+            return classification
+        except Exception as e:
+            _engine_logger.debug("Intent classification unavailable, using heuristics: %s", e)
+            # Fallback to keyword heuristics
+            return self._classify_intent_heuristic(text)
+
+    def _classify_intent_heuristic(self, text: str) -> UserIntentClassification:
+        """Fallback keyword-based intent classification."""
+        if self._is_clarification_request(text):
+            return UserIntentClassification(intent="clarification", confidence=0.7, reasoning="Keyword match")
+        if self._is_move_on(text):
+            return UserIntentClassification(intent="move_on", confidence=0.8, reasoning="Keyword match")
+        if self._is_dont_know(text):
+            return UserIntentClassification(intent="dont_know", confidence=0.7, reasoning="Keyword match")
+        # Default to answering
+        return UserIntentClassification(intent="answering", confidence=0.5, reasoning="Default fallback")
+
     def _warmup_behavioral_reply(
         self,
         session: InterviewSession,
@@ -2219,7 +2307,26 @@ Question context: {self._combine_question_text(title, prompt)}
 
         warm_step, warm_done = interview_warmup.get_state(session)
         stage = session.stage or "intro"
+        
+        # Handle behavioral warmup stage with smart intent detection
         if stage == "warmup_behavioral" and not warm_done:
+            # Check if user wants clarification/repetition
+            intent_classification = await self._classify_user_intent(student_text, question_context="Behavioral warmup question")
+            if intent_classification and intent_classification.confidence >= 0.6:
+                if intent_classification.intent == "clarification":
+                    # Repeat the behavioral question
+                    msgs = message_crud.list_messages(db, session.id, limit=10)
+                    behavioral_question = None
+                    for m in reversed(msgs):
+                        if m.role == "interviewer" and ("tell me about" in m.content.lower() or "describe a time" in m.content.lower()):
+                            behavioral_question = m.content
+                            break
+                    if behavioral_question:
+                        clarify_reply = f"Of course! Here's the question again:\n\n{behavioral_question}"
+                        message_crud.add_message(db, session.id, "interviewer", clarify_reply)
+                        return clarify_reply
+            
+            # Normal flow: user answered behavioral, move on
             focus = self._extract_focus(student_text)
             has_focus = bool(focus.get("dimensions") or focus.get("tags"))
             if has_focus:
@@ -2232,6 +2339,24 @@ Question context: {self._combine_question_text(title, prompt)}
 
         if not warm_done and (stage in (None, "", "intro", "warmup", "warmup_smalltalk")) and stage != "warmup_done":
             # Warmup flow: greet, then a short small-talk question, then a behavioral warmup question.
+            
+            # SMART INTENT: Check if user is asking for clarification/repetition during warmup
+            if warm_step > 0:  # After initial greeting
+                intent_classification = await self._classify_user_intent(student_text, question_context="Warmup conversation")
+                if intent_classification and intent_classification.confidence >= 0.6:
+                    if intent_classification.intent == "clarification":
+                        # User asking to repeat during warmup - use natural response
+                        msgs = message_crud.list_messages(db, session.id, limit=5)
+                        last_interviewer_msg = None
+                        for m in reversed(msgs):
+                            if m.role == "interviewer":
+                                last_interviewer_msg = m.content
+                                break
+                        if last_interviewer_msg:
+                            clarify_reply = f"Of course! I asked: {last_interviewer_msg}"
+                            message_crud.add_message(db, session.id, "interviewer", clarify_reply)
+                            return clarify_reply
+            
             focus = self._extract_focus(student_text)
             has_focus = bool(focus.get("dimensions") or focus.get("tags"))
             if has_focus:
@@ -2246,6 +2371,37 @@ Question context: {self._combine_question_text(title, prompt)}
                 return msg
 
             if warm_step == 1:
+                # Step 1: User responded to greeting, now continue conversation naturally
+                # Check if user is asking about the interviewer (reciprocal question)
+                t_lower = student_text.lower()
+                is_reciprocal = any(phrase in t_lower for phrase in [
+                    "how are you", "how about you", "what about you", "how is your",
+                    "how's your", "and you", "yourself"
+                ])
+                
+                if is_reciprocal:
+                    # User asked about the interviewer - respond naturally then continue
+                    reciprocal_response = "I'm doing well, thank you for asking! "
+                    # Then add a smalltalk question
+                    profile = await self._classify_warmup_smalltalk(student_text)
+                    question = self._smalltalk_question(profile, student_text)
+                    msg = reciprocal_response + question
+                    meta: dict[str, Any] = {
+                        "smalltalk_question": question,
+                        "smalltalk_topic": (profile.topic if profile else None) or self._infer_smalltalk_topic(student_text),
+                    }
+                    if profile:
+                        meta.update({
+                            "tone": profile.tone,
+                            "energy": profile.energy,
+                            "tone_confidence": profile.confidence,
+                        })
+                    message_crud.add_message(db, session.id, "interviewer", msg)
+                    self._set_warmup_state(db, session, 2, False, **meta)
+                    session_crud.update_stage(db, session, "warmup_smalltalk")
+                    return msg
+                
+                # Normal flow: classify and ask smalltalk
                 profile = await self._classify_warmup_smalltalk(student_text)
                 # If LLM is unavailable, still do a small-talk fallback before behavioral warmup.
                 if not profile and not getattr(self.llm, "api_key", None):
@@ -2281,7 +2437,38 @@ Question context: {self._combine_question_text(title, prompt)}
                 session_crud.update_stage(db, session, "warmup_smalltalk")
                 return msg
 
-            # ...existing code (warm_step >= 2 branch)...
+            # Step 2+: User responded to smalltalk - check for reciprocal or continue to behavioral
+            # Check if user is still engaging in conversation before moving to behavioral
+            if warm_step == 2:
+                t_lower = student_text.lower()
+                is_reciprocal = any(phrase in t_lower for phrase in [
+                    "how are you", "how about you", "what about you", "how is your",
+                    "how's your", "and you", "yourself", "what about your", "asked you"
+                ])
+                
+                if is_reciprocal:
+                    # User is continuing conversation - respond naturally
+                    natural_response = "I'm doing great, thanks for asking! "
+                    # Now transition to behavioral
+                    behavioral_target = int(getattr(session, "behavioral_questions_target", 0) or 0)
+                    if behavioral_target <= 0:
+                        transition = "Let's dive into the interview."
+                        self._set_warmup_state(db, session, 3, True)
+                        session_crud.update_stage(db, session, "warmup_done")
+                        preface = natural_response + transition
+                        return await self.ensure_question_and_intro(db, session, user_name=user_name, preface=preface)
+                    else:
+                        # Continue to behavioral with natural transition
+                        transition = "Let's get started. "
+                        question_text, qid = self._warmup_behavioral_question(db, session)
+                        msg = natural_response + transition + question_text
+                        message_crud.add_message(db, session.id, "interviewer", msg)
+                        self._set_warmup_state(db, session, 3, False)
+                        session_crud.update_stage(db, session, "warmup_behavioral")
+                        self._mark_warmup_behavioral_asked(db, session, qid)
+                        return msg
+            
+            # Normal flow: transition to behavioral question
             behavioral_target = int(getattr(session, "behavioral_questions_target", 0) or 0)
             tone_line = self._warmup_transition_line(self._warmup_profile_from_state(session))
             if behavioral_target <= 0:
@@ -2353,13 +2540,35 @@ Question context: {self._combine_question_text(title, prompt)}
         if stage in ("followups", "candidate_solution") and self._max_followups_reached(session):
             stage = "next_question"
 
-        # Human-like handling before invoking the controller
-        if self._is_move_on(student_text) or self._is_dont_know(student_text):
-            reason = "move_on" if self._is_move_on(student_text) else "dont_know"
-            preface = self._transition_preface(session, reason=reason)
-            session_crud.update_stage(db, session, "next_question")
-            return await self._advance_to_next_question(db, session, history, user_name=user_name, preface=preface)
+        # SMART INTENT DETECTION: Use AI to understand what user wants (like a human would)
+        intent_classification = await self._classify_user_intent(student_text, question_context)
+        
+        if intent_classification and intent_classification.confidence >= 0.6:
+            intent = intent_classification.intent
+            
+            # Handle clarification requests
+            if intent == "clarification":
+                qt, qp = self._render_question(session, q)
+                clarify_reply = f"Of course! Let me restate the question:\n\n**{qt}**\n\n{qp}\n\nTake your time thinking through it."
+                message_crud.add_message(db, session.id, "interviewer", clarify_reply)
+                # Don't increment followups for clarification requests
+                return clarify_reply
+            
+            # Handle explicit move-on requests
+            if intent == "move_on":
+                reason = "move_on"
+                preface = self._transition_preface(session, reason=reason)
+                session_crud.update_stage(db, session, "next_question")
+                return await self._advance_to_next_question(db, session, history, user_name=user_name, preface=preface)
+            
+            # Handle "don't know" responses
+            if intent == "dont_know":
+                reason = "dont_know"
+                preface = self._transition_preface(session, reason=reason)
+                session_crud.update_stage(db, session, "next_question")
+                return await self._advance_to_next_question(db, session, history, user_name=user_name, preface=preface)
 
+        # Fallback checks for very short/empty responses (keep as safety net)
         if self._is_non_informative(student_text):
             if self._max_followups_reached(session):
                 preface = "Let's move on for now. Please share more detail in your next response."

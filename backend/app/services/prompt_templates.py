@@ -189,6 +189,46 @@ Return JSON with shape:
 """.strip()
 
 
+def user_intent_classifier_system_prompt() -> str:
+    return """
+You are an intent classifier for interview conversations. Analyze the candidate's message to understand what they're trying to do.
+Return ONLY valid JSON.
+
+Intent types:
+- answering: Providing an answer, solution, or explanation to the current question
+- clarification: Asking to repeat, clarify, or explain the question
+- move_on: Explicitly requesting to skip or move to next question
+- dont_know: Explicitly stating they don't know the answer
+- thinking: Thinking out loud, working through the problem
+- greeting: Small talk, greeting, or casual conversation
+
+Be smart about context:
+- "not sure but let me think..." → thinking (NOT dont_know)
+- "can you repeat that?" → clarification
+- "hash map" or short technical terms → answering
+- "I don't know, skip" → dont_know
+- "move on please" → move_on
+""".strip()
+
+
+def user_intent_classifier_user_prompt(candidate_text: str, question_context: str | None = None) -> str:
+    context_section = ""
+    if question_context:
+        context_section = f"\nCurrent question context: {question_context[:200]}\n"
+    
+    return f"""
+Candidate message:
+{candidate_text}
+{context_section}
+Return JSON with shape:
+{{
+  "intent": "answering|clarification|move_on|dont_know|thinking|greeting",
+  "confidence": 0.0-1.0,
+  "reasoning": "brief explanation"
+}}
+""".strip()
+
+
 def interviewer_controller_system_prompt(company_style: str, role: str, rag_context: str | None = None) -> str:
     label = _company_label(company_style)
     style_guide = _company_style_guide(company_style)

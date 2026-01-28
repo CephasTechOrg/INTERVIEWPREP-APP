@@ -119,12 +119,42 @@ class WarmupSmalltalkProfile(WarmupToneProfile):
     topic: str = Field(default="")
     smalltalk_question: str = Field(default="")
 
-    @field_validator("topic", "smalltalk_question", mode="before")
+
+UserIntent = Literal[
+    "answering",           # User is providing an answer to the question
+    "clarification",       # User wants question repeated/clarified
+    "move_on",            # User wants to skip/move to next question
+    "dont_know",          # User doesn't know the answer
+    "thinking",           # User is thinking through the problem
+    "greeting",           # User is greeting/small talk
+]
+
+
+class UserIntentClassification(BaseModel):
+    """AI-powered classification of user's intent."""
+    intent: UserIntent = Field(default="answering")
+    confidence: float = Field(default=0.6, ge=0, le=1)
+    reasoning: str = Field(default="")
+    
+    @field_validator("confidence", mode="before")
     @classmethod
-    def _coerce_str(cls, v):  # noqa: ANN001
+    def _coerce_confidence(cls, v):  # noqa: ANN001
+        if v is None:
+            return 0.6
+        try:
+            n = float(v)
+        except Exception:
+            return 0.6
+        return max(0.0, min(1.0, n))
+
+    @field_validator("reasoning", mode="before")
+    @classmethod
+    def _coerce_reasoning(cls, v):  # noqa: ANN001
         if v is None:
             return ""
         return str(v).strip()
+
+
 _FOCUS_KEYS = {
     "approach",
     "constraints",
