@@ -50,6 +50,10 @@
   margin-bottom: 24px;
 }
 
+.dashboard-card.full-width {
+  grid-column: 1 / -1;
+}
+
 @media (max-width: 1100px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
@@ -103,6 +107,25 @@
 .dashboard-card.main-card::before {
   opacity: 1;
   height: 5px;
+}
+
+/* AI Chat CTA */
+.chat-cta-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(247, 250, 252, 0.92));
+}
+
+.chat-cta-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.chat-cta-copy {
+  font-size: 14px;
+  color: var(--text-light);
+  max-width: 520px;
 }
 
 /* Card Header */
