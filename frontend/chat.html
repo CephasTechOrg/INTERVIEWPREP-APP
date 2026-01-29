@@ -102,9 +102,12 @@
             <aside class="chat-history-panel">
               <div class="history-header">
                 <h2>Chats</h2>
-                <button class="btn btn-primary btn-small" id="newChatBtn">
-                  <i class="fas fa-plus"></i> New
-                </button>
+                <div class="chat-header-actions">
+                  <button class="btn-ghost" id="clearAllChatsBtn" title="Delete all chats">Clear All</button>
+                  <button class="btn btn-primary btn-small" id="newChatBtn">
+                    <i class="fas fa-plus"></i> New
+                  </button>
+                </div>
               </div>
               <div class="history-search">
                 <input type="text" id="chatSearchInput" placeholder="Search chats...">

@@ -21,7 +21,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Reducing gap further to 10px */
+  gap: 6px; /* Minimal gap */
   overflow: hidden; 
 }
 
@@ -29,8 +29,8 @@
 .interview-header {
   background: var(--surface-glass);
   backdrop-filter: blur(16px);
-  border-radius: var(--radius-lg);
-  padding: 10px 18px; /* Reducing padding again */
+  border-radius: var(--radius-md);
+  padding: 6px 14px; /* Compact padding */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,23 +40,23 @@
 }
 
 .interview-title h2 {
-  font-size: 17px; /* Subtly smaller title */
+  font-size: 15px; /* Smaller title */
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 2px;
+  margin-bottom: 0;
 }
 
 .interview-status {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
+  gap: 6px;
+  font-size: 11px;
   color: var(--text-muted);
 }
 
 .interview-actions {
   display: flex;
-  gap: 8px; /* Tighter actions */
+  gap: 6px; /* Tighter actions */
   align-items: center;
 }
 
@@ -65,8 +65,8 @@
    ----------------------------------------------------------------------------- */
 .interview-layout {
   display: grid;
-  grid-template-columns: 320px 1fr; /* Default narrower sidebar */
-  gap: 12px; /* Reducing gap between panels */
+  grid-template-columns: 300px 1fr; /* Slightly narrower sidebar */
+  gap: 10px; /* Tighter gap between panels */
   flex: 1; 
   min-height: 0; 
   position: relative;
@@ -91,7 +91,7 @@
 .question-panel {
   display: flex;
   flex-direction: column;
-  gap: 12px; 
+  gap: 8px; /* Tighter gap */
   overflow-y: auto;
   padding-right: 4px;
   max-height: 100%; 
@@ -609,6 +609,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  padding: 12px; /* Reduced padding */
 }
 
 /* Fallback for browsers without :has() support */
@@ -616,5 +617,6 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  padding: 12px; /* Reduced padding */
 }
 
