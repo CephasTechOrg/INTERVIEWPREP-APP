@@ -1,46 +1,19 @@
-# ============================================
-# SAFE DEVELOPMENT WORKFLOW
-# ============================================
-
-# 1. START: Create a feature branch (safe isolation)
+# Start work
 git checkout dev
 git pull origin dev
-git checkout -b feature/your-feature-name
 
-# 2. WORK: Make changes and test locally
-#    - Edit files...
-#    - Run tests: pytest tests/ -v
-#    - Check for errors
-
-# 3. COMMIT: Save your work
+# Work & commit
 git add .
-git commit -m "Describe your change"
-
-# 4. IF SOMETHING BREAKS - ESCAPE HATCHES:
-#    Discard uncommitted changes:  git checkout .
-#    Reset to last commit:         git reset --hard HEAD
-#    Delete the feature branch:    git checkout dev && git branch -D feature/your-feature-name
-
-# 5. MERGE TO DEV (when feature is working)
-git checkout dev
-git pull origin dev
-git merge feature/your-feature-name
+git commit -m "Initial startup configuration"
 git push origin dev
 
-# 6. MERGE TO MAIN (when ready for production)
+# Merge to main
 git checkout main
 git pull origin main
 git merge dev
 git push origin main
 
-# 7. CLEANUP: Delete feature branch
-git branch -d feature/your-feature-name
-
-# ============================================
-# QUICK REFERENCE
-# ============================================
-# See changes:          git status
-# See diff:             git diff
-# Undo file changes:    git checkout -- <file>
-# Undo all changes:     git checkout .
-# View commit history:  git log --oneline -10
+# Sync dev again
+git checkout dev
+git merge main
+git push origin dev
