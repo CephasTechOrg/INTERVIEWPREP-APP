@@ -118,6 +118,18 @@ function renderHistory(filter = "") {
 
     btn.appendChild(title);
     btn.appendChild(meta);
+
+    const del = document.createElement("button");
+    del.type = "button";
+    del.className = "history-delete";
+    del.title = "Delete chat";
+    del.innerHTML = '<i class="fas fa-trash"></i>';
+    del.addEventListener("click", (e) => {
+      e.stopPropagation();
+      deleteSession(session.id);
+    });
+    btn.appendChild(del);
+
     btn.addEventListener("click", () => {
       state.activeId = session.id;
       persist();
@@ -331,6 +343,33 @@ function handleClearChat() {
   renderMessages();
 }
 
+function deleteSession(id) {
+  const session = state.sessions.find((s) => s.id === id);
+  if (!session) return;
+  if (!confirm("Delete this chat?")) return;
+  state.sessions = state.sessions.filter((s) => s.id !== id);
+  if (!state.sessions.length) {
+    const fresh = createSession();
+    state.sessions = [fresh];
+    state.activeId = fresh.id;
+  } else if (state.activeId === id) {
+    state.activeId = state.sessions[0]?.id || null;
+  }
+  persist();
+  renderHistory(qs("#chatSearchInput")?.value || "");
+  renderMessages();
+}
+
+function clearAllChats() {
+  if (!confirm("Delete all chats? This cannot be undone.")) return;
+  const fresh = createSession();
+  state.sessions = [fresh];
+  state.activeId = fresh.id;
+  persist();
+  renderHistory(qs("#chatSearchInput")?.value || "");
+  renderMessages();
+}
+
 function setupHeader() {
   const mobileBtn = qs("#mobileMenuBtn");
   const overlay = qs("#sidebarOverlay");
@@ -391,6 +430,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   qs("#newChatBtn")?.addEventListener("click", handleNewChat);
   qs("#clearChatBtn")?.addEventListener("click", handleClearChat);
+  qs("#clearAllChatsBtn")?.addEventListener("click", clearAllChats);
   qs("#chatSearchInput")?.addEventListener("input", (e) => {
     renderHistory(e.target?.value || "");
   });
