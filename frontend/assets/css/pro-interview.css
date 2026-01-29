@@ -2,6 +2,20 @@
    INTERVIEW STYLES - Professional & Glassmorphism
    ============================================================================= */
 
+/* ============ FIXED VIEWPORT LAYOUT (ChatGPT-style) ============ */
+/* Interview page: prevent page scroll, only chat-messages scrolls */
+#interviewPage {
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+#interviewPage .interview-container {
+  flex: 1;
+  min-height: 0;
+}
+
 /* Main Layout Wrapper */
 .interview-container {
   height: 100%;
@@ -587,5 +601,20 @@
   .interview-layout {
       grid-template-columns: 1fr;
   }
+}
+
+/* ============ FIXED VIEWPORT - Content Area Override ============ */
+/* For interview page: no outer scroll, fill height */
+.content-area:has(#interviewPage) {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fallback for browsers without :has() support */
+.content-area.interview-content {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 

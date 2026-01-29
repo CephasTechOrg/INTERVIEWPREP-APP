@@ -640,6 +640,7 @@ html, body {
   overflow-y: auto;
   background: var(--light-gray);
   position: relative;
+  min-height: 0; /* Critical for nested flex scrolling */
 }
 
 .page {
@@ -649,6 +650,15 @@ html, body {
 
 .page.active {
   display: block;
+}
+
+/* Interview & Chat pages need flex display to fill height */
+#interviewPage.active,
+#chatPage.active {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
 
 /* Responsive Adjustments for Short Screens (Laptops) */

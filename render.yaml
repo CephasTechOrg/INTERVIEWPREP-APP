@@ -1,0 +1,119 @@
+# Render.com deployment configuration
+# https://render.com/docs/blueprint-spec
+
+services:
+  # ============================================
+  # BACKEND - FastAPI Python Service
+  # ============================================
+  - type: web
+    name: interviq-backend
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    rootDir: backend
+
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+
+    healthCheckPath: /health
+
+    envVars:
+      # Python version (must be major.minor.patch)
+      - key: PYTHON_VERSION
+        value: "3.12.3"
+      
+      # Pip settings
+      - key: PIP_ROOT_USER_ACTION
+        value: ignore
+      
+      # Avoid Rust build issues for some packages
+      - key: MISE_PYTHON_COMPILE
+        value: "false"
+      
+      # Application environment
+      - key: ENV
+        value: production
+      
+      # Secret key for JWT (use Render's secret generator)
+      - key: SECRET_KEY
+        generateValue: true
+      
+      # Database URL (linked from Render PostgreSQL)
+      - key: DATABASE_URL
+        fromDatabase:
+          name: interviq-db
+          property: connectionString
+      
+      # Frontend URL for CORS
+      - key: FRONTEND_ORIGINS
+        value: https://interviq-frontend.onrender.com
+      
+      - key: FRONTEND_URL
+        value: https://interviq-frontend.onrender.com
+      
+      # DeepSeek API Key (set manually in Render dashboard)
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      
+      # ElevenLabs TTS (optional - set manually if using)
+      - key: ELEVENLABS_API_KEY
+        sync: false
+      
+      # SMTP settings (optional - set manually for email)
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USERNAME
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: SMTP_FROM
+        sync: false
+
+  # ============================================
+  # FRONTEND - Static Site
+  # ============================================
+  - type: web
+    name: interviq-frontend
+    env: static
+    region: oregon
+    plan: free
+    branch: main
+    rootDir: frontend
+
+    buildCommand: echo "No build needed for static HTML"
+    
+    staticPublishPath: .
+
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+# ============================================
+# DATABASE - PostgreSQL with pgvector
+# ============================================
+databases:
+  - name: interviq-db
+    region: oregon
+    plan: free
+    databaseName: interviq
+    postgresMajorVersion: "16"
+    # Note: pgvector extension must be enabled manually in Render dashboard
+    # or via migration: CREATE EXTENSION IF NOT EXISTS vector;

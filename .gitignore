@@ -24,6 +24,15 @@ SETUP_COMPLETE.md
 # Ruff cache
 .ruff_cache/
 
+# Coverage reports
+htmlcov/
+coverage.xml
+backend/htmlcov/
+backend/coverage.xml
+
+# Dev test files
+test.py
+test_minimal.py
 
 # pre-commit for dev
 .pre-commit-config.yaml

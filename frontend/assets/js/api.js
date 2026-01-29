@@ -22,7 +22,8 @@ async function apiFetch(path, { method = "GET", body = null, auth = true } = {})
     if (token) headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${API_BASE}${path}`, {
+  const url = `${API_BASE}${path}`;
+  const res = await fetch(url, {
     method,
     headers,
     body: body ? JSON.stringify(body) : null,
@@ -34,6 +35,14 @@ async function apiFetch(path, { method = "GET", body = null, auth = true } = {})
 
   if (!res.ok) {
     const msg = data?.detail || data?.message || `Request failed (${res.status})`;
+    console.error("[apiFetch] Request failed", {
+      url,
+      method,
+      status: res.status,
+      statusText: res.statusText,
+      message: msg,
+      response: data,
+    });
     if (auth && (res.status === 401 || res.status === 403)) {
       const lower = String(msg || "").toLowerCase();
       clearToken();

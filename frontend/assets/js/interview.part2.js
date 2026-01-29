@@ -207,6 +207,7 @@ const PAGE_LINKS = {
   history: "./dashboard.html#history",
   performance: "./dashboard.html#performance",
   interview: "./interview.html",
+  chat: "./chat.html",
   results: "./results.html",
   settings: "./settings.html",
 };
@@ -552,6 +553,7 @@ async function refreshSessionHistory() {
         const msg = err?.message || "Failed to load sessions.";
         if (list) list.innerHTML = `<div style="color: var(--danger); font-weight:600;">${escapeHtml(msg)}</div>`;
         showNotification(msg, "error");
+        logError("refreshSessionHistory", err);
       } finally {
         _refreshSessionHistoryPending = false;
       }
