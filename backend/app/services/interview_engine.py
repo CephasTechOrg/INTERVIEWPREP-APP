@@ -1557,19 +1557,36 @@ class InterviewEngine:
         diff = self._effective_difficulty(session)
         tracks = {track, "behavioral"} if track else {"behavioral"}
 
-        base = db.query(Question).filter(
-            Question.company_style == company,
-            Question.track.in_(tracks),
-            Question.difficulty == diff,
-            or_(Question.tags_csv.ilike("%behavioral%"), Question.question_type == "behavioral"),
-        )
-        if asked_ids:
-            base = base.filter(~Question.id.in_(asked_ids))
-        seen = self._seen_question_subquery(session)
-        unseen = base.filter(~Question.id.in_(seen)).order_by(func.random()).first()
-        if unseen:
-            return unseen
-        return base.order_by(func.random()).first()
+        def _query(company_style: str, difficulty: str | None) -> Question | None:
+            base = db.query(Question).filter(
+                Question.company_style == company_style,
+                Question.track.in_(tracks),
+                or_(Question.tags_csv.ilike("%behavioral%"), Question.question_type == "behavioral"),
+            )
+            if difficulty:
+                base = base.filter(Question.difficulty == difficulty)
+            if asked_ids:
+                base = base.filter(~Question.id.in_(asked_ids))
+            seen = self._seen_question_subquery(session)
+            unseen = base.filter(~Question.id.in_(seen)).order_by(func.random()).first()
+            if unseen:
+                return unseen
+            return base.order_by(func.random()).first()
+
+        # Prefer company + same difficulty, then company any difficulty,
+        # then general + same difficulty, then general any difficulty.
+        for company_style, difficulty in (
+            (company, diff),
+            (company, None),
+            ("general", diff) if company != "general" else (None, None),
+            ("general", None) if company != "general" else (None, None),
+        ):
+            if not company_style:
+                continue
+            q = _query(company_style, difficulty)
+            if q:
+                return q
+        return None
 
     def _pick_next_technical_question(
         self,
@@ -1719,18 +1736,33 @@ class InterviewEngine:
         tracks = [track, "behavioral"] if track else ["behavioral"]
         diff = (session.difficulty or "easy").strip().lower()
 
-        base = db.query(Question).filter(
-            Question.company_style == company,
-            Question.track.in_(tracks),
-            Question.difficulty == diff,
-            or_(Question.tags_csv.ilike("%behavioral%"), Question.question_type == "behavioral"),
-        )
-        if asked_ids:
-            base = base.filter(~Question.id.in_(asked_ids))
-        unseen = base.filter(~Question.id.in_(seen)).order_by(func.random()).first()
-        if unseen:
-            return unseen
-        return base.order_by(func.random()).first()
+        def _query(company_style: str, difficulty: str | None) -> Question | None:
+            base = db.query(Question).filter(
+                Question.company_style == company_style,
+                Question.track.in_(tracks),
+                or_(Question.tags_csv.ilike("%behavioral%"), Question.question_type == "behavioral"),
+            )
+            if difficulty:
+                base = base.filter(Question.difficulty == difficulty)
+            if asked_ids:
+                base = base.filter(~Question.id.in_(asked_ids))
+            unseen = base.filter(~Question.id.in_(seen)).order_by(func.random()).first()
+            if unseen:
+                return unseen
+            return base.order_by(func.random()).first()
+
+        for company_style, difficulty in (
+            (company, diff),
+            (company, None),
+            ("general", diff) if company != "general" else (None, None),
+            ("general", None) if company != "general" else (None, None),
+        ):
+            if not company_style:
+                continue
+            q = _query(company_style, difficulty)
+            if q:
+                return q
+        return None
 
     def _fallback_warmup_behavioral_question(self, session: InterviewSession) -> str:
         company = self._company_name(session.company_style)

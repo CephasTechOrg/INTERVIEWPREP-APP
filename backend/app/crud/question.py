@@ -74,9 +74,22 @@ def count_questions(
 
 
 def count_behavioral_questions(db: Session, track: str, company_style: str, difficulty: str) -> int:
+    """
+    Count available behavioral questions for a session.
+
+    Behavioral questions are not strongly tied to difficulty, and many datasets
+    only provide "easy" behavioral items. We therefore:
+    - Ignore difficulty.
+    - Allow fallback to general company style.
+    - Allow track-specific behavioral or generic behavioral track.
+    """
+    company = (company_style or "").strip().lower() or "general"
+    allowed_companies = [company]
+    if company != "general":
+        allowed_companies.append("general")
+
     q = db.query(func.count(Question.id)).filter(
-        Question.company_style == company_style,
-        Question.difficulty == difficulty,
+        Question.company_style.in_(allowed_companies),
         or_(Question.tags_csv.ilike("%behavioral%"), Question.question_type == "behavioral"),
     )
     # Allow role-specific behavioral banks (track == role) and generic behavioral (track == "behavioral").
