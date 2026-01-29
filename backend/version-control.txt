@@ -1,0 +1,19 @@
+# Start work
+git checkout dev
+git pull origin dev
+
+# Work & commit
+git add .
+git commit -m "Initial startup configuration"
+git push origin dev
+
+# Merge to main
+git checkout main
+git pull origin main
+git merge dev
+git push origin main
+
+# Sync dev again
+git checkout dev
+git merge main
+git push origin dev

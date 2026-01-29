@@ -322,7 +322,7 @@ class TestErrorHandling:
 
         assert response.status_code == 422
 
-    def test_missing_required_fields(self, client: TestClient, auth_headers):
+    def test_missing_required_fields(self, client: TestClient, auth_headers, sample_questions):
         """Test missing required fields in request."""
         response = client.post("/api/v1/sessions", headers=auth_headers, json={})  # Missing required fields
 
