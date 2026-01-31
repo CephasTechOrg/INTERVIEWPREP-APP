@@ -77,7 +77,7 @@
     }
 
     .hero-logo-icon {
-      width: 60px;
+      width: 90px;
       height: 60px;
       background: white;
       border-radius: 16px;
@@ -87,6 +87,10 @@
       font-size: 28px;
       color: #4361ee;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      img{
+        width: 80px;
+        height: auto;
+      }
     }
 
     .hero-logo-text {
@@ -173,10 +177,11 @@
       text-align: center;
     }
 
-    .stat-value {
+    .stat-value-text {
       font-size: 36px;
       font-weight: 800;
       display: block;
+      color: var(--white);
       margin-bottom: 4px;
     }
 
@@ -472,9 +477,13 @@
       }
 
       .hero-logo-icon {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 45px;
         font-size: 24px;
+        img{
+          width: 50px;
+          height: auto;
+        }
       }
 
       .hero-logo-text {
@@ -493,8 +502,10 @@
     <!-- Hero Panel -->
     <div class="hero-panel">
       <div class="hero-logo">
-        <div class="hero-logo-icon"><i class="fas fa-comments"></i></div>
-        <div class="hero-logo-text">InterviewPrep AI</div>
+        <div class="hero-logo-icon">
+          <img src="./assets/images/logo1.png.png" alt="IntervIQ Logo"/>
+        </div>
+        <div class="hero-logo-text">IntervIQ AI</div>
       </div>
 
       <div class="hero-content">
@@ -523,15 +534,15 @@
         </div>
         <div class="hero-stats">
           <div class="stat">
-            <span class="stat-value">10K+</span>
+            <span class="stat-value-text">10K+</span>
             <span class="stat-label">Sessions run</span>
           </div>
           <div class="stat">
-            <span class="stat-value">94%</span>
+            <span class="stat-value-text">94%</span>
             <span class="stat-label">Success rate</span>
           </div>
           <div class="stat">
-            <span class="stat-value">4.9</span>
+            <span class="stat-value-text">4.9</span>
             <span class="stat-label">User rating</span>
           </div>
         </div>
