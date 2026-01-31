@@ -7,6 +7,7 @@
   <title>IntervIQ AI — Smart Interview Coach</title>
   <meta name="description"
     content="Practice realistic technical and behavioral interviews with AI-powered feedback. Get instant scoring, adaptive difficulty, and company-specific interview simulations." />
+  <link rel="icon" type="image/png" href="./assets/images/logo1.png.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="./assets/css/landing.css" />
 </head>
@@ -14,11 +15,17 @@
 <body>
   <!-- Navigation -->
   <nav>
+    <button class="menuToggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
     <div class="logo">
       <img src="./assets/images/logo1.png.png" alt="IntervIQ Logo" class="nav-logo-img">
       IntervIQ
     </div>
     <div class="nav-links">
+      <button class="menuToggle" id="closeMenu">
+        <i class="fas fa-xmark"></i>
+      </button>
       <a href="#features">Features</a>
       <a href="#how-it-works">How It Works</a>
       <a href="#pricing">Pricing</a>
