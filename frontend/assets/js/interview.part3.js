@@ -1,5 +1,40 @@
 // Split from interview.js for maintainability (part: interview.part3.js)
 
+// Define globally accessible function for fullscreen toggle
+window.toggleChatFullscreen = function() {
+  const chatPanel = document.querySelector(".chat-panel");
+  const layout = document.querySelector(".interview-layout");
+  const container = document.querySelector(".interview-container");
+  
+  if (!chatPanel && !layout) {
+    console.error("Chat panel not found!");
+    return;
+  }
+
+  let isFullscreen = false;
+  if (layout) {
+    isFullscreen = layout.classList.toggle("chat-expanded");
+    if (container) {
+      container.classList.toggle("chat-expanded", isFullscreen);
+    }
+  } else if (chatPanel) {
+    isFullscreen = chatPanel.classList.toggle("fullscreen");
+  }
+  if (chatPanel) {
+    chatPanel.classList.toggle("fullscreen", isFullscreen && !layout);
+  }
+  
+  const icon = document.querySelector("#btnExpand i");
+  if (icon) {
+    icon.className = isFullscreen ? "fas fa-compress" : "fas fa-expand";
+  }
+  
+  const btn = document.querySelector("#btnExpand");
+  if (btn) {
+    btn.title = isFullscreen ? "Exit full screen" : "Toggle full screen";
+  }
+};
+
 function setComposerEnabled(enabled) {
   const on = !!enabled;
   const tab = getComposerTab();
@@ -437,13 +472,33 @@ document.addEventListener("DOMContentLoaded", async () => {
   applyTheme(savedTheme);
 
   // Full screen chat toggle
-  qs("#btnExpand")?.addEventListener("click", () => {
-    const chatPanel = qs(".chat-panel");
-    if (chatPanel) {
-      chatPanel.classList.toggle("fullscreen");
-      const icon = qs("#btnExpand i");
-      if (icon) {
-        icon.className = chatPanel.classList.contains("fullscreen") ? "fas fa-compress" : "fas fa-expand";
+  const expandBtn = qs("#btnExpand");
+  if (expandBtn) {
+    expandBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.toggleChatFullscreen?.();
+    });
+  } else {
+    console.warn("btnExpand button not found!");
+  }
+
+  // Close fullscreen chat on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const chatPanel = qs(".chat-panel");
+      const layout = qs(".interview-layout");
+      const container = qs(".interview-container");
+      if (layout && layout.classList.contains("chat-expanded")) {
+        layout.classList.remove("chat-expanded");
+        container?.classList.remove("chat-expanded");
+      }
+      if (chatPanel && chatPanel.classList.contains("fullscreen")) {
+        chatPanel.classList.remove("fullscreen");
+        const icon = qs("#btnExpand i");
+        if (icon) {
+          icon.className = "fas fa-expand";
+        }
       }
     }
   });

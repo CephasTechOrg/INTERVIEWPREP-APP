@@ -643,6 +643,12 @@ html, body {
   min-height: 0; /* Critical for nested flex scrolling */
 }
 
+/* Reduce padding for interview page */
+.content-area.interview-content {
+  padding: 12px;
+  overflow: hidden !important;
+}
+
 .page {
   display: none;
   animation: fadeIn 0.3s ease-out;
