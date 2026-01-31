@@ -85,14 +85,14 @@ app.include_router(v1_router)
 
 def _startup_init_db() -> None:
     """
-    Startup hook: Load questions from data/questions/ if DB is empty.
+    Startup hook: Load questions from data/questions/ (insert-only, dev).
 
     Note: Database schema is now managed by Alembic migrations.
     Run 'alembic upgrade head' before starting the application.
     """
     if settings.ENV != "dev":
         return
-    # Dev convenience: auto-load questions from `data/questions` when DB is empty.
+    # Dev convenience: auto-load questions from `data/questions` (insert-only).
     # This does not affect auth flows; it just ensures the interview has content.
     try:
         db = SessionLocal()
