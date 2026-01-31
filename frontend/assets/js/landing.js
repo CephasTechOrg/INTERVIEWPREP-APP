@@ -1,6 +1,9 @@
 // Dark Mode Toggle
 const themeToggle = document.getElementById('themeToggle');
+const menuToggle = document.getElementById('menuToggle');
+const closeMenu = document.getElementById('closeMenu');
 const html = document.documentElement;
+isActive = false;
 
 // Initialize dark mode from localStorage
 function initTheme() {
@@ -19,13 +22,25 @@ function updateThemeIcon(isDark) {
     icon.className = 'fas fa-moon';
   }
 }
-
+  
 if (themeToggle) {
   themeToggle.addEventListener('click', () => {
     html.classList.toggle('dark-mode');
     const isDark = html.classList.contains('dark-mode');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     updateThemeIcon(isDark);
+  });
+}
+
+if (menuToggle) {
+  menuToggle.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.add('active');
+  });
+}
+
+if (closeMenu) {
+  closeMenu.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('active');
   });
 }
 

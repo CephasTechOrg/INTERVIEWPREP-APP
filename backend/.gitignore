@@ -1,8 +1,12 @@
+# IDEs and Editors
+.vscode/
+
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+*.pyc
 .Python
 build/
 develop-eggs/
@@ -85,6 +89,7 @@ dmypy.json
 
 # Database
 *.db
+*.db-journal
 *.sqlite
 *.sqlite3
 
@@ -107,3 +112,4 @@ tmp/
 temp/
 *.tmp
 project-walkthrough.txt
+test_output.txt

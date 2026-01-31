@@ -36,8 +36,7 @@ html.dark-mode {
     --footer-bg: #020617;
 }
 
-html,
-body {
+html {
     scroll-behavior: smooth;
 }
 
@@ -47,6 +46,7 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     transition: background 0.4s ease, color 0.4s ease;
+    scroll-behavior: smooth;
 }
 
 /* Navigation */
@@ -87,10 +87,10 @@ html.dark-mode nav {
     gap: 8px;
 }
 
-.logo i {
+/* .logo i {
     font-size: 28px;
     color: var(--primary-color);
-}
+} */
 
 .nav-links {
     display: flex;
@@ -149,6 +149,24 @@ html.dark-mode nav {
     color: var(--primary-color);
     border-color: var(--primary-color);
     transform: rotate(20deg);
+}
+
+.menuToggle{
+    color: var(--primary-color);
+    background: transparent;
+    border: none;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+    font-size: 1.65rem;
+    font-weight: bold;
+}
+.menuToggle#closeMenu{
+    position: absolute;
+    left: 15px;
+    top: 15px;
 }
 
 .btn-primary {
@@ -252,7 +270,8 @@ html.dark-mode nav {
     align-items: center;
     justify-content: space-between;
     gap: 60px;
-    animation: fadeInUp 0.8s ease-out;
+    animation: fadeInUp 0.5s ease-in;
+    z-index: 10;
 }
 
 .hero-content {
@@ -341,6 +360,7 @@ html.dark-mode nav {
     padding: 80px 40px;
     background: var(--white);
     transition: background 0.3s ease;
+    z-index: 600;
 }
 
 html.dark-mode .features {
@@ -880,130 +900,6 @@ footer a {
 
 footer a:hover {
     color: var(--white);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    nav {
-        padding: 15px 20px;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .logo {
-        font-size: 20px;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-        display: none;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-right {
-        order: 2;
-    }
-
-    .hero {
-        padding: 60px 20px;
-    }
-
-    .hero h1 {
-        font-size: 36px;
-    }
-
-    .hero p {
-        font-size: 16px;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .hero-buttons a,
-    .hero-buttons button {
-        width: 100%;
-    }
-
-    .features,
-    .interview-types,
-    .companies,
-    .tracks,
-    .how-it-works,
-    .cta {
-        padding: 60px 20px;
-    }
-
-    .features h2,
-    .interview-types h2,
-    .companies h2,
-    .tracks h2,
-    .how-it-works h2 {
-        font-size: 32px;
-    }
-
-    .cta-container {
-        padding: 40px 20px;
-    }
-
-    .cta-container h2 {
-        font-size: 28px;
-    }
-
-    .company-logos {
-        gap: 20px;
-    }
-
-    .company-logo {
-        font-size: 14px;
-        padding: 15px 20px;
-    }
-
-    .stats {
-        gap: 20px;
-        padding: 40px 20px;
-    }
-
-    .feature-card,
-    .type-card,
-    .track-card,
-    .step,
-    .stat {
-        animation: none;
-        opacity: 1;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        padding: 50px 15px;
-    }
-
-    .hero h1 {
-        font-size: 28px;
-    }
-
-    .hero p {
-        font-size: 14px;
-    }
-
-    .section-title {
-        font-size: 28px;
-    }
-
-    .feature-card {
-        padding: 20px;
-    }
-
-    .type-card {
-        padding: 25px;
-    }
 }
 
 /* Scroll animations */
@@ -1766,7 +1662,7 @@ html.dark-mode .payment-info {
    RESPONSIVE
    ============================================ */
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .pricing {
         padding: 60px 20px;
     }
@@ -1812,51 +1708,8 @@ html.dark-mode .payment-info {
         padding: 12px;
         font-size: 14px;
     }
-}
-@media (max-width: 968px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding-top: 60px;
-        padding-bottom: 60px;
-        gap: 40px;
-    }
+} */
 
-    .hero-content {
-        margin-bottom: 0;
-        max-width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .hero h1 {
-        font-size: 42px;
-    }
-
-    .hero p {
-        max-width: 100%;
-        font-size: 18px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .hero-buttons {
-        justify-content: center;
-        width: 100%;
-    }
-    
-    .hero-img {
-        transform: none; /* Reset 3D transform on mobile for clarity */
-        max-width: 100%;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        margin-top: 20px;
-    }
-    
-    .hero-image-container {
-        width: 100%;
-    }
-}
 
 /* ============================================
    UPDATED STYLES (Clean & Big)
@@ -1875,10 +1728,10 @@ html.dark-mode .payment-info {
 }
 
 /* Nav Cleanliness */
-nav {
-    padding: 20px 60px; /* More breathing room */
-    background: rgba(255, 255, 255, 0.95); /* Less transparent for cleanliness */
-}
+/* nav {
+    padding: 20px 60px;
+    background: rgba(255, 255, 255, 0.95); 
+} */
 
 .nav-links {
     gap: 40px; /* More space between links */
@@ -1901,7 +1754,7 @@ nav {
     align-items: center;
     justify-content: center;
     background: transparent;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--primary-color);
 }
 
 .theme-toggle:hover {
@@ -2030,29 +1883,279 @@ nav {
     }
 }
 
+@media (max-width: 968px) {
+    html, body{
+        width: 100vw;
+        overflow-x: hidden;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 60px;
+        padding-bottom: 60px;
+        gap: 40px;
+    }
+
+    .hero-content {
+        margin-bottom: 0;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .hero p {
+        max-width: 100%;
+        font-size: 18px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .hero-img {
+        transform: none;
+        /* Reset 3D transform on mobile for clarity */
+        max-width: 100%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .hero-image-container {
+        width: 100%;
+    }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
     nav {
+        width: 100vw;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 20px;
+
+        img {
+            display: none;
+        }        
+    }
+
+    .menuToggle {
+        display: flex;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        display: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .nav-links.active {
+        display: flex;
+        width: 100vw;
+        position: fixed;
+        top: 0; 
+        left: 0;
+        right: 0;
+        background: var(--white);
+        backdrop-filter: blur(10px);
+        align-items: center;
+        justify-content: flex-start;
+        padding: 20px;
+        z-index: 1;
+        font-size: 1.45rem;
+        animation: fadeInUp 0.6s ease-in;
+    }
+
+    .nav-right {
+        order: 2;
+    }
+
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero-buttons a,
+    .hero-buttons button {
+        width: 100%;
+    }
+
+    .features,
+    .interview-types,
+    .companies,
+    .tracks,
+    .how-it-works,
+    .cta {
+        padding: 30px 20px;
+    }
+
+    .features h2,
+    .interview-types h2,
+    .companies h2,
+    .tracks h2,
+    .how-it-works h2 {
+        font-size: 32px;
+    }
+
+    .cta-container {
+        padding: 40px 20px;
+    }
+
+    .cta-container h2 {
+        font-size: 28px;
+    }
+
+    .company-logos {
+        gap: 20px;
+    }
+
+    .company-logo {
+        font-size: 14px;
         padding: 15px 20px;
     }
-    
-    .nav-logo-img {
-        height: 40px;
+
+    .stats {
+        gap: 20px;
+        padding: 40px 20px;
     }
-    
+
+    .feature-card,
+    .type-card,
+    .track-card,
+    .step,
+    .stat {
+        animation: none;
+        opacity: 1;
+    }
+
+    .pricing {
+        padding: 60px 20px;
+    }
+
+    .pricing h2 {
+        font-size: 32px;
+    }
+
+    .pricing-grid {
+        gap: 20px;
+    }
+
+    .pricing-card.featured {
+        transform: scale(1);
+    }
+
+    .pricing-card.featured:hover {
+        transform: translateY(-8px);
+    }
+
+    .plan-price {
+        flex-wrap: wrap;
+    }
+
+    .amount {
+        font-size: 40px;
+    }
+
+    .payment-modal-content {
+        padding: 30px 20px;
+        max-width: 95%;
+    }
+
+    .payment-options {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-modal-title {
+        font-size: 20px;
+    }
+
+    .btn-pay {
+        padding: 12px;
+        font-size: 14px;
+    }
+
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
     }
-    
+
     .footer-desc {
         margin: 0 auto 24px;
     }
-    
+
     .social-links {
         justify-content: center;
     }
-    
+
     .footer-logo {
         justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-right {
+        order: 2;
+
+        a.btn-primary {
+            display: none;
+        }
+    }
+
+    .hero {
+        padding: 50px 15px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    .features,
+    .interview-types,
+    .companies,
+    .tracks,
+    .how-it-works,
+    .cta {
+        padding: 8px 15px;
+    }
+
+    .feature-card {
+        padding: 20px;
+    }
+
+    .type-card {
+        padding: 25px;
     }
 }
