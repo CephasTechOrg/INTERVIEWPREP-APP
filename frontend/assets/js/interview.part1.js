@@ -126,12 +126,15 @@ const ROLE_OPTIONS = new Set([
 ]);
 const COMPANY_OPTIONS = new Set(["general", "amazon", "google", "apple", "microsoft", "meta"]);
 const DIFFICULTY_OPTIONS = new Set(["easy", "medium", "hard"]);
-const INTERVIEWER_IMAGE_URL = "https://i.imgur.com/ZCLzsF6.jpeg";
+const ALEX_INTERVIEWER_IMAGE_URL = "./assets/images/alex.avif";
+const MASON_INTERVIEWER_IMAGE_URL = "./assets/images/mason.jpg";
+const ERICA_INTERVIEWER_IMAGE_URL = "./assets/images/erica.jpeg";
+const MAYA_INTERVIEWER_IMAGE_URL = "./assets/images/maya.jpg";
 const INTERVIEWER_IMAGES = {
-  alex: INTERVIEWER_IMAGE_URL,
-  mason: INTERVIEWER_IMAGE_URL,
-  erica: INTERVIEWER_IMAGE_URL,
-  maya: INTERVIEWER_IMAGE_URL,
+  alex: ALEX_INTERVIEWER_IMAGE_URL,
+  mason: MASON_INTERVIEWER_IMAGE_URL,
+  erica: ERICA_INTERVIEWER_IMAGE_URL,
+  maya: MAYA_INTERVIEWER_IMAGE_URL,
 };
 const INTERVIEWERS = [
   { id: "alex", name: "Alex", gender: "Male", image_url: INTERVIEWER_IMAGES.alex },
