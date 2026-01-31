@@ -291,15 +291,15 @@ html.dark-mode nav {
 .hero-img {
     width: 100%;
     max-width: 600px;
-    height: auto;
+    min-height: 360px;
     border-radius: 20px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-    transform: rotateY(-5deg) rotateX(2deg);
+    /* transform: rotateY(-2deg) rotateX(1deg); */
     transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
 .hero-img:hover {
-    transform: rotateY(0) rotateX(0) scale(1.02);
+    /* transform: rotateY(0) rotateX(0) scale(1.02); */
     box-shadow: 0 30px 60px -12px rgba(37, 99, 235, 0.2);
 }
 
@@ -1770,7 +1770,7 @@ html.dark-mode .payment-info {
 }
 
 .hero-image-container {
-    perspective: 1500px;
+    /* perspective: 1500px; */
     flex: 1.2; /* Give image more space */
 }
 
