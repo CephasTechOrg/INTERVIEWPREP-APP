@@ -889,7 +889,7 @@ select.form-control {
 }
 
 #dashLastSession .stat-value-primary {
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--text);
   line-height: 1.2;

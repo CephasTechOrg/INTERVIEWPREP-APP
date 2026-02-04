@@ -1,11 +1,13 @@
 const CHAT_STORAGE_KEY = "ai_chat_sessions_v1";
 const CHAT_ACTIVE_KEY = "ai_chat_active_id_v1";
 const CHAT_MAX_HISTORY = 12;
+const CHAT_HISTORY_COLLAPSED_KEY = "ai_chat_history_collapsed_v1";
 
 const state = {
   sessions: [],
   activeId: null,
   sending: false,
+  historyCollapsed: false,
 };
 
 function nowTimeLabel() {
@@ -14,6 +16,129 @@ function nowTimeLabel() {
   } catch {
     return "";
   }
+}
+
+function normalizeMessageText(text) {
+  let out = String(text || "");
+  out = out.replace(/\r\n/g, "\n");
+  out = out.replace(/\u00a0/g, " ");
+  out = out.replace(/[\u200B-\u200D\uFEFF]/g, "");
+  out = out.replace(/[ \t]+$/gm, "");
+  out = out.replace(/\n{4,}/g, "\n\n\n");
+  out = out.replace(/^\*(?!\*)\S/gm, (m) => `* ${m.slice(1)}`);
+  out = out.replace(/^-([^\s-])/gm, "- $1");
+  out = out.replace(/^(\d+)\.(\S)/gm, "$1. $2");
+  const fenceCount = (out.match(/```/g) || []).length;
+  if (fenceCount % 2 === 1) {
+    out = out.replace(/```/g, "");
+  }
+  return out.trim();
+}
+
+function escapeHtmlLocal(str) {
+  return String(str || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function formatInline(text) {
+  let out = escapeHtmlLocal(text);
+  out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+  out = out.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  out = out.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  return out;
+}
+
+function attachCopyHandler(btn, text) {
+  if (!btn) return;
+  btn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      await navigator.clipboard.writeText(String(text || ""));
+      btn.classList.add("copied");
+      setTimeout(() => btn.classList.remove("copied"), 800);
+    } catch {
+      showNotification("Copy failed. Check clipboard permissions.", "error");
+    }
+  });
+}
+
+function renderTextBlock(container, block) {
+  const trimmed = (block || "").trim();
+  if (!trimmed) return;
+  const lines = trimmed.split("\n");
+  const listLines = lines.filter((l) => l.trim().startsWith("- ") || l.trim().startsWith("* "));
+  const isList = listLines.length >= 2 && listLines.length === lines.length;
+
+  if (isList) {
+    const ul = document.createElement("ul");
+    ul.className = "message-list";
+    lines.forEach((line) => {
+      const li = document.createElement("li");
+      const content = line.trim().replace(/^[-*]\s+/, "");
+      li.innerHTML = formatInline(content);
+      ul.appendChild(li);
+    });
+    container.appendChild(ul);
+    return;
+  }
+
+  const p = document.createElement("p");
+  p.className = "message-paragraph";
+  p.innerHTML = formatInline(trimmed).replace(/\n/g, "<br>");
+  container.appendChild(p);
+}
+
+function renderMessageContent(container, rawText) {
+  const text = normalizeMessageText(rawText);
+  const codeRegex = /```([a-zA-Z0-9_-]+)?\n([\s\S]*?)```/g;
+  let lastIndex = 0;
+  let match = null;
+  let hasCode = false;
+
+  while ((match = codeRegex.exec(text)) !== null) {
+    const before = text.slice(lastIndex, match.index);
+    if (before.trim()) {
+      before.split(/\n{2,}/).forEach((block) => renderTextBlock(container, block));
+    }
+
+    const lang = (match[1] || "").trim();
+    const codeText = (match[2] || "").replace(/\n$/, "");
+    const codeWrap = document.createElement("div");
+    codeWrap.className = "code-block";
+
+    const header = document.createElement("div");
+    header.className = "code-block__header";
+    header.textContent = lang ? lang.toUpperCase() : "CODE";
+
+    const copyBtn = document.createElement("button");
+    copyBtn.type = "button";
+    copyBtn.className = "code-copy";
+    copyBtn.title = "Copy code";
+    copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+    attachCopyHandler(copyBtn, codeText);
+    header.appendChild(copyBtn);
+
+    const pre = document.createElement("pre");
+    const code = document.createElement("code");
+    code.textContent = codeText;
+    pre.appendChild(code);
+
+    codeWrap.appendChild(header);
+    codeWrap.appendChild(pre);
+    container.appendChild(codeWrap);
+    hasCode = true;
+    lastIndex = codeRegex.lastIndex;
+  }
+
+  const rest = text.slice(lastIndex);
+  if (rest.trim()) {
+    rest.split(/\n{2,}/).forEach((block) => renderTextBlock(container, block));
+  }
+
+  return hasCode;
 }
 
 function loadSessions() {
@@ -39,6 +164,30 @@ function getActiveId() {
 function setActiveId(id) {
   if (!id) return;
   localStorage.setItem(CHAT_ACTIVE_KEY, id);
+}
+
+function loadHistoryCollapsed() {
+  try {
+    return localStorage.getItem(CHAT_HISTORY_COLLAPSED_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function saveHistoryCollapsed(value) {
+  try {
+    localStorage.setItem(CHAT_HISTORY_COLLAPSED_KEY, value ? "1" : "0");
+  } catch {}
+}
+
+function applyHistoryCollapsed(collapsed) {
+  const shell = qs(".chat-shell");
+  const btn = qs("#toggleHistoryBtn i");
+  if (!shell) return;
+  shell.classList.toggle("history-collapsed", !!collapsed);
+  if (btn) {
+    btn.className = collapsed ? "fas fa-chevron-right" : "fas fa-chevron-left";
+  }
 }
 
 function createSession() {
@@ -154,6 +303,7 @@ function renderMessages() {
   }
 
   session.messages.forEach((msg) => {
+    const normalizedContent = normalizeMessageText(msg.content || "");
     const bubble = document.createElement("div");
     const msgType = msg.role === "system" ? "ai system" : msg.role === "ai" ? "ai" : "user";
     bubble.className = `message ${msgType}`;
@@ -182,13 +332,21 @@ function renderMessages() {
     content.className = "message-content";
 
     const text = document.createElement("div");
-    const hasCode = String(msg.content || "").includes("```");
-    text.className = `message-bubble${hasCode ? " code" : ""}`;
-    text.textContent = msg.content || "";
+    const hasCode = normalizedContent.includes("```");
+    text.className = `message-bubble${hasCode ? " has-code" : ""}`;
+    renderMessageContent(text, normalizedContent);
 
     const meta = document.createElement("div");
     meta.className = "message-time";
     meta.textContent = `${msg.role === "user" ? "You" : msg.role === "ai" ? "AI" : "System"} | ${msg.time || nowTimeLabel()}`;
+
+    const copyBtn = document.createElement("button");
+    copyBtn.type = "button";
+    copyBtn.className = "message-copy";
+    copyBtn.title = "Copy message";
+    copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+    attachCopyHandler(copyBtn, normalizedContent);
+    meta.appendChild(copyBtn);
 
     content.appendChild(text);
     content.appendChild(meta);
@@ -307,7 +465,7 @@ function setupComposer() {
 
   input.addEventListener("input", () => {
     input.style.height = "auto";
-    const max = 160;
+    const max = 240;
     const next = Math.min(input.scrollHeight, max);
     input.style.height = `${next}px`;
   });
@@ -428,9 +586,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderMessages();
   setupComposer();
 
+  state.historyCollapsed = loadHistoryCollapsed();
+  applyHistoryCollapsed(state.historyCollapsed);
+
   qs("#newChatBtn")?.addEventListener("click", handleNewChat);
   qs("#clearChatBtn")?.addEventListener("click", handleClearChat);
   qs("#clearAllChatsBtn")?.addEventListener("click", clearAllChats);
+  qs("#toggleHistoryBtn")?.addEventListener("click", () => {
+    state.historyCollapsed = !state.historyCollapsed;
+    saveHistoryCollapsed(state.historyCollapsed);
+    applyHistoryCollapsed(state.historyCollapsed);
+  });
   qs("#chatSearchInput")?.addEventListener("input", (e) => {
     renderHistory(e.target?.value || "");
   });

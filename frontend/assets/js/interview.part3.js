@@ -144,7 +144,7 @@ async function resumeSessionById(sessionId) {
       const hasInterviewer = msgs.some((m) => m.role === "interviewer");
       msgs.forEach((m) => {
         const sender = roleToSender(m.role);
-        addMessage(m.content, sender, timeLabelFromDate(m.created_at));
+        addMessage(m.content, sender, timeLabelFromDate(m.created_at), { speak: false });
       });
       if (!hasInterviewer && !(isDone || isWrapup)) {
         const first = await startInterview(id);

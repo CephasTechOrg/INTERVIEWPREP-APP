@@ -843,7 +843,7 @@ function renderFlowRail() {
   if (subtitle) {
     const next = FLOW_STEPS.find((step) => !flowState[step.key]);
     if (!next) subtitle.textContent = "Flow complete. Keep it crisp and confident.";
-    else if (next.key === "plan") subtitle.textContent = "Start with your plan and approach.";
+    else if (next.key === "plan") subtitle.textContent = "Start with plan and approach.";
     else subtitle.textContent = `Next up: ${next.label.toLowerCase()}.`;
   }
 }

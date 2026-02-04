@@ -319,9 +319,9 @@ html, body {
 }
 
 .logo-icon {
-  width: 44px;
-  height: 44px;
-  background: var(--gradient-primary);
+  width: 80px;
+  height: 60px;
+  background: white;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
@@ -330,6 +330,10 @@ html, body {
   color: white;
   box-shadow: var(--shadow-primary);
   padding: 5px 15px;
+  img{
+    width: 70px;
+    height: auto;
+  }
 }
 
 .logo-text {

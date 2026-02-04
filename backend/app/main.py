@@ -31,27 +31,15 @@ def _parse_origins(raw: str | None) -> list[str]:
 origins = _parse_origins(settings.FRONTEND_ORIGINS)
 origin_regex = None
 if settings.ENV == "dev":
-    if not origins:
-        origins = [
-            "http://localhost:3000",
-            "http://127.0.0.1:3000",
-            "http://localhost:5173",
-            "http://127.0.0.1:5173",
-            "http://localhost:5500",
-            "http://127.0.0.1:5500",
-            "http://localhost:5501",
-            "http://127.0.0.1:5501",
-            "http://localhost:8000",
-            "http://127.0.0.1:8000",
-            "null",
-        ]
     # Allow any localhost/127.0.0.1 port in dev so preflights don't 400.
-    origin_regex = r"^https?://(localhost|127\\.0\\.0\\.1)(:\\d+)?$|^null$"
+    origin_regex = r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$"
+    origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_origin_regex=origin_regex,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -85,14 +73,14 @@ app.include_router(v1_router)
 
 def _startup_init_db() -> None:
     """
-    Startup hook: Load questions from data/questions/ if DB is empty.
+    Startup hook: Load questions from data/questions/ (insert-only, dev).
 
     Note: Database schema is now managed by Alembic migrations.
     Run 'alembic upgrade head' before starting the application.
     """
     if settings.ENV != "dev":
         return
-    # Dev convenience: auto-load questions from `data/questions` when DB is empty.
+    # Dev convenience: auto-load questions from `data/questions` (insert-only).
     # This does not affect auth flows; it just ensures the interview has content.
     try:
         db = SessionLocal()

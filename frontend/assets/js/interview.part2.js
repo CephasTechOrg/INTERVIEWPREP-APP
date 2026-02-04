@@ -97,7 +97,7 @@ function roleToSender(role) {
   return "system";
 }
 
-function addMessage(text, sender, timeLabel = null) {
+function addMessage(text, sender, timeLabel = null, options = {}) {
   const wrap = qs("#chatMessages");
   if (!wrap) return;
 
@@ -145,7 +145,8 @@ function addMessage(text, sender, timeLabel = null) {
     updateGuidanceFromUserMessage(text);
   }
 
-  if (sender === "ai" && qs("#voiceToggle")?.checked) {
+  const speak = options?.speak !== false;
+  if (speak && sender === "ai" && qs("#voiceToggle")?.checked) {
     // Browser auto-play policies block audio on fresh page loads. Defer until user interacts.
     if (hasUserActivation()) {
       speakWithBackendTts(text);

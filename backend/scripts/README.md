@@ -28,6 +28,19 @@ python scripts/init_migrations.py
 
 ## Other Scripts
 
+### `seed.py` (in `backend/`)
+
+Seeds questions from `data/questions` and can reset tables.
+
+**Usage:**
+```bash
+cd backend
+python seed.py                     # Migrate + upsert questions
+python seed.py --questions          # Upsert questions only
+python seed.py --questions --no-upsert  # Insert-only
+python seed.py --reset              # Wipe all tables
+```
+
 Additional utility scripts can be added here for:
 - Database seeding
 - Data migrations

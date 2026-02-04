@@ -30,8 +30,17 @@
   gap: 0;
 }
 
+.interview-header {
+  transition: opacity 0.2s ease, max-height 0.2s ease, margin 0.2s ease, padding 0.2s ease;
+  overflow: hidden;
+}
+
 .interview-container.chat-expanded .interview-header {
-  display: none;
+  opacity: 0;
+  max-height: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
 }
 
 /* Header - Compact and Professional */
@@ -146,20 +155,31 @@
   flex: 1; 
   min-height: 0;
   position: relative;
+  transition: grid-template-columns 0.25s ease, gap 0.25s ease;
 }
 
 /* Expand chat to take the full interview area */
 .interview-layout.chat-expanded {
-  grid-template-columns: 1fr;
+  grid-template-columns: 0fr 1fr;
+  gap: 0;
   height: 100%;
 }
 
 .interview-layout.chat-expanded .question-panel {
-  display: none;
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(-12px);
+  pointer-events: none;
+  margin: 0;
 }
 
 .interview-layout.chat-expanded .chat-panel {
   grid-column: 1 / -1;
+  box-shadow: none;
+  border: none;
+  background: var(--light);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 /* Desktop: 3-column with question on left, chat larger */
@@ -176,6 +196,10 @@
     grid-template-columns: 1fr;
     gap: 6px;
   }
+
+  .interview-layout.chat-expanded {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Mobile: Stacked */
@@ -183,6 +207,10 @@
   .interview-layout {
     grid-template-columns: 1fr;
     gap: 6px;
+  }
+
+  .interview-layout.chat-expanded {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -197,6 +225,7 @@
   overflow: hidden;
   max-height: 100%;
   min-height: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease, max-width 0.2s ease, margin 0.2s ease;
 }
 
 /* Question and Guidance Cards */
@@ -219,6 +248,13 @@
   flex: 0 0 auto;
   max-height: 35%;
   overflow-y: auto;
+  margin-bottom: 18px;
+}
+
+.question-card.collapsed {
+  .question-body{
+    display: none;
+  }
 }
 
 .guidance-card {
@@ -231,7 +267,7 @@
 .question-header, .guidance-header {
   padding: 8px 12px; /* Compact padding */
   border-bottom: 1px solid var(--border-light);
-  background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.3) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.01) 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -241,13 +277,21 @@
 }
 
 .question-header h3, .guidance-header h4 {
-  font-size: 13px; 
+  font-size: 14px; 
   font-weight: 700;
   color: var(--text);
   margin: 0;
   flex: 1;
   min-width: 0;
 }
+
+.guidance-header span {
+    font-size: 14px;
+    color: var(--text);
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+  }
 
 /* Question action buttons */
 .question-actions {
@@ -311,7 +355,7 @@
   padding: 8px 12px; /* Reduced padding */
   display: flex;
   flex-direction: column;
-  gap: 3px; /* Very tight spacing */
+  gap: 10px; /* Very tight spacing */
   overflow-y: auto;
   flex: 1;
   min-height: 0;
@@ -330,7 +374,7 @@
 }
 
 .flow-step:hover {
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.2);
   opacity: 1;
 }
 
@@ -350,7 +394,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--text-muted);
   flex-shrink: 0;
@@ -371,7 +415,7 @@
 }
 
 .step-title {
-  font-size: 12px; /* Smaller */
+  font-size: 14px; /* Smaller */
   font-weight: 600;
   color: var(--text);
   margin: 0;
@@ -389,7 +433,7 @@
    CHAT AREA (Main Panel)
    ----------------------------------------------------------------------------- */
 .chat-panel {
-  background: rgba(255, 255, 255, 0.85); 
+  background: rgba(255, 255, 255, 0.5); 
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   border-radius: var(--radius-xl);
@@ -403,6 +447,9 @@
   position: relative;
   height: 100%;
   min-height: 0; 
+  contain: layout paint;
+  transition: box-shadow 0.2s ease, border 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  will-change: transform;
 }
 
 .chat-header {
@@ -411,7 +458,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,0.5));
+  background: linear-gradient(to right, var(--dark), rgba(255,255,255,0.5));
   z-index: 10;
   flex-shrink: 0;
   min-height: 48px;
@@ -502,7 +549,7 @@
 .chat-indicator {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   font-size: 11px;
   color: var(--text-muted);
   white-space: nowrap;
@@ -598,7 +645,7 @@
   position: relative;
   transition: transform 0.2s;
   word-wrap: break-word;
-  white-space: pre-wrap;
+  /* white-space: pre-wrap; */
 }
 
 .message-bubble.code {
@@ -686,7 +733,7 @@
    CHAT INPUT AREA - Optimized
    ============================================================================= */
 .chat-input {
-  background: rgba(255,255,255,0.7);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.01) 100%);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--border-light);
   padding: 8px 12px; /* Compact padding */
@@ -1128,4 +1175,4 @@
     max-height: 40%;
   }
 }
-
+}

@@ -44,7 +44,7 @@ Database (Postgres)
 Entry point: `backend/app/main.py`
 
 - Uses Alembic for database migrations (see `backend/MIGRATIONS.md`).
-- Seeds questions from `data/questions/` if the DB is empty.
+- Seeds questions from `data/questions/` on startup in dev (insert-only; no updates).
 - Enables permissive CORS for local development.
 
 Database Migrations:
@@ -297,7 +297,29 @@ Add or update questions:
 2. Ensure `company_style`, `track`, and `difficulty` match the allowed values in:
    - `backend/app/core/constants.py`
 3. Run `python scripts/validate_questions.py`.
-4. Restart the backend (it will load new questions if DB is empty; otherwise insert manually).
+4. Run `python seed.py --questions` (from `backend/`) to upsert changes.
+   - Startup seeding only inserts new rows; it does not update existing questions.
+5. Restart the backend if needed.
+
+## Seeding and Updates
+
+Use `backend/seed.py` to migrate and sync datasets from JSON.
+
+Common commands (run from `backend/`):
+
+```bash
+python seed.py                     # Migrate + upsert questions from data/questions
+python seed.py --questions          # Upsert questions only
+python seed.py --questions --no-upsert  # Insert-only (skip updates)
+python seed.py --reset              # Wipe all tables (destructive)
+```
+
+Update example:
+
+- Edit a question JSON (e.g., change `prompt` or `tags` in `data/questions/...`).
+- Run `python seed.py --questions` to update the existing row (matched by track + company + difficulty + title).
+
+Note: Only questions are seeded from JSON. Other tables are runtime data; use `--reset` to clear them if needed.
 
 Adjust interview behavior:
 

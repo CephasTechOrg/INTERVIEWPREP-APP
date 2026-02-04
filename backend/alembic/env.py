@@ -14,6 +14,7 @@ from app.db.base import Base
 
 # Import all models so Alembic can detect them
 from app.models.audit_log import AuditLog  # noqa: F401
+from app.models.chat_thread import ChatThread  # noqa: F401
 from app.models.evaluation import Evaluation  # noqa: F401
 from app.models.interview_session import InterviewSession  # noqa: F401
 from app.models.message import Message  # noqa: F401
