@@ -271,28 +271,6 @@ Future enhancements:
 
 ---
 
-## Support
-
-If you encounter issues:
-
-1. **Check database migration applied**:
-
-   ```sql
-   SELECT * FROM alembic_version;
-   ```
-
-2. **Check backend logs** for API errors
-
-3. **Check frontend DevTools**:
-   - Network tab for failed requests
-   - Console for JavaScript errors
-   - Application tab to verify no old localStorage keys
-
-4. **Verify permissions**: User must be authenticated
-
----
-
-## Quick Reference
 
 **Frontend Service Usage**:
 
