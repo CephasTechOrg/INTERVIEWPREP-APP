@@ -36,5 +36,6 @@ class ResetRequest(BaseModel):
 
 
 class PerformResetRequest(BaseModel):
+    email: EmailStr
     token: str
     new_password: str

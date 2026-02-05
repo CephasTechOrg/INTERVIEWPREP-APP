@@ -11,6 +11,10 @@ def _generate_verification_code() -> str:
     return f"{secrets.randbelow(1000000):06d}"
 
 
+def _generate_reset_code() -> str:
+    return _generate_verification_code()
+
+
 def get_by_email(db: Session, email: str) -> User | None:
     return db.query(User).filter(User.email == email).first()
 
@@ -134,7 +138,7 @@ def verify_user(db: Session, email: str, code: str) -> User | None:
 
 
 def set_reset_token(db: Session, user: User, expires_minutes: int = 30) -> str:
-    token = secrets.token_urlsafe(32)
+    token = _generate_reset_code()
     user.reset_token = hash_token(token)
     user.reset_token_expires_at = datetime.now(UTC) + timedelta(minutes=expires_minutes)
     db.add(user)
@@ -143,18 +147,17 @@ def set_reset_token(db: Session, user: User, expires_minutes: int = 30) -> str:
     return token
 
 
-def reset_password(db: Session, token: str, new_password: str) -> User | None:
+def reset_password(db: Session, token: str, new_password: str, email: str | None = None) -> User | None:
     now = datetime.now(UTC)
     token_hash = hash_token(token)
-    user = (
-        db.query(User)
-        .filter(
-            User.reset_token.in_([token, token_hash]),
-            User.reset_token_expires_at is not None,
-            User.reset_token_expires_at > now,
-        )
-        .first()
+    query = db.query(User).filter(
+        User.reset_token.in_([token, token_hash]),
+        User.reset_token_expires_at is not None,
+        User.reset_token_expires_at > now,
     )
+    if email:
+        query = query.filter(User.email == email)
+    user = query.first()
     if not user:
         return None
     user.password_hash = hash_password(new_password)

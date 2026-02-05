@@ -62,44 +62,44 @@ export const ChartsSection = () => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Analytics Dashboard</h2>
-        <p className="text-gray-600">Track your interview progress and performance trends.</p>
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 transition-colors">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Analytics Dashboard</h2>
+        <p className="text-slate-600 dark:text-slate-400">Track your interview progress and performance trends.</p>
       </div>
 
       {loading ? (
-        <div className="bg-white rounded-lg shadow-md p-8 text-center text-gray-500">Loading...</div>
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-8 text-center text-slate-500 dark:text-slate-400 transition-colors">Loading...</div>
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <p className="text-sm text-gray-500 mb-1">Total Sessions</p>
-              <p className="text-3xl font-bold text-blue-600">{data?.total_sessions ?? 0}</p>
+            <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 transition-colors">
+              <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Total Sessions</p>
+              <p className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">{data?.total_sessions ?? 0}</p>
             </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <p className="text-sm text-gray-500 mb-1">Completed Sessions</p>
-              <p className="text-3xl font-bold text-green-600">{data?.completed_sessions ?? 0}</p>
+            <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 transition-colors">
+              <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Completed Sessions</p>
+              <p className="text-3xl font-bold text-green-600 dark:text-green-400">{data?.completed_sessions ?? 0}</p>
             </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <p className="text-sm text-gray-500 mb-1">Avg Score</p>
-              <p className="text-3xl font-bold text-purple-600">{data?.average_score ?? 0}</p>
+            <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 transition-colors">
+              <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Avg Score</p>
+              <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">{data?.average_score ?? 0}</p>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Performance by Track</h3>
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 transition-colors">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Performance by Track</h3>
             <div className="space-y-3">
               {data && Object.entries(data.performance_by_track).length > 0 ? (
                 Object.entries(data.performance_by_track).map(([track, stats]) => (
                   <div key={track} className="flex items-center justify-between">
-                    <span className="capitalize text-gray-700">{track.replace(/_/g, ' ')}</span>
-                    <span className="font-semibold text-gray-900">
+                    <span className="capitalize text-slate-700 dark:text-slate-300">{track.replace(/_/g, ' ')}</span>
+                    <span className="font-semibold text-slate-900 dark:text-white">
                       {stats.average_score} ({stats.count} sessions)
                     </span>
                   </div>
                 ))
               ) : (
-                <p className="text-gray-500">No performance data yet.</p>
+                <p className="text-slate-500 dark:text-slate-400">No performance data yet.</p>
               )}
             </div>
           </div>

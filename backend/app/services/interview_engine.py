@@ -44,10 +44,10 @@ def _get_rag_context_for_interview(db: Session, session_id: int) -> str | None:
     """
     try:
         from app.services.rag_service import get_rag_context_for_session
-        context = get_rag_context_for_session(db, session_id)
-        if context:
+        context_text, _context_meta = get_rag_context_for_session(db, session_id)
+        if context_text:
             _engine_logger.debug("RAG context available for session_id=%s", session_id)
-        return context
+        return context_text
     except Exception:
         return None
 

@@ -3,7 +3,11 @@ import { ErrorResponse } from '@/types/api';
 
 // Use a function to get the URL to handle SSR properly
 const getBaseURL = () => {
-  return process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api/v1';
+  return (
+    process.env.NEXT_PUBLIC_API_URL ||
+    process.env.NEXT_PUBLIC_API_BASE ||
+    'http://127.0.0.1:8000/api/v1'
+  );
 };
 
 class APIClient {

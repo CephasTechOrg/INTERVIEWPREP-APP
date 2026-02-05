@@ -1,5 +1,4 @@
 import contextlib
-from urllib.parse import quote
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
@@ -162,35 +161,31 @@ def request_password_reset(payload: ResetRequest, request: Request, db: Session 
         # do not reveal existence
         return {"ok": True}
     token = set_reset_token(db, user)
-    reset_link = None
-    if settings.FRONTEND_URL:
-        base = settings.FRONTEND_URL.rstrip("/")
-        reset_link = f"{base}/login.html?view=reset&token={quote(token)}&email={quote(user.email)}"
     with contextlib.suppress(Exception):
         lines = [
-            "Use this token to reset your password:",
+            "Use this 6-digit code to reset your password:",
             "",
             token,
             "",
-            "Token expires in 30 minutes.",
+            "Code expires in 30 minutes.",
         ]
-        if reset_link:
-            lines.extend(["", "Or open this link:", reset_link])
         send_email(user.email, "Reset your password", "\n".join(lines))
     log_audit(db, "request_password_reset", user_id=user.id, metadata={"email": user.email}, request=request)
     resp: dict[str, str | bool] = {"ok": True}
     if settings.ENV == "dev":
         resp["token"] = token
-        if reset_link:
-            resp["reset_link"] = reset_link
     return resp
 
 
 @router.post("/reset-password")
 def perform_password_reset(payload: PerformResetRequest, request: Request, db: Session = Depends(get_db)):
     rate_limit(request, key=_rate_key(request, "reset", None), max_calls=6, window_sec=60)
-    user = reset_password(db, payload.token, payload.new_password)
+    email = payload.email.strip().lower()
+    code = (payload.token or "").strip()
+    if not code.isdigit() or len(code) != 6:
+        raise HTTPException(status_code=400, detail="Reset code must be 6 digits.")
+    user = reset_password(db, code, payload.new_password, email=email)
     if not user:
-        raise HTTPException(status_code=400, detail="Invalid or expired reset token.")
+        raise HTTPException(status_code=400, detail="Invalid or expired reset code.")
     log_audit(db, "reset_password", user_id=user.id, metadata={"email": user.email}, request=request)
     return {"ok": True}

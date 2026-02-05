@@ -13,6 +13,7 @@ export default function ForgotPasswordPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [redirecting, setRedirecting] = useState(false);
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -37,12 +38,26 @@ export default function ForgotPasswordPage() {
       setIsSubmitting(true);
       
       await authService.requestPasswordReset(trimmedEmail);
-      
-      setSuccess('If an account exists with this email, you will receive a password reset link.');
+
+      setSuccess('If an account exists with this email, you will receive a 6-digit reset code.');
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('reset_email', trimmedEmail);
+      }
+      setRedirecting(true);
+      setTimeout(() => {
+        router.push(`/reset-password?email=${encodeURIComponent(trimmedEmail)}`);
+      }, 1200);
     } catch (err: unknown) {
       console.error('Password reset request error:', err);
       // Don't reveal if email exists or not for security
-      setSuccess('If an account exists with this email, you will receive a password reset link.');
+      setSuccess('If an account exists with this email, you will receive a 6-digit reset code.');
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('reset_email', trimmedEmail);
+      }
+      setRedirecting(true);
+      setTimeout(() => {
+        router.push(`/reset-password?email=${encodeURIComponent(trimmedEmail)}`);
+      }, 1200);
     } finally {
       setIsSubmitting(false);
     }
@@ -71,7 +86,7 @@ export default function ForgotPasswordPage() {
         {/* Card */}
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/20">
           <h2 className="text-2xl font-bold text-white mb-2">Forgot Password</h2>
-          <p className="text-slate-300 mb-6">Enter your email to receive a reset link</p>
+          <p className="text-slate-300 mb-6">Enter your email to receive a 6-digit reset code</p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email */}
@@ -126,14 +141,31 @@ export default function ForgotPasswordPage() {
                     <span>Sending...</span>
                   </>
                 ) : (
-                  <span>Send Reset Link</span>
+                  <span>Send Reset Code</span>
                 )}
+              </button>
+            )}
+
+            {success && (
+              <button
+                type="button"
+                disabled={redirecting}
+                onClick={() => router.push(`/reset-password?email=${encodeURIComponent(email.trim().toLowerCase())}`)}
+                className="w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-3 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 border border-white/10"
+              >
+                {redirecting ? 'Opening reset form...' : 'Enter Reset Code'}
               </button>
             )}
           </form>
 
           {/* Links */}
           <div className="mt-6 pt-6 border-t border-white/10 text-center space-y-3">
+            <p className="text-slate-400 text-sm">
+              Already have a code?{' '}
+              <Link href="/reset-password" className="text-blue-400 font-medium hover:text-blue-300 transition-colors">
+                Reset now
+              </Link>
+            </p>
             <p className="text-slate-400 text-sm">
               Remember your password?{' '}
               <Link href="/login" className="text-blue-400 font-medium hover:text-blue-300 transition-colors">

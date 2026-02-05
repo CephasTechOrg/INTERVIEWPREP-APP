@@ -15,6 +15,7 @@ interface UIStore {
   sidebarOpen: boolean;
   theme: 'light' | 'dark';
   voiceEnabled: boolean;
+  voiceEnabledTouched: boolean;
 
   setCurrentPage: (page: CurrentPage) => void;
   setSidebarOpen: (open: boolean) => void;
@@ -29,16 +30,24 @@ export const useUIStore = create<UIStore>()(
       currentPage: 'dashboard',
       sidebarOpen: true,
       theme: 'light',
-      voiceEnabled: false,
+      voiceEnabled: true,
+      voiceEnabledTouched: false,
 
       setCurrentPage: (page) => set({ currentPage: page }),
       setSidebarOpen: (open) => set({ sidebarOpen: open }),
       toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
       setTheme: (theme) => set({ theme }),
-      setVoiceEnabled: (enabled) => set({ voiceEnabled: enabled }),
+      setVoiceEnabled: (enabled) => set({ voiceEnabled: enabled, voiceEnabledTouched: true }),
     }),
     {
       name: 'ui-store',
+      merge: (persisted, current) => {
+        const merged = { ...current, ...(persisted as object) } as UIStore;
+        if (!merged.voiceEnabledTouched) {
+          merged.voiceEnabled = true;
+        }
+        return merged;
+      },
       storage: {
         getItem: (name) => {
           if (typeof window === 'undefined') return null;

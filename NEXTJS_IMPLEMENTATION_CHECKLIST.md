@@ -16,7 +16,7 @@ npm install -D @types/node @types/react @types/react-dom
 Create `.env.local`:
 
 ```
-NEXT_PUBLIC_API_BASE=http://127.0.0.1:8000/api/v1
+NEXT_PUBLIC_API_URL=http://127.0.0.1:8000/api/v1
 NEXT_PUBLIC_APP_NAME=Interview Prep AI
 ```
 
@@ -32,7 +32,7 @@ NEXT_PUBLIC_APP_NAME=Interview Prep AI
 import { useAuthStore } from "@/lib/store/authStore";
 
 const API_BASE =
-  process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000/api/v1";
+  process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api/v1";
 
 class APIError extends Error {
   constructor(
@@ -514,7 +514,7 @@ export const aiService = {
     const parsedToken = token ? JSON.parse(token).state?.token : null;
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000/api/v1"}/tts`,
+      `${process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api/v1"}/tts`,
       {
         method: "POST",
         headers: {

@@ -20,10 +20,10 @@ def _get_rag_context_safe(db: Session, session_id: int) -> str | None:
     """Safely get RAG context, returning None if unavailable."""
     try:
         from app.services.rag_service import get_rag_context_for_session
-        context = get_rag_context_for_session(db, session_id)
-        if context:
-            logger.info("RAG context retrieved for session_id=%s (%d chars)", session_id, len(context))
-        return context
+        context_text, _context_meta = get_rag_context_for_session(db, session_id)
+        if context_text:
+            logger.info("RAG context retrieved for session_id=%s (%d chars)", session_id, len(context_text))
+        return context_text
     except Exception as e:
         logger.debug("RAG context unavailable for session_id=%s: %s", session_id, e)
         return None

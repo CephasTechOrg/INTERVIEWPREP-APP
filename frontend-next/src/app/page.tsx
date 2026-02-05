@@ -26,7 +26,7 @@ export default function Home() {
 
   if (!initialized) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-gray-600">
+      <div className="min-h-screen flex items-center justify-center text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-900 transition-colors">
         Loading...
       </div>
     );
@@ -34,7 +34,7 @@ export default function Home() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-gray-600">
+      <div className="min-h-screen flex items-center justify-center text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-900 transition-colors">
         Redirecting to login...
       </div>
     );
