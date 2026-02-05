@@ -2,7 +2,10 @@ import axios from 'axios';
 import { apiClient } from '@/lib/api';
 import { AIStatusResponse, AIChatRequest, AIChatResponse, TTSRequest, TTSResponse } from '@/types/api';
 
-const getBaseURL = () => process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api/v1';
+const getBaseURL = () =>
+  process.env.NEXT_PUBLIC_API_URL ||
+  process.env.NEXT_PUBLIC_API_BASE ||
+  'http://127.0.0.1:8000/api/v1';
 
 export const aiService = {
   async getStatus(): Promise<AIStatusResponse> {

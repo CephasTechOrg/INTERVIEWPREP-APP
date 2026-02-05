@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import { useSessionStore } from '@/lib/stores/sessionStore';
 import { useUIStore } from '@/lib/stores/uiStore';
 import { sessionService } from '@/lib/services/sessionService';
@@ -19,6 +19,18 @@ interface LoadingState {
   replaying: boolean;
 }
 
+type SpeechRecognitionInstance = {
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+  onresult: ((event: any) => void) | null;
+  onerror: ((event: any) => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+  abort: () => void;
+};
+
 export const InterviewSection = () => {
   const {
     currentSession,
@@ -29,7 +41,7 @@ export const InterviewSection = () => {
     setEvaluation,
     clearSession,
   } = useSessionStore();
-  const { setCurrentPage } = useUIStore();
+  const { setCurrentPage, voiceEnabled, setVoiceEnabled } = useUIStore();
 
   // State management
   const [inputMode, setInputMode] = useState<InputMode>('text');
@@ -42,20 +54,40 @@ export const InterviewSection = () => {
     ending: false,
     replaying: false,
   });
-  const [isChatExpanded, setIsChatExpanded] = useState(false);
-  const [isQuestionCollapsed, setIsQuestionCollapsed] = useState(false);
+  const [isLeftPanelCollapsed, setIsLeftPanelCollapsed] = useState(false);
+  const [isPageExpanded, setIsPageExpanded] = useState(false);
   const [aiStatus, setAiStatus] = useState<AIStatusResponse | null>(null);
   const [question, setQuestion] = useState<Question | null>(null);
   const [elapsedSec, setElapsedSec] = useState(0);
   const [localError, setLocalError] = useState<string | null>(null);
+  const [ttsProvider, setTtsProvider] = useState<string | null>(null);
+  const [voiceSupported, setVoiceSupported] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [voiceText, setVoiceText] = useState('');
+  const [voiceInterim, setVoiceInterim] = useState('');
+  const [audioUnlocked, setAudioUnlocked] = useState(false);
+  const [needsAudioUnlock, setNeedsAudioUnlock] = useState(false);
 
   const chatEndRef = useRef<HTMLDivElement | null>(null);
+  const messagesContainerRef = useRef<HTMLDivElement | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
+  const lastSpokenMessageIdRef = useRef<string | null>(null);
+  const startRequestedRef = useRef(false);
+
+  // Auto-resize textarea
+  const autoResizeTextarea = useCallback(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      const newHeight = Math.min(textareaRef.current.scrollHeight, 150);
+      textareaRef.current.style.height = `${Math.max(40, newHeight)}px`;
+    }
+  }, []);
 
   // Memoized: extract the latest question ID from messages
   const latestQuestionId = useMemo(() => {
     if (!currentSession) return null;
-    // Search backwards through messages for the latest question ID
     for (let i = messages.length - 1; i >= 0; i -= 1) {
       const qid = messages[i].current_question_id;
       if (qid) return qid;
@@ -72,27 +104,139 @@ export const InterviewSection = () => {
 
   // Auto-scroll chat to bottom when messages update
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages.length, isChatExpanded]);
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  }, [messages.length, isLeftPanelCollapsed]);
 
-  // Timer effect - increment elapsed seconds
+  // Auto-resize textarea when text changes
+  useEffect(() => {
+    autoResizeTextarea();
+  }, [messageText, codeText, autoResizeTextarea]);
+
+  // Timer effect
   useEffect(() => {
     if (!currentSession || currentSession.stage === 'done') {
       return;
     }
-
     const timer = setInterval(() => {
       setElapsedSec((prev) => prev + 1);
     }, 1000);
-
     return () => clearInterval(timer);
   }, [currentSession?.id, currentSession?.stage]);
 
   // Load AI status on mount
   useEffect(() => {
     loadAIStatus();
-    const statusInterval = setInterval(loadAIStatus, 30000); // Poll every 30s
+    const statusInterval = setInterval(loadAIStatus, 30000);
     return () => clearInterval(statusInterval);
+  }, []);
+
+  // Initialize speech recognition
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const SpeechRecognitionCtor =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognitionCtor) {
+      setVoiceSupported(false);
+      return;
+    }
+
+    const recognition: SpeechRecognitionInstance = new SpeechRecognitionCtor();
+    recognition.lang = 'en-US';
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    recognition.onresult = (event: any) => {
+      let finalText = '';
+      let interimText = '';
+
+      for (let i = event.resultIndex; i < event.results.length; i += 1) {
+        const result = event.results[i];
+        const transcript = result?.[0]?.transcript ?? '';
+        if (result.isFinal) {
+          finalText += transcript;
+        } else {
+          interimText += transcript;
+        }
+      }
+
+      if (finalText.trim()) {
+        setVoiceText((prev) => {
+          const trimmed = finalText.trim();
+          return prev ? `${prev} ${trimmed}` : trimmed;
+        });
+      }
+      setVoiceInterim(interimText.trim());
+    };
+
+    recognition.onerror = (event: any) => {
+      const message = event?.error ? `Voice error: ${event.error}` : 'Voice error';
+      setLocalError(message);
+      setIsListening(false);
+      setVoiceInterim('');
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+      setVoiceInterim('');
+    };
+
+    recognitionRef.current = recognition;
+    setVoiceSupported(true);
+
+    return () => {
+      recognitionRef.current?.abort();
+      recognitionRef.current = null;
+    };
+  }, []);
+
+  // Stop listening when leaving voice mode
+  useEffect(() => {
+    if (inputMode !== 'voice' && isListening) {
+      recognitionRef.current?.stop();
+    }
+  }, [inputMode, isListening]);
+
+  useEffect(() => {
+    if (currentSession?.stage === 'done' && isListening) {
+      recognitionRef.current?.stop();
+    }
+  }, [currentSession?.stage, isListening]);
+
+  // Prevent background scroll when expanded
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (isPageExpanded) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+    document.body.style.overflow = '';
+    return;
+  }, [isPageExpanded]);
+
+  // Unlock audio on first user interaction
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const unlock = () => {
+      setAudioUnlocked(true);
+      setNeedsAudioUnlock(false);
+      window.removeEventListener('pointerdown', unlock);
+      window.removeEventListener('keydown', unlock);
+      window.removeEventListener('touchstart', unlock);
+    };
+    window.addEventListener('pointerdown', unlock, { once: true });
+    window.addEventListener('keydown', unlock, { once: true });
+    window.addEventListener('touchstart', unlock, { once: true });
+    return () => {
+      window.removeEventListener('pointerdown', unlock);
+      window.removeEventListener('keydown', unlock);
+      window.removeEventListener('touchstart', unlock);
+    };
   }, []);
 
   // Load current question when latest question ID changes
@@ -100,10 +244,40 @@ export const InterviewSection = () => {
     loadCurrentQuestion();
   }, [latestQuestionId]);
 
-  /**
-   * Load session messages from backend
-   * If no messages exist, start the session
-   */
+  // Auto-play new interviewer messages
+  useEffect(() => {
+    if (loading.messages) return;
+    const lastAiMessage = [...messages].reverse().find((m) => m.role === 'interviewer');
+    if (!lastAiMessage) return;
+
+    const key =
+      typeof lastAiMessage.id === 'number'
+        ? `id:${lastAiMessage.id}`
+        : `ts:${lastAiMessage.created_at ?? ''}:${lastAiMessage.content}`;
+
+    if (!lastSpokenMessageIdRef.current) {
+      lastSpokenMessageIdRef.current = key;
+      if (voiceEnabled && messages.length <= 1) {
+        if (!audioUnlocked) {
+          setNeedsAudioUnlock(true);
+          return;
+        }
+        playTts(lastAiMessage.content);
+      }
+      return;
+    }
+
+    if (lastSpokenMessageIdRef.current === key) return;
+    lastSpokenMessageIdRef.current = key;
+
+    if (!voiceEnabled) return;
+    if (!audioUnlocked) {
+      setNeedsAudioUnlock(true);
+      return;
+    }
+    playTts(lastAiMessage.content);
+  }, [messages, voiceEnabled, loading.messages]);
+
   const loadMessages = async () => {
     if (!currentSession) return;
     try {
@@ -112,12 +286,17 @@ export const InterviewSection = () => {
       const result = await sessionService.getMessages(currentSession.id);
       setMessages(result);
 
-      // If no messages, start the session
       if (result.length === 0) {
+        if (startRequestedRef.current) return;
+        startRequestedRef.current = true;
         const firstMessage = await sessionService.startSession(currentSession.id);
         addMessage(firstMessage);
+        startRequestedRef.current = false;
+      } else {
+        startRequestedRef.current = false;
       }
     } catch (err) {
+      startRequestedRef.current = false;
       const errorMsg = err instanceof Error ? err.message : 'Failed to load messages';
       setLocalError(errorMsg);
       setError(errorMsg);
@@ -126,9 +305,6 @@ export const InterviewSection = () => {
     }
   };
 
-  /**
-   * Load AI service status
-   */
   const loadAIStatus = async () => {
     try {
       const status = await aiService.getStatus();
@@ -138,9 +314,6 @@ export const InterviewSection = () => {
     }
   };
 
-  /**
-   * Load the current question details
-   */
   const loadCurrentQuestion = async () => {
     if (!latestQuestionId) {
       setQuestion(null);
@@ -155,21 +328,16 @@ export const InterviewSection = () => {
     }
   };
 
-  /**
-   * Format elapsed time as MM:SS
-   */
   const formatTimer = (total: number) => {
     const minutes = Math.floor(total / 60).toString().padStart(2, '0');
     const seconds = (total % 60).toString().padStart(2, '0');
     return `${minutes}:${seconds}`;
   };
 
-  /**
-   * Build message payload based on input mode
-   * - text mode: plain text
-   * - code mode: markdown code block
-   * - voice mode: not implemented yet
-   */
+  const buildVoiceDraft = () => {
+    return [voiceText, voiceInterim].filter(Boolean).join(' ').trim();
+  };
+
   const buildMessagePayload = (): string => {
     if (inputMode === 'code') {
       const trimmed = codeText.trim();
@@ -177,49 +345,39 @@ export const InterviewSection = () => {
       return `\`\`\`\n${trimmed}\n\`\`\``;
     }
     if (inputMode === 'voice') {
-      return ''; // Not implemented yet
+      const draft = buildVoiceDraft();
+      return draft;
     }
     return messageText.trim();
   };
 
-  /**
-   * Send message to backend and add AI response to chat
-   */
-  const handleSendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!currentSession) return;
+  const handleSendMessage = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!currentSession || loading.sending) return;
 
-    const payload = buildMessagePayload();
-    if (!payload) {
-      setLocalError('Please enter a message');
-      return;
-    }
+    const content = buildMessagePayload();
+    if (!content) return;
+
+    const tempId = Date.now();
+    const studentMessage: Message = {
+      id: tempId,
+      session_id: currentSession.id,
+      role: 'student',
+      content,
+      created_at: new Date().toISOString(),
+    };
+
+    addMessage(studentMessage);
+    if (inputMode === 'code') setCodeText('');
+    else if (inputMode === 'voice') {
+      setVoiceText('');
+      setVoiceInterim('');
+    } else setMessageText('');
 
     try {
-      setLocalError(null);
       setLoading((prev) => ({ ...prev, sending: true }));
-
-      // Optimistically add user message to local state
-      const userMessage: Message = {
-        id: Date.now(), // Temporary ID
-        session_id: currentSession.id,
-        role: 'student',
-        content: payload,
-        created_at: new Date().toISOString(),
-      };
-      addMessage(userMessage);
-
-      // Send message to backend and get AI response
-      const response = await sessionService.sendMessage(currentSession.id, {
-        content: payload,
-      });
-
-      // Add AI response to local state
-      addMessage(response);
-
-      // Clear input fields
-      setMessageText('');
-      setCodeText('');
+      const reply = await sessionService.sendMessage(currentSession.id, { content });
+      addMessage(reply);
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Failed to send message';
       setLocalError(errorMsg);
@@ -229,18 +387,12 @@ export const InterviewSection = () => {
     }
   };
 
-  /**
-   * Finalize session and navigate to results
-   * This endpoint calls the scoring engine and creates evaluation
-   */
   const handleFinalize = async () => {
-    if (!currentSession) return;
+    if (!currentSession || loading.finalizing) return;
     try {
-      setLocalError(null);
       setLoading((prev) => ({ ...prev, finalizing: true }));
-
-      const result = await sessionService.finalizeSession(currentSession.id);
-      setEvaluation(result);
+      const evaluation = await sessionService.finalizeSession(currentSession.id);
+      setEvaluation(evaluation);
       setCurrentPage('results');
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Failed to finalize session';
@@ -251,16 +403,11 @@ export const InterviewSection = () => {
     }
   };
 
-  /**
-   * Delete session and return to dashboard
-   */
   const handleEndSession = async () => {
-    if (!currentSession) return;
+    if (!currentSession || loading.ending) return;
     try {
-      setLocalError(null);
       setLoading((prev) => ({ ...prev, ending: true }));
-
-      await sessionService.deleteSession(currentSession.id);
+      // Just clear the session and go back to dashboard
       clearSession();
       setCurrentPage('dashboard');
     } catch (err) {
@@ -272,69 +419,72 @@ export const InterviewSection = () => {
     }
   };
 
-  /**
-   * Replay the last AI message as speech (if TTS enabled)
-   */
-  const handleReplayLast = async () => {
-    const lastAiMessage = [...messages].reverse().find((m) => m.role === 'interviewer');
-    if (!lastAiMessage) {
-      setLocalError('No interviewer message to replay');
-      return;
-    }
-
+  const playTts = async (text: string) => {
+    if (!text?.trim()) return;
     try {
-      setLocalError(null);
-      setLoading((prev) => ({ ...prev, replaying: true }));
+      const response = await aiService.generateSpeech({ text });
+      
+      if (response.tts_provider) {
+        setTtsProvider(response.tts_provider);
+      }
 
-      const result = await aiService.generateSpeech({ text: lastAiMessage.content });
-
-      if (result.mode === 'audio' && result.audio_url) {
+      if (response.mode === 'audio' && response.audio_url) {
         if (!audioRef.current) {
           audioRef.current = new Audio();
         }
-        audioRef.current.src = result.audio_url;
-        audioRef.current.onerror = () => {
-          setLocalError('Failed to play audio');
-        };
+        audioRef.current.src = response.audio_url;
         await audioRef.current.play();
-      } else {
-        setLocalError('Audio not available');
       }
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Failed to replay audio';
-      setLocalError(errorMsg);
-    } finally {
-      setLoading((prev) => ({ ...prev, replaying: false }));
+      console.error('TTS playback error:', err);
     }
   };
 
-  /**
-   * Copy question text to clipboard
-   */
+  const handleReplayLast = async () => {
+    const lastAiMessage = [...messages].reverse().find((m) => m.role === 'interviewer');
+    if (!lastAiMessage) return;
+    setLoading((prev) => ({ ...prev, replaying: true }));
+    await playTts(lastAiMessage.content);
+    setLoading((prev) => ({ ...prev, replaying: false }));
+  };
+
+  const startListening = () => {
+    if (!recognitionRef.current || isListening) return;
+    try {
+      recognitionRef.current.start();
+      setIsListening(true);
+      setLocalError(null);
+    } catch (err) {
+      setLocalError('Failed to start voice recognition');
+    }
+  };
+
+  const stopListening = () => {
+    if (!recognitionRef.current || !isListening) return;
+    recognitionRef.current.stop();
+    setIsListening(false);
+  };
+
   const copyQuestion = async () => {
     if (!question) return;
     const text = `${question.title}\n\n${question.prompt}`;
     try {
       await navigator.clipboard.writeText(text);
-      // Brief visual feedback
-      setTimeout(() => {
-        setLocalError(null);
-      }, 2000);
     } catch (err) {
       setLocalError('Failed to copy question');
     }
   };
 
-  // If no active session, show empty state
+  // No active session state
   if (!currentSession) {
     return (
-      <div className="flex items-center justify-center min-h-full">
+      <div className="flex items-center justify-center h-full min-h-[400px]">
         <div className="text-center">
-          <div className="mx-auto w-16 h-16 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
+          <div className="mx-auto w-16 h-16 rounded-full bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
             {Icons.play}
           </div>
-          <p className="text-lg font-semibold text-gray-900">No Active Session</p>
-          <p className="text-sm text-gray-500 mt-2">
+          <p className="text-lg font-semibold text-slate-900 dark:text-white">No Active Session</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
             Start a new interview from the dashboard to begin.
           </p>
         </div>
@@ -342,357 +492,342 @@ export const InterviewSection = () => {
     );
   }
 
-  // Determine session status UI
   const statusColor =
     currentSession.stage === 'done'
-      ? 'bg-emerald-500/10 text-emerald-700'
+      ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400'
       : currentSession.stage === 'intro'
-        ? 'bg-blue-500/10 text-blue-700'
-        : 'bg-amber-500/10 text-amber-700';
+        ? 'bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-400'
+        : 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400';
 
   const aiStatusColor =
     aiStatus?.status === 'online'
-      ? 'bg-emerald-50 text-emerald-700'
+      ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400'
       : aiStatus?.status === 'offline'
-        ? 'bg-red-50 text-red-700'
-        : 'bg-gray-50 text-gray-600';
+        ? 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400'
+        : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400';
 
   const aiStatusDot =
     aiStatus?.status === 'online'
       ? 'bg-emerald-500'
       : aiStatus?.status === 'offline'
         ? 'bg-red-500'
-        : 'bg-gray-400';
+        : 'bg-slate-400';
+
+  const lastAiMessage = [...messages].reverse().find((m) => m.role === 'interviewer');
+
+  const containerClass = isPageExpanded
+    ? 'fixed inset-0 z-50 flex flex-col bg-slate-50 dark:bg-slate-900'
+    : 'flex flex-col h-[calc(100vh-8rem)] min-h-[500px] bg-slate-50 dark:bg-slate-900 -m-4 md:-m-6';
 
   return (
-    <div className="flex flex-col h-[calc(100dvh-8rem)] bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+    <div className={containerClass}>
       {/* Error Toast */}
       {localError && (
-        <div className="fixed top-4 right-4 z-50 bg-red-50 border border-red-200 rounded-lg p-4 shadow-lg animate-in fade-in slide-in-from-right">
-          <div className="flex items-start gap-3">
-            <div className="flex-shrink-0 w-5 h-5 text-red-600 mt-0.5">
-              {Icons.alertCircle}
-            </div>
-            <div className="flex-1">
-              <p className="text-sm font-medium text-red-900">{localError}</p>
-            </div>
-            <button
-              onClick={() => setLocalError(null)}
-              className="flex-shrink-0 text-red-600 hover:text-red-800"
-            >
-              {Icons.close}
-            </button>
+        <div className="fixed top-20 right-4 z-[60] bg-red-50 dark:bg-red-900/90 border border-red-200 dark:border-red-800 rounded-xl p-3 shadow-xl max-w-xs">
+          <div className="flex items-start gap-2">
+            <div className="flex-shrink-0 w-4 h-4 text-red-600 dark:text-red-400 mt-0.5">{Icons.alertCircle}</div>
+            <p className="text-sm text-red-900 dark:text-red-100 flex-1">{localError}</p>
+            <button onClick={() => setLocalError(null)} className="text-red-600 dark:text-red-400 hover:text-red-800">{Icons.close}</button>
           </div>
         </div>
       )}
 
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-3 sm:px-4 py-2 sm:py-3 shadow-sm flex-shrink-0">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-2 sm:gap-3">
-          {/* Session Info */}
-          <div className="flex-1 min-w-0 w-full lg:w-auto">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
-              <div className="flex-1 min-w-0">
-                <h1 className="text-lg sm:text-xl font-bold text-gray-900">Live Interview</h1>
-                <div className="flex items-center gap-2 mt-1 flex-wrap">
-                  <span className={`inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${statusColor}`}>
-                    <span className="w-2 h-2 rounded-full bg-current" />
-                    {currentSession.stage?.toUpperCase() || 'IDLE'}
-                  </span>
-                  <span className="text-xs sm:text-sm text-gray-600">{currentSession.role}</span>
-                  <span className="text-xs text-gray-400">•</span>
-                  <span className="text-xs sm:text-sm text-gray-600 capitalize">{currentSession.track?.replace(/_/g, ' ')}</span>
-                  <span className="text-xs text-gray-400">•</span>
-                  <span className="text-xs sm:text-sm text-gray-600 capitalize">{currentSession.difficulty}</span>
-                </div>
-              </div>
-
-              {/* Timer */}
-              <div className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 self-start sm:self-auto">
-                <div className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600">
-                  {Icons.clock}
-                </div>
-                <span className="font-mono font-bold text-blue-900 text-sm sm:text-base">{formatTimer(elapsedSec)}</span>
-              </div>
+      {/* Slim Top Header Bar */}
+      <div className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-3 py-2 flex-shrink-0">
+        <div className="flex items-center justify-between gap-3">
+          {/* Left: Title + Status + Timer */}
+          <div className="flex items-center gap-3 min-w-0">
+            <h1 className="text-base font-bold text-slate-900 dark:text-white">Interview</h1>
+            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold ${statusColor}`}>
+              <span className="w-1.5 h-1.5 rounded-full bg-current" />
+              {currentSession.stage?.toUpperCase() || 'IDLE'}
+            </span>
+            <div className="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-md bg-indigo-50 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300">
+              <div className="w-3.5 h-3.5">{Icons.clock}</div>
+              <span className="font-mono font-bold text-xs">{formatTimer(elapsedSec)}</span>
+            </div>
+            <div className="hidden md:flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+              <span>{currentSession.role}</span>
+              <span>•</span>
+              <span className="capitalize">{currentSession.difficulty}</span>
             </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex items-center gap-2 flex-wrap w-full lg:w-auto justify-start lg:justify-end">
+          {/* Right: Actions */}
+          <div className="flex items-center gap-1.5">
+            {needsAudioUnlock && voiceEnabled && (
+              <button
+                onClick={() => { setAudioUnlocked(true); setNeedsAudioUnlock(false); if (lastAiMessage) playTts(lastAiMessage.content); }}
+                className="px-2 py-1 rounded-md border border-amber-300 dark:border-amber-700 text-amber-700 dark:text-amber-400 text-xs hover:bg-amber-50 dark:hover:bg-amber-900/30"
+              >
+                Audio
+              </button>
+            )}
             <button
-              onClick={() => setIsChatExpanded(!isChatExpanded)}
-              disabled={loading.sending || loading.finalizing}
-              className="px-3 sm:px-4 py-2 rounded-lg border border-gray-300 text-gray-700 text-xs sm:text-sm font-medium hover:bg-gray-50 disabled:opacity-50 transition-colors flex items-center gap-1.5 sm:gap-2"
-              title={isChatExpanded ? 'Split view' : 'Focus on chat'}
+              onClick={() => setIsLeftPanelCollapsed(!isLeftPanelCollapsed)}
+              className="p-1.5 rounded-md border border-slate-200 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"
+              title={isLeftPanelCollapsed ? 'Show panel' : 'Hide panel'}
             >
-              <div className="w-4 h-4">
-                {isChatExpanded ? Icons.collapse : Icons.expand}
-              </div>
-              <span className="hidden sm:inline">{isChatExpanded ? 'Split View' : 'Focus Chat'}</span>
+              <div className="w-4 h-4">{isLeftPanelCollapsed ? Icons.expand : Icons.collapse}</div>
             </button>
-
+            <button
+              onClick={() => setIsPageExpanded(!isPageExpanded)}
+              className="p-1.5 rounded-md border border-slate-200 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"
+              title={isPageExpanded ? 'Exit fullscreen' : 'Fullscreen'}
+            >
+              <div className="w-4 h-4">{isPageExpanded ? Icons.minimize : Icons.maximize}</div>
+            </button>
             <button
               onClick={handleReplayLast}
               disabled={loading.replaying || messages.length === 0}
-              className="px-3 sm:px-4 py-2 rounded-lg border border-gray-300 text-gray-700 text-xs sm:text-sm font-medium hover:bg-gray-50 disabled:opacity-50 transition-colors"
+              className="px-2 py-1 rounded-md border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 text-xs hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-50"
             >
-              {loading.replaying ? 'Playing...' : 'Replay'}
+              Replay
             </button>
-
             <button
               onClick={handleEndSession}
               disabled={loading.ending}
-              className="px-3 sm:px-4 py-2 rounded-lg border border-red-300 text-red-600 text-xs sm:text-sm font-medium hover:bg-red-50 disabled:opacity-50 transition-colors"
+              className="px-2 py-1 rounded-md border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 text-xs hover:bg-red-50 dark:hover:bg-red-900/30 disabled:opacity-50"
             >
-              {loading.ending ? 'Ending...' : 'End'}
+              End
             </button>
-
-            <button
-              onClick={() => setCurrentPage('dashboard')}
-              className="px-3 sm:px-4 py-2 rounded-lg border border-gray-300 text-gray-700 text-xs sm:text-sm font-medium hover:bg-gray-50 transition-colors whitespace-nowrap"
-            >
-              New Session
-            </button>
-
             <button
               onClick={handleFinalize}
               disabled={loading.finalizing || currentSession.stage === 'done'}
-              className="px-3 sm:px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs sm:text-sm font-semibold hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 shadow-sm transition-colors whitespace-nowrap"
+              className="px-3 py-1 rounded-md bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold disabled:opacity-50"
             >
-              {loading.finalizing ? 'Evaluating...' : 'Submit & Evaluate'}
+              {loading.finalizing ? '...' : 'Submit & Evaluate'}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 overflow-hidden min-h-0 p-2 sm:p-3">
-        <div className={`grid gap-2 sm:gap-3 h-full ${isChatExpanded ? 'grid-cols-1' : 'grid-cols-1 lg:grid-cols-[minmax(200px,280px)_1fr]'}`} style={{ gridTemplateRows: '1fr' }}>
-          {/* Left Panel: Question Card (hidden in chat expanded mode) */}
-          {!isChatExpanded && (
-            <div className="flex flex-col gap-2 min-h-0 overflow-y-auto">
-              {/* Current Question Card */}
-              <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden flex flex-col flex-shrink-0">
-                <div className="flex items-center justify-between px-3 py-2 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
-                  <h3 className="text-xs font-semibold text-gray-900 flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-blue-500" />
-                    Question
-                  </h3>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={copyQuestion}
-                      disabled={!question}
-                      className="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded disabled:opacity-50 transition-colors"
-                      title="Copy question"
-                    >
-                      {Icons.copy}
-                    </button>
-                    <button
-                      onClick={() => setIsQuestionCollapsed(!isQuestionCollapsed)}
-                      className="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded transition-colors"
-                      title={isQuestionCollapsed ? 'Expand' : 'Collapse'}
-                    >
-                      {isQuestionCollapsed ? Icons.chevronDown : Icons.chevronUp}
-                    </button>
-                  </div>
-                </div>
-
-                {!isQuestionCollapsed && (
-                  <div className="px-3 py-2 space-y-2 overflow-y-auto max-h-60">
-                    {question ? (
-                      <>
-                        <div>
-                          <p className="text-xs font-bold text-gray-900">{question.title}</p>
-                          <p className="text-xs text-gray-500 mt-0.5 flex flex-wrap gap-1">
-                            <span>{question.company_style}</span>
-                            <span>•</span>
-                            <span className="capitalize">{question.difficulty}</span>
-                          </p>
-                        </div>
-                        <p className="text-xs text-gray-700 leading-relaxed whitespace-pre-wrap font-mono">{question.prompt}</p>
-                        {question.tags && question.tags.length > 0 && (
-                          <div className="flex flex-wrap gap-1 pt-1">
-                            {question.tags.map((tag) => (
-                              <span
-                                key={tag}
-                                className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs"
-                              >
-                                #{tag}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <div className="text-xs text-gray-500 text-center py-4">
-                        Question will appear here once the session starts.
+      {/* Main Content: Narrow Left Panel + Wide Chat */}
+      <div className="flex-1 flex min-h-0 overflow-hidden">
+        {/* Left Panel - Narrow (Question + Guide) */}
+        {!isLeftPanelCollapsed && (
+          <div className="w-56 xl:w-64 flex-shrink-0 border-r border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex flex-col overflow-hidden">
+            {/* Question Section */}
+            <div className="flex-1 overflow-y-auto p-3 space-y-3">
+              <div>
+                <h3 className="text-xs font-semibold text-slate-900 dark:text-white mb-2 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                  Question
+                </h3>
+                {question ? (
+                  <div className="space-y-2">
+                    <p className="text-xs font-medium text-slate-900 dark:text-white leading-snug">{question.title}</p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed whitespace-pre-wrap bg-slate-50 dark:bg-slate-900/50 rounded p-2 border border-slate-100 dark:border-slate-700 max-h-40 overflow-y-auto">
+                      {question.prompt}
+                    </p>
+                    {question.tags && question.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-1">
+                        {question.tags.slice(0, 3).map((tag) => (
+                          <span key={tag} className="px-1.5 py-0.5 rounded bg-indigo-50 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 text-[10px]">
+                            {tag}
+                          </span>
+                        ))}
                       </div>
                     )}
                   </div>
+                ) : (
+                  <p className="text-xs text-slate-500 dark:text-slate-400 italic">Waiting for question...</p>
                 )}
               </div>
 
-              {/* Answer Flow Guide Card */}
-              <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden flex flex-col flex-shrink-0">
-                <div className="px-3 py-2 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
-                  <h4 className="text-xs font-semibold text-gray-900">Answer Structure</h4>
-                </div>
-                <div className="p-2 space-y-1">
+              {/* Answer Guide - Compact */}
+              <div>
+                <h4 className="text-xs font-semibold text-slate-900 dark:text-white mb-2">Approach</h4>
+                <div className="space-y-1">
                   {[
-                    { id: 'plan', title: 'Plan', desc: 'Clarify requirements & constraints' },
-                    { id: 'solve', title: 'Solve', desc: 'Walk through solution approach' },
-                    { id: 'optimize', title: 'Optimize', desc: 'Discuss time/space tradeoffs' },
-                    { id: 'validate', title: 'Validate', desc: 'Test edge cases' },
-                  ].map((step, idx) => (
-                    <div
-                      key={step.id}
-                      className="flex gap-2 p-1.5 rounded-md bg-gradient-to-r from-gray-50 to-white border border-gray-100 hover:border-blue-200 transition-colors"
-                    >
-                      <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">
-                        {idx + 1}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-medium text-gray-900">{step.title}: <span className="font-normal text-gray-600">{step.desc}</span></p>
-                      </div>
+                    { n: 1, t: 'Plan', d: 'Clarify' },
+                    { n: 2, t: 'Solve', d: 'Approach' },
+                    { n: 3, t: 'Optimize', d: 'Tradeoffs' },
+                    { n: 4, t: 'Validate', d: 'Edge cases' },
+                  ].map((s) => (
+                    <div key={s.n} className="flex items-center gap-2 p-1.5 rounded bg-slate-50 dark:bg-slate-700/50 border border-slate-100 dark:border-slate-600">
+                      <div className="w-4 h-4 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0">{s.n}</div>
+                      <span className="text-[11px] text-slate-700 dark:text-slate-300"><span className="font-medium">{s.t}</span> - {s.d}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-          )}
 
-          {/* Right Panel: Chat */}
-          <div className="bg-white rounded-lg border border-gray-200 shadow-sm flex flex-col min-h-0 overflow-hidden">
-            {/* Chat Header */}
-            <div className="flex items-center justify-between px-3 py-2 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white flex-shrink-0">
-              <h3 className="text-xs font-semibold text-gray-900">Interview Chat</h3>
-              <div className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${aiStatusColor}`}>
-                <span className={`w-1.5 h-1.5 rounded-full ${aiStatusDot}`} />
-                {aiStatus?.status === 'online' ? 'Online' : aiStatus?.status === 'offline' ? 'Offline' : '...'}
-              </div>
+            {/* Voice Status - Bottom of left panel */}
+            <div className="p-2 border-t border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80">
+              <button
+                onClick={() => setVoiceEnabled(!voiceEnabled)}
+                className={`w-full flex items-center justify-center gap-1.5 px-2 py-1.5 rounded text-xs font-medium transition-colors ${
+                  voiceEnabled
+                    ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400'
+                    : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400'
+                }`}
+              >
+                <span className={`w-1.5 h-1.5 rounded-full ${voiceEnabled ? 'bg-emerald-500' : 'bg-slate-400'}`} />
+                Voice {voiceEnabled ? 'On' : 'Off'}
+              </button>
             </div>
+          </div>
+        )}
 
-            {/* Chat Messages */}
-            <div className="flex-1 overflow-y-auto p-2 sm:p-3 space-y-2 min-h-0">
-              {loading.messages ? (
-                <div className="flex items-center justify-center h-full">
-                  <div className="text-center">
-                    <div className="w-6 h-6 rounded-full border-2 border-blue-200 border-t-blue-600 animate-spin mx-auto mb-2" />
-                    <p className="text-xs text-gray-600">Loading...</p>
-                  </div>
+        {/* Chat Panel - Takes remaining space */}
+        <div className="flex-1 flex flex-col min-w-0 bg-slate-50 dark:bg-slate-900">
+          {/* AI Status Bar */}
+          <div className="px-3 py-1.5 border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-between">
+            <span className="text-xs text-slate-500 dark:text-slate-400">Conversation</span>
+            <div className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium ${aiStatusColor}`}>
+              <span className={`w-1 h-1 rounded-full ${aiStatusDot}`} />
+              {aiStatus?.status === 'online' ? 'Online' : aiStatus?.status === 'offline' ? 'Offline' : '...'}
+            </div>
+          </div>
+
+          {/* Messages Area - Maximum space */}
+          <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-3 md:p-4 space-y-3">
+            {loading.messages ? (
+              <div className="flex items-center justify-center h-full">
+                <div className="text-center">
+                  <div className="w-6 h-6 rounded-full border-2 border-indigo-200 dark:border-indigo-800 border-t-indigo-600 animate-spin mx-auto mb-2" />
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Loading...</p>
                 </div>
-              ) : messages.length === 0 ? (
-                <div className="flex items-center justify-center h-full">
-                  <div className="text-center">
-                    <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-2">
-                      {Icons.messageCircle}
-                    </div>
-                    <p className="text-xs text-gray-600">Waiting for interviewer...</p>
+              </div>
+            ) : messages.length === 0 ? (
+              <div className="flex items-center justify-center h-full">
+                <div className="text-center">
+                  <div className="w-10 h-10 rounded-full bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mx-auto mb-2">
+                    {Icons.messageCircle}
                   </div>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Waiting for interviewer...</p>
                 </div>
-              ) : (
-                messages.map((msg: Message) => (
-                  <div
-                    key={msg.id}
-                    className={`flex gap-1.5 ${msg.role === 'student' ? 'justify-end' : 'justify-start'}`}
-                  >
+              </div>
+            ) : (
+              <>
+                {messages.map((msg: Message) => (
+                  <div key={msg.id} className={`flex ${msg.role === 'student' ? 'justify-end' : 'justify-start'}`}>
                     <div
-                      className={`max-w-[90%] rounded-xl px-2.5 py-1.5 ${
+                      className={`max-w-[85%] lg:max-w-[75%] rounded-2xl px-3 py-2 ${
                         msg.role === 'student'
-                          ? 'bg-blue-600 text-white rounded-br-sm'
-                          : 'bg-gray-100 text-gray-900 rounded-bl-sm'
+                          ? 'bg-indigo-600 text-white rounded-br-sm'
+                          : 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-bl-sm'
                       }`}
                     >
-                      <p className="text-xs leading-relaxed whitespace-pre-wrap break-words">{msg.content}</p>
+                      <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{msg.content}</p>
                       {msg.created_at && (
-                        <p className={`text-xs mt-0.5 opacity-70`}>
-                          {new Date(msg.created_at).toLocaleTimeString([], {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          })}
+                        <p className={`text-[10px] mt-1.5 ${msg.role === 'student' ? 'text-indigo-200' : 'text-slate-400 dark:text-slate-500'}`}>
+                          {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </p>
                       )}
                     </div>
                   </div>
-                ))
-              )}
-              <div ref={chatEndRef} />
-            </div>
-
-            {/* Chat Input Form */}
-            <form onSubmit={handleSendMessage} className="border-t border-gray-100 p-2 sm:p-3 space-y-1.5 sm:space-y-2 bg-gradient-to-t from-gray-50 to-white flex-shrink-0">
-              {/* Input Mode Tabs */}
-              <div className="flex gap-1.5 sm:gap-2 flex-wrap">
-                {(['text', 'code', 'voice'] as InputMode[]).map((mode) => (
-                  <button
-                    key={mode}
-                    type="button"
-                    onClick={() => setInputMode(mode)}
-                    disabled={loading.sending || currentSession.stage === 'done'}
-                    className={`px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs font-medium rounded-full border transition-colors flex items-center gap-1 sm:gap-1.5 ${
-                      inputMode === mode
-                        ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
-                        : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300 disabled:opacity-50'
-                    }`}
-                  >
-                    {mode === 'text' ? (
-                      <>
-                        {Icons.pencil}
-                        <span>Text</span>
-                      </>
-                    ) : mode === 'code' ? (
-                      <>
-                        {Icons.code}
-                        <span>Code</span>
-                      </>
-                    ) : (
-                      <>
-                        {Icons.microphone}
-                        <span>Voice</span>
-                      </>
-                    )}
-                  </button>
                 ))}
-              </div>
+                <div ref={chatEndRef} />
+              </>
+            )}
+          </div>
 
-              {/* Input Area */}
-              {inputMode === 'code' ? (
-                <textarea
-                  value={codeText}
-                  onChange={(e) => setCodeText(e.target.value)}
-                  disabled={loading.sending || currentSession.stage === 'done'}
-                  rows={4}
-                  className="w-full px-3 py-2 rounded-lg border border-gray-300 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 resize-none"
-                  placeholder="Paste your code here..."
-                />
-              ) : inputMode === 'voice' ? (
-                <div className="p-3 sm:p-4 rounded-lg border-2 border-dashed border-gray-300 text-center text-xs sm:text-sm text-gray-500 bg-gray-50 flex items-center justify-center gap-2">
-                  {Icons.microphone}
-                  <span>Voice input coming soon. Please use text or code mode.</span>
+          {/* Compact Input Area */}
+          <div className="border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2 md:p-3">
+            <form onSubmit={handleSendMessage} className="flex flex-col gap-2">
+              {/* Mode tabs + Input in one row for text mode */}
+              <div className="flex items-end gap-2">
+                {/* Mode Tabs - Vertical on left */}
+                <div className="flex flex-col gap-1">
+                  {(['text', 'code', 'voice'] as InputMode[]).map((mode) => (
+                    <button
+                      key={mode}
+                      type="button"
+                      onClick={() => setInputMode(mode)}
+                      disabled={loading.sending || currentSession.stage === 'done' || (mode === 'voice' && !voiceSupported)}
+                      className={`p-1.5 rounded transition-all ${
+                        inputMode === mode
+                          ? 'bg-indigo-600 text-white'
+                          : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 disabled:opacity-50'
+                      }`}
+                      title={mode}
+                    >
+                      <div className="w-4 h-4">
+                        {mode === 'text' && Icons.pencil}
+                        {mode === 'code' && Icons.code}
+                        {mode === 'voice' && Icons.microphone}
+                      </div>
+                    </button>
+                  ))}
                 </div>
-              ) : (
-                <textarea
-                  value={messageText}
-                  onChange={(e) => setMessageText(e.target.value)}
-                  disabled={loading.sending || currentSession.stage === 'done'}
-                  rows={2}
-                  className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 resize-none"
-                  placeholder="Share your approach or ask clarifying questions..."
-                />
-              )}
 
-              {/* Submit Area */}
-              <div className="flex items-center justify-between gap-2 pt-1 sm:pt-2">
-                <p className="text-xs text-gray-500 items-center gap-1.5 hidden sm:flex">
-                  {Icons.lightBulb}
-                  <span>Plan → Solve → Optimize → Validate</span>
-                </p>
+                {/* Input Area - Grows */}
+                <div className="flex-1 min-w-0">
+                  {inputMode === 'code' ? (
+                    <textarea
+                      ref={textareaRef}
+                      value={codeText}
+                      onChange={(e) => setCodeText(e.target.value)}
+                      disabled={loading.sending || currentSession.stage === 'done'}
+                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 resize-none"
+                      placeholder="Code..."
+                      style={{ minHeight: '40px', maxHeight: '120px' }}
+                    />
+                  ) : inputMode === 'voice' ? (
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={isListening ? stopListening : startListening}
+                        disabled={!voiceSupported || currentSession.stage === 'done' || loading.sending}
+                        className={`px-3 py-2 rounded-lg text-xs font-medium border flex items-center gap-1.5 ${
+                          isListening
+                            ? 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-red-200 dark:border-red-800'
+                            : 'bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-600'
+                        }`}
+                      >
+                        <span className={`w-2 h-2 rounded-full ${isListening ? 'bg-red-500 animate-pulse' : 'bg-slate-400'}`} />
+                        {isListening ? 'Stop' : 'Record'}
+                      </button>
+                      <input
+                        type="text"
+                        value={voiceText}
+                        onChange={(e) => setVoiceText(e.target.value)}
+                        className="flex-1 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder={voiceInterim || 'Speak or type...'}
+                      />
+                    </div>
+                  ) : (
+                    <textarea
+                      ref={textareaRef}
+                      value={messageText}
+                      onChange={(e) => setMessageText(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                          e.preventDefault();
+                          handleSendMessage();
+                        }
+                      }}
+                      disabled={loading.sending || currentSession.stage === 'done'}
+                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 resize-none"
+                      placeholder="Type your response... (Enter to send)"
+                      style={{ minHeight: '40px', maxHeight: '120px' }}
+                    />
+                  )}
+                </div>
+
+                {/* Send Button */}
                 <button
                   type="submit"
-                  disabled={loading.sending || currentSession.stage === 'done' || (!messageText.trim() && !codeText.trim())}
-                  className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-semibold hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 shadow-sm transition-colors ml-auto"
+                  disabled={
+                    loading.sending ||
+                    currentSession.stage === 'done' ||
+                    (inputMode === 'code' ? !codeText.trim() : inputMode === 'voice' ? !buildVoiceDraft() : !messageText.trim())
+                  }
+                  className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold disabled:opacity-50 shadow-sm transition-all flex items-center gap-1.5 h-[40px]"
                 >
-                  {loading.sending ? 'Sending...' : 'Send'}
+                  {loading.sending ? (
+                    <div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                  ) : (
+                    <>
+                      Send
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
+                    </>
+                  )}
                 </button>
               </div>
             </form>

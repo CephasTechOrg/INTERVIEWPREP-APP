@@ -47,6 +47,7 @@ export interface ResetPasswordRequest {
 }
 
 export interface PerformResetRequest {
+  email: string;
   token: string;
   new_password: string;
 }

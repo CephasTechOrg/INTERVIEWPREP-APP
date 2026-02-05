@@ -104,10 +104,11 @@ export const authService = {
   /**
    * Perform password reset with token
    */
-  async resetPassword(token: string, newPassword: string): Promise<{ ok: boolean; message?: string }> {
-    return apiClient.post('/auth/reset-password', { 
-      token, 
-      new_password: newPassword 
+  async resetPassword(email: string, code: string, newPassword: string): Promise<{ ok: boolean; message?: string }> {
+    return apiClient.post('/auth/reset-password', {
+      email,
+      token: code,
+      new_password: newPassword,
     });
   },
 

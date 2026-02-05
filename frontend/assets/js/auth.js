@@ -42,7 +42,7 @@ async function handleSignup(e) {
     setNotice("#signup_notice", data?.message || "Verification code sent. Check your email.", "ok");
     if (qs("#ver_email")) qs("#ver_email").value = email;
     showView("verify");
-    focusVerificationInputs();
+    focusCodeInputs("#verifyCodeInputs");
   } catch (err) {
     setNotice("#signup_notice", err.message, "error");
   }
@@ -179,7 +179,8 @@ function showView(viewName) {
     const index = viewName === "signup" ? 1 : 0;
     indicator.style.transform = `translateX(${index * 100}%)`;
   }
-  if (viewName === "verify") focusVerificationInputs();
+  if (viewName === "verify") focusCodeInputs("#verifyCodeInputs");
+  if (viewName === "reset") focusCodeInputs("#resetCodeInputs");
 }
 
 function showLoginOverlay(show = true) {
@@ -188,19 +189,31 @@ function showLoginOverlay(show = true) {
   overlay.classList.toggle("hidden", !show);
 }
 
-function focusVerificationInputs() {
-  const first = qs("#verifyCodeInputs .code-input");
+function focusCodeInputs(containerSelector) {
+  const first = qs(`${containerSelector} .code-input`);
   if (first) first.focus();
 }
 
-function readVerificationCode() {
-  const inputs = qsa("#verifyCodeInputs .code-input");
+function readCodeFrom(containerSelector) {
+  const inputs = qsa(`${containerSelector} .code-input`);
   if (!inputs.length) return "";
   return inputs.map((i) => (i.value || "").trim()).join("").replace(/\D/g, "");
 }
 
-function setupVerificationInputs() {
-  const inputs = qsa("#verifyCodeInputs .code-input");
+function fillCodeInputs(containerSelector, value) {
+  const inputs = qsa(`${containerSelector} .code-input`);
+  if (!inputs.length) return;
+  const digits = String(value || "").replace(/\D/g, "").slice(0, inputs.length);
+  if (!digits) return;
+  for (let i = 0; i < inputs.length; i += 1) {
+    inputs[i].value = digits[i] || "";
+  }
+  const focusIdx = Math.min(digits.length, inputs.length) - 1;
+  if (focusIdx >= 0) inputs[focusIdx].focus();
+}
+
+function setupCodeInputs(containerSelector) {
+  const inputs = qsa(`${containerSelector} .code-input`);
   if (!inputs.length) return;
 
   const fillFrom = (start, digits) => {
@@ -255,7 +268,7 @@ function setupVerificationInputs() {
 async function handleVerify(e) {
   e.preventDefault();
   const email = qs("#ver_email")?.value.trim();
-  const code = readVerificationCode();
+  const code = readCodeFrom("#verifyCodeInputs");
   if (!email) {
     setNotice("#verify_notice", "Enter your email first.", "error");
     return;
@@ -302,14 +315,17 @@ async function handleResetRequest(e) {
   setNotice("#reset_request_notice", "Requesting reset...", "");
   try {
     const data = await apiFetch("/auth/request-password-reset", { method: "POST", auth: false, body: { email } });
-    const tokenEl = qs("#rp_token");
-    if (data?.token && tokenEl && !tokenEl.value) {
-      tokenEl.value = data.token;
+    if (qs("#rp_email_reset") && !qs("#rp_email_reset").value) {
+      qs("#rp_email_reset").value = email;
+    }
+    if (data?.token) {
+      fillCodeInputs("#resetCodeInputs", data.token);
     }
     const msg = data?.token
-      ? "Reset token ready. Enter a new password below."
-      : "If the email exists, a reset token was sent (or printed in console).";
+      ? "Reset code ready. Enter a new password below."
+      : "If the email exists, a reset code was sent (or printed in console).";
     setNotice("#reset_request_notice", msg, "ok");
+    focusCodeInputs("#resetCodeInputs");
   } catch (err) {
     setNotice("#reset_request_notice", err.message, "error");
   }
@@ -317,12 +333,21 @@ async function handleResetRequest(e) {
 
 async function handleReset(e) {
   e.preventDefault();
-  const token = qs("#rp_token")?.value.trim();
+  const email = (qs("#rp_email_reset")?.value || qs("#rp_email")?.value || "").trim();
+  const code = readCodeFrom("#resetCodeInputs");
   const new_password = qs("#rp_new_password")?.value.trim();
-  if (!token || !new_password) return;
+  if (!email) {
+    setNotice("#reset_notice", "Enter your email first.", "error");
+    return;
+  }
+  if (code.length !== 6) {
+    setNotice("#reset_notice", "Enter the 6-digit reset code.", "error");
+    return;
+  }
+  if (!new_password) return;
   setNotice("#reset_notice", "Resetting...", "");
   try {
-    await apiFetch("/auth/reset-password", { method: "POST", auth: false, body: { token, new_password } });
+    await apiFetch("/auth/reset-password", { method: "POST", auth: false, body: { email, token: code, new_password } });
     setNotice("#reset_notice", "Password reset. You can now sign in.", "ok");
   } catch (err) {
     setNotice("#reset_notice", err.message, "error");
@@ -362,7 +387,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const resetReqForm = qs("#reset_request_form");
   const resetForm = qs("#reset_form");
 
-  setupVerificationInputs();
+  setupCodeInputs("#verifyCodeInputs");
+  setupCodeInputs("#resetCodeInputs");
 
   if (suForm) suForm.addEventListener("submit", handleSignup);
   if (liForm) liForm.addEventListener("submit", handleLogin);
@@ -374,7 +400,9 @@ document.addEventListener("DOMContentLoaded", () => {
   qs("#link_forgot")?.addEventListener("click", () => {
     const email = qs("#li_email")?.value || "";
     if (email) qs("#rp_email").value = email;
+    if (email && qs("#rp_email_reset")) qs("#rp_email_reset").value = email;
     showView("reset");
+    focusCodeInputs("#resetCodeInputs");
   });
   qs("#link_verify")?.addEventListener("click", () => {
     const email = qs("#li_email")?.value || "";
@@ -418,13 +446,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (requestedView === "verify") {
     if (qs("#ver_email") && lastEmail) qs("#ver_email").value = lastEmail;
     showView("verify");
-    focusVerificationInputs();
+    focusCodeInputs("#verifyCodeInputs");
     return;
   }
   if (requestedView === "reset" || tokenParam) {
     if (qs("#rp_email")) qs("#rp_email").value = emailParam || lastEmail;
-    if (qs("#rp_token") && tokenParam) qs("#rp_token").value = tokenParam;
+    if (qs("#rp_email_reset")) qs("#rp_email_reset").value = emailParam || lastEmail;
+    if (tokenParam) fillCodeInputs("#resetCodeInputs", tokenParam);
     showView("reset");
+    focusCodeInputs("#resetCodeInputs");
     return;
   }
 });

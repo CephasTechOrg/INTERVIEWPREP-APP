@@ -1,23 +1,24 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { authService } from '@/lib/services/authService';
 import { useAuthStore } from '@/lib/stores/authStore';
 
-function ResetPasswordForm() {
+export default function ResetPasswordPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isAuthenticated, isHydrated } = useAuthStore();
+  const [email, setEmail] = useState('');
+  const [code, setCode] = useState(['', '', '', '', '', '']);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
-  const token = searchParams.get('token');
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -26,16 +27,58 @@ function ResetPasswordForm() {
     }
   }, [isHydrated, isAuthenticated, router]);
 
-  // Check for token on mount
+  // Prefill email from query or localStorage
   useEffect(() => {
-    if (isHydrated && !token) {
-      setError('Invalid or missing reset token. Please request a new password reset.');
+    const emailParam = searchParams.get('email');
+    if (emailParam) {
+      setEmail(emailParam);
+      return;
     }
-  }, [isHydrated, token]);
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('reset_email');
+      if (stored) setEmail(stored);
+    }
+  }, [searchParams]);
 
   const validatePassword = (pwd: string): string | null => {
     if (pwd.length < 8) return 'Password must be at least 8 characters.';
     return null;
+  };
+
+  const handleCodeChange = (index: number, value: string) => {
+    const digit = value.replace(/\D/g, '').slice(-1);
+    const newCode = [...code];
+    newCode[index] = digit;
+    setCode(newCode);
+    if (digit && index < 5) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
+    if (e.key === 'Backspace' && !code[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+    if (e.key === 'ArrowLeft' && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+    if (e.key === 'ArrowRight' && index < 5) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handlePaste = (e: React.ClipboardEvent) => {
+    e.preventDefault();
+    const pasted = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
+    if (pasted) {
+      const newCode = [...code];
+      for (let i = 0; i < pasted.length; i++) {
+        newCode[i] = pasted[i];
+      }
+      setCode(newCode);
+      const focusIndex = Math.min(pasted.length, 5);
+      inputRefs.current[focusIndex]?.focus();
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -43,13 +86,20 @@ function ResetPasswordForm() {
     setError(null);
     setSuccess(null);
 
-    if (!token) {
-      setError('Invalid reset token. Please request a new password reset.');
+    const trimmedEmail = email.trim().toLowerCase();
+    const fullCode = code.join('');
+    const trimmedPassword = password.trim();
+    const trimmedConfirm = confirmPassword.trim();
+
+    if (!trimmedEmail) {
+      setError('Please enter your email address.');
       return;
     }
 
-    const trimmedPassword = password.trim();
-    const trimmedConfirm = confirmPassword.trim();
+    if (fullCode.length !== 6) {
+      setError('Please enter the complete 6-digit reset code.');
+      return;
+    }
 
     if (!trimmedPassword || !trimmedConfirm) {
       setError('Please enter and confirm your new password.');
@@ -69,22 +119,17 @@ function ResetPasswordForm() {
 
     try {
       setIsSubmitting(true);
-      
-      await authService.resetPassword(token, trimmedPassword);
-      
+      await authService.resetPassword(trimmedEmail, fullCode, trimmedPassword);
       setSuccess('Password reset successfully! Redirecting to login...');
-      
       setTimeout(() => router.push('/login'), 2000);
     } catch (err: unknown) {
-      console.error('Password reset error:', err);
       const errorObj = err as { message?: string };
-      setError(errorObj?.message || 'Failed to reset password. The token may be expired.');
+      setError(errorObj?.message || 'Failed to reset password. The code may be expired.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Don't render until hydrated
   if (!isHydrated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
@@ -96,7 +141,6 @@ function ResetPasswordForm() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Logo */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">
             Interview Prep <span className="text-blue-400">AI</span>
@@ -104,13 +148,48 @@ function ResetPasswordForm() {
           <p className="text-slate-400">Master your next technical interview</p>
         </div>
 
-        {/* Card */}
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/20">
           <h2 className="text-2xl font-bold text-white mb-2">Reset Password</h2>
-          <p className="text-slate-300 mb-6">Enter your new password</p>
+          <p className="text-slate-300 mb-6">Enter the 6-digit code and your new password</p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* New Password */}
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                placeholder="you@example.com"
+                autoComplete="email"
+                disabled={isSubmitting || !!success}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-3">
+                Reset Code
+              </label>
+              <div className="flex gap-2 justify-center" onPaste={handlePaste}>
+                {code.map((digit, index) => (
+                  <input
+                    key={index}
+                    ref={(el) => { inputRefs.current[index] = el; }}
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={1}
+                    value={digit}
+                    onChange={(e) => handleCodeChange(index, e.target.value)}
+                    onKeyDown={(e) => handleKeyDown(index, e)}
+                    className="w-12 h-14 text-center text-xl font-bold bg-white/5 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    disabled={isSubmitting || !!success}
+                  />
+                ))}
+              </div>
+            </div>
+
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
                 New Password
@@ -121,7 +200,7 @@ function ResetPasswordForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all pr-12"
-                  placeholder="••••••••"
+                  placeholder="Min 8 characters"
                   autoComplete="new-password"
                   disabled={isSubmitting || !!success}
                 />
@@ -145,7 +224,6 @@ function ResetPasswordForm() {
               <p className="mt-2 text-xs text-slate-500">Must be at least 8 characters</p>
             </div>
 
-            {/* Confirm Password */}
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
                 Confirm Password
@@ -155,13 +233,12 @@ function ResetPasswordForm() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                placeholder="••••••••"
+                placeholder="Confirm password"
                 autoComplete="new-password"
                 disabled={isSubmitting || !!success}
               />
             </div>
 
-            {/* Error Message */}
             {error && (
               <div className="bg-red-500/20 border border-red-500/50 text-red-200 text-sm p-4 rounded-xl flex items-start gap-3">
                 <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,7 +248,6 @@ function ResetPasswordForm() {
               </div>
             )}
 
-            {/* Success Message */}
             {success && (
               <div className="bg-green-500/20 border border-green-500/50 text-green-200 text-sm p-4 rounded-xl flex items-start gap-3">
                 <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -181,8 +257,7 @@ function ResetPasswordForm() {
               </div>
             )}
 
-            {/* Submit Button */}
-            {!success && token && (
+            {!success && (
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -201,20 +276,15 @@ function ResetPasswordForm() {
                 )}
               </button>
             )}
-
-            {/* Request new reset if no token */}
-            {!token && (
-              <Link
-                href="/forgot-password"
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-blue-600/25"
-              >
-                Request Password Reset
-              </Link>
-            )}
           </form>
 
-          {/* Links */}
           <div className="mt-6 pt-6 border-t border-white/10 text-center space-y-3">
+            <p className="text-slate-400 text-sm">
+              Need a reset code?{' '}
+              <Link href="/forgot-password" className="text-blue-400 font-medium hover:text-blue-300 transition-colors">
+                Request a code
+              </Link>
+            </p>
             <p className="text-slate-400 text-sm">
               Remember your password?{' '}
               <Link href="/login" className="text-blue-400 font-medium hover:text-blue-300 transition-colors">
@@ -225,17 +295,5 @@ function ResetPasswordForm() {
         </div>
       </div>
     </div>
-  );
-}
-
-export default function ResetPasswordPage() {
-  return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <div className="animate-pulse text-white">Loading...</div>
-      </div>
-    }>
-      <ResetPasswordForm />
-    </Suspense>
   );
 }

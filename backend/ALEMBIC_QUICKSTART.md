@@ -1,32 +1,31 @@
 # Alembic Quick Start Guide
 
-## First Time Setup
+## First-Time Setup
 
-### 1. Ensure Database is Running
+### 1. Ensure database is running
+
 ```bash
 docker-compose up -d
 ```
 
-### 2. Install Dependencies (if not already done)
+### 2. Install backend dependencies
+
 ```bash
 cd backend
 pip install -r requirements.txt
 ```
 
-### 3. Initialize Migrations (Automated)
+### 3. Initialize migrations (automated)
+
 ```bash
 cd backend
 python scripts/init_migrations.py
 ```
 
-This script will:
-- ✅ Check database connection
-- ✅ Verify Alembic installation
-- ✅ Create initial migration
-- ✅ Optionally apply the migration
-- ✅ Verify the setup
+This helper script checks DB connectivity, verifies Alembic, creates the initial migration (if needed), and can apply it.
 
-### 4. Manual Initialization (Alternative)
+### 4. Manual initialization (alternative)
+
 ```bash
 cd backend
 
@@ -44,45 +43,24 @@ alembic current
 
 ## Daily Workflow
 
-### Making Schema Changes
+1. Modify SQLAlchemy models in `app/models/`.
+2. Generate migration:
 
-1. **Modify your models** in `app/models/`
-   ```python
-   # Example: Add a new column
-   class User(Base):
-       __tablename__ = "users"
-       # ... existing columns ...
-       new_field = Column(String(100), nullable=True)
-   ```
+```bash
+cd backend
+alembic revision --autogenerate -m "describe change"
+```
 
-2. **Generate migration**
-   ```bash
-   cd backend
-   alembic revision --autogenerate -m "add new_field to users"
-   ```
+3. Review generated `upgrade()` and `downgrade()` in `alembic/versions/`.
+4. Test upgrade and rollback:
 
-3. **Review the migration** in `alembic/versions/`
-   - Check the upgrade() function
-   - Check the downgrade() function
-   - Edit if needed (Alembic doesn't catch everything)
+```bash
+alembic upgrade head
+alembic downgrade -1
+alembic upgrade head
+```
 
-4. **Test the migration**
-   ```bash
-   # Apply
-   alembic upgrade head
-
-   # Test rollback
-   alembic downgrade -1
-
-   # Re-apply
-   alembic upgrade head
-   ```
-
-5. **Commit to git**
-   ```bash
-   git add alembic/versions/*.py
-   git commit -m "Add new_field to users table"
-   ```
+5. Commit migration file(s) with related model changes.
 
 ## Common Commands
 
@@ -96,66 +74,67 @@ alembic history
 # Apply all pending migrations
 alembic upgrade head
 
-# Rollback one migration
+# Roll back one migration
 alembic downgrade -1
 
-# Rollback to specific revision
+# Roll back to a specific revision
 alembic downgrade <revision_id>
 
-# Create empty migration (for data changes)
+# Create empty migration (e.g. data migration)
 alembic revision -m "seed default data"
 ```
 
 ## Troubleshooting
 
 ### "Can't locate revision"
-```bash
-# Check if migration files exist
-ls alembic/versions/
 
-# If missing, restore from git or regenerate
+```bash
+ls alembic/versions/
 ```
 
-### "Target database is not up to date"
-```bash
-# Check current state
-alembic current
+If files are missing, restore from git.
 
-# If migrations were applied manually, stamp the database
+### "Target database is not up to date"
+
+```bash
+alembic current
+alembic upgrade head
+```
+
+If schema was modified manually and you need to align revision markers:
+
+```bash
 alembic stamp head
 ```
 
 ### "No changes detected"
+
+- Ensure your model edits are saved.
+- Ensure models are imported by `backend/alembic/env.py`.
+- Retry with:
+
 ```bash
-# Ensure models are imported in alembic/env.py
-# Check that your model changes are saved
-# Try: alembic revision --autogenerate -m "test" --verbose
+alembic revision --autogenerate -m "test" --verbose
 ```
 
 ## Best Practices
 
-✅ **DO:**
-- Review generated migrations before applying
-- Test rollbacks before committing
-- Keep migrations small and focused
-- Use descriptive migration messages
-- Commit migration files to git
+Do:
+- Review generated migrations before applying.
+- Test both upgrade and downgrade locally.
+- Keep migrations small and focused.
+- Use descriptive migration messages.
+- Commit migration files to git.
 
-❌ **DON'T:**
-- Edit already-applied migrations
-- Skip reviewing auto-generated migrations
-- Apply untested migrations to production
-- Delete migration files
-- Manually modify the database schema
+Do not:
+- Edit already-applied migrations.
+- Skip migration review.
+- Apply untested migrations to production.
+- Delete committed migration files.
+- Modify schema manually without migration tracking.
 
-## Next Steps
+## More Documentation
 
-- Read the full guide: `MIGRATIONS.md`
-- Understand the configuration: `alembic.ini` and `alembic/env.py`
-- Learn about data migrations and advanced scenarios
-
-## Need Help?
-
-- Full documentation: `backend/MIGRATIONS.md`
+- Full migration guide: `backend/MIGRATIONS.md`
 - Alembic docs: https://alembic.sqlalchemy.org/
-- Project README: `../README
+- Project setup: `README.md`

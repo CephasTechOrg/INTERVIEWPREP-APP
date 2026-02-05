@@ -33,6 +33,8 @@ class Settings(BaseSettings):
     SMTP_PASSWORD: str | None = None
     SMTP_FROM: str | None = None
     SMTP_TLS: bool = True
+    SENDGRID_API_KEY: str | None = None
+    FROM_EMAIL: str | None = None
 
 
 settings = Settings()
