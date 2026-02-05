@@ -67,7 +67,7 @@ const normalizeRoleValue = (rawRole?: string | null): string => {
 export const DashboardSection = () => {
   const { setCurrentSession, setLoading, setError } = useSessionStore();
   const { user } = useAuthStore();
-  const { setCurrentPage } = useUIStore();
+  const { setCurrentPage, setVoiceEnabled } = useUIStore();
   const [sessions, setSessions] = useState<SessionSummary[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   
@@ -175,6 +175,7 @@ export const DashboardSection = () => {
     try {
       setIsStarting(true);
       setLoading(true);
+      setVoiceEnabled(true);
       const session = await sessionService.createSession({
         role,
         track,
