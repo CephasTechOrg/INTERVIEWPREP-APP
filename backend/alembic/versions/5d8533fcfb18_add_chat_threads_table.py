@@ -28,7 +28,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_chat_threads_user_id'), 'chat_threads', ['user_id'], unique=False)
-    op.drop_index(op.f('ix_audit_logs_action'), table_name='audit_logs')
+    op.execute(sa.text("DROP INDEX IF EXISTS ix_audit_logs_action"))
     op.alter_column('interview_sessions', 'difficulty_current',
                existing_type=sa.VARCHAR(length=20),
                server_default=None,
