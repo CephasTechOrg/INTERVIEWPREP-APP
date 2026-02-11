@@ -1,8 +1,142 @@
 ﻿{
-    "difficulty":  "hard",
-    "questions":  [
-
-                  ],
-    "company_style":  "general",
-    "track":  "data_science"
+    "difficulty": "hard",
+    "questions": [
+        {
+            "title": "Attention Mechanism in Transformers",
+            "prompt": "Explain the attention mechanism in transformers and how it differs from RNN/LSTM architectures.",
+            "tags": ["deep-learning", "nlp", "transformers"],
+            "followups": [
+                "What is self-attention and how is it computed?",
+                "Why does attention help with long-range dependencies?"
+            ]
+        },
+        {
+            "title": "GAN Architecture",
+            "prompt": "Explain how Generative Adversarial Networks work and the training dynamics between generator and discriminator.",
+            "tags": ["deep-learning", "generative-models"],
+            "followups": [
+                "What are common failure modes in GAN training?",
+                "How do techniques like WGAN or StyleGAN improve upon basic GANs?"
+            ]
+        },
+        {
+            "title": "Causal Inference Methods",
+            "prompt": "Explain methods for causal inference beyond correlation (propensity score matching, instrumental variables, difference-in-differences).",
+            "tags": ["causality", "statistics"],
+            "followups": [
+                "What are the assumptions behind propensity score matching?",
+                "How do you validate causal inference results?"
+            ]
+        },
+        {
+            "title": "Bayesian Neural Networks",
+            "prompt": "Explain how Bayesian neural networks differ from traditional neural networks and their advantages.",
+            "tags": ["bayesian", "deep-learning", "uncertainty"],
+            "followups": [
+                "How does variational inference work in Bayesian neural networks?",
+                "What are the computational challenges with Bayesian approaches?"
+            ]
+        },
+        {
+            "title": "Reinforcement Learning Algorithms",
+            "prompt": "Compare Q-learning, policy gradients, and actor-critic methods in reinforcement learning.",
+            "tags": ["reinforcement-learning", "algorithms"],
+            "followups": [
+                "What is the exploration-exploitation tradeoff?",
+                "How does experience replay work in deep Q-networks?"
+            ]
+        },
+        {
+            "title": "Graph Neural Networks",
+            "prompt": "Explain how graph neural networks operate and their applications.",
+            "tags": ["deep-learning", "graph-ml"],
+            "followups": [
+                "How do message passing algorithms work in GNNs?",
+                "What are some challenges with scaling GNNs to large graphs?"
+            ]
+        },
+        {
+            "title": "Multi-Armed Bandit Problems",
+            "prompt": "Explain the multi-armed bandit problem and compare different solution strategies.",
+            "tags": ["reinforcement-learning", "optimization"],
+            "followups": [
+                "How do contextual bandits extend the basic bandit problem?",
+                "When would you use bandits instead of A/B testing?"
+            ]
+        },
+        {
+            "title": "Federated Learning",
+            "prompt": "Explain the federated learning paradigm and its challenges.",
+            "tags": ["distributed-ml", "privacy"],
+            "followups": [
+                "How does federated averaging work?",
+                "What are the privacy guarantees in federated learning?"
+            ]
+        },
+        {
+            "title": "Time Series Forecasting Models",
+            "prompt": "Compare traditional time series models (ARIMA, SARIMA) with deep learning approaches (LSTM, Transformers).",
+            "tags": ["time-series", "forecasting"],
+            "followups": [
+                "How do you handle multivariate time series forecasting?",
+                "What are the challenges with long-horizon forecasting?"
+            ]
+        },
+        {
+            "title": "Optimization for Deep Learning",
+            "prompt": "Explain advanced optimization techniques for deep learning (Adam, RMSprop, learning rate schedules).",
+            "tags": ["deep-learning", "optimization"],
+            "followups": [
+                "Why is adaptive learning rate important?",
+                "How do learning rate warmup and decay strategies work?"
+            ]
+        },
+        {
+            "title": "Meta-Learning",
+            "prompt": "Explain the concept of meta-learning and different approaches (MAML, metric-based).",
+            "tags": ["deep-learning", "few-shot"],
+            "followups": [
+                "How does meta-learning differ from traditional transfer learning?",
+                "What are the challenges in evaluating meta-learning algorithms?"
+            ]
+        },
+        {
+            "title": "AutoML Systems",
+            "prompt": "Explain how automated machine learning systems work and their components.",
+            "tags": ["automl", "mlops"],
+            "followups": [
+                "What are the limitations of current AutoML systems?",
+                "How do neural architecture search algorithms work?"
+            ]
+        },
+        {
+            "title": "Explainable AI Techniques",
+            "prompt": "Compare different model interpretation techniques (LIME, SHAP, integrated gradients).",
+            "tags": ["interpretability", "ethics"],
+            "followups": [
+                "What are the theoretical foundations of SHAP values?",
+                "How do you evaluate the quality of explanations?"
+            ]
+        },
+        {
+            "title": "Recommender System Algorithms",
+            "prompt": "Explain collaborative filtering, content-based filtering, and hybrid approaches in recommender systems.",
+            "tags": ["recommender-systems", "algorithms"],
+            "followups": [
+                "How does matrix factorization work?",
+                "What are the challenges with cold start problems?"
+            ]
+        },
+        {
+            "title": "Model Deployment Challenges",
+            "prompt": "Discuss challenges in deploying machine learning models to production.",
+            "tags": ["mlops", "deployment"],
+            "followups": [
+                "How do you handle model drift in production?",
+                "What are the considerations for real-time vs batch inference?"
+            ]
+        }
+    ],
+    "company_style": "general",
+    "track": "data_science"
 }
