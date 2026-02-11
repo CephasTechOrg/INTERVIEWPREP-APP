@@ -1,8 +1,142 @@
 ﻿{
-    "difficulty":  "easy",
-    "questions":  [
-
-                  ],
-    "company_style":  "general",
-    "track":  "cybersecurity"
+    "difficulty": "easy",
+    "questions": [
+        {
+            "title": "What is a Firewall?",
+            "prompt": "Explain what a firewall is and its primary purpose in network security.",
+            "tags": ["network-security", "fundamentals"],
+            "followups": [
+                "What are the main differences between stateful and stateless firewalls?",
+                "Can you name a scenario where a firewall might not be sufficient protection?"
+            ]
+        },
+        {
+            "title": "Malware Types",
+            "prompt": "Name and briefly describe three common types of malware.",
+            "tags": ["malware", "threats"],
+            "followups": [
+                "How does ransomware differ from other types of malware?",
+                "What are some common infection vectors for malware?"
+            ]
+        },
+        {
+            "title": "Password Best Practices",
+            "prompt": "What are three best practices for creating and managing strong passwords?",
+            "tags": ["authentication", "access-control"],
+            "followups": [
+                "Why is password complexity important?",
+                "What are the advantages of using a password manager?"
+            ]
+        },
+        {
+            "title": "Phishing Basics",
+            "prompt": "What is phishing and what are some common indicators of a phishing attempt?",
+            "tags": ["social-engineering", "email-security"],
+            "followups": [
+                "How does spear phishing differ from regular phishing?",
+                "What should you do if you receive a suspicious email?"
+            ]
+        },
+        {
+            "title": "Confidentiality, Integrity, Availability (CIA)",
+            "prompt": "Explain the CIA triad and provide an example for each component.",
+            "tags": ["security-concepts", "fundamentals"],
+            "followups": [
+                "How do encryption and access controls relate to the CIA triad?",
+                "Can you think of a scenario where one component might conflict with another?"
+            ]
+        },
+        {
+            "title": "What is Multi-Factor Authentication?",
+            "prompt": "Explain what multi-factor authentication (MFA) is and why it's important.",
+            "tags": ["authentication", "access-control"],
+            "followups": [
+                "What are the three types of authentication factors?",
+                "Why is SMS-based MFA considered less secure than other methods?"
+            ]
+        },
+        {
+            "title": "HTTPS vs HTTP",
+            "prompt": "What is the main security difference between HTTP and HTTPS?",
+            "tags": ["web-security", "encryption"],
+            "followups": [
+                "How does SSL/TLS encryption work in HTTPS?",
+                "What should you check when verifying a website's certificate?"
+            ]
+        },
+        {
+            "title": "Social Engineering",
+            "prompt": "What is social engineering and provide two common examples.",
+            "tags": ["social-engineering", "awareness"],
+            "followups": [
+                "Why is social engineering often successful?",
+                "How can organizations protect against social engineering attacks?"
+            ]
+        },
+        {
+            "title": "VPN Purpose",
+            "prompt": "What is a VPN and what security benefits does it provide?",
+            "tags": ["network-security", "encryption"],
+            "followups": [
+                "How does a VPN encrypt your internet traffic?",
+                "What are the limitations of VPN security?"
+            ]
+        },
+        {
+            "title": "Types of Hackers",
+            "prompt": "Describe the differences between white hat, black hat, and gray hat hackers.",
+            "tags": ["ethical-hacking", "threat-actors"],
+            "followups": [
+                "What is bug bounty hunting and which type of hacker typically does this?",
+                "Why is ethical hacking important for organizations?"
+            ]
+        },
+        {
+            "title": "Software Updates",
+            "prompt": "Why are regular software updates important for security?",
+            "tags": ["patch-management", "vulnerability"],
+            "followups": [
+                "What is a zero-day vulnerability?",
+                "Why might organizations delay patching software?"
+            ]
+        },
+        {
+            "title": "Data Backup",
+            "prompt": "Why are regular data backups important for cybersecurity?",
+            "tags": ["disaster-recovery", "ransomware"],
+            "followups": [
+                "What is the 3-2-1 backup rule?",
+                "How often should different types of data be backed up?"
+            ]
+        },
+        {
+            "title": "Antivirus Software",
+            "prompt": "How does antivirus software work to protect computers?",
+            "tags": ["malware", "endpoint-security"],
+            "followups": [
+                "What are some limitations of traditional antivirus software?",
+                "How does heuristic analysis differ from signature-based detection?"
+            ]
+        },
+        {
+            "title": "Public vs Private Wi-Fi",
+            "prompt": "What are the security risks of using public Wi-Fi vs private/home Wi-Fi?",
+            "tags": ["network-security", "wireless"],
+            "followups": [
+                "What precautions should you take when using public Wi-Fi?",
+                "How can you secure your home Wi-Fi network?"
+            ]
+        },
+        {
+            "title": "Encryption Basics",
+            "prompt": "What is encryption and why is it important for protecting data?",
+            "tags": ["encryption", "data-protection"],
+            "followups": [
+                "What's the difference between symmetric and asymmetric encryption?",
+                "How does encryption protect data at rest vs data in transit?"
+            ]
+        }
+    ],
+    "company_style": "general",
+    "track": "cybersecurity"
 }
