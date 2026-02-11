@@ -41,6 +41,501 @@
         "Can you do better than O(n log n)?",
         "What\u2019s the complexity of each approach?"
       ]
+    },
+    {
+      "title": "Design Twitter or News Feed",
+      "prompt": "Design a scalable news feed system like Twitter. Cover: fan-out strategies, ranking, and real-time updates.",
+      "tags": [
+        "system-design",
+        "scalability",
+        "social-media"
+      ],
+      "followups": [
+        "Compare push vs pull models for feed generation",
+        "How do you handle celebrity users with millions of followers?"
+      ]
+    },
+    {
+      "title": "Design Uber/Lyft",
+      "prompt": "Design a ride-sharing service. Cover: real-time matching, location tracking, pricing, and driver dispatch.",
+      "tags": [
+        "system-design",
+        "real-time",
+        "matching"
+      ],
+      "followups": [
+        "How do you handle surge pricing algorithmically?",
+        "What data structures optimize nearest driver lookup?"
+      ]
+    },
+    {
+      "title": "Design YouTube or Netflix",
+      "prompt": "Design a video streaming platform. Cover: video encoding, CDN distribution, recommendations, and analytics.",
+      "tags": [
+        "system-design",
+        "video",
+        "cdn",
+        "recommendations"
+      ],
+      "followups": [
+        "How do you handle adaptive bitrate streaming?",
+        "What about live streaming vs on-demand?"
+      ]
+    },
+    {
+      "title": "Design a Distributed Cache",
+      "prompt": "Design a distributed cache like Redis Cluster. Cover: sharding, replication, consistency, and eviction policies.",
+      "tags": [
+        "system-design",
+        "distributed-systems",
+        "caching"
+      ],
+      "followups": [
+        "How do you handle cache invalidation across nodes?",
+        "What consistency model (strong vs eventual) would you choose?"
+      ]
+    },
+    {
+      "title": "Design Amazon's Shopping Cart",
+      "prompt": "Design a highly available shopping cart for Amazon-scale traffic. Cover: persistence, concurrency, and checkout.",
+      "tags": [
+        "system-design",
+        "ecommerce",
+        "availability"
+      ],
+      "followups": [
+        "How do you handle cart abandonment and recovery?",
+        "What about price changes while items are in cart?"
+      ]
+    },
+    {
+      "title": "Design Google Docs",
+      "prompt": "Design a collaborative document editing system. Cover: operational transforms, conflict resolution, and real-time sync.",
+      "tags": [
+        "system-design",
+        "collaboration",
+        "real-time"
+      ],
+      "followups": [
+        "Compare OT vs CRDT for conflict resolution",
+        "How do you handle offline editing?"
+      ]
+    },
+    {
+      "title": "Design a Distributed Job Scheduler",
+      "prompt": "Design a system like Apache Airflow or Kubernetes CronJob at scale. Cover: scheduling, execution, monitoring, and fault tolerance.",
+      "tags": [
+        "system-design",
+        "distributed-systems",
+        "scheduling"
+      ],
+      "followups": [
+        "How do you ensure exactly-once execution?",
+        "What about dependency management between jobs?"
+      ]
+    },
+    {
+      "title": "Design a Payment System",
+      "prompt": "Design a payment processing system for an e-commerce platform. Cover: idempotency, fraud detection, and reconciliation.",
+      "tags": [
+        "system-design",
+        "payments",
+        "finance"
+      ],
+      "followups": [
+        "How do you handle split payments and refunds?",
+        "What about PCI compliance and security?"
+      ]
+    },
+    {
+      "title": "Design a Search Engine",
+      "prompt": "Design a web search engine. Cover: crawling, indexing, ranking, and query processing at scale.",
+      "tags": [
+        "system-design",
+        "search",
+        "big-data"
+      ],
+      "followups": [
+        "How do you handle freshness of indexed content?",
+        "What about personalization and location-based results?"
+      ]
+    },
+    {
+      "title": "Design a Social Network",
+      "prompt": "Design a social network like Facebook. Cover: friend graph, news feed, messaging, and privacy controls.",
+      "tags": [
+        "system-design",
+        "social",
+        "graph"
+      ],
+      "followups": [
+        "How do you store and query social graphs efficiently?",
+        "What about content moderation and spam detection?"
+      ]
+    },
+    {
+      "title": "Design a URL Shortener at Scale",
+      "prompt": "Design a URL shortener serving billions of requests per day. Cover: key generation, redirection, analytics, and anti-abuse.",
+      "tags": [
+        "system-design",
+        "scalability",
+        "url-shortener"
+      ],
+      "followups": [
+        "How do you handle vanity URLs and custom slugs?",
+        "What about link expiration and cleanup?"
+      ]
+    },
+    {
+      "title": "Design a Recommendation System",
+      "prompt": "Design a personalized recommendation system for an e-commerce or content platform. Cover: data collection, model serving, and A/B testing.",
+      "tags": [
+        "system-design",
+        "recommendations",
+        "machine-learning"
+      ],
+      "followups": [
+        "How do you handle cold start for new users/items?",
+        "What metrics measure recommendation quality?"
+      ]
+    },
+    {
+      "title": "Design an Ad Server",
+      "prompt": "Design an online advertising platform. Cover: ad targeting, auction systems, billing, and click fraud detection.",
+      "tags": [
+        "system-design",
+        "advertising",
+        "real-time"
+      ],
+      "followups": [
+        "How do you implement real-time bidding (RTB)?",
+        "What about viewability and attribution tracking?"
+      ]
+    },
+    {
+      "title": "Design a Stock Trading Platform",
+      "prompt": "Design a real-time stock trading platform. Cover: order matching, market data, risk checks, and compliance.",
+      "tags": [
+        "system-design",
+        "finance",
+        "real-time"
+      ],
+      "followups": [
+        "How do you ensure order fairness and prevent front-running?",
+        "What about circuit breakers and volatility controls?"
+      ]
+    },
+    {
+      "title": "Design a Distributed File System",
+      "prompt": "Design a distributed file system like Google File System or HDFS. Cover: metadata management, replication, and consistency.",
+      "tags": [
+        "system-design",
+        "distributed-systems",
+        "storage"
+      ],
+      "followups": [
+        "How do you handle data durability and repair?",
+        "What about small file problem and garbage collection?"
+      ]
+    },
+    {
+      "title": "Design a Multiplayer Game Server",
+      "prompt": "Design a server for a real-time multiplayer game. Cover: game state synchronization, cheat prevention, and matchmaking.",
+      "tags": [
+        "system-design",
+        "gaming",
+        "real-time"
+      ],
+      "followups": [
+        "How do you handle lag compensation and prediction?",
+        "What about leaderboards and player progression?"
+      ]
+    },
+    {
+      "title": "Design a Hotel/Airline Booking System",
+      "prompt": "Design a booking system with inventory management, pricing, and reservations. Cover: overbooking and cancellation policies.",
+      "tags": [
+        "system-design",
+        "travel",
+        "inventory"
+      ],
+      "followups": [
+        "How do you prevent double booking in distributed system?",
+        "What about dynamic pricing based on demand?"
+      ]
+    },
+    {
+      "title": "Design a Distributed Logging System",
+      "prompt": "Design a system like Splunk or ELK at scale. Cover: log ingestion, indexing, search, and retention.",
+      "tags": [
+        "system-design",
+        "logging",
+        "big-data"
+      ],
+      "followups": [
+        "How do you handle structured vs unstructured logs?",
+        "What about real-time alerting and anomaly detection?"
+      ]
+    },
+    {
+      "title": "Design a Content Delivery Network",
+      "prompt": "Design a CDN from scratch. Cover: edge caching, origin shielding, and load balancing.",
+      "tags": [
+        "system-design",
+        "cdn",
+        "networking"
+      ],
+      "followups": [
+        "How do you handle cache invalidation globally?",
+        "What about DDoS protection and security?"
+      ]
+    },
+    {
+      "title": "Design a Distributed Database",
+      "prompt": "Design a distributed database system. Cover: partitioning, replication, consensus, and query processing.",
+      "tags": [
+        "system-design",
+        "databases",
+        "distributed-systems"
+      ],
+      "followups": [
+        "How do you handle cross-partition transactions?",
+        "What about schema changes and migrations?"
+      ]
+    },
+    {
+      "title": "Design a Real-time Analytics Platform",
+      "prompt": "Design a system for real-time analytics on streaming data. Cover: data ingestion, windowed aggregations, and dashboarding.",
+      "tags": [
+        "system-design",
+        "analytics",
+        "stream-processing"
+      ],
+      "followups": [
+        "How do you handle late arriving data?",
+        "What about data quality and schema evolution?"
+      ]
+    },
+    {
+      "title": "Design an IoT Platform",
+      "prompt": "Design a platform for millions of IoT devices. Cover: device management, telemetry, commands, and firmware updates.",
+      "tags": [
+        "system-design",
+        "iot",
+        "device-management"
+      ],
+      "followups": [
+        "How do you handle unreliable network connections?",
+        "What about security and device authentication?"
+      ]
+    },
+    {
+      "title": "Design a Cryptocurrency Exchange",
+      "prompt": "Design a cryptocurrency exchange. Cover: order books, wallet management, blockchain integration, and security.",
+      "tags": [
+        "system-design",
+        "crypto",
+        "finance"
+      ],
+      "followups": [
+        "How do you prevent trading bots from gaming the system?",
+        "What about hot/cold wallet security?"
+      ]
+    },
+    {
+      "title": "Design a Mobile Banking App Backend",
+      "prompt": "Design the backend for a mobile banking app. Cover: account management, transactions, fraud detection, and compliance.",
+      "tags": [
+        "system-design",
+        "banking",
+        "security"
+      ],
+      "followups": [
+        "How do you ensure ACID compliance for financial transactions?",
+        "What about regulatory reporting and audit trails?"
+      ]
+    },
+    {
+      "title": "Design a Travel Itinerary Planner",
+      "prompt": "Design a system that plans multi-city travel itineraries with flights, hotels, and activities.",
+      "tags": [
+        "system-design",
+        "travel",
+        "optimization"
+      ],
+      "followups": [
+        "How do you optimize for price, time, and preferences?",
+        "What about real-time availability and pricing?"
+      ]
+    },
+    {
+      "title": "Design a Video Conferencing System",
+      "prompt": "Design a system like Zoom or Google Meet. Cover: signaling, media servers, recording, and scalability.",
+      "tags": [
+        "system-design",
+        "video",
+        "real-time"
+      ],
+      "followups": [
+        "How do you handle network variability and quality adaptation?",
+        "What about breakout rooms and screen sharing?"
+      ]
+    },
+    {
+      "title": "Design a Food Delivery Platform",
+      "prompt": "Design a food delivery platform like Uber Eats or DoorDash. Cover: order routing, real-time tracking, and payments.",
+      "tags": [
+        "system-design",
+        "delivery",
+        "real-time"
+      ],
+      "followups": [
+        "How do you optimize delivery routes in real-time?",
+        "What about restaurant capacity and preparation time estimation?"
+      ]
+    },
+    {
+      "title": "Design a Healthcare Records System",
+      "prompt": "Design a HIPAA-compliant electronic health records system. Cover: data privacy, access controls, and interoperability.",
+      "tags": [
+        "system-design",
+        "healthcare",
+        "compliance"
+      ],
+      "followups": [
+        "How do you handle data anonymization for research?",
+        "What about emergency access and audit logging?"
+      ]
+    },
+    {
+      "title": "Design a Smart Home Platform",
+      "prompt": "Design a platform for controlling and automating smart home devices. Cover: device discovery, scenes, and voice control.",
+      "tags": [
+        "system-design",
+        "iot",
+        "home-automation"
+      ],
+      "followups": [
+        "How do you handle local vs cloud control?",
+        "What about device firmware updates and compatibility?"
+      ]
+    },
+    {
+      "title": "Design a Fitness Tracking Platform",
+      "prompt": "Design a platform like Strava or Fitbit. Cover: activity tracking, social features, and health insights.",
+      "tags": [
+        "system-design",
+        "fitness",
+        "wearables"
+      ],
+      "followups": [
+        "How do you handle data from various wearable devices?",
+        "What about privacy controls for sharing activity data?"
+      ]
+    },
+    {
+      "title": "Design a Code Hosting Platform",
+      "prompt": "Design a system like GitHub or GitLab. Cover: repository management, pull requests, CI/CD, and collaboration.",
+      "tags": [
+        "system-design",
+        "version-control",
+        "collaboration"
+      ],
+      "followups": [
+        "How do you handle large binary files (Git LFS)?",
+        "What about access controls and audit trails?"
+      ]
+    },
+    {
+      "title": "Design a Location-Based Service",
+      "prompt": "Design a location-based service like Yelp or Foursquare. Cover: geospatial queries, reviews, and recommendations.",
+      "tags": [
+        "system-design",
+        "location",
+        "geospatial"
+      ],
+      "followups": [
+        "How do you optimize for nearest neighbor queries?",
+        "What about handling location spoofing and fake reviews?"
+      ]
+    },
+    {
+      "title": "Design a Learning Management System",
+      "prompt": "Design a platform like Coursera or Udemy. Cover: course delivery, progress tracking, assignments, and certifications.",
+      "tags": [
+        "system-design",
+        "education",
+        "content-delivery"
+      ],
+      "followups": [
+        "How do you handle video streaming and interactive content?",
+        "What about plagiarism detection and exam proctoring?"
+      ]
+    },
+    {
+      "title": "Design a Distributed Messaging Queue",
+      "prompt": "Design a system like Kafka or RabbitMQ at scale. Cover: partitioning, replication, ordering guarantees, and durability.",
+      "tags": [
+        "system-design",
+        "messaging",
+        "distributed-systems"
+      ],
+      "followups": [
+        "How do you ensure exactly-once semantics?",
+        "What about consumer lag monitoring and rebalancing?"
+      ]
+    },
+    {
+      "title": "Design a Real-time Sports Analytics Platform",
+      "prompt": "Design a system that processes real-time sports data for live commentary, stats, and predictions.",
+      "tags": [
+        "system-design",
+        "sports",
+        "real-time"
+      ],
+      "followups": [
+        "How do you handle data from multiple sources and sensors?",
+        "What about latency requirements for live betting applications?"
+      ]
+    },
+    {
+      "title": "Design an AI/ML Model Serving Platform",
+      "prompt": "Design a platform for serving machine learning models at scale. Cover: model deployment, A/B testing, and monitoring.",
+      "tags": [
+        "system-design",
+        "machine-learning",
+        "model-serving"
+      ],
+      "followups": [
+        "How do you handle model versioning and rollbacks?",
+        "What about prediction explainability and bias monitoring?"
+      ]
+    },
+    {
+      "title": "Design a Distributed Configuration Management System",
+      "prompt": "Design a system like etcd or ZooKeeper for distributed configuration and service discovery.",
+      "tags": [
+        "system-design",
+        "distributed-systems",
+        "configuration"
+      ],
+      "followups": [
+        "How do you handle network partitions and consensus?",
+        "What about watch mechanisms and change notifications?"
+      ]
+    },
+    {
+      "title": "Design a Digital Asset Management System",
+      "prompt": "Design a system for storing, organizing, and retrieving digital assets (images, videos, documents).",
+      "tags": [
+        "system-design",
+        "media",
+        "storage"
+      ],
+      "followups": [
+        "How do you handle asset versioning and transformations?",
+        "What about metadata extraction and search?"
+      ]
     }
   ]
 }

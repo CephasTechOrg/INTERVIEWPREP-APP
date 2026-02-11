@@ -1,197 +1,537 @@
 {
-    "track": "swe_intern",
-    "company_style": "amazon",
-    "difficulty": "medium",
-    "questions": [
-      {
-        "title": "LRU Cache",
-        "prompt": "Design and implement an LRU cache supporting get and put in O(1) average time.",
-        "tags": ["hashmap", "linked-list", "design"],
-        "followups": [
-          "Why do you need both a hash map and a linked list?",
-          "What edge cases would you test (capacity 0/1, updates, repeats)?",
-          "How would you make it thread-safe?"
-        ]
-      },
-      {
-        "title": "Top K Frequent Elements",
-        "prompt": "Given an array of integers, return the k most frequent elements.",
-        "tags": ["hashmap", "heap", "arrays"],
-        "followups": [
-          "Can you do better than sorting?",
-          "How do you handle ties deterministically?",
-          "Time and space complexity?"
-        ]
-      },
-      {
-        "title": "Longest Substring Without Repeating Characters",
-        "prompt": "Given a string, find the length of the longest substring without repeating characters.",
-        "tags": ["sliding-window", "hashmap", "strings"],
-        "followups": [
-          "What invariant does your window maintain?",
-          "Time/space complexity?",
-          "How would you adapt for Unicode?"
-        ]
-      },
-      {
-        "title": "Merge Intervals",
-        "prompt": "Given a list of intervals, merge all overlapping intervals.",
-        "tags": ["sorting", "arrays"],
-        "followups": [
-          "Why does sorting help?",
-          "What tricky edge cases exist (touching endpoints, nested)?",
-          "Complexity?"
-        ]
-      },
-      {
-        "title": "Search in Rotated Sorted Array",
-        "prompt": "Search for a target in a rotated sorted array in O(log n) time.",
-        "tags": ["binary-search", "arrays"],
-        "followups": [
-          "What invariant keeps it logarithmic?",
-          "How do duplicates change the approach?",
-          "What edge cases would you test?"
-        ]
-      },
-      {
-        "title": "Product of Array Except Self",
-        "prompt": "Return an array output where output[i] is the product of all elements except nums[i], without using division.",
-        "tags": ["arrays", "prefix-sum"],
-        "followups": [
-          "How do zeros affect the solution?",
-          "Space optimization (excluding output array)?",
-          "Complexity?"
-        ]
-      },
-      {
-        "title": "Validate Binary Search Tree",
-        "prompt": "Given a binary tree, determine if it is a valid BST.",
-        "tags": ["trees", "dfs"],
-        "followups": [
-          "Why do bounds matter?",
-          "Iterative vs recursive?",
-          "Edge cases?"
-        ]
-      },
-      {
-        "title": "Lowest Common Ancestor (Binary Tree)",
-        "prompt": "Given a binary tree and two nodes, find their lowest common ancestor.",
-        "tags": ["trees", "dfs", "recursion"],
-        "followups": [
-          "How does it differ for a BST?",
-          "What if nodes might not exist in the tree?",
-          "How do you avoid recursion depth issues?"
-        ]
-      },
-      {
-        "title": "Design a Rate Limiter (Single Region)",
-        "prompt": "Design a rate limiter for an API: N requests per minute per user. Provide a workable design and trade-offs.",
-        "tags": ["system-design", "scalability", "design"],
-        "followups": [
-          "Fixed window vs sliding window vs token bucket?",
-          "How do you avoid retry storms?",
-          "How do you test correctness?"
-        ]
-      },
-      {
-        "title": "Design a Queue-Based Worker System",
-        "prompt": "Design a system where requests are enqueued and processed by workers with retries and dead-letter handling.",
-        "tags": ["system-design", "reliability", "scalability"],
-        "followups": [
-          "How do you ensure idempotency?",
-          "At-least-once vs exactly-once processing?",
-          "How do you monitor stuck jobs?"
-        ]
-      },
-      {
-        "title": "SQL: Top Customers by Spend",
-        "prompt": "Given tables Orders(user_id, amount, created_at) and Users(id, name), write a query to return top 10 users by total spend in the last 30 days.",
-        "tags": ["sql", "databases"],
-        "followups": [
-          "What indexes would you add and why?",
-          "How do you handle ties?",
-          "How would you paginate results?"
-        ]
-      },
-      {
-        "title": "Concurrency: Producer-Consumer",
-        "prompt": "Explain how you would implement producer-consumer with a bounded buffer safely.",
-        "tags": ["concurrency", "design"],
-        "followups": [
-          "How do you prevent deadlocks?",
-          "What are condition variables used for?",
-          "How do you reduce contention?"
-        ]
-      },
-      {
-        "title": "Object Design: Notification Service",
-        "prompt": "Design classes/interfaces for sending notifications (email/SMS/push) with extensibility and testability.",
-        "tags": ["oop", "design", "api-design"],
-        "followups": [
-          "Where do interfaces help here?",
-          "How would you test integrations?",
-          "How do you handle retries and failures?"
-        ]
-      },
-      {
-        "title": "Behavioral (LP): Deliver Results",
-        "prompt": "Tell me about a time you delivered a result under a tight deadline or constraints.",
-        "tags": ["behavioral", "leadership-principles", "communication"],
-        "followups": [
-          "What did you prioritize and why?",
-          "How did you handle trade-offs?",
-          "How did you measure success?"
-        ]
-      },
-      {
-        "title": "Behavioral (LP): Earn Trust",
-        "prompt": "Tell me about a time you earned trust from teammates or stakeholders.",
-        "tags": ["behavioral", "leadership-principles"],
-        "followups": [
-          "What actions built trust?",
-          "How did you handle misunderstandings?",
-          "What was the outcome?"
-        ]
-      },
-      {
-        "title": "Behavioral (LP): Are Right, A Lot",
-        "prompt": "Tell me about a decision you made with limited data. How did you reason and what happened?",
-        "tags": ["behavioral", "leadership-principles"],
-        "followups": [
-          "What assumptions did you make?",
-          "How did you validate quickly?",
-          "What did you learn?"
-        ]
-      },
-      {
-        "title": "Behavioral (LP): Invent and Simplify",
-        "prompt": "Tell me about a time you simplified a process/system to improve speed or reliability.",
-        "tags": ["behavioral", "leadership-principles", "system-thinking"],
-        "followups": [
-          "What was complex before?",
-          "How did you prove the simplification worked?",
-          "What trade-offs did you accept?"
-        ]
-      },
-      {
-        "title": "Behavioral (LP): Insist on the Highest Standards",
-        "prompt": "Tell me about a time you raised the quality bar in a project (testing, reviews, performance, security).",
-        "tags": ["behavioral", "leadership-principles", "code-quality"],
-        "followups": [
-          "What standard did you enforce?",
-          "How did you bring others along?",
-          "What was the outcome?"
-        ]
-      },
-      {
-        "title": "Behavioral (LP): Think Big",
-        "prompt": "Tell me about a time you proposed a big improvement or long-term idea beyond immediate requirements.",
-        "tags": ["behavioral", "leadership-principles", "communication"],
-        "followups": [
-          "How did you influence stakeholders?",
-          "What risks did you identify?",
-          "What was the outcome or next step?"
-        ]
-      }
-    ]
-  }
+  "track": "swe_intern",
+  "company_style": "amazon",
+  "difficulty": "medium",
+  "questions": [
+    {
+      "title": "LRU Cache",
+      "prompt": "Design and implement an LRU cache supporting get and put in O(1) average time.",
+      "tags": ["hashmap", "linked-list", "design"],
+      "followups": [
+        "Why do you need both a hash map and a linked list?",
+        "What edge cases would you test (capacity 0/1, updates, repeats)?",
+        "How would you make it thread-safe?"
+      ]
+    },
+    {
+      "title": "Top K Frequent Elements",
+      "prompt": "Given an array of integers, return the k most frequent elements.",
+      "tags": ["hashmap", "heap", "arrays"],
+      "followups": [
+        "Can you do better than sorting?",
+        "How do you handle ties deterministically?",
+        "Time and space complexity?"
+      ]
+    },
+    {
+      "title": "Longest Substring Without Repeating Characters",
+      "prompt": "Given a string, find the length of the longest substring without repeating characters.",
+      "tags": ["sliding-window", "hashmap", "strings"],
+      "followups": [
+        "What invariant does your window maintain?",
+        "Time/space complexity?",
+        "How would you adapt for Unicode?"
+      ]
+    },
+    {
+      "title": "Merge Intervals",
+      "prompt": "Given a list of intervals, merge all overlapping intervals.",
+      "tags": ["sorting", "arrays"],
+      "followups": [
+        "Why does sorting help?",
+        "What tricky edge cases exist (touching endpoints, nested)?",
+        "Complexity?"
+      ]
+    },
+    {
+      "title": "Search in Rotated Sorted Array",
+      "prompt": "Search for a target in a rotated sorted array in O(log n) time.",
+      "tags": ["binary-search", "arrays"],
+      "followups": [
+        "What invariant keeps it logarithmic?",
+        "How do duplicates change the approach?",
+        "What edge cases would you test?"
+      ]
+    },
+    {
+      "title": "Product of Array Except Self",
+      "prompt": "Return an array output where output[i] is the product of all elements except nums[i], without using division.",
+      "tags": ["arrays", "prefix-sum"],
+      "followups": [
+        "How do zeros affect the solution?",
+        "Space optimization (excluding output array)?",
+        "Complexity?"
+      ]
+    },
+    {
+      "title": "Validate Binary Search Tree",
+      "prompt": "Given a binary tree, determine if it is a valid BST.",
+      "tags": ["trees", "dfs"],
+      "followups": [
+        "Why do bounds matter?",
+        "Iterative vs recursive?",
+        "Edge cases?"
+      ]
+    },
+    {
+      "title": "Lowest Common Ancestor (Binary Tree)",
+      "prompt": "Given a binary tree and two nodes, find their lowest common ancestor.",
+      "tags": ["trees", "dfs", "recursion"],
+      "followups": [
+        "How does it differ for a BST?",
+        "What if nodes might not exist in the tree?",
+        "How do you avoid recursion depth issues?"
+      ]
+    },
+    {
+      "title": "Design a Rate Limiter (Single Region)",
+      "prompt": "Design a rate limiter for an API: N requests per minute per user. Provide a workable design and trade-offs.",
+      "tags": ["system-design", "scalability", "design"],
+      "followups": [
+        "Fixed window vs sliding window vs token bucket?",
+        "How do you avoid retry storms?",
+        "How do you test correctness?"
+      ]
+    },
+    {
+      "title": "Design a Queue-Based Worker System",
+      "prompt": "Design a system where requests are enqueued and processed by workers with retries and dead-letter handling.",
+      "tags": ["system-design", "reliability", "scalability"],
+      "followups": [
+        "How do you ensure idempotency?",
+        "At-least-once vs exactly-once processing?",
+        "How do you monitor stuck jobs?"
+      ]
+    },
+    {
+      "title": "SQL: Top Customers by Spend",
+      "prompt": "Given tables Orders(user_id, amount, created_at) and Users(id, name), write a query to return top 10 users by total spend in the last 30 days.",
+      "tags": ["sql", "databases"],
+      "followups": [
+        "What indexes would you add and why?",
+        "How do you handle ties?",
+        "How would you paginate results?"
+      ]
+    },
+    {
+      "title": "Concurrency: Producer-Consumer",
+      "prompt": "Explain how you would implement producer-consumer with a bounded buffer safely.",
+      "tags": ["concurrency", "design"],
+      "followups": [
+        "How do you prevent deadlocks?",
+        "What are condition variables used for?",
+        "How do you reduce contention?"
+      ]
+    },
+    {
+      "title": "Object Design: Notification Service",
+      "prompt": "Design classes/interfaces for sending notifications (email/SMS/push) with extensibility and testability.",
+      "tags": ["oop", "design", "api-design"],
+      "followups": [
+        "Where do interfaces help here?",
+        "How would you test integrations?",
+        "How do you handle retries and failures?"
+      ]
+    },
+    {
+      "title": "Behavioral (LP): Deliver Results",
+      "prompt": "Tell me about a time you delivered a result under a tight deadline or constraints.",
+      "tags": ["behavioral", "leadership-principles", "communication"],
+      "followups": [
+        "What did you prioritize and why?",
+        "How did you handle trade-offs?",
+        "How did you measure success?"
+      ]
+    },
+    {
+      "title": "Behavioral (LP): Earn Trust",
+      "prompt": "Tell me about a time you earned trust from teammates or stakeholders.",
+      "tags": ["behavioral", "leadership-principles"],
+      "followups": [
+        "What actions built trust?",
+        "How did you handle misunderstandings?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Behavioral (LP): Are Right, A Lot",
+      "prompt": "Tell me about a decision you made with limited data. How did you reason and what happened?",
+      "tags": ["behavioral", "leadership-principles"],
+      "followups": [
+        "What assumptions did you make?",
+        "How did you validate quickly?",
+        "What did you learn?"
+      ]
+    },
+    {
+      "title": "Behavioral (LP): Invent and Simplify",
+      "prompt": "Tell me about a time you simplified a process/system to improve speed or reliability.",
+      "tags": ["behavioral", "leadership-principles", "system-thinking"],
+      "followups": [
+        "What was complex before?",
+        "How did you prove the simplification worked?",
+        "What trade-offs did you accept?"
+      ]
+    },
+    {
+      "title": "Behavioral (LP): Insist on the Highest Standards",
+      "prompt": "Tell me about a time you raised the quality bar in a project (testing, reviews, performance, security).",
+      "tags": ["behavioral", "leadership-principles", "code-quality"],
+      "followups": [
+        "What standard did you enforce?",
+        "How did you bring others along?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Behavioral (LP): Think Big",
+      "prompt": "Tell me about a time you proposed a big improvement or long-term idea beyond immediate requirements.",
+      "tags": ["behavioral", "leadership-principles", "communication"],
+      "followups": [
+        "How did you influence stakeholders?",
+        "What risks did you identify?",
+        "What was the outcome or next step?"
+      ]
+    },
+    {
+      "title": "Two Sum (Multiple Approaches)",
+      "prompt": "Given an array of integers and a target sum, find two indices whose values add up to the target.",
+      "tags": ["arrays", "hashmap", "two-pointers"],
+      "followups": [
+        "Compare brute force, hash map, and two-pointer approaches",
+        "What if the array is sorted?",
+        "How would you handle multiple pairs?"
+      ]
+    },
+    {
+      "title": "Valid Palindrome",
+      "prompt": "Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.",
+      "tags": ["strings", "two-pointers"],
+      "followups": [
+        "How would you handle spaces and punctuation?",
+        "What's the time and space complexity?",
+        "Can you solve it with O(1) extra space?"
+      ]
+    },
+    {
+      "title": "Maximum Subarray (Kadane's Algorithm)",
+      "prompt": "Find the contiguous subarray with the largest sum.",
+      "tags": ["arrays", "dynamic-programming"],
+      "followups": [
+        "What's the intuition behind Kadane's algorithm?",
+        "How would you modify it to also return the subarray indices?",
+        "What if all numbers are negative?"
+      ]
+    },
+    {
+      "title": "Implement Queue using Stacks",
+      "prompt": "Implement a queue using two stacks with efficient operations.",
+      "tags": ["stacks", "queues", "data-structures"],
+      "followups": [
+        "What's the amortized time complexity?",
+        "How would you make peek() efficient?",
+        "Can you implement a stack using queues?"
+      ]
+    },
+    {
+      "title": "Group Anagrams",
+      "prompt": "Given an array of strings, group anagrams together.",
+      "tags": ["hashmap", "strings", "sorting"],
+      "followups": [
+        "What makes a good hash key for anagrams?",
+        "How would you handle large strings?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Container With Most Water",
+      "prompt": "Given n non-negative integers representing heights, find two lines that together with x-axis form a container holding most water.",
+      "tags": ["arrays", "two-pointers"],
+      "followups": [
+        "Why does the two-pointer approach work?",
+        "How would you prove its correctness?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "3Sum",
+      "prompt": "Find all unique triplets in an array that sum to zero.",
+      "tags": ["arrays", "two-pointers", "sorting"],
+      "followups": [
+        "How do you avoid duplicate triplets?",
+        "What's the time complexity?",
+        "How would you adapt for a different target sum?"
+      ]
+    },
+    {
+      "title": "Word Break",
+      "prompt": "Given a string and a dictionary of words, determine if the string can be segmented into space-separated dictionary words.",
+      "tags": ["dynamic-programming", "strings"],
+      "followups": [
+        "What's the recurrence relation?",
+        "How would you handle an empty dictionary?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Design Hit Counter",
+      "prompt": "Design a hit counter that counts the number of hits in the past 5 minutes.",
+      "tags": ["design", "data-structures"],
+      "followups": [
+        "How would you handle concurrent hits?",
+        "What data structure optimizes for time range queries?",
+        "How do you clean up old hits?"
+      ]
+    },
+    {
+      "title": "Design Tic-Tac-Toe",
+      "prompt": "Design a Tic-Tac-Toe game that supports moves, checking for winners, and handling invalid moves.",
+      "tags": ["design", "arrays", "games"],
+      "followups": [
+        "How do you check for a win efficiently?",
+        "How would you extend to N x N board?",
+        "What about undo functionality?"
+      ]
+    },
+    {
+      "title": "Design Parking Lot",
+      "prompt": "Design a parking lot system with different spot sizes, vehicle types, and pricing.",
+      "tags": ["design", "oop", "system-design"],
+      "followups": [
+        "What classes would you create?",
+        "How do you handle spot assignment?",
+        "What about multiple entry/exit points?"
+      ]
+    },
+    {
+      "title": "Design URL Shortener (Basic)",
+      "prompt": "Design a basic URL shortener with key generation and redirection.",
+      "tags": ["system-design", "hashing", "databases"],
+      "followups": [
+        "How do you generate unique short codes?",
+        "What about collision handling?",
+        "How would you scale this design?"
+      ]
+    },
+    {
+      "title": "Design Amazon Product Recommendation",
+      "prompt": "Design a basic product recommendation system for Amazon.",
+      "tags": ["system-design", "recommendations", "amazon-context"],
+      "followups": [
+        "What data would you collect?",
+        "How would you match users with products?",
+        "How do you handle new users or products?"
+      ]
+    },
+    {
+      "title": "Design Shopping Cart (Amazon Context)",
+      "prompt": "Design a shopping cart system for Amazon with features like add/remove, price calculation, and persistence.",
+      "tags": ["system-design", "amazon-context", "ecommerce"],
+      "followups": [
+        "How do you handle concurrent modifications?",
+        "What about cart abandonment and recovery?",
+        "How do you integrate with inventory and pricing systems?"
+      ]
+    },
+    {
+      "title": "Design Simple Search (Amazon)",
+      "prompt": "Design a basic search system for Amazon products.",
+      "tags": ["system-design", "search", "amazon-context"],
+      "followups": [
+        "What fields would you index?",
+        "How would you handle typos?",
+        "What about ranking results?"
+      ]
+    },
+    {
+      "title": "SQL: Find Duplicate Products",
+      "prompt": "Given a products table with name, category, and price, find products with the same name but different prices.",
+      "tags": ["sql", "databases", "amazon-context"],
+      "followups": [
+        "How would you optimize this query?",
+        "What if you need to find near-duplicates?",
+        "How would you prevent duplicates during insertion?"
+      ]
+    },
+    {
+      "title": "SQL: Customer Order History",
+      "prompt": "Given orders and customers tables, write a query to find customers who haven't ordered in the last 6 months.",
+      "tags": ["sql", "databases", "amazon-context"],
+      "followups": [
+        "What indexes would improve performance?",
+        "How would you handle large datasets?",
+        "What about customers who never ordered?"
+      ]
+    },
+    {
+      "title": "Concurrency: Dining Philosophers",
+      "prompt": "Explain the dining philosophers problem and how to prevent deadlocks.",
+      "tags": ["concurrency", "deadlock", "synchronization"],
+      "followups": [
+        "What strategies prevent deadlock?",
+        "How does resource hierarchy help?",
+        "What about starvation?"
+      ]
+    },
+    {
+      "title": "Concurrency: Read-Write Lock",
+      "prompt": "Design a read-write lock that allows multiple readers or single writer.",
+      "tags": ["concurrency", "synchronization", "design"],
+      "followups": [
+        "How do you prevent writer starvation?",
+        "What about reentrancy?",
+        "How would you test this implementation?"
+      ]
+    },
+    {
+      "title": "Object Design: Amazon Payment System",
+      "prompt": "Design classes for a payment processing system at Amazon.",
+      "tags": ["oop", "design", "amazon-context"],
+      "followups": [
+        "How would you handle different payment methods?",
+        "What about refunds and cancellations?",
+        "How do you ensure transaction integrity?"
+      ]
+    },
+    {
+      "title": "Object Design: Inventory Management",
+      "prompt": "Design classes for Amazon's inventory management system.",
+      "tags": ["oop", "design", "amazon-context"],
+      "followups": [
+        "How do you track stock levels?",
+        "What about multiple warehouses?",
+        "How do you handle restocking alerts?"
+      ]
+    },
+    {
+      "title": "Behavioral (LP): Customer Obsession",
+      "prompt": "Tell me about a time you went above and beyond to help a customer or user.",
+      "tags": ["behavioral", "leadership-principles", "customer-obsession"],
+      "followups": [
+        "How did you identify the customer's need?",
+        "What obstacles did you overcome?",
+        "How did you measure the impact?"
+      ]
+    },
+    {
+      "title": "Behavioral (LP): Ownership",
+      "prompt": "Tell me about a time you took ownership of a problem that wasn't originally your responsibility.",
+      "tags": ["behavioral", "leadership-principles", "ownership"],
+      "followups": [
+        "Why did you step up?",
+        "What challenges did you face?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Behavioral (LP): Bias for Action",
+      "prompt": "Tell me about a time you made a quick decision with incomplete information.",
+      "tags": ["behavioral", "leadership-principles", "decision-making"],
+      "followups": [
+        "What made you decide to act quickly?",
+        "How did you manage risks?",
+        "What did you learn?"
+      ]
+    },
+    {
+      "title": "Behavioral (LP): Frugality",
+      "prompt": "Tell me about a time you accomplished more with fewer resources.",
+      "tags": ["behavioral", "leadership-principles", "efficiency"],
+      "followups": [
+        "What constraints were you working under?",
+        "How did you optimize resources?",
+        "What was the result?"
+      ]
+    },
+    {
+      "title": "Behavioral (LP): Learn and Be Curious",
+      "prompt": "Tell me about a time you learned a new technology or skill to solve a problem.",
+      "tags": ["behavioral", "leadership-principles", "learning"],
+      "followups": [
+        "How did you approach learning?",
+        "How did you apply what you learned?",
+        "What challenges did you face?"
+      ]
+    },
+    {
+      "title": "Behavioral (LP): Hire and Develop the Best",
+      "prompt": "Tell me about a time you helped someone else learn or grow.",
+      "tags": ["behavioral", "leadership-principles", "mentorship"],
+      "followups": [
+        "How did you assess their needs?",
+        "What approach did you take?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Behavioral (LP): Success and Scale Bring Broad Responsibility",
+      "prompt": "Tell me about a time you considered the broader impact of your work.",
+      "tags": ["behavioral", "leadership-principles", "impact"],
+      "followups": [
+        "What broader considerations did you have?",
+        "How did you address them?",
+        "What was the result?"
+      ]
+    },
+    {
+      "title": "Behavioral: Conflict Resolution",
+      "prompt": "Tell me about a time you had a disagreement with a teammate and how you resolved it.",
+      "tags": ["behavioral", "conflict-resolution", "teamwork"],
+      "followups": [
+        "What was the disagreement about?",
+        "How did you approach the conversation?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Behavioral: Handling Failure",
+      "prompt": "Tell me about a time you failed at something and what you learned from it.",
+      "tags": ["behavioral", "failure", "growth"],
+      "followups": [
+        "What went wrong?",
+        "How did you recover?",
+        "What would you do differently?"
+      ]
+    },
+    {
+      "title": "Amazon Innovation Question",
+      "prompt": "What Amazon product or service would you improve, and how?",
+      "tags": ["behavioral", "amazon-context", "innovation"],
+      "followups": [
+        "Why did you choose this product?",
+        "What technical challenges might you face?",
+        "How would you measure success?"
+      ]
+    },
+    {
+      "title": "Technical Trade-offs",
+      "prompt": "Describe a time you had to make a technical trade-off between performance, scalability, and maintainability.",
+      "tags": ["behavioral", "technical", "trade-offs"],
+      "followups": [
+        "What factors did you consider?",
+        "How did you make your decision?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Code Review Experience",
+      "prompt": "Tell me about a time you gave or received constructive feedback during code review.",
+      "tags": ["behavioral", "code-review", "collaboration"],
+      "followups": [
+        "What was the feedback about?",
+        "How did you deliver/receive it?",
+        "What was the impact?"
+      ]
+    },
+    {
+      "title": "Technical Debt",
+      "prompt": "Tell me about a time you had to deal with technical debt.",
+      "tags": ["behavioral", "technical-debt", "maintenance"],
+      "followups": [
+        "How did you identify the debt?",
+        "How did you prioritize addressing it?",
+        "What was the result?"
+      ]
+    }
+  ]
+}

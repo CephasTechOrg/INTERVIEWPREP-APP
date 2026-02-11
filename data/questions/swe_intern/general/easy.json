@@ -58,7 +58,7 @@
         "greedy"
       ],
       "followups": [
-        "Explain the Boyer\u2013Moore voting idea.",
+        "Explain the Boyer–Moore voting idea.",
         "What's the time and space complexity?"
       ]
     },
@@ -826,7 +826,7 @@
       "followups": [
         "Why do constants improve maintainability?",
         "How do constants relate to immutability?",
-        "What\u2019s an example of a constant you\u2019d define in an API client?"
+        "What's an example of a constant you'd define in an API client?"
       ]
     },
     {
@@ -838,7 +838,7 @@
       "followups": [
         "What are examples of common primitive types?",
         "How do types prevent bugs?",
-        "What\u2019s the difference between static and dynamic typing?"
+        "What's the difference between static and dynamic typing?"
       ]
     },
     {
@@ -953,7 +953,7 @@
       ],
       "followups": [
         "Which pillar do you use most in real projects and why?",
-        "What\u2019s a common misuse of inheritance?",
+        "What's a common misuse of inheritance?",
         "How do these pillars relate to maintainable code?"
       ]
     },
@@ -991,7 +991,7 @@
         "design"
       ],
       "followups": [
-        "What\u2019s the difference between compile-time and runtime polymorphism?",
+        "What's the difference between compile-time and runtime polymorphism?",
         "How do interfaces enable polymorphism?",
         "When can polymorphism hurt performance or clarity?"
       ]
@@ -1006,7 +1006,7 @@
       "followups": [
         "How do you design a good abstraction?",
         "What are signs of a leaky abstraction?",
-        "Give an example of a clean abstraction you\u2019ve used."
+        "Give an example of a clean abstraction you've used."
       ]
     },
     {
@@ -1050,7 +1050,7 @@
     },
     {
       "title": "Constructor",
-      "prompt": "What is a constructor? When is it called, and what should (and shouldn\u2019t) happen inside it?",
+      "prompt": "What is a constructor? When is it called, and what should (and shouldn't) happen inside it?",
       "tags": [
         "oop",
         "fundamentals"
@@ -1069,7 +1069,7 @@
         "fundamentals"
       ],
       "followups": [
-        "Give examples of data structures you\u2019ve used recently.",
+        "Give examples of data structures you've used recently.",
         "How do you choose the right data structure?",
         "How do data structures affect complexity?"
       ]
@@ -1097,7 +1097,7 @@
       ],
       "followups": [
         "How would you implement a stack?",
-        "What\u2019s the time complexity of push/pop?",
+        "What's the time complexity of push/pop?",
         "Give an example where a stack naturally appears."
       ]
     },
@@ -1110,7 +1110,7 @@
       ],
       "followups": [
         "How would you implement a queue efficiently?",
-        "What\u2019s the time complexity of enqueue/dequeue?",
+        "What's the time complexity of enqueue/dequeue?",
         "Where do queues appear in systems?"
       ]
     },
@@ -1123,7 +1123,7 @@
       ],
       "followups": [
         "What collision strategies do you know?",
-        "What\u2019s average-case vs worst-case complexity?",
+        "What's average-case vs worst-case complexity?",
         "What makes a good hash function?"
       ]
     },
@@ -1149,7 +1149,7 @@
         "data-structures"
       ],
       "followups": [
-        "What\u2019s the difference between a binary tree and a BST?",
+        "What's the difference between a binary tree and a BST?",
         "When do you use BFS vs DFS on a tree?",
         "Give an example of a tree problem."
       ]
@@ -1162,7 +1162,7 @@
         "data-structures"
       ],
       "followups": [
-        "What\u2019s the difference between a binary tree and a binary search tree?",
+        "What's the difference between a binary tree and a binary search tree?",
         "What are in-order, pre-order, and post-order traversals?",
         "What is the typical complexity of operations in a balanced BST?"
       ]
@@ -1176,7 +1176,7 @@
       ],
       "followups": [
         "Adjacency list vs adjacency matrix: when would you choose each?",
-        "What\u2019s the complexity of BFS/DFS in terms of V and E?",
+        "What's the complexity of BFS/DFS in terms of V and E?",
         "Give a real-world example modeled as a graph."
       ]
     },
@@ -1207,266 +1207,3 @@
       ]
     },
     {
-      "title": "Linear Search vs Binary Search",
-      "prompt": "What is the difference between linear search and binary search? When can you use each?",
-      "tags": [
-        "binary-search",
-        "algorithms",
-        "arrays"
-      ],
-      "followups": [
-        "What are the prerequisites for binary search?",
-        "What\u2019s the time complexity of each?",
-        "What are common binary search pitfalls?"
-      ]
-    },
-    {
-      "title": "Sorting",
-      "prompt": "What is sorting? Why is sorting useful in problem solving?",
-      "tags": [
-        "sorting",
-        "algorithms"
-      ],
-      "followups": [
-        "How does sorting enable faster searching?",
-        "What is a stable sort and why might it matter?",
-        "Give an example problem where sorting is a key step."
-      ]
-    },
-    {
-      "title": "Sorting Algorithms",
-      "prompt": "Name some sorting algorithms you know. Compare them by time complexity and stability.",
-      "tags": [
-        "sorting",
-        "algorithms"
-      ],
-      "followups": [
-        "When would you choose quicksort vs mergesort?",
-        "What\u2019s the difference between comparison sorts and non-comparison sorts?",
-        "What is the worst-case complexity of quicksort and how do you avoid it?"
-      ]
-    },
-    {
-      "title": "Time Complexity",
-      "prompt": "What is time complexity? How do you analyze the runtime of an algorithm?",
-      "tags": [
-        "complexity",
-        "fundamentals"
-      ],
-      "followups": [
-        "What is the dominant term and why do we ignore constants?",
-        "How do nested loops affect complexity?",
-        "How does recursion affect complexity?"
-      ]
-    },
-    {
-      "title": "Space Complexity",
-      "prompt": "What is space complexity? How do you analyze extra memory usage of an algorithm?",
-      "tags": [
-        "complexity",
-        "fundamentals"
-      ],
-      "followups": [
-        "What counts as auxiliary space?",
-        "Give an example of a time-space tradeoff.",
-        "How do recursion and call stacks factor in?"
-      ]
-    },
-    {
-      "title": "Binary Search Complexity",
-      "prompt": "What is the time complexity of binary search? Explain why.",
-      "tags": [
-        "binary-search",
-        "complexity"
-      ],
-      "followups": [
-        "When does binary search not apply?",
-        "What are common off-by-one errors?",
-        "What\u2019s the space complexity (iterative vs recursive)?"
-      ]
-    },
-    {
-      "title": "Linear Search Complexity",
-      "prompt": "What is the time complexity of linear search? Explain best-case vs worst-case scenarios.",
-      "tags": [
-        "complexity",
-        "algorithms"
-      ],
-      "followups": [
-        "What is the average-case complexity and what does it depend on?",
-        "How does data distribution affect average-case?",
-        "When is linear search still the best option?"
-      ]
-    },
-    {
-      "title": "Greedy Algorithms",
-      "prompt": "What is a greedy algorithm? Explain the idea and give an example problem where greedy works.",
-      "tags": [
-        "greedy",
-        "algorithms"
-      ],
-      "followups": [
-        "How do you prove a greedy choice is correct?",
-        "Give an example where greedy fails.",
-        "How do greedy approaches compare to dynamic programming?"
-      ]
-    },
-    {
-      "title": "Dynamic Programming (Basic Idea)",
-      "prompt": "What is dynamic programming? Explain overlapping subproblems and optimal substructure with a simple example.",
-      "tags": [
-        "dp",
-        "algorithms"
-      ],
-      "followups": [
-        "Top-down vs bottom-up: what\u2019s the difference?",
-        "How do you define DP state and transition?",
-        "What are common DP pitfalls?"
-      ]
-    },
-    {
-      "title": "Database Basics",
-      "prompt": "What is a database? Why do applications use databases instead of plain files?",
-      "tags": [
-        "databases",
-        "fundamentals"
-      ],
-      "followups": [
-        "What are common operations (CRUD) in databases?",
-        "What does consistency mean?",
-        "What\u2019s the difference between OLTP and OLAP (high level)?"
-      ]
-    },
-    {
-      "title": "SQL",
-      "prompt": "What is SQL? What kinds of operations do you commonly perform with SQL?",
-      "tags": [
-        "databases",
-        "sql"
-      ],
-      "followups": [
-        "What is SELECT/INSERT/UPDATE/DELETE?",
-        "What is a JOIN and why is it useful?",
-        "How do you prevent SQL injection (high level)?"
-      ]
-    },
-    {
-      "title": "Primary Key",
-      "prompt": "What is a primary key? Why is it important in relational databases?",
-      "tags": [
-        "databases",
-        "sql"
-      ],
-      "followups": [
-        "Can a table have multiple primary keys?",
-        "What makes a good primary key?",
-        "What is a composite key?"
-      ]
-    },
-    {
-      "title": "Foreign Key",
-      "prompt": "What is a foreign key? How does it help maintain relationships and integrity between tables?",
-      "tags": [
-        "databases",
-        "sql"
-      ],
-      "followups": [
-        "What is referential integrity?",
-        "What happens on delete/update (CASCADE vs RESTRICT)?",
-        "Give an example of a one-to-many relationship."
-      ]
-    },
-    {
-      "title": "Normalization",
-      "prompt": "What is normalization? Why do we normalize relational database schemas?",
-      "tags": [
-        "databases",
-        "sql"
-      ],
-      "followups": [
-        "What problems does normalization prevent?",
-        "When would you denormalize and why?",
-        "What is 1NF/2NF/3NF (high level)?"
-      ]
-    },
-    {
-      "title": "Database Index",
-      "prompt": "What is an index in a database? How does an index speed up queries and what are the trade-offs?",
-      "tags": [
-        "databases",
-        "performance"
-      ],
-      "followups": [
-        "Why do indexes slow down writes?",
-        "What kinds of queries benefit most from indexes?",
-        "What is a composite index?"
-      ]
-    },
-    {
-      "title": "API",
-      "prompt": "What is an API? Explain it in simple terms and give an example of an API you\u2019ve used.",
-      "tags": [
-        "api",
-        "fundamentals"
-      ],
-      "followups": [
-        "What\u2019s the difference between an API and a library?",
-        "What makes an API easy to use?",
-        "How do you version an API?"
-      ]
-    },
-    {
-      "title": "REST",
-      "prompt": "What is REST? Explain REST principles and what makes an API RESTful.",
-      "tags": [
-        "api",
-        "rest"
-      ],
-      "followups": [
-        "What are common HTTP status codes and when do you use them?",
-        "What is idempotency and why does it matter?",
-        "How do you design resource-oriented URLs?"
-      ]
-    },
-    {
-      "title": "HTTP vs HTTPS",
-      "prompt": "What is HTTP and HTTPS? What problem does HTTPS solve?",
-      "tags": [
-        "http",
-        "security"
-      ],
-      "followups": [
-        "What is TLS at a high level?",
-        "What kinds of attacks does HTTPS help prevent?",
-        "What is a certificate?"
-      ]
-    },
-    {
-      "title": "GET vs POST",
-      "prompt": "What is the difference between GET and POST? Discuss semantics, caching, and when to use each.",
-      "tags": [
-        "http",
-        "rest",
-        "api"
-      ],
-      "followups": [
-        "Which methods should be idempotent?",
-        "How do query parameters differ from request bodies?",
-        "How do caches treat GET vs POST?"
-      ]
-    },
-    {
-      "title": "JSON",
-      "prompt": "What is JSON? Why is it commonly used in web APIs, and what does a JSON document look like?",
-      "tags": [
-        "json",
-        "api"
-      ],
-      "followups": [
-        "How is JSON different from XML?",
-        "What are common pitfalls when parsing JSON?",
-        "How do you validate JSON data?"
-      ]
-    }
-  ]
-}

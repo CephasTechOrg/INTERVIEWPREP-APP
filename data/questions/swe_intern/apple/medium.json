@@ -1,207 +1,537 @@
 {
-    "track": "swe_intern",
-    "company_style": "apple",
-    "difficulty": "medium",
-    "questions": [
-      {
-        "title": "LRU Cache",
-        "prompt": "Design and implement an LRU (Least Recently Used) cache with get and put in O(1) average time.",
-        "tags": ["design", "hashmap", "linked-list"],
-        "followups": [
-          "Why do you need both a hash map and a linked list?",
-          "What are the edge cases (capacity 0/1, repeated puts, updates)?",
-          "How would you make it thread-safe? What are the trade-offs?"
-        ]
-      },
-      {
-        "title": "Top K Frequent Elements",
-        "prompt": "Given an integer array, return the k most frequent elements. Your solution should be better than O(n log n) if possible.",
-        "tags": ["hashmap", "heap", "arrays"],
-        "followups": [
-          "What approach gives O(n) average time?",
-          "How do you handle ties deterministically?",
-          "What happens if k is close to n?"
-        ]
-      },
-      {
-        "title": "Longest Substring Without Repeating Characters",
-        "prompt": "Given a string, find the length of the longest substring without repeating characters.",
-        "tags": ["strings", "sliding-window", "hashmap"],
-        "followups": [
-          "What invariant does your sliding window maintain?",
-          "How do you implement this efficiently for Unicode?",
-          "What are the time and space complexities?"
-        ]
-      },
-      {
-        "title": "Kth Largest Element in an Array",
-        "prompt": "Find the kth largest element in an unsorted array without fully sorting the array.",
-        "tags": ["heap", "quickselect", "arrays"],
-        "followups": [
-          "Compare heap vs quickselect in average and worst case.",
-          "How do you handle many duplicates?",
-          "What changes if the input is a stream?"
-        ]
-      },
-      {
-        "title": "Merge Intervals",
-        "prompt": "Given a list of intervals, merge all overlapping intervals.",
-        "tags": ["sorting", "arrays", "intervals"],
-        "followups": [
-          "Why is sorting helpful here?",
-          "What are corner cases (touching endpoints, nested intervals)?",
-          "Can you do it in-place and what does that mean here?"
-        ]
-      },
-      {
-        "title": "Binary Tree Level Order Traversal",
-        "prompt": "Given a binary tree, return the level order traversal of its nodes' values.",
-        "tags": ["trees", "bfs", "queue"],
-        "followups": [
-          "What is the space complexity in the worst case?",
-          "How would you return the average per level instead of values?",
-          "How do you handle very deep trees (stack vs queue concerns)?"
-        ]
-      },
-      {
-        "title": "Lowest Common Ancestor (Binary Tree)",
-        "prompt": "Given a binary tree and two nodes, find their lowest common ancestor.",
-        "tags": ["trees", "recursion", "dfs"],
-        "followups": [
-          "How does the solution differ for a BST?",
-          "What if one or both nodes may not exist in the tree?",
-          "How would you avoid recursion?"
-        ]
-      },
-      {
-        "title": "Detect Cycle in a Linked List",
-        "prompt": "Determine if a linked list has a cycle and, if so, find the node where the cycle begins.",
-        "tags": ["linked-list", "two-pointers"],
-        "followups": [
-          "Explain why Floyd\u2019s algorithm works.",
-          "What are time and space complexities?",
-          "What changes if nodes can be modified (marking visited)?"
-        ]
-      },
-      {
-        "title": "Product Feature Metrics (Apple-style)",
-        "prompt": "Pick a feature in an Apple product (e.g., Notes search, Photos memories, iOS keyboard). Propose 2\u20133 success metrics and how you would instrument them.",
-        "tags": ["product-thinking", "metrics", "system-thinking"],
-        "followups": [
-          "How do you avoid optimizing for the wrong metric?",
-          "What privacy constraints would you consider?",
-          "What would be your rollback plan if metrics degrade?"
-        ]
-      },
-      {
-        "title": "Thread Safety Basics",
-        "prompt": "Explain race conditions and how you would protect shared data in a multi-threaded program.",
-        "tags": ["concurrency", "fundamentals", "memory"],
-        "followups": [
-          "Compare mutex vs atomic operations.",
-          "What is deadlock and how do you prevent it?",
-          "When is immutability the best solution?"
-        ]
-      },
-      {
-        "title": "Memory Management and Leaks",
-        "prompt": "Explain common causes of memory leaks in managed and unmanaged environments and how you debug them.",
-        "tags": ["memory", "debugging", "fundamentals"],
-        "followups": [
-          "What is a retain cycle and how do you prevent it?",
-          "How would you confirm a leak vs a cache?",
-          "What tools or techniques do you use to diagnose?"
-        ]
-      },
-      {
-        "title": "API Design for a Small Module",
-        "prompt": "Design a small API for a Settings module that supports reading and updating user preferences safely and predictably.",
-        "tags": ["api-design", "design", "code-quality"],
-        "followups": [
-          "How do you ensure backward compatibility?",
-          "How do you validate and version preference keys?",
-          "How do you test this module?"
-        ]
-      },
-      {
-        "title": "Build a Rate Limiter",
-        "prompt": "Design a rate limiter for an API (e.g., N requests per minute per user). Provide a workable design and complexity.",
-        "tags": ["design", "hashmap", "system-thinking"],
-        "followups": [
-          "Compare fixed window vs sliding window.",
-          "How do you handle distributed systems?",
-          "How do you measure and monitor effectiveness?"
-        ]
-      },
-      {
-        "title": "String Compression",
-        "prompt": "Implement basic string compression using counts of repeated characters (e.g., aabcccccaaa \u2192 a2b1c5a3). Return the original if not shorter.",
-        "tags": ["strings", "two-pointers", "fundamentals"],
-        "followups": [
-          "What is the time and space complexity?",
-          "How do you handle digits in the input?",
-          "How would you optimize for large strings?"
-        ]
-      },
-      {
-        "title": "Backtracking: Generate Parentheses",
-        "prompt": "Given n pairs of parentheses, generate all combinations of well-formed parentheses.",
-        "tags": ["backtracking", "recursion", "strings"],
-        "followups": [
-          "What pruning condition prevents invalid generation?",
-          "How many outputs exist asymptotically?",
-          "How would you convert this to iterative?"
-        ]
-      },
-      {
-        "title": "Matrix Rotate",
-        "prompt": "Rotate an NxN matrix 90 degrees in-place.",
-        "tags": ["arrays", "matrix", "in-place"],
-        "followups": [
-          "How do you do this layer by layer?",
-          "What is the space complexity and why?",
-          "What edge cases would you test?"
-        ]
-      },
-      {
-        "title": "Design: Logger with Levels",
-        "prompt": "Design a logger that supports log levels, formatting, and multiple outputs (console/file). Keep it extensible.",
-        "tags": ["design", "oop", "code-quality"],
-        "followups": [
-          "How would you avoid global state?",
-          "How would you make it fast (buffering, async)?",
-          "How do you test logging behavior?"
-        ]
-      },
-      {
-        "title": "Bug Hunt: Off-by-One in Production",
-        "prompt": "A feature occasionally crashes when processing the last element in a list. Describe how you would triage, reproduce, and fix it.",
-        "tags": ["debugging", "testing", "communication"],
-        "followups": [
-          "What logs or signals would you add first?",
-          "How do you write a regression test?",
-          "How do you ensure the fix doesn\u2019t cause performance regressions?"
-        ]
-      },
-      {
-        "title": "Design Review: Trade-offs",
-        "prompt": "You propose a design, but a teammate wants a faster-to-ship implementation that is less clean. How do you handle it?",
-        "tags": ["behavioral", "communication", "engineering-culture"],
-        "followups": [
-          "How do you decide what to simplify?",
-          "How do you document technical debt?",
-          "How do you align on quality standards?"
-        ]
-      },
-      {
-        "title": "Data Model: Notes Sync (Simplified)",
-        "prompt": "Design a simple data model and sync strategy for a Notes-like app that supports offline edits and later sync.",
-        "tags": ["system-thinking", "design", "data-modeling"],
-        "followups": [
-          "How do you resolve conflicts?",
-          "What is the minimal metadata you need per note?",
-          "What would you test first?"
-        ]
-      }
-    ]
-  }
+  "track": "swe_intern",
+  "company_style": "apple",
+  "difficulty": "medium",
+  "questions": [
+    {
+      "title": "LRU Cache",
+      "prompt": "Design and implement an LRU (Least Recently Used) cache with get and put in O(1) average time.",
+      "tags": ["design", "hashmap", "linked-list"],
+      "followups": [
+        "Why do you need both a hash map and a linked list?",
+        "What are the edge cases (capacity 0/1, repeated puts, updates)?",
+        "How would you make it thread-safe? What are the trade-offs?"
+      ]
+    },
+    {
+      "title": "Top K Frequent Elements",
+      "prompt": "Given an integer array, return the k most frequent elements. Your solution should be better than O(n log n) if possible.",
+      "tags": ["hashmap", "heap", "arrays"],
+      "followups": [
+        "What approach gives O(n) average time?",
+        "How do you handle ties deterministically?",
+        "What happens if k is close to n?"
+      ]
+    },
+    {
+      "title": "Longest Substring Without Repeating Characters",
+      "prompt": "Given a string, find the length of the longest substring without repeating characters.",
+      "tags": ["strings", "sliding-window", "hashmap"],
+      "followups": [
+        "What invariant does your sliding window maintain?",
+        "How do you implement this efficiently for Unicode?",
+        "What are the time and space complexities?"
+      ]
+    },
+    {
+      "title": "Kth Largest Element in an Array",
+      "prompt": "Find the kth largest element in an unsorted array without fully sorting the array.",
+      "tags": ["heap", "quickselect", "arrays"],
+      "followups": [
+        "Compare heap vs quickselect in average and worst case.",
+        "How do you handle many duplicates?",
+        "What changes if the input is a stream?"
+      ]
+    },
+    {
+      "title": "Merge Intervals",
+      "prompt": "Given a list of intervals, merge all overlapping intervals.",
+      "tags": ["sorting", "arrays", "intervals"],
+      "followups": [
+        "Why is sorting helpful here?",
+        "What are corner cases (touching endpoints, nested intervals)?",
+        "Can you do it in-place and what does that mean here?"
+      ]
+    },
+    {
+      "title": "Binary Tree Level Order Traversal",
+      "prompt": "Given a binary tree, return the level order traversal of its nodes' values.",
+      "tags": ["trees", "bfs", "queue"],
+      "followups": [
+        "What is the space complexity in the worst case?",
+        "How would you return the average per level instead of values?",
+        "How do you handle very deep trees (stack vs queue concerns)?"
+      ]
+    },
+    {
+      "title": "Lowest Common Ancestor (Binary Tree)",
+      "prompt": "Given a binary tree and two nodes, find their lowest common ancestor.",
+      "tags": ["trees", "recursion", "dfs"],
+      "followups": [
+        "How does the solution differ for a BST?",
+        "What if one or both nodes may not exist in the tree?",
+        "How would you avoid recursion?"
+      ]
+    },
+    {
+      "title": "Detect Cycle in a Linked List",
+      "prompt": "Determine if a linked list has a cycle and, if so, find the node where the cycle begins.",
+      "tags": ["linked-list", "two-pointers"],
+      "followups": [
+        "Explain why Floyd\u2019s algorithm works.",
+        "What are time and space complexities?",
+        "What changes if nodes can be modified (marking visited)?"
+      ]
+    },
+    {
+      "title": "Product Feature Metrics (Apple-style)",
+      "prompt": "Pick a feature in an Apple product (e.g., Notes search, Photos memories, iOS keyboard). Propose 2\u20133 success metrics and how you would instrument them.",
+      "tags": ["product-thinking", "metrics", "system-thinking"],
+      "followups": [
+        "How do you avoid optimizing for the wrong metric?",
+        "What privacy constraints would you consider?",
+        "What would be your rollback plan if metrics degrade?"
+      ]
+    },
+    {
+      "title": "Thread Safety Basics",
+      "prompt": "Explain race conditions and how you would protect shared data in a multi-threaded program.",
+      "tags": ["concurrency", "fundamentals", "memory"],
+      "followups": [
+        "Compare mutex vs atomic operations.",
+        "What is deadlock and how do you prevent it?",
+        "When is immutability the best solution?"
+      ]
+    },
+    {
+      "title": "Memory Management and Leaks",
+      "prompt": "Explain common causes of memory leaks in managed and unmanaged environments and how you debug them.",
+      "tags": ["memory", "debugging", "fundamentals"],
+      "followups": [
+        "What is a retain cycle and how do you prevent it?",
+        "How would you confirm a leak vs a cache?",
+        "What tools or techniques do you use to diagnose?"
+      ]
+    },
+    {
+      "title": "API Design for a Small Module",
+      "prompt": "Design a small API for a Settings module that supports reading and updating user preferences safely and predictably.",
+      "tags": ["api-design", "design", "code-quality"],
+      "followups": [
+        "How do you ensure backward compatibility?",
+        "How do you validate and version preference keys?",
+        "How do you test this module?"
+      ]
+    },
+    {
+      "title": "Build a Rate Limiter",
+      "prompt": "Design a rate limiter for an API (e.g., N requests per minute per user). Provide a workable design and complexity.",
+      "tags": ["design", "hashmap", "system-thinking"],
+      "followups": [
+        "Compare fixed window vs sliding window.",
+        "How do you handle distributed systems?",
+        "How do you measure and monitor effectiveness?"
+      ]
+    },
+    {
+      "title": "String Compression",
+      "prompt": "Implement basic string compression using counts of repeated characters (e.g., aabcccccaaa \u2192 a2b1c5a3). Return the original if not shorter.",
+      "tags": ["strings", "two-pointers", "fundamentals"],
+      "followups": [
+        "What is the time and space complexity?",
+        "How do you handle digits in the input?",
+        "How would you optimize for large strings?"
+      ]
+    },
+    {
+      "title": "Backtracking: Generate Parentheses",
+      "prompt": "Given n pairs of parentheses, generate all combinations of well-formed parentheses.",
+      "tags": ["backtracking", "recursion", "strings"],
+      "followups": [
+        "What pruning condition prevents invalid generation?",
+        "How many outputs exist asymptotically?",
+        "How would you convert this to iterative?"
+      ]
+    },
+    {
+      "title": "Matrix Rotate",
+      "prompt": "Rotate an NxN matrix 90 degrees in-place.",
+      "tags": ["arrays", "matrix", "in-place"],
+      "followups": [
+        "How do you do this layer by layer?",
+        "What is the space complexity and why?",
+        "What edge cases would you test?"
+      ]
+    },
+    {
+      "title": "Design: Logger with Levels",
+      "prompt": "Design a logger that supports log levels, formatting, and multiple outputs (console/file). Keep it extensible.",
+      "tags": ["design", "oop", "code-quality"],
+      "followups": [
+        "How would you avoid global state?",
+        "How would you make it fast (buffering, async)?",
+        "How do you test logging behavior?"
+      ]
+    },
+    {
+      "title": "Bug Hunt: Off-by-One in Production",
+      "prompt": "A feature occasionally crashes when processing the last element in a list. Describe how you would triage, reproduce, and fix it.",
+      "tags": ["debugging", "testing", "communication"],
+      "followups": [
+        "What logs or signals would you add first?",
+        "How do you write a regression test?",
+        "How do you ensure the fix doesn\u2019t cause performance regressions?"
+      ]
+    },
+    {
+      "title": "Design Review: Trade-offs",
+      "prompt": "You propose a design, but a teammate wants a faster-to-ship implementation that is less clean. How do you handle it?",
+      "tags": ["behavioral", "communication", "engineering-culture"],
+      "followups": [
+        "How do you decide what to simplify?",
+        "How do you document technical debt?",
+        "How do you align on quality standards?"
+      ]
+    },
+    {
+      "title": "Data Model: Notes Sync (Simplified)",
+      "prompt": "Design a simple data model and sync strategy for a Notes-like app that supports offline edits and later sync.",
+      "tags": ["system-thinking", "design", "data-modeling"],
+      "followups": [
+        "How do you resolve conflicts?",
+        "What is the minimal metadata you need per note?",
+        "What would you test first?"
+      ]
+    },
+    {
+      "title": "Two Sum (Multiple Approaches)",
+      "prompt": "Given an array of integers and a target sum, find two indices whose values add up to the target.",
+      "tags": ["arrays", "hashmap", "two-pointers"],
+      "followups": [
+        "Compare brute force, hash map, and two-pointer approaches",
+        "What if the array is sorted?",
+        "How would you handle multiple pairs?"
+      ]
+    },
+    {
+      "title": "Valid Palindrome (Enhanced)",
+      "prompt": "Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.",
+      "tags": ["strings", "two-pointers"],
+      "followups": [
+        "How would you handle spaces and punctuation?",
+        "What's the time and space complexity?",
+        "Can you solve it with O(1) extra space?"
+      ]
+    },
+    {
+      "title": "Maximum Subarray (Kadane's Algorithm)",
+      "prompt": "Find the contiguous subarray with the largest sum.",
+      "tags": ["arrays", "dynamic-programming"],
+      "followups": [
+        "What's the intuition behind Kadane's algorithm?",
+        "How would you modify it to also return the subarray indices?",
+        "What if all numbers are negative?"
+      ]
+    },
+    {
+      "title": "Implement Queue using Stacks",
+      "prompt": "Implement a queue using two stacks with efficient operations.",
+      "tags": ["stacks", "queues", "data-structures"],
+      "followups": [
+        "What's the amortized time complexity?",
+        "How would you make peek() efficient?",
+        "Can you implement a stack using queues?"
+      ]
+    },
+    {
+      "title": "Group Anagrams",
+      "prompt": "Given an array of strings, group anagrams together.",
+      "tags": ["hashmap", "strings", "sorting"],
+      "followups": [
+        "What makes a good hash key for anagrams?",
+        "How would you handle large strings?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Container With Most Water",
+      "prompt": "Given n non-negative integers representing heights, find two lines that together with x-axis form a container holding most water.",
+      "tags": ["arrays", "two-pointers"],
+      "followups": [
+        "Why does the two-pointer approach work?",
+        "How would you prove its correctness?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "3Sum",
+      "prompt": "Find all unique triplets in an array that sum to zero.",
+      "tags": ["arrays", "two-pointers", "sorting"],
+      "followups": [
+        "How do you avoid duplicate triplets?",
+        "What's the time complexity?",
+        "How would you adapt for a different target sum?"
+      ]
+    },
+    {
+      "title": "Word Break",
+      "prompt": "Given a string and a dictionary of words, determine if the string can be segmented into space-separated dictionary words.",
+      "tags": ["dynamic-programming", "strings"],
+      "followups": [
+        "What's the recurrence relation?",
+        "How would you handle an empty dictionary?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Design a Simple Cache",
+      "prompt": "Design a cache with TTL (Time To Live) support for key-value pairs.",
+      "tags": ["design", "data-structures", "caching"],
+      "followups": [
+        "How do you efficiently remove expired entries?",
+        "How would you handle concurrent access?",
+        "What about memory constraints?"
+      ]
+    },
+    {
+      "title": "Design a Calendar Event System",
+      "prompt": "Design a system to store and query calendar events with features like overlapping detection and reminders.",
+      "tags": ["design", "data-structures", "apple-context"],
+      "followups": [
+        "How do you efficiently find overlapping events?",
+        "How would you implement recurring events?",
+        "What about timezone handling?"
+      ]
+    },
+    {
+      "title": "Design a Photo Gallery App",
+      "prompt": "Design the backend system for a photo gallery app with features like albums, search, and thumbnail generation.",
+      "tags": ["design", "apple-context", "system-thinking"],
+      "followups": [
+        "How do you store and retrieve large numbers of photos efficiently?",
+        "How would you implement face recognition grouping?",
+        "What about privacy considerations?"
+      ]
+    },
+    {
+      "title": "Design a Music Streaming Service",
+      "prompt": "Design a basic music streaming service with features like playlists, recommendations, and offline playback.",
+      "tags": ["design", "apple-context", "streaming"],
+      "followups": [
+        "How do you handle streaming large audio files?",
+        "How would you implement shuffle algorithm?",
+        "What about licensing and DRM?"
+      ]
+    },
+    {
+      "title": "Design a Messaging App",
+      "prompt": "Design a messaging app with features like delivery receipts, typing indicators, and media sharing.",
+      "tags": ["design", "real-time", "apple-context"],
+      "followups": [
+        "How do you handle message delivery guarantees?",
+        "How would you implement end-to-end encryption?",
+        "What about scalability for millions of users?"
+      ]
+    },
+    {
+      "title": "Design a Health Data System",
+      "prompt": "Design a system to store and process health data from Apple Watch and other health devices.",
+      "tags": ["design", "apple-context", "privacy"],
+      "followups": [
+        "How do you ensure data privacy and security?",
+        "How would you handle different data types (heart rate, steps, sleep)?",
+        "What about data synchronization across devices?"
+      ]
+    },
+    {
+      "title": "SQL: Query Optimization",
+      "prompt": "Given a slow database query, explain how you would optimize it.",
+      "tags": ["sql", "databases", "performance"],
+      "followups": [
+        "What tools would you use to analyze query performance?",
+        "How do indexes help and when do they hurt?",
+        "What about query caching strategies?"
+      ]
+    },
+    {
+      "title": "SQL: Data Analysis for App",
+      "prompt": "Write a query to analyze user engagement for an iOS app with tables for users, sessions, and events.",
+      "tags": ["sql", "databases", "apple-context"],
+      "followups": [
+        "How would you calculate daily active users?",
+        "What about retention rate?",
+        "How do you handle timezone differences?"
+      ]
+    },
+    {
+      "title": "Concurrency: Producer-Consumer Pattern",
+      "prompt": "Implement a producer-consumer pattern with a bounded buffer using threads.",
+      "tags": ["concurrency", "threads", "synchronization"],
+      "followups": [
+        "How do you prevent deadlocks?",
+        "What about handling multiple producers and consumers?",
+        "How would you test this implementation?"
+      ]
+    },
+    {
+      "title": "Concurrency: Read-Write Lock",
+      "prompt": "Design a read-write lock that allows multiple readers or single writer.",
+      "tags": ["concurrency", "synchronization", "design"],
+      "followups": [
+        "How do you prevent writer starvation?",
+        "What about reentrancy?",
+        "How would you implement this in Swift/Objective-C?"
+      ]
+    },
+    {
+      "title": "Object Design: Shopping Cart",
+      "prompt": "Design classes for a shopping cart system for Apple's online store.",
+      "tags": ["oop", "design", "apple-context"],
+      "followups": [
+        "How do you handle different product types?",
+        "What about discounts and promotions?",
+        "How do you ensure thread safety?"
+      ]
+    },
+    {
+      "title": "Object Design: File System",
+      "prompt": "Design classes to represent a simple file system with files, directories, and permissions.",
+      "tags": ["oop", "design", "file-system"],
+      "followups": [
+        "How do you handle symbolic links?",
+        "What about file versioning?",
+        "How would you implement search functionality?"
+      ]
+    },
+    {
+      "title": "Behavioral: Technical Challenge",
+      "prompt": "Tell me about a challenging technical problem you solved and how you approached it.",
+      "tags": ["behavioral", "problem-solving", "technical"],
+      "followups": [
+        "What made it challenging?",
+        "How did you debug the issue?",
+        "What did you learn from the experience?"
+      ]
+    },
+    {
+      "title": "Behavioral: Code Review",
+      "prompt": "Describe your experience with code reviews - both giving and receiving feedback.",
+      "tags": ["behavioral", "code-review", "collaboration"],
+      "followups": [
+        "What makes a good code review?",
+        "How do you handle constructive criticism?",
+        "What was the impact of a particularly good code review?"
+      ]
+    },
+    {
+      "title": "Behavioral: Technical Debt",
+      "prompt": "Tell me about a time you had to deal with technical debt in a project.",
+      "tags": ["behavioral", "technical-debt", "maintenance"],
+      "followups": [
+        "How did you identify the debt?",
+        "How did you prioritize addressing it?",
+        "What was the result?"
+      ]
+    },
+    {
+      "title": "Behavioral: Cross-Functional Collaboration",
+      "prompt": "Describe a time you worked with designers or product managers to deliver a feature.",
+      "tags": ["behavioral", "collaboration", "communication"],
+      "followups": [
+        "How did you handle differing opinions?",
+        "What challenges did you face?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Behavioral: Handling Production Issues",
+      "prompt": "Tell me about a time you had to handle a production issue or outage.",
+      "tags": ["behavioral", "incident-response", "reliability"],
+      "followups": [
+        "How did you diagnose the issue?",
+        "How did you communicate with stakeholders?",
+        "What preventive measures did you implement?"
+      ]
+    },
+    {
+      "title": "Behavioral: Learning New Technology",
+      "prompt": "Describe how you learn new programming languages or frameworks.",
+      "tags": ["behavioral", "learning", "adaptability"],
+      "followups": [
+        "What's your learning process?",
+        "How do you decide what to learn next?",
+        "What was the most challenging technology you learned?"
+      ]
+    },
+    {
+      "title": "Behavioral: Quality Focus",
+      "prompt": "How do you ensure quality in your code and deliverables?",
+      "tags": ["behavioral", "quality", "apple-context"],
+      "followups": [
+        "What testing strategies do you use?",
+        "How do you balance speed with quality?",
+        "What does quality mean to you in software development?"
+      ]
+    },
+    {
+      "title": "Behavioral: Privacy and Security",
+      "prompt": "How do you approach privacy and security in your software projects?",
+      "tags": ["behavioral", "privacy", "security", "apple-context"],
+      "followups": [
+        "What principles guide your approach?",
+        "What trade-offs have you faced between features and security?",
+        "How do you stay updated on security best practices?"
+      ]
+    },
+    {
+      "title": "Behavioral: User Experience",
+      "prompt": "How do you incorporate user experience considerations into your technical decisions?",
+      "tags": ["behavioral", "user-experience", "apple-context"],
+      "followups": [
+        "What's an example of a technical decision impacting UX?",
+        "How do you gather user feedback?",
+        "How do you balance technical elegance with user needs?"
+      ]
+    },
+    {
+      "title": "Behavioral: Innovation at Apple",
+      "prompt": "What Apple product or technology would you improve, and how?",
+      "tags": ["behavioral", "innovation", "apple-context"],
+      "followups": [
+        "Why did you choose this product?",
+        "What technical challenges would you face?",
+        "How would you measure success?"
+      ]
+    },
+    {
+      "title": "Behavioral: Sustainability in Tech",
+      "prompt": "How can software contribute to environmental sustainability?",
+      "tags": ["behavioral", "sustainability", "apple-context"],
+      "followups": [
+        "What Apple initiatives relate to sustainability?",
+        "How can software reduce energy consumption?",
+        "Why is this important for technology companies?"
+      ]
+    },
+    {
+      "title": "Technical Trade-offs",
+      "prompt": "Describe a time you had to make a technical trade-off between performance, maintainability, and time to market.",
+      "tags": ["behavioral", "technical", "trade-offs"],
+      "followups": [
+        "What factors did you consider?",
+        "How did you make your decision?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Mentoring Experience",
+      "prompt": "Tell me about a time you helped someone else learn or grow technically.",
+      "tags": ["behavioral", "mentorship", "leadership"],
+      "followups": [
+        "How did you assess their needs?",
+        "What approach did you take?",
+        "What was the outcome?"
+      ]
+    }
+  ]
+}

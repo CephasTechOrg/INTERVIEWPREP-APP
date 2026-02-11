@@ -351,6 +351,214 @@
         "What is one gap you\u2019re working on right now?",
         "What\u2019s an example that demonstrates your fit?"
       ]
+    },
+    {
+      "title": "Dealing with Ambiguity",
+      "prompt": "Tell me about a time you had to work on a project with unclear requirements or goals. How did you proceed?",
+      "tags": [
+        "behavioral",
+        "problem-solving",
+        "adaptability"
+      ],
+      "followups": [
+        "How did you seek clarity and define success?",
+        "What steps did you take to manage uncertainty?"
+      ]
+    },
+    {
+      "title": "Mentoring Others",
+      "prompt": "Describe a time you mentored or helped a junior colleague or teammate grow their skills.",
+      "tags": [
+        "behavioral",
+        "leadership",
+        "collaboration"
+      ],
+      "followups": [
+        "How did you assess what they needed?",
+        "What was the outcome for them and for the team?"
+      ]
+    },
+    {
+      "title": "Learning New Technology",
+      "prompt": "Tell me about a time you had to quickly learn a new technology or framework for a project.",
+      "tags": [
+        "behavioral",
+        "learning",
+        "adaptability"
+      ],
+      "followups": [
+        "What was your learning strategy?",
+        "How did you apply it to deliver value quickly?"
+      ]
+    },
+    {
+      "title": "Missed Deadline or Failure",
+      "prompt": "Tell me about a time you missed a deadline or a project didn't go as planned. What happened and what did you learn?",
+      "tags": [
+        "behavioral",
+        "resilience",
+        "growth-mindset"
+      ],
+      "followups": [
+        "How did you communicate the situation?",
+        "What would you do differently in hindsight?"
+      ]
+    },
+    {
+      "title": "Improving a Process",
+      "prompt": "Describe a time you identified an inefficient process at work and improved it.",
+      "tags": [
+        "behavioral",
+        "initiative",
+        "problem-solving"
+      ],
+      "followups": [
+        "How did you get buy-in from others?",
+        "How did you measure the impact of your change?"
+      ]
+    },
+    {
+      "title": "Ethical Dilemma",
+      "prompt": "Have you ever faced an ethical dilemma at work? How did you handle it?",
+      "tags": [
+        "behavioral",
+        "integrity",
+        "decision-making"
+      ],
+      "followups": [
+        "What principles guided your decision?",
+        "Who did you consult with, if anyone?"
+      ]
+    },
+    {
+      "title": "Receiving Conflicting Feedback",
+      "prompt": "Tell me about a time you received conflicting feedback from multiple stakeholders. How did you resolve it?",
+      "tags": [
+        "behavioral",
+        "communication",
+        "prioritization"
+      ],
+      "followups": [
+        "How did you decide which direction to take?",
+        "How did you manage stakeholder expectations?"
+      ]
+    },
+    {
+      "title": "Working with Remote Team",
+      "prompt": "Describe your experience working with a remote or distributed team. What challenges did you face and how did you overcome them?",
+      "tags": [
+        "behavioral",
+        "collaboration",
+        "communication"
+      ],
+      "followups": [
+        "What tools or practices helped most?",
+        "How did you build rapport with teammates you rarely saw in person?"
+      ]
+    },
+    {
+      "title": "Taking Initiative",
+      "prompt": "Give an example of a time you took initiative on a project beyond your assigned responsibilities.",
+      "tags": [
+        "behavioral",
+        "initiative",
+        "ownership"
+      ],
+      "followups": [
+        "What was the outcome?",
+        "How did you balance this with your core responsibilities?"
+      ]
+    },
+    {
+      "title": "Adapting to Change",
+      "prompt": "Tell me about a significant change in your team or company (reorg, pivot, new leadership). How did you adapt?",
+      "tags": [
+        "behavioral",
+        "adaptability",
+        "resilience"
+      ],
+      "followups": [
+        "How did you help others adapt?",
+        "What did you learn from the experience?"
+      ]
+    },
+    {
+      "title": "Saying No to a Request",
+      "prompt": "Describe a time you had to say no to a request from a manager, stakeholder, or teammate. How did you handle it?",
+      "tags": [
+        "behavioral",
+        "communication",
+        "prioritization"
+      ],
+      "followups": [
+        "How did you explain your reasoning?",
+        "What alternative did you propose, if any?"
+      ]
+    },
+    {
+      "title": "Building Trust",
+      "prompt": "Tell me about a time you had to build trust with a new team or a skeptical stakeholder.",
+      "tags": [
+        "behavioral",
+        "collaboration",
+        "communication"
+      ],
+      "followups": [
+        "What specific actions did you take?",
+        "How did you know trust had been established?"
+      ]
+    },
+    {
+      "title": "Work-Life Balance",
+      "prompt": "How do you maintain a healthy work-life balance, especially during demanding projects?",
+      "tags": [
+        "behavioral",
+        "self-management",
+        "wellbeing"
+      ],
+      "followups": [
+        "What boundaries do you set?",
+        "How do you recharge and avoid burnout?"
+      ]
+    },
+    {
+      "title": "Presenting to Leadership",
+      "prompt": "Describe a time you had to present a complex technical topic to non-technical leadership or stakeholders.",
+      "tags": [
+        "behavioral",
+        "communication",
+        "leadership"
+      ],
+      "followups": [
+        "How did you tailor your message?",
+        "What was the outcome of the presentation?"
+      ]
+    },
+    {
+      "title": "Cultural Fit",
+      "prompt": "How would you describe your work style, and what kind of team culture brings out your best performance?",
+      "tags": [
+        "behavioral",
+        "self-awareness",
+        "culture"
+      ],
+      "followups": [
+        "How do you contribute to a positive team culture?",
+        "What's your approach when you join a new team?"
+      ]
+    },
+    {
+      "title": "Career Goals",
+      "prompt": "Where do you see your career in 3-5 years, and how does this role align with that vision?",
+      "tags": [
+        "behavioral",
+        "communication",
+        "growth-mindset"
+      ],
+      "followups": [
+        "What skills are you looking to develop in that time?",
+        "How do you plan your professional development?"
+      ]
     }
   ]
 }

@@ -69,7 +69,7 @@
       "tags": ["binary-search", "fundamentals"],
       "followups": [
         "Why does sorting help?",
-        "Why wouldn’t this work on an unsorted list?",
+        "Why wouldn\u2019t this work on an unsorted list?",
         "What real-life example is similar?"
       ]
     },
@@ -98,7 +98,7 @@
       "prompt": "Explain when and why you would use a loop in a program.",
       "tags": ["loops", "fundamentals"],
       "followups": [
-        "What happens if you don’t use loops?",
+        "What happens if you don\u2019t use loops?",
         "What is a common mistake with loops?",
         "How do you make sure a loop stops?"
       ]
@@ -145,7 +145,7 @@
     },
     {
       "title": "Debugging Basics",
-      "prompt": "Your program doesn’t work as expected. Explain the first steps you would take to debug it.",
+      "prompt": "Your program doesn\u2019t work as expected. Explain the first steps you would take to debug it.",
       "tags": ["debugging", "fundamentals"],
       "followups": [
         "Why start with small checks?",
@@ -165,12 +165,372 @@
     },
     {
       "title": "Why Apple? (Easy Technical Angle)",
-      "prompt": "Why do you want to intern at Apple, and how does software contribute to Apple’s products?",
+      "prompt": "Why do you want to intern at Apple, and how does software contribute to Apple\u2019s products?",
       "tags": ["behavioral", "product-thinking"],
       "followups": [
         "What Apple product do you like?",
         "How does software improve user experience?",
         "What do you hope to learn at Apple?"
+      ]
+    },
+    {
+      "title": "Find the Smallest Number",
+      "prompt": "Explain how you would find the smallest number in a list of integers.",
+      "tags": ["arrays", "logic", "fundamentals"],
+      "followups": [
+        "How is this similar to finding the largest number?",
+        "What if all numbers are negative?",
+        "Why is this a common programming task?"
+      ]
+    },
+    {
+      "title": "Sorting Concepts",
+      "prompt": "Explain why sorting data can be useful in programming.",
+      "tags": ["sorting", "fundamentals"],
+      "followups": [
+        "What operations become easier with sorted data?",
+        "Name a real-world Apple use case for sorting",
+        "Is sorting always necessary?"
+      ]
+    },
+    {
+      "title": "String Concatenation",
+      "prompt": "Explain how you would combine two or more strings together.",
+      "tags": ["strings", "fundamentals"],
+      "followups": [
+        "What's a simple example?",
+        "Why is this useful in real programs?",
+        "How would you combine user input with a message?"
+      ]
+    },
+    {
+      "title": "Basic Error Handling",
+      "prompt": "Explain what you would do if your program encounters an error or unexpected input.",
+      "tags": ["error-handling", "fundamentals"],
+      "followups": [
+        "Why is it important to handle errors gracefully?",
+        "What information should error messages provide?",
+        "How does error handling improve user experience?"
+      ]
+    },
+    {
+      "title": "Comments in Code",
+      "prompt": "Explain why adding comments to code can be helpful.",
+      "tags": ["code-quality", "fundamentals"],
+      "followups": [
+        "When should you add comments?",
+        "What makes a good comment?",
+        "Can comments ever be unhelpful?"
+      ]
+    },
+    {
+      "title": "Version Control Basics",
+      "prompt": "Explain why using version control (like Git) is important for team projects.",
+      "tags": ["version-control", "collaboration", "fundamentals"],
+      "followups": [
+        "How does it help with collaboration?",
+        "What happens if you make a mistake?",
+        "Why does Apple use version control?"
+      ]
+    },
+    {
+      "title": "User Input Validation",
+      "prompt": "Explain why it's important to validate user input in applications.",
+      "tags": ["validation", "security", "fundamentals"],
+      "followups": [
+        "What types of validation are important?",
+        "How does this protect Apple's products?",
+        "What happens without validation?"
+      ]
+    },
+    {
+      "title": "Variables and Data Types",
+      "prompt": "Explain how variables help store and manage different types of data.",
+      "tags": ["fundamentals", "variables"],
+      "followups": [
+        "Why not hardcode all values?",
+        "What are common data types?",
+        "How do variables improve code readability?"
+      ]
+    },
+    {
+      "title": "Simple iOS App Concept",
+      "prompt": "Explain at a high level how a simple iOS app might work.",
+      "tags": ["ios", "apple-context", "fundamentals"],
+      "followups": [
+        "What are basic components of an iOS app?",
+        "How does user interaction work?",
+        "Where does data come from?"
+      ]
+    },
+    {
+      "title": "Apple Product Integration",
+      "prompt": "Explain how different Apple products might work together (like iPhone and Apple Watch).",
+      "tags": ["apple-context", "product-thinking", "integration"],
+      "followups": [
+        "What benefits come from integration?",
+        "How does software enable this?",
+        "What challenges might arise?"
+      ]
+    },
+    {
+      "title": "Accessibility Basics",
+      "prompt": "Explain why making software accessible to all users is important.",
+      "tags": ["accessibility", "inclusion", "fundamentals"],
+      "followups": [
+        "Who benefits from accessible design?",
+        "What simple improvements help accessibility?",
+        "Why does Apple emphasize accessibility?"
+      ]
+    },
+    {
+      "title": "Privacy and Security Basics",
+      "prompt": "Explain why privacy and security are crucial for Apple's products.",
+      "tags": ["privacy", "security", "apple-context"],
+      "followups": [
+        "What sensitive data do Apple products handle?",
+        "What are basic security practices?",
+        "How does privacy build user trust?"
+      ]
+    },
+    {
+      "title": "Performance Considerations",
+      "prompt": "Explain why performance matters in software, especially on mobile devices.",
+      "tags": ["performance", "mobile", "fundamentals"],
+      "followups": [
+        "What affects app performance?",
+        "Why is battery life important?",
+        "How do you balance features with performance?"
+      ]
+    },
+    {
+      "title": "Simple Algorithm for Photos App",
+      "prompt": "Explain a simple way to organize photos by date in an app like Photos.",
+      "tags": ["algorithms", "apple-context", "logic"],
+      "followups": [
+        "What data would you use?",
+        "How would you group photos?",
+        "Why is this useful for users?"
+      ]
+    },
+    {
+      "title": "Handling Multiple Tasks",
+      "prompt": "Explain why apps need to handle multiple tasks or users at once.",
+      "tags": ["concurrency", "fundamentals"],
+      "followups": [
+        "What problems could occur with multiple users?",
+        "How does Apple handle millions of users?",
+        "Why is this important for messaging apps?"
+      ]
+    },
+    {
+      "title": "Database Basics",
+      "prompt": "Explain why apps need databases to store information.",
+      "tags": ["databases", "fundamentals"],
+      "followups": [
+        "What types of data would Apple apps store?",
+        "Why not use files instead?",
+        "How do databases help with speed?"
+      ]
+    },
+    {
+      "title": "Caching Concept",
+      "prompt": "Explain why caching frequently accessed data can improve app performance.",
+      "tags": ["caching", "performance", "fundamentals"],
+      "followups": [
+        "What Apple app data might be cached?",
+        "What are trade-offs of caching?",
+        "How does caching help during slow network?"
+      ]
+    },
+    {
+      "title": "Mobile vs Desktop Differences",
+      "prompt": "Explain why mobile apps might need different approaches than desktop software.",
+      "tags": ["mobile", "apple-context", "user-experience"],
+      "followups": [
+        "What differences might exist?",
+        "Why is touch interface important?",
+        "How would you approach this as a developer?"
+      ]
+    },
+    {
+      "title": "Team Collaboration",
+      "prompt": "Explain why working well in a team is important at Apple.",
+      "tags": ["collaboration", "teamwork", "behavioral"],
+      "followups": [
+        "What makes a good team member?",
+        "How do teams solve complex problems?",
+        "Why does Apple value collaboration?"
+      ]
+    },
+    {
+      "title": "Learning from Mistakes",
+      "prompt": "Tell me about a time you made a mistake in coding and what you learned.",
+      "tags": ["behavioral", "learning", "growth"],
+      "followups": [
+        "How did you discover the mistake?",
+        "What did you do to fix it?",
+        "How did this help you improve?"
+      ]
+    },
+    {
+      "title": "Technical Challenge",
+      "prompt": "Describe a technical challenge you faced and how you approached it.",
+      "tags": ["behavioral", "problem-solving", "technical"],
+      "followups": [
+        "What made it challenging?",
+        "What resources did you use?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Project Experience",
+      "prompt": "Tell me about a programming project you worked on.",
+      "tags": ["behavioral", "experience", "projects"],
+      "followups": [
+        "What was your role?",
+        "What did you learn?",
+        "What would you improve?"
+      ]
+    },
+    {
+      "title": "User-Centric Thinking",
+      "prompt": "How would you improve the user experience of an Apple product?",
+      "tags": ["behavioral", "user-experience", "apple-context"],
+      "followups": [
+        "What pain points have you noticed?",
+        "How would you implement your idea?",
+        "How would you test your improvement?"
+      ]
+    },
+    {
+      "title": "Adaptability",
+      "prompt": "Tell me about a time you had to learn something new quickly.",
+      "tags": ["behavioral", "adaptability", "learning"],
+      "followups": [
+        "What was the situation?",
+        "How did you approach learning?",
+        "What was the result?"
+      ]
+    },
+    {
+      "title": "Communication Skills",
+      "prompt": "Explain a technical concept to someone without a technical background.",
+      "tags": ["behavioral", "communication", "teaching"],
+      "followups": [
+        "How do you simplify complex ideas?",
+        "Why is clear communication important?",
+        "How do you know if someone understands?"
+      ]
+    },
+    {
+      "title": "Initiative",
+      "prompt": "Tell me about a time you went beyond what was required.",
+      "tags": ["behavioral", "initiative", "ownership"],
+      "followups": [
+        "What motivated you?",
+        "What was the impact?",
+        "What did you learn?"
+      ]
+    },
+    {
+      "title": "Time Management",
+      "prompt": "How do you prioritize tasks when you have multiple deadlines?",
+      "tags": ["behavioral", "time-management", "organization"],
+      "followups": [
+        "What strategies do you use?",
+        "How do you handle unexpected tasks?",
+        "What tools help you stay organized?"
+      ]
+    },
+    {
+      "title": "Feedback Reception",
+      "prompt": "Tell me about a time you received feedback on your work.",
+      "tags": ["behavioral", "feedback", "growth"],
+      "followups": [
+        "How did you respond?",
+        "What did you change?",
+        "How did it improve your work?"
+      ]
+    },
+    {
+      "title": "Problem Solving Approach",
+      "prompt": "Walk me through how you would approach a new programming problem.",
+      "tags": ["behavioral", "problem-solving", "process"],
+      "followups": [
+        "Where do you start?",
+        "How do you break down complex problems?",
+        "When do you ask for help?"
+      ]
+    },
+    {
+      "title": "Apple Innovation",
+      "prompt": "What Apple innovation or technology impresses you most?",
+      "tags": ["behavioral", "apple-context", "innovation"],
+      "followups": [
+        "Why does it impress you?",
+        "How does it help users?",
+        "What technical challenges might it involve?"
+      ]
+    },
+    {
+      "title": "Career Goals",
+      "prompt": "What do you hope to gain from an Apple internship?",
+      "tags": ["behavioral", "goals", "career"],
+      "followups": [
+        "What skills do you want to develop?",
+        "How does this fit your long-term goals?",
+        "What unique opportunities does Apple offer?"
+      ]
+    },
+    {
+      "title": "Diversity and Inclusion",
+      "prompt": "Why is diversity important in technology teams?",
+      "tags": ["behavioral", "diversity", "inclusion"],
+      "followups": [
+        "How does diversity improve products?",
+        "What can individuals do to promote inclusion?",
+        "Why does Apple value diverse perspectives?"
+      ]
+    },
+    {
+      "title": "Work-Life Balance",
+      "prompt": "How do you maintain balance while working on challenging projects?",
+      "tags": ["behavioral", "wellbeing", "balance"],
+      "followups": [
+        "What strategies help you stay productive?",
+        "How do you avoid burnout?",
+        "Why is balance important for creativity?"
+      ]
+    },
+    {
+      "title": "Design Thinking",
+      "prompt": "Explain why design is important in software development.",
+      "tags": ["behavioral", "design-thinking", "apple-context"],
+      "followups": [
+        "How does design affect user experience?",
+        "Why does Apple focus on design?",
+        "How do developers collaborate with designers?"
+      ]
+    },
+    {
+      "title": "Quality Focus",
+      "prompt": "Why is quality important in software, especially at Apple?",
+      "tags": ["behavioral", "quality", "apple-context"],
+      "followups": [
+        "What does quality mean in software?",
+        "How do you ensure quality in your work?",
+        "Why do users expect quality from Apple?"
+      ]
+    },
+    {
+      "title": "Environmental Responsibility",
+      "prompt": "How can software contribute to environmental sustainability?",
+      "tags": ["behavioral", "sustainability", "apple-context"],
+      "followups": [
+        "What Apple initiatives relate to sustainability?",
+        "How can software reduce environmental impact?",
+        "Why is this important for technology companies?"
       ]
     }
   ]
