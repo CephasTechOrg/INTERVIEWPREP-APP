@@ -1028,6 +1028,212 @@
         "What metrics would you monitor?",
         "What is exponential backoff with jitter?"
       ]
+    },
+    {
+      "title": "String Manipulation Basics",
+      "prompt": "Given a string, write a function to count vowels, reverse words, or remove duplicates. Explain your approach.",
+      "tags": [
+        "algorithms",
+        "strings"
+      ],
+      "followups": [
+        "What's the time and space complexity?",
+        "How would you handle Unicode characters?"
+      ]
+    },
+    {
+      "title": "Array Rotation",
+      "prompt": "Rotate an array by k positions. Discuss different approaches and their trade-offs.",
+      "tags": [
+        "algorithms",
+        "arrays"
+      ],
+      "followups": [
+        "What's the optimal solution for in-place rotation?",
+        "How would you handle negative k values?"
+      ]
+    },
+    {
+      "title": "Find Missing Number",
+      "prompt": "Given an array of n-1 integers in the range 1 to n, find the missing number.",
+      "tags": [
+        "algorithms",
+        "arrays"
+      ],
+      "followups": [
+        "What if the array isn't sorted?",
+        "How would you find multiple missing numbers?"
+      ]
+    },
+    {
+      "title": "Binary Tree Height",
+      "prompt": "Calculate the height of a binary tree. Explain both recursive and iterative approaches.",
+      "tags": [
+        "data-structures",
+        "tree"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "How would you find the diameter of a binary tree?"
+      ]
+    },
+    {
+      "title": "Check if Tree is Balanced",
+      "prompt": "Determine if a binary tree is balanced (height difference between left and right subtrees ≤ 1 for all nodes).",
+      "tags": [
+        "data-structures",
+        "tree"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "How would you optimize the solution?"
+      ]
+    },
+    {
+      "title": "Implement a Queue with Stacks",
+      "prompt": "Design a queue using two stacks. Explain the enqueue and dequeue operations.",
+      "tags": [
+        "data-structures",
+        "queue",
+        "stack"
+      ],
+      "followups": [
+        "What's the amortized time complexity?",
+        "Can you implement a stack with queues?"
+      ]
+    },
+    {
+      "title": "Find First Non-repeating Character",
+      "prompt": "Given a string, find the first character that doesn't repeat.",
+      "tags": [
+        "algorithms",
+        "strings"
+      ],
+      "followups": [
+        "What's the optimal time and space complexity?",
+        "How would you handle case sensitivity?"
+      ]
+    },
+    {
+      "title": "Merge Two Sorted Arrays",
+      "prompt": "Merge two sorted arrays into one sorted array.",
+      "tags": [
+        "algorithms",
+        "arrays",
+        "sorting"
+      ],
+      "followups": [
+        "What's the time complexity?",
+        "How would you do it in-place if one array has extra space?"
+      ]
+    },
+    {
+      "title": "Find Majority Element",
+      "prompt": "Find the element that appears more than n/2 times in an array (if it exists).",
+      "tags": [
+        "algorithms",
+        "arrays"
+      ],
+      "followups": [
+        "What's Boyer-Moore Voting Algorithm?",
+        "What if no element has majority?"
+      ]
+    },
+    {
+      "title": "Check if Array Contains Duplicates",
+      "prompt": "Determine if an array contains duplicate elements.",
+      "tags": [
+        "algorithms",
+        "arrays"
+      ],
+      "followups": [
+        "What's the optimal solution?",
+        "How would you find all duplicates?"
+      ]
+    },
+    {
+      "title": "Basic Calculator",
+      "prompt": "Implement a calculator that evaluates simple expressions like \"2+3*4\".",
+      "tags": [
+        "algorithms",
+        "stack"
+      ],
+      "followups": [
+        "How do you handle operator precedence?",
+        "What about parentheses?"
+      ]
+    },
+    {
+      "title": "Design a Parking Lot",
+      "prompt": "Design the classes for a parking lot system. What are the key entities and their relationships?",
+      "tags": [
+        "design",
+        "oop"
+      ],
+      "followups": [
+        "How would you handle different vehicle types?",
+        "What methods would you implement?"
+      ]
+    },
+    {
+      "title": "Design a Deck of Cards",
+      "prompt": "Design classes to represent a deck of playing cards. How would you shuffle and deal cards?",
+      "tags": [
+        "design",
+        "oop"
+      ],
+      "followups": [
+        "How would you implement different card games?",
+        "What design patterns would be useful?"
+      ]
+    },
+    {
+      "title": "Design a URL Shortener (High Level)",
+      "prompt": "At a high level, how would you design a URL shortening service like TinyURL?",
+      "tags": [
+        "system-design",
+        "url-shortener"
+      ],
+      "followups": [
+        "How do you generate unique short codes?",
+        "How would you handle redirects and analytics?"
+      ]
+    },
+    {
+      "title": "Design a Key-Value Store (Basic)",
+      "prompt": "Design a simple in-memory key-value store. What data structures would you use?",
+      "tags": [
+        "system-design",
+        "data-structures"
+      ],
+      "followups": [
+        "How would you add TTL support?",
+        "What about persistence to disk?"
+      ]
+    },
+    {
+      "title": "Design a File System (Conceptual)",
+      "prompt": "At a high level, how would you design a simple file system?",
+      "tags": [
+        "system-design",
+        "file-system"
+      ],
+      "followups": [
+        "How would you represent files and directories?",
+        "What about permissions and metadata?"
+      ]
+    },
+    {
+      "title": "Browser Rendering Process",
+      "prompt": "Explain what happens when you type a URL and press enter in a browser.",
+      "tags": [
+        "web",
+        "browser"
+      ],
+      "followups": [
+        "What's DNS resolution?",
+        "How does the browser render HTML/CSS/JS?"
+      ]
     }
   ]
 }

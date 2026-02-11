@@ -1,8 +1,142 @@
 ﻿{
-    "difficulty":  "medium",
-    "questions":  [
-
-                  ],
-    "company_style":  "general",
-    "track":  "data_science"
+    "difficulty": "medium",
+    "questions": [
+        {
+            "title": "Cross-Validation Techniques",
+            "prompt": "Explain different cross-validation techniques and when to use each.",
+            "tags": ["model-evaluation", "validation"],
+            "followups": [
+                "What are the advantages of k-fold cross-validation over train-test split?",
+                "When would you use stratified cross-validation?"
+            ]
+        },
+        {
+            "title": "Feature Scaling Methods",
+            "prompt": "Compare and contrast different feature scaling methods (normalization, standardization, etc.).",
+            "tags": ["preprocessing", "features"],
+            "followups": [
+                "When is feature scaling particularly important?",
+                "Which algorithms are sensitive to feature scaling?"
+            ]
+        },
+        {
+            "title": "Regularization Techniques",
+            "prompt": "Explain L1 and L2 regularization and their differences.",
+            "tags": ["machine-learning", "optimization"],
+            "followups": [
+                "How does regularization help prevent overfitting?",
+                "Why does L1 regularization lead to feature selection?"
+            ]
+        },
+        {
+            "title": "Confusion Matrix Metrics",
+            "prompt": "Explain precision, recall, F1-score, and when to prioritize each.",
+            "tags": ["metrics", "evaluation"],
+            "followups": [
+                "In what scenarios is precision more important than recall?",
+                "How do you calculate ROC-AUC and what does it represent?"
+            ]
+        },
+        {
+            "title": "Handling Imbalanced Datasets",
+            "prompt": "Describe techniques for handling imbalanced classification problems.",
+            "tags": ["preprocessing", "classification"],
+            "followups": [
+                "What are the pros and cons of oversampling vs undersampling?",
+                "How does SMOTE work and what are its limitations?"
+            ]
+        },
+        {
+            "title": "Gradient Descent",
+            "prompt": "Explain how gradient descent works and the differences between batch, stochastic, and mini-batch variants.",
+            "tags": ["optimization", "machine-learning"],
+            "followups": [
+                "What are common challenges with gradient descent?",
+                "How do optimization algorithms like Adam improve upon basic gradient descent?"
+            ]
+        },
+        {
+            "title": "Decision Trees Splitting Criteria",
+            "prompt": "Explain how decision trees choose where to split and different splitting criteria (Gini, entropy).",
+            "tags": ["algorithms", "decision-trees"],
+            "followups": [
+                "What are the advantages and disadvantages of decision trees?",
+                "How do random forests address some of these limitations?"
+            ]
+        },
+        {
+            "title": "Principal Component Analysis",
+            "prompt": "Explain what PCA is and when you would use it.",
+            "tags": ["dimensionality-reduction", "unsupervised"],
+            "followups": [
+                "How do you interpret principal components?",
+                "What are some limitations of PCA?"
+            ]
+        },
+        {
+            "title": "Time Series Components",
+            "prompt": "Describe the main components of a time series (trend, seasonality, noise).",
+            "tags": ["time-series", "analysis"],
+            "followups": [
+                "How would you detrend a time series?",
+                "What is stationarity and why is it important?"
+            ]
+        },
+        {
+            "title": "A/B Test Analysis",
+            "prompt": "Walk through the steps to analyze the results of an A/B test.",
+            "tags": ["experimentation", "statistics"],
+            "followups": [
+                "How do you calculate sample size for an A/B test?",
+                "What are common pitfalls in A/B testing?"
+            ]
+        },
+        {
+            "title": "Bias in Machine Learning",
+            "prompt": "Explain different types of bias that can occur in machine learning models.",
+            "tags": ["ethics", "fairness"],
+            "followups": [
+                "How can bias enter a machine learning pipeline?",
+                "What techniques can help detect and mitigate bias?"
+            ]
+        },
+        {
+            "title": "K-Means Clustering",
+            "prompt": "Explain how k-means clustering works and how to choose the right k.",
+            "tags": ["clustering", "unsupervised"],
+            "followups": [
+                "What are the assumptions of k-means?",
+                "How does k-means++ initialization improve results?"
+            ]
+        },
+        {
+            "title": "Feature Importance Methods",
+            "prompt": "Describe different methods for determining feature importance in models.",
+            "tags": ["features", "interpretability"],
+            "followups": [
+                "How does permutation feature importance work?",
+                "What are SHAP values and how do they differ from traditional importance metrics?"
+            ]
+        },
+        {
+            "title": "Hyperparameter Tuning",
+            "prompt": "Compare grid search, random search, and Bayesian optimization for hyperparameter tuning.",
+            "tags": ["modeling", "optimization"],
+            "followups": [
+                "When would you choose random search over grid search?",
+                "What is cross-validation's role in hyperparameter tuning?"
+            ]
+        },
+        {
+            "title": "Text Preprocessing Steps",
+            "prompt": "Describe the typical preprocessing steps for text data in NLP.",
+            "tags": ["nlp", "preprocessing"],
+            "followups": [
+                "What are the differences between stemming and lemmatization?",
+                "How do you handle stop words and when might you keep them?"
+            ]
+        }
+    ],
+    "company_style": "general",
+    "track": "data_science"
 }

@@ -1,8 +1,142 @@
 ﻿{
-    "difficulty":  "hard",
-    "questions":  [
-
-                  ],
-    "company_style":  "general",
-    "track":  "devops_cloud"
+    "difficulty": "hard",
+    "questions": [
+        {
+            "title": "Kubernetes Network Policies",
+            "prompt": "Explain how Kubernetes network policies work and how to implement zero-trust networking.",
+            "tags": ["kubernetes", "networking", "security"],
+            "followups": [
+                "How do you implement microsegmentation in Kubernetes?",
+                "What are the limitations of Kubernetes network policies?"
+            ]
+        },
+        {
+            "title": "Service Mesh Architecture",
+            "prompt": "Explain the architecture of Istio and how it implements traffic management and security.",
+            "tags": ["service-mesh", "istio", "architecture"],
+            "followups": [
+                "How does Envoy proxy fit into the Istio architecture?",
+                "What is the performance overhead of using a service mesh?"
+            ]
+        },
+        {
+            "title": "Multi-Cluster Kubernetes",
+            "prompt": "Describe strategies for managing multiple Kubernetes clusters.",
+            "tags": ["kubernetes", "multi-cluster", "federation"],
+            "followups": [
+                "How does cluster federation work?",
+                "What are the challenges with multi-cluster service discovery?"
+            ]
+        },
+        {
+            "title": "Cloud-Native Storage",
+            "prompt": "Explain different storage options for cloud-native applications and their trade-offs.",
+            "tags": ["storage", "kubernetes", "cloud-native"],
+            "followups": [
+                "How do you choose between block, file, and object storage?",
+                "What are CSI drivers and how do they work?"
+            ]
+        },
+        {
+            "title": "Chaos Engineering",
+            "prompt": "Explain chaos engineering principles and how to implement chaos experiments safely.",
+            "tags": ["reliability", "testing", "chaos-engineering"],
+            "followups": [
+                "How do you design and run chaos experiments in production?",
+                "What tools are available for chaos engineering?"
+            ]
+        },
+        {
+            "title": "FinOps Implementation",
+            "prompt": "Explain FinOps principles and how to implement cloud financial management at scale.",
+            "tags": ["cost-optimization", "finops", "cloud"],
+            "followups": [
+                "How do you implement showback/chargeback in cloud environments?",
+                "What metrics and reports are essential for FinOps?"
+            ]
+        },
+        {
+            "title": "GitOps at Scale",
+            "prompt": "Explain strategies for implementing GitOps in large, complex organizations.",
+            "tags": ["gitops", "scalability", "enterprise"],
+            "followups": [
+                "How do you handle multiple teams and environments with GitOps?",
+                "What are the challenges with GitOps at enterprise scale?"
+            ]
+        },
+        {
+            "title": "Serverless Architecture Patterns",
+            "prompt": "Explain advanced serverless patterns and when to use them.",
+            "tags": ["serverless", "architecture", "aws-lambda"],
+            "followups": [
+                "How do you handle state in serverless applications?",
+                "What are the cold start challenges and mitigation strategies?"
+            ]
+        },
+        {
+            "title": "Kubernetes Operators",
+            "prompt": "Explain what Kubernetes operators are and how they work.",
+            "tags": ["kubernetes", "operators", "automation"],
+            "followups": [
+                "How does the operator pattern extend Kubernetes functionality?",
+                "What are some use cases for custom operators?"
+            ]
+        },
+        {
+            "title": "Disaster Recovery Strategies",
+            "prompt": "Design a multi-region disaster recovery strategy for a critical cloud application.",
+            "tags": ["disaster-recovery", "multi-region", "availability"],
+            "followups": [
+                "How do you test disaster recovery plans without impacting production?",
+                "What are the trade-offs between different DR strategies (pilot light, warm standby, multi-site)?"
+            ]
+        },
+        {
+            "title": "Edge Computing Architecture",
+            "prompt": "Explain edge computing architectures and how they integrate with cloud.",
+            "tags": ["edge-computing", "architecture", "iot"],
+            "followups": [
+                "How do you manage applications across cloud and edge locations?",
+                "What are the networking challenges with edge computing?"
+            ]
+        },
+        {
+            "title": "Policy as Code",
+            "prompt": "Explain policy as code and how to implement governance in cloud environments.",
+            "tags": ["security", "governance", "opa"],
+            "followups": [
+                "How does Open Policy Agent (OPA) work?",
+                "How do you implement compliance as code?"
+            ]
+        },
+        {
+            "title": "MLOps Pipeline Design",
+            "prompt": "Design a complete MLOps pipeline for deploying and monitoring machine learning models.",
+            "tags": ["mlops", "machine-learning", "pipelines"],
+            "followups": [
+                "How do you handle model versioning and rollbacks?",
+                "What infrastructure is needed for model serving at scale?"
+            ]
+        },
+        {
+            "title": "Cloud Migration Strategies",
+            "prompt": "Explain different cloud migration strategies (rehost, refactor, rearchitect).",
+            "tags": ["cloud-migration", "strategy", "enterprise"],
+            "followups": [
+                "How do you assess applications for cloud migration?",
+                "What are the challenges with migrating legacy applications?"
+            ]
+        },
+        {
+            "title": "Zero Trust Architecture Implementation",
+            "prompt": "Explain how to implement zero-trust architecture in a cloud-native environment.",
+            "tags": ["security", "zero-trust", "architecture"],
+            "followups": [
+                "How do you implement identity-aware proxies?",
+                "What are the network implications of zero-trust?"
+            ]
+        }
+    ],
+    "company_style": "general",
+    "track": "devops_cloud"
 }

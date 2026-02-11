@@ -1,8 +1,142 @@
 ﻿{
-    "difficulty":  "hard",
-    "questions":  [
-
-                  ],
-    "company_style":  "general",
-    "track":  "product_management"
+    "difficulty": "hard",
+    "questions": [
+        {
+            "title": "Product Portfolio Strategy",
+            "prompt": "How do you manage and prioritize across multiple products in a portfolio?",
+            "tags": ["portfolio-management", "strategy"],
+            "followups": [
+                "How do you allocate resources across different product lines?",
+                "What frameworks help with portfolio-level decision making?"
+            ]
+        },
+        {
+            "title": "Platform Product Management",
+            "prompt": "What are the unique challenges of managing platform products vs end-user products?",
+            "tags": ["platform", "strategy"],
+            "followups": [
+                "How do you balance the needs of different platform stakeholders?",
+                "What metrics are important for platform products?"
+            ]
+        },
+        {
+            "title": "Product-Led Growth Strategy",
+            "prompt": "Explain product-led growth and how to implement it effectively.",
+            "tags": ["growth", "plg", "strategy"],
+            "followups": [
+                "How do you design products for viral growth?",
+                "What are the key metrics for product-led growth companies?"
+            ]
+        },
+        {
+            "title": "International Expansion Strategy",
+            "prompt": "How do you approach international expansion for a product?",
+            "tags": ["international", "expansion", "strategy"],
+            "followups": [
+                "How do you decide which markets to enter first?",
+                "What are the key considerations for localization?"
+            ]
+        },
+        {
+            "title": "Monetization Strategy for Enterprise Products",
+            "prompt": "How do you develop pricing and packaging for enterprise SaaS products?",
+            "tags": ["monetization", "enterprise", "pricing"],
+            "followups": [
+                "How do you handle enterprise negotiations and custom pricing?",
+                "What are common enterprise pricing models and their trade-offs?"
+            ]
+        },
+        {
+            "title": "M&A Integration Strategy",
+            "prompt": "How do you integrate products and teams after an acquisition?",
+            "tags": ["acquisitions", "integration", "strategy"],
+            "followups": [
+                "What are the key risks in product integration after M&A?",
+                "How do you prioritize integration work vs ongoing product development?"
+            ]
+        },
+        {
+            "title": "Zero-to-One Product Strategy",
+            "prompt": "How do you approach building a completely new product category?",
+            "tags": ["innovation", "strategy", "new-categories"],
+            "followups": [
+                "What are the unique challenges of creating new markets?",
+                "How do you validate demand for a product that doesn't exist yet?"
+            ]
+        },
+        {
+            "title": "Product Organization Design",
+            "prompt": "How do you structure product teams for maximum effectiveness at scale?",
+            "tags": ["organization", "scaling", "team-structure"],
+            "followups": [
+                "What are the trade-offs between feature teams and platform teams?",
+                "How do you evolve team structure as a company grows?"
+            ]
+        },
+        {
+            "title": "Ethical Product Decisions",
+            "prompt": "How do you navigate ethical dilemmas in product development?",
+            "tags": ["ethics", "decision-making", "responsible-ai"],
+            "followups": [
+                "What frameworks help with ethical decision making?",
+                "How do you balance business objectives with ethical considerations?"
+            ]
+        },
+        {
+            "title": "Incumbent Disruption Strategy",
+            "prompt": "How do you position a product against established market leaders?",
+            "tags": ["competition", "strategy", "disruption"],
+            "followups": [
+                "What are effective strategies for competing with much larger companies?",
+                "How do you identify and exploit weaknesses in incumbent products?"
+            ]
+        },
+        {
+            "title": "Product-Led Sales Integration",
+            "prompt": "How do you align product-led growth with sales-led motion?",
+            "tags": ["sales", "plg", "gtm"],
+            "followups": [
+                "How do you design handoffs between self-serve and sales-assisted customers?",
+                "What data should sales teams have access to from the product?"
+            ]
+        },
+        {
+            "title": "Regulatory Strategy",
+            "prompt": "How do you develop products in heavily regulated industries?",
+            "tags": ["regulation", "compliance", "strategy"],
+            "followups": [
+                "How do you balance innovation with compliance requirements?",
+                "What's the role of product in regulatory strategy?"
+            ]
+        },
+        {
+            "title": "AI Product Strategy",
+            "prompt": "What are unique considerations for building AI-powered products?",
+            "tags": ["ai", "ml", "strategy"],
+            "followups": [
+                "How do you manage uncertainty in AI model performance?",
+                "What ethical considerations are unique to AI products?"
+            ]
+        },
+        {
+            "title": "Product Metrics at Scale",
+            "prompt": "How do you design and implement a metrics framework for a large, complex product organization?",
+            "tags": ["metrics", "analytics", "scaling"],
+            "followups": [
+                "How do you ensure metric consistency across teams?",
+                "What systems are needed to support data-driven decision making at scale?"
+            ]
+        },
+        {
+            "title": "Product Innovation Process",
+            "prompt": "How do you institutionalize innovation in an established product organization?",
+            "tags": ["innovation", "process", "culture"],
+            "followups": [
+                "How do you balance incremental improvements with breakthrough innovations?",
+                "What structures and processes support sustained innovation?"
+            ]
+        }
+    ],
+    "company_style": "general",
+    "track": "product_management"
 }
