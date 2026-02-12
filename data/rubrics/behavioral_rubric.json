@@ -50,7 +50,404 @@
         { "range": "7-8", "description": "Addresses risks and mitigation with clear examples." },
         { "range": "9-10", "description": "Proactively identifies risks, alternatives, and lessons." }
       ]
+    },
+    {
+      "name": "leadership_influence",
+      "description": "Ability to lead, influence, or mentor without direct authority.",
+      "levels": [
+        { "range": "0-3", "description": "No evidence of leadership or influence." },
+        { "range": "4-6", "description": "Some initiative taken, limited influence on others." },
+        { "range": "7-8", "description": "Clearly led or influenced a team/outcome with measurable results." },
+        { "range": "9-10", "description": "Mentored others, changed team practices, or influenced across boundaries." }
+      ]
+    },
+    {
+      "name": "collaboration_teamwork",
+      "description": "Ability to work effectively within a team, resolve conflict, and support others.",
+      "levels": [
+        { "range": "0-3", "description": "Focuses only on self; dismissive of team dynamics." },
+        { "range": "4-6", "description": "Acknowledges team, but limited active collaboration." },
+        { "range": "7-8", "description": "Actively collaborates, shares credit, resolves differences." },
+        { "range": "9-10", "description": "Builds strong team cohesion, resolves conflicts constructively." }
+      ]
+    },
+    {
+      "name": "adaptability_resilience",
+      "description": "Ability to adapt to changing priorities, setbacks, or ambiguous situations.",
+      "levels": [
+        { "range": "0-3", "description": "Rigid response; struggles with change or setbacks." },
+        { "range": "4-6", "description": "Acknowledges change but limited proactive adaptation." },
+        { "range": "7-8", "description": "Adjusts effectively; learns from setbacks." },
+        { "range": "9-10", "description": "Thrives in ambiguity; uses setbacks as growth opportunities." }
+      ]
+    },
+    {
+      "name": "ownership_accountability",
+      "description": "Taking responsibility for outcomes, including failures and follow-through.",
+      "levels": [
+        { "range": "0-3", "description": "Deflects blame; avoids responsibility." },
+        { "range": "4-6", "description": "Accepts responsibility but limited follow-through." },
+        { "range": "7-8", "description": "Clearly owns outcomes, follows up on commitments." },
+        { "range": "9-10", "description": "Takes ownership beyond scope, ensures long-term success." }
+      ]
+    },
+    {
+      "name": "initiative_proactiveness",
+      "description": "Identifying and acting on opportunities beyond assigned tasks.",
+      "levels": [
+        { "range": "0-3", "description": "Only does what is explicitly assigned." },
+        { "range": "4-6", "description": "Occasionally takes initiative on small improvements." },
+        { "range": "7-8", "description": "Identifies and acts on meaningful opportunities." },
+        { "range": "9-10", "description": "Proactively drives new initiatives with significant impact." }
+      ]
+    },
+    {
+      "name": "customer_focus",
+      "description": "Understanding and prioritizing user/customer needs in decision-making.",
+      "levels": [
+        { "range": "0-3", "description": "No consideration of customer perspective." },
+        { "range": "4-6", "description": "Acknowledges customers but actions not clearly driven by their needs." },
+        { "range": "7-8", "description": "Explicitly prioritizes customer outcomes in decisions." },
+        { "range": "9-10", "description": "Advocates for customers; measures success through customer impact." }
+      ]
+    },
+    {
+      "name": "strategic_thinking",
+      "description": "Considering long-term implications, not just immediate tasks.",
+      "levels": [
+        { "range": "0-3", "description": "Focuses only on immediate tactics." },
+        { "range": "4-6", "description": "Some consideration of future impact." },
+        { "range": "7-8", "description": "Balances short-term needs with long-term goals." },
+        { "range": "9-10", "description": "Articulates clear strategy; anticipates future challenges." }
+      ]
+    },
+    {
+      "name": "technical_judgment",
+      "description": "Making sound technical decisions considering trade-offs, scalability, and maintainability.",
+      "levels": [
+        { "range": "0-3", "description": "Poor technical choices or no justification." },
+        { "range": "4-6", "description": "Reasonable choices with limited trade-off analysis." },
+        { "range": "7-8", "description": "Well-reasoned technical decisions with clear trade-offs." },
+        { "range": "9-10", "description": "Exemplary judgment; considers scalability, maintainability, and future needs." }
+      ]
+    },
+    {
+      "name": "growth_mindset",
+      "description": "Openness to feedback, learning from mistakes, and continuous improvement.",
+      "levels": [
+        { "range": "0-3", "description": "Defensive; avoids feedback or growth opportunities." },
+        { "range": "4-6", "description": "Accepts feedback but limited application." },
+        { "range": "7-8", "description": "Actively seeks feedback and applies it to improve." },
+        { "range": "9-10", "description": "Transforms feedback into systematic improvement; helps others grow." }
+      ]
+    },
+    {
+      "name": "prioritization",
+      "description": "Effectively managing competing priorities and time constraints.",
+      "levels": [
+        { "range": "0-3", "description": "Poor prioritization; misses deadlines or focuses on low-impact work." },
+        { "range": "4-6", "description": "Basic prioritization with some missed opportunities." },
+        { "range": "7-8", "description": "Consistently prioritizes high-impact work; manages time well." },
+        { "range": "9-10", "description": "Optimizes team priorities; helps others prioritize effectively." }
+      ]
     }
   ],
-  "overall_scoring": "Compute the overall score as the average of the five dimension scores, scaled to 0-100 and rounded."
+  "overall_scoring": "Compute the overall score as the average of all dimension scores, scaled to 0-100 and rounded.",
+  "sample_questions": [
+    {
+      "dimension": "communication",
+      "questions": [
+        "Tell me about a time you had to explain a complex technical concept to a non-technical audience.",
+        "Describe a situation where you had to present your work to leadership. How did you structure your message?",
+        "Give an example of a time when your written communication (email, documentation) made a difference."
+      ]
+    },
+    {
+      "dimension": "problem_solving",
+      "questions": [
+        "Tell me about a time you faced a problem with no clear solution. How did you approach it?",
+        "Describe a situation where you had to make a decision with incomplete information.",
+        "Walk me through how you debugged a particularly challenging technical issue."
+      ]
+    },
+    {
+      "dimension": "correctness_reasoning",
+      "questions": [
+        "Tell me about a time you successfully measured the impact of your work. What metrics did you use?",
+        "Describe a situation where you had to prove that your solution was correct.",
+        "Give an example of how you validated your assumptions before implementing a solution."
+      ]
+    },
+    {
+      "dimension": "complexity",
+      "questions": [
+        "Tell me about the most complex project you've worked on. What made it complex?",
+        "Describe a time you had to coordinate work across multiple teams or stakeholders.",
+        "Give an example of a project that required significant scale or performance considerations."
+      ]
+    },
+    {
+      "dimension": "edge_cases",
+      "questions": [
+        "Tell me about a time something unexpected happened during a project. How did you handle it?",
+        "Describe a situation where you identified a risk that others had missed.",
+        "What's an example of a project that didn't go as planned, and what did you learn?"
+      ]
+    },
+    {
+      "dimension": "leadership_influence",
+      "questions": [
+        "Tell me about a time you led a project without having formal authority.",
+        "Describe how you've mentored or helped a teammate grow their skills.",
+        "Give an example of a time you influenced a decision that was initially opposed."
+      ]
+    },
+    {
+      "dimension": "collaboration_teamwork",
+      "questions": [
+        "Tell me about a time you had a disagreement with a teammate. How did you resolve it?",
+        "Describe a situation where you helped a struggling teammate succeed.",
+        "Give an example of how you contributed to a positive team culture."
+      ]
+    },
+    {
+      "dimension": "adaptability_resilience",
+      "questions": [
+        "Tell me about a time priorities shifted unexpectedly. How did you adapt?",
+        "Describe a situation where you had to learn a new technology or skill quickly.",
+        "Give an example of a setback you faced and how you bounced back."
+      ]
+    },
+    {
+      "dimension": "ownership_accountability",
+      "questions": [
+        "Tell me about a time you made a mistake at work. How did you handle it?",
+        "Describe a situation where you took responsibility for a problem outside your role.",
+        "Give an example of how you ensured a project was completed successfully."
+      ]
+    },
+    {
+      "dimension": "initiative_proactiveness",
+      "questions": [
+        "Tell me about a time you identified an improvement and drove it to completion.",
+        "Describe a situation where you went above and beyond what was expected.",
+        "Give an example of a process you created or improved."
+      ]
+    },
+    {
+      "dimension": "customer_focus",
+      "questions": [
+        "Tell me about a time you advocated for a customer need that wasn't immediately obvious.",
+        "Describe how you've gathered and incorporated user feedback into your work.",
+        "Give an example of a trade-off you made to prioritize user experience."
+      ]
+    },
+    {
+      "dimension": "strategic_thinking",
+      "questions": [
+        "Tell me about a time you considered long-term implications of a technical decision.",
+        "Describe a situation where you balanced immediate needs with future goals.",
+        "Give an example of how you anticipated and prepared for future challenges."
+      ]
+    },
+    {
+      "dimension": "technical_judgment",
+      "questions": [
+        "Tell me about a technical decision you made and the trade-offs you considered.",
+        "Describe a time you chose simplicity over complexity, or vice versa.",
+        "Give an example of how you evaluated different technical approaches."
+      ]
+    },
+    {
+      "dimension": "growth_mindset",
+      "questions": [
+        "Tell me about a time you received constructive criticism. How did you respond?",
+        "Describe a skill you intentionally developed. How did you approach learning it?",
+        "Give an example of a failure that led to significant personal growth."
+      ]
+    },
+    {
+      "dimension": "prioritization",
+      "questions": [
+        "Tell me about a time you had multiple competing deadlines. How did you prioritize?",
+        "Describe how you handle interruptions while maintaining progress on important work.",
+        "Give an example of a time you said no to a request and how you communicated it."
+      ]
+    }
+  ],
+  "company_specific_dimensions": {
+    "amazon": {
+      "description": "Amazon Leadership Principles alignment",
+      "dimensions": [
+        {
+          "name": "customer_obsession",
+          "description": "Leaders start with the customer and work backwards.",
+          "levels": [
+            { "range": "0-3", "description": "Limited or no customer consideration." },
+            { "range": "4-6", "description": "Acknowledges customer needs but not central to decisions." },
+            { "range": "7-8", "description": "Explicitly prioritizes customer outcomes." },
+            { "range": "9-10", "description": "Advocates vigorously for customers; earns customer trust." }
+          ]
+        },
+        {
+          "name": "ownership",
+          "description": "Leaders act on behalf of the entire company, beyond their own team.",
+          "levels": [
+            { "range": "0-3", "description": "Limited to assigned tasks; avoids responsibility." },
+            { "range": "4-6", "description": "Takes ownership within scope." },
+            { "range": "7-8", "description": "Takes ownership beyond immediate responsibilities." },
+            { "range": "9-10", "description": "Thinks long-term; acts on behalf of the whole company." }
+          ]
+        },
+        {
+          "name": "bias_for_action",
+          "description": "Speed matters in business; leaders calculate and take calculated risks.",
+          "levels": [
+            { "range": "0-3", "description": "Analysis paralysis; avoids decisions." },
+            { "range": "4-6", "description": "Acts with some urgency but may be hesitant." },
+            { "range": "7-8", "description": "Moves quickly with calculated risks." },
+            { "range": "9-10", "description": "Decisive; takes smart risks even with incomplete information." }
+          ]
+        },
+        {
+          "name": "dive_deep",
+          "description": "Leaders operate at all levels, stay connected to details, and audit frequently.",
+          "levels": [
+            { "range": "0-3", "description": "Stays at surface level; misses important details." },
+            { "range": "4-6", "description": "Examines some details but may miss root causes." },
+            { "range": "7-8", "description": "Systematically investigates and finds root causes." },
+            { "range": "9-10", "description": "Relentlessly curious; verifies data and processes thoroughly." }
+          ]
+        }
+      ]
+    },
+    "google": {
+      "description": "Google Googleyness attributes",
+      "dimensions": [
+        {
+          "name": "comfort_with_ambiguity",
+          "description": "Thrives in ambiguous environments and can make progress without clear direction.",
+          "levels": [
+            { "range": "0-3", "description": "Needs clear, explicit direction; struggles without it." },
+            { "range": "4-6", "description": "Copes with ambiguity but may need support." },
+            { "range": "7-8", "description": "Effectively navigates ambiguity; creates structure." },
+            { "range": "9-10", "description": "Thrives in ambiguity; helps others find clarity." }
+          ]
+        },
+        {
+          "name": "collaborative_leadership",
+          "description": "Leads through influence, not authority; values team success over individual recognition.",
+          "levels": [
+            { "range": "0-3", "description": "Prefers individual work; limited collaboration." },
+            { "range": "4-6", "description": "Collaborates when necessary." },
+            { "range": "7-8", "description": "Actively collaborates and shares credit." },
+            { "range": "9-10", "description": "Builds consensus; empowers others; team-first mindset." }
+          ]
+        },
+        {
+          "name": "intellectual_curiosity",
+          "description": "Passionate about learning and solving hard problems.",
+          "levels": [
+            { "range": "0-3", "description": "Limited curiosity beyond immediate needs." },
+            { "range": "4-6", "description": "Shows interest in learning new things." },
+            { "range": "7-8", "description": "Actively seeks out learning opportunities." },
+            { "range": "9-10", "description": "Deeply curious; explores problems beyond requirements." }
+          ]
+        }
+      ]
+    },
+    "microsoft": {
+      "description": "Microsoft culture and growth mindset",
+      "dimensions": [
+        {
+          "name": "growth_mindset",
+          "description": "Embraces challenges, learns from criticism, and finds lessons in success and failure.",
+          "levels": [
+            { "range": "0-3", "description": "Avoids challenges; defensive about feedback." },
+            { "range": "4-6", "description": "Accepts feedback but may not apply it." },
+            { "range": "7-8", "description": "Actively seeks feedback; learns from mistakes." },
+            { "range": "9-10", "description": "Transforms failures into growth; helps others learn." }
+          ]
+        },
+        {
+          "name": "customer_obsession",
+          "description": "Empowers customers through technology; understands and prioritizes their needs.",
+          "levels": [
+            { "range": "0-3", "description": "Limited customer consideration." },
+            { "range": "4-6", "description": "Acknowledges customers but not central." },
+            { "range": "7-8", "description": "Prioritizes customer outcomes in decisions." },
+            { "range": "9-10", "description": "Advocates for customers; measures success through their impact." }
+          ]
+        },
+        {
+          "name": "inclusive_collaboration",
+          "description": "Seeks diverse perspectives and creates an environment where everyone can contribute.",
+          "levels": [
+            { "range": "0-3", "description": "Works in silos; limited inclusion of others." },
+            { "range": "4-6", "description": "Collaborates but may not actively seek diverse input." },
+            { "range": "7-8", "description": "Actively includes others; values different perspectives." },
+            { "range": "9-10", "description": "Creates inclusive environment; ensures all voices are heard." }
+          ]
+        }
+      ]
+    },
+    "apple": {
+      "description": "Apple values and design focus",
+      "dimensions": [
+        {
+          "name": "design_excellence",
+          "description": "Passion for craftsmanship and user experience.",
+          "levels": [
+            { "range": "0-3", "description": "Focuses on function over user experience." },
+            { "range": "4-6", "description": "Considers usability but not deeply." },
+            { "range": "7-8", "description": "Actively works to improve user experience." },
+            { "range": "9-10", "description": "Obsessed with craftsmanship and elegant solutions." }
+          ]
+        },
+        {
+          "name": "innovation",
+          "description": "Thinks differently; challenges assumptions.",
+          "levels": [
+            { "range": "0-3", "description": "Follows established patterns without question." },
+            { "range": "4-6", "description": "Occasionally suggests new approaches." },
+            { "range": "7-8", "description": "Regularly proposes novel solutions." },
+            { "range": "9-10", "description": "Challenges conventions; reimagines how things work." }
+          ]
+        },
+        {
+          "name": "privacy_focus",
+          "description": "Respects user privacy as a fundamental right.",
+          "levels": [
+            { "range": "0-3", "description": "Limited privacy consideration." },
+            { "range": "4-6", "description": "Acknowledges privacy but not prioritized." },
+            { "range": "7-8", "description": "Actively incorporates privacy in design." },
+            { "range": "9-10", "description": "Advocates for user privacy; minimizes data collection." }
+          ]
+        }
+      ]
+    }
+  },
+  "interviewer_guidance": {
+    "scoring_tips": [
+      "Score each dimension independently based on evidence in the candidate's response.",
+      "Look for specific, concrete examples rather than hypotheticals or general statements.",
+      "Consider the STAR framework: Situation, Task, Action, Result.",
+      "Higher scores require both strong actions AND meaningful results.",
+      "Note the absence of expected elements (e.g., no mention of impact) as well as presence."
+    ],
+    "common_pitfalls": [
+      "Candidate describes what 'we' did without clarifying their specific role.",
+      "Results are vague ('it worked well') without metrics or evidence.",
+      "No mention of challenges, trade-offs, or lessons learned.",
+      "Story lacks context, making it difficult to assess complexity."
+    ],
+    "probing_questions": [
+      "What was your specific role in that situation?",
+      "What alternatives did you consider?",
+      "How did you measure success?",
+      "What would you do differently next time?",
+      "How did you involve or influence others?",
+      "What was the hardest part of that challenge?"
+    ]
+  }
 }

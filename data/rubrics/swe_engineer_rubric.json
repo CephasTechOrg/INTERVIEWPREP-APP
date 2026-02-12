@@ -50,7 +50,395 @@
         { "range": "7-8", "description": "Covers major edge cases and constraints well." },
         { "range": "9-10", "description": "Comprehensive coverage and robust handling." }
       ]
+    },
+    {
+      "name": "data_structures_selection",
+      "description": "Choice of appropriate data structures and understanding of their properties.",
+      "levels": [
+        { "range": "0-3", "description": "Poor or inappropriate data structure choice." },
+        { "range": "4-6", "description": "Reasonable choice but misses better alternatives." },
+        { "range": "7-8", "description": "Good choice with justification of trade-offs." },
+        { "range": "9-10", "description": "Optimal selection with deep understanding of properties." }
+      ]
+    },
+    {
+      "name": "algorithm_design",
+      "description": "Ability to design efficient algorithms and recognize patterns.",
+      "levels": [
+        { "range": "0-3", "description": "Unable to design a working algorithm." },
+        { "range": "4-6", "description": "Working solution but inefficient or brute force." },
+        { "range": "7-8", "description": "Efficient solution with good algorithmic thinking." },
+        { "range": "9-10", "description": "Highly optimized solution with novel insights." }
+      ]
+    },
+    {
+      "name": "system_design_scope",
+      "description": "Ability to scope and decompose large-scale systems.",
+      "levels": [
+        { "range": "0-3", "description": "Misses major components; narrow scope." },
+        { "range": "4-6", "description": "Identifies key components but misses interactions." },
+        { "range": "7-8", "description": "Good decomposition with clear component boundaries." },
+        { "range": "9-10", "description": "Comprehensive scope with well-defined interfaces." }
+      ]
+    },
+    {
+      "name": "scalability_tradeoffs",
+      "description": "Understanding of scaling challenges and architectural trade-offs.",
+      "levels": [
+        { "range": "0-3", "description": "No consideration of scale." },
+        { "range": "4-6", "description": "Acknowledges scale but limited solutions." },
+        { "range": "7-8", "description": "Identifies bottlenecks and proposes reasonable solutions." },
+        { "range": "9-10", "description": "Sophisticated understanding with multiple scaling strategies." }
+      ]
+    },
+    {
+      "name": "database_design",
+      "description": "Schema design, indexing strategy, and query optimization.",
+      "levels": [
+        { "range": "0-3", "description": "Poor schema or no indexing consideration." },
+        { "range": "4-6", "description": "Reasonable schema but missing key optimizations." },
+        { "range": "7-8", "description": "Good schema with appropriate indexes and query planning." },
+        { "range": "9-10", "description": "Optimal design with advanced techniques (sharding, denormalization)." }
+      ]
+    },
+    {
+      "name": "api_design",
+      "description": "RESTful/API design principles, resource modeling, and versioning.",
+      "levels": [
+        { "range": "0-3", "description": "Poor resource modeling; inconsistent patterns." },
+        { "range": "4-6", "description": "Basic REST understanding but misses best practices." },
+        { "range": "7-8", "description": "Clean resource design with good status code usage." },
+        { "range": "9-10", "description": "Excellent API design with versioning, pagination, and error handling." }
+      ]
+    },
+    {
+      "name": "security_awareness",
+      "description": "Identification of security risks and mitigation strategies.",
+      "levels": [
+        { "range": "0-3", "description": "No security consideration." },
+        { "range": "4-6", "description": "Acknowledges basic threats (auth, injection)." },
+        { "range": "7-8", "description": "Identifies multiple threat vectors with mitigations." },
+        { "range": "9-10", "description": "Comprehensive threat modeling with defense-in-depth." }
+      ]
+    },
+    {
+      "name": "concurrency_handling",
+      "description": "Understanding of parallel execution, race conditions, and synchronization.",
+      "levels": [
+        { "range": "0-3", "description": "No awareness of concurrency issues." },
+        { "range": "4-6", "description": "Identifies race conditions but limited solutions." },
+        { "range": "7-8", "description": "Good understanding of locks, atomics, and deadlock prevention." },
+        { "range": "9-10", "description": "Advanced concurrency patterns; lock-free or immutable designs." }
+      ]
+    },
+    {
+      "name": "testing_strategy",
+      "description": "Approach to testing including unit, integration, and edge cases.",
+      "levels": [
+        { "range": "0-3", "description": "No testing consideration." },
+        { "range": "4-6", "description": "Basic unit tests for happy path." },
+        { "range": "7-8", "description": "Comprehensive testing including edge cases and integration." },
+        { "range": "9-10", "description": "Test-driven approach; property-based or contract testing." }
+      ]
+    },
+    {
+      "name": "code_quality",
+      "description": "Code organization, readability, maintainability, and best practices.",
+      "levels": [
+        { "range": "0-3", "description": "Spaghetti code; poor naming and structure." },
+        { "range": "4-6", "description": "Working but messy; some organization." },
+        { "range": "7-8", "description": "Clean, readable code with good abstractions." },
+        { "range": "9-10", "description": "Exemplary code; modular, extensible, and self-documenting." }
+      ]
+    },
+    {
+      "name": "debugging_methodology",
+      "description": "Systematic approach to identifying and fixing defects.",
+      "levels": [
+        { "range": "0-3", "description": "Random guessing; no structured approach." },
+        { "range": "4-6", "description": "Basic debugging with print statements." },
+        { "range": "7-8", "description": "Systematic hypothesis testing with tools." },
+        { "range": "9-10", "description": "Efficient root cause analysis with preventive measures." }
+      ]
+    },
+    {
+      "name": "technical_tradeoffs",
+      "description": "Ability to weigh competing concerns (performance, maintainability, time).",
+      "levels": [
+        { "range": "0-3", "description": "Ignores trade-offs; picks arbitrarily." },
+        { "range": "4-6", "description": "Acknowledges trade-offs but limited analysis." },
+        { "range": "7-8", "description": "Explicit trade-off analysis with clear rationale." },
+        { "range": "9-10", "description": "Sophisticated evaluation of multiple dimensions." }
+      ]
+    },
+    {
+      "name": "technical_leadership",
+      "description": "Guiding technical decisions and mentoring others.",
+      "levels": [
+        { "range": "0-3", "description": "No evidence of technical leadership." },
+        { "range": "4-6", "description": "Occasionally influences technical decisions." },
+        { "range": "7-8", "description": "Consistently guides architecture and reviews." },
+        { "range": "9-10", "description": "Sets technical direction; mentors effectively." }
+      ]
     }
   ],
-  "overall_scoring": "Compute the overall score as the average of the five dimension scores, scaled to 0-100 and rounded."
+  "overall_scoring": "Compute the overall score as the average of all dimension scores, scaled to 0-100 and rounded.",
+  "sample_questions": [
+    {
+      "dimension": "communication",
+      "questions": [
+        "Explain how a hash map works internally to a non-technical stakeholder.",
+        "Walk me through your approach to the previous coding problem.",
+        "How would you document a complex API for other developers?"
+      ]
+    },
+    {
+      "dimension": "problem_solving",
+      "questions": [
+        "Design an algorithm to find the most frequent element in a stream of data.",
+        "How would you approach debugging a performance regression in production?",
+        "Design a system to detect duplicate files on a file system."
+      ]
+    },
+    {
+      "dimension": "correctness_reasoning",
+      "questions": [
+        "Prove that your binary search implementation always terminates correctly.",
+        "What invariants does quicksort maintain during partitioning?",
+        "How would you verify that a distributed system is eventually consistent?"
+      ]
+    },
+    {
+      "dimension": "complexity",
+      "questions": [
+        "What is the time and space complexity of your LRU cache design?",
+        "Analyze the complexity of your solution to the N-Queens problem.",
+        "How does your algorithm scale with input size? Where are the bottlenecks?"
+      ]
+    },
+    {
+      "dimension": "edge_cases",
+      "questions": [
+        "What edge cases would you test for a function that validates email addresses?",
+        "How does your rate limiter handle burst traffic and clock skew?",
+        "What happens in your distributed system when a node fails during a transaction?"
+      ]
+    },
+    {
+      "dimension": "data_structures_selection",
+      "questions": [
+        "Why would you choose a hash table over a binary search tree for this problem?",
+        "What data structure would you use to implement an autocomplete system?",
+        "Compare and contrast arrays, linked lists, and skip lists for a leaderboard."
+      ]
+    },
+    {
+      "dimension": "algorithm_design",
+      "questions": [
+        "Design an algorithm to find all palindromic substrings in a string.",
+        "How would you implement a spell checker with suggestions?",
+        "Design an algorithm to schedule meetings in the fewest conference rooms."
+      ]
+    },
+    {
+      "dimension": "system_design_scope",
+      "questions": [
+        "Design a URL shortener service. What are the major components?",
+        "How would you architect a real-time chat application?",
+        "Design the backend for a photo sharing social network."
+      ]
+    },
+    {
+      "dimension": "scalability_tradeoffs",
+      "questions": [
+        "How would you scale a database that has become read-heavy?",
+        "What are the trade-offs between vertical and horizontal scaling?",
+        "Design a caching strategy for a globally distributed application."
+      ]
+    },
+    {
+      "dimension": "database_design",
+      "questions": [
+        "Design a schema for an e-commerce platform with products, orders, and customers.",
+        "How would you index a table with frequent range queries on timestamp?",
+        "When would you denormalize a database schema intentionally?"
+      ]
+    },
+    {
+      "dimension": "api_design",
+      "questions": [
+        "Design REST endpoints for a task management application.",
+        "How would you version an API to avoid breaking existing clients?",
+        "What status codes and error formats would you return for validation failures?"
+      ]
+    },
+    {
+      "dimension": "security_awareness",
+      "questions": [
+        "How would you prevent SQL injection in your application?",
+        "Design an authentication flow for a mobile app.",
+        "What security considerations are important when storing user files?"
+      ]
+    },
+    {
+      "dimension": "concurrency_handling",
+      "questions": [
+        "How would you implement a thread-safe counter across multiple servers?",
+        "Design a producer-consumer queue with backpressure.",
+        "What happens when two users concurrently edit the same document?"
+      ]
+    },
+    {
+      "dimension": "testing_strategy",
+      "questions": [
+        "How would you test a distributed system with network partitions?",
+        "What unit tests would you write for a function that parses user input?",
+        "How do you test that a cache invalidation strategy works correctly?"
+      ]
+    },
+    {
+      "dimension": "code_quality",
+      "questions": [
+        "What makes a function 'clean' and how would you refactor a large one?",
+        "How do you name variables, functions, and classes for readability?",
+        "When is it appropriate to use design patterns?"
+      ]
+    },
+    {
+      "dimension": "debugging_methodology",
+      "questions": [
+        "A service crashes only under load. How do you debug it?",
+        "Memory usage grows slowly over time. How do you find the leak?",
+        "A bug disappears when you add logging. What do you do?"
+      ]
+    },
+    {
+      "dimension": "technical_tradeoffs",
+      "questions": [
+        "When would you choose consistency over availability, and vice versa?",
+        "How do you balance shipping quickly with maintaining code quality?",
+        "What are the trade-offs between microservices and monoliths?"
+      ]
+    },
+    {
+      "dimension": "technical_leadership",
+      "questions": [
+        "How do you advocate for a technical direction when others disagree?",
+        "Describe how you've helped a junior engineer improve their coding skills.",
+        "How do you ensure technical decisions are documented and shared?"
+      ]
+    }
+  ],
+  "difficulty_calibration": {
+    "easy": {
+      "description": "Fundamental concepts, single data structure, straightforward implementation.",
+      "typical_dimensions": ["communication", "data_structures_selection", "edge_cases"],
+      "example": "Reverse a linked list, valid parentheses, two sum."
+    },
+    "medium": {
+      "description": "Multiple considerations, optimization awareness, some trade-offs.",
+      "typical_dimensions": ["problem_solving", "complexity", "algorithm_design", "correctness_reasoning"],
+      "example": "LRU cache, course schedule, number of islands."
+    },
+    "hard": {
+      "description": "Complex algorithms, system design, deep trade-off analysis, scalability.",
+      "typical_dimensions": ["system_design_scope", "scalability_tradeoffs", "concurrency_handling", "technical_tradeoffs"],
+      "example": "Design distributed rate limiter, median of two sorted arrays, serialization."
+    }
+  },
+  "interviewer_guidance": {
+    "scoring_tips": [
+      "Score each dimension independently based on the candidate's response.",
+      "Look for explicit reasoning, not just the final answer.",
+      "Consider the candidate's ability to recognize when they don't know something.",
+      "Higher scores require both correctness AND depth of understanding.",
+      "Note if the candidate improves their answer after probing questions."
+    ],
+    "common_pitfalls": [
+      "Candidate jumps to implementation without problem framing.",
+      "Candidate cannot explain why their solution works (intuition vs rigor).",
+      "Candidate ignores constraints (memory, time, scale) in their design.",
+      "Candidate cannot identify the limitations of their approach."
+    ],
+    "probing_questions": [
+      "What assumptions are you making?",
+      "Can you prove that this always works?",
+      "What happens when input size grows to 1 billion?",
+      "How would you handle failure in this component?",
+      "What alternative approaches did you consider?",
+      "What's the bottleneck in your design?"
+    ]
+  },
+  "company_specific_dimensions": {
+    "google": {
+      "description": "Google technical expectations",
+      "dimensions": [
+        {
+          "name": "scale_consciousness",
+          "description": "Designing for Google-scale traffic and data.",
+          "levels": [
+            { "range": "0-3", "description": "No consideration of scale." },
+            { "range": "4-6", "description": "Acknowledges scale but proposes impractical solutions." },
+            { "range": "7-8", "description": "Reasonable scaling strategies with identified bottlenecks." },
+            { "range": "9-10", "description": "Sophisticated distributed systems thinking at planetary scale." }
+          ]
+        }
+      ]
+    },
+    "amazon": {
+      "description": "Amazon technical expectations",
+      "dimensions": [
+        {
+          "name": "operational_excellence",
+          "description": "Designing for operability, monitoring, and fault tolerance.",
+          "levels": [
+            { "range": "0-3", "description": "No operational considerations." },
+            { "range": "4-6", "description": "Acknowledges monitoring or logging." },
+            { "range": "7-8", "description": "Designs for observability and graceful degradation." },
+            { "range": "9-10", "description": "Comprehensive operability strategy including runbooks and alarms." }
+          ]
+        }
+      ]
+    },
+    "microsoft": {
+      "description": "Microsoft technical expectations",
+      "dimensions": [
+        {
+          "name": "enterprise_considerations",
+          "description": "Designing for enterprise customers (compliance, integration, supportability).",
+          "levels": [
+            { "range": "0-3", "description": "No enterprise considerations." },
+            { "range": "4-6", "description": "Acknowledges enterprise needs but limited depth." },
+            { "range": "7-8", "description": "Incorporates backward compatibility and integration." },
+            { "range": "9-10", "description": "Comprehensive enterprise design with compliance and support." }
+          ]
+        }
+      ]
+    },
+    "apple": {
+      "description": "Apple technical expectations",
+      "dimensions": [
+        {
+          "name": "user_experience_craftsmanship",
+          "description": "Attention to UI/UX details and performance smoothness.",
+          "levels": [
+            { "range": "0-3", "description": "No UX consideration." },
+            { "range": "4-6", "description": "Acknowledges usability but surface level." },
+            { "range": "7-8", "description": "Designs for responsiveness and intuitive interfaces." },
+            { "range": "9-10", "description": "Obsessed with pixel-perfect, fluid, accessible experiences." }
+          ]
+        },
+        {
+          "name": "privacy_by_design",
+          "description": "Minimizing data collection and protecting user privacy.",
+          "levels": [
+            { "range": "0-3", "description": "No privacy consideration." },
+            { "range": "4-6", "description": "Acknowledges privacy but reactive." },
+            { "range": "7-8", "description": "Proactively minimizes data collection." },
+            { "range": "9-10", "description": "Privacy-first architecture with on-device processing." }
+          ]
+        }
+      ]
+    }
+  }
 }
