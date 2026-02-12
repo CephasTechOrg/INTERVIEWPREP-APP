@@ -1,207 +1,777 @@
 {
-    "track": "swe_intern",
-    "company_style": "google",
-    "difficulty": "medium",
-    "questions": [
-      {
-        "title": "Longest Substring Without Repeating Characters",
-        "prompt": "Given a string, find the length of the longest substring without repeating characters.",
-        "tags": ["sliding-window", "hashmap"],
-        "followups": [
-          "What invariant does the window maintain?",
-          "What is the time complexity?",
-          "How does Unicode affect your solution?"
-        ]
-      },
-      {
-        "title": "Kth Largest Element",
-        "prompt": "Find the kth largest element in an unsorted array.",
-        "tags": ["heap", "quickselect"],
-        "followups": [
-          "Heap vs quickselect?",
-          "Worst-case complexity?",
-          "How would you handle streaming data?"
-        ]
-      },
-      {
-        "title": "Merge Intervals",
-        "prompt": "Merge overlapping intervals.",
-        "tags": ["sorting", "arrays"],
-        "followups": [
-          "Why is sorting required?",
-          "What edge cases exist?",
-          "Time complexity?"
-        ]
-      },
-      {
-        "title": "Binary Tree Level Order Traversal",
-        "prompt": "Return the level order traversal of a binary tree.",
-        "tags": ["trees", "bfs"],
-        "followups": [
-          "DFS vs BFS?",
-          "Space complexity?",
-          "How do you modify it for zigzag?"
-        ]
-      },
-      {
-        "title": "Detect Cycle in Graph",
-        "prompt": "Detect if a graph contains a cycle.",
-        "tags": ["graphs", "dfs"],
-        "followups": [
-          "Directed vs undirected?",
-          "How do you track visited states?",
-          "Complexity?"
-        ]
-      },
-      {
-        "title": "Product of Array Except Self",
-        "prompt": "Return an array where each element is the product of all other elements.",
-        "tags": ["arrays", "prefix-sum"],
-        "followups": [
-          "Why not division?",
-          "Space optimization?",
-          "Edge cases with zeros?"
-        ]
-      },
-      {
-        "title": "Design a Simple Cache",
-        "prompt": "Design a basic cache with get and put.",
-        "tags": ["design", "hashmap"],
-        "followups": [
-          "What eviction policy?",
-          "Time complexity?",
-          "Thread safety?"
-        ]
-      },
-      {
-        "title": "Search in Rotated Sorted Array",
-        "prompt": "Search a target in a rotated sorted array.",
-        "tags": ["binary-search"],
-        "followups": [
-          "What invariant remains?",
-          "Why is it logarithmic?",
-          "Edge cases?"
-        ]
-      },
-      {
-        "title": "Backtracking: Permutations",
-        "prompt": "Generate all permutations of a list of numbers.",
-        "tags": ["backtracking"],
-        "followups": [
-          "Time complexity?",
-          "How do you avoid duplicates?",
-          "Stack depth concerns?"
-        ]
-      },
-      {
-        "title": "Design URL Shortener",
-        "prompt": "Design a URL shortening service.",
-        "tags": ["system-design"],
-        "followups": [
-          "Key generation?",
-          "Handling scale?",
-          "Abuse prevention?"
-        ]
-      },
-      {
-        "title": "Thread Safety Basics",
-        "prompt": "Explain race conditions and how to avoid them.",
-        "tags": ["concurrency"],
-        "followups": [
-          "Locks vs atomics?",
-          "Deadlocks?",
-          "Performance trade-offs?"
-        ]
-      },
-      {
-        "title": "Top K Frequent Elements",
-        "prompt": "Return the k most frequent elements in an array.",
-        "tags": ["heap", "hashmap"],
-        "followups": [
-          "Bucket sort approach?",
-          "Complexity?",
-          "Memory usage?"
-        ]
-      },
-      {
-        "title": "Design Metrics for a Feature",
-        "prompt": "Pick a Google product feature and define success metrics.",
-        "tags": ["product-thinking"],
-        "followups": [
-          "Leading vs lagging metrics?",
-          "Avoiding vanity metrics?",
-          "Experiment design?"
-        ]
-      },
-      {
-        "title": "Implement Trie",
-        "prompt": "Implement a trie with insert and search.",
-        "tags": ["tries"],
-        "followups": [
-          "Memory trade-offs?",
-          "Prefix search?",
-          "Deletion?"
-        ]
-      },
-      {
-        "title": "Matrix Traversal",
-        "prompt": "Traverse a matrix in spiral order.",
-        "tags": ["arrays"],
-        "followups": [
-          "Boundary management?",
-          "Edge cases?",
-          "Complexity?"
-        ]
-      },
-      {
-        "title": "Find Duplicate Number",
-        "prompt": "Find the duplicate number in an array without modifying it.",
-        "tags": ["two-pointers"],
-        "followups": [
-          "Why does cycle detection work?",
-          "Space complexity?",
-          "Alternative approaches?"
-        ]
-      },
-      {
-        "title": "Design Logging System",
-        "prompt": "Design a logging system for a backend service.",
-        "tags": ["design"],
-        "followups": [
-          "Log levels?",
-          "Performance concerns?",
-          "Storage?"
-        ]
-      },
-      {
-        "title": "Validate Binary Search Tree",
-        "prompt": "Check if a binary tree is a valid BST.",
-        "tags": ["trees", "dfs"],
-        "followups": [
-          "Why bounds matter?",
-          "Recursive vs iterative?",
-          "Edge cases?"
-        ]
-      },
-      {
-        "title": "Handling Large Data Files",
-        "prompt": "How do you process files larger than memory?",
-        "tags": ["system-thinking"],
-        "followups": [
-          "Streaming?",
-          "Chunking?",
-          "Failure recovery?"
-        ]
-      },
-      {
-        "title": "Behavioral: Learning Fast",
-        "prompt": "Tell me about a time you had to learn something complex quickly.",
-        "tags": ["behavioral"],
-        "followups": [
-          "How did you validate understanding?",
-          "What was challenging?",
-          "Outcome?"
-        ]
-      }
-    ]
-  }
+  "track": "swe_intern",
+  "company_style": "google",
+  "difficulty": "medium",
+  "questions": [
+    {
+      "title": "Longest Substring Without Repeating Characters",
+      "prompt": "Given a string, find the length of the longest substring without repeating characters.",
+      "tags": ["sliding-window", "hashmap"],
+      "followups": [
+        "What invariant does the window maintain?",
+        "What is the time complexity?",
+        "How does Unicode affect your solution?"
+      ]
+    },
+    {
+      "title": "Kth Largest Element",
+      "prompt": "Find the kth largest element in an unsorted array.",
+      "tags": ["heap", "quickselect"],
+      "followups": [
+        "Heap vs quickselect?",
+        "Worst-case complexity?",
+        "How would you handle streaming data?"
+      ]
+    },
+    {
+      "title": "Merge Intervals",
+      "prompt": "Merge overlapping intervals.",
+      "tags": ["sorting", "arrays"],
+      "followups": [
+        "Why is sorting required?",
+        "What edge cases exist?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Binary Tree Level Order Traversal",
+      "prompt": "Return the level order traversal of a binary tree.",
+      "tags": ["trees", "bfs"],
+      "followups": [
+        "DFS vs BFS?",
+        "Space complexity?",
+        "How do you modify it for zigzag?"
+      ]
+    },
+    {
+      "title": "Detect Cycle in Graph",
+      "prompt": "Detect if a graph contains a cycle.",
+      "tags": ["graphs", "dfs"],
+      "followups": [
+        "Directed vs undirected?",
+        "How do you track visited states?",
+        "Complexity?"
+      ]
+    },
+    {
+      "title": "Product of Array Except Self",
+      "prompt": "Return an array where each element is the product of all other elements.",
+      "tags": ["arrays", "prefix-sum"],
+      "followups": [
+        "Why not division?",
+        "Space optimization?",
+        "Edge cases with zeros?"
+      ]
+    },
+    {
+      "title": "Design a Simple Cache",
+      "prompt": "Design a basic cache with get and put.",
+      "tags": ["design", "hashmap"],
+      "followups": [
+        "What eviction policy?",
+        "Time complexity?",
+        "Thread safety?"
+      ]
+    },
+    {
+      "title": "Search in Rotated Sorted Array",
+      "prompt": "Search a target in a rotated sorted array.",
+      "tags": ["binary-search"],
+      "followups": [
+        "What invariant remains?",
+        "Why is it logarithmic?",
+        "Edge cases?"
+      ]
+    },
+    {
+      "title": "Backtracking: Permutations",
+      "prompt": "Generate all permutations of a list of numbers.",
+      "tags": ["backtracking"],
+      "followups": [
+        "Time complexity?",
+        "How do you avoid duplicates?",
+        "Stack depth concerns?"
+      ]
+    },
+    {
+      "title": "Design URL Shortener",
+      "prompt": "Design a URL shortening service.",
+      "tags": ["system-design"],
+      "followups": [
+        "Key generation?",
+        "Handling scale?",
+        "Abuse prevention?"
+      ]
+    },
+    {
+      "title": "Thread Safety Basics",
+      "prompt": "Explain race conditions and how to avoid them.",
+      "tags": ["concurrency"],
+      "followups": [
+        "Locks vs atomics?",
+        "Deadlocks?",
+        "Performance trade-offs?"
+      ]
+    },
+    {
+      "title": "Top K Frequent Elements",
+      "prompt": "Return the k most frequent elements in an array.",
+      "tags": ["heap", "hashmap"],
+      "followups": [
+        "Bucket sort approach?",
+        "Complexity?",
+        "Memory usage?"
+      ]
+    },
+    {
+      "title": "Design Metrics for a Feature",
+      "prompt": "Pick a Google product feature and define success metrics.",
+      "tags": ["product-thinking"],
+      "followups": [
+        "Leading vs lagging metrics?",
+        "Avoiding vanity metrics?",
+        "Experiment design?"
+      ]
+    },
+    {
+      "title": "Implement Trie",
+      "prompt": "Implement a trie with insert and search.",
+      "tags": ["tries"],
+      "followups": [
+        "Memory trade-offs?",
+        "Prefix search?",
+        "Deletion?"
+      ]
+    },
+    {
+      "title": "Matrix Traversal",
+      "prompt": "Traverse a matrix in spiral order.",
+      "tags": ["arrays"],
+      "followups": [
+        "Boundary management?",
+        "Edge cases?",
+        "Complexity?"
+      ]
+    },
+    {
+      "title": "Find Duplicate Number",
+      "prompt": "Find the duplicate number in an array without modifying it.",
+      "tags": ["two-pointers"],
+      "followups": [
+        "Why does cycle detection work?",
+        "Space complexity?",
+        "Alternative approaches?"
+      ]
+    },
+    {
+      "title": "Design Logging System",
+      "prompt": "Design a logging system for a backend service.",
+      "tags": ["design"],
+      "followups": [
+        "Log levels?",
+        "Performance concerns?",
+        "Storage?"
+      ]
+    },
+    {
+      "title": "Validate Binary Search Tree",
+      "prompt": "Check if a binary tree is a valid BST.",
+      "tags": ["trees", "dfs"],
+      "followups": [
+        "Why bounds matter?",
+        "Recursive vs iterative?",
+        "Edge cases?"
+      ]
+    },
+    {
+      "title": "Handling Large Data Files",
+      "prompt": "How do you process files larger than memory?",
+      "tags": ["system-thinking"],
+      "followups": [
+        "Streaming?",
+        "Chunking?",
+        "Failure recovery?"
+      ]
+    },
+    {
+      "title": "Behavioral: Learning Fast",
+      "prompt": "Tell me about a time you had to learn something complex quickly.",
+      "tags": ["behavioral"],
+      "followups": [
+        "How did you validate understanding?",
+        "What was challenging?",
+        "Outcome?"
+      ]
+    },
+    {
+      "title": "3Sum",
+      "prompt": "Given an integer array nums, return all triplets that sum to zero.",
+      "tags": ["arrays", "two-pointers", "sorting"],
+      "followups": [
+        "How do you avoid duplicate triplets?",
+        "What is the time complexity?",
+        "How would you extend this to 4Sum?"
+      ]
+    },
+    {
+      "title": "Container With Most Water",
+      "prompt": "Given n non-negative integers representing heights, find two lines that together with x-axis form a container holding the most water.",
+      "tags": ["arrays", "two-pointers"],
+      "followups": [
+        "Why does the two-pointer approach work?",
+        "How would you prove correctness?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Generate Parentheses",
+      "prompt": "Given n pairs of parentheses, generate all valid combinations.",
+      "tags": ["backtracking", "strings"],
+      "followups": [
+        "What is the pruning condition?",
+        "How many valid combinations exist?",
+        "Can you solve iteratively?"
+      ]
+    },
+    {
+      "title": "Word Break",
+      "prompt": "Given a string and a dictionary of words, determine if the string can be segmented into dictionary words.",
+      "tags": ["dp", "strings"],
+      "followups": [
+        "What is the DP recurrence?",
+        "Time and space complexity?",
+        "How would you return all possible segmentations?"
+      ]
+    },
+    {
+      "title": "Number of Islands",
+      "prompt": "Given a 2D grid of '1's and '0's, count the number of islands.",
+      "tags": ["graphs", "dfs", "bfs"],
+      "followups": [
+        "DFS vs BFS trade-offs?",
+        "What about very large grids?",
+        "How would you handle diagonal connections?"
+      ]
+    },
+    {
+      "title": "Rotting Oranges",
+      "prompt": "Given a grid with fresh and rotten oranges, return minimum minutes until no fresh oranges remain.",
+      "tags": ["bfs", "matrix"],
+      "followups": [
+        "Why is BFS appropriate here?",
+        "How do you handle multiple sources?",
+        "What if some oranges never rot?"
+      ]
+    },
+    {
+      "title": "Course Schedule",
+      "prompt": "Given numCourses and prerequisites, determine if all courses can be finished.",
+      "tags": ["graphs", "topological-sort"],
+      "followups": [
+        "How do you detect cycles?",
+        "Compare DFS vs Kahn's algorithm?",
+        "How would you return the course order?"
+      ]
+    },
+    {
+      "title": "Course Schedule II",
+      "prompt": "Return the ordering of courses to take all courses.",
+      "tags": ["graphs", "topological-sort"],
+      "followups": [
+        "How does the algorithm differ from cycle detection?",
+        "What if multiple valid orders exist?",
+        "Complexity analysis?"
+      ]
+    },
+    {
+      "title": "Design Google Search Autocomplete",
+      "prompt": "Design an autocomplete system that returns top k suggestions for a prefix.",
+      "tags": ["system-design", "tries", "heap"],
+      "followups": [
+        "How do you store and update frequencies?",
+        "What about real-time updates?",
+        "How do you handle memory constraints?"
+      ]
+    },
+    {
+      "title": "Design Google Docs",
+      "prompt": "Design a collaborative document editing system at a high level.",
+      "tags": ["system-design", "real-time"],
+      "followups": [
+        "How do you handle concurrent edits?",
+        "What is operational transformation?",
+        "How do you handle offline editing?"
+      ]
+    },
+    {
+      "title": "Design Google Maps ETA",
+      "prompt": "How would you estimate travel time between two locations?",
+      "tags": ["system-design", "graphs"],
+      "followups": [
+        "What factors affect travel time?",
+        "How do you handle real-time traffic?",
+        "How do you compute the shortest path?"
+      ]
+    },
+    {
+      "title": "Design Google Photos",
+      "prompt": "Design a photo storage and sharing system at a high level.",
+      "tags": ["system-design", "storage"],
+      "followups": [
+        "How do you store large files efficiently?",
+        "How do you generate thumbnails?",
+        "What about sharing permissions?"
+      ]
+    },
+    {
+      "title": "Design YouTube",
+      "prompt": "Design a video streaming platform at a high level.",
+      "tags": ["system-design", "video"],
+      "followups": [
+        "How do you handle video encoding?",
+        "What about CDN and caching?",
+        "How do you recommend videos?"
+      ]
+    },
+    {
+      "title": "Longest Palindromic Substring",
+      "prompt": "Find the longest palindromic substring in a given string.",
+      "tags": ["strings", "dp", "two-pointers"],
+      "followups": [
+        "Compare DP vs expand-around-center?",
+        "What is the time complexity of each?",
+        "How would you handle very long strings?"
+      ]
+    },
+    {
+      "title": "Unique Paths",
+      "prompt": "Count the number of unique paths from top-left to bottom-right in a grid moving only down or right.",
+      "tags": ["dp", "combinatorics"],
+      "followups": [
+        "What is the DP recurrence?",
+        "What is the mathematical formula?",
+        "How do you optimize space?"
+      ]
+    },
+    {
+      "title": "Jump Game",
+      "prompt": "Determine if you can reach the last index given maximum jump lengths at each position.",
+      "tags": ["greedy", "dp"],
+      "followups": [
+        "Why is greedy optimal here?",
+        "What is the time complexity?",
+        "How would you find minimum jumps?"
+      ]
+    },
+    {
+      "title": "Jump Game II",
+      "prompt": "Find the minimum number of jumps to reach the last index.",
+      "tags": ["greedy", "bfs"],
+      "followups": [
+        "How does BFS on intervals work?",
+        "What is the time complexity?",
+        "Can you do it in O(1) space?"
+      ]
+    },
+    {
+      "title": "Set Matrix Zeroes",
+      "prompt": "If an element in a matrix is zero, set its entire row and column to zero in O(1) space.",
+      "tags": ["matrix", "arrays"],
+      "followups": [
+        "How do you avoid overwriting state?",
+        "What is the first row/column trick?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Spiral Matrix",
+      "prompt": "Return all elements of a matrix in spiral order.",
+      "tags": ["matrix", "simulation"],
+      "followups": [
+        "How do you manage boundaries?",
+        "What edge cases exist?",
+        "How would you generate a spiral matrix?"
+      ]
+    },
+    {
+      "title": "Subsets",
+      "prompt": "Given an array of unique integers, return all possible subsets.",
+      "tags": ["backtracking", "bit-manipulation"],
+      "followups": [
+        "Compare backtracking vs bitmask?",
+        "What is the time complexity?",
+        "How would you handle duplicates?"
+      ]
+    },
+    {
+      "title": "Subsets II",
+      "prompt": "Given an array with duplicates, return all unique subsets.",
+      "tags": ["backtracking"],
+      "followups": [
+        "How do you avoid duplicates?",
+        "Why sort the array first?",
+        "What is the time complexity?"
+      ]
+    },
+    {
+      "title": "Combination Sum",
+      "prompt": "Find all unique combinations that sum to target, with unlimited use of candidates.",
+      "tags": ["backtracking"],
+      "followups": [
+        "What is the pruning condition?",
+        "Time complexity analysis?",
+        "How does it differ from bounded usage?"
+      ]
+    },
+    {
+      "title": "Combination Sum II",
+      "prompt": "Find all unique combinations that sum to target, with each number used at most once.",
+      "tags": ["backtracking"],
+      "followups": [
+        "How do you avoid duplicate combinations?",
+        "Why sort the array?",
+        "What is the time complexity?"
+      ]
+    },
+    {
+      "title": "Permutations II",
+      "prompt": "Generate all unique permutations of a list with duplicates.",
+      "tags": ["backtracking"],
+      "followups": [
+        "How do you prune duplicate branches?",
+        "What is the time complexity?",
+        "How would you solve iteratively?"
+      ]
+    },
+    {
+      "title": "Decode Ways",
+      "prompt": "Count the number of ways to decode a digit string (A=1, B=2, ... Z=26).",
+      "tags": ["dp", "strings"],
+      "followups": [
+        "What is the DP recurrence?",
+        "How do you handle leading zeros?",
+        "What is the space-optimized solution?"
+      ]
+    },
+    {
+      "title": "House Robber",
+      "prompt": "Find maximum amount you can rob from non-adjacent houses.",
+      "tags": ["dp", "arrays"],
+      "followups": [
+        "What is the DP recurrence?",
+        "How do you optimize space?",
+        "What about circular houses?"
+      ]
+    },
+    {
+      "title": "House Robber II",
+      "prompt": "Same as House Robber but houses are arranged in a circle.",
+      "tags": ["dp", "arrays"],
+      "followups": [
+        "How do you break the circular dependency?",
+        "What is the recurrence?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Task Scheduler",
+      "prompt": "Given tasks and cooldown n, return the least number of time units to finish all tasks.",
+      "tags": ["greedy", "heap"],
+      "followups": [
+        "Why is the greedy formula optimal?",
+        "How does the math solution work?",
+        "What if tasks have different cooldowns?"
+      ]
+    },
+    {
+      "title": "Partition Equal Subset Sum",
+      "prompt": "Determine if an array can be partitioned into two subsets with equal sum.",
+      "tags": ["dp", "knapsack"],
+      "followups": [
+        "What is the DP state and transition?",
+        "How do you optimize space?",
+        "Why is this a 0/1 knapsack problem?"
+      ]
+    },
+    {
+      "title": "Gas Station",
+      "prompt": "Find the starting gas station index to complete a circular tour.",
+      "tags": ["arrays", "greedy"],
+      "followups": [
+        "Why can you skip intermediate indices?",
+        "What invariant guarantees correctness?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Copy List with Random Pointer",
+      "prompt": "Deep copy a linked list where each node has a random pointer.",
+      "tags": ["linked-list", "hashmap"],
+      "followups": [
+        "Compare O(n) space vs O(1) space approaches?",
+        "How does the interweaving technique work?",
+        "What about cycles in random pointers?"
+      ]
+    },
+    {
+      "title": "Sort Colors (Dutch National Flag)",
+      "prompt": "Sort an array of 0s, 1s, and 2s in one pass with O(1) space.",
+      "tags": ["arrays", "two-pointers"],
+      "followups": [
+        "What invariants do the three pointers maintain?",
+        "Why is this O(n) and one-pass?",
+        "How would you generalize to k colors?"
+      ]
+    },
+    {
+      "title": "Kth Smallest Element in a BST",
+      "prompt": "Find the kth smallest element in a binary search tree.",
+      "tags": ["trees", "bst"],
+      "followups": [
+        "What property of BST does this use?",
+        "How would you handle frequent modifications?",
+        "What about kth largest?"
+      ]
+    },
+    {
+      "title": "Binary Tree Right Side View",
+      "prompt": "Return the values visible from the right side of a binary tree.",
+      "tags": ["trees", "bfs", "dfs"],
+      "followups": [
+        "BFS vs DFS approach?",
+        "Time and space complexity?",
+        "How about the left side view?"
+      ]
+    },
+    {
+      "title": "Flatten Binary Tree to Linked List",
+      "prompt": "Flatten a binary tree to a linked list in-place (preorder order).",
+      "tags": ["trees", "recursion"],
+      "followups": [
+        "What is the traversal order?",
+        "How do you do it iteratively?",
+        "What is the Morris traversal approach?"
+      ]
+    },
+    {
+      "title": "Construct Binary Tree from Preorder and Inorder",
+      "prompt": "Build a binary tree from preorder and inorder traversal arrays.",
+      "tags": ["trees", "recursion"],
+      "followups": [
+        "How do you find the root in inorder?",
+        "What is the time complexity with hashmap optimization?",
+        "What about postorder + inorder?"
+      ]
+    },
+    {
+      "title": "Construct Binary Tree from Inorder and Postorder",
+      "prompt": "Build a binary tree from inorder and postorder traversal arrays.",
+      "tags": ["trees", "recursion"],
+      "followups": [
+        "How does this differ from preorder+inorder?",
+        "What is the recursive pattern?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Path Sum II",
+      "prompt": "Return all root-to-leaf paths that sum to a target.",
+      "tags": ["trees", "dfs", "backtracking"],
+      "followups": [
+        "How do you track the current path?",
+        "Time complexity?",
+        "How would you handle negative values?"
+      ]
+    },
+    {
+      "title": "Populating Next Right Pointers in Each Node",
+      "prompt": "Connect each node to its next right node in a perfect binary tree.",
+      "tags": ["trees", "bfs"],
+      "followups": [
+        "How do you solve with O(1) extra space?",
+        "What about non-perfect trees?",
+        "How does level traversal without queue work?"
+      ]
+    },
+    {
+      "title": "Populating Next Right Pointers in Each Node II",
+      "prompt": "Same as above but the tree may not be perfect.",
+      "tags": ["trees", "bfs"],
+      "followups": [
+        "How does the algorithm change?",
+        "How do you traverse levels without a queue?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Design Circular Queue",
+      "prompt": "Implement a circular queue with fixed capacity.",
+      "tags": ["design", "queue"],
+      "followups": [
+        "How do you differentiate full vs empty?",
+        "Time complexity of operations?",
+        "How would you make it thread-safe?"
+      ]
+    },
+    {
+      "title": "Daily Temperatures",
+      "prompt": "Given daily temperatures, return days until warmer temperature.",
+      "tags": ["stack", "monotonic-stack"],
+      "followups": [
+        "Why is a monotonic decreasing stack efficient?",
+        "What is the time complexity?",
+        "How would you solve with brute force first?"
+      ]
+    },
+    {
+      "title": "Minimum Path Sum",
+      "prompt": "Find the minimum sum path from top-left to bottom-right in a grid.",
+      "tags": ["dp", "matrix"],
+      "followups": [
+        "What is the DP recurrence?",
+        "How do you optimize space?",
+        "What if you can move in all four directions?"
+      ]
+    },
+    {
+      "title": "Longest Increasing Subsequence",
+      "prompt": "Find the length of the longest strictly increasing subsequence.",
+      "tags": ["dp", "binary-search"],
+      "followups": [
+        "Compare O(n²) DP vs O(n log n) patience sorting?",
+        "What is the DP recurrence?",
+        "How would you reconstruct the subsequence?"
+      ]
+    },
+    {
+      "title": "Coin Change II",
+      "prompt": "Count the number of combinations to make up an amount with unlimited coins.",
+      "tags": ["dp", "knapsack"],
+      "followups": [
+        "How does this differ from Coin Change I?",
+        "What is the DP recurrence?",
+        "Why does the loop order matter?"
+      ]
+    },
+    {
+      "title": "Maximum Product Subarray",
+      "prompt": "Find the contiguous subarray with the maximum product.",
+      "tags": ["arrays", "dp"],
+      "followups": [
+        "Why do you need to track both max and min?",
+        "How do you handle zeros and negatives?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Partition Labels",
+      "prompt": "Partition a string into as many parts as possible so each letter appears in at most one part.",
+      "tags": ["strings", "greedy"],
+      "followups": [
+        "What is the greedy approach?",
+        "How do you track last occurrences?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Google Interview: Googleyness",
+      "prompt": "Tell me about a time you worked on a project that had impact beyond your immediate team.",
+      "tags": ["behavioral", "googleyness"],
+      "followups": [
+        "What was your specific contribution?",
+        "How did you measure impact?",
+        "What did you learn from the experience?"
+      ]
+    },
+    {
+      "title": "Google Interview: Collaboration",
+      "prompt": "Tell me about a time you worked with someone whose working style was very different from yours.",
+      "tags": ["behavioral", "collaboration"],
+      "followups": [
+        "How did you adapt your approach?",
+        "What was challenging?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Google Interview: Ambiguity",
+      "prompt": "Tell me about a time you had to make progress on a project with unclear requirements.",
+      "tags": ["behavioral", "problem-solving"],
+      "followups": [
+        "How did you gain clarity?",
+        "Who did you consult?",
+        "How did you validate your approach?"
+      ]
+    },
+    {
+      "title": "Google Interview: Leadership",
+      "prompt": "Tell me about a time you took initiative to solve a problem without being asked.",
+      "tags": ["behavioral", "leadership"],
+      "followups": [
+        "What motivated you?",
+        "How did you convince others?",
+        "What was the impact?"
+      ]
+    },
+    {
+      "title": "Google Interview: Failure",
+      "prompt": "Tell me about a time you failed at something and what you learned from it.",
+      "tags": ["behavioral", "growth"],
+      "followups": [
+        "What went wrong?",
+        "How did you recover?",
+        "What would you do differently?"
+      ]
+    },
+    {
+      "title": "Google Interview: Feedback",
+      "prompt": "Tell me about a time you received constructive criticism and how you responded.",
+      "tags": ["behavioral", "growth"],
+      "followups": [
+        "What was the feedback?",
+        "How did you incorporate it?",
+        "How did it help you improve?"
+      ]
+    },
+    {
+      "title": "Google Interview: Cross-functional",
+      "prompt": "Tell me about a time you worked with non-engineers (PM, design, etc.) to deliver a project.",
+      "tags": ["behavioral", "collaboration"],
+      "followups": [
+        "How did you bridge technical gaps?",
+        "What challenges did you face?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Google Search: Ranking Factors",
+      "prompt": "What factors would you consider when ranking search results?",
+      "tags": ["product-thinking", "google-context"],
+      "followups": [
+        "How do you balance relevance and popularity?",
+        "How do you handle freshness?",
+        "What about personalization?"
+      ]
+    },
+    {
+      "title": "Google Ads: Click-Through Rate",
+      "prompt": "How would you measure and improve click-through rate for Google Ads?",
+      "tags": ["product-thinking", "metrics"],
+      "followups": [
+        "What metrics would you track?",
+        "How do you run experiments?",
+        "How do you avoid negative user experience?"
+      ]
+    },
+    {
+      "title": "Google Maps: ETA Accuracy",
+      "prompt": "How would you evaluate and improve the accuracy of Google Maps ETAs?",
+      "tags": ["product-thinking", "metrics"],
+      "followups": [
+        "What data would you collect?",
+        "How do you measure error?",
+        "What features might improve accuracy?"
+      ]
+    }
+  ]
+}

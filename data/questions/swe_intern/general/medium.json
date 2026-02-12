@@ -61,14 +61,730 @@
     },
     {
       "title": "Coin Change (Minimum Coins)",
-      "prompt": "Given an integer array coins representing coin denominations and an integer amount, return the fewest number of coins needed to make up that amount. If it\u2019s not possible, return -1.",
+      "prompt": "Given an integer array coins representing coin denominations and an integer amount, return the fewest number of coins needed to make up that amount. If it's not possible, return -1.",
       "tags": [
         "dp"
       ],
       "followups": [
-        "What\u2019s the DP state and transition?",
+        "What's the DP state and transition?",
         "What is the complexity?",
         "How would you also reconstruct the actual coins used?"
+      ]
+    },
+    {
+      "title": "3Sum",
+      "prompt": "Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.",
+      "tags": [
+        "arrays",
+        "two-pointers",
+        "sorting"
+      ],
+      "followups": [
+        "How do you avoid duplicate triplets?",
+        "What is the time complexity?",
+        "How would you extend this to k-sum?"
+      ]
+    },
+    {
+      "title": "Container With Most Water",
+      "prompt": "Given n non-negative integers a1, a2, ..., an where each represents a point at coordinate (i, ai). Find two lines that together with the x-axis form a container that contains the most water.",
+      "tags": [
+        "arrays",
+        "two-pointers"
+      ],
+      "followups": [
+        "Why does the two-pointer approach work?",
+        "What's the time complexity?",
+        "How would you prove correctness?"
+      ]
+    },
+    {
+      "title": "Generate Parentheses",
+      "prompt": "Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.",
+      "tags": [
+        "backtracking",
+        "strings",
+        "recursion"
+      ],
+      "followups": [
+        "What is the pruning condition?",
+        "How many valid combinations exist?",
+        "Can you solve iteratively?"
+      ]
+    },
+    {
+      "title": "Word Break",
+      "prompt": "Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.",
+      "tags": [
+        "dp",
+        "strings"
+      ],
+      "followups": [
+        "What is the DP recurrence?",
+        "What's the time and space complexity?",
+        "How would you return all possible segmentations?"
+      ]
+    },
+    {
+      "title": "Kth Largest Element in an Array",
+      "prompt": "Given an integer array nums and an integer k, return the kth largest element in the array. You must solve it in O(n) time on average.",
+      "tags": [
+        "heap",
+        "quickselect",
+        "arrays"
+      ],
+      "followups": [
+        "Compare heap vs quickselect trade-offs.",
+        "What's the worst-case time complexity?",
+        "How do you handle duplicates?"
+      ]
+    },
+    {
+      "title": "Course Schedule",
+      "prompt": "There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates you must take course bi before course ai. Return true if you can finish all courses.",
+      "tags": [
+        "graphs",
+        "topological-sort",
+        "dfs"
+      ],
+      "followups": [
+        "How do you detect cycles in a directed graph?",
+        "Compare BFS (Kahn's) vs DFS approaches.",
+        "How would you return the ordering of courses?"
+      ]
+    },
+    {
+      "title": "Course Schedule II",
+      "prompt": "Return the ordering of courses you should take to finish all courses. If there are multiple valid orders, return any of them. If it's impossible, return an empty array.",
+      "tags": [
+        "graphs",
+        "topological-sort",
+        "bfs"
+      ],
+      "followups": [
+        "How does the algorithm change from detecting feasibility to producing an order?",
+        "What's the time complexity?",
+        "How do you detect and report cycles?"
+      ]
+    },
+    {
+      "title": "Design Add and Search Words Data Structure",
+      "prompt": "Design a data structure that supports adding new words and searching if a string matches any previously added string. The search can contain '.' which matches any character.",
+      "tags": [
+        "trie",
+        "design",
+        "backtracking"
+      ],
+      "followups": [
+        "How does a trie help with prefix matching?",
+        "How do you handle '.' wildcard efficiently?",
+        "What's the time complexity of search?"
+      ]
+    },
+    {
+      "title": "Number of Islands",
+      "prompt": "Given an m x n 2D binary grid grid which represents '1's (land) and '0's (water), return the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.",
+      "tags": [
+        "graphs",
+        "dfs",
+        "bfs",
+        "matrix"
+      ],
+      "followups": [
+        "Compare DFS vs BFS approaches.",
+        "What's the time and space complexity?",
+        "How would you count islands in a very large grid?"
+      ]
+    },
+    {
+      "title": "Rotting Oranges",
+      "prompt": "Given an m x n grid where each cell can have a value 0 (empty), 1 (fresh orange), or 2 (rotten orange). Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten. Return the minimum number of minutes that must elapse until no cell has a fresh orange.",
+      "tags": [
+        "bfs",
+        "matrix"
+      ],
+      "followups": [
+        "Why is BFS more suitable than DFS?",
+        "How do you handle multiple sources?",
+        "What if there are oranges that can never rot?"
+      ]
+    },
+    {
+      "title": "Pacific Atlantic Water Flow",
+      "prompt": "Given an m x n matrix of non-negative integers representing the height of each unit cell in a continent, the Pacific ocean touches the top and left edges, and the Atlantic ocean touches the bottom and right edges. Return a list of grid coordinates where water can flow to both oceans.",
+      "tags": [
+        "dfs",
+        "bfs",
+        "matrix"
+      ],
+      "followups": [
+        "Why is reverse traversal efficient?",
+        "What's the time complexity?",
+        "How would you solve with BFS instead?"
+      ]
+    },
+    {
+      "title": "Longest Palindromic Substring",
+      "prompt": "Given a string s, return the longest palindromic substring in s.",
+      "tags": [
+        "strings",
+        "dp",
+        "two-pointers"
+      ],
+      "followups": [
+        "Compare DP vs expand-around-center approaches.",
+        "What's the time complexity of each?",
+        "How would you handle very long strings?"
+      ]
+    },
+    {
+      "title": "Unique Paths",
+      "prompt": "A robot is located at the top-left corner of an m x n grid. It can only move either down or right at any point. How many possible unique paths are there to reach the bottom-right corner?",
+      "tags": [
+        "dp",
+        "combinatorics"
+      ],
+      "followups": [
+        "What's the DP recurrence?",
+        "What's the mathematical formula?",
+        "How would you optimize space?"
+      ]
+    },
+    {
+      "title": "Jump Game",
+      "prompt": "Given an array of non-negative integers nums, you are initially positioned at the first index. Each element represents your maximum jump length at that position. Determine if you are able to reach the last index.",
+      "tags": [
+        "arrays",
+        "greedy",
+        "dp"
+      ],
+      "followups": [
+        "Why is greedy optimal here?",
+        "What's the time complexity?",
+        "How would you find the minimum jumps needed?"
+      ]
+    },
+    {
+      "title": "Jump Game II",
+      "prompt": "Return the minimum number of jumps to reach the last index. You can assume that you can always reach the last index.",
+      "tags": [
+        "arrays",
+        "greedy",
+        "bfs"
+      ],
+      "followups": [
+        "How does BFS on intervals work?",
+        "What's the time complexity?",
+        "Can you do it in O(1) space?"
+      ]
+    },
+    {
+      "title": "Set Matrix Zeroes",
+      "prompt": "Given an m x n integer matrix, if an element is 0, set its entire row and column to 0. Do it in-place using O(1) extra space.",
+      "tags": [
+        "matrix",
+        "arrays"
+      ],
+      "followups": [
+        "How do you avoid overwriting state?",
+        "What's the trick with first row/column markers?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Spiral Matrix",
+      "prompt": "Given an m x n matrix, return all elements of the matrix in spiral order.",
+      "tags": [
+        "matrix",
+        "simulation"
+      ],
+      "followups": [
+        "How do you handle boundary conditions?",
+        "What's the time complexity?",
+        "How would you generate a spiral matrix?"
+      ]
+    },
+    {
+      "title": "Subsets",
+      "prompt": "Given an integer array nums of unique elements, return all possible subsets (the power set).",
+      "tags": [
+        "backtracking",
+        "bit-manipulation"
+      ],
+      "followups": [
+        "Compare backtracking vs bitmask approaches.",
+        "What's the time complexity?",
+        "How would you handle duplicates?"
+      ]
+    },
+    {
+      "title": "Subsets II",
+      "prompt": "Given an integer array nums that may contain duplicates, return all possible subsets (the power set). The solution set must not contain duplicate subsets.",
+      "tags": [
+        "backtracking"
+      ],
+      "followups": [
+        "How do you avoid duplicates?",
+        "Why sort the array first?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Combination Sum",
+      "prompt": "Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may use the same number an unlimited number of times.",
+      "tags": [
+        "backtracking"
+      ],
+      "followups": [
+        "What's the pruning condition?",
+        "How does the algorithm differ if numbers can be reused?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Combination Sum II",
+      "prompt": "Given a collection of candidate numbers that may contain duplicates and a target, find all unique combinations where the chosen numbers sum to target. Each number may only be used once per combination.",
+      "tags": [
+        "backtracking"
+      ],
+      "followups": [
+        "How do you avoid duplicate combinations?",
+        "Why sort the array?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Permutations",
+      "prompt": "Given an array nums of distinct integers, return all the possible permutations.",
+      "tags": [
+        "backtracking",
+        "recursion"
+      ],
+      "followups": [
+        "What's the recurrence relation?",
+        "How many permutations exist?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Permutations II",
+      "prompt": "Given a collection of numbers that may contain duplicates, return all possible unique permutations.",
+      "tags": [
+        "backtracking"
+      ],
+      "followups": [
+        "How do you prune duplicate branches?",
+        "What's the time complexity?",
+        "How would you solve iteratively?"
+      ]
+    },
+    {
+      "title": "Rotate Image",
+      "prompt": "Given an n x n 2D matrix representing an image, rotate the image by 90 degrees clockwise in-place.",
+      "tags": [
+        "matrix",
+        "arrays"
+      ],
+      "followups": [
+        "How do you do it layer by layer?",
+        "What's the in-place approach?",
+        "How would you rotate counter-clockwise?"
+      ]
+    },
+    {
+      "title": "Word Search",
+      "prompt": "Given an m x n grid of characters and a string word, return true if the word exists in the grid. The word can be constructed from letters of sequentially adjacent cells.",
+      "tags": [
+        "backtracking",
+        "dfs",
+        "matrix"
+      ],
+      "followups": [
+        "How do you mark visited cells?",
+        "What's the time complexity?",
+        "How would you optimize with pruning?"
+      ]
+    },
+    {
+      "title": "Decode Ways",
+      "prompt": "A message containing letters from A-Z can be encoded to numbers using the mapping: A=1, B=2, ..., Z=26. Given a string s containing digits, return the number of ways to decode it.",
+      "tags": [
+        "dp",
+        "strings"
+      ],
+      "followups": [
+        "What's the DP recurrence?",
+        "How do you handle leading zeros?",
+        "What's the space-optimized solution?"
+      ]
+    },
+    {
+      "title": "House Robber",
+      "prompt": "You are a robber planning to rob houses along a street. Each house has a certain amount of money. Adjacent houses cannot be robbed on the same night. Given an integer array nums representing the amount of money of each house, return the maximum amount you can rob tonight.",
+      "tags": [
+        "dp",
+        "arrays"
+      ],
+      "followups": [
+        "What's the DP recurrence?",
+        "How do you optimize space?",
+        "What about circular houses (House Robber II)?"
+      ]
+    },
+    {
+      "title": "House Robber II",
+      "prompt": "Same as House Robber, but the houses are arranged in a circle (first and last are adjacent).",
+      "tags": [
+        "dp",
+        "arrays"
+      ],
+      "followups": [
+        "How do you break the circular dependency?",
+        "What's the recurrence?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Task Scheduler",
+      "prompt": "Given a characters array tasks, representing CPU tasks each taking 1 unit of time, and an integer n representing the cooldown period between two same tasks, return the least number of units of time the CPU will take to finish all tasks.",
+      "tags": [
+        "greedy",
+        "heap",
+        "queue"
+      ],
+      "followups": [
+        "Why is the greedy formula optimal?",
+        "How does the math solution work?",
+        "What if tasks have different cooldowns?"
+      ]
+    },
+    {
+      "title": "Partition Equal Subset Sum",
+      "prompt": "Given a non-empty array nums containing only positive integers, find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.",
+      "tags": [
+        "dp",
+        "knapsack"
+      ],
+      "followups": [
+        "What's the DP state and transition?",
+        "Can you optimize space?",
+        "Why is this a 0/1 knapsack problem?"
+      ]
+    },
+    {
+      "title": "Find All Duplicates in an Array",
+      "prompt": "Given an integer array nums of length n where all integers are in the range [1, n] and each integer appears once or twice, return an array of all the integers that appear twice. You must do it in O(n) time and O(1) extra space.",
+      "tags": [
+        "arrays"
+      ],
+      "followups": [
+        "How do you use indices as markers?",
+        "What's the trick with negating values?",
+        "What if integers are not in range [1, n]?"
+      ]
+    },
+    {
+      "title": "Product of Array Except Self",
+      "prompt": "Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i]. You must write an algorithm that runs in O(n) time and without using division.",
+      "tags": [
+        "arrays",
+        "prefix-sum"
+      ],
+      "followups": [
+        "How do you compute prefix and suffix products?",
+        "Can you do it with O(1) extra space?",
+        "How do you handle zeros?"
+      ]
+    },
+    {
+      "title": "Gas Station",
+      "prompt": "There are n gas stations along a circular route. You have two integer arrays gas and cost. Return the starting gas station's index if you can travel around the circuit once, otherwise return -1. You may assume there is at most one solution.",
+      "tags": [
+        "arrays",
+        "greedy"
+      ],
+      "followups": [
+        "Why can you skip intermediate indices?",
+        "What's the invariant that guarantees correctness?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Copy List with Random Pointer",
+      "prompt": "A linked list of length n is given such that each node contains an additional random pointer that could point to any node in the list or null. Construct a deep copy of the list.",
+      "tags": [
+        "linked-list",
+        "hashmap"
+      ],
+      "followups": [
+        "Compare O(n) space vs O(1) space approaches.",
+        "How do you handle cycles in random pointers?",
+        "What's the interweaving technique?"
+      ]
+    },
+    {
+      "title": "Sort Colors (Dutch National Flag)",
+      "prompt": "Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent. Use integers 0, 1, and 2. Solve without using the library's sort function.",
+      "tags": [
+        "arrays",
+        "two-pointers",
+        "sorting"
+      ],
+      "followups": [
+        "What's the invariant maintained by three pointers?",
+        "Why is this O(n) and one-pass?",
+        "How would you generalize to k colors?"
+      ]
+    },
+    {
+      "title": "Kth Smallest Element in a BST",
+      "prompt": "Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.",
+      "tags": [
+        "trees",
+        "bst",
+        "dfs"
+      ],
+      "followups": [
+        "What's the in-order traversal property?",
+        "How would you handle frequent modifications?",
+        "What about kth largest?"
+      ]
+    },
+    {
+      "title": "Binary Tree Right Side View",
+      "prompt": "Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.",
+      "tags": [
+        "trees",
+        "bfs",
+        "dfs"
+      ],
+      "followups": [
+        "How do you solve with BFS vs DFS?",
+        "What's the time complexity?",
+        "How about the left side view?"
+      ]
+    },
+    {
+      "title": "Flatten Binary Tree to Linked List",
+      "prompt": "Given the root of a binary tree, flatten it into a linked list in-place. The 'linked list' should use the same TreeNode class where the right child pointer points to the next node in the list, and the left child pointer is always null.",
+      "tags": [
+        "trees",
+        "recursion"
+      ],
+      "followups": [
+        "What's the order (preorder) of the linked list?",
+        "How do you do it iteratively?",
+        "What's the Morris traversal approach?"
+      ]
+    },
+    {
+      "title": "Construct Binary Tree from Preorder and Inorder",
+      "prompt": "Given two integer arrays preorder and inorder representing the preorder and inorder traversal of a binary tree, construct and return the binary tree.",
+      "tags": [
+        "trees",
+        "recursion"
+      ],
+      "followups": [
+        "How do you find the root in inorder array?",
+        "What's the time complexity with hashmap optimization?",
+        "What about postorder + inorder?"
+      ]
+    },
+    {
+      "title": "Construct Binary Tree from Inorder and Postorder",
+      "prompt": "Given two integer arrays inorder and postorder representing the inorder and postorder traversal of a binary tree, construct and return the binary tree.",
+      "tags": [
+        "trees",
+        "recursion"
+      ],
+      "followups": [
+        "How does this differ from preorder+inorder?",
+        "What's the recursive pattern?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Path Sum II",
+      "prompt": "Given the root of a binary tree and an integer targetSum, return all root-to-leaf paths where the sum of the node values equals targetSum.",
+      "tags": [
+        "trees",
+        "dfs",
+        "backtracking"
+      ],
+      "followups": [
+        "How do you track the current path?",
+        "What's the time complexity?",
+        "How would you handle negative values?"
+      ]
+    },
+    {
+      "title": "Populating Next Right Pointers in Each Node",
+      "prompt": "You are given a perfect binary tree where all leaves are on the same level, and every parent has two children. Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.",
+      "tags": [
+        "trees",
+        "bfs"
+      ],
+      "followups": [
+        "How do you solve with O(1) extra space?",
+        "What's the level order traversal without queue?",
+        "How would you handle non-perfect trees?"
+      ]
+    },
+    {
+      "title": "Populating Next Right Pointers in Each Node II",
+      "prompt": "Same as above but the tree may not be perfect. Populate the next pointers in any binary tree.",
+      "tags": [
+        "trees",
+        "bfs"
+      ],
+      "followups": [
+        "How does the algorithm change for non-perfect trees?",
+        "How do you traverse levels without a queue?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Implement Trie (Prefix Tree)",
+      "prompt": "A trie (pronounced 'try') or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. Implement a trie with insert, search, and startsWith methods.",
+      "tags": [
+        "trie",
+        "design"
+      ],
+      "followups": [
+        "What's the space complexity?",
+        "How would you handle deletions?",
+        "How would you implement autocomplete?"
+      ]
+    },
+    {
+      "title": "Design Circular Queue",
+      "prompt": "Design your implementation of a circular queue. The circular queue is a linear data structure in which the operations are performed based on FIFO principle and the last position is connected back to the first position to make a circle.",
+      "tags": [
+        "design",
+        "queue",
+        "arrays"
+      ],
+      "followups": [
+        "How do you differentiate full vs empty conditions?",
+        "What's the time complexity of operations?",
+        "How would you make it thread-safe?"
+      ]
+    },
+    {
+      "title": "Evaluate Reverse Polish Notation",
+      "prompt": "Evaluate the value of an arithmetic expression in Reverse Polish Notation. Valid operators are +, -, *, /. Each operand may be an integer or another expression.",
+      "tags": [
+        "stack",
+        "math"
+      ],
+      "followups": [
+        "Why use a stack?",
+        "How do you handle division truncation?",
+        "What about negative numbers?"
+      ]
+    },
+    {
+      "title": "Daily Temperatures",
+      "prompt": "Given an array of integers temperatures representing daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day with a warmer temperature, answer[i] = 0.",
+      "tags": [
+        "stack",
+        "monotonic-stack"
+      ],
+      "followups": [
+        "Why is a monotonic decreasing stack efficient?",
+        "What's the time complexity?",
+        "How would you solve with brute force first?"
+      ]
+    },
+    {
+      "title": "Minimum Path Sum",
+      "prompt": "Given an m x n grid filled with non-negative numbers, find a path from top-left to bottom-right that minimizes the sum of numbers along the path. You can only move down or right.",
+      "tags": [
+        "dp",
+        "matrix"
+      ],
+      "followups": [
+        "What's the DP recurrence?",
+        "How do you optimize space?",
+        "What if you can move in all four directions?"
+      ]
+    },
+    {
+      "title": "Longest Increasing Subsequence",
+      "prompt": "Given an integer array nums, return the length of the longest strictly increasing subsequence.",
+      "tags": [
+        "dp",
+        "binary-search"
+      ],
+      "followups": [
+        "Compare O(n²) DP vs O(n log n) patience sorting.",
+        "What's the DP recurrence?",
+        "How would you reconstruct the subsequence?"
+      ]
+    },
+    {
+      "title": "Coin Change II",
+      "prompt": "You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money. Return the number of combinations that make up that amount. You may assume you have infinite number of each kind of coin.",
+      "tags": [
+        "dp",
+        "knapsack"
+      ],
+      "followups": [
+        "How does this differ from Coin Change I?",
+        "What's the DP recurrence?",
+        "Why does the loop order matter?"
+      ]
+    },
+    {
+      "title": "Maximum Product Subarray",
+      "prompt": "Given an integer array nums, find a contiguous non-empty subarray within the array that has the largest product, and return the product.",
+      "tags": [
+        "arrays",
+        "dp"
+      ],
+      "followups": [
+        "Why do you need to track both max and min?",
+        "How do you handle zeros and negatives?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Wiggle Sort II",
+      "prompt": "Given an integer array nums, reorder it such that nums[0] < nums[1] > nums[2] < nums[3] > ... (alternating low-high-low-high). You may assume all input has valid answer.",
+      "tags": [
+        "arrays",
+        "sorting"
+      ],
+      "followups": [
+        "What's the median finding approach?",
+        "How do you handle duplicates?",
+        "What's the virtual indexing trick?"
+      ]
+    },
+    {
+      "title": "Partition Labels",
+      "prompt": "You are given a string s. We want to partition the string into as many parts as possible so that each letter appears in at most one part, and return a list of integers representing the size of these parts.",
+      "tags": [
+        "strings",
+        "greedy",
+        "hashmap"
+      ],
+      "followups": [
+        "What's the greedy approach?",
+        "How do you track last occurrences?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Battleships in a Board",
+      "prompt": "Given an m x n matrix board where each cell is either 'X' (battleship) or '.' (empty). Battleships are placed either horizontally or vertically, and there are no adjacent battleships. Count the number of battleships on the board in O(1) extra space.",
+      "tags": [
+        "matrix"
+      ],
+      "followups": [
+        "How do you avoid double counting?",
+        "What's the invariant for counting only the head?",
+        "How would you solve if adjacent ships were allowed?"
       ]
     }
   ]

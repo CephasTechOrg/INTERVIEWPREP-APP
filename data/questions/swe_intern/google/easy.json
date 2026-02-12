@@ -103,7 +103,6 @@
         "Why can recursion be risky?"
       ]
     },
-
     {
       "title": "Stacks (Practical Understanding)",
       "prompt": "Explain what a stack is using a real-life example.",
@@ -204,7 +203,6 @@
         "Why is logging useful?"
       ]
     },
-
     {
       "title": "Loops vs Recursion",
       "prompt": "Explain one difference between loops and recursion.",
@@ -242,7 +240,7 @@
       "followups": [
         "Why not store all data locally?",
         "What kind of data might an API return?",
-        "Give an example you’ve seen."
+        "Give an example you've seen."
       ]
     },
     {
@@ -275,7 +273,6 @@
         "When do you ask for help?"
       ]
     },
-
     {
       "title": "Why Google?",
       "prompt": "Why do you want to intern at Google?",
@@ -284,6 +281,376 @@
         "What Google product do you like?",
         "What excites you about problem solving?",
         "What do you want to learn at Google?"
+      ]
+    },
+    {
+      "title": "Find Smallest Number",
+      "prompt": "Explain how you would find the smallest number in a list of integers.",
+      "tags": ["arrays", "logic"],
+      "followups": [
+        "How is this similar to finding the largest number?",
+        "What if all numbers are negative?",
+        "Why is this a common starting problem?"
+      ]
+    },
+    {
+      "title": "Count Character Occurrences",
+      "prompt": "Explain how you would count how many times each character appears in a string.",
+      "tags": ["strings", "hashmap"],
+      "followups": [
+        "What would you use as a key and value?",
+        "Why is this useful in real applications?",
+        "How would you handle Unicode characters?"
+      ]
+    },
+    {
+      "title": "Remove Duplicates from Array",
+      "prompt": "Explain how you would remove duplicates from an array.",
+      "tags": ["arrays", "hashset"],
+      "followups": [
+        "How do you detect duplicates?",
+        "Does the order matter?",
+        "What if you can't use extra memory?"
+      ]
+    },
+    {
+      "title": "Check if Array is Sorted",
+      "prompt": "Explain how you would check if an array is sorted in ascending order.",
+      "tags": ["arrays", "logic"],
+      "followups": [
+        "What pairs of elements would you compare?",
+        "What edge cases would you test?",
+        "Why is this important for algorithms like binary search?"
+      ]
+    },
+    {
+      "title": "String vs StringBuilder",
+      "prompt": "Explain why concatenating many strings can be inefficient and how to do it better.",
+      "tags": ["strings", "performance"],
+      "followups": [
+        "Why are strings immutable in many languages?",
+        "How does StringBuilder work differently?",
+        "When would you notice the performance difference?"
+      ]
+    },
+    {
+      "title": "What is a Compiler?",
+      "prompt": "Explain what a compiler does in simple terms.",
+      "tags": ["fundamentals", "systems"],
+      "followups": [
+        "How is it different from an interpreter?",
+        "What does 'compiled language' mean?",
+        "What languages are typically compiled vs interpreted?"
+      ]
+    },
+    {
+      "title": "Google Search - High Level",
+      "prompt": "Explain at a very high level how Google Search might work.",
+      "tags": ["system-thinking", "google-context"],
+      "followups": [
+        "How does Google find web pages?",
+        "How does it know what pages to show first?",
+        "Why does search happen so fast?"
+      ]
+    },
+    {
+      "title": "Google Maps Directions",
+      "prompt": "Explain how Google Maps might find the shortest route between two locations.",
+      "tags": ["system-thinking", "google-context", "graphs"],
+      "followups": [
+        "What does a graph have to do with this?",
+        "What might 'shortest' mean (time vs distance)?",
+        "Why is this challenging for many locations?"
+      ]
+    },
+    {
+      "title": "Auto-Complete Feature",
+      "prompt": "Explain how Google Search suggests completions as you type.",
+      "tags": ["system-thinking", "google-context"],
+      "followups": [
+        "How does Google know popular searches?",
+        "Why do suggestions change over time?",
+        "What data structure might help with prefixes?"
+      ]
+    },
+    {
+      "title": "Version Control Basics",
+      "prompt": "Explain why version control (like Git) is important for teams.",
+      "tags": ["fundamentals", "collaboration"],
+      "followups": [
+        "How does it help when multiple people work on the same code?",
+        "What happens if you make a mistake?",
+        "Why does Google use version control?"
+      ]
+    },
+    {
+      "title": "Code Review Benefits",
+      "prompt": "Explain why Google emphasizes code reviews.",
+      "tags": ["collaboration", "code-quality"],
+      "followups": [
+        "What kinds of issues can code reviews catch?",
+        "How do you give constructive feedback?",
+        "How do you receive feedback well?"
+      ]
+    },
+    {
+      "title": "Comments in Code",
+      "prompt": "Explain when and why you should add comments to code.",
+      "tags": ["code-quality", "fundamentals"],
+      "followups": [
+        "What makes a comment helpful vs unnecessary?",
+        "Should you comment obvious code?",
+        "How do comments help with maintenance?"
+      ]
+    },
+    {
+      "title": "User Input Validation",
+      "prompt": "Explain why it's important to validate user input in applications.",
+      "tags": ["security", "fundamentals"],
+      "followups": [
+        "What could happen without validation?",
+        "What are examples of malicious input?",
+        "How does this protect users?"
+      ]
+    },
+    {
+      "title": "Google's Go Programming Language",
+      "prompt": "Have you heard of Go? Why might Google have created a new programming language?",
+      "tags": ["google-context", "fundamentals"],
+      "followups": [
+        "What problems was Go designed to solve?",
+        "How is it different from Python or Java?",
+        "What are goroutines?"
+      ]
+    },
+    {
+      "title": "Web Browser Basics",
+      "prompt": "Explain what happens when you type google.com into a browser and press Enter.",
+      "tags": ["web", "fundamentals"],
+      "followups": [
+        "What is DNS and why is it needed?",
+        "What does the browser do with the response?",
+        "Why does the page load quickly sometimes but slowly other times?"
+      ]
+    },
+    {
+      "title": "HTTPS vs HTTP",
+      "prompt": "Explain the difference between HTTP and HTTPS.",
+      "tags": ["security", "web"],
+      "followups": [
+        "What does the 'S' stand for?",
+        "Why does Google use HTTPS everywhere?",
+        "How does encryption protect users?"
+      ]
+    },
+    {
+      "title": "Cookie vs LocalStorage",
+      "prompt": "Explain the difference between cookies and localStorage in simple terms.",
+      "tags": ["web", "fundamentals"],
+      "followups": [
+        "Where is each stored?",
+        "When would you use one over the other?",
+        "What are security considerations for each?"
+      ]
+    },
+    {
+      "title": "Mobile App vs Web App",
+      "prompt": "Explain the difference between a mobile app and a web app.",
+      "tags": ["fundamentals", "product-thinking"],
+      "followups": [
+        "When might Google choose to build a mobile app?",
+        "What are the trade-offs?",
+        "How do they update differently?"
+      ]
+    },
+    {
+      "title": "Google's Culture (High Level)",
+      "prompt": "What do you know about Google's engineering culture?",
+      "tags": ["behavioral", "google-context"],
+      "followups": [
+        "What is 'psychological safety' in teams?",
+        "Why is collaboration important at Google?",
+        "What does 'fail fast' mean?"
+      ]
+    },
+    {
+      "title": "Learning New Technologies",
+      "prompt": "How do you approach learning a new programming language or framework?",
+      "tags": ["behavioral", "learning"],
+      "followups": [
+        "What resources do you use?",
+        "How do you practice?",
+        "Tell me about a time you learned something new quickly."
+      ]
+    },
+    {
+      "title": "Team Collaboration",
+      "prompt": "Describe how you work effectively in a team setting.",
+      "tags": ["behavioral", "collaboration"],
+      "followups": [
+        "How do you handle disagreements?",
+        "How do you contribute to team discussions?",
+        "Why is teamwork important in software engineering?"
+      ]
+    },
+    {
+      "title": "Handling Ambiguity",
+      "prompt": "Tell me about a time you worked on a problem with unclear requirements.",
+      "tags": ["behavioral", "problem-solving"],
+      "followups": [
+        "How did you clarify the requirements?",
+        "Who did you talk to?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Project You're Proud Of",
+      "prompt": "Describe a programming project you're proud of and explain your role.",
+      "tags": ["behavioral", "projects"],
+      "followups": [
+        "What was your contribution?",
+        "What challenges did you face?",
+        "What did you learn?"
+      ]
+    },
+    {
+      "title": "Time Management",
+      "prompt": "How do you prioritize tasks when you have multiple deadlines?",
+      "tags": ["behavioral", "organization"],
+      "followups": [
+        "What strategies do you use?",
+        "How do you handle interruptions?",
+        "What tools help you stay organized?"
+      ]
+    },
+    {
+      "title": "Receiving Feedback",
+      "prompt": "Tell me about a time you received constructive feedback on your work.",
+      "tags": ["behavioral", "growth"],
+      "followups": [
+        "How did you respond?",
+        "What did you change?",
+        "How did it help you improve?"
+      ]
+    },
+    {
+      "title": "Google's Products",
+      "prompt": "What Google product do you use most and how would you improve it?",
+      "tags": ["behavioral", "product-thinking", "google-context"],
+      "followups": [
+        "Why did you choose this product?",
+        "What problem would your improvement solve?",
+        "How would you know if it was successful?"
+      ]
+    },
+    {
+      "title": "Diversity in Tech",
+      "prompt": "Why is diversity important in technology teams?",
+      "tags": ["behavioral", "inclusion"],
+      "followups": [
+        "How does diversity improve products?",
+        "What can individuals do to promote inclusion?",
+        "Why does Google value diverse perspectives?"
+      ]
+    },
+    {
+      "title": "Ethics in AI",
+      "prompt": "Why should engineers consider ethics when building AI systems?",
+      "tags": ["behavioral", "ethics", "google-context"],
+      "followups": [
+        "What could go wrong with biased AI?",
+        "How can engineers reduce bias?",
+        "Why is this important at Google?"
+      ]
+    },
+    {
+      "title": "Constant vs Variable",
+      "prompt": "Explain the difference between a constant and a variable.",
+      "tags": ["fundamentals"],
+      "followups": [
+        "When would you use a constant?",
+        "Why do constants improve code readability?",
+        "What are naming conventions for constants?"
+      ]
+    },
+    {
+      "title": "Integer Overflow",
+      "prompt": "Explain what integer overflow is and why it matters.",
+      "tags": ["fundamentals", "memory"],
+      "followups": [
+        "What happens when you exceed the maximum value?",
+        "Give a real-world example of why this is a problem.",
+        "How do languages handle this differently?"
+      ]
+    },
+    {
+      "title": "Floating Point Precision",
+      "prompt": "Why might 0.1 + 0.2 not equal exactly 0.3 in programming?",
+      "tags": ["fundamentals", "math"],
+      "followups": [
+        "How do computers represent decimal numbers?",
+        "When is this a problem?",
+        "How would you compare floating point numbers safely?"
+      ]
+    },
+    {
+      "title": "Infinite Loops",
+      "prompt": "What is an infinite loop and how do you avoid it?",
+      "tags": ["fundamentals", "debugging"],
+      "followups": [
+        "Give an example of code that causes an infinite loop.",
+        "How do you stop a program stuck in an infinite loop?",
+        "How do you test that your loop will terminate?"
+      ]
+    },
+    {
+      "title": "If Statements vs Switch",
+      "prompt": "When would you use a switch statement instead of multiple if-else statements?",
+      "tags": ["fundamentals", "control-flow"],
+      "followups": [
+        "What are the readability differences?",
+        "Are there performance differences?",
+        "What languages have switch statements?"
+      ]
+    },
+    {
+      "title": "Pass by Value vs Reference",
+      "prompt": "Explain the difference between pass by value and pass by reference.",
+      "tags": ["fundamentals", "memory"],
+      "followups": [
+        "What happens to the original variable in each case?",
+        "Which is more efficient and why?",
+        "Give an example where this matters."
+      ]
+    },
+    {
+      "title": "What is an IDE?",
+      "prompt": "What is an IDE and why do developers use them?",
+      "tags": ["fundamentals", "tools"],
+      "followups": [
+        "What features make IDEs useful?",
+        "What IDEs have you used?",
+        "How do they help with debugging?"
+      ]
+    },
+    {
+      "title": "Google's PageRank (Conceptual)",
+      "prompt": "Explain the basic idea behind Google's PageRank algorithm in simple terms.",
+      "tags": ["google-context", "algorithms"],
+      "followups": [
+        "How does counting links help determine importance?",
+        "Why are links from important pages more valuable?",
+        "How is this different from keyword matching?"
+      ]
+    },
+    {
+      "title": "Gmail Search",
+      "prompt": "How might Gmail implement search through millions of emails so quickly?",
+      "tags": ["system-thinking", "google-context"],
+      "followups": [
+        "What is an index and why is it useful?",
+        "What would you index in an email?",
+        "How do you handle new emails arriving?"
       ]
     }
   ]

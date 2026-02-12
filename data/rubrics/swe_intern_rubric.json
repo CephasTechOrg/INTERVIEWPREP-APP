@@ -50,7 +50,359 @@
         { "range": "7-8", "description": "Covers major edge cases and constraints." },
         { "range": "9-10", "description": "Comprehensive edge cases and robust handling." }
       ]
+    },
+    {
+      "name": "data_structure_familiarity",
+      "description": "Knowledge of common data structures and when to apply them.",
+      "levels": [
+        { "range": "0-3", "description": "Unfamiliar with basic data structures." },
+        { "range": "4-6", "description": "Knows arrays, lists, hash tables but may choose poorly." },
+        { "range": "7-8", "description": "Good selection of appropriate data structures with justification." },
+        { "range": "9-10", "description": "Excellent understanding of multiple structures and trade-offs." }
+      ]
+    },
+    {
+      "name": "algorithm_basics",
+      "description": "Understanding of fundamental algorithms and patterns.",
+      "levels": [
+        { "range": "0-3", "description": "Unable to implement basic algorithms." },
+        { "range": "4-6", "description": "Can implement with hints; recognizes some patterns." },
+        { "range": "7-8", "description": "Solid grasp of common algorithms; chooses appropriately." },
+        { "range": "9-10", "description": "Strong pattern recognition; can adapt algorithms to novel problems." }
+      ]
+    },
+    {
+      "name": "code_completion",
+      "description": "Ability to write syntactically correct, working code.",
+      "levels": [
+        { "range": "0-3", "description": "Code has major syntax errors or doesn't compile." },
+        { "range": "4-6", "description": "Works for basic cases but has small bugs." },
+        { "range": "7-8", "description": "Correct implementation with minimal issues." },
+        { "range": "9-10", "description": "Flawless execution with clean syntax." }
+      ]
+    },
+    {
+      "name": "code_organization",
+      "description": "Variable naming, function decomposition, and readability.",
+      "levels": [
+        { "range": "0-3", "description": "Poor naming, monolithic functions, messy." },
+        { "range": "4-6", "description": "Adequate naming but could be cleaner." },
+        { "range": "7-8", "description": "Good naming, reasonable function size, logical flow." },
+        { "range": "9-10", "description": "Excellent organization; self-documenting code." }
+      ]
+    },
+    {
+      "name": "debugging_approach",
+      "description": "Methodology for identifying and fixing issues.",
+      "levels": [
+        { "range": "0-3", "description": "Guesses randomly; no systematic approach." },
+        { "range": "4-6", "description": "Uses print statements but lacks strategy." },
+        { "range": "7-8", "description": "Systematic hypothesis testing with debugging tools." },
+        { "range": "9-10", "description": "Efficient root cause identification; preventive mindset." }
+      ]
+    },
+    {
+      "name": "learning_agility",
+      "description": "Ability to understand new concepts and apply them during interview.",
+      "levels": [
+        { "range": "0-3", "description": "Struggles to incorporate hints or new information." },
+        { "range": "4-6", "description": "Accepts hints but applies them slowly." },
+        { "range": "7-8", "description": "Quickly incorporates feedback and improves solution." },
+        { "range": "9-10", "description": "Learns and adapts rapidly; asks insightful clarifying questions." }
+      ]
+    },
+    {
+      "name": "fundamentals_knowledge",
+      "description": "Core computer science concepts (OOP, recursion, etc.).",
+      "levels": [
+        { "range": "0-3", "description": "Major gaps in foundational knowledge." },
+        { "range": "4-6", "description": "Understands basics but lacks depth." },
+        { "range": "7-8", "description": "Solid grasp of core concepts and can apply them." },
+        { "range": "9-10", "description": "Strong understanding with ability to explain nuances." }
+      ]
+    },
+    {
+      "name": "system_thinking_basics",
+      "description": "Understanding of how components interact (simple systems).",
+      "levels": [
+        { "range": "0-3", "description": "Focuses only on isolated code; no system view." },
+        { "range": "4-6", "description": "Acknowledges other components but vague." },
+        { "range": "7-8", "description": "Clear understanding of client-server, API, database roles." },
+        { "range": "9-10", "description": "Articulates end-to-end flow with component interactions." }
+      ]
+    },
+    {
+      "name": "testing_awareness",
+      "description": "Understanding of why and how to test code.",
+      "levels": [
+        { "range": "0-3", "description": "No consideration of testing." },
+        { "range": "4-6", "description": "Mentions testing but not specific." },
+        { "range": "7-8", "description": "Identifies key test cases and edge cases." },
+        { "range": "9-10", "description": "Comprehensive test strategy; understands testability." }
+      ]
+    },
+    {
+      "name": "intellectual_curiosity",
+      "description": "Asks questions, shows interest in learning, explores beyond requirements.",
+      "levels": [
+        { "range": "0-3", "description": "Passive; answers only what is asked." },
+        { "range": "4-6", "description": "Occasionally asks clarifying questions." },
+        { "range": "7-8", "description": "Engages with problem; explores constraints and extensions." },
+        { "range": "9-10", "description": "Deep curiosity; discusses trade-offs and alternatives unprompted." }
+      ]
+    },
+    {
+      "name": "time_management",
+      "description": "Pacing during interview and ability to prioritize.",
+      "levels": [
+        { "range": "0-3", "description": "Spends too long on details; doesn't finish." },
+        { "range": "4-6", "description": "Completes solution but rushed at end." },
+        { "range": "7-8", "description": "Good pace with time for verification." },
+        { "range": "9-10", "description": "Excellent pacing; prioritizes correctly; has buffer for questions." }
+      ]
     }
   ],
-  "overall_scoring": "Compute the overall score as the average of the five dimension scores, scaled to 0-100 and rounded."
+  "overall_scoring": "Compute the overall score as the average of all dimension scores, scaled to 0-100 and rounded.",
+  "sample_questions": [
+    {
+      "dimension": "communication",
+      "questions": [
+        "Explain how you would find the largest number in an unsorted list.",
+        "Describe how a hash table works to someone who has never programmed before.",
+        "Walk me through your thought process for reversing a string.",
+        "How would you explain a stack using a real-world analogy?",
+        "What's the difference between an array and a linked list? Explain it simply."
+      ]
+    },
+    {
+      "dimension": "problem_solving",
+      "questions": [
+        "Given a list of numbers, how would you find the two that sum to a target?",
+        "How would you check if a word is a palindrome?",
+        "Design a simple algorithm to remove duplicates from a list.",
+        "How would you merge two sorted lists into one sorted list?",
+        "What approach would you take to find the first non-repeating character in a string?"
+      ]
+    },
+    {
+      "dimension": "correctness_reasoning",
+      "questions": [
+        "How do you know your binary search implementation is correct?",
+        "What invariants does your palindrome checker maintain?",
+        "Why does your approach for finding duplicates work?",
+        "How would you convince me that your sorting function works for all inputs?",
+        "What assumptions did you make in your solution?"
+      ]
+    },
+    {
+      "dimension": "complexity",
+      "questions": [
+        "What is the time complexity of your two-sum solution?",
+        "How much memory does your duplicate removal approach use?",
+        "Is your algorithm efficient for a list of 1 billion items? Why or why not?",
+        "Can you optimize your solution to use less memory?",
+        "What's the Big-O of reversing a linked list iteratively vs recursively?"
+      ]
+    },
+    {
+      "dimension": "edge_cases",
+      "questions": [
+        "What happens in your two-sum solution if no pair exists?",
+        "How does your palindrome checker handle empty strings or single characters?",
+        "What edge cases would you test for a function that validates email addresses?",
+        "How does your merge sorted lists handle one empty list?",
+        "What if the input to your duplicate remover is already sorted? Does it matter?"
+      ]
+    },
+    {
+      "dimension": "data_structure_familiarity",
+      "questions": [
+        "When would you use a set instead of a list?",
+        "What's the difference between a stack and a queue? Give examples of each.",
+        "How would you implement a queue using two stacks?",
+        "Why might you choose a linked list over an array?",
+        "What is a hash map and what problem does it solve?"
+      ]
+    },
+    {
+      "dimension": "algorithm_basics",
+      "questions": [
+        "Explain how binary search works and what it requires.",
+        "What's the difference between breadth-first and depth-first search?",
+        "How would you sort a small list of numbers?",
+        "Explain recursion with a simple example like factorial or Fibonacci.",
+        "What is the two-pointer technique and when would you use it?"
+      ]
+    },
+    {
+      "dimension": "code_completion",
+      "questions": [
+        "Write a function to reverse a string in your preferred language.",
+        "Implement a function that checks if a number is prime.",
+        "Write code to find the maximum value in an array.",
+        "Implement a simple counter class with increment and reset methods.",
+        "Write a function that returns the nth Fibonacci number."
+      ]
+    },
+    {
+      "dimension": "code_organization",
+      "questions": [
+        "How would you name variables in a function that calculates average?",
+        "When would you break a large function into smaller ones?",
+        "What makes a variable name 'good'? Give examples.",
+        "How would you organize code that processes user input and validates it?",
+        "Why is it important to use consistent formatting?"
+      ]
+    },
+    {
+      "dimension": "debugging_approach",
+      "questions": [
+        "Your function returns the wrong result for one input. How do you find the bug?",
+        "The program crashes only sometimes. How do you investigate?",
+        "What tools do you use to debug your code?",
+        "How do you approach debugging a null reference exception?",
+        "Your code works on your machine but fails on the test server. What do you check?"
+      ]
+    },
+    {
+      "dimension": "learning_agility",
+      "questions": [
+        "I'm suggesting you try a hash map instead of nested loops. How would that change your approach?",
+        "What questions would you ask to better understand this problem?",
+        "If you had to learn a new programming language for this project, how would you start?",
+        "How do you approach documentation when you're stuck?",
+        "Tell me about a time you learned a new concept quickly."
+      ]
+    },
+    {
+      "dimension": "fundamentals_knowledge",
+      "questions": [
+        "What is object-oriented programming? Explain the main concepts.",
+        "What is the difference between a class and an object?",
+        "Explain what recursion is and give an example where it's useful.",
+        "What is a variable scope and why does it matter?",
+        "What is the difference between pass-by-value and pass-by-reference?"
+      ]
+    },
+    {
+      "dimension": "system_thinking_basics",
+      "questions": [
+        "If you were building a simple weather app, what components would you need?",
+        "How does a web browser get a webpage from a server?",
+        "What is an API and why would you use one?",
+        "Describe how a mobile app might communicate with a backend.",
+        "What is a database and why do applications use them?"
+      ]
+    },
+    {
+      "dimension": "testing_awareness",
+      "questions": [
+        "How would you test a function that validates passwords?",
+        "What test cases would you write for a calculator's add function?",
+        "Why is it important to test edge cases?",
+        "What's the difference between a unit test and an integration test?",
+        "How do you know when you've tested enough?"
+      ]
+    },
+    {
+      "dimension": "intellectual_curiosity",
+      "questions": [
+        "What questions do you have about this problem?",
+        "How might you extend this solution to handle additional requirements?",
+        "What alternative approaches did you consider?",
+        "What interests you about computer science or software engineering?",
+        "What's a technical concept you've learned recently that excited you?"
+      ]
+    },
+    {
+      "dimension": "time_management",
+      "questions": [
+        "You have 20 minutes to solve this problem. How do you allocate your time?",
+        "What part of the solution would you prioritize first?",
+        "If you're running out of time, what would you cut?",
+        "How do you decide when to stop optimizing and move on?",
+        "How do you balance writing clean code vs getting a working solution quickly?"
+      ]
+    }
+  ],
+  "difficulty_calibration": {
+    "intern_easy": {
+      "description": "Single concept, straightforward implementation, minimal edge cases.",
+      "typical_dimensions": ["communication", "data_structure_familiarity", "code_completion", "edge_cases"],
+      "example": "Two sum, reverse string, find maximum, valid parentheses."
+    },
+    "intern_medium": {
+      "description": "Multiple considerations, optimization awareness, some trade-offs.",
+      "typical_dimensions": ["problem_solving", "complexity", "algorithm_basics", "correctness_reasoning"],
+      "example": "LRU cache design, merge intervals, course schedule, number of islands."
+    },
+    "intern_hard": {
+      "description": "Complex patterns, system design basics, deeper trade-off analysis.",
+      "typical_dimensions": ["system_thinking_basics", "debugging_approach", "technical_tradeoffs"],
+      "example": "Design URL shortener, rate limiter, web crawler basics."
+    }
+  },
+  "interviewer_guidance": {
+    "scoring_tips": [
+      "Score based on demonstrated ability, not potential.",
+      "Consider that interns are early in their learning journey - be reasonable about expectations.",
+      "Look for problem decomposition before implementation.",
+      "Value intellectual curiosity and learning agility highly.",
+      "Partial credit is appropriate; interns may need hints.",
+      "How they respond to feedback is as important as initial performance."
+    ],
+    "common_pitfalls": [
+      "Candidate memorized solutions but cannot explain reasoning.",
+      "Candidate freezes on unfamiliar problem variation.",
+      "Candidate ignores constraints (e.g., memory limits for large input).",
+      "Candidate cannot articulate why one approach is better than another.",
+      "Candidate rushes to code without planning."
+    ],
+    "probing_questions": [
+      "Can you explain that in another way?",
+      "What would happen if the input was very large?",
+      "How would you test this?",
+      "What's the simplest version of this problem?",
+      "Can you think of an alternative approach?",
+      "What's the one thing you'd improve if you had more time?"
+    ],
+    "feedback_recommendations": {
+      "strength_phrases": [
+        "Clear communication of complex ideas",
+        "Systematic approach to problem solving",
+        "Good instinct for edge cases",
+        "Quick to incorporate feedback",
+        "Writes clean, readable code"
+      ],
+      "growth_opportunity_phrases": [
+        "Practice analyzing time and space complexity",
+        "Explore more data structures and their trade-offs",
+        "Work on explaining reasoning before coding",
+        "Develop more thorough testing habits",
+        "Build familiarity with debugging tools"
+      ]
+    }
+  },
+  "company_specific_expectations": {
+    "amazon_intern": {
+      "emphasis": ["problem_solving", "edge_cases", "code_completion"],
+      "behavioral_integration": "Look for customer-centric reasoning even in technical answers.",
+      "example_feedback": "Strong problem decomposition; consider adding more thorough edge case coverage."
+    },
+    "google_intern": {
+      "emphasis": ["learning_agility", "complexity", "intellectual_curiosity"],
+      "behavioral_integration": "Value candidates who explore alternatives and ask insightful questions.",
+      "example_feedback": "Excellent optimization discussion; great curiosity about scalability."
+    },
+    "microsoft_intern": {
+      "emphasis": ["code_organization", "fundamentals_knowledge", "testing_awareness"],
+      "behavioral_integration": "Look for collaborative problem-solving and clear communication.",
+      "example_feedback": "Clean, maintainable code; good instinct for validation and testing."
+    },
+    "apple_intern": {
+      "emphasis": ["code_quality", "edge_cases", "system_thinking_basics"],
+      "behavioral_integration": "Attention to detail and user experience considerations.",
+      "example_feedback": "Meticulous edge case handling; thinks about end-to-end user impact."
+    }
+  }
 }

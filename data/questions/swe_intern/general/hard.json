@@ -44,6 +44,684 @@
         "How can you optimize neighbor generation?",
         "What is the complexity?"
       ]
+    },
+    {
+      "title": "Trapping Rain Water",
+      "prompt": "Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.",
+      "tags": [
+        "arrays",
+        "two-pointers",
+        "dynamic-programming"
+      ],
+      "followups": [
+        "Compare the DP approach vs two-pointer approach.",
+        "What is the time and space complexity of each?",
+        "How would you solve if the elevation map is circular?"
+      ]
+    },
+    {
+      "title": "Median of Two Sorted Arrays",
+      "prompt": "Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays in O(log(m+n)) time.",
+      "tags": [
+        "arrays",
+        "binary-search",
+        "divide-and-conquer"
+      ],
+      "followups": [
+        "Why can't we simply merge the arrays?",
+        "Explain the partition approach.",
+        "What are the edge cases (empty arrays, odd/even lengths)?"
+      ]
+    },
+    {
+      "title": "Alien Dictionary",
+      "prompt": "There is a new alien language that uses the English alphabet. You are given a list of words from the dictionary, where words are sorted lexicographically by the rules of this new language. Derive the order of letters in this language.",
+      "tags": [
+        "graphs",
+        "topological-sort",
+        "dfs"
+      ],
+      "followups": [
+        "How do you handle invalid input (cycles, contradictions)?",
+        "What if multiple valid orders exist?",
+        "How do you build the graph efficiently?"
+      ]
+    },
+    {
+      "title": "Regular Expression Matching",
+      "prompt": "Given an input string s and a pattern p, implement regular expression matching with support for '.' and '*' where '.' matches any single character and '*' matches zero or more of the preceding element.",
+      "tags": [
+        "dynamic-programming",
+        "strings",
+        "backtracking"
+      ],
+      "followups": [
+        "What is the DP state and recurrence relation?",
+        "How does greedy fail for '*'?",
+        "Can you optimize space complexity?"
+      ]
+    },
+    {
+      "title": "Largest Rectangle in Histogram",
+      "prompt": "Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.",
+      "tags": [
+        "arrays",
+        "stack",
+        "monotonic-stack"
+      ],
+      "followups": [
+        "Why does a stack help here?",
+        "What is the time and space complexity?",
+        "How would you solve for a 2D matrix?"
+      ]
+    },
+    {
+      "title": "Sliding Window Maximum",
+      "prompt": "Given an array nums and a sliding window size k, return the maximum element in each window moving from left to right.",
+      "tags": [
+        "arrays",
+        "deque",
+        "sliding-window"
+      ],
+      "followups": [
+        "Why does a deque give O(n) solution?",
+        "How do you maintain indices vs values?",
+        "What if k is very large?"
+      ]
+    },
+    {
+      "title": "Minimum Window Substring",
+      "prompt": "Given two strings s and t, return the minimum window substring of s that contains all characters of t (including duplicates).",
+      "tags": [
+        "strings",
+        "sliding-window",
+        "hashmap"
+      ],
+      "followups": [
+        "How do you track character requirements efficiently?",
+        "What's the time complexity?",
+        "How do you handle very large strings?"
+      ]
+    },
+    {
+      "title": "N-Queens",
+      "prompt": "The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other. Return all distinct solutions.",
+      "tags": [
+        "backtracking",
+        "recursion"
+      ],
+      "followups": [
+        "How do you optimize the conflict check?",
+        "What's the time complexity?",
+        "How would you count only the number of solutions?"
+      ]
+    },
+    {
+      "title": "Sudoku Solver",
+      "prompt": "Write a program to solve a Sudoku puzzle by filling the empty cells. You may assume there is exactly one solution.",
+      "tags": [
+        "backtracking",
+        "recursion"
+      ],
+      "followups": [
+        "How do you choose which cell to fill next?",
+        "What pruning strategies can you use?",
+        "How would you validate a solved Sudoku?"
+      ]
+    },
+    {
+      "title": "Longest Valid Parentheses",
+      "prompt": "Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.",
+      "tags": [
+        "strings",
+        "stack",
+        "dynamic-programming"
+      ],
+      "followups": [
+        "Compare DP vs stack approach.",
+        "How to solve in O(1) space?",
+        "What are the edge cases?"
+      ]
+    },
+    {
+      "title": "Edit Distance",
+      "prompt": "Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2. Operations: insert, delete, replace.",
+      "tags": [
+        "dynamic-programming",
+        "strings"
+      ],
+      "followups": [
+        "What is the DP recurrence?",
+        "How can you optimize space?",
+        "What if operations have different costs?"
+      ]
+    },
+    {
+      "title": "Maximum Profit in Job Scheduling",
+      "prompt": "Given startTime, endTime, and profit arrays for n jobs, find the maximum profit with no overlapping jobs.",
+      "tags": [
+        "dynamic-programming",
+        "binary-search",
+        "sorting"
+      ],
+      "followups": [
+        "Why sort by end time?",
+        "How does binary search help?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Count of Smaller Numbers After Self",
+      "prompt": "Given an integer array nums, return an array counts where counts[i] is the number of smaller elements to the right of nums[i].",
+      "tags": [
+        "arrays",
+        "binary-indexed-tree",
+        "merge-sort",
+        "bst"
+      ],
+      "followups": [
+        "Compare merge-sort vs BIT approach.",
+        "What's the time complexity?",
+        "How to handle duplicates?"
+      ]
+    },
+    {
+      "title": "Design Twitter",
+      "prompt": "Design a simplified version of Twitter where users can post tweets, follow/unfollow another user, and see the 10 most recent tweets in their news feed.",
+      "tags": [
+        "system-design",
+        "heap",
+        "hashmap"
+      ],
+      "followups": [
+        "How do you handle news feed generation efficiently?",
+        "What about pull vs push models?",
+        "How to scale to millions of users?"
+      ]
+    },
+    {
+      "title": "LRU Cache",
+      "prompt": "Design and implement a data structure for Least Recently Used (LRU) cache. It should support get and put in O(1) average time complexity.",
+      "tags": [
+        "design",
+        "hashmap",
+        "linked-list"
+      ],
+      "followups": [
+        "Why do you need both HashMap and LinkedList?",
+        "How would you make it thread-safe?",
+        "What about implementing LFU cache?"
+      ]
+    },
+    {
+      "title": "LFU Cache",
+      "prompt": "Design and implement a data structure for Least Frequently Used (LFU) cache. It should support get and put in O(1) average time complexity.",
+      "tags": [
+        "design",
+        "hashmap",
+        "linked-list"
+      ],
+      "followups": [
+        "How does LFU differ from LRU?",
+        "How do you handle frequency ties?",
+        "What's the space complexity?"
+      ]
+    },
+    {
+      "title": "Word Search II",
+      "prompt": "Given an m x n board of characters and a list of words, return all words on the board. Words can be constructed from letters of sequentially adjacent cells.",
+      "tags": [
+        "trie",
+        "backtracking",
+        "dfs"
+      ],
+      "followups": [
+        "How does using a trie improve performance?",
+        "How do you prune the search?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Design In-Memory File System",
+      "prompt": "Design an in-memory file system that supports creating paths, adding files, listing directories, and reading/writing files.",
+      "tags": [
+        "design",
+        "trie",
+        "system-design"
+      ],
+      "followups": [
+        "What data structure represents the hierarchy?",
+        "How do you handle relative vs absolute paths?",
+        "What about file permissions and metadata?"
+      ]
+    },
+    {
+      "title": "The Skyline Problem",
+      "prompt": "Given a list of buildings represented as [left, right, height], return the skyline formed by these buildings.",
+      "tags": [
+        "heap",
+        "divide-and-conquer",
+        "sweep-line"
+      ],
+      "followups": [
+        "Why use a max-heap?",
+        "How do you handle overlapping buildings?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Design Search Autocomplete System",
+      "prompt": "Design a search autocomplete system that returns top k sentences for a given prefix, weighted by historical frequency.",
+      "tags": [
+        "design",
+        "trie",
+        "heap"
+      ],
+      "followups": [
+        "How do you store and update frequencies?",
+        "What about real-time updates?",
+        "How to handle memory constraints?"
+      ]
+    },
+    {
+      "title": "Candy",
+      "prompt": "There are n children standing in a line with ratings. Each child must have at least one candy, and children with a higher rating get more candies than neighbors. Return minimum candies needed.",
+      "tags": [
+        "arrays",
+        "greedy"
+      ],
+      "followups": [
+        "Why does the two-pass approach work?",
+        "What's the time complexity?",
+        "Can you solve with one pass?"
+      ]
+    },
+    {
+      "title": "Text Justification",
+      "prompt": "Given an array of words and a width maxWidth, format the text such that each line has exactly maxWidth characters and is fully justified.",
+      "tags": [
+        "strings",
+        "simulation"
+      ],
+      "followups": [
+        "How do you distribute extra spaces?",
+        "What about the last line?",
+        "What edge cases should you test?"
+      ]
+    },
+    {
+      "title": "Basic Calculator",
+      "prompt": "Implement a basic calculator to evaluate a simple expression string containing non-negative integers, '+', '-', '*', '/' and parentheses.",
+      "tags": [
+        "stack",
+        "math",
+        "strings"
+      ],
+      "followups": [
+        "How do you handle operator precedence?",
+        "What about negative numbers?",
+        "How to extend for more operators?"
+      ]
+    },
+    {
+      "title": "Longest Increasing Path in a Matrix",
+      "prompt": "Given an m x n integers matrix, return the length of the longest increasing path in the matrix.",
+      "tags": [
+        "dfs",
+        "dp",
+        "memoization"
+      ],
+      "followups": [
+        "Why does memoization help?",
+        "What's the time complexity?",
+        "Can you solve with topological sort?"
+      ]
+    },
+    {
+      "title": "Burst Balloons",
+      "prompt": "Given n balloons with values, burst them in any order. Coins = balloon[i-1] * balloon[i] * balloon[i+1] if adjacent exist. Return maximum coins.",
+      "tags": [
+        "dynamic-programming",
+        "divide-and-conquer"
+      ],
+      "followups": [
+        "What is the DP state and transition?",
+        "Why is greedy incorrect?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Russian Doll Envelopes",
+      "prompt": "Given envelopes with width and height, find maximum number you can Russian doll (one inside another). Width and height must both be strictly smaller.",
+      "tags": [
+        "dynamic-programming",
+        "binary-search",
+        "sorting"
+      ],
+      "followups": [
+        "Why sort by width and then LIS on height?",
+        "What's the time complexity?",
+        "How to handle equal widths?"
+      ]
+    },
+    {
+      "title": "Design a Distributed Rate Limiter",
+      "prompt": "Design a distributed rate limiter that can handle millions of requests across multiple servers with high accuracy.",
+      "tags": [
+        "system-design",
+        "distributed-systems",
+        "scalability"
+      ],
+      "followups": [
+        "Compare token bucket vs sliding window in distributed context.",
+        "How do you handle clock skew?",
+        "What about consistency vs availability trade-offs?"
+      ]
+    },
+    {
+      "title": "Design a URL Shortener at Scale",
+      "prompt": "Design a URL shortening service like TinyURL that handles billions of requests with high availability and low latency.",
+      "tags": [
+        "system-design",
+        "scalability",
+        "databases"
+      ],
+      "followups": [
+        "How do you generate unique short codes?",
+        "What's your database choice and sharding strategy?",
+        "How do you handle custom aliases and expiration?"
+      ]
+    },
+    {
+      "title": "Design a Web Crawler",
+      "prompt": "Design a web crawler that downloads and indexes web pages at scale, handling politeness, deduplication, and freshness.",
+      "tags": [
+        "system-design",
+        "scalability",
+        "distributed-systems"
+      ],
+      "followups": [
+        "How do you avoid overloading servers?",
+        "How do you detect and avoid duplicate URLs?",
+        "What about priority crawling?"
+      ]
+    },
+    {
+      "title": "Design a Chat System",
+      "prompt": "Design a real-time chat system supporting 1-1 and group chats, online presence, and message history.",
+      "tags": [
+        "system-design",
+        "real-time",
+        "scalability"
+      ],
+      "followups": [
+        "How do you handle message ordering and delivery guarantees?",
+        "What about offline messages and sync?",
+        "How do you scale WebSocket connections?"
+      ]
+    },
+    {
+      "title": "Design a Recommendation System",
+      "prompt": "Design a recommendation system for e-commerce or content platforms that suggests items based on user behavior.",
+      "tags": [
+        "system-design",
+        "machine-learning",
+        "scalability"
+      ],
+      "followups": [
+        "Collaborative filtering vs content-based?",
+        "How do you handle cold start?",
+        "What metrics measure recommendation quality?"
+      ]
+    },
+    {
+      "title": "Design a Notification System",
+      "prompt": "Design a scalable notification system that sends emails, push notifications, and SMS to millions of users.",
+      "tags": [
+        "system-design",
+        "scalability",
+        "queues"
+      ],
+      "followups": [
+        "How do you handle retries and failures?",
+        "What about user preferences and rate limiting?",
+        "How do you prevent duplicate notifications?"
+      ]
+    },
+    {
+      "title": "Design a Key-Value Store",
+      "prompt": "Design a distributed key-value store with strong consistency, high availability, and partition tolerance.",
+      "tags": [
+        "system-design",
+        "distributed-systems",
+        "consistency"
+      ],
+      "followups": [
+        "CAP trade-offs: which two do you choose and why?",
+        "How do you handle replication and sharding?",
+        "What about failure detection and recovery?"
+      ]
+    },
+    {
+      "title": "Design a Parking Lot System",
+      "prompt": "Design a parking lot system with multiple floors, spots of different sizes, and entry/exit gates.",
+      "tags": [
+        "design",
+        "oop"
+      ],
+      "followups": [
+        "How do you find the nearest available spot?",
+        "How do you handle pricing and payments?",
+        "What about disabled spots and EV charging?"
+      ]
+    },
+    {
+      "title": "Maximum Frequency Stack",
+      "prompt": "Design a stack-like data structure that supports push, pop, and popMax (pop most frequent element, breaking ties by recency).",
+      "tags": [
+        "design",
+        "hashmap",
+        "stack"
+      ],
+      "followups": [
+        "How do you maintain frequency counts?",
+        "How do you handle ties?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Find Median from Data Stream",
+      "prompt": "Design a data structure that supports adding numbers and finding the median of all added numbers.",
+      "tags": [
+        "design",
+        "heap"
+      ],
+      "followups": [
+        "Why use two heaps?",
+        "How do you maintain balance?",
+        "What if you need to support removal?"
+      ]
+    },
+    {
+      "title": "Insert Delete GetRandom O(1)",
+      "prompt": "Design a data structure that supports insert, delete, and getRandom in average O(1) time, with duplicates allowed.",
+      "tags": [
+        "design",
+        "hashmap",
+        "arrays"
+      ],
+      "followups": [
+        "How do you handle duplicates?",
+        "What's the space complexity?",
+        "How does getRandom guarantee uniform distribution?"
+      ]
+    },
+    {
+      "title": "Longest Consecutive Sequence",
+      "prompt": "Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence in O(n) time.",
+      "tags": [
+        "arrays",
+        "hashset"
+      ],
+      "followups": [
+        "Why is sorting not allowed?",
+        "How do you achieve O(n)?",
+        "What about memory constraints?"
+      ]
+    },
+    {
+      "title": "First Missing Positive",
+      "prompt": "Given an unsorted integer array nums, return the smallest missing positive integer in O(n) time and O(1) space.",
+      "tags": [
+        "arrays",
+        "hashmap",
+        "cyclic-sort"
+      ],
+      "followups": [
+        "Why can't we use extra space?",
+        "How do you use array indices as hash keys?",
+        "What are the edge cases?"
+      ]
+    },
+    {
+      "title": "Max Points on a Line",
+      "prompt": "Given an array of points where points[i] = [xi, yi], return the maximum number of points that lie on the same straight line.",
+      "tags": [
+        "math",
+        "hashmap",
+        "geometry"
+      ],
+      "followups": [
+        "How do you represent slope to avoid floating point errors?",
+        "How do you handle duplicate points?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Expression Add Operators",
+      "prompt": "Given a string num that contains only digits and a target integer, return all possibilities to add binary operators '+', '-', or '*' between digits to evaluate to target.",
+      "tags": [
+        "backtracking",
+        "strings",
+        "math"
+      ],
+      "followups": [
+        "How do you handle operator precedence with '*',",
+        "How do you avoid overflow?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Perfect Rectangle",
+      "prompt": "Given an array of rectangles defined as [x1, y1, x2, y2], determine if they form a perfect rectangle (no gaps, no overlaps).",
+      "tags": [
+        "math",
+        "geometry",
+        "hashmap"
+      ],
+      "followups": [
+        "What conditions must a perfect rectangle satisfy?",
+        "How do you detect overlaps efficiently?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Largest BST Subtree",
+      "prompt": "Given a binary tree, find the largest subtree which is a Binary Search Tree.",
+      "tags": [
+        "trees",
+        "dfs",
+        "bst"
+      ],
+      "followups": [
+        "What information needs to be passed up the recursion?",
+        "How do you validate BST while traversing?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Recover Binary Search Tree",
+      "prompt": "Two elements of a BST are swapped by mistake. Recover the tree without changing its structure.",
+      "tags": [
+        "trees",
+        "dfs",
+        "bst"
+      ],
+      "followups": [
+        "How do you identify the two swapped nodes?",
+        "What about Morris traversal for O(1) space?",
+        "What are the edge cases?"
+      ]
+    },
+    {
+      "title": "Binary Tree Maximum Path Sum",
+      "prompt": "Given a binary tree, find the maximum path sum. The path may start and end at any node.",
+      "tags": [
+        "trees",
+        "dfs",
+        "dp"
+      ],
+      "followups": [
+        "What does each node contribute to the max path?",
+        "How do you handle negative values?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Critical Connections in a Network",
+      "prompt": "Given n servers and connections between them, find all critical connections (bridges) whose removal disconnects the network.",
+      "tags": [
+        "graphs",
+        "dfs",
+        "bridges"
+      ],
+      "followups": [
+        "What are low-link values?",
+        "Why is Tarjan's algorithm O(V+E)?",
+        "How do you handle duplicate edges?"
+      ]
+    },
+    {
+      "title": "Minimum Number of Refueling Stops",
+      "prompt": "A car travels from start to target with initial fuel. Stations have position and fuel amount. Find minimum refueling stops to reach destination.",
+      "tags": [
+        "heap",
+        "greedy",
+        "dp"
+      ],
+      "followups": [
+        "Compare DP vs greedy approaches.",
+        "Why does a max-heap work?",
+        "What's the time complexity?"
+      ]
+    },
+    {
+      "title": "Swim in Rising Water",
+      "prompt": "Given N x N grid where grid[i][j] is elevation at (i,j). Rain starts at time 0. At time t, water depth is t. You can swim iff elevation <= t. Find minimum time to reach bottom-right.",
+      "tags": [
+        "heap",
+        "bfs",
+        "binary-search"
+      ],
+      "followups": [
+        "Compare Dijkstra vs binary search + BFS.",
+        "What's the time complexity of each?",
+        "How does this relate to the minimax path problem?"
+      ]
+    },
+    {
+      "title": "Shortest Subarray with Sum at Least K",
+      "prompt": "Given an integer array nums and an integer k, return the length of the shortest non-empty subarray with sum >= k. If no such subarray exists, return -1.",
+      "tags": [
+        "arrays",
+        "deque",
+        "prefix-sum"
+      ],
+      "followups": [
+        "Why can't we use sliding window with negatives?",
+        "How does the deque maintain monotonicity?",
+        "What's the time complexity?"
+      ]
     }
   ]
 }
