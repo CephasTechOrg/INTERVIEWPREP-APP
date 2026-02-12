@@ -38,6 +38,17 @@ const ROLE_TO_TRACK: Record<string, Track> = {
   'product management': 'product_management',
 };
 
+const COMPANY_STYLE_OPTIONS: Array<{ value: string; label: string }> = [
+  { value: 'general', label: 'General Tech' },
+  { value: 'amazon', label: 'Amazon' },
+  { value: 'apple', label: 'Apple' },
+  { value: 'google', label: 'Google' },
+  { value: 'microsoft', label: 'Microsoft' },
+  { value: 'meta', label: 'Meta' },
+];
+
+const supportsCompanyStyles = (track: Track) => track === 'swe_intern' || track === 'swe_engineer';
+
 const ROLE_VALUE_NORMALIZATION: Record<string, string> = {
   'swe_intern': 'swe_intern',
   'swe intern': 'swe_intern',
@@ -81,6 +92,9 @@ export const DashboardSection = () => {
 
   // Derive track from role
   const track: Track = ROLE_TO_TRACK[(role || '').trim().toLowerCase()] || 'swe_intern';
+  const companyStyleOptions = supportsCompanyStyles(track)
+    ? COMPANY_STYLE_OPTIONS
+    : [{ value: 'general', label: 'General (Only option)' }];
 
   // Stats
   const [stats, setStats] = useState({
@@ -93,6 +107,12 @@ export const DashboardSection = () => {
   useEffect(() => {
     loadSessions();
   }, []);
+
+  useEffect(() => {
+    if (!supportsCompanyStyles(track) && companyStyle !== 'general') {
+      setCompanyStyle('general');
+    }
+  }, [track, companyStyle]);
 
   useEffect(() => {
     if (sessions.length > 0) {
@@ -244,13 +264,17 @@ export const DashboardSection = () => {
                   onChange={(e) => setCompanyStyle(e.target.value)}
                   className="w-full px-3 py-2 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
                 >
-                  <option value="general">General Tech</option>
-                  <option value="amazon">Amazon</option>
-                  <option value="apple">Apple</option>
-                  <option value="google">Google</option>
-                  <option value="microsoft">Microsoft</option>
-                  <option value="meta">Meta</option>
+                  {companyStyleOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
                 </select>
+                {!supportsCompanyStyles(track) && (
+                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                    This role uses General style questions only.
+                  </p>
+                )}
               </div>
 
               {/* Difficulty */}
