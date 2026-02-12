@@ -1,4 +1,3 @@
-
 {
   "track": "swe_intern",
   "company_style": "amazon",
@@ -104,7 +103,6 @@
         "Give a simple use case."
       ]
     },
-
     {
       "title": "If Statements",
       "prompt": "Explain how an if statement helps a program make decisions.",
@@ -205,7 +203,6 @@
         "How do they communicate?"
       ]
     },
-
     {
       "title": "Leadership Principle: Customer Obsession",
       "prompt": "Tell me about a time you improved something based on user feedback.",
@@ -284,6 +281,356 @@
         "Which leadership principle fits you best?",
         "What Amazon product do you like?",
         "What do you want to learn?"
+      ]
+    },
+    {
+      "title": "Find the Smallest Number",
+      "prompt": "Explain how you would find the smallest number in a list of integers.",
+      "tags": ["arrays", "logic"],
+      "followups": [
+        "How is this similar to finding the largest?",
+        "What if all numbers are negative?",
+        "Why is this a common interview question?"
+      ]
+    },
+    {
+      "title": "Sorting Concepts",
+      "prompt": "Explain why sorting data can be helpful in programming.",
+      "tags": ["sorting", "fundamentals"],
+      "followups": [
+        "What operations become easier with sorted data?",
+        "Name a real Amazon use case for sorting",
+        "Is sorting always necessary?"
+      ]
+    },
+    {
+      "title": "Data Structures for Shopping Cart",
+      "prompt": "What data structure would you use to store items in an Amazon shopping cart?",
+      "tags": ["data-structures", "amazon-context"],
+      "followups": [
+        "Why choose that structure?",
+        "How would you handle adding/removing items?",
+        "What about calculating totals?"
+      ]
+    },
+    {
+      "title": "String Concatenation",
+      "prompt": "Explain how you would combine two strings together.",
+      "tags": ["strings", "fundamentals"],
+      "followups": [
+        "What's a simple example?",
+        "Why is this useful in real programs?",
+        "How would you combine multiple strings?"
+      ]
+    },
+    {
+      "title": "Basic Error Handling",
+      "prompt": "Explain what you would do if your program encounters an error.",
+      "tags": ["error-handling", "fundamentals"],
+      "followups": [
+        "Why is it important to handle errors?",
+        "What information should error messages provide?",
+        "How does error handling improve user experience?"
+      ]
+    },
+    {
+      "title": "Comments in Code",
+      "prompt": "Explain why adding comments to code can be helpful.",
+      "tags": ["code-quality", "fundamentals"],
+      "followups": [
+        "When should you add comments?",
+        "What makes a good comment?",
+        "Can comments ever be unhelpful?"
+      ]
+    },
+    {
+      "title": "Version Control Basics",
+      "prompt": "Explain why using version control (like Git) is important for team projects.",
+      "tags": ["version-control", "collaboration"],
+      "followups": [
+        "How does it help with collaboration?",
+        "What happens if you make a mistake?",
+        "Why does Amazon use version control?"
+      ]
+    },
+    {
+      "title": "Simple Amazon Product Search",
+      "prompt": "Explain how you would search for a product in a small list of Amazon items.",
+      "tags": ["search", "amazon-context", "arrays"],
+      "followups": [
+        "What information would you search by?",
+        "How would you handle multiple matches?",
+        "What if the product isn't found?"
+      ]
+    },
+    {
+      "title": "Calculate Order Total",
+      "prompt": "Explain how you would calculate the total price of items in an order.",
+      "tags": ["arrays", "amazon-context", "logic"],
+      "followups": [
+        "What data would you need?",
+        "How would you handle taxes or discounts?",
+        "Why is accuracy important?"
+      ]
+    },
+    {
+      "title": "Check Stock Availability",
+      "prompt": "Explain how you would check if an Amazon product is in stock.",
+      "tags": ["logic", "amazon-context", "conditionals"],
+      "followups": [
+        "What conditions would you check?",
+        "How would you display the result to users?",
+        "What if stock changes while processing?"
+      ]
+    },
+    {
+      "title": "User Input Validation",
+      "prompt": "Explain why it's important to validate user input in forms.",
+      "tags": ["validation", "security", "fundamentals"],
+      "followups": [
+        "What types of validation are important?",
+        "How does this protect Amazon's systems?",
+        "What happens without validation?"
+      ]
+    },
+    {
+      "title": "Simple Recommendation System",
+      "prompt": "Explain a basic way Amazon might recommend products to users.",
+      "tags": ["algorithms", "amazon-context", "logic"],
+      "followups": [
+        "What data would you use?",
+        "How simple could you make this?",
+        "Why are recommendations valuable?"
+      ]
+    },
+    {
+      "title": "Track Package Status",
+      "prompt": "Explain how you would track the status of an Amazon package.",
+      "tags": ["state-management", "amazon-context", "logic"],
+      "followups": [
+        "What statuses might a package have?",
+        "How would you update the status?",
+        "How would you display this to customers?"
+      ]
+    },
+    {
+      "title": "Handle Multiple User Sessions",
+      "prompt": "Explain why websites need to handle multiple users at once.",
+      "tags": ["concurrency", "web", "fundamentals"],
+      "followups": [
+        "What problems could occur with multiple users?",
+        "How does Amazon handle millions of users?",
+        "Why is this important for shopping sites?"
+      ]
+    },
+    {
+      "title": "Database Basics",
+      "prompt": "Explain why Amazon needs databases to store information.",
+      "tags": ["databases", "amazon-context", "fundamentals"],
+      "followups": [
+        "What types of data would Amazon store?",
+        "Why not use files instead?",
+        "How do databases help with speed?"
+      ]
+    },
+    {
+      "title": "Caching Concept",
+      "prompt": "Explain why caching frequently accessed data can improve performance.",
+      "tags": ["caching", "performance", "fundamentals"],
+      "followups": [
+        "What Amazon data might be cached?",
+        "What are trade-offs of caching?",
+        "How does caching help during busy times?"
+      ]
+    },
+    {
+      "title": "Mobile vs Desktop Experience",
+      "prompt": "Explain why Amazon might need different experiences for mobile and desktop.",
+      "tags": ["web", "amazon-context", "user-experience"],
+      "followups": [
+        "What differences might exist?",
+        "Why is mobile important for shopping?",
+        "How would you approach this as a developer?"
+      ]
+    },
+    {
+      "title": "Accessibility Basics",
+      "prompt": "Explain why making websites accessible to all users is important.",
+      "tags": ["accessibility", "inclusion", "fundamentals"],
+      "followups": [
+        "Who benefits from accessible design?",
+        "What simple improvements help accessibility?",
+        "Why does Amazon care about accessibility?"
+      ]
+    },
+    {
+      "title": "Security Basics",
+      "prompt": "Explain why security is crucial for Amazon's systems.",
+      "tags": ["security", "amazon-context", "fundamentals"],
+      "followups": [
+        "What sensitive data does Amazon handle?",
+        "What are basic security practices?",
+        "How does security build customer trust?"
+      ]
+    },
+    {
+      "title": "Scaling Concepts",
+      "prompt": "Explain why Amazon needs to handle more users during holiday seasons.",
+      "tags": ["scaling", "amazon-context", "fundamentals"],
+      "followups": [
+        "What challenges come with more users?",
+        "How might Amazon prepare for busy times?",
+        "Why is scaling important for business?"
+      ]
+    },
+    {
+      "title": "Team Collaboration",
+      "prompt": "Explain why working well in a team is important at Amazon.",
+      "tags": ["collaboration", "teamwork", "behavioral"],
+      "followups": [
+        "What makes a good team member?",
+        "How do teams solve complex problems?",
+        "Why does Amazon value collaboration?"
+      ]
+    },
+    {
+      "title": "Learning from Mistakes",
+      "prompt": "Tell me about a time you made a mistake in coding and what you learned.",
+      "tags": ["behavioral", "learning", "growth"],
+      "followups": [
+        "How did you discover the mistake?",
+        "What did you do to fix it?",
+        "How did this help you improve?"
+      ]
+    },
+    {
+      "title": "Technical Challenge",
+      "prompt": "Describe a technical challenge you faced and how you approached it.",
+      "tags": ["behavioral", "problem-solving", "technical"],
+      "followups": [
+        "What made it challenging?",
+        "What resources did you use?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Project Experience",
+      "prompt": "Tell me about a programming project you worked on.",
+      "tags": ["behavioral", "experience", "projects"],
+      "followups": [
+        "What was your role?",
+        "What did you learn?",
+        "What would you improve?"
+      ]
+    },
+    {
+      "title": "Customer-Centric Thinking",
+      "prompt": "How would you improve the Amazon shopping experience for customers?",
+      "tags": ["behavioral", "customer-obsession", "amazon-context"],
+      "followups": [
+        "What pain points have you noticed?",
+        "How would you implement your idea?",
+        "How would you measure success?"
+      ]
+    },
+    {
+      "title": "Adaptability",
+      "prompt": "Tell me about a time you had to learn something new quickly.",
+      "tags": ["behavioral", "adaptability", "learning"],
+      "followups": [
+        "What was the situation?",
+        "How did you approach learning?",
+        "What was the result?"
+      ]
+    },
+    {
+      "title": "Communication Skills",
+      "prompt": "Explain a technical concept to someone without a technical background.",
+      "tags": ["behavioral", "communication", "teaching"],
+      "followups": [
+        "How do you simplify complex ideas?",
+        "Why is clear communication important?",
+        "How do you know if someone understands?"
+      ]
+    },
+    {
+      "title": "Initiative",
+      "prompt": "Tell me about a time you went beyond what was required.",
+      "tags": ["behavioral", "initiative", "ownership"],
+      "followups": [
+        "What motivated you?",
+        "What was the impact?",
+        "What did you learn?"
+      ]
+    },
+    {
+      "title": "Time Management",
+      "prompt": "How do you prioritize tasks when you have multiple deadlines?",
+      "tags": ["behavioral", "time-management", "organization"],
+      "followups": [
+        "What strategies do you use?",
+        "How do you handle unexpected tasks?",
+        "What tools help you stay organized?"
+      ]
+    },
+    {
+      "title": "Feedback Reception",
+      "prompt": "Tell me about a time you received feedback on your work.",
+      "tags": ["behavioral", "feedback", "growth"],
+      "followups": [
+        "How did you respond?",
+        "What did you change?",
+        "How did it improve your work?"
+      ]
+    },
+    {
+      "title": "Problem Solving Approach",
+      "prompt": "Walk me through how you would approach a new programming problem.",
+      "tags": ["behavioral", "problem-solving", "process"],
+      "followups": [
+        "Where do you start?",
+        "How do you break down complex problems?",
+        "When do you ask for help?"
+      ]
+    },
+    {
+      "title": "Amazon Innovation",
+      "prompt": "What Amazon innovation or technology impresses you most?",
+      "tags": ["behavioral", "amazon-context", "innovation"],
+      "followups": [
+        "Why does it impress you?",
+        "How does it help customers?",
+        "What technical challenges might it involve?"
+      ]
+    },
+    {
+      "title": "Career Goals",
+      "prompt": "What do you hope to gain from an Amazon internship?",
+      "tags": ["behavioral", "goals", "career"],
+      "followups": [
+        "What skills do you want to develop?",
+        "How does this fit your long-term goals?",
+        "What unique opportunities does Amazon offer?"
+      ]
+    },
+    {
+      "title": "Diversity and Inclusion",
+      "prompt": "Why is diversity important in technology teams?",
+      "tags": ["behavioral", "diversity", "inclusion"],
+      "followups": [
+        "How does diversity improve products?",
+        "What can individuals do to promote inclusion?",
+        "Why does Amazon value diverse perspectives?"
+      ]
+    },
+    {
+      "title": "Work-Life Balance",
+      "prompt": "How do you maintain balance while working on challenging projects?",
+      "tags": ["behavioral", "wellbeing", "balance"],
+      "followups": [
+        "What strategies help you stay productive?",
+        "How do you avoid burnout?",
+        "Why is balance important for long-term success?"
       ]
     }
   ]

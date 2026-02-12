@@ -1,207 +1,517 @@
 {
-    "track": "swe_intern",
-    "company_style": "apple",
-    "difficulty": "hard",
-    "questions": [
-      {
-        "title": "Design a Privacy-Preserving Analytics System",
-        "prompt": "Design an analytics system that measures feature usage while minimizing collection of sensitive user data. Discuss data minimization, aggregation, and access controls.",
-        "tags": ["system-thinking", "privacy", "design"],
-        "followups": [
-          "What data would you refuse to collect and why?",
-          "How would you support debugging without raw user data?",
-          "How would you audit and monitor access to analytics?"
-        ]
-      },
-      {
-        "title": "Distributed Cache Invalidation",
-        "prompt": "You have a distributed cache in front of a source of truth database. Design a strategy for invalidation and consistency under concurrent writes.",
-        "tags": ["system-thinking", "distributed-systems", "design"],
-        "followups": [
-          "What consistency model are you targeting and why?",
-          "How do you handle cache stampedes?",
-          "How do you test correctness under race conditions?"
-        ]
-      },
-      {
-        "title": "Concurrent Queue (Correctness Focus)",
-        "prompt": "Design a thread-safe queue supporting multiple producers and consumers. Describe how you ensure correctness and performance.",
-        "tags": ["concurrency", "design", "memory"],
-        "followups": [
-          "How do you prevent deadlocks and starvation?",
-          "When would you use lock-free vs locking?",
-          "How would you validate linearizability or correctness?"
-        ]
-      },
-      {
-        "title": "Implement a File-System-like Trie",
-        "prompt": "Design and implement a structure that supports creating paths and querying if a path exists (like a simplified file system).",
-        "tags": ["tries", "design", "strings"],
-        "followups": [
-          "How do you handle deletions safely?",
-          "How do you store metadata (permissions, timestamps)?",
-          "What are the memory trade-offs?"
-        ]
-      },
-      {
-        "title": "Scheduler: Priorities and Fairness",
-        "prompt": "Design a task scheduler that supports priorities, time slicing, and fairness (no starvation). Explain policies and trade-offs.",
-        "tags": ["system-thinking", "design", "concurrency"],
-        "followups": [
-          "How do you measure fairness?",
-          "How do you handle long-running tasks?",
-          "What data structures support efficient scheduling?"
-        ]
-      },
-      {
-        "title": "Search Autocomplete with Ranking",
-        "prompt": "Design an autocomplete system for a large dictionary that supports prefix queries and ranks results by popularity and recency.",
-        "tags": ["system-thinking", "tries", "ranking"],
-        "followups": [
-          "How do you update rankings in near real-time?",
-          "How do you handle memory constraints on device?",
-          "What tests ensure relevance and latency targets?"
-        ]
-      },
-      {
-        "title": "On-Device Model Update Strategy",
-        "prompt": "You ship an on-device ML feature. Design how you would roll out model updates safely, handle rollback, and measure impact.",
-        "tags": ["product-thinking", "system-thinking", "reliability"],
-        "followups": [
-          "What guardrails prevent bad updates?",
-          "How do you handle offline devices?",
-          "How do you evaluate model quality without collecting raw user data?"
-        ]
-      },
-      {
-        "title": "Build a Crash Deduplication Pipeline",
-        "prompt": "Design a backend pipeline that ingests crash reports, deduplicates them, and surfaces top issues. Consider scalability and signal quality.",
-        "tags": ["system-thinking", "design", "debugging"],
-        "followups": [
-          "What defines a duplicate crash signature?",
-          "How do you handle noisy stack traces (inlining, symbol changes)?",
-          "How do you prioritize what engineers fix first?"
-        ]
-      },
-      {
-        "title": "Memory: ARC/GC + Performance Trade-offs",
-        "prompt": "Explain how reference counting (ARC-like) compares to tracing garbage collection for latency-sensitive apps. Discuss pauses, fragmentation, and cycles.",
-        "tags": ["memory", "performance", "fundamentals"],
-        "followups": [
-          "How do retain cycles happen and how do you break them?",
-          "What patterns reduce allocation churn?",
-          "How do you measure and tune memory in production?"
-        ]
-      },
-      {
-        "title": "Design a Real-Time Collaboration Engine",
-        "prompt": "Design a simplified real-time collaboration system (like shared notes) that supports concurrent edits and conflict resolution.",
-        "tags": ["distributed-systems", "design", "system-thinking"],
-        "followups": [
-          "Compare OT vs CRDT at a high level.",
-          "How do you handle offline edits and re-merge?",
-          "What are the minimal correctness guarantees you must provide?"
-        ]
-      },
-      {
-        "title": "High-Performance Image Pipeline",
-        "prompt": "Design a pipeline that loads images, transforms them (resize/crop), and renders smoothly under memory and latency constraints.",
-        "tags": ["performance", "system-thinking", "design"],
-        "followups": [
-          "How do you avoid UI jank and blocking the main thread?",
-          "What caching strategy would you use (memory/disk)?",
-          "How do you test performance regressions?"
-        ]
-      },
-      {
-        "title": "Implement a Mini Regex Engine",
-        "prompt": "Implement a simplified regex matcher supporting '.' and '*' operators. Focus on correctness and complexity.",
-        "tags": ["dp", "strings", "algorithms"],
-        "followups": [
-          "Why does naive backtracking blow up?",
-          "How do you implement DP and what is the state?",
-          "What test cases catch tricky bugs?"
-        ]
-      },
-      {
-        "title": "Design a Secure Token System",
-        "prompt": "Design a token-based authentication system for a mobile app and backend. Consider token rotation, expiration, and storage.",
-        "tags": ["security", "system-thinking", "design"],
-        "followups": [
-          "How do you store tokens securely on-device?",
-          "How do you handle compromised tokens?",
-          "What logs/telemetry do you collect without leaking secrets?"
-        ]
-      },
-      {
-        "title": "Rate Limiting at Scale (Distributed)",
-        "prompt": "Design a distributed rate limiter for millions of users across multiple regions. Focus on correctness under failures.",
-        "tags": ["distributed-systems", "design", "system-thinking"],
-        "followups": [
-          "How do you avoid a single point of failure?",
-          "What consistency trade-offs are acceptable?",
-          "How do you handle clock skew and burstiness?"
-        ]
-      },
-      {
-        "title": "Build a Dependency Graph Resolver",
-        "prompt": "Given packages with dependencies, determine an installation order or report a cycle. Extend to version constraints at a high level.",
-        "tags": ["graphs", "topological-sort", "design"],
-        "followups": [
-          "How do you detect and report cycles clearly?",
-          "How does this change with optional dependencies?",
-          "What are performance constraints for large graphs?"
-        ]
-      },
-      {
-        "title": "Design Review: Latency Budget",
-        "prompt": "A feature must respond within 16ms to stay smooth. How do you design, measure, and keep within a latency budget?",
-        "tags": ["performance", "system-thinking", "communication"],
-        "followups": [
-          "What do you profile first and why?",
-          "How do you prevent regressions over time?",
-          "How do you handle trade-offs between CPU, memory, and battery?"
-        ]
-      },
-      {
-        "title": "Consistency vs Availability Decision",
-        "prompt": "You are designing a sync service. Explain a scenario where you prefer stronger consistency and one where you prefer higher availability.",
-        "tags": ["distributed-systems", "system-thinking", "design"],
-        "followups": [
-          "What failure modes change your choice?",
-          "How do you communicate these trade-offs to non-engineers?",
-          "What metrics reveal user pain from inconsistency?"
-        ]
-      },
-      {
-        "title": "Debugging: Heisenbug in Production",
-        "prompt": "A bug disappears when logging is enabled and happens only under load. Describe a strategy to identify root cause and ship a safe fix.",
-        "tags": ["debugging", "concurrency", "reliability"],
-        "followups": [
-          "What signals do you add without perturbing timing too much?",
-          "How do you reproduce issues deterministically?",
-          "How do you roll out and validate the fix safely?"
-        ]
-      },
-      {
-        "title": "Design a Fault-Tolerant Upload System",
-        "prompt": "Design a resumable upload system for large files on unreliable mobile networks. Include retries, chunking, and integrity checks.",
-        "tags": ["system-thinking", "design", "reliability"],
-        "followups": [
-          "How do you ensure idempotency of chunk uploads?",
-          "How do you handle partial failures and cleanup?",
-          "How do you detect corruption and verify integrity end-to-end?"
-        ]
-      },
-      {
-        "title": "Security + Privacy: Local Data Storage",
-        "prompt": "You need to store user-sensitive data locally. Design how you would encrypt at rest, manage keys, and handle device compromise scenarios.",
-        "tags": ["security", "privacy", "system-thinking"],
-        "followups": [
-          "Where do keys live and how are they rotated?",
-          "How do you balance usability vs security (biometrics, lockouts)?",
-          "What is your incident response if a vulnerability is discovered?"
-        ]
-      }
-    ]
-  }
+  "track": "swe_intern",
+  "company_style": "apple",
+  "difficulty": "hard",
+  "questions": [
+    {
+      "title": "Design a Privacy-Preserving Analytics System",
+      "prompt": "Design an analytics system that measures feature usage while minimizing collection of sensitive user data. Discuss data minimization, aggregation, and access controls.",
+      "tags": ["system-thinking", "privacy", "design"],
+      "followups": [
+        "What data would you refuse to collect and why?",
+        "How would you support debugging without raw user data?",
+        "How would you audit and monitor access to analytics?"
+      ]
+    },
+    {
+      "title": "Distributed Cache Invalidation",
+      "prompt": "You have a distributed cache in front of a source of truth database. Design a strategy for invalidation and consistency under concurrent writes.",
+      "tags": ["system-thinking", "distributed-systems", "design"],
+      "followups": [
+        "What consistency model are you targeting and why?",
+        "How do you handle cache stampedes?",
+        "How do you test correctness under race conditions?"
+      ]
+    },
+    {
+      "title": "Concurrent Queue (Correctness Focus)",
+      "prompt": "Design a thread-safe queue supporting multiple producers and consumers. Describe how you ensure correctness and performance.",
+      "tags": ["concurrency", "design", "memory"],
+      "followups": [
+        "How do you prevent deadlocks and starvation?",
+        "When would you use lock-free vs locking?",
+        "How would you validate linearizability or correctness?"
+      ]
+    },
+    {
+      "title": "Implement a File-System-like Trie",
+      "prompt": "Design and implement a structure that supports creating paths and querying if a path exists (like a simplified file system).",
+      "tags": ["tries", "design", "strings"],
+      "followups": [
+        "How do you handle deletions safely?",
+        "How do you store metadata (permissions, timestamps)?",
+        "What are the memory trade-offs?"
+      ]
+    },
+    {
+      "title": "Scheduler: Priorities and Fairness",
+      "prompt": "Design a task scheduler that supports priorities, time slicing, and fairness (no starvation). Explain policies and trade-offs.",
+      "tags": ["system-thinking", "design", "concurrency"],
+      "followups": [
+        "How do you measure fairness?",
+        "How do you handle long-running tasks?",
+        "What data structures support efficient scheduling?"
+      ]
+    },
+    {
+      "title": "Search Autocomplete with Ranking",
+      "prompt": "Design an autocomplete system for a large dictionary that supports prefix queries and ranks results by popularity and recency.",
+      "tags": ["system-thinking", "tries", "ranking"],
+      "followups": [
+        "How do you update rankings in near real-time?",
+        "How do you handle memory constraints on device?",
+        "What tests ensure relevance and latency targets?"
+      ]
+    },
+    {
+      "title": "On-Device Model Update Strategy",
+      "prompt": "You ship an on-device ML feature. Design how you would roll out model updates safely, handle rollback, and measure impact.",
+      "tags": ["product-thinking", "system-thinking", "reliability"],
+      "followups": [
+        "What guardrails prevent bad updates?",
+        "How do you handle offline devices?",
+        "How do you evaluate model quality without collecting raw user data?"
+      ]
+    },
+    {
+      "title": "Build a Crash Deduplication Pipeline",
+      "prompt": "Design a backend pipeline that ingests crash reports, deduplicates them, and surfaces top issues. Consider scalability and signal quality.",
+      "tags": ["system-thinking", "design", "debugging"],
+      "followups": [
+        "What defines a duplicate crash signature?",
+        "How do you handle noisy stack traces (inlining, symbol changes)?",
+        "How do you prioritize what engineers fix first?"
+      ]
+    },
+    {
+      "title": "Memory: ARC/GC + Performance Trade-offs",
+      "prompt": "Explain how reference counting (ARC-like) compares to tracing garbage collection for latency-sensitive apps. Discuss pauses, fragmentation, and cycles.",
+      "tags": ["memory", "performance", "fundamentals"],
+      "followups": [
+        "How do retain cycles happen and how do you break them?",
+        "What patterns reduce allocation churn?",
+        "How do you measure and tune memory in production?"
+      ]
+    },
+    {
+      "title": "Design a Real-Time Collaboration Engine",
+      "prompt": "Design a simplified real-time collaboration system (like shared notes) that supports concurrent edits and conflict resolution.",
+      "tags": ["distributed-systems", "design", "system-thinking"],
+      "followups": [
+        "Compare OT vs CRDT at a high level.",
+        "How do you handle offline edits and re-merge?",
+        "What are the minimal correctness guarantees you must provide?"
+      ]
+    },
+    {
+      "title": "High-Performance Image Pipeline",
+      "prompt": "Design a pipeline that loads images, transforms them (resize/crop), and renders smoothly under memory and latency constraints.",
+      "tags": ["performance", "system-thinking", "design"],
+      "followups": [
+        "How do you avoid UI jank and blocking the main thread?",
+        "What caching strategy would you use (memory/disk)?",
+        "How do you test performance regressions?"
+      ]
+    },
+    {
+      "title": "Implement a Mini Regex Engine",
+      "prompt": "Implement a simplified regex matcher supporting '.' and '*' operators. Focus on correctness and complexity.",
+      "tags": ["dp", "strings", "algorithms"],
+      "followups": [
+        "Why does naive backtracking blow up?",
+        "How do you implement DP and what is the state?",
+        "What test cases catch tricky bugs?"
+      ]
+    },
+    {
+      "title": "Design a Secure Token System",
+      "prompt": "Design a token-based authentication system for a mobile app and backend. Consider token rotation, expiration, and storage.",
+      "tags": ["security", "system-thinking", "design"],
+      "followups": [
+        "How do you store tokens securely on-device?",
+        "How do you handle compromised tokens?",
+        "What logs/telemetry do you collect without leaking secrets?"
+      ]
+    },
+    {
+      "title": "Rate Limiting at Scale (Distributed)",
+      "prompt": "Design a distributed rate limiter for millions of users across multiple regions. Focus on correctness under failures.",
+      "tags": ["distributed-systems", "design", "system-thinking"],
+      "followups": [
+        "How do you avoid a single point of failure?",
+        "What consistency trade-offs are acceptable?",
+        "How do you handle clock skew and burstiness?"
+      ]
+    },
+    {
+      "title": "Build a Dependency Graph Resolver",
+      "prompt": "Given packages with dependencies, determine an installation order or report a cycle. Extend to version constraints at a high level.",
+      "tags": ["graphs", "topological-sort", "design"],
+      "followups": [
+        "How do you detect and report cycles clearly?",
+        "How does this change with optional dependencies?",
+        "What are performance constraints for large graphs?"
+      ]
+    },
+    {
+      "title": "Design Review: Latency Budget",
+      "prompt": "A feature must respond within 16ms to stay smooth. How do you design, measure, and keep within a latency budget?",
+      "tags": ["performance", "system-thinking", "communication"],
+      "followups": [
+        "What do you profile first and why?",
+        "How do you prevent regressions over time?",
+        "How do you handle trade-offs between CPU, memory, and battery?"
+      ]
+    },
+    {
+      "title": "Consistency vs Availability Decision",
+      "prompt": "You are designing a sync service. Explain a scenario where you prefer stronger consistency and one where you prefer higher availability.",
+      "tags": ["distributed-systems", "system-thinking", "design"],
+      "followups": [
+        "What failure modes change your choice?",
+        "How do you communicate these trade-offs to non-engineers?",
+        "What metrics reveal user pain from inconsistency?"
+      ]
+    },
+    {
+      "title": "Debugging: Heisenbug in Production",
+      "prompt": "A bug disappears when logging is enabled and happens only under load. Describe a strategy to identify root cause and ship a safe fix.",
+      "tags": ["debugging", "concurrency", "reliability"],
+      "followups": [
+        "What signals do you add without perturbing timing too much?",
+        "How do you reproduce issues deterministically?",
+        "How do you roll out and validate the fix safely?"
+      ]
+    },
+    {
+      "title": "Design a Fault-Tolerant Upload System",
+      "prompt": "Design a resumable upload system for large files on unreliable mobile networks. Include retries, chunking, and integrity checks.",
+      "tags": ["system-thinking", "design", "reliability"],
+      "followups": [
+        "How do you ensure idempotency of chunk uploads?",
+        "How do you handle partial failures and cleanup?",
+        "How do you detect corruption and verify integrity end-to-end?"
+      ]
+    },
+    {
+      "title": "Security + Privacy: Local Data Storage",
+      "prompt": "You need to store user-sensitive data locally. Design how you would encrypt at rest, manage keys, and handle device compromise scenarios.",
+      "tags": ["security", "privacy", "system-thinking"],
+      "followups": [
+        "Where do keys live and how are they rotated?",
+        "How do you balance usability vs security (biometrics, lockouts)?",
+        "What is your incident response if a vulnerability is discovered?"
+      ]
+    },
+    {
+      "title": "Design Apple's End-to-End Encryption for iMessage",
+      "prompt": "Design an end-to-end encrypted messaging system that supports delivery receipts, group chats, and device synchronization.",
+      "tags": ["security", "encryption", "distributed-systems", "apple-context"],
+      "followups": [
+        "How do you handle key distribution and rotation?",
+        "What about message recovery when a user loses their device?",
+        "How do you prevent man-in-the-middle attacks?"
+      ]
+    },
+    {
+      "title": "Design Face ID's On-Device Machine Learning Pipeline",
+      "prompt": "Design the ML pipeline for Face ID that runs entirely on-device with real-time performance and high accuracy.",
+      "tags": ["machine-learning", "performance", "privacy", "apple-context"],
+      "followups": [
+        "How do you handle different lighting conditions and angles?",
+        "What about security against spoofing attacks?",
+        "How do you update the model without compromising user privacy?"
+      ]
+    },
+    {
+      "title": "Design Apple Music's Global Streaming Infrastructure",
+      "prompt": "Design a global music streaming service that handles millions of concurrent streams, personalized recommendations, and offline playback.",
+      "tags": ["streaming", "scalability", "cdn", "apple-context"],
+      "followups": [
+        "How do you minimize latency for global users?",
+        "What DRM strategy protects content while ensuring smooth playback?",
+        "How do you handle licensing and regional content restrictions?"
+      ]
+    },
+    {
+      "title": "Design the iOS App Store's Review System",
+      "prompt": "Design the system that handles app submissions, automated and manual reviews, and app updates at scale.",
+      "tags": ["system-thinking", "scale", "automation", "apple-context"],
+      "followups": [
+        "How do you automate security and policy checks?",
+        "What about handling appeals and disputed decisions?",
+        "How do you prevent malicious apps from bypassing the review process?"
+      ]
+    },
+    {
+      "title": "Design Apple Pay's Transaction Processing System",
+      "prompt": "Design the backend system that processes Apple Pay transactions with sub-second latency and 99.99% availability.",
+      "tags": ["payments", "reliability", "security", "apple-context"],
+      "followups": [
+        "How do you prevent double-spending in distributed systems?",
+        "What about handling bank outages and network partitions?",
+        "How do you ensure PCI DSS compliance throughout?"
+      ]
+    },
+    {
+      "title": "Design HealthKit's Data Synchronization",
+      "prompt": "Design a system that synchronizes health data across iPhone, Apple Watch, and iCloud while maintaining privacy and consistency.",
+      "tags": ["synchronization", "privacy", "health", "apple-context"],
+      "followups": [
+        "How do you handle conflicts from multiple data sources?",
+        "What encryption scheme protects health data in transit and at rest?",
+        "How do you manage storage for years of health data?"
+      ]
+    },
+    {
+      "title": "Design Siri's Voice Recognition Pipeline",
+      "prompt": "Design the real-time pipeline that processes voice commands, handles natural language understanding, and executes actions.",
+      "tags": ["real-time", "nlp", "performance", "apple-context"],
+      "followups": [
+        "How do you achieve low-latency voice recognition?",
+        "What about handling multiple languages and accents?",
+        "How do you balance on-device vs cloud processing for privacy?"
+      ]
+    },
+    {
+      "title": "Design Apple Maps' Real-Time Traffic System",
+      "prompt": "Design a system that collects, processes, and displays real-time traffic data with predictive routing.",
+      "tags": ["real-time", "data-processing", "scalability", "apple-context"],
+      "followups": [
+        "How do you collect traffic data while preserving privacy?",
+        "What algorithms predict traffic patterns and ETAs?",
+        "How do you handle data freshness and accuracy?"
+      ]
+    },
+    {
+      "title": "Design iCloud Photo Library's Deduplication",
+      "prompt": "Design a system that stores billions of photos with efficient deduplication and synchronization across devices.",
+      "tags": ["storage", "deduplication", "synchronization", "apple-context"],
+      "followups": [
+        "How do you detect duplicate photos efficiently?",
+        "What about handling edits and derivatives?",
+        "How do you optimize storage across the user base?"
+      ]
+    },
+    {
+      "title": "Design Apple's Continuity Features",
+      "prompt": "Design the system that enables Handoff, Universal Clipboard, and Continuity Camera across Apple devices.",
+      "tags": ["device-integration", "networking", "security", "apple-context"],
+      "followups": [
+        "How do devices discover each other securely?",
+        "What about handling network transitions (Wi-Fi to cellular)?",
+        "How do you ensure low latency for seamless user experience?"
+      ]
+    },
+    {
+      "title": "Algorithm: Word Search II",
+      "prompt": "Given an m x n board of characters and a list of words, return all words on the board.",
+      "tags": ["trie", "backtracking", "algorithms"],
+      "followups": [
+        "How does using a trie improve performance?",
+        "What optimizations reduce backtracking?",
+        "What's the worst-case time complexity?"
+      ]
+    },
+    {
+      "title": "Algorithm: Serialize and Deserialize Binary Tree",
+      "prompt": "Design an algorithm to serialize and deserialize a binary tree.",
+      "tags": ["trees", "serialization", "algorithms"],
+      "followups": [
+        "What serialization format would you choose?",
+        "How do you handle null values?",
+        "What about large trees and memory constraints?"
+      ]
+    },
+    {
+      "title": "Algorithm: Longest Increasing Path in Matrix",
+      "prompt": "Given an integer matrix, find the length of the longest increasing path.",
+      "tags": ["dp", "dfs", "memoization", "algorithms"],
+      "followups": [
+        "Why does memoization work here?",
+        "How do you handle cycles?",
+        "What's the time complexity with memoization?"
+      ]
+    },
+    {
+      "title": "Algorithm: Alien Dictionary",
+      "prompt": "Given a sorted dictionary of an alien language, find order of characters in that language.",
+      "tags": ["graphs", "topological-sort", "algorithms"],
+      "followups": [
+        "How do you build the graph from word comparisons?",
+        "How do you detect and handle cycles (invalid dictionary)?",
+        "What about multiple valid orders?"
+      ]
+    },
+    {
+      "title": "Algorithm: Sliding Window Maximum",
+      "prompt": "Given an array and a sliding window size k, find the maximum in each window.",
+      "tags": ["deque", "sliding-window", "algorithms"],
+      "followups": [
+        "Why does a deque provide O(n) solution?",
+        "How would you extend to find minimum as well?",
+        "What about very large k values?"
+      ]
+    },
+    {
+      "title": "Concurrency: Lock-Free Hash Map",
+      "prompt": "Design a lock-free hash map for concurrent read and write operations.",
+      "tags": ["concurrency", "lock-free", "data-structures"],
+      "followups": [
+        "How do you handle the ABA problem?",
+        "What about resizing and rehashing?",
+        "How do you ensure memory safety and reclamation?"
+      ]
+    },
+    {
+      "title": "Concurrency: Scalable Reader-Writer Lock",
+      "prompt": "Design a reader-writer lock that scales well with many readers and minimizes writer starvation.",
+      "tags": ["concurrency", "synchronization", "performance"],
+      "followups": [
+        "How do you reduce cache contention?",
+        "What about fairness between readers and writers?",
+        "How do you measure scalability under load?"
+      ]
+    },
+    {
+      "title": "Database: Distributed Transactions with Saga Pattern",
+      "prompt": "Design a system for distributed transactions using the Saga pattern with compensation transactions.",
+      "tags": ["distributed-systems", "transactions", "databases"],
+      "followups": [
+        "How do you handle partial failures?",
+        "What about idempotency of compensation actions?",
+        "How do you ensure eventual consistency?"
+      ]
+    },
+    {
+      "title": "Database: Time-Series Data at Apple Scale",
+      "prompt": "Design a system to store and query time-series data (like Health metrics or device analytics) at Apple's scale.",
+      "tags": ["databases", "time-series", "scalability", "apple-context"],
+      "followups": [
+        "How do you handle high write throughput?",
+        "How do you optimize range queries and aggregations?",
+        "What about data retention and compression?"
+      ]
+    },
+    {
+      "title": "Security: Zero-Trust Architecture for Internal Services",
+      "prompt": "Design a zero-trust architecture for Apple's internal services and build systems.",
+      "tags": ["security", "zero-trust", "architecture", "apple-context"],
+      "followups": [
+        "How do you implement identity-based access controls?",
+        "What about service-to-service authentication?",
+        "How do you monitor for anomalies and breaches?"
+      ]
+    },
+    {
+      "title": "Performance: Global Load Balancing for Apple Services",
+      "prompt": "Design a global load balancing system that routes users to the nearest healthy data center.",
+      "tags": ["networking", "load-balancing", "global", "apple-context"],
+      "followups": [
+        "How do you detect region health and performance?",
+        "What about DNS propagation and caching issues?",
+        "How do you handle failover during outages?"
+      ]
+    },
+    {
+      "title": "Behavioral: Handling a Security Breach",
+      "prompt": "Describe how you would handle the discovery of a security vulnerability in production.",
+      "tags": ["behavioral", "security", "incident-response", "apple-context"],
+      "followups": [
+        "What's your immediate response?",
+        "How do you communicate with stakeholders?",
+        "What post-mortem actions would you take?"
+      ]
+    },
+    {
+      "title": "Behavioral: Technical Leadership on Complex Project",
+      "prompt": "Tell me about a time you provided technical leadership on a complex, cross-functional project.",
+      "tags": ["behavioral", "leadership", "technical", "apple-context"],
+      "followups": [
+        "How did you make technical decisions?",
+        "How did you handle differing opinions?",
+        "What was the impact?"
+      ]
+    },
+    {
+      "title": "Behavioral: Privacy vs Feature Trade-off",
+      "prompt": "Describe a time you faced a trade-off between user privacy and implementing a feature.",
+      "tags": ["behavioral", "privacy", "trade-offs", "apple-context"],
+      "followups": [
+        "How did you evaluate the trade-off?",
+        "What solution did you propose?",
+        "How did stakeholders react?"
+      ]
+    },
+    {
+      "title": "Behavioral: Scaling Challenges at Apple Scale",
+      "prompt": "Tell me about a time you faced scaling challenges and how you addressed them.",
+      "tags": ["behavioral", "scaling", "problem-solving", "apple-context"],
+      "followups": [
+        "What symptoms indicated scaling issues?",
+        "How did you diagnose the bottlenecks?",
+        "What architectural changes did you make?"
+      ]
+    },
+    {
+      "title": "Behavioral: Innovating Within Constraints",
+      "prompt": "Describe a time you came up with an innovative solution despite technical or resource constraints.",
+      "tags": ["behavioral", "innovation", "constraints", "apple-context"],
+      "followups": [
+        "What were the constraints?",
+        "How did you arrive at your solution?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Behavioral: Cross-Functional Leadership",
+      "prompt": "Tell me about a time you led a project involving multiple teams or disciplines.",
+      "tags": ["behavioral", "leadership", "collaboration", "apple-context"],
+      "followups": [
+        "How did you align different teams?",
+        "What challenges did you face?",
+        "What was the result?"
+      ]
+    },
+    {
+      "title": "Behavioral: Handling Production Incident at Scale",
+      "prompt": "Walk me through how you would handle a major production incident affecting millions of users.",
+      "tags": ["behavioral", "incident-response", "reliability", "apple-context"],
+      "followups": [
+        "How would you prioritize during the incident?",
+        "How would you communicate with different stakeholders?",
+        "What post-incident actions would you take?"
+      ]
+    },
+    {
+      "title": "Behavioral: Technical Debt at Apple Scale",
+      "prompt": "Describe how you would approach technical debt in a large, mature codebase like iOS or macOS.",
+      "tags": ["behavioral", "technical-debt", "maintenance", "apple-context"],
+      "followups": [
+        "How would you identify and prioritize debt?",
+        "How would you balance new features vs debt repayment?",
+        "How would you get buy-in from stakeholders?"
+      ]
+    },
+    {
+      "title": "Behavioral: Quality vs Time-to-Market",
+      "prompt": "Describe a time you had to balance quality requirements with aggressive deadlines.",
+      "tags": ["behavioral", "quality", "deadlines", "apple-context"],
+      "followups": [
+        "How did you make your decision?",
+        "What trade-offs did you accept?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Behavioral: Mentoring in a High-Performance Environment",
+      "prompt": "Describe your experience mentoring junior engineers in a demanding technical environment.",
+      "tags": ["behavioral", "mentorship", "leadership", "apple-context"],
+      "followups": [
+        "How did you adapt your mentoring style?",
+        "What challenges did you face?",
+        "What was the impact on the team?"
+      ]
+    }
+  ]
+}
