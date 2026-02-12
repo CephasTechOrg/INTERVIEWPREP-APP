@@ -1,207 +1,897 @@
 {
-    "track": "swe_intern",
-    "company_style": "microsoft",
-    "difficulty": "medium",
-    "questions": [
-      {
-        "title": "Design a REST API for a Todo App",
-        "prompt": "Design REST endpoints for a Todo application (create, read, update, delete). Include request/response shapes at a high level.",
-        "tags": ["api", "rest", "design"],
-        "followups": [
-          "How do you handle validation and error responses?",
-          "How do you version this API?",
-          "How do you secure the endpoints?"
-        ]
-      },
-      {
-        "title": "LRU Cache",
-        "prompt": "Implement an LRU cache supporting get and put in O(1) average time.",
-        "tags": ["hashmap", "linked-list", "design"],
-        "followups": [
-          "Why do you need both a hash map and a linked list?",
-          "What edge cases would you test?",
-          "How would you make it thread-safe?"
-        ]
-      },
-      {
-        "title": "Top K Frequent Elements",
-        "prompt": "Given an array of integers, return the k most frequent elements.",
-        "tags": ["hashmap", "heap", "arrays"],
-        "followups": [
-          "Can you do better than sorting?",
-          "What is the time complexity?",
-          "How would you handle ties deterministically?"
-        ]
-      },
-      {
-        "title": "Validate BST",
-        "prompt": "Given a binary tree, determine if it is a valid binary search tree.",
-        "tags": ["trees", "dfs"],
-        "followups": [
-          "Why do bounds matter?",
-          "How would you do this iteratively?",
-          "What edge cases would you test?"
-        ]
-      },
-      {
-        "title": "Lowest Common Ancestor",
-        "prompt": "Given a binary tree and two nodes, find their lowest common ancestor.",
-        "tags": ["trees", "dfs", "recursion"],
-        "followups": [
-          "How does this change for a BST?",
-          "What if one node is not present?",
-          "How do you avoid recursion depth issues?"
-        ]
-      },
-      {
-        "title": "Detect Cycle in a Linked List",
-        "prompt": "Detect if a linked list has a cycle and return the node where the cycle begins (if any).",
-        "tags": ["linked-list", "two-pointers"],
-        "followups": [
-          "Why does Floyd\u2019s algorithm work?",
-          "Time and space complexity?",
-          "How would you test it?"
-        ]
-      },
-      {
-        "title": "Search in Rotated Sorted Array",
-        "prompt": "Search for a target in a rotated sorted array in O(log n) time.",
-        "tags": ["binary-search", "arrays"],
-        "followups": [
-          "What invariant lets you keep logarithmic time?",
-          "What tricky edge cases exist?",
-          "How does duplicates change the solution?"
-        ]
-      },
-      {
-        "title": "String Compression",
-        "prompt": "Compress a string by replacing repeated characters with the character followed by count. Return original if not shorter.",
-        "tags": ["strings", "two-pointers"],
-        "followups": [
-          "What is the time complexity?",
-          "How would you handle very large inputs efficiently?",
-          "What test cases catch bugs?"
-        ]
-      },
-      {
-        "title": "Concurrency: Producer-Consumer",
-        "prompt": "Explain how you would implement a producer-consumer system safely in a multi-threaded environment.",
-        "tags": ["concurrency", "design"],
-        "followups": [
-          "How do you prevent deadlocks?",
-          "What are the trade-offs of bounded vs unbounded queues?",
-          "When would you use condition variables?"
-        ]
-      },
-      {
-        "title": "Design a Logging Pipeline (High Level)",
-        "prompt": "Design a basic logging pipeline for a service: ingestion, storage, query, and retention.",
-        "tags": ["system-design", "scalability"],
-        "followups": [
-          "How do you handle high write volume?",
-          "How do you secure sensitive logs?",
-          "How do you design retention policies?"
-        ]
-      },
-      {
-        "title": "Database Indexing Trade-offs",
-        "prompt": "Explain what a database index is and how it improves reads but can hurt writes. Give an example.",
-        "tags": ["databases", "performance"],
-        "followups": [
-          "What types of indexes do you know?",
-          "How do you choose what to index?",
-          "How do you measure whether an index helps?"
-        ]
-      },
-      {
-        "title": "API Reliability and Retries",
-        "prompt": "Your service calls another service that sometimes fails. How do you design retries and timeouts safely?",
-        "tags": ["reliability", "system-thinking"],
-        "followups": [
-          "What is exponential backoff and why is it used?",
-          "How do you avoid retry storms?",
-          "When should you fail fast?"
-        ]
-      },
-      {
-        "title": "Behavioral: Ownership",
-        "prompt": "Tell me about a time you took ownership of a problem that wasn\u2019t clearly assigned to you.",
-        "tags": ["behavioral", "communication", "collaboration"],
-        "followups": [
-          "How did you align stakeholders?",
-          "What trade-offs did you make?",
-          "What was the outcome?"
-        ]
-      },
-      {
-        "title": "Behavioral: Conflict Resolution",
-        "prompt": "Describe a disagreement with a teammate about a technical decision. How did you handle it?",
-        "tags": ["behavioral", "communication", "collaboration"],
-        "followups": [
-          "How did you reach a decision?",
-          "What would you do differently next time?",
-          "How do you keep relationships strong during conflict?"
-        ]
-      },
-      {
-        "title": "System Thinking: Feature Flag Rollout",
-        "prompt": "Explain how you would roll out a risky feature safely using feature flags.",
-        "tags": ["system-thinking", "reliability"],
-        "followups": [
-          "How do you monitor the rollout?",
-          "How do you rollback quickly?",
-          "What metrics would you track?"
-        ]
-      },
-      {
-        "title": "Object Design: Shopping Cart",
-        "prompt": "Design classes/interfaces for a shopping cart system. Emphasize extensibility and testability.",
-        "tags": ["oop", "design"],
-        "followups": [
-          "Where would you use interfaces and why?",
-          "How would you test pricing rules?",
-          "How do you avoid tight coupling?"
-        ]
-      },
-      {
-        "title": "Implement Min Stack",
-        "prompt": "Design a stack that supports push, pop, top, and retrieving the minimum element in O(1).",
-        "tags": ["stack", "design"],
-        "followups": [
-          "What extra data do you store?",
-          "How do duplicates of the minimum affect your solution?",
-          "Complexities?"
-        ]
-      },
-      {
-        "title": "Design: Email Validator Service",
-        "prompt": "Design a service that validates emails (format, domain checks) with caching and rate limiting.",
-        "tags": ["design", "system-thinking"],
-        "followups": [
-          "What checks are safe to do synchronously?",
-          "How do you handle abuse?",
-          "How do you test it?"
-        ]
-      },
-      {
-        "title": "Performance: Reduce Latency",
-        "prompt": "A web endpoint is slow. Describe how you would profile and reduce latency end-to-end.",
-        "tags": ["performance", "debugging"],
-        "followups": [
-          "What do you measure first?",
-          "How do you differentiate CPU vs IO bottlenecks?",
-          "How do you prevent regressions?"
-        ]
-      },
-      {
-        "title": "Why Microsoft (Engineering Focus)",
-        "prompt": "Why Microsoft? Connect your interests to Microsoft engineering culture (growth mindset, customer obsession, inclusive collaboration).",
-        "tags": ["behavioral", "communication"],
-        "followups": [
-          "What Microsoft product would you improve and why?",
-          "Tell me about a time you improved something based on user feedback.",
-          "How do you define impact?"
-        ]
-      }
-    ]
-  }
+  "track": "swe_intern",
+  "company_style": "microsoft",
+  "difficulty": "medium",
+  "questions": [
+    {
+      "title": "Design a REST API for a Todo App",
+      "prompt": "Design REST endpoints for a Todo application (create, read, update, delete). Include request/response shapes at a high level.",
+      "tags": ["api", "rest", "design"],
+      "followups": [
+        "How do you handle validation and error responses?",
+        "How do you version this API?",
+        "How do you secure the endpoints?"
+      ]
+    },
+    {
+      "title": "LRU Cache",
+      "prompt": "Implement an LRU cache supporting get and put in O(1) average time.",
+      "tags": ["hashmap", "linked-list", "design"],
+      "followups": [
+        "Why do you need both a hash map and a linked list?",
+        "What edge cases would you test?",
+        "How would you make it thread-safe?"
+      ]
+    },
+    {
+      "title": "Top K Frequent Elements",
+      "prompt": "Given an array of integers, return the k most frequent elements.",
+      "tags": ["hashmap", "heap", "arrays"],
+      "followups": [
+        "Can you do better than sorting?",
+        "What is the time complexity?",
+        "How would you handle ties deterministically?"
+      ]
+    },
+    {
+      "title": "Validate BST",
+      "prompt": "Given a binary tree, determine if it is a valid binary search tree.",
+      "tags": ["trees", "dfs"],
+      "followups": [
+        "Why do bounds matter?",
+        "How would you do this iteratively?",
+        "What edge cases would you test?"
+      ]
+    },
+    {
+      "title": "Lowest Common Ancestor",
+      "prompt": "Given a binary tree and two nodes, find their lowest common ancestor.",
+      "tags": ["trees", "dfs", "recursion"],
+      "followups": [
+        "How does this change for a BST?",
+        "What if one node is not present?",
+        "How do you avoid recursion depth issues?"
+      ]
+    },
+    {
+      "title": "Detect Cycle in a Linked List",
+      "prompt": "Detect if a linked list has a cycle and return the node where the cycle begins (if any).",
+      "tags": ["linked-list", "two-pointers"],
+      "followups": [
+        "Why does Floyd's algorithm work?",
+        "Time and space complexity?",
+        "How would you test it?"
+      ]
+    },
+    {
+      "title": "Search in Rotated Sorted Array",
+      "prompt": "Search for a target in a rotated sorted array in O(log n) time.",
+      "tags": ["binary-search", "arrays"],
+      "followups": [
+        "What invariant lets you keep logarithmic time?",
+        "What tricky edge cases exist?",
+        "How does duplicates change the solution?"
+      ]
+    },
+    {
+      "title": "String Compression",
+      "prompt": "Compress a string by replacing repeated characters with the character followed by count. Return original if not shorter.",
+      "tags": ["strings", "two-pointers"],
+      "followups": [
+        "What is the time complexity?",
+        "How would you handle very large inputs efficiently?",
+        "What test cases catch bugs?"
+      ]
+    },
+    {
+      "title": "Concurrency: Producer-Consumer",
+      "prompt": "Explain how you would implement a producer-consumer system safely in a multi-threaded environment.",
+      "tags": ["concurrency", "design"],
+      "followups": [
+        "How do you prevent deadlocks?",
+        "What are the trade-offs of bounded vs unbounded queues?",
+        "When would you use condition variables?"
+      ]
+    },
+    {
+      "title": "Design a Logging Pipeline (High Level)",
+      "prompt": "Design a basic logging pipeline for a service: ingestion, storage, query, and retention.",
+      "tags": ["system-design", "scalability"],
+      "followups": [
+        "How do you handle high write volume?",
+        "How do you secure sensitive logs?",
+        "How do you design retention policies?"
+      ]
+    },
+    {
+      "title": "Database Indexing Trade-offs",
+      "prompt": "Explain what a database index is and how it improves reads but can hurt writes. Give an example.",
+      "tags": ["databases", "performance"],
+      "followups": [
+        "What types of indexes do you know?",
+        "How do you choose what to index?",
+        "How do you measure whether an index helps?"
+      ]
+    },
+    {
+      "title": "API Reliability and Retries",
+      "prompt": "Your service calls another service that sometimes fails. How do you design retries and timeouts safely?",
+      "tags": ["reliability", "system-thinking"],
+      "followups": [
+        "What is exponential backoff and why is it used?",
+        "How do you avoid retry storms?",
+        "When should you fail fast?"
+      ]
+    },
+    {
+      "title": "Behavioral: Ownership",
+      "prompt": "Tell me about a time you took ownership of a problem that wasn't clearly assigned to you.",
+      "tags": ["behavioral", "communication", "collaboration"],
+      "followups": [
+        "How did you align stakeholders?",
+        "What trade-offs did you make?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Behavioral: Conflict Resolution",
+      "prompt": "Describe a disagreement with a teammate about a technical decision. How did you handle it?",
+      "tags": ["behavioral", "communication", "collaboration"],
+      "followups": [
+        "How did you reach a decision?",
+        "What would you do differently next time?",
+        "How do you keep relationships strong during conflict?"
+      ]
+    },
+    {
+      "title": "System Thinking: Feature Flag Rollout",
+      "prompt": "Explain how you would roll out a risky feature safely using feature flags.",
+      "tags": ["system-thinking", "reliability"],
+      "followups": [
+        "How do you monitor the rollout?",
+        "How do you rollback quickly?",
+        "What metrics would you track?"
+      ]
+    },
+    {
+      "title": "Object Design: Shopping Cart",
+      "prompt": "Design classes/interfaces for a shopping cart system. Emphasize extensibility and testability.",
+      "tags": ["oop", "design"],
+      "followups": [
+        "Where would you use interfaces and why?",
+        "How would you test pricing rules?",
+        "How do you avoid tight coupling?"
+      ]
+    },
+    {
+      "title": "Implement Min Stack",
+      "prompt": "Design a stack that supports push, pop, top, and retrieving the minimum element in O(1).",
+      "tags": ["stack", "design"],
+      "followups": [
+        "What extra data do you store?",
+        "How do duplicates of the minimum affect your solution?",
+        "Complexities?"
+      ]
+    },
+    {
+      "title": "Design: Email Validator Service",
+      "prompt": "Design a service that validates emails (format, domain checks) with caching and rate limiting.",
+      "tags": ["design", "system-thinking"],
+      "followups": [
+        "What checks are safe to do synchronously?",
+        "How do you handle abuse?",
+        "How do you test it?"
+      ]
+    },
+    {
+      "title": "Performance: Reduce Latency",
+      "prompt": "A web endpoint is slow. Describe how you would profile and reduce latency end-to-end.",
+      "tags": ["performance", "debugging"],
+      "followups": [
+        "What do you measure first?",
+        "How do you differentiate CPU vs IO bottlenecks?",
+        "How do you prevent regressions?"
+      ]
+    },
+    {
+      "title": "Why Microsoft (Engineering Focus)",
+      "prompt": "Why Microsoft? Connect your interests to Microsoft engineering culture (growth mindset, customer obsession, inclusive collaboration).",
+      "tags": ["behavioral", "communication"],
+      "followups": [
+        "What Microsoft product would you improve and why?",
+        "Tell me about a time you improved something based on user feedback.",
+        "How do you define impact?"
+      ]
+    },
+    {
+      "title": "3Sum",
+      "prompt": "Given an integer array nums, return all unique triplets that sum to zero.",
+      "tags": ["arrays", "two-pointers", "sorting"],
+      "followups": [
+        "How do you avoid duplicate triplets?",
+        "What is the time complexity?",
+        "How would you extend this to 4Sum?"
+      ]
+    },
+    {
+      "title": "Container With Most Water",
+      "prompt": "Given n non-negative integers representing heights, find two lines that together with x-axis form a container holding the most water.",
+      "tags": ["arrays", "two-pointers"],
+      "followups": [
+        "Why does the two-pointer approach work?",
+        "How would you prove correctness?",
+        "What is the time complexity?"
+      ]
+    },
+    {
+      "title": "Generate Parentheses",
+      "prompt": "Given n pairs of parentheses, generate all valid combinations.",
+      "tags": ["backtracking", "strings"],
+      "followups": [
+        "What is the pruning condition?",
+        "How many valid combinations exist?",
+        "Can you solve iteratively?"
+      ]
+    },
+    {
+      "title": "Number of Islands",
+      "prompt": "Given a 2D grid of '1's and '0's, count the number of islands.",
+      "tags": ["graphs", "dfs", "bfs"],
+      "followups": [
+        "DFS vs BFS trade-offs?",
+        "What about very large grids?",
+        "How would you handle diagonal connections?"
+      ]
+    },
+    {
+      "title": "Rotting Oranges",
+      "prompt": "Given a grid with fresh and rotten oranges, return minimum minutes until no fresh oranges remain.",
+      "tags": ["bfs", "matrix"],
+      "followups": [
+        "Why is BFS appropriate here?",
+        "How do you handle multiple sources?",
+        "What if some oranges never rot?"
+      ]
+    },
+    {
+      "title": "Course Schedule",
+      "prompt": "Given numCourses and prerequisites, determine if all courses can be finished.",
+      "tags": ["graphs", "topological-sort"],
+      "followups": [
+        "How do you detect cycles?",
+        "Compare DFS vs Kahn's algorithm?",
+        "How would you return the course order?"
+      ]
+    },
+    {
+      "title": "Course Schedule II",
+      "prompt": "Return the ordering of courses to take all courses.",
+      "tags": ["graphs", "topological-sort"],
+      "followups": [
+        "How does the algorithm differ from cycle detection?",
+        "What if multiple valid orders exist?",
+        "Complexity analysis?"
+      ]
+    },
+    {
+      "title": "Longest Palindromic Substring",
+      "prompt": "Find the longest palindromic substring in a given string.",
+      "tags": ["strings", "dp", "two-pointers"],
+      "followups": [
+        "Compare DP vs expand-around-center?",
+        "What is the time complexity of each?",
+        "How would you handle very long strings?"
+      ]
+    },
+    {
+      "title": "Unique Paths",
+      "prompt": "Count the number of unique paths from top-left to bottom-right in a grid moving only down or right.",
+      "tags": ["dp", "combinatorics"],
+      "followups": [
+        "What is the DP recurrence?",
+        "What is the mathematical formula?",
+        "How do you optimize space?"
+      ]
+    },
+    {
+      "title": "Jump Game",
+      "prompt": "Determine if you can reach the last index given maximum jump lengths at each position.",
+      "tags": ["greedy", "dp"],
+      "followups": [
+        "Why is greedy optimal here?",
+        "What is the time complexity?",
+        "How would you find minimum jumps?"
+      ]
+    },
+    {
+      "title": "Jump Game II",
+      "prompt": "Find the minimum number of jumps to reach the last index.",
+      "tags": ["greedy", "bfs"],
+      "followups": [
+        "How does BFS on intervals work?",
+        "What is the time complexity?",
+        "Can you do it in O(1) space?"
+      ]
+    },
+    {
+      "title": "Set Matrix Zeroes",
+      "prompt": "If an element in a matrix is zero, set its entire row and column to zero in O(1) space.",
+      "tags": ["matrix", "arrays"],
+      "followups": [
+        "How do you avoid overwriting state?",
+        "What is the first row/column trick?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Spiral Matrix",
+      "prompt": "Return all elements of a matrix in spiral order.",
+      "tags": ["matrix", "simulation"],
+      "followups": [
+        "How do you manage boundaries?",
+        "What edge cases exist?",
+        "How would you generate a spiral matrix?"
+      ]
+    },
+    {
+      "title": "Subsets",
+      "prompt": "Given an array of unique integers, return all possible subsets.",
+      "tags": ["backtracking", "bit-manipulation"],
+      "followups": [
+        "Compare backtracking vs bitmask?",
+        "What is the time complexity?",
+        "How would you handle duplicates?"
+      ]
+    },
+    {
+      "title": "Subsets II",
+      "prompt": "Given an array with duplicates, return all unique subsets.",
+      "tags": ["backtracking"],
+      "followups": [
+        "How do you avoid duplicates?",
+        "Why sort the array first?",
+        "What is the time complexity?"
+      ]
+    },
+    {
+      "title": "Combination Sum",
+      "prompt": "Find all unique combinations that sum to target, with unlimited use of candidates.",
+      "tags": ["backtracking"],
+      "followups": [
+        "What is the pruning condition?",
+        "Time complexity analysis?",
+        "How does it differ from bounded usage?"
+      ]
+    },
+    {
+      "title": "Combination Sum II",
+      "prompt": "Find all unique combinations that sum to target, with each number used at most once.",
+      "tags": ["backtracking"],
+      "followups": [
+        "How do you avoid duplicate combinations?",
+        "Why sort the array?",
+        "What is the time complexity?"
+      ]
+    },
+    {
+      "title": "Permutations",
+      "prompt": "Given an array of distinct integers, return all possible permutations.",
+      "tags": ["backtracking"],
+      "followups": [
+        "What is the recurrence relation?",
+        "How many permutations exist?",
+        "What is the time complexity?"
+      ]
+    },
+    {
+      "title": "Permutations II",
+      "prompt": "Given an array with duplicates, return all unique permutations.",
+      "tags": ["backtracking"],
+      "followups": [
+        "How do you prune duplicate branches?",
+        "What is the time complexity?",
+        "How would you solve iteratively?"
+      ]
+    },
+    {
+      "title": "Decode Ways",
+      "prompt": "Count the number of ways to decode a digit string (A=1, B=2, ... Z=26).",
+      "tags": ["dp", "strings"],
+      "followups": [
+        "What is the DP recurrence?",
+        "How do you handle leading zeros?",
+        "What is the space-optimized solution?"
+      ]
+    },
+    {
+      "title": "House Robber",
+      "prompt": "Find maximum amount you can rob from non-adjacent houses.",
+      "tags": ["dp", "arrays"],
+      "followups": [
+        "What is the DP recurrence?",
+        "How do you optimize space?",
+        "What about circular houses?"
+      ]
+    },
+    {
+      "title": "House Robber II",
+      "prompt": "Same as House Robber but houses are arranged in a circle.",
+      "tags": ["dp", "arrays"],
+      "followups": [
+        "How do you break the circular dependency?",
+        "What is the recurrence?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Task Scheduler",
+      "prompt": "Given tasks and cooldown n, return the least number of time units to finish all tasks.",
+      "tags": ["greedy", "heap"],
+      "followups": [
+        "Why is the greedy formula optimal?",
+        "How does the math solution work?",
+        "What if tasks have different cooldowns?"
+      ]
+    },
+    {
+      "title": "Partition Equal Subset Sum",
+      "prompt": "Determine if an array can be partitioned into two subsets with equal sum.",
+      "tags": ["dp", "knapsack"],
+      "followups": [
+        "What is the DP state and transition?",
+        "How do you optimize space?",
+        "Why is this a 0/1 knapsack problem?"
+      ]
+    },
+    {
+      "title": "Gas Station",
+      "prompt": "Find the starting gas station index to complete a circular tour.",
+      "tags": ["arrays", "greedy"],
+      "followups": [
+        "Why can you skip intermediate indices?",
+        "What invariant guarantees correctness?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Copy List with Random Pointer",
+      "prompt": "Deep copy a linked list where each node has a random pointer.",
+      "tags": ["linked-list", "hashmap"],
+      "followups": [
+        "Compare O(n) space vs O(1) space approaches?",
+        "How does the interweaving technique work?",
+        "What about cycles in random pointers?"
+      ]
+    },
+    {
+      "title": "Sort Colors (Dutch National Flag)",
+      "prompt": "Sort an array of 0s, 1s, and 2s in one pass with O(1) space.",
+      "tags": ["arrays", "two-pointers"],
+      "followups": [
+        "What invariants do the three pointers maintain?",
+        "Why is this O(n) and one-pass?",
+        "How would you generalize to k colors?"
+      ]
+    },
+    {
+      "title": "Kth Smallest Element in a BST",
+      "prompt": "Find the kth smallest element in a binary search tree.",
+      "tags": ["trees", "bst"],
+      "followups": [
+        "What property of BST does this use?",
+        "How would you handle frequent modifications?",
+        "What about kth largest?"
+      ]
+    },
+    {
+      "title": "Binary Tree Right Side View",
+      "prompt": "Return the values visible from the right side of a binary tree.",
+      "tags": ["trees", "bfs", "dfs"],
+      "followups": [
+        "BFS vs DFS approach?",
+        "Time and space complexity?",
+        "How about the left side view?"
+      ]
+    },
+    {
+      "title": "Flatten Binary Tree to Linked List",
+      "prompt": "Flatten a binary tree to a linked list in-place (preorder order).",
+      "tags": ["trees", "recursion"],
+      "followups": [
+        "What is the traversal order?",
+        "How do you do it iteratively?",
+        "What is the Morris traversal approach?"
+      ]
+    },
+    {
+      "title": "Construct Binary Tree from Preorder and Inorder",
+      "prompt": "Build a binary tree from preorder and inorder traversal arrays.",
+      "tags": ["trees", "recursion"],
+      "followups": [
+        "How do you find the root in inorder?",
+        "What is the time complexity with hashmap optimization?",
+        "What about postorder + inorder?"
+      ]
+    },
+    {
+      "title": "Construct Binary Tree from Inorder and Postorder",
+      "prompt": "Build a binary tree from inorder and postorder traversal arrays.",
+      "tags": ["trees", "recursion"],
+      "followups": [
+        "How does this differ from preorder+inorder?",
+        "What is the recursive pattern?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Path Sum II",
+      "prompt": "Return all root-to-leaf paths that sum to a target.",
+      "tags": ["trees", "dfs", "backtracking"],
+      "followups": [
+        "How do you track the current path?",
+        "Time complexity?",
+        "How would you handle negative values?"
+      ]
+    },
+    {
+      "title": "Populating Next Right Pointers in Each Node",
+      "prompt": "Connect each node to its next right node in a perfect binary tree.",
+      "tags": ["trees", "bfs"],
+      "followups": [
+        "How do you solve with O(1) extra space?",
+        "What about non-perfect trees?",
+        "How does level traversal without queue work?"
+      ]
+    },
+    {
+      "title": "Populating Next Right Pointers in Each Node II",
+      "prompt": "Same as above but the tree may not be perfect.",
+      "tags": ["trees", "bfs"],
+      "followups": [
+        "How does the algorithm change?",
+        "How do you traverse levels without a queue?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Daily Temperatures",
+      "prompt": "Given daily temperatures, return days until warmer temperature.",
+      "tags": ["stack", "monotonic-stack"],
+      "followups": [
+        "Why is a monotonic decreasing stack efficient?",
+        "What is the time complexity?",
+        "How would you solve with brute force first?"
+      ]
+    },
+    {
+      "title": "Minimum Path Sum",
+      "prompt": "Find the minimum sum path from top-left to bottom-right in a grid.",
+      "tags": ["dp", "matrix"],
+      "followups": [
+        "What is the DP recurrence?",
+        "How do you optimize space?",
+        "What if you can move in all four directions?"
+      ]
+    },
+    {
+      "title": "Longest Increasing Subsequence",
+      "prompt": "Find the length of the longest strictly increasing subsequence.",
+      "tags": ["dp", "binary-search"],
+      "followups": [
+        "Compare O(n²) DP vs O(n log n) patience sorting?",
+        "What is the DP recurrence?",
+        "How would you reconstruct the subsequence?"
+      ]
+    },
+    {
+      "title": "Coin Change II",
+      "prompt": "Count the number of combinations to make up an amount with unlimited coins.",
+      "tags": ["dp", "knapsack"],
+      "followups": [
+        "How does this differ from Coin Change I?",
+        "What is the DP recurrence?",
+        "Why does the loop order matter?"
+      ]
+    },
+    {
+      "title": "Maximum Product Subarray",
+      "prompt": "Find the contiguous subarray with the maximum product.",
+      "tags": ["arrays", "dp"],
+      "followups": [
+        "Why do you need to track both max and min?",
+        "How do you handle zeros and negatives?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "Partition Labels",
+      "prompt": "Partition a string into as many parts as possible so each letter appears in at most one part.",
+      "tags": ["strings", "greedy"],
+      "followups": [
+        "What is the greedy approach?",
+        "How do you track last occurrences?",
+        "Time complexity?"
+      ]
+    },
+    {
+      "title": "C#: Async/Await Basics",
+      "prompt": "Explain how async/await works in C#. What problems does it solve?",
+      "tags": ["microsoft-context", "concurrency", "csharp"],
+      "followups": [
+        "What happens to the thread during await?",
+        "What is ConfigureAwait(false) and when to use it?",
+        "How do you handle exceptions in async methods?"
+      ]
+    },
+    {
+      "title": "C#: Task vs Thread",
+      "prompt": "What is the difference between Task and Thread in C#?",
+      "tags": ["microsoft-context", "concurrency", "csharp"],
+      "followups": [
+        "What is a Task and what does it represent?",
+        "When would you use Thread directly?",
+        "What is Task.Run?"
+      ]
+    },
+    {
+      "title": "C#: ValueTask vs Task",
+      "prompt": "What is the difference between ValueTask and Task in C#?",
+      "tags": ["microsoft-context", "performance", "csharp"],
+      "followups": [
+        "When would you choose ValueTask over Task?",
+        "What are the limitations of ValueTask?",
+        "How does this reduce allocations?"
+      ]
+    },
+    {
+      "title": "C#: LINQ Deferred Execution",
+      "prompt": "Explain deferred execution in LINQ. Give an example where it matters.",
+      "tags": ["microsoft-context", "linq", "csharp"],
+      "followups": [
+        "What is immediate execution vs deferred?",
+        "How do ToList(), ToArray() change behavior?",
+        "Why can deferred execution cause bugs?"
+      ]
+    },
+    {
+      "title": "C#: Yield Return",
+      "prompt": "What does 'yield return' do in C#? When would you use it?",
+      "tags": ["microsoft-context", "csharp", "performance"],
+      "followups": [
+        "How does it differ from returning a List?",
+        "What is the state machine behind yield?",
+        "What are the performance implications?"
+      ]
+    },
+    {
+      "title": "C#: Record Types",
+      "prompt": "What are record types in C# 9+ and what problems do they solve?",
+      "tags": ["microsoft-context", "csharp", "fundamentals"],
+      "followups": [
+        "How is a record different from a class?",
+        "What is value-based equality?",
+        "When would you choose a record over a class?"
+      ]
+    },
+    {
+      "title": "C#: Nullable Reference Types",
+      "prompt": "Explain nullable reference types in C# 8+. How do they improve code safety?",
+      "tags": ["microsoft-context", "csharp", "safety"],
+      "followups": [
+        "What does #nullable enable do?",
+        "How do you suppress warnings when you know it's safe?",
+        "How does this help prevent null reference exceptions?"
+      ]
+    },
+    {
+      "title": "C#: Pattern Matching",
+      "prompt": "What pattern matching features have been added to C#? Give examples.",
+      "tags": ["microsoft-context", "csharp"],
+      "followups": [
+        "What is switch expression?",
+        "How does property pattern matching work?",
+        "How does this improve code readability?"
+      ]
+    },
+    {
+      "title": ".NET: Garbage Collection Generations",
+      "prompt": "Explain the generational garbage collector in .NET.",
+      "tags": ["microsoft-context", "memory", "performance"],
+      "followups": [
+        "What are Gen 0, Gen 1, Gen 2?",
+        "Why are objects promoted?",
+        "What is the Large Object Heap (LOH)?"
+      ]
+    },
+    {
+      "title": ".NET: Dispose Pattern",
+      "prompt": "Explain the Dispose pattern in .NET. When do you implement IDisposable?",
+      "tags": ["microsoft-context", "memory", "design"],
+      "followups": [
+        "What is the difference between Dispose and Finalize?",
+        "Why implement both?",
+        "What is SuppressFinalize and why call it?"
+      ]
+    },
+    {
+      "title": ".NET: Stack vs Heap",
+      "prompt": "What types go on the stack vs the heap in .NET?",
+      "tags": ["microsoft-context", "memory", "fundamentals"],
+      "followups": [
+        "Value types vs reference types allocation?",
+        "What about structs that contain reference types?",
+        "How does this impact performance?"
+      ]
+    },
+    {
+      "title": "Azure: Blob Storage",
+      "prompt": "What is Azure Blob Storage and what are common use cases?",
+      "tags": ["microsoft-context", "azure", "cloud"],
+      "followups": [
+        "What is the difference between hot, cool, and archive tiers?",
+        "How do you secure blob storage?",
+        "What is SAS (Shared Access Signature)?"
+      ]
+    },
+    {
+      "title": "Azure: Cosmos DB",
+      "prompt": "What is Azure Cosmos DB and when would you use it?",
+      "tags": ["microsoft-context", "azure", "databases"],
+      "followups": [
+        "What consistency levels does Cosmos DB support?",
+        "How does global distribution work?",
+        "When would you choose Cosmos DB over SQL Database?"
+      ]
+    },
+    {
+      "title": "Azure: Functions",
+      "prompt": "What are Azure Functions and what are they used for?",
+      "tags": ["microsoft-context", "azure", "serverless"],
+      "followups": [
+        "What triggers are available?",
+        "How does scaling work?",
+        "What are cold starts and how do you mitigate them?"
+      ]
+    },
+    {
+      "title": "SQL Server: Query Optimization",
+      "prompt": "How do you identify and fix a slow-performing SQL query?",
+      "tags": ["microsoft-context", "sql-server", "performance"],
+      "followups": [
+        "What is an execution plan and how do you read it?",
+        "What are index seeks vs scans?",
+        "What are common query anti-patterns?"
+      ]
+    },
+    {
+      "title": "SQL Server: N+1 Problem",
+      "prompt": "What is the N+1 query problem in Entity Framework? How do you solve it?",
+      "tags": ["microsoft-context", "ef-core", "performance"],
+      "followups": [
+        "What is eager loading vs lazy loading?",
+        "How does Include() help?",
+        "When might eager loading be harmful?"
+      ]
+    },
+    {
+      "title": "Entity Framework: Change Tracking",
+      "prompt": "How does Entity Framework track changes to entities?",
+      "tags": ["microsoft-context", "ef-core"],
+      "followups": [
+        "What is the difference between DbSet and DbContext?",
+        "How do AsNoTracking() improve performance?",
+        "When would you use detached entities?"
+      ]
+    },
+    {
+      "title": "Design: Rate Limiter for Azure API",
+      "prompt": "Design a rate limiter for an Azure API Management endpoint.",
+      "tags": ["microsoft-context", "system-design", "azure"],
+      "followups": [
+        "What policies would you use?",
+        "How do you handle distributed rate limiting?",
+        "How do you communicate limits to clients?"
+      ]
+    },
+    {
+      "title": "Design: Distributed Cache (Redis)",
+      "prompt": "Design a caching strategy for a distributed application using Azure Redis Cache.",
+      "tags": ["microsoft-context", "caching", "system-design"],
+      "followups": [
+        "What cache invalidation strategies exist?",
+        "How do you handle cache stampede?",
+        "What data should you cache vs not cache?"
+      ]
+    },
+    {
+      "title": "Microservices: Service Communication",
+      "prompt": "How do microservices communicate? Compare synchronous vs asynchronous approaches.",
+      "tags": ["system-design", "microservices"],
+      "followups": [
+        "When would you use HTTP/REST vs message queues?",
+        "What are the trade-offs of each?",
+        "How do you handle partial failures?"
+      ]
+    },
+    {
+      "title": "Microservices: API Gateway",
+      "prompt": "What is an API gateway and what problems does it solve?",
+      "tags": ["system-design", "microservices"],
+      "followups": [
+        "What responsibilities does a gateway handle?",
+        "How does it differ from a load balancer?",
+        "What Azure services provide gateway functionality?"
+      ]
+    },
+    {
+      "title": "Behavioral: Growth Mindset",
+      "prompt": "Tell me about a time you received critical feedback and used it to improve.",
+      "tags": ["behavioral", "microsoft-culture", "growth-mindset"],
+      "followups": [
+        "What was the feedback?",
+        "How did you act on it?",
+        "How did you measure improvement?"
+      ]
+    },
+    {
+      "title": "Behavioral: Customer Focus",
+      "prompt": "Tell me about a time you prioritized user needs over technical elegance.",
+      "tags": ["behavioral", "microsoft-culture", "customer-obsession"],
+      "followups": [
+        "What trade-offs did you make?",
+        "How did you validate the user need?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Behavioral: Inclusive Collaboration",
+      "prompt": "Describe a time you worked with someone whose background or perspective was different from yours.",
+      "tags": ["behavioral", "microsoft-culture", "inclusion"],
+      "followups": [
+        "How did you adapt your communication?",
+        "What did you learn from them?",
+        "How did this improve the outcome?"
+      ]
+    },
+    {
+      "title": "Behavioral: Data-Driven Decision",
+      "prompt": "Tell me about a time you used data to make a technical decision.",
+      "tags": ["behavioral", "data-driven"],
+      "followups": [
+        "What data did you collect?",
+        "How did you analyze it?",
+        "What was the result?"
+      ]
+    },
+    {
+      "title": "Behavioral: Technical Debt",
+      "prompt": "Describe a time you had to balance shipping quickly vs maintaining code quality.",
+      "tags": ["behavioral", "technical-debt"],
+      "followups": [
+        "How did you make the decision?",
+        "How did you document the trade-off?",
+        "Did you ever revisit that decision?"
+      ]
+    },
+    {
+      "title": "System Design: URL Shortener",
+      "prompt": "Design a URL shortening service like TinyURL at high level.",
+      "tags": ["system-design", "scalability"],
+      "followups": [
+        "How do you generate unique short codes?",
+        "How do you handle redirection at scale?",
+        "What database would you choose and why?"
+      ]
+    },
+    {
+      "title": "System Design: Chat Application",
+      "prompt": "Design a real-time chat application at high level.",
+      "tags": ["system-design", "real-time"],
+      "followups": [
+        "How do you handle message ordering?",
+        "How do you support offline messages?",
+        "How do you scale WebSocket connections?"
+      ]
+    }
+  ]
+}

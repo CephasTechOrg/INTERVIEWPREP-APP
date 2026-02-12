@@ -103,7 +103,6 @@
         "Name one common HTTP status code and meaning."
       ]
     },
-
     {
       "title": "GET vs POST (Simple)",
       "prompt": "Explain the difference between GET and POST in simple terms.",
@@ -140,7 +139,7 @@
       "tags": ["fundamentals", "debugging"],
       "followups": [
         "Give a simple example of an exception.",
-        "What happens if you don’t handle it?",
+        "What happens if you don't handle it?",
         "What is a try/catch in simple terms?"
       ]
     },
@@ -194,7 +193,6 @@
         "What do you do after resolving a conflict?"
       ]
     },
-
     {
       "title": "Clean Code (Basics)",
       "prompt": "What does 'clean code' mean to you? Name a few simple practices.",
@@ -285,7 +283,6 @@
         "Give a real-life example of something scaling."
       ]
     },
-
     {
       "title": "String vs Integer",
       "prompt": "What is the difference between a string and an integer? Give examples.",
@@ -351,7 +348,7 @@
       "prompt": "Name a few simple best practices for handling passwords in an app.",
       "tags": ["security", "fundamentals"],
       "followups": [
-        "Why shouldn’t you store plain text passwords?",
+        "Why shouldn't you store plain text passwords?",
         "What is hashing in simple terms?",
         "Why use multi-factor authentication?"
       ]
@@ -376,7 +373,6 @@
         "What is one way teams reduce risk?"
       ]
     },
-
     {
       "title": "Communication: Explaining a Bug",
       "prompt": "How would you explain a bug you found to a teammate clearly?",
@@ -444,7 +440,7 @@
       "followups": [
         "How do you prioritize tasks?",
         "How do you track progress?",
-        "What do you do if you’re behind?"
+        "What do you do if you're behind?"
       ]
     },
     {
@@ -475,6 +471,446 @@
         "How do you learn new tech quickly?",
         "How do you handle being stuck?",
         "How do you balance learning with delivering results?"
+      ]
+    },
+    {
+      "title": "Polymorphism (Simple Idea)",
+      "prompt": "What is polymorphism in OOP? Explain it with a simple example.",
+      "tags": ["oop", "design", "fundamentals"],
+      "followups": [
+        "What does 'many forms' mean?",
+        "How do interfaces enable polymorphism?",
+        "Give an example using shapes or animals."
+      ]
+    },
+    {
+      "title": "Method Overloading",
+      "prompt": "What is method overloading? When might you use it?",
+      "tags": ["oop", "fundamentals"],
+      "followups": [
+        "How is it different from overriding?",
+        "Give a simple example like calculating area.",
+        "Why is this convenient for developers?"
+      ]
+    },
+    {
+      "title": "Method Overriding",
+      "prompt": "What is method overriding and why is it useful in inheritance?",
+      "tags": ["oop", "fundamentals"],
+      "followups": [
+        "What does @Override or virtual mean?",
+        "Give an example with a base class and derived class.",
+        "How does this enable polymorphism?"
+      ]
+    },
+    {
+      "title": "Constructor Basics",
+      "prompt": "What is a constructor and what is its purpose?",
+      "tags": ["oop", "fundamentals"],
+      "followups": [
+        "When is a constructor called?",
+        "What is a default constructor?",
+        "What is constructor overloading?"
+      ]
+    },
+    {
+      "title": "Static vs Instance Members",
+      "prompt": "What is the difference between static and instance members (fields/methods)?",
+      "tags": ["oop", "fundamentals"],
+      "followups": [
+        "When would you make something static?",
+        "How do you access static vs instance members?",
+        "Give a simple example like Math.PI."
+      ]
+    },
+    {
+      "title": "Value Type vs Reference Type",
+      "prompt": "What is the difference between a value type and a reference type?",
+      "tags": ["fundamentals", "memory"],
+      "followups": [
+        "Give examples of each in C#/Java.",
+        "Where are they stored?",
+        "How does assignment behave differently?"
+      ]
+    },
+    {
+      "title": "Pass by Value vs Pass by Reference",
+      "prompt": "Explain the difference between pass by value and pass by reference.",
+      "tags": ["fundamentals", "memory"],
+      "followups": [
+        "What happens to the original variable?",
+        "Give an example where this matters.",
+        "How does C#/Java handle this?"
+      ]
+    },
+    {
+      "title": "What is .NET?",
+      "prompt": "What is .NET? Explain it at a high level.",
+      "tags": ["microsoft-context", "fundamentals"],
+      "followups": [
+        "What is the difference between .NET Framework and .NET Core?",
+        "What languages run on .NET?",
+        "What is the CLR?"
+      ]
+    },
+    {
+      "title": "What is C#?",
+      "prompt": "What is C# and what kinds of applications can you build with it?",
+      "tags": ["microsoft-context", "fundamentals"],
+      "followups": [
+        "How is C# different from Java?",
+        "What are some key features of C#?",
+        "Why does Microsoft use C#?"
+      ]
+    },
+    {
+      "title": "What is Azure?",
+      "prompt": "What is Microsoft Azure? Describe it in simple terms.",
+      "tags": ["microsoft-context", "cloud", "fundamentals"],
+      "followups": [
+        "What is cloud computing?",
+        "Give an example of an Azure service.",
+        "Why do companies use Azure?"
+      ]
+    },
+    {
+      "title": "Windows vs Linux (Basic)",
+      "prompt": "What is one major difference between Windows and Linux operating systems?",
+      "tags": ["microsoft-context", "fundamentals"],
+      "followups": [
+        "Why does Microsoft support Linux now?",
+        "What is WSL?",
+        "When might you choose one over the other?"
+      ]
+    },
+    {
+      "title": "What is Visual Studio?",
+      "prompt": "What is Visual Studio and what is it used for?",
+      "tags": ["microsoft-context", "tools"],
+      "followups": [
+        "How is it different from VS Code?",
+        "What features make it useful for developers?",
+        "What have you built with it?"
+      ]
+    },
+    {
+      "title": "What is GitHub?",
+      "prompt": "What is GitHub and why is it important for developers?",
+      "tags": ["microsoft-context", "git", "collaboration"],
+      "followups": [
+        "Why did Microsoft acquire GitHub?",
+        "What is a repository?",
+        "How do you contribute to open source on GitHub?"
+      ]
+    },
+    {
+      "title": "SOLID: Single Responsibility",
+      "prompt": "What is the Single Responsibility Principle? Give a simple example.",
+      "tags": ["design-principles", "oop"],
+      "followups": [
+        "Why is it better to have one reason to change?",
+        "What problems happen when a class does too much?",
+        "How do you identify violations?"
+      ]
+    },
+    {
+      "title": "SOLID: Open-Closed",
+      "prompt": "What does it mean for code to be 'open for extension, closed for modification'?",
+      "tags": ["design-principles", "oop"],
+      "followups": [
+        "Give a simple example using interfaces.",
+        "Why is this important for maintainability?",
+        "How does this reduce bugs?"
+      ]
+    },
+    {
+      "title": "SOLID: Liskov Substitution",
+      "prompt": "Explain the Liskov Substitution Principle in simple terms.",
+      "tags": ["design-principles", "oop"],
+      "followups": [
+        "What does 'subtypes must be substitutable for their base types' mean?",
+        "Give an example of a violation (square vs rectangle).",
+        "Why does this matter in inheritance?"
+      ]
+    },
+    {
+      "title": "SOLID: Interface Segregation",
+      "prompt": "What is the Interface Segregation Principle?",
+      "tags": ["design-principles", "oop"],
+      "followups": [
+        "Why are smaller, focused interfaces better?",
+        "Give an example of a 'fat' interface problem.",
+        "How does this relate to the Single Responsibility Principle?"
+      ]
+    },
+    {
+      "title": "SOLID: Dependency Inversion",
+      "prompt": "Explain the Dependency Inversion Principle in simple terms.",
+      "tags": ["design-principles", "oop"],
+      "followups": [
+        "What does it mean to depend on abstractions, not concretions?",
+        "How does dependency injection help?",
+        "Why does this make code more testable?"
+      ]
+    },
+    {
+      "title": "Dependency Injection (Concept)",
+      "prompt": "What is dependency injection in simple terms?",
+      "tags": ["design-patterns", "testing"],
+      "followups": [
+        "Why does this make code easier to test?",
+        "Give an example without DI and with DI.",
+        "How does constructor injection work?"
+      ]
+    },
+    {
+      "title": "IDisposable / Dispose Pattern",
+      "prompt": "What is the purpose of IDisposable in .NET?",
+      "tags": ["microsoft-context", "memory"],
+      "followups": [
+        "What resources need explicit cleanup?",
+        "What is a using statement?",
+        "What happens if you don't dispose?"
+      ]
+    },
+    {
+      "title": "What is Garbage Collection?",
+      "prompt": "Explain garbage collection in simple terms.",
+      "tags": ["fundamentals", "memory"],
+      "followups": [
+        "How does it help developers?",
+        "What is a managed language?",
+        "What are common GC optimizations?"
+      ]
+    },
+    {
+      "title": "Boxing and Unboxing",
+      "prompt": "What is boxing and unboxing in .NET/C#?",
+      "tags": ["microsoft-context", "performance"],
+      "followups": [
+        "Why can this impact performance?",
+        "Give an example.",
+        "How do generics help avoid boxing?"
+      ]
+    },
+    {
+      "title": "IEnumerable vs IEnumerator",
+      "prompt": "What is the difference between IEnumerable and IEnumerator?",
+      "tags": ["microsoft-context", "collections"],
+      "followups": [
+        "What does foreach work with?",
+        "How does yield return work?",
+        "When would you implement these interfaces?"
+      ]
+    },
+    {
+      "title": "Collections: List vs Dictionary",
+      "prompt": "When would you use a List vs a Dictionary?",
+      "tags": ["collections", "data-structures"],
+      "followups": [
+        "What is the lookup time for each?",
+        "What if you need to store unique keys?",
+        "Give a practical example for each."
+      ]
+    },
+    {
+      "title": "Collections: Stack vs Queue",
+      "prompt": "When would you choose a Stack over a Queue?",
+      "tags": ["collections", "data-structures"],
+      "followups": [
+        "Give a real-world example for each.",
+        "What are the primary operations?",
+        "How do their orders differ?"
+      ]
+    },
+    {
+      "title": "Exception Handling: try-catch-finally",
+      "prompt": "Explain the purpose of try, catch, and finally blocks.",
+      "tags": ["fundamentals", "debugging"],
+      "followups": [
+        "What code belongs in finally?",
+        "What happens if you don't catch an exception?",
+        "When would you use multiple catch blocks?"
+      ]
+    },
+    {
+      "title": "Checked vs Unchecked",
+      "prompt": "What are checked and unchecked contexts in C#?",
+      "tags": ["microsoft-context", "math"],
+      "followups": [
+        "What is integer overflow?",
+        "When would you enable checked?",
+        "Why would you disable it?"
+      ]
+    },
+    {
+      "title": "const vs readonly",
+      "prompt": "What is the difference between const and readonly in C#?",
+      "tags": ["microsoft-context", "fundamentals"],
+      "followups": [
+        "When is each evaluated?",
+        "Can a const be a reference type?",
+        "When would you choose readonly?"
+      ]
+    },
+    {
+      "title": "String vs StringBuilder",
+      "prompt": "Why is StringBuilder more efficient for many string operations?",
+      "tags": ["strings", "performance"],
+      "followups": [
+        "Why are strings immutable?",
+        "When should you use StringBuilder?",
+        "When is regular string concatenation fine?"
+      ]
+    },
+    {
+      "title": "var vs explicit type",
+      "prompt": "When would you use var vs explicitly declaring the type?",
+      "tags": ["microsoft-context", "code-quality"],
+      "followups": [
+        "What does var mean in C#?",
+        "Does var affect performance?",
+        "What are readability considerations?"
+      ]
+    },
+    {
+      "title": "Microsoft Product: Visual Studio Code",
+      "prompt": "What do you like about VS Code as a code editor?",
+      "tags": ["microsoft-context", "tools"],
+      "followups": [
+        "What extensions do you use?",
+        "How does it help with productivity?",
+        "How is it different from full Visual Studio?"
+      ]
+    },
+    {
+      "title": "Microsoft Product: Teams",
+      "prompt": "How do you use Microsoft Teams for collaboration?",
+      "tags": ["microsoft-context", "collaboration"],
+      "followups": [
+        "What features are useful for developers?",
+        "How does it compare to Slack?",
+        "What could be improved?"
+      ]
+    },
+    {
+      "title": "Microsoft Product: Windows",
+      "prompt": "What do you think makes Windows a popular operating system?",
+      "tags": ["microsoft-context", "fundamentals"],
+      "followups": [
+        "What improvements would you suggest?",
+        "How has Windows evolved for developers?",
+        "What is WSL and why is it significant?"
+      ]
+    },
+    {
+      "title": "Microsoft Culture: Growth Mindset",
+      "prompt": "Microsoft values a 'growth mindset.' What does this mean to you?",
+      "tags": ["behavioral", "microsoft-culture"],
+      "followups": [
+        "Tell me about a time you demonstrated this.",
+        "How do you handle not knowing something?",
+        "How do you learn from failures?"
+      ]
+    },
+    {
+      "title": "Microsoft Culture: Customer Obsession",
+      "prompt": "Microsoft focuses on 'customer obsession.' How have you focused on users in your projects?",
+      "tags": ["behavioral", "microsoft-culture"],
+      "followups": [
+        "How did you gather user feedback?",
+        "What did you change based on feedback?",
+        "How did you measure success?"
+      ]
+    },
+    {
+      "title": "Microsoft Culture: Diversity & Inclusion",
+      "prompt": "Why is diversity and inclusion important in tech?",
+      "tags": ["behavioral", "microsoft-culture"],
+      "followups": [
+        "How does diversity improve products?",
+        "What can individuals do to foster inclusion?",
+        "Why does Microsoft prioritize this?"
+      ]
+    },
+    {
+      "title": "Microsoft Mission",
+      "prompt": "Microsoft's mission is to 'empower every person and every organization on the planet to achieve more.' How does this resonate with you?",
+      "tags": ["behavioral", "microsoft-culture"],
+      "followups": [
+        "What Microsoft product empowers you?",
+        "How can software empower people?",
+        "What does this mission mean for developers?"
+      ]
+    },
+    {
+      "title": "Inclusive Design",
+      "prompt": "What is inclusive design and why does Microsoft emphasize it?",
+      "tags": ["behavioral", "microsoft-culture", "accessibility"],
+      "followups": [
+        "Give an example of inclusive design in Microsoft products.",
+        "How would you design for accessibility?",
+        "Why is this good for all users?"
+      ]
+    },
+    {
+      "title": "Ethics in AI",
+      "prompt": "Why should engineers consider ethics when building AI systems?",
+      "tags": ["behavioral", "ethics"],
+      "followups": [
+        "What are Microsoft's AI principles?",
+        "What could go wrong with biased AI?",
+        "How can engineers reduce bias?"
+      ]
+    },
+    {
+      "title": "Sustainability at Microsoft",
+      "prompt": "Microsoft has committed to being carbon negative. How can software engineers contribute to sustainability?",
+      "tags": ["behavioral", "sustainability"],
+      "followups": [
+        "How can code be more energy efficient?",
+        "What Azure services support sustainability?",
+        "Why is this important for tech companies?"
+      ]
+    },
+    {
+      "title": "Remote Collaboration",
+      "prompt": "How do you effectively collaborate with teammates remotely?",
+      "tags": ["behavioral", "collaboration"],
+      "followups": [
+        "What tools do you use?",
+        "How do you communicate clearly in writing?",
+        "How do you build rapport remotely?"
+      ]
+    },
+    {
+      "title": "Handling Uncertainty",
+      "prompt": "Tell me about a time you had to work on something you didn't understand yet.",
+      "tags": ["behavioral", "growth-mindset"],
+      "followups": [
+        "How did you approach learning?",
+        "What resources did you use?",
+        "What was the outcome?"
+      ]
+    },
+    {
+      "title": "Project Planning",
+      "prompt": "How do you approach starting a new coding project from scratch?",
+      "tags": ["behavioral", "planning"],
+      "followups": [
+        "What do you do before writing code?",
+        "How do you break down the work?",
+        "How do you track progress?"
+      ]
+    },
+    {
+      "title": "Microsoft Internship Goals",
+      "prompt": "What do you hope to accomplish during a Microsoft internship?",
+      "tags": ["behavioral", "goals"],
+      "followups": [
+        "What skills do you want to develop?",
+        "What kind of impact do you want to make?",
+        "How will you seek feedback?"
       ]
     }
   ]
