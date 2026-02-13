@@ -1,0 +1,161 @@
+{
+    "track": "swe_intern",
+    "company_style": "salesforce",
+    "difficulty": "hard",
+    "questions": [
+      {
+        "title": "Design a Marketing Campaign System (HLD)",
+        "prompt": "Design a marketing campaign system for a platform like Salesforce. Users should be able to create campaigns, define target audiences based on criteria, schedule deliveries (email/push), and track engagement metrics.",
+        "tags": ["system-design", "hld", "distributed-systems", "salesforce-specific"],
+        "followups": [
+          "How do you handle audience segmentation for millions of users?",
+          "What database schema do you use for campaign definitions?",
+          "How do you schedule campaigns across different time zones?",
+          "Deep dive: How do you ensure exactly-once delivery of messages?",
+          "How do you handle failures in the middle of a large campaign?",
+          "What is the saga pattern and how would you apply it here?",
+          "How do you design a self-healing system for failed deliveries?"
+        ]
+      },
+      {
+        "title": "Distributed Transactions & Saga Pattern",
+        "prompt": "We have a microservices architecture for an order processing system (Inventory, Payment, Shipping). A single order spans multiple services. Design a reliable transaction mechanism that maintains consistency without using a distributed 2PC coordinator.",
+        "tags": ["distributed-systems", "transactions", "saga", "architecture"],
+        "followups": [
+          "Explain the difference between choreography and orchestration sagas.",
+          "How do you implement compensating transactions?",
+          "What do you store in your transaction log?",
+          "How do you handle idempotency for retried operations?",
+          "What happens if the compensation itself fails?"
+        ]
+      },
+      {
+        "title": "Design a Real-Time Collaborative Tool",
+        "prompt": "Design a real-time collaborative document editing feature (similar to Google Docs or Salesforce Quip). Focus on conflict resolution and concurrency control.",
+        "tags": ["system-design", "real-time", "cr dt", "ot"],
+        "followups": [
+          "Compare Operational Transformation (OT) vs CRDTs.",
+          "How do you handle offline edits and sync?",
+          "How do you scale WebSocket connections to millions of concurrent users?",
+          "What is the role of a central server vs peer-to-peer?"
+        ]
+      },
+      {
+        "title": "Design a Scalable Notification Service",
+        "prompt": "Design a notification system that can send millions of emails, push notifications, and SMS messages per day. Requirements: user preferences, rate limiting, retries with exponential backoff, and provider failover.",
+        "tags": ["system-design", "scalability", "queues"],
+        "followups": [
+          "How do you prevent spamming users?",
+          "How do you handle provider outages?",
+          "How do you ensure idempotency to prevent duplicate messages?",
+          "What is the trade-off between at-least-once and exactly-once delivery?"
+        ]
+      },
+      {
+        "title": "Implement a Custom Task Scheduler",
+        "prompt": "Design a job scheduler that supports: (1) Scheduling one-time and recurring tasks, (2) Priority queues, (3) Retries with backoff, (4) Worker scaling, (5) Monitoring for stuck jobs.",
+        "tags": ["system-design", "distributed-systems", "scheduling"],
+        "followups": [
+          "What data structure do you use for the priority queue?",
+          "How do you ensure at-least-once execution?",
+          "How do you avoid duplicate work on retries?",
+          "How do you handle a worker crashing mid-task?"
+        ]
+      },
+      {
+        "title": "Performance Optimization: P99 Latency",
+        "prompt": "Your service meets average latency targets but consistently fails at the 99th percentile (P99). Describe your end-to-end strategy to diagnose and mitigate tail latency.",
+        "tags": ["performance", "debugging", "distributed-systems"],
+        "followups": [
+          "What are common causes of tail latency in distributed systems?",
+          "How do you instrument your code to capture P99 effectively?",
+          "What is head-of-line blocking and how do you fix it?",
+          "How do you implement client-side timeouts and retries?"
+        ]
+      },
+      {
+        "title": "JVM Deep Dive: Memory Leak Analysis",
+        "prompt": "Your Java application has been running fine for weeks, but recently it started throwing OutOfMemoryError after 2-3 hours of load. Walk me through your exact diagnosis and remediation strategy.",
+        "tags": ["java", "jvm", "debugging", "production"],
+        "followups": [
+          "What commands do you run immediately (jstat, jstack, jmap)?",
+          "How do you capture a heap dump and analyze it with Eclipse MAT?",
+          "What is a classloader leak and how do you fix it?",
+          "How do you set up proactive monitoring to catch this before it crashes?"
+        ]
+      },
+      {
+        "title": "Multi-Threaded Rate Limiter",
+        "prompt": "Implement a thread-safe rate limiter that supports `tryAcquire()` for a given user ID. The rate limiter should allow N requests per minute. Optimize for minimal contention under high concurrency.",
+        "tags": ["concurrency", "java", "system-design"],
+        "followups": [
+          "What lock granularity do you use?",
+          "How does a sliding window log differ from a token bucket?",
+          "How would you implement this in a distributed environment?",
+          "What is the ABA problem in the context of CAS?"
+        ]
+      },
+      {
+        "title": "Design a Global Distributed Cache",
+        "prompt": "Design a distributed cache that spans multiple data centers globally. It must provide low-latency reads and handle write conflicts.",
+        "tags": ["system-design", "distributed-systems", "caching"],
+        "followups": [
+          "What consistency model do you target (strong vs eventual)?",
+          "How do you handle cache invalidation across regions?",
+          "What is a cache stampede and how do you prevent it?",
+          "How do you handle network partitions?"
+        ]
+      },
+      {
+        "title": "Implement a Lock-Free Concurrent Data Structure",
+        "prompt": "Implement a lock-free stack or queue using Compare-And-Swap (CAS) primitives. Explain how you handle the ABA problem.",
+        "tags": ["concurrency", "data-structures", "c++", "java"],
+        "followups": [
+          "How do hazard pointers or epoch-based reclamation work?",
+          "What are the performance trade-offs between lock-free and locking?",
+          "How do you test a lock-free data structure for correctness?"
+        ]
+      },
+      {
+        "title": "Design Salesforce's Multi-Tenant Architecture",
+        "prompt": "Explain how Salesforce achieves data isolation and scalability in its multi-tenant architecture. How are metadata and data stored?",
+        "tags": ["system-design", "salesforce-architecture", "multi-tenant"],
+        "followups": [
+          "What is the difference between row-level and table-level multi-tenancy?",
+          "How does Salesforce handle governor limits per tenant?",
+          "How do you migrate a tenant from one shared instance to a dedicated instance?"
+        ]
+      },
+      {
+        "title": "Behavioral: Technical Grilling by Hiring Manager",
+        "prompt": "The HM grilled you on your current project architecture for 45 minutes. Walk me through your thought process as you defended your design decisions.",
+        "tags": ["behavioral", "leadership", "technical-deep-dive"],
+        "followups": [
+          "What was the most controversial design decision you made?",
+          "How did you convince senior stakeholders that your approach was correct?",
+          "If you had to re-implement it today, what would you do differently?",
+          "How do you mentor junior engineers on the team?"
+        ]
+      },
+      {
+        "title": "Behavioral: Leadership and Mentoring",
+        "prompt": "Tell me about your roles and responsibilities in your current team. How do you exhibit leadership without formal authority?",
+        "tags": ["behavioral", "leadership", "mentorship"],
+        "followups": [
+          "Describe a time you mentored a junior developer. How did you adapt your style?",
+          "How do you handle a situation where a teammate is underperforming?",
+          "What is your philosophy on code reviews?"
+        ]
+      },
+      {
+        "title": "Salesforce Product Knowledge",
+        "prompt": "What is a new Salesforce product or feature that you have learned about recently? Why is it significant?",
+        "tags": ["behavioral", "salesforce-context", "product-awareness"],
+        "followups": [
+          "How does this product solve a customer pain point?",
+          "What are the technical challenges in implementing this feature?",
+          "How does it compete with other products in the market?"
+        ]
+      }
+    ]
+  }

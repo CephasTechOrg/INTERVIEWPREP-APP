@@ -1,0 +1,160 @@
+{
+    "track": "swe_intern",
+    "company_style": "morgan_stanley",
+    "difficulty": "hard",
+    "questions": [
+      {
+        "title": "Design BookMyShow / Movie Ticket Booking System",
+        "prompt": "Design a scalable ticket booking system like BookMyShow. Users should be able to search for movies by city, view available shows, select seats, and make payments. Handle concurrent seat selection and booking conflicts.",
+        "tags": ["system-design", "hld", "concurrency", "morgan-stanley-specific"],
+        "followups": [
+          "How do you handle race conditions when two users try to book the same seat simultaneously?",
+          "What database schema would you use? How do you index for fast search?",
+          "How long do you hold a seat in the 'locked' state? What happens if the user doesn't complete payment?",
+          "How would you scale this system to handle flash sales (e.g., Avengers: Endgame)?"
+        ]
+      },
+      {
+        "title": "Design Amazon/E-Commerce Platform (Optimized Queries)",
+        "prompt": "Design an e-commerce platform like Amazon. You need to display products with details like ratings, number of customers who bought this item, and available offers. Optimize your database schema and queries for the given high-traffic read patterns.",
+        "tags": ["system-design", "database-design", "optimization"],
+        "followups": [
+          "How do you handle denormalization vs normalization trade-offs?",
+          "How would you implement product search with filters (price, brand, rating)?",
+          "How do you track inventory and prevent overselling?",
+          "How would you design a recommendation engine for 'customers who bought this also bought'?"
+        ]
+      },
+      {
+        "title": "Design URL Shortening System (TinyURL)",
+        "prompt": "Design a URL shortening service like TinyURL. Discuss key generation, storage, redirection, analytics, and how to handle billions of redirects per day.",
+        "tags": ["system-design", "scalability", "databases"],
+        "followups": [
+          "How do you generate unique short codes? What is the probability of collision?",
+          "How do you handle custom aliases?",
+          "What database would you choose (SQL vs NoSQL) and why?",
+          "How do you shard the data across multiple servers?"
+        ]
+      },
+      {
+        "title": "LFU Cache (Deep Dive)",
+        "prompt": "Implement LFU Cache from scratch. Explain the choice of data structures to achieve O(1) average time complexity for both `get` and `put`. This was a direct question in a Morgan Stanley interview.",
+        "tags": ["design", "algorithms", "leetcode-460", "high-frequency"],
+        "followups": [
+          "Why is LFU generally harder to implement than LRU?",
+          "How do you maintain the minimum frequency efficiently?",
+          "What are the memory trade-offs of your approach?"
+        ]
+      },
+      {
+        "title": "Compare-And-Swap (CAS) in Java",
+        "prompt": "Explain the Compare-And-Swap (CAS) operation. How is it implemented at the hardware level and how does Java leverage it (e.g., `AtomicInteger`, `ConcurrentHashMap`)?",
+        "tags": ["concurrency", "java", "internals", "multithreading"],
+        "followups": [
+          "What is the ABA problem and how do you solve it?",
+          "How does CAS compare to traditional locking in terms of performance?",
+          "How is CAS used in `ConcurrentHashMap` for computeIfAbsent?"
+        ]
+      },
+      {
+        "title": "Transaction Management in Java (Spring)",
+        "prompt": "Explain how transaction management works in Java, specifically with Spring `@Transactional`. How does it handle rollback scenarios? What is the difference between REQUIRED and REQUIRES_NEW propagation levels?",
+        "tags": ["java", "spring", "databases"],
+        "followups": [
+          "How does Spring proxy-based AOP work for transactions?",
+          "What happens if you call a transactional method from within the same class?",
+          "How do you test transactional code?"
+        ]
+      },
+      {
+        "title": "All-Pair Shortest Path (Graph)",
+        "prompt": "Given a weighted graph (positive and negative edges, no negative cycles), implement an algorithm to find the shortest path between all pairs of vertices. Discuss the trade-offs between Floyd-Warshall and running Dijkstra (with Fibonacci heap) from each vertex.",
+        "tags": ["graphs", "dynamic-programming", "algorithms", "advanced-dsa"],
+        "followups": [
+          "How does Floyd-Warshall handle negative weights?",
+          "What is the time and space complexity of each approach?",
+          "How would you detect a negative cycle?"
+        ]
+      },
+      {
+        "title": "Minimum Number of Taps to Water a Garden",
+        "prompt": "There is a one-dimensional garden on the x-axis from 0 to n. At position i, there is a tap that can water the area from `i - ranges[i]` to `i + ranges[i]`. Return the minimum number of taps needed to water the whole garden. If it is impossible, return -1.",
+        "tags": ["dynamic-programming", "greedy", "leetcode-1326", "morgan-stanley-oa"],
+        "followups": [
+          "How is this problem similar to jump game II or minimum number of intervals to cover a range?",
+          "What is the greedy approach using sorting?",
+          "What is the DP recurrence and its complexity?"
+        ]
+      },
+      {
+        "title": "Python Garbage Collection (Deep Dive)",
+        "prompt": "Explain how garbage collection works in Python. How does reference counting differ from generational garbage collection? How do you handle circular references?",
+        "tags": ["python", "memory", "internals"],
+        "followups": [
+          "What is the `gc` module?",
+          "What are the performance implications of reference counting?",
+          "How does Python's GC handle cycles?"
+        ]
+      },
+      {
+        "title": "Multi-Threading: When does Python do actual multi-threading?",
+        "prompt": "Python has a Global Interpreter Lock (GIL). In what scenarios can Python achieve true parallelism? How do you work around the GIL?",
+        "tags": ["python", "concurrency", "internals"],
+        "followups": [
+          "What is the difference between I/O-bound and CPU-bound tasks?",
+          "How does the `multiprocessing` module bypass the GIL?",
+          "What are the trade-offs of using multiprocessing vs threading in Python?"
+        ]
+      },
+      {
+        "title": "NGO Tasks Problem (Complex Interval Processing)",
+        "prompt": "An NGO has N members with IDs 1 to N. There are X new activity types. For Y hours, a group of members with consecutive IDs are selected to perform new activities. Members not selected perform old activities. The head needs the maximum number of members performing a certain activity type for every Y working hours. Design an efficient algorithm.",
+        "tags": ["algorithms", "arrays", "interval", "morgan-stanley-specific", "complex"],
+        "followups": [
+          "How do you represent the intervals efficiently?",
+          "What is the time complexity of a brute force approach and how do you optimize it?",
+          "How does this relate to difference arrays or sweep line algorithms?"
+        ]
+      },
+      {
+        "title": "Custom Sorting with Comparator",
+        "prompt": "Sort a HashMap based on its values. Now, what if the values are objects with multiple fields? Write a custom comparator to sort by one field, then another.",
+        "tags": ["java", "collections", "sorting", "coding"],
+        "followups": [
+          "How do you make your comparator null-safe?",
+          "What is the difference between `Comparable` and `Comparator`?",
+          "How do you use Java 8 lambda expressions to write this concisely?"
+        ]
+      },
+      {
+        "title": "OOP: Real-World Scenario - Fix Message Parser",
+        "prompt": "Explain FIX (Financial Information Exchange) protocol messages. Given a sample FIX message, design a parser in an object-oriented way. How do you handle different message types (New Order, Execution Report, etc.)?",
+        "tags": ["ood", "parsing", "financial", "morgan-stanley-specific"],
+        "followups": [
+          "What design pattern would you use to avoid massive if-else blocks?",
+          "How do you handle versioning of the FIX protocol?",
+          "How do you ensure your parser is efficient for high-frequency trading?"
+        ]
+      },
+      {
+        "title": "Behavioral: Most Difficult Decision & Consequences",
+        "prompt": "Tell me about the most difficult decision you have made in your life. What were the consequences, and would you make the same decision again?",
+        "tags": ["behavioral", "leadership", "judgment"],
+        "followups": [
+          "How did you weigh the pros and cons?",
+          "Who did you consult before making the decision?",
+          "What did you learn about yourself from this experience?"
+        ]
+      },
+      {
+        "title": "Behavioral: Experience as a Leader",
+        "prompt": "Describe a time when you acted as a leader. What was the situation, and what was the outcome?",
+        "tags": ["behavioral", "leadership"],
+        "followups": [
+          "How did you motivate your team members?",
+          "Did you face any conflicts? How did you resolve them?",
+          "What would you do differently next time?"
+        ]
+      }
+    ]
+  }

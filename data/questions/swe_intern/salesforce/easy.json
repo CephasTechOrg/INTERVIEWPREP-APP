@@ -1,0 +1,227 @@
+{
+    "track": "swe_intern",
+    "company_style": "salesforce",
+    "difficulty": "easy",
+    "questions": [
+      {
+        "title": "Find the Three Largest Numbers",
+        "prompt": "Given an unsorted array of integers, find the three largest distinct numbers in the array. Optimize for space complexity.",
+        "tags": ["arrays", "optimization", "top-k"],
+        "followups": [
+          "How would you solve this in O(n) time with O(1) space?",
+          "What if the array contains duplicates?",
+          "How does your approach change if you need the top K elements?"
+        ]
+      },
+      {
+        "title": "Reverse Words in a Sentence (Linked List)",
+        "prompt": "You are given a linked list where each node contains a single character. The entire list represents a sentence. Reverse every word individually while keeping the word order intact.",
+        "tags": ["linked-list", "strings", "two-pointers"],
+        "followups": [
+          "How do you identify the start and end of each word?",
+          "What is the time and space complexity of your approach?",
+          "How would you handle punctuation attached to words?"
+        ]
+      },
+      {
+        "title": "Maximum Units on a Truck",
+        "prompt": "You are assigned to load boxes onto a truck. You are given a 2D array `boxTypes` where `boxTypes[i] = [numberOfBoxes_i, numberOfUnitsPerBox_i]`. The truck has a maximum load size `truckSize`. Return the maximum total number of units that can be loaded.",
+        "tags": ["arrays", "greedy", "sorting"],
+        "followups": [
+          "Why does sorting by units per box yield the optimal solution?",
+          "What is the time complexity of your approach?",
+          "How would you solve this without using a sort (counting sort)?"
+        ]
+      },
+      {
+        "title": "Remove Duplicates from Unsorted Linked List",
+        "prompt": "Given the head of a linked list, remove all nodes that have duplicate values, leaving only distinct numbers from the original list. Return the head of the modified linked list.",
+        "tags": ["linked-list", "hashmap"],
+        "followups": [
+          "How do you handle the case where the head node itself is a duplicate?",
+          "What is the time and space complexity?",
+          "How would you solve this in O(1) extra space if the list was sorted?"
+        ]
+      },
+      {
+        "title": "Kth Largest Element in an Array",
+        "prompt": "Given an integer array `nums` and an integer `k`, return the `kth` largest element in the array. You must solve it without sorting the entire array.",
+        "tags": ["heap", "quickselect", "arrays"],
+        "followups": [
+          "What is the time complexity of the heap vs quickselect approach?",
+          "How do you handle duplicate values?",
+          "What if the array is a stream and you cannot store all elements?"
+        ]
+      },
+      {
+        "title": "Valid Parentheses",
+        "prompt": "Given a string `s` containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.",
+        "tags": ["stack", "strings"],
+        "followups": [
+          "Why is a stack the optimal data structure here?",
+          "What is the space complexity in the worst case?",
+          "How would you extend this to validate XML/HTML tags?"
+        ]
+      },
+      {
+        "title": "Merge Two Sorted Lists",
+        "prompt": "Merge two sorted linked lists and return it as a new sorted list.",
+        "tags": ["linked-list", "two-pointers"],
+        "followups": [
+          "What is the iterative vs recursive approach?",
+          "What are the edge cases (one list empty, both empty)?",
+          "How would you merge K sorted lists?"
+        ]
+      },
+      {
+        "title": "Two Sum",
+        "prompt": "Given an array of integers `nums` and an integer `target`, return indices of the two numbers that add up to `target`.",
+        "tags": ["arrays", "hashmap"],
+        "followups": [
+          "What is the time complexity of the brute force vs hashmap approach?",
+          "How would you handle duplicate pairs?",
+          "What if the array is sorted?"
+        ]
+      },
+      {
+        "title": "Reverse a Linked List",
+        "prompt": "Reverse a singly linked list.",
+        "tags": ["linked-list", "recursion"],
+        "followups": [
+          "What is the iterative and recursive solution?",
+          "What is the space complexity of the recursive solution?",
+          "How would you reverse a doubly linked list?"
+        ]
+      },
+      {
+        "title": "Min Stack",
+        "prompt": "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.",
+        "tags": ["stack", "design"],
+        "followups": [
+          "How do you handle duplicate minimum values?",
+          "What is the space complexity of your approach?",
+          "Can you implement it with O(1) extra space?"
+        ]
+      },
+      {
+        "title": "Frequency Stack",
+        "prompt": "Design a stack-like data structure that supports push, pop, and popMax (pop the most frequent element). If there is a tie, pop the element closest to the stack's top.",
+        "tags": ["stack", "hashmap", "design"],
+        "followups": [
+          "How do you maintain the frequency of each element?",
+          "What data structure do you use to group elements by frequency?",
+          "What is the time complexity of each operation?"
+        ]
+      },
+      {
+        "title": "Object-Oriented Programming (OOP) Pillars",
+        "prompt": "Explain the four pillars of Object-Oriented Programming. Provide a real-world example for each.",
+        "tags": ["oop", "fundamentals"],
+        "followups": [
+          "How is abstraction different from encapsulation?",
+          "Give a Salesforce-specific example of polymorphism.",
+          "Why is inheritance sometimes considered harmful (composition over inheritance)?"
+        ]
+      },
+      {
+        "title": "Class vs Object",
+        "prompt": "What is the difference between a class and an object? Provide a code example.",
+        "tags": ["oop", "java"],
+        "followups": [
+          "How is memory allocated for a class vs an object?",
+          "Can you have an object without a class?",
+          "What is a static class?"
+        ]
+      },
+      {
+        "title": "Virtual Functions / Polymorphism",
+        "prompt": "What is a virtual function? Provide a real-world example of where it is useful.",
+        "tags": ["oop", "c++", "polymorphism"],
+        "followups": [
+          "How does dynamic dispatch work under the hood (vtable)?",
+          "What is the difference between virtual and pure virtual?",
+          "Can constructors be virtual? Why or why not?"
+        ]
+      },
+      {
+        "title": "Method Overloading vs Overriding",
+        "prompt": "Explain the difference between method overloading and method overriding.",
+        "tags": ["oop", "java"],
+        "followups": [
+          "Which one is resolved at compile-time and which at runtime?",
+          "Can you override a private or static method?",
+          "What is covariant return type?"
+        ]
+      },
+      {
+        "title": "Queue with getMax()",
+        "prompt": "Design a queue data structure that supports enqueue, dequeue, and getMax() operations in O(1) amortized time.",
+        "tags": ["queue", "design", "monotonic-deque"],
+        "followups": [
+          "Why does a monotonic deque help maintain the maximum?",
+          "How is this different from a stack with getMax()?",
+          "What is the space complexity of your design?"
+        ]
+      },
+      {
+        "title": "Linked List Cycle Detection",
+        "prompt": "Given the head of a linked list, determine if the list has a cycle in it.",
+        "tags": ["linked-list", "two-pointers"],
+        "followups": [
+          "Why does Floyd's Tortoise and Hare algorithm work?",
+          "What is the time and space complexity?",
+          "How do you find the node where the cycle begins?"
+        ]
+      },
+      {
+        "title": "Best Time to Buy and Sell Stock",
+        "prompt": "Given an array `prices` where `prices[i]` is the price of a given stock on the ith day, maximize your profit by choosing a single day to buy and a different day in the future to sell.",
+        "tags": ["arrays", "dynamic-programming"],
+        "followups": [
+          "What is the single-pass greedy solution?",
+          "How would you handle unlimited transactions?",
+          "What about transactions with a cooldown?"
+        ]
+      },
+      {
+        "title": "Move Zeroes",
+        "prompt": "Given an integer array `nums`, move all 0's to the end of it while maintaining the relative order of the non-zero elements. Do it in-place.",
+        "tags": ["arrays", "two-pointers"],
+        "followups": [
+          "What is the time complexity of the optimal solution?",
+          "How many write operations does your algorithm perform?",
+          "What if you need to move zeros to the front instead?"
+        ]
+      },
+      {
+        "title": "Why Salesforce?",
+        "prompt": "Why do you want to intern at Salesforce?",
+        "tags": ["behavioral", "company-fit"],
+        "followups": [
+          "What do you know about Salesforce's 1-1-1 model?",
+          "Which Salesforce product or acquisition interests you the most (e.g., Slack, Tableau, MuleSoft)?",
+          "How do you align with the Ohana culture?"
+        ]
+      },
+      {
+        "title": "Behavioral: Challenging Situation",
+        "prompt": "Tell me about a recent challenging situation you handled in a project. What were the technical details?",
+        "tags": ["behavioral", "problem-solving"],
+        "followups": [
+          "How did you diagnose the problem?",
+          "What was your specific role in the solution?",
+          "What was the outcome and what did you learn?"
+        ]
+      },
+      {
+        "title": "Behavioral: AI Tool Usage",
+        "prompt": "How do you use AI tools (like Copilot or ChatGPT) in your development workflow? What are your views on their growing use?",
+        "tags": ["behavioral", "ai", "trends"],
+        "followups": [
+          "How do you verify the correctness of AI-generated code?",
+          "What are the risks of relying on AI?",
+          "How do you think AI will change the role of software engineers?"
+        ]
+      }
+    ]
+  }

@@ -1,0 +1,127 @@
+{
+    "track": "founder_interview",
+    "company_style": "y_combinator",
+    "difficulty": "hard",
+    "questions": [
+      {
+        "title": "Existential Business Risks",
+        "prompt": "What keeps you up at night? What are the biggest risks to this business that are outside of your control?",
+        "tags": ["risk", "threats", "self-awareness"],
+        "followups": [
+          "If this startup fails, what will be the most likely cause?",
+          "What risk are you most worried about that you haven't mitigated yet?",
+          "What keeps you up at night that you *can* control?"
+        ]
+      },
+      {
+        "title": "The Peter Thiel Question",
+        "prompt": "Tell me something that is true that almost nobody agrees with you on.",
+        "tags": ["contrarian", "insight", "curveball"],
+        "followups": [
+          "Why do you believe this?",
+          "If you are wrong, what does that mean for your business?",
+          "What evidence would change your mind?"
+        ]
+      },
+      {
+        "title": "Path to $100k MRR",
+        "prompt": "Walk me through the exact steps you will take to get to $100k in Monthly Recurring Revenue (MRR).",
+        "tags": ["financial-modeling", "forecasting", "ambition"],
+        "followups": [
+          "How many customers is that?",
+          "What has to happen in your sales/marketing funnel to achieve that?",
+          "How long will it take you?"
+        ]
+      },
+      {
+        "title": "Weakest Link",
+        "prompt": "What part of your plan are you least confident about?",
+        "tags": ["humility", "self-assessment", "honesty"],
+        "followups": [
+          "Why haven't you solved that part yet?",
+          "What experiment are you running to de-risk that area?",
+          "What help do you need to fix this weakness?"
+        ]
+      },
+      {
+        "title": "The No YC Scenario",
+        "prompt": "What are you going to do if we don't fund you?",
+        "tags": ["resilience", "determination", "paul-graham"],
+        "followups": [
+          "Does this company exist without YC?",
+          "How will you fundraise otherwise?",
+          "Are you building this company regardless of external validation?"
+        ]
+      },
+      {
+        "title": "Advanced Unit Economics",
+        "prompt": "Your LTV/CAC ratio is 3:1. How does this change if interest rates rise and venture capital becomes scarce?",
+        "tags": ["economics", "macroeconomics", "sensitivity"],
+        "followups": [
+          "Can you be a cash-flow positive business?",
+          "What is your path to profitability?",
+          "How long can you survive with zero additional funding?"
+        ]
+      },
+      {
+        "title": "The Monopoly Question",
+        "prompt": "What is your defensibility? In 5 years, why haven't you been crushed by a larger competitor?",
+        "tags": ["moat", "defensibility", "long-term"],
+        "followups": [
+          "Is brand the only defensibility in consumer software?",
+          "Do you have network effects?",
+          "Is it really a network effect or just viral growth?"
+        ]
+      },
+      {
+        "title": "Deep Dive: Retention Breakdown",
+        "prompt": "You told me your retention is X%. Walk me through the retention curve for your best cohort versus your worst cohort. What explains the delta?",
+        "tags": ["analytics", "data-diligence", "cohort"],
+        "followups": [
+          "What did you do differently to acquire the best cohort?",
+          "Why did the worst cohort churn?",
+          "What specific feature do retained users use that churned users never touched?"
+        ]
+      },
+      {
+        "title": "Founder Market Fit (Deep)",
+        "prompt": "Why are you personally obsessed with this problem?",
+        "tags": ["founder-market-fit", "purpose", "story"],
+        "followups": [
+          "Did you experience this pain yourself?",
+          "What is the origin story of this company?",
+          "Why not give up and work on something easier?"
+        ]
+      },
+      {
+        "title": "Term Sheet Knowledge",
+        "prompt": "We offer you $125k for 7%. Is that fair? How do you know?",
+        "tags": ["fundraising", "valuation", "negotiation"],
+        "followups": [
+          "What is the standard deal YC offers? (Standard deal: $125k for 7% or $500k for 10% with Deal Flow) [Citation needed from interviewer knowledge]",
+          "How much dilution are you willing to accept before Demo Day?",
+          "What is your post-money valuation expectation?"
+        ]
+      },
+      {
+        "title": "The Low Point Scenario",
+        "prompt": "Every successful startup has a near-death experience. Describe what yours has been (or realistically will be).",
+        "tags": ["resilience", "grit", "survival"],
+        "followups": [
+          "How did you keep the team together?",
+          "What did you learn about yourself in that moment?",
+          "What would you have done if you couldn't raise money?"
+        ]
+      },
+      {
+        "title": "Feedback on YC",
+        "prompt": "What questions do you have for us?",
+        "tags": ["curiosity", "engagement", "closing"],
+        "followups": [
+          "What do you wish you had known as a founder?",
+          "How do you measure success of a partner?",
+          "What makes the difference between a good batch and a great batch?"
+        ]
+      }
+    ]
+  }

@@ -1,0 +1,617 @@
+{
+    "track": "swe_intern",
+    "company_style": "bloomberg",
+    "difficulty": "easy",
+    "questions": [
+      {
+        "title": "Two Numbers That Add Up (Explain Only)",
+        "prompt": "Explain how you would find two numbers in a small list that add up to a target, without writing code.",
+        "tags": ["arrays", "logic", "fundamentals"],
+        "followups": [
+          "Would you check all pairs or remember past numbers?",
+          "Give a small example using stock prices or financial data.",
+          "What edge case would you test first?"
+        ]
+      },
+      {
+        "title": "Reverse a String (Steps)",
+        "prompt": "Explain step by step how you would reverse a string like \"bloomberg\".",
+        "tags": ["strings", "logic"],
+        "followups": [
+          "Where do you start?",
+          "How do you know when to stop?",
+          "How do you verify the result without printing it?"
+        ]
+      },
+      {
+        "title": "Palindrome Check",
+        "prompt": "Explain how you would check if a word reads the same forward and backward.",
+        "tags": ["strings", "logic"],
+        "followups": [
+          "Would case or punctuation matter in a terminal search?",
+          "Why compare from both ends rather than reversing?",
+          "Give a simple example using a ticker symbol like 'AAPL'."
+        ]
+      },
+      {
+        "title": "Find the Largest Number",
+        "prompt": "Explain how you would find the largest number in a list of stock prices.",
+        "tags": ["arrays", "logic", "financial"],
+        "followups": [
+          "How do you track the current maximum?",
+          "What if the list is empty or has negative prices?",
+          "Why is this approach simple and fast for real-time data?"
+        ]
+      },
+      {
+        "title": "Counting Items (Stock Trades)",
+        "prompt": "Explain how you would count how many times each stock ticker appears in a list of trades.",
+        "tags": ["hashmap", "fundamentals", "financial"],
+        "followups": [
+          "What is the key and value in your data structure?",
+          "Why is this better than counting manually?",
+          "Where is this useful at Bloomberg (e.g., trade volume)?"
+        ]
+      },
+      {
+        "title": "Remove Duplicates (Ticker Symbols)",
+        "prompt": "Explain how you would remove duplicate ticker symbols from a list.",
+        "tags": ["arrays", "logic", "financial"],
+        "followups": [
+          "How do you detect duplicates?",
+          "Does the order of the first occurrence matter?",
+          "What edge case would you test (e.g., all duplicates)?"
+        ]
+      },
+      {
+        "title": "Binary Search (Idea Only)",
+        "prompt": "Explain how you could search a sorted list of bond yields faster than checking every item.",
+        "tags": ["binary-search", "fundamentals", "financial"],
+        "followups": [
+          "Why must the list be sorted?",
+          "What does \"cutting in half\" mean?",
+          "Give a real-life example at Bloomberg (e.g., finding a price)."
+        ]
+      },
+      {
+        "title": "Merge Two Sorted Lists",
+        "prompt": "Explain how you would merge two sorted lists of trade timestamps into one sorted list.",
+        "tags": ["arrays", "logic", "financial"],
+        "followups": [
+          "What do you compare first?",
+          "What happens when one list ends?",
+          "How would you handle millisecond precision?"
+        ]
+      },
+      {
+        "title": "Valid Parentheses (Idea Level)",
+        "prompt": "Explain how you would check if brackets in a Bloomberg Terminal query are correctly matched.",
+        "tags": ["strings", "stack"],
+        "followups": [
+          "Why does order matter?",
+          "What makes a query string invalid?",
+          "Give an example of a complex nested query."
+        ]
+      },
+      {
+        "title": "Loops (Practical Use)",
+        "prompt": "Explain when and why you would use a loop to process incoming market data.",
+        "tags": ["loops", "fundamentals", "financial"],
+        "followups": [
+          "What happens if a loop never stops (infinite loop in production)?",
+          "Why are loops useful for streaming data?",
+          "Give a simple use case (e.g., calculating average price)."
+        ]
+      },
+      {
+        "title": "If Statements",
+        "prompt": "Explain how an if statement helps a trading algorithm make decisions.",
+        "tags": ["control-flow", "fundamentals", "financial"],
+        "followups": [
+          "What happens if the condition is false?",
+          "Give a real-life example (e.g., if price > threshold, execute trade).",
+          "Why are conditions important in low-latency systems?"
+        ]
+      },
+      {
+        "title": "Functions (Purpose)",
+        "prompt": "Explain why breaking a financial data parser into functions is helpful.",
+        "tags": ["functions", "fundamentals"],
+        "followups": [
+          "How do functions reduce repetition?",
+          "How do they help with unit testing?",
+          "What happens without functions in a large codebase?"
+        ]
+      },
+      {
+        "title": "Variables (Usage)",
+        "prompt": "Explain how variables help store and manage real-time stock prices.",
+        "tags": ["fundamentals"],
+        "followups": [
+          "Why not hardcode values?",
+          "What happens when variables change during market hours?",
+          "How do you name variables for clarity in a trading system?"
+        ]
+      },
+      {
+        "title": "Arrays vs Linked Lists",
+        "prompt": "Explain one practical difference between arrays and linked lists for storing order books.",
+        "tags": ["data-structures", "fundamentals", "financial"],
+        "followups": [
+          "Which is easier for random access?",
+          "Which is more flexible for inserts/deletes?",
+          "Why might Bloomberg choose one for a specific feature?"
+        ]
+      },
+      {
+        "title": "Big-O (Plain English)",
+        "prompt": "Explain what Big-O helps developers think about when processing millions of trades per second.",
+        "tags": ["complexity", "fundamentals", "performance"],
+        "followups": [
+          "Why does performance matter in financial systems?",
+          "Is faster always better? (Consider power/heat).",
+          "When is a simple O(n²) solution good enough for prototyping?"
+        ]
+      },
+      {
+        "title": "Debugging Basics",
+        "prompt": "Your Bloomberg Terminal feature is not updating prices. Explain the first steps you would take to debug it.",
+        "tags": ["debugging", "fundamentals", "terminal"],
+        "followups": [
+          "Why start with the network connection?",
+          "What tools help (logs, breakpoints)?",
+          "When do you ask a senior engineer for help?"
+        ]
+      },
+      {
+        "title": "Testing Basics",
+        "prompt": "Explain how you would test a function that calculates the moving average of a stock price.",
+        "tags": ["testing", "fundamentals", "financial"],
+        "followups": [
+          "Why test multiple inputs (zero volume, negative prices)?",
+          "What happens if you skip testing?",
+          "How do automated tests save time in a CI/CD pipeline?"
+        ]
+      },
+      {
+        "title": "APIs (Usage)",
+        "prompt": "Explain how a Bloomberg Terminal feature might use an API to get historical data.",
+        "tags": ["api", "fundamentals", "terminal"],
+        "followups": [
+          "Why not store all historical data locally on the terminal?",
+          "What data format would you expect (JSON, protobuf)?",
+          "Give an example of a REST endpoint for 'AAPL' prices."
+        ]
+      },
+      {
+        "title": "REST Basics",
+        "prompt": "Explain what a REST API is using a simple example like retrieving a company's profile.",
+        "tags": ["api", "rest"],
+        "followups": [
+          "What does GET do?",
+          "What does POST do for submitting a trade?",
+          "Why is REST popular for internal Bloomberg services?"
+        ]
+      },
+      {
+        "title": "Frontend vs Backend",
+        "prompt": "Explain how the Bloomberg Terminal frontend and backend work together to display a chart.",
+        "tags": ["web", "fundamentals", "terminal"],
+        "followups": [
+          "Which part handles user input (e.g., typing a ticker)?",
+          "Which part calculates the chart data?",
+          "How do they communicate (WebSockets vs HTTP)?"
+        ]
+      },
+      {
+        "title": "Bloomberg Value: Impact",
+        "prompt": "Tell me about a time you built something that had a measurable impact on users.",
+        "tags": ["behavioral", "bloomberg-values"],
+        "followups": [
+          "How did you measure that impact?",
+          "What was your specific role?",
+          "How did you know the users were satisfied?"
+        ]
+      },
+      {
+        "title": "Bloomberg Value: Ownership",
+        "prompt": "Tell me about a time you took ownership of a task outside your defined responsibilities.",
+        "tags": ["behavioral", "bloomberg-values"],
+        "followups": [
+          "What motivated you to step up?",
+          "What challenges did you face?",
+          "What did you learn about yourself?"
+        ]
+      },
+      {
+        "title": "Bloomberg Value: Collaboration",
+        "prompt": "Describe a time you worked closely with someone to solve a difficult problem.",
+        "tags": ["behavioral", "bloomberg-values", "collaboration"],
+        "followups": [
+          "How did you divide the work?",
+          "What happened when you disagreed?",
+          "What was the outcome?"
+        ]
+      },
+      {
+        "title": "Bloomberg Value: Resilience",
+        "prompt": "Tell me about a time a project did not go as planned. How did you handle it?",
+        "tags": ["behavioral", "bloomberg-values", "resilience"],
+        "followups": [
+          "What went wrong?",
+          "How did you communicate the delay?",
+          "What did you do differently next time?"
+        ]
+      },
+      {
+        "title": "Why Bloomberg? (Intern Focus)",
+        "prompt": "Why do you want to intern at Bloomberg specifically?",
+        "tags": ["behavioral", "communication", "bloomberg-culture"],
+        "followups": [
+          "What Bloomberg product do you use or admire?",
+          "What do you know about Bloomberg's engineering culture?",
+          "How does this internship fit your career goals?"
+        ]
+      },
+      {
+        "title": "Implement a Simple Linked List",
+        "prompt": "Explain how you would implement your own linked list class in C++ or Java.",
+        "tags": ["linked-list", "oop", "c++"],
+        "followups": [
+          "How do you achieve O(1) access to the head?",
+          "How would you allocate new memory and resize dynamically?",
+          "What strategy would you use to decide how much extra memory to allocate?"
+        ]
+      },
+      {
+        "title": "Telephone Directory Lookup",
+        "prompt": "What data structure would you use for a telephone lookup that is efficient both ways (search by name and search by number)?",
+        "tags": ["data-structures", "design", "hashmap"],
+        "followups": [
+          "Why not just use a single hash map?",
+          "How would you keep both maps in sync?",
+          "What is the memory trade-off?"
+        ]
+      },
+      {
+        "title": "Maximum Nesting Depth",
+        "prompt": "Explain how you would find the maximum nesting depth of parentheses in a string.",
+        "tags": ["strings", "stack"],
+        "followups": [
+          "How do you track the current depth?",
+          "How would you return the indices of the deepest pairs?",
+          "What if there are multiple maximum depth pairs?"
+        ]
+      },
+      {
+        "title": "Stock Trade Tracker (Basic)",
+        "prompt": "Explain how you would efficiently store and update the total quantity of trades for a stock ticker (e.g., 'AAPL' and 'MSFT').",
+        "tags": ["hashmap", "financial", "design"],
+        "followups": [
+          "What data structure gives O(1) update and retrieval?",
+          "How would you handle a burst of 10,000 trades per second?",
+          "What if you later need the top K most traded stocks?"
+        ]
+      },
+      {
+        "title": "String Permutation Palindrome",
+        "prompt": "Explain how you would determine if the permutation of a string can form a palindrome.",
+        "tags": ["strings", "hashmap", "logic"],
+        "followups": [
+          "What character counts matter?",
+          "How do you handle an even vs odd length string?",
+          "Give an example using 'bloomberg' or 'ticker'."
+        ]
+      },
+      {
+        "title": "Find the 2 Innermost Characters",
+        "prompt": "Explain how you would find the two innermost characters within a string.",
+        "tags": ["strings", "logic"],
+        "followups": [
+          "What does 'innermost' mean for nested structures?",
+          "How do you handle strings without nesting?",
+          "Walk through an example like 'a(b(c)d)e'."
+        ]
+      },
+      {
+        "title": "Balanced Binary Tree Check",
+        "prompt": "Explain how you would check if a binary tree is balanced (height difference of subtrees <= 1).",
+        "tags": ["trees", "recursion"],
+        "followups": [
+          "What is the base case?",
+          "Why is it important to avoid recomputing heights?",
+          "What is the time complexity of your approach?"
+        ]
+      },
+      {
+        "title": "Linked List Cycle (Conceptual)",
+        "prompt": "Explain how you would detect if a linked list has a cycle.",
+        "tags": ["linked-list", "two-pointers"],
+        "followups": [
+          "Why does Floyd's algorithm (tortoise and hare) work?",
+          "What is the space complexity?",
+          "What if you cannot modify the list?"
+        ]
+      },
+      {
+        "title": "Swap Opposite Nodes",
+        "prompt": "Explain the idea behind swapping the opposite nodes of a binary tree.",
+        "tags": ["trees", "recursion"],
+        "followups": [
+          "What does 'opposite' mean in this context (mirror/invert)?",
+          "How would you traverse the tree?",
+          "Can you do this iteratively with a queue?"
+        ]
+      },
+      {
+        "title": "Validate IP Address",
+        "prompt": "Explain how you would validate whether a given string is a valid IPv4 address.",
+        "tags": ["strings", "validation"],
+        "followups": [
+          "What are the four main conditions?",
+          "How do you handle leading zeros?",
+          "What about IPv6? How would you extend it?"
+        ]
+      },
+      {
+        "title": "Time Complexity of Functions",
+        "prompt": "Explain what time complexity means and give an example of O(1), O(n), and O(n²) operations.",
+        "tags": ["complexity", "fundamentals"],
+        "followups": [
+          "What is the complexity of array access vs linked list search?",
+          "Why is this important for Bloomberg's real-time systems?",
+          "How do you measure performance empirically?"
+        ]
+      },
+      {
+        "title": "Fibonacci Sequence (Optimization)",
+        "prompt": "Explain how you would compute the nth Fibonacci number. What are the trade-offs of recursion vs iteration?",
+        "tags": ["recursion", "dp", "optimization"],
+        "followups": [
+          "Why is naive recursion exponential?",
+          "How does memoization help?",
+          "What is the space complexity of the iterative approach?"
+        ]
+      },
+      {
+        "title": "First Non-Repeating Character",
+        "prompt": "Explain how you would find the first character in a string that does not repeat.",
+        "tags": ["strings", "hashmap"],
+        "followups": [
+          "What data structure tracks character counts?",
+          "How many passes over the string do you need?",
+          "What if the string is very long (e.g., a financial feed)?"
+        ]
+      },
+      {
+        "title": "String Concatenation (Performance)",
+        "prompt": "Explain why concatenating many strings in a loop is inefficient and how to do it better.",
+        "tags": ["strings", "performance"],
+        "followups": [
+          "Why are strings immutable in languages like Java and C#?",
+          "How does StringBuilder or StringBuffer work?",
+          "When would you notice the performance difference at Bloomberg?"
+        ]
+      },
+      {
+        "title": "Basic Error Handling",
+        "prompt": "Explain what you would do if your program encounters a null pointer exception when processing a trade.",
+        "tags": ["error-handling", "fundamentals", "financial"],
+        "followups": [
+          "Why is it important to handle errors gracefully in a terminal?",
+          "What information should the error log contain?",
+          "How does error handling improve user trust?"
+        ]
+      },
+      {
+        "title": "Comments in Code",
+        "prompt": "Explain why adding comments to code is important in a large codebase like Bloomberg's.",
+        "tags": ["code-quality", "fundamentals", "collaboration"],
+        "followups": [
+          "When should you add comments?",
+          "What makes a good comment vs obvious code?",
+          "Can comments ever be misleading or harmful?"
+        ]
+      },
+      {
+        "title": "Version Control Basics",
+        "prompt": "Explain why using version control (like Git) is critical for a team of 20 engineers working on the Terminal.",
+        "tags": ["version-control", "collaboration"],
+        "followups": [
+          "How does it help with concurrent development?",
+          "What happens if you make a mistake and commit breaking code?",
+          "Why does Bloomberg use version control for compliance?"
+        ]
+      },
+      {
+        "title": "Caching Concept",
+        "prompt": "Explain why caching frequently accessed financial data (like a stock price) can improve performance.",
+        "tags": ["caching", "performance", "financial"],
+        "followups": [
+          "What Bloomberg data might be cached?",
+          "What are the risks of serving stale cached data?",
+          "How do you invalidate the cache when a price updates?"
+        ]
+      },
+      {
+        "title": "Mobile vs Desktop Experience",
+        "prompt": "Explain why Bloomberg might need a different experience for mobile vs the desktop Terminal.",
+        "tags": ["web", "user-experience", "bloomberg-context"],
+        "followups": [
+          "What differences exist in screen size and input?",
+          "Why is mobile important for traders on the go?",
+          "How would you prioritize features for a mobile MVP?"
+        ]
+      },
+      {
+        "title": "Accessibility Basics",
+        "prompt": "Explain why making the Bloomberg Terminal accessible to users with disabilities is important.",
+        "tags": ["accessibility", "inclusion", "fundamentals"],
+        "followups": [
+          "Who benefits from accessible design beyond the target audience?",
+          "What simple improvements help with screen readers?",
+          "Why does Bloomberg care about accessibility?"
+        ]
+      },
+      {
+        "title": "Security Basics",
+        "prompt": "Explain why security is crucial for Bloomberg's financial data systems.",
+        "tags": ["security", "financial", "fundamentals"],
+        "followups": [
+          "What sensitive data does Bloomberg handle?",
+          "What are basic security practices for API authentication?",
+          "How does security build trust with financial institutions?"
+        ]
+      },
+      {
+        "title": "Scaling Concepts",
+        "prompt": "Explain why Bloomberg needs to handle massive spikes in traffic during market open.",
+        "tags": ["scaling", "financial", "fundamentals"],
+        "followups": [
+          "What challenges come with sudden increases in users?",
+          "How might Bloomberg prepare for these predictable peaks?",
+          "Why is scaling important for business reputation?"
+        ]
+      },
+      {
+        "title": "Team Collaboration",
+        "prompt": "Explain why working well in a team is important at Bloomberg.",
+        "tags": ["collaboration", "teamwork", "behavioral"],
+        "followups": [
+          "What makes a good team member?",
+          "How do teams solve complex problems like a new Terminal feature?",
+          "Why does Bloomberg value collaboration over individual heroics?"
+        ]
+      },
+      {
+        "title": "Learning from Mistakes",
+        "prompt": "Tell me about a time you made a mistake in code and what you learned from it.",
+        "tags": ["behavioral", "learning", "growth"],
+        "followups": [
+          "How did you discover the mistake?",
+          "What did you do to fix it?",
+          "How did this help you prevent similar issues?"
+        ]
+      },
+      {
+        "title": "Technical Challenge (Easy)",
+        "prompt": "Describe a technical challenge you faced in a past project and how you approached it.",
+        "tags": ["behavioral", "problem-solving", "technical"],
+        "followups": [
+          "What made it challenging?",
+          "What resources did you use to overcome it?",
+          "What was the outcome?"
+        ]
+      },
+      {
+        "title": "Project Experience",
+        "prompt": "Tell me about a programming project you are proud of.",
+        "tags": ["behavioral", "experience", "projects"],
+        "followups": [
+          "What was your specific role?",
+          "What did you learn technically?",
+          "What would you improve if you had more time?"
+        ]
+      },
+      {
+        "title": "User-Focused Thinking",
+        "prompt": "How would you improve the Bloomberg Terminal for a specific type of user (e.g., a bond trader)?",
+        "tags": ["behavioral", "user-focus", "bloomberg-context"],
+        "followups": [
+          "What pain points have you observed or can imagine?",
+          "How would you implement your idea simply?",
+          "How would you measure if the improvement was successful?"
+        ]
+      },
+      {
+        "title": "Adaptability",
+        "prompt": "Tell me about a time you had to learn a new programming language or framework quickly.",
+        "tags": ["behavioral", "adaptability", "learning"],
+        "followups": [
+          "What was the situation?",
+          "How did you approach learning (docs, courses, pair programming)?",
+          "What was the result of your effort?"
+        ]
+      },
+      {
+        "title": "Communication Skills",
+        "prompt": "Explain a technical concept (like a hash table) to someone without a technical background (e.g., a salesperson).",
+        "tags": ["behavioral", "communication", "teaching"],
+        "followups": [
+          "How do you simplify complex ideas?",
+          "Why is clear communication important at Bloomberg?",
+          "How do you know if someone understands your explanation?"
+        ]
+      },
+      {
+        "title": "Initiative",
+        "prompt": "Tell me about a time you went beyond what was required in a project or job.",
+        "tags": ["behavioral", "initiative", "ownership"],
+        "followups": [
+          "What motivated you to do more?",
+          "What was the impact of your extra effort?",
+          "What did you learn from taking initiative?"
+        ]
+      },
+      {
+        "title": "Time Management",
+        "prompt": "How do you prioritize tasks when you have multiple deadlines (e.g., exams, projects, internship work)?",
+        "tags": ["behavioral", "time-management", "organization"],
+        "followups": [
+          "What strategies do you use (e.g., Eisenhower matrix, to-do lists)?",
+          "How do you handle unexpected urgent tasks?",
+          "What tools help you stay organized?"
+        ]
+      },
+      {
+        "title": "Feedback Reception",
+        "prompt": "Tell me about a time you received constructive feedback on your code or design.",
+        "tags": ["behavioral", "feedback", "growth"],
+        "followups": [
+          "What was the feedback?",
+          "How did you initially react?",
+          "What did you change, and how did it improve your work?"
+        ]
+      },
+      {
+        "title": "Problem Solving Approach",
+        "prompt": "Walk me through how you would approach a new programming problem from scratch.",
+        "tags": ["behavioral", "problem-solving", "process"],
+        "followups": [
+          "Where do you start (requirements, examples)?",
+          "How do you break down complex problems?",
+          "At what point do you ask for help or clarification?"
+        ]
+      },
+      {
+        "title": "Bloomberg Innovation",
+        "prompt": "What Bloomberg innovation or technology impresses you most?",
+        "tags": ["behavioral", "bloomberg-context", "innovation"],
+        "followups": [
+          "Why does it impress you?",
+          "How does it help financial professionals?",
+          "What technical challenges might it involve (e.g., low latency, data volume)?"
+        ]
+      },
+      {
+        "title": "Career Goals",
+        "prompt": "What do you hope to gain from an internship at Bloomberg?",
+        "tags": ["behavioral", "goals", "career"],
+        "followups": [
+          "What specific skills do you want to develop?",
+          "How does this internship fit your long-term career goals?",
+          "What unique opportunities does Bloomberg offer that other companies don't?"
+        ]
+      },
+      {
+        "title": "Diversity and Inclusion",
+        "prompt": "Why is diversity important in technology teams?",
+        "tags": ["behavioral", "diversity", "inclusion"],
+        "followups": [
+          "How does diversity improve product development?",
+          "What can individual engineers do to promote inclusion?",
+          "Why does Bloomberg value diverse perspectives?"
+        ]
+      }
+    ]
+  }

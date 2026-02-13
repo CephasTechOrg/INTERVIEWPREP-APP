@@ -1,0 +1,197 @@
+{
+    "track": "swe_intern",
+    "company_style": "jpmorgan_chase",
+    "difficulty": "medium",
+    "questions": [
+      {
+        "title": "Minimum Number of Platforms (Railway/Trading)",
+        "prompt": "Given arrival and departure times of traders using a terminal, find the minimum number of platforms/seats required so that no trader waits.",
+        "tags": ["arrays", "greedy", "sorting", "bloomberg-tagged", "financial-context"],
+        "followups": [
+          "Why does sorting both arrays help solve this problem?",
+          "What is the time complexity of your approach?",
+          "How would the solution change if the times were not sorted?"
+        ]
+      },
+      {
+        "title": "Count Valid Substrings (No Adjacent Repeat)",
+        "prompt": "Count the number of valid substrings in a given string where no two adjacent characters are the same and the substring length is between `minLen` and `maxLen`.",
+        "tags": ["strings", "sliding-window", "algorithms"],
+        "followups": [
+          "What is the brute force approach and its complexity?",
+          "How does the sliding window maintain the invariant of 'no adjacent repeats'?",
+          "How do you handle the length constraints dynamically?"
+        ]
+      },
+      {
+        "title": "Matrix Level Connections (JPMC Specific)",
+        "prompt": "Given a binary matrix of size m*n. Count the total number of connections possible from a '1' in one row to a '1' in the next feasible row (next row containing at least one '1'). If a row has no '1's, skip to the next row that does.",
+        "tags": ["matrix", "arrays", "custom-problem", "jpmc-specific"],
+        "followups": [
+          "How do you precompute the count of 1s per row to avoid O(n²) scanning?",
+          "What is the edge case where no connections are possible?",
+          "Can you solve this in O(m*n) time?"
+        ]
+      },
+      {
+        "title": "Graph Cycle Detection (Add Node/Edge)",
+        "prompt": "Design a system to manage a graph. Implement `addNode(val)`, `addEdge(node1, node2)`, and `traverse()`. The `addEdge` function must fail if adding the edge creates a cycle.",
+        "tags": ["graphs", "union-find", "dfs", "design"],
+        "followups": [
+          "Why is Union-Find (Disjoint Set) more efficient than DFS for cycle detection in a dynamic graph?",
+          "How do you represent the graph for the `traverse()` function?",
+          "What is the time complexity of your cycle detection algorithm?"
+        ]
+      },
+      {
+        "title": "Container With Most Water",
+        "prompt": "Given an integer array `height` of length `n`. Find two lines that together with the x-axis form a container that contains the most water.",
+        "tags": ["arrays", "two-pointers", "greedy"],
+        "followups": [
+          "Why does the two-pointer approach guarantee correctness?",
+          "What is the intuition behind moving the pointer with the smaller height?",
+          "What is the time and space complexity?"
+        ]
+      },
+      {
+        "title": "Code Review: ConcurrentHashMap & Synchronization",
+        "prompt": "(PR Review) You are presented with a Java class that stores account balances in a `HashMap<String, Integer>`. It has `updateBalance(acct, amount)` and `getBalance(acct)` methods. Identify the issues.",
+        "tags": ["code-review", "concurrency", "java", "jpmc-specific"],
+        "followups": [
+          "Why is `HashMap` not thread-safe?",
+          "What specific issues arise with `ConcurrentHashMap`?",
+          "How does `ConcurrentHashMap` achieve thread-safety (bucket locking, CAS)?"
+        ]
+      },
+      {
+        "title": "Design a Fraud Detection Model (High Level)",
+        "prompt": "Design a high-level system to detect fraudulent credit card transactions in real-time.",
+        "tags": ["system-design", "machine-learning", "financial-context"],
+        "followups": [
+          "What are the functional and non-functional requirements?",
+          "How do you handle low-latency requirements for approval?",
+          "What features (data points) would you use to detect fraud?"
+        ]
+      },
+      {
+        "title": "Design a News Aggregator",
+        "prompt": "Design a News Aggregator system (like Google News or Bloomberg Terminal feed). Users can log in and set preferences.",
+        "tags": ["system-design", "hld", "scalability"],
+        "followups": [
+          "How do you fetch articles from multiple sources?",
+          "What database schema would you use for user preferences?",
+          "How do you handle real-time updates pushing to the UI?"
+        ]
+      },
+      {
+        "title": "Combination Sum II (Recursion)",
+        "prompt": "Given a collection of candidate numbers (with duplicates) and a target number, find all unique combinations where the candidate numbers sum to target. Each number may only be used once per combination.",
+        "tags": ["backtracking", "recursion", "algorithms"],
+        "followups": [
+          "How do you avoid duplicate combinations in the result set?",
+          "Why is sorting the array necessary?",
+          "What is the time complexity of the backtracking approach?"
+        ]
+      },
+      {
+        "title": "Longest Common Prefix",
+        "prompt": "Write a function to find the longest common prefix string amongst an array of strings (e.g., stock ticker prefixes).",
+        "tags": ["strings", "trie"],
+        "followups": [
+          "What is the time complexity of the horizontal scanning approach?",
+          "How would a Trie optimize this for very large dictionaries?",
+          "What edge cases (empty array, identical strings) need testing?"
+        ]
+      },
+      {
+        "title": "Move Zeroes (to end)",
+        "prompt": "Given an integer array `nums`, move all 0's to the end of it while maintaining the relative order of the non-zero elements. Do it in-place.",
+        "tags": ["arrays", "two-pointers"],
+        "followups": [
+          "Why is a two-pointer approach optimal here?",
+          "Can you minimize the total number of write operations?",
+          "What if we needed to move zeros to the front instead?"
+        ]
+      },
+      {
+        "title": "Best Time to Buy and Sell Stock",
+        "prompt": "You are given an array `prices` where `prices[i]` is the price of a given stock on the ith day. You want to maximize your profit by choosing a single day to buy one stock and choosing a different future day to sell that stock.",
+        "tags": ["arrays", "dynamic-programming", "greedy"],
+        "followups": [
+          "What is the time complexity of the single-pass solution?",
+          "How does this relate to Kadane's algorithm?",
+          "How would you handle unlimited transactions (Stock II)?"
+        ]
+      },
+      {
+        "title": "Longest Increasing Subsequence (LIS)",
+        "prompt": "Given an integer array `nums`, return the length of the longest strictly increasing subsequence.",
+        "tags": ["dynamic-programming", "binary-search"],
+        "followups": [
+          "What is the O(n²) DP recurrence?",
+          "How does the patience sorting algorithm achieve O(n log n)?",
+          "How would you reconstruct the actual subsequence?"
+        ]
+      },
+      {
+        "title": "Coin Change (Minimum Coins)",
+        "prompt": "Given an array of coin denominations and a target amount, return the fewest number of coins needed to make up that amount.",
+        "tags": ["dynamic-programming", "knapsack"],
+        "followups": [
+          "What is the DP state and transition?",
+          "How do you detect if the amount is impossible to form?",
+          "What is the space-optimized version of this DP?"
+        ]
+      },
+      {
+        "title": "Java: Singleton Pattern (Thread Safe)",
+        "prompt": "Write a Singleton class in Java. Explain different ways to make it thread-safe and the pros/cons of each.",
+        "tags": ["java", "design-patterns", "concurrency"],
+        "followups": [
+          "What is the difference between Eager and Lazy initialization?",
+          "How does the `volatile` keyword help in Double-Checked Locking?",
+          "What is the Bill Pugh Singleton (static inner class) approach?"
+        ]
+      },
+      {
+        "title": "Java: Comparable vs Comparator",
+        "prompt": "Explain the difference between `Comparable` and `Comparator` in Java. When would you use one over the other?",
+        "tags": ["java", "collections", "sorting"],
+        "followups": [
+          "How does `Collections.sort()` work with each?",
+          "Can you use both in the same class?",
+          "How do you handle null values when sorting?"
+        ]
+      },
+      {
+        "title": "SQL: Find Duplicate Rows",
+        "prompt": "Given a `transactions` table, write a SQL query to find all duplicate transaction IDs based on the `reference_number` column.",
+        "tags": ["sql", "databases"],
+        "followups": [
+          "How do you use `GROUP BY` and `HAVING` to achieve this?",
+          "How would you delete duplicates while keeping one record?",
+          "What index would you create to prevent future duplicates?"
+        ]
+      },
+      {
+        "title": "REST vs SOAP",
+        "prompt": "What is the difference between REST and SOAP web services? Why is REST more common in modern applications?",
+        "tags": ["api", "web-services", "fundamentals"],
+        "followups": [
+          "What protocol does SOAP typically use?",
+          "How does REST leverage HTTP methods?",
+          "In what scenario might SOAP still be preferred in banking?"
+        ]
+      },
+      {
+        "title": "Spring Boot: Dependency Injection & Autowiring",
+        "prompt": "Explain how Dependency Injection works in Spring Boot. What is `@Autowired` and how does it resolve dependencies?",
+        "tags": ["spring", "java", "frameworks"],
+        "followups": [
+          "What is the difference between Field, Setter, and Constructor injection?",
+          "How does Spring handle circular dependencies?",
+          "What is the `@Primary` annotation used for?"
+        ]
+      }
+    ]
+  }
