@@ -1,0 +1,127 @@
+{
+    "track": "founder_interview",
+    "company_style": "y_combinator",
+    "difficulty": "medium",
+    "questions": [
+      {
+        "title": "The Idea Maze",
+        "prompt": "Walk us through the 'idea maze'. You've arrived at your current solution, but what other paths did you consider and reject?",
+        "tags": ["strategy", "idea-maze", "balaji-srinivasan"],
+        "followups": [
+          "Why is your current approach the right one?",
+          "What did you learn from the paths you didn't take?",
+          "How do you know you're not in a local maximum?"
+        ]
+      },
+      {
+        "title": "Competitors (Direct)",
+        "prompt": "Who are your top 3 direct competitors?",
+        "tags": ["competition", "market"],
+        "followups": [
+          "What do they do better than you?",
+          "What do you do better than them?",
+          "If a customer chooses them over you, what is the reason?"
+        ]
+      },
+      {
+        "title": "The 'Evil' Competitor Question",
+        "prompt": "What would you do if Google/Amazon/Meta launched a competing feature tomorrow for free?",
+        "tags": ["competition", "defensibility", "moat"],
+        "followups": [
+          "Is there a world where you still win?",
+          "What do you have that they can't copy?",
+          "Is your market big enough for them to care?"
+        ]
+      },
+      {
+        "title": "Go-to-Market: First 1000 Users",
+        "prompt": "How exactly will you get your first 1,000 users?",
+        "tags": ["gtm", "acquisition", "marketing"],
+        "followups": [
+          "What is your #1 acquisition channel right now?",
+          "Is that channel scalable?",
+          "How much does it cost to acquire a user (CAC)?"
+        ]
+      },
+      {
+        "title": "Retention & Cohort Analysis",
+        "prompt": "Show us your retention curve. Do users stick around?",
+        "tags": ["retention", "cohort", "product-market-fit"],
+        "followups": [
+          "What is your D1, D7, D30 retention?",
+          "What does your cohort chart look like?",
+          "What is the #1 reason users churn?"
+        ]
+      },
+      {
+        "title": "Growth Rate",
+        "prompt": "What is your week-over-week growth rate?",
+        "tags": ["growth", "velocity"],
+        "followups": [
+          "Is that accelerating or decelerating?",
+          "What are the three things you are doing to move this number?",
+          "What is your goal for the next 4 weeks?"
+        ]
+      },
+      {
+        "title": "Unit Economics (Basic)",
+        "prompt": "What is your Customer Acquisition Cost (CAC) and Lifetime Value (LTV)?",
+        "tags": ["unit-economics", "finance"],
+        "followups": [
+          "What is your payback period?",
+          "How did you calculate LTV? What is your assumption for customer lifespan?",
+          "Is your unit economy improving or getting worse as you scale?"
+        ]
+      },
+      {
+        "title": "Market Size (TAM)",
+        "prompt": "What is your Total Addressable Market (TAM)? How did you calculate it?",
+        "tags": ["tam", "market-sizing"],
+        "followups": [
+          "Is this a billion dollar market?",
+          "Are you doing a top-down or bottom-up calculation?",
+          "How many people actually have this problem AND will pay for it?"
+        ]
+      },
+      {
+        "title": "Differentiation",
+        "prompt": "How are you different from [leading competitor]? Be specific.",
+        "tags": ["differentiation", "positioning"],
+        "followups": [
+          "Is that difference defensible?",
+          "How long will it take them to copy that feature?",
+          "Do customers actually care about that difference?"
+        ]
+      },
+      {
+        "title": "The 'Unfair' Advantage",
+        "prompt": "What is your unfair advantage? Why are you the right team?",
+        "tags": ["advantage", "team-fit"],
+        "followups": [
+          "What unique insight do you have?",
+          "Do you have domain expertise?",
+          "Do you have proprietary data or distribution?"
+        ]
+      },
+      {
+        "title": "Co-founder Dynamics",
+        "prompt": "Tell me about the biggest disagreement you and your co-founder have had. How was it resolved?",
+        "tags": ["team", "conflict-resolution", "culture"],
+        "followups": [
+          "Who makes the final decision when you disagree?",
+          "How do you handle stress as a team?",
+          "What would your co-founder say is your biggest weakness?"
+        ]
+      },
+      {
+        "title": "Scaling the Niche",
+        "prompt": "You are dominating a small niche today. How do you turn that into a huge company?",
+        "tags": ["scale", "expansion", "strategy"],
+        "followups": [
+          "What is the adjacent market you attack next?",
+          "What needs to be true for that expansion to work?",
+          "What stops you from doing that today?"
+        ]
+      }
+    ]
+  }

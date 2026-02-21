@@ -1,0 +1,167 @@
+{
+    "track": "swe_intern",
+    "company_style": "tesla",
+    "difficulty": "easy",
+    "questions": [
+      {
+        "title": "Moving Average from Data Stream",
+        "prompt": "Given a stream of sensor readings, implement a class `MovingAverage` that computes the average of the last `N` values. Optimize for time complexity.",
+        "tags": ["queue", "arrays", "data-streams", "tesla-specific"],
+        "followups": [
+          "What data structure allows O(1) update and retrieval of the average?",
+          "How would you modify this to compute the median instead of the mean?",
+          "What if the window size is extremely large (e.g., 1 million readings)?"
+        ]
+      },
+      {
+        "title": "Valid Palindrome (Car VIN Check)",
+        "prompt": "A vehicle identification number (VIN) is being processed. Explain how you would check if a given string reads the same forwards and backwards, ignoring non-alphanumeric characters.",
+        "tags": ["strings", "two-pointers"],
+        "followups": [
+          "How do you handle case sensitivity?",
+          "What is the time and space complexity?",
+          "Can you solve this without using extra space for filtering?"
+        ]
+      },
+      {
+        "title": "FizzBuzz (Tesla Edition)",
+        "prompt": "Implement FizzBuzz. However, if a number is a multiple of 3, print 'Tesla'. If a multiple of 5, print 'Motors'. If a multiple of both, print 'TeslaMotors'.",
+        "tags": ["fundamentals", "logic"],
+        "followups": [
+          "What is the time complexity?",
+          "How would you extend this to support additional rules (e.g., multiples of 7)?",
+          "What is the simplest way to avoid repetitive modulus operations?"
+        ]
+      },
+      {
+        "title": "Merge Sorted Arrays (Battery Cells)",
+        "prompt": "You have two sorted lists representing the charge levels of individual battery cells in a pack. Merge them into one sorted list without using built-in sort functions.",
+        "tags": ["arrays", "two-pointers"],
+        "followups": [
+          "What is the time and space complexity?",
+          "How would you merge K sorted lists?",
+          "What if one list is much larger than the other?"
+        ]
+      },
+      {
+        "title": "Remove Duplicates from Sorted Array (Firmware Updates)",
+        "prompt": "A list of firmware version numbers is sorted. Remove duplicates in-place and return the new length.",
+        "tags": ["arrays", "two-pointers"],
+        "followups": [
+          "Why is the two-pointer approach efficient here?",
+          "What if the array is unsorted?",
+          "How do you handle memory constraints for embedded systems?"
+        ]
+      },
+      {
+        "title": "First Unique Character (Telemetry Signal)",
+        "prompt": "Given a string of telemetry signal IDs, find the first non-repeating character and return its index. If it doesn't exist, return -1.",
+        "tags": ["strings", "hashmap"],
+        "followups": [
+          "What is the time complexity of a single-pass vs two-pass approach?",
+          "How would you handle a stream of infinite characters?",
+          "What data structure minimizes memory usage?"
+        ]
+      },
+      {
+        "title": "Plus One (Odometer Increment)",
+        "prompt": "An array represents the digits of a vehicle's odometer reading. Increment the odometer by one and return the resulting array.",
+        "tags": ["arrays", "math"],
+        "followups": [
+          "What is the worst-case scenario (e.g., [9,9,9])?",
+          "How do you handle the carry operation efficiently?",
+          "Can you solve it without converting the array to an integer?"
+        ]
+      },
+      {
+        "title": "Linked List Cycle Detection (CAN Bus)",
+        "prompt": "A Controller Area Network (CAN) bus log is represented as a linked list. Determine if there is a cycle in the log (indicative of a data loop error).",
+        "tags": ["linked-list", "two-pointers"],
+        "followups": [
+          "Why does Floyd's Tortoise and Hare algorithm work?",
+          "What is the space complexity of your approach?",
+          "How do you find the node where the cycle begins?"
+        ]
+      },
+      {
+        "title": "Stack using Queues (Charge Scheduling)",
+        "prompt": "Implement a LIFO stack using only two FIFO queues. This models a charge scheduling buffer.",
+        "tags": ["stack", "queue", "design"],
+        "followups": [
+          "What is the time complexity of push and pop in your implementation?",
+          "Can you optimize one operation to be O(1)?",
+          "What are the trade-offs between making push vs pop expensive?"
+        ]
+      },
+      {
+        "title": "OOP: Encapsulation (Battery Management System)",
+        "prompt": "Design a `BatteryCell` class. It should have a state of charge (SOC) and a temperature. Explain how you would use encapsulation to prevent invalid states (e.g., SOC below 0% or above 100%).",
+        "tags": ["oop", "design", "embedded-context"],
+        "followups": [
+          "Why are private fields important here?",
+          "How do you validate input in setter methods?",
+          "Would you use an interface or an abstract class for different battery chemistries (NMC, LFP)?"
+        ]
+      },
+      {
+        "title": "OOP: Polymorphism (Autopilot Sensor Fusion)",
+        "prompt": "Tesla uses cameras, radar, and ultrasonic sensors. Design a `Sensor` interface and implement concrete classes for `Camera`, `Radar`, and `Ultrasonic`. Explain how polymorphism simplifies adding new sensor types.",
+        "tags": ["oop", "design", "autopilot-context"],
+        "followups": [
+          "What common method would the interface define (e.g., `readData()`)?",
+          "How does this adhere to the Open-Closed Principle?",
+          "Where would you use dependency injection here?"
+        ]
+      },
+      {
+        "title": "SDLC: Agile vs Waterfall",
+        "prompt": "Explain the difference between Agile and Waterfall software development life cycles. Which one is more suitable for Tesla's Autopilot firmware updates?",
+        "tags": ["sdlc", "fundamentals", "process"],
+        "followups": [
+          "What are the advantages of Agile in a fast-paced environment?",
+          "How do you handle requirement changes in Agile?",
+          "What is a sprint retrospective?"
+        ]
+      },
+      {
+        "title": "Black-box vs White-box Testing",
+        "prompt": "What is the difference between black-box and white-box testing? When would you use each for validating a vehicle's infotainment system?",
+        "tags": ["testing", "qa", "fundamentals"],
+        "followups": [
+          "Which one is more effective for finding security vulnerabilities?",
+          "How do you test a function without knowing its internal implementation?",
+          "What is code coverage and which testing method does it relate to?"
+        ]
+      },
+      {
+        "title": "Why Tesla? (Intern Focus)",
+        "prompt": "Why do you want to intern at Tesla? What specific aspect of Tesla's mission or technology drives you?",
+        "tags": ["behavioral", "company-fit", "mission"],
+        "followups": [
+          "Which Tesla product or feature do you admire most and why?",
+          "How do you align with Tesla's 'First Principles' problem-solving approach?",
+          "What do you know about Tesla's energy business (Solar, Megapack) vs automotive?"
+        ]
+      },
+      {
+        "title": "Behavioral: Difficult Problem Solved",
+        "prompt": "Tell me about the most difficult technical problem you have solved. Be specific about your approach and the outcome.",
+        "tags": ["behavioral", "problem-solving", "ownership"],
+        "followups": [
+          "What was the root cause of the problem?",
+          "How did you validate your solution?",
+          "What would you have done differently in hindsight?"
+        ]
+      },
+      {
+        "title": "Behavioral: Taking Initiative",
+        "prompt": "Describe a time when you took initiative to solve a problem that was not in your job description or assigned to you.",
+        "tags": ["behavioral", "ownership", "bias-for-action"],
+        "followups": [
+          "Why did you decide to take ownership?",
+          "How did you balance this with your core responsibilities?",
+          "What was the impact of your initiative?"
+        ]
+      }
+    ]
+  }
