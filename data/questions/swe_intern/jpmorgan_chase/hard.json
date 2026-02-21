@@ -1,0 +1,135 @@
+{
+    "track": "swe_intern",
+    "company_style": "jpmorgan_chase",
+    "difficulty": "hard",
+    "questions": [
+      {
+        "title": "Design a Check/Cheque Deposit System (Mobile + ATM)",
+        "prompt": "Design an end-to-end system for depositing a physical check via a mobile app (photo capture) or ATM. Consider image processing, validation, fraud checks, and core banking ledger updates.",
+        "tags": ["system-design", "distributed-systems", "financial", "jpmc-specific"],
+        "followups": [
+          "How do you ensure exactly-once processing of the deposit?",
+          "What is your strategy for handling duplicate image submissions?",
+          "How do you maintain consistency between the 'available balance' and 'actual ledger' during check clearing (float)?",
+          "The interviewer pushed back: 'Your design relies on a single database. What happens if that database region goes down during a deposit?' How do you handle multi-region failover?"
+        ]
+      },
+      {
+        "title": "ConcurrentHashMap Internals & Custom Caching Layer",
+        "prompt": "Explain the internal architecture of `ConcurrentHashMap` in Java 8+. Specifically, how does it handle concurrent writes without locking the entire map? Now, design a time-based expiration cache using `ConcurrentHashMap` that is thread-safe and high-throughput.",
+        "tags": ["java", "concurrency", "data-structures", "caching", "deep-dive"],
+        "followups": [
+          "What is the purpose of the `table` array and what are `Node`, `TreeNode`, and `ForwardingNode`?",
+          "How does `ConcurrentHashMap` count size using `LongAdder`-like counters?",
+          "In your custom cache, how do you proactively evict expired entries without blocking `get()` requests?",
+          "What are the memory visibility guarantees between threads using your cache?"
+        ]
+      },
+      {
+        "title": "JVM Performance Tuning: High CPU / Memory Leak",
+        "prompt": "Your trading application is running on a JVM. Suddenly, it starts consuming 100% CPU or you observe a gradual memory increase leading to an OutOfMemoryError. Walk me through your exact diagnosis and remediation strategy.",
+        "tags": ["debugging", "jvm", "performance", "production"],
+        "followups": [
+          "What commands do you run immediately (e.g., `top`, `jstat`, `jstack`)?",
+          "How do you capture a heap dump and analyze it with Eclipse MAT or JProfiler?",
+          "You find a classloader leak. How did that happen and how do you fix it without restarting the JVM?",
+          "How do you set up proactive alerts to catch this before it crashes?"
+        ]
+      },
+      {
+        "title": "Design a Real-Time Fraud Detection Engine",
+        "prompt": "Design a low-latency (sub-100ms) fraud detection engine for credit card swipes. It must handle 10k+ TPS, apply rule-based checks (velocity, country blocks), and a machine learning model score. If flagged, the transaction is declined.",
+        "tags": ["system-design", "real-time", "streaming", "ml-ops"],
+        "followups": [
+          "How do you shard the data by customer ID to maintain session state (e.g., 5 transactions in 5 minutes)?",
+          "How do you update the ML model in production without stopping the stream?",
+          "What consistency trade-off do you make when reading the customer's blocklist?",
+          "How do you audit why a specific transaction was declined for compliance?"
+        ]
+      },
+      {
+        "title": "Distributed Transaction Coordinator (Banking Ledger)",
+        "prompt": "We need to transfer $100 from Account A (in DB1) to Account B (in DB2). DB1 and DB2 are on separate database clusters. Design a system to ensure atomicity (either both accounts update or neither does). You cannot use a single 2PC coordinator due to the 'blocking' problem.",
+        "tags": ["distributed-systems", "transactions", "saga", "financial"],
+        "followups": [
+          "How does the Saga pattern (Choreography vs Orchestration) solve this?",
+          "What do you store in the 'compensation' transaction log?",
+          "If the orchestration service crashes after debiting Account A but before crediting Account B, how do you recover?",
+          "How do you handle idempotency if the bank retries the request?"
+        ]
+      },
+      {
+        "title": "Garbage Collection Deep Dive",
+        "prompt": "Explain the difference between G1GC, ZGC, and Shenandoah. If JPMC told you to migrate a low-latency trading application from G1 to ZGC, what metrics would you monitor to validate the switch?",
+        "tags": ["jvm", "garbage-collection", "performance"],
+        "followups": [
+          "What are the trade-offs of using concurrent GC (e.g., ZGC) regarding CPU overhead vs pause times?",
+          "How do you force a Full GC and why is it dangerous in production?",
+          "What is the difference between a minor, major, and full GC event?"
+        ]
+      },
+      {
+        "title": "Design a High-Availability Payment Gateway",
+        "prompt": "Design a payment gateway that routes transactions to multiple acquiring banks. It must have 99.99% availability. Discuss how you handle bank timeouts, partial failures, and idempotency.",
+        "tags": ["system-design", "high-availability", "payments"],
+        "followups": [
+          "How do you implement a circuit breaker pattern for a bank that is responding slowly?",
+          "What is your strategy for idempotency keys to prevent double charging?",
+          "How do you test chaos engineering (e.g., killing a random server) in this system?",
+          "How do you reconcile transactions at the end of the day when banks send you files?"
+        ]
+      },
+      {
+        "title": "Code Review: Immutability and Thread Safety",
+        "prompt": "(PR Review) A developer has written a Java class to represent a `Trade` object. All fields are `private final`. The class contains a `Date` field and a `List<String>` field with getters that return the raw references. What are the thread-safety and security issues?",
+        "tags": ["code-review", "java", "immutability", "security"],
+        "followups": [
+          "Why is `java.util.Date` mutable? How do you fix this?",
+          "How do you create a truly immutable collection?",
+          "If the list is large, what is the performance impact of your defensive copying strategy?",
+          "What is the difference between shallow immutability and deep immutability?"
+        ]
+      },
+      {
+        "title": "Database Design: Ride-Sharing Schema",
+        "prompt": "Design the database schema for a ride-sharing app (like Uber). Include tables for users, drivers, rides, locations, and payments. How do you query for nearby drivers?",
+        "tags": ["databases", "schema-design", "sql", "geospatial"],
+        "followups": [
+          "How do you handle geo-spatial queries efficiently (e.g., find drivers within 5 miles)?",
+          "What is the difference between using PostGIS, Elasticsearch, or a simple grid system?",
+          "How do you partition the `rides` table by date?",
+          "How do you maintain consistency between the ride status and the payment transaction?"
+        ]
+      },
+      {
+        "title": "Spring Boot: Internal Working of Autowiring",
+        "prompt": "Explain, at a deep level, how Spring Boot's `@Autowired` works under the hood. What role does the `BeanFactory`, `ApplicationContext`, and `PostProcessor` play?",
+        "tags": ["spring", "java", "frameworks", "internals"],
+        "followups": [
+          "How does Spring resolve circular dependencies (e.g., Bean A depends on B, B depends on A)?",
+          "What is the difference between Singleton and Prototype scope in terms of lifecycle?",
+          "How would you implement your own `@InjectRandomInt` annotation using a `BeanPostProcessor`?"
+        ]
+      },
+      {
+        "title": "Behavioral: Handling Executive Pushback",
+        "prompt": "Tell me about a time you proposed a technical solution and received significant pushback from higher management or a senior architect. How did you handle it?",
+        "tags": ["behavioral", "leadership", "communication", "jpmc-culture"],
+        "followups": [
+          "How did you prepare data or evidence to support your case?",
+          "Did you compromise? If so, how did you ensure quality wasn't completely sacrificed?",
+          "What was the outcome and what did you learn about influencing without authority?"
+        ]
+      },
+      {
+        "title": "Behavioral: Code for Good / Social Impact",
+        "prompt": "JPMC heavily emphasizes the 'Code for Good' hackathon. Tell me about a time you used your technical skills to solve a problem for a community or non-profit organization.",
+        "tags": ["behavioral", "social-impact", "jpmc-specific"],
+        "followups": [
+          "What was the specific problem and who were the users?",
+          "What constraints (time, resources, technical debt) did you face?",
+          "How did you ensure the solution was sustainable after you left?"
+        ]
+      }
+    ]
+  }

@@ -1,0 +1,173 @@
+{
+    "track": "swe_intern",
+    "company_style": "tesla",
+    "difficulty": "medium",
+    "questions": [
+      {
+        "title": "Data Stream Processor (Mean, Median, Mode)",
+        "prompt": "Implement a class `StreamProcessor` that receives integer data points from a vehicle sensor. It must support `add(num)`, `get_mean()`, `get_median()`, and `get_mode()` in O(log n) time or better per operation.",
+        "tags": ["heap", "hashmap", "data-streams", "tesla-favorite"],
+        "followups": [
+          "How do you maintain two heaps to track the median in O(1) retrieval time?",
+          "How do you handle the mode when multiple numbers have the same frequency?",
+          "What is the memory footprint of your design for billions of readings?",
+          "The interviewer pushed back on O(n) mode retrieval. How do you achieve O(1) for get_mode()?"
+        ]
+      },
+      {
+        "title": "Trapping Rain Water (Battery Cooling)",
+        "prompt": "Given an elevation map representing the cross-section of a battery cooling channel, compute the total amount of water (coolant) that can be trapped after a thermal event. Implement brute force, then optimize to O(n) time with O(1) space.",
+        "tags": ["arrays", "two-pointers", "optimization", "leetcode-42"],
+        "followups": [
+          "What is the time complexity of the brute force DP approach?",
+          "Explain the intuition behind the two-pointer O(1) space solution.",
+          "How would this change if the bars had varying widths?"
+        ]
+      },
+      {
+        "title": "Contiguous Segment Allocator (Memory Management)",
+        "prompt": "Design an in-memory contiguous segment allocator over an array of `n` cells (indexed 0..n-1), all initially free. Support: 1) `allocate(size) -> index`: allocates the first available contiguous block of `size` cells and returns the start index; returns -1 if no such block exists. 2) `free(index)`: frees the block starting at `index`. Optimize for speed.",
+        "tags": ["design", "memory", "algorithms", "tesla-specific"],
+        "followups": [
+          "What data structures can track free blocks efficiently (e.g., balanced BST, interval map)?",
+          "How do you merge adjacent free blocks during `free()`?",
+          "What is the time complexity of your `allocate` and `free` operations?",
+          "How would you handle fragmentation over time?"
+        ]
+      },
+      {
+        "title": "H2O Molecule Synchronization (Concurrency)",
+        "prompt": "You are given two kinds of threads: hydrogen and oxygen. Each hydrogen thread calls `releaseHydrogen()`, each oxygen thread calls `releaseOxygen()`. Design a synchronization mechanism that ensures molecules are formed as H2O (two hydrogens, one oxygen) without race conditions or deadlocks.",
+        "tags": ["concurrency", "multithreading", "synchronization"],
+        "followups": [
+          "How do you ensure that exactly two hydrogen threads and one oxygen thread proceed together?",
+          "What happens if there is an imbalance of threads (e.g., excess hydrogen)?",
+          "How would you implement this using Semaphores vs Monitors?",
+          "Can you solve this without using a queue?"
+        ]
+      },
+      {
+        "title": "In-Place Permutation Verification",
+        "prompt": "Given an integer list `A` of length `n`, determine whether `A` is a permutation of `[0, 1, ..., n-1]`. You must do it in-place with O(1) extra space (no auxiliary arrays or hash sets).",
+        "tags": ["arrays", "math", "optimization", "tesla-oa"],
+        "followups": [
+          "How can you use the array indices themselves to mark visited elements?",
+          "What is the risk of using negation to mark visited elements?",
+          "How do you handle negative numbers or values out of range?",
+          "What is the time complexity of your solution?"
+        ]
+      },
+      {
+        "title": "Minimum Difference Pair (Latency Analysis)",
+        "prompt": "Given an array of integers representing network latencies, return all increasing pairs `[a, b]` such that `b - a` equals the **minimal absolute difference** between any two elements. The pairs must be sorted by `a` ascending.",
+        "tags": ["arrays", "sorting", "tesla-oa"],
+        "followups": [
+          "What is the brute force O(n²) approach?",
+          "How does sorting the array simplify the problem to O(n log n)?",
+          "What if there are duplicate values? How do you handle the minimal difference of zero?"
+        ]
+      },
+      {
+        "title": "Fast Power (Exponentiation)",
+        "prompt": "Implement `pow(x, n)`, which calculates `x` raised to the power `n` (where `n` is a 32-bit integer). Optimize for time complexity.",
+        "tags": ["math", "recursion", "bit-manipulation"],
+        "followups": [
+          "What is the brute force O(n) approach and its problem?",
+          "Explain the divide-and-conquer O(log n) approach.",
+          "How do you handle negative exponents?",
+          "What edge cases (e.g., n = -2^31) cause overflow and how do you mitigate them?"
+        ]
+      },
+      {
+        "title": "Expression Evaluator (+, -, *, /)",
+        "prompt": "Given a string `s` containing digits, '+', '-', '*', '/', and spaces, evaluate the expression respecting operator precedence. Do not use built-in eval().",
+        "tags": ["stack", "strings", "parsing"],
+        "followups": [
+          "How do you handle the '*' and '/' operators with higher precedence?",
+          "What is the time and space complexity?",
+          "How would you extend this to support parentheses?"
+        ]
+      },
+      {
+        "title": "RDBMS vs NoSQL Trade-offs",
+        "prompt": "You are designing the backend for Tesla's vehicle service history. Compare RDBMS (PostgreSQL) and NoSQL (MongoDB/Cassandra). Which would you choose and why?",
+        "tags": ["system-design", "databases", "trade-offs"],
+        "followups": [
+          "What are the CAP theorem trade-offs between these systems?",
+          "How do you handle schema migrations in a NoSQL database?",
+          "Why might you choose a time-series database for telemetry data?"
+        ]
+      },
+      {
+        "title": "Kubernetes: Multi-Tenancy and GitOps",
+        "prompt": "Describe how you have used Kubernetes in production. How would you handle multi-tenant access control in ArgoCD? What is your rollback strategy when an ArgoCD deployment introduces regressions?",
+        "tags": ["devops", "k8s", "gitops", "argocd"],
+        "followups": [
+          "How do you isolate build environments for different vehicle software teams?",
+          "How would you debug a Jenkins agent stuck in a Pending state on Kubernetes?",
+          "What's your approach to running bare metal nodes under Kubernetes control?"
+        ]
+      },
+      {
+        "title": "Real-Time Vehicle Monitoring (System Design)",
+        "prompt": "How would you design a real-time monitoring system for millions of Tesla vehicles? Focus on telemetry ingestion, anomaly detection, and low-latency alerting.",
+        "tags": ["system-design", "real-time", "tesla-specific"],
+        "followups": [
+          "What technologies would you choose for ingestion (Kafka vs Kinesis)?",
+          "How do you process streaming data to detect anomalies (Flink, Spark Streaming)?",
+          "How do you handle missing data or sensor drift?",
+          "How do you balance real-time requirements with cost?"
+        ]
+      },
+      {
+        "title": "HTTP Methods: Idempotency and Safety",
+        "prompt": "Explain the core HTTP methods (GET, POST, PUT, DELETE, PATCH). Define idempotency and safety. Which methods are idempotent and why?",
+        "tags": ["api", "rest", "http"],
+        "followups": [
+          "Why is PUT idempotent but POST is not?",
+          "How do you implement an idempotent POST endpoint?",
+          "What is the difference between PUT and PATCH?"
+        ]
+      },
+      {
+        "title": "Course Schedule (Dependency Resolution)",
+        "prompt": "Tesla's firmware build system has dependencies between modules. Given `numModules` and prerequisites `[a, b]` indicating `b` must be built before `a`, determine if you can build all modules.",
+        "tags": ["graphs", "topological-sort", "dfs"],
+        "followups": [
+          "How do you detect a cycle in a directed graph?",
+          "Compare Kahn's algorithm (BFS) vs DFS for topological sorting.",
+          "How would you return the actual build order?"
+        ]
+      },
+      {
+        "title": "Group Anagrams (Telemetry Signatures)",
+        "prompt": "Given an array of telemetry event signatures (strings), group the anagrams together. Anagrams are signatures with the same character frequency.",
+        "tags": ["hashmap", "strings", "sorting"],
+        "followups": [
+          "What is the time complexity of using a sorted string as a key?",
+          "How can you optimize using a character count array as a key?",
+          "What if the strings are extremely long?"
+        ]
+      },
+      {
+        "title": "Design a Hammock Stand",
+        "prompt": "How would you design a hammock stand? Walk through your first-principles thinking process.",
+        "tags": ["behavioral", "first-principles", "design"],
+        "followups": [
+          "What are the forces acting on the stand?",
+          "What materials would you consider and why?",
+          "How do you ensure stability without permanent fixtures?"
+        ]
+      },
+      {
+        "title": "Behavioral: Disagreement with Manager",
+        "prompt": "Tell me about a time you disagreed with your manager or a senior engineer. How did you handle it, and what was the outcome?",
+        "tags": ["behavioral", "leadership", "conflict-resolution"],
+        "followups": [
+          "How did you prepare your argument?",
+          "Were you able to find a compromise?",
+          "What did you learn about influencing without authority?"
+        ]
+      }
+    ]
+  }

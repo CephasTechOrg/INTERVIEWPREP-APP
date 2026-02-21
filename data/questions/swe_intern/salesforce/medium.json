@@ -1,0 +1,222 @@
+{
+    "track": "swe_intern",
+    "company_style": "salesforce",
+    "difficulty": "medium",
+    "questions": [
+      {
+        "title": "Connection Pool (LLD)",
+        "prompt": "Implement a connection pool. Requirements: (1) Pool size is fixed (1000-2000 connections). (2) Developers can `requestConnection()` and `releaseConnection()`. (3) If a connection is closed by the developer, create a new one to maintain the pool count. (4) Connection states: FREE, BLOCKED, CLOSED. (5) Implement a default timeout - if no connection is freed within the timeout, reject the request.",
+        "tags": ["lld", "concurrency", "design", "java", "salesforce-specific"],
+        "followups": [
+          "How do you handle concurrent requests for connections?",
+          "You used a BlockingQueue. What is the time complexity of checking the status of a connection?",
+          "How would you scale this to millions of connections?",
+          "The interviewer pushed back on O(n) status checking. How would you achieve O(1)?",
+          "How do you prevent a connection from being returned twice?"
+        ]
+      },
+      {
+        "title": "LRU Cache Design",
+        "prompt": "Design and implement an LRU (Least Recently Used) cache. Implement `get(key)` and `put(key, value)` in O(1) average time. The keys and values can be of generic/dynamic data types.",
+        "tags": ["design", "hashmap", "linked-list", "c++", "java"],
+        "followups": [
+          "Why do you need both a HashMap and a Doubly Linked List?",
+          "How do you handle concurrency?",
+          "How would you implement this using generics/templates?",
+          "What is the space complexity?"
+        ]
+      },
+      {
+        "title": "Array Reduction (Passes to Sort)",
+        "prompt": "Given an array, on each pass you remove an element at index `i` if `arr[i-1] >= arr[i]`. Calculate the number of passes required before the array becomes strictly increasing.",
+        "tags": ["arrays", "simulation", "optimization", "salesforce-oa"],
+        "followups": [
+          "What is the brute force O(n²) approach?",
+          "How can you optimize this using a stack or linked list simulation?",
+          "What data structure allows efficient removal of elements?",
+          "What edge cases (empty array, already increasing) need to be handled?"
+        ]
+      },
+      {
+        "title": "Reconstruct Itinerary (No Cycles)",
+        "prompt": "You are given a list of airline tickets represented as `[from, to]`. There are no loops or multiple paths. Reconstruct the itinerary in order. If there are multiple valid itineraries, return the one with the smallest lexical order.",
+        "tags": ["graphs", "dfs", "hashmap"],
+        "followups": [
+          "How do you represent the graph?",
+          "Why is a hierarchical DFS necessary?",
+          "What is the time complexity?"
+        ]
+      },
+      {
+        "title": "Count Palindromes of Size K",
+        "prompt": "Given a binary array consisting of only 1s and 0s, find the number of palindromic subarrays of size exactly 5.",
+        "tags": ["arrays", "palindrome", "sliding-window"],
+        "followups": [
+          "What is the brute force O(n*k) approach?",
+          "How can you optimize palindrome checking using prefix hashing?",
+          "How would you generalize this to any odd-sized palindrome?"
+        ]
+      },
+      {
+        "title": "Binary Heap / Priority Queue Implementation",
+        "prompt": "You are given a problem that is optimally solved using a binary heap. Implement a min-heap from scratch. The interviewer probed you to reduce complexity to O(log n).",
+        "tags": ["heap", "priority-queue", "data-structures"],
+        "followups": [
+          "What is the underlying data structure for a binary heap?",
+          "How do you implement `heapifyUp()` and `heapifyDown()`?",
+          "What is the time complexity of building a heap from an array?"
+        ]
+      },
+      {
+        "title": "Maximum Frequency Stack",
+        "prompt": "Implement `FreqStack` that supports `push(int val)`, `pop()`, and `popMax()` (pop the most frequent element).",
+        "tags": ["stack", "hashmap", "design", "leetcode-895"],
+        "followups": [
+          "How do you maintain the frequency of each element?",
+          "How do you maintain a stack per frequency level?",
+          "What is the time complexity of each operation?"
+        ]
+      },
+      {
+        "title": "Scalability & Database Sharding",
+        "prompt": "When would you choose to shard a database? What are the complexities introduced by sharding?",
+        "tags": ["system-design", "databases", "scalability"],
+        "followups": [
+          "Why would you be 'scared' of sharding?",
+          "What are the trade-offs between vertical and horizontal scaling?",
+          "How do you choose a shard key?",
+          "How do you handle cross-shard joins or transactions?"
+        ]
+      },
+      {
+        "title": "High Latency API Debugging",
+        "prompt": "Your API endpoint has suddenly become slow. What is your systematic approach to diagnosing and fixing the issue?",
+        "tags": ["debugging", "performance", "system-design"],
+        "followups": [
+          "What tools do you use to profile the application?",
+          "How do you identify if it's a CPU, I/O, or database bottleneck?",
+          "How do you implement tracing to find the slow downstream dependency?"
+        ]
+      },
+      {
+        "title": "Idempotency in APIs",
+        "prompt": "What is idempotency and why is it important in distributed systems? How would you implement an idempotent POST endpoint?",
+        "tags": ["system-design", "api", "distributed-systems"],
+        "followups": [
+          "What is the difference between idempotent and safe methods?",
+          "How do you generate and store idempotency keys?",
+          "What is the TTL for an idempotency key and why?"
+        ]
+      },
+      {
+        "title": "SOLID Principles Deep Dive",
+        "prompt": "Explain the SOLID principles in detail. Provide an example of how violating Liskov Substitution Principle (LSP) causes bugs.",
+        "tags": ["ood", "design-principles", "solid"],
+        "followups": [
+          "What happens if we don't follow the Single Responsibility Principle?",
+          "Give a classic example of LSP violation (e.g., Square-Rectangle).",
+          "How do interfaces help achieve Dependency Inversion?"
+        ]
+      },
+      {
+        "title": "JWT Authentication Flow",
+        "prompt": "How does JWT (JSON Web Token) authentication work? What are the security considerations?",
+        "tags": ["security", "authentication", "system-design"],
+        "followups": [
+          "What is the difference between JWT and server-side sessions?",
+          "How do you handle token revocation?",
+          "Where should you store JWTs on the client side?"
+        ]
+      },
+      {
+        "title": "When and Why Not to Use Indexes?",
+        "prompt": "You have a slow query. Adding an index is the obvious solution. Why and when would you choose NOT to add an index?",
+        "tags": ["databases", "optimization"],
+        "followups": [
+          "What are the trade-offs of adding too many indexes?",
+          "How do indexes affect write performance?",
+          "What is index cardinality and why does it matter?"
+        ]
+      },
+      {
+        "title": "Design a Feature Delivery Pipeline",
+        "prompt": "Walk me through a time you delivered a feature from start to finish. How did you ensure quality and timely delivery?",
+        "tags": ["behavioral", "system-thinking", "process"],
+        "followups": [
+          "How did you gather requirements?",
+          "What was your testing strategy?",
+          "How did you handle feedback during the review process?"
+        ]
+      },
+      {
+        "title": "Binary Tree Maximum Path Sum",
+        "prompt": "Given the root of a binary tree, return the maximum path sum of any non-empty path. (A path does not need to pass through the root.)",
+        "tags": ["trees", "dfs", "dynamic-programming", "leetcode-124"],
+        "followups": [
+          "What information needs to be returned from each recursive call?",
+          "How do you handle negative values?",
+          "What is the time complexity of your solution?"
+        ]
+      },
+      {
+        "title": "Top K Frequent Elements",
+        "prompt": "Given an integer array `nums` and an integer `k`, return the `k` most frequent elements. You may return the answer in any order.",
+        "tags": ["heap", "hashmap", "bucket-sort"],
+        "followups": [
+          "What is the time complexity of the heap approach (O(n log k))?",
+          "How does bucket sort achieve O(n) time?",
+          "What if `k` is close to `n`?"
+        ]
+      },
+      {
+        "title": "Number of Islands",
+        "prompt": "Given an `m x n` 2D binary grid `grid` which represents '1's (land) and '0's (water), return the number of islands.",
+        "tags": ["graphs", "dfs", "bfs", "matrix"],
+        "followups": [
+          "What is the space complexity of DFS vs BFS?",
+          "How would you solve this if the grid is too large to fit in memory?",
+          "How do you handle diagonal connections?"
+        ]
+      },
+      {
+        "title": "Course Schedule (Cycle Detection)",
+        "prompt": "There are `numCourses` courses labeled from `0` to `numCourses-1`. You are given `prerequisites` where `prerequisites[i] = [a, b]` indicates you must take course `b` before course `a`. Determine if you can finish all courses.",
+        "tags": ["graphs", "topological-sort", "dfs"],
+        "followups": [
+          "How do you detect a cycle in a directed graph?",
+          "Compare Kahn's algorithm (BFS) vs DFS for topological sort.",
+          "How would you return the order of courses?"
+        ]
+      },
+      {
+        "title": "Longest Increasing Subsequence",
+        "prompt": "Given an integer array `nums`, return the length of the longest strictly increasing subsequence.",
+        "tags": ["dynamic-programming", "binary-search"],
+        "followups": [
+          "What is the O(n²) DP recurrence?",
+          "How does patience sorting achieve O(n log n)?",
+          "How would you reconstruct the actual subsequence?"
+        ]
+      },
+      {
+        "title": "Knapsack (0/1) Problem",
+        "prompt": "Given a list of items with weights and values, and a knapsack capacity, determine the maximum value you can carry.",
+        "tags": ["dynamic-programming", "optimization"],
+        "followups": [
+          "What is the DP state and transition?",
+          "How do you optimize space to O(capacity)?",
+          "How would you handle fractional items (greedy)?"
+        ]
+      },
+      {
+        "title": "Operating Systems: Process Scheduling",
+        "prompt": "Explain different CPU scheduling algorithms. Which one minimizes waiting time? Which one minimizes response time?",
+        "tags": ["os", "scheduling"],
+        "followups": [
+          "What is the difference between preemptive and non-preemptive scheduling?",
+          "How does the Round Robin algorithm work?",
+          "What is starvation and how do you prevent it?"
+        ]
+      }
+    ]
+  }

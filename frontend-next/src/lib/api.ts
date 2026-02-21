@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import { ErrorResponse } from '@/types/api';
+import { useAuthStore } from '@/lib/stores/authStore';
 
 // Use a function to get the URL to handle SSR properly
 const getBaseURL = () => {
@@ -40,10 +41,25 @@ class APIClient {
         // Only redirect on 401 if NOT on login-related endpoints
         const isAuthEndpoint = error.config?.url?.includes('/auth/');
         if (error.response?.status === 401 && typeof window !== 'undefined' && !isAuthEndpoint) {
-          // Clear token and redirect to login (only for protected routes, not login attempts)
-          localStorage.removeItem('access_token');
-          localStorage.removeItem('user');
-          window.location.href = '/login';
+          const path = window.location.pathname || '';
+          const isAuthRoute =
+            path.startsWith('/login') ||
+            path.startsWith('/signup') ||
+            path.startsWith('/verify') ||
+            path.startsWith('/forgot-password') ||
+            path.startsWith('/reset-password');
+
+          // Clear auth state centrally to avoid login/logout loops.
+          try {
+            useAuthStore.getState().logout();
+          } catch {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('user');
+          }
+
+          if (!isAuthRoute) {
+            window.location.href = '/login';
+          }
         }
         // Return rejected promise with error (don't throw here, let caller handle)
         return Promise.reject(error);

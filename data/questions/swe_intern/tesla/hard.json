@@ -1,0 +1,135 @@
+{
+    "track": "swe_intern",
+    "company_style": "tesla",
+    "difficulty": "hard",
+    "questions": [
+      {
+        "title": "Design CI/CD Platform for 10,000+ Daily Firmware Builds",
+        "prompt": "Design a CI/CD platform that supports 10,000+ daily firmware builds for Tesla's vehicles, energy products, and connected services. The platform must handle thousands of concurrent builds across distributed compute clusters, support multiple teams (vehicle, battery, autopilot, infotainment), and ensure build isolation and security.",
+        "tags": ["system-design", "ci-cd", "jenkins", "k8s", "tesla-scale"],
+        "followups": [
+          "How would you scale Jenkins to handle thousands of concurrent builds?",
+          "How do Jenkins controllers and agents communicate? How would you optimize agent provisioning?",
+          "What's your strategy for managing plugin versions and dependencies in a large Jenkins deployment?",
+          "How do you secure Jenkins credentials and secrets across thousands of pipelines?",
+          "How do you reduce build latency (caching dependencies, Docker layers) across teams?",
+          "How would you design Argo Workflows to orchestrate multi-step firmware builds across environments?",
+          "How do you isolate build environments for different vehicle software teams (e.g., Autopilot vs Infotainment)?"
+        ]
+      },
+      {
+        "title": "Design Telemetry Platform for Millions of Vehicles",
+        "prompt": "Once vehicle software is deployed, Tesla receives massive telemetry data (metrics, logs, traces) from millions of cars. Design a system to collect, store, and analyze this data in real-time. Key requirements: (1) Detect anomalies in real-time (e.g., battery degradation, Autopilot crashes). (2) Support ad-hoc querying for engineering analysis. (3) Cost-efficient long-term storage.",
+        "tags": ["system-design", "telemetry", "observability", "real-time", "tesla-scale"],
+        "followups": [
+          "How would you design the ingestion layer for millions of concurrent connections?",
+          "What are the trade-offs between pushing telemetry vs edge aggregation?",
+          "How would you detect anomalies (e.g., sudden drop in efficiency) in real-time using streaming analytics?",
+          "What storage engines would you choose for hot vs cold data (e.g., Elasticsearch, Parquet on S3, Time-series DB)?",
+          "How do you handle schema evolution of telemetry data?",
+          "How would you provide engineers with the ability to query petabyte-scale data with low latency?"
+        ]
+      },
+      {
+        "title": "Concurrency: Double-Spending Prevention (Payment Account API)",
+        "prompt": "Design a concurrency-safe shared payment account API. Two users simultaneously attempt to pay from the same account. Implement a `withdraw(account_id, amount)` function that prevents double-spending (i.e., the total withdrawn never exceeds the balance). The system must handle high throughput (10k+ TPS) and be resilient to partial failures.",
+        "tags": ["concurrency", "distributed-systems", "transactions", "tesla-hard"],
+        "followups": [
+          "How do you implement optimistic vs pessimistic locking?",
+          "What are the trade-offs of using a database transaction with `SELECT FOR UPDATE`?",
+          "How would you implement this using Redis (atomic operations, Lua scripting)?",
+          "What happens if the payment service crashes after debiting the account but before completing the order?",
+          "How do you ensure idempotency for retried requests?"
+        ]
+      },
+      {
+        "title": "Coordinate Workers Across Two Exclusive Targets",
+        "prompt": "You are given two exclusive resources (targets) labeled 'A' and 'B'. You need to start N = 10 parallel workers (threads/processes). Each worker, when started, must atomically choose one of the targets to work on, with the constraint that at any given time, the number of workers on 'A' and 'B' cannot differ by more than 1. If a worker cannot join due to this constraint, it must block until a slot is available. Design the synchronization mechanism.",
+        "tags": ["concurrency", "synchronization", "algorithms", "tesla-hard"],
+        "followups": [
+          "How do you ensure fairness and prevent starvation?",
+          "Can you solve this using semaphores?",
+          "What is the state space of your solution?",
+          "How would you test this for deadlock conditions?"
+        ]
+      },
+      {
+        "title": "Shortest Path with Range Constraints (Tesla Charging Network)",
+        "prompt": "Find the smallest distance for a Tesla car to drive from one charging station 's' to another 't' in the Tesla charging station network. The car's maximum range is 320km, so it must charge at intermediate stations. Each station has a charging speed (km/hr), indicating how many additional kilometers of range the car gains per hour of charging. Input: station names, coordinates, charging speeds. Output: optimal path with charge times at each station.",
+        "tags": ["algorithms", "graphs", "dijkstra", "tesla-autopilot"],
+        "followups": [
+          "How do you model the state (station, current range) in your graph?",
+          "What is the time complexity of Dijkstra on this expanded graph?",
+          "How do you handle the trade-off between charging time and detour distance?",
+          "What if the car can charge partially (not necessarily to full)?"
+        ]
+      },
+      {
+        "title": "System Design: Autonomous Vehicle Compute Platform",
+        "prompt": "Design the software and hardware architecture for Tesla's Autopilot/Hardware 4.0 compute platform. Discuss sensor fusion, real-time constraints (safety-critical), redundancy, and fail-operational behavior.",
+        "tags": ["system-design", "embedded", "autopilot", "real-time"],
+        "followups": [
+          "How do you ensure deterministic latency for neural network inference?",
+          "What is the role of heterogeneous computing (GPU, NPU, FPGA)?",
+          "How do you handle sensor degradation or failure (e.g., camera occlusion)?",
+          "How do you validate and verify safety-critical software?"
+        ]
+      },
+      {
+        "title": "Jenkins Scaling & Optimization (Deep Dive)",
+        "prompt": "Tesla's Jenkins infrastructure supports thousands of vehicle, energy, and connected service teams with 250,000+ CPU cores. How would you optimize Jenkins to reduce build latency and agent contention? How do you manage plugin versions and dependencies across such a large deployment?",
+        "tags": ["devops", "jenkins", "scalability", "ci-cd", "tesla-specific"],
+        "followups": [
+          "How do Jenkins controllers and agents communicate? How would you optimize agent provisioning?",
+          "What is your strategy for managing plugin versions and dependencies?",
+          "How do you secure Jenkins credentials and secrets across pipelines?",
+          "How do you debug a Jenkins agent stuck in a Pending state on Kubernetes?",
+          "What's your approach to running bare metal nodes under Kubernetes control?"
+        ]
+      },
+      {
+        "title": "Distributed Tracing & Anomaly Detection at Scale",
+        "prompt": "Tesla's connected services generate billions of traces per day. Design a distributed tracing system that can: (1) Correlate requests across microservices, (2) Detect anomalies (e.g., latency spikes, error rate increases) in real-time, (3) Provide root cause analysis for engineers.",
+        "tags": ["system-design", "observability", "distributed-tracing"],
+        "followups": [
+          "What is the sampling strategy? Always sample vs adaptive sampling?",
+          "How do you propagate trace context across asynchronous boundaries?",
+          "How do you store and index trace data for fast querying?",
+          "What statistical methods can you use to automatically detect anomalous traces?"
+        ]
+      },
+      {
+        "title": "Behavioral: Migration Leadership",
+        "prompt": "Tell me about a time you led a migration from one CI/CD system to another. What were the technical and organizational challenges? How did you balance quality vs speed?",
+        "tags": ["behavioral", "leadership", "migration", "scale"],
+        "followups": [
+          "How did you ensure zero downtime during the migration?",
+          "How did you handle teams that were resistant to change?",
+          "What metrics did you use to measure the success of the migration?",
+          "What would you do differently in hindsight?"
+        ]
+      },
+      {
+        "title": "Behavioral: Influencing Multiple Teams",
+        "prompt": "How do you influence multiple teams to adopt standardized pipelines or workflows? Describe a specific example where you drove alignment across organizational boundaries.",
+        "tags": ["behavioral", "leadership", "influence"],
+        "followups": [
+          "How did you handle differing priorities between teams?",
+          "What communication strategies did you use?",
+          "How did you measure adoption and compliance?"
+        ]
+      },
+      {
+        "title": "Elon Musk's Favorite Question",
+        "prompt": "Tell me about some of the most difficult problems you worked on and how you solved them. (The interviewer will probe for tiny, specific details to verify authenticity.)",
+        "tags": ["behavioral", "problem-solving", "first-principles"],
+        "followups": [
+          "Walk me through your debugging process step-by-step.",
+          "What was the root cause of the problem?",
+          "What tools did you use to diagnose the issue?",
+          "Why didn't you solve it the obvious way?",
+          "What did you learn from this experience that changed how you approach problems today?"
+        ]
+      }
+    ]
+  }
