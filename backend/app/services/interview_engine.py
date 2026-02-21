@@ -125,6 +125,25 @@ class InterviewEngine:
             return None
         return f"Hi, I'm {name}, and I'll be your interviewer today."
 
+    def _intro_used(self, session: InterviewSession) -> bool:
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            return False
+        return bool(state.get("intro_used"))
+
+    def _set_intro_used(self, db: Session, session: InterviewSession) -> None:
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        state = dict(state)
+        state["intro_used"] = True
+        session.skill_state = state
+        db.add(session)
+        db.commit()
+        db.refresh(session)
+
     def _reanchor_state(self, session: InterviewSession) -> dict:
         try:
             state = session.skill_state if isinstance(session.skill_state, dict) else {}
@@ -545,6 +564,46 @@ class InterviewEngine:
             return "conceptual"
         return "coding"
 
+    def _is_conceptual_question(self, q: Question) -> bool:
+        if self._is_behavioral(q):
+            return False
+        qt = self._question_type(q)
+        if qt and qt != "coding":
+            return qt == "conceptual"
+        prompt = (getattr(q, "prompt", None) or "").strip().lower()
+        if not prompt:
+            return False
+        prefixes = (
+            "explain",
+            "define",
+            "what is",
+            "what's",
+            "why",
+            "describe",
+            "compare",
+            "difference between",
+            "when would you",
+            "when should you",
+            "how would you handle",
+            "how do you",
+        )
+        if not prompt.startswith(prefixes):
+            return False
+        exclude = (
+            "implement",
+            "write",
+            "code",
+            "solve",
+            "return",
+            "given",
+            "design",
+            "build",
+            "create",
+            "compute",
+            "find",
+        )
+        return not any(k in prompt for k in exclude)
+
     def _matches_desired_type(self, q: Question, desired_type: str | None) -> bool:
         if not desired_type:
             return True
@@ -749,6 +808,7 @@ class InterviewEngine:
         signals: dict[str, bool],
         is_behavioral: bool,
         behavioral_missing: list[str],
+        is_conceptual: bool = False,
     ) -> bool:
         """Check if response lacks substance - but allow clarifications."""
         # Don't flag clarification requests as thin
@@ -758,6 +818,9 @@ class InterviewEngine:
         tokens = self._clean_tokens(text)
         if not tokens:
             return True
+
+        if is_conceptual:
+            return len(tokens) < 8
         
         # Short responses with technical content are acceptable
         if len(tokens) >= 3:
@@ -768,7 +831,7 @@ class InterviewEngine:
                 return False  # Has technical content, not thin
         
         if is_behavioral:
-            return len(behavioral_missing) >= 2
+            return len(behavioral_missing) >= 3
         if signals.get("has_code") and not signals.get("mentions_approach"):
             return True
         content_signals = [
@@ -787,6 +850,7 @@ class InterviewEngine:
         signals: dict[str, bool],
         is_behavioral: bool,
         behavioral_missing: list[str],
+        is_conceptual: bool = False,
     ) -> str:
         """Assess response quality - but don't penalize clarifications."""
         # Clarification requests are neutral quality
@@ -794,10 +858,16 @@ class InterviewEngine:
             return "ok"
         
         tokens = self._clean_tokens(text)
+        if is_conceptual:
+            if len(tokens) < 8:
+                return "weak"
+            if len(tokens) >= 25:
+                return "strong"
+            return "ok"
         if len(tokens) < 8:
             return "weak"
         if is_behavioral:
-            if len(behavioral_missing) >= 2:
+            if len(behavioral_missing) >= 3:
                 return "weak"
             if not behavioral_missing and len(tokens) >= 25:
                 return "strong"
@@ -970,9 +1040,11 @@ class InterviewEngine:
         }
 
     def _missing_focus_keys(self, q: Question, signals: dict[str, bool], behavioral_missing: list[str]) -> list[str]:
+        if self._is_conceptual_question(q):
+            return []
         if self._is_behavioral(q):
             missing = []
-            if behavioral_missing:
+            if len(behavioral_missing) >= 3:
                 missing.append("star")
             if "result" in behavioral_missing:
                 missing.append("impact")
@@ -1053,7 +1125,7 @@ class InterviewEngine:
         if not missing:
             return ([], [])
         if is_behavioral:
-            critical = [k for k in missing if k == "star"] if len(behavioral_missing) >= 2 else []
+            critical = [k for k in missing if k == "star"] if len(behavioral_missing) >= 3 else []
             optional = [k for k in missing if k not in critical]
             return (critical, optional)
         critical = [k for k in missing if k in ("approach", "correctness")]
@@ -1165,7 +1237,7 @@ class InterviewEngine:
         session: InterviewSession,
         followups_used: int,
     ) -> str | None:
-        if self._is_behavioral(q):
+        if self._is_behavioral(q) or self._is_conceptual_question(q):
             return None
 
         if followups_used <= 0:
@@ -1418,6 +1490,24 @@ class InterviewEngine:
         cleaned = re.sub(r"\s+([,.;:!?])", r"\1", cleaned)
         cleaned = re.sub(r"[ \t]{2,}", " ", cleaned)
         return cleaned.strip()
+
+    def _ensure_question_in_reply(self, reply: str | None, title: str, prompt: str) -> str:
+        if not reply:
+            return ""
+        cleaned = reply.strip()
+        if not cleaned:
+            return ""
+        lower = cleaned.lower()
+        title_clean = (title or "").strip()
+        prompt_clean = (prompt or "").strip()
+        if title_clean and title_clean.lower() in lower:
+            return cleaned
+        if prompt_clean and prompt_clean.lower() in lower:
+            return cleaned
+        question_text = self._combine_question_text(title_clean, prompt_clean)
+        if not question_text:
+            return cleaned
+        return f"{cleaned}\n\nHere's the question: {question_text}".strip()
 
     def _warmup_focus_line(self, focus: dict[str, Any]) -> str:
         dims = focus.get("dimensions") or []
@@ -2149,6 +2239,7 @@ Question context: {question_context}
         cleaned_reply = self._clean_next_question_reply(reply, user_name=user_name)
         if cleaned_reply:
             reply = cleaned_reply
+        reply = self._ensure_question_in_reply(reply, title, prompt)
         if preface:
             cleaned = preface.strip()
             if cleaned and cleaned.lower() not in (reply or "").lower():
@@ -2242,6 +2333,8 @@ Question context: {question_context}
                     )
                 if msg:
                     message_crud.add_message(db, session.id, "interviewer", msg)
+                    with contextlib.suppress(Exception):
+                        self._set_intro_used(db, session)
                     self._set_warmup_state(db, session, 1, False)
                     session_crud.update_stage(db, session, "warmup")
                     return msg
@@ -2264,8 +2357,12 @@ Question context: {question_context}
                 user_question_seen_crud.mark_question_seen(db, session.user_id, q.id)
             self._increment_questions_asked(db, session)
 
-            if not preface:
-                preface = self._interviewer_intro_line(session) or preface
+            if not preface and not self._intro_used(session):
+                intro_line = self._interviewer_intro_line(session)
+                if intro_line:
+                    preface = intro_line
+                    with contextlib.suppress(Exception):
+                        self._set_intro_used(db, session)
             sys = interviewer_system_prompt(session.company_style, session.role, self._interviewer_name(session))
             title, prompt = self._render_question(session, q)
             if self._is_behavioral(q):
@@ -2306,6 +2403,7 @@ Question context: {self._combine_question_text(title, prompt)}
                     followups=[self._render_text(session, str(x)) for x in (getattr(q, "followups", []) or [])],
                 )
                 reply = self._offline_intro(q2, user_name=user_name, preface=preface)
+            reply = self._ensure_question_in_reply(reply, title, prompt)
             if preface:
                 cleaned = preface.strip()
                 if cleaned and cleaned.lower() not in (reply or "").lower():
@@ -2398,6 +2496,8 @@ Question context: {self._combine_question_text(title, prompt)}
             if warm_step <= 0:
                 msg = await self._warmup_prompt(session, user_name=user_name)
                 message_crud.add_message(db, session.id, "interviewer", msg)
+                with contextlib.suppress(Exception):
+                    self._set_intro_used(db, session)
                 self._set_warmup_state(db, session, 1, False)
                 session_crud.update_stage(db, session, "warmup")
                 return msg
@@ -2602,6 +2702,11 @@ Question context: {self._combine_question_text(title, prompt)}
 
         # Fallback checks for very short/empty responses (keep as safety net)
         if self._is_non_informative(student_text):
+            tokens = self._clean_tokens(student_text)
+            if len(tokens) <= 2:
+                preface = "Understood. Let's move on to the next question."
+                session_crud.update_stage(db, session, "next_question")
+                return await self._advance_to_next_question(db, session, history, user_name=user_name, preface=preface)
             if self._max_followups_reached(session):
                 preface = "Let's move on for now. Please share more detail in your next response."
                 session_crud.update_stage(db, session, "next_question")
@@ -2629,26 +2734,30 @@ Question context: {self._combine_question_text(title, prompt)}
 
         signals = self._candidate_signals(student_text)
         is_behavioral = self._is_behavioral(q)
+        is_conceptual = self._is_conceptual_question(q)
         behavioral_missing = self._behavioral_missing_parts(student_text) if is_behavioral else []
         missing_keys_all = self._missing_focus_keys(q, signals, behavioral_missing)
         focus_keys = self._question_focus_keys(q)
         missing_keys_all = self._prioritize_missing_focus(missing_keys_all, session, prefer=focus_keys)
-        last_overall = self._skill_last_overall(session)
-        if (
-            last_overall is not None
-            and last_overall >= 8.0
-            and not is_behavioral
-            and "tradeoffs" not in missing_keys_all
-            and not signals.get("mentions_tradeoffs")
-        ):
-            missing_keys_all = ["tradeoffs"] + missing_keys_all
 
         response_quality = self._response_quality(
             student_text,
             signals,
             is_behavioral,
             behavioral_missing,
+            is_conceptual=is_conceptual,
         )
+
+        last_overall = self._skill_last_overall(session)
+        if (
+            response_quality == "weak"
+            and last_overall is not None
+            and last_overall >= 8.0
+            and not is_behavioral
+            and "tradeoffs" not in missing_keys_all
+            and not signals.get("mentions_tradeoffs")
+        ):
+            missing_keys_all = ["tradeoffs"] + missing_keys_all
         critical_missing, optional_missing = self._missing_focus_tiers(
             missing_keys_all,
             is_behavioral,
@@ -2658,10 +2767,7 @@ Question context: {self._combine_question_text(title, prompt)}
         if response_quality == "strong":
             missing_keys = critical_missing
         elif response_quality == "ok":
-            missing_keys = []
-            for key in critical_missing + optional_missing[:1]:
-                if key not in missing_keys:
-                    missing_keys.append(key)
+            missing_keys = critical_missing
 
         missing_focus = self._missing_focus_summary(missing_keys, behavioral_missing)
         signal_summary = self._signal_summary(signals, missing_keys, behavioral_missing)
@@ -2686,6 +2792,7 @@ Question context: {self._combine_question_text(title, prompt)}
             signals,
             is_behavioral,
             behavioral_missing,
+            is_conceptual=is_conceptual,
         )
 
         if thin_response:
@@ -2698,6 +2805,8 @@ Question context: {self._combine_question_text(title, prompt)}
             self._increment_followups_used(db, session)
             session_crud.update_stage(db, session, "followups")
             return nudge
+
+        prefer_move_on = response_quality in ("strong", "ok") and not critical_missing
 
         if int(session.followups_used or 0) == 0 and not self._max_followups_reached(session):
             force_followup = False
@@ -2835,6 +2944,10 @@ Question context: {self._combine_question_text(title, prompt)}
                 message = self._missing_focus_question(critical_missing[0], behavioral_missing) or ""
         elif critical_missing and clarify_attempts >= 2 and action == "FOLLOWUP":
             action = "MOVE_TO_NEXT_QUESTION"
+
+        if prefer_move_on and action == "FOLLOWUP" and not force_clarify:
+            action = "MOVE_TO_NEXT_QUESTION"
+            message = ""
 
         if not message:
             focus_key = self._normalize_focus_key(next_focus)
