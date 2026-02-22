@@ -3,12 +3,15 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { aiService } from '@/lib/services/aiService';
 import { chatService, type ChatMessage } from '@/lib/services/chatService';
+import { sanitizeAiText } from '@/lib/utils/text';
 import { Icons } from '@/components/ui/Icons';
+
+type UIChatMessage = ChatMessage & { pending?: boolean };
 
 type ChatThread = {
   id: number;
   title: string;
-  messages: ChatMessage[];
+  messages: UIChatMessage[];
 };
 
 const buildTitle = (messages: ChatMessage[]) => {
@@ -74,6 +77,7 @@ export const ChatSection = () => {
   );
 
   const messages = activeThread?.messages ?? [];
+  const hasPending = messages.some((m) => m.pending);
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,9 +85,18 @@ export const ChatSection = () => {
     if (!text || !activeThread) return;
 
     const newMessage: ChatMessage = { role: 'user', content: text };
-    const history: ChatMessage[] = [...messages, newMessage];
+    const history: ChatMessage[] = [...messages.filter((m) => !m.pending), newMessage];
+    const optimisticUser: UIChatMessage = { role: 'user', content: text };
+    const pendingAssistant: UIChatMessage = { role: 'assistant', content: 'Thinking...', pending: true };
 
     setInput('');
+    setThreads((prev) =>
+      prev.map((t) =>
+        t.id === activeThread.id
+          ? { ...t, messages: [...t.messages.filter((m) => !m.pending), optimisticUser, pendingAssistant] }
+          : t
+      )
+    );
 
     try {
       setIsSending(true);
@@ -95,7 +108,7 @@ export const ChatSection = () => {
 
       // Get AI response
       const response = await aiService.chat({ message: text, history });
-      const assistantMessage: ChatMessage = { role: 'assistant', content: response.reply };
+      const assistantMessage: ChatMessage = { role: 'assistant', content: sanitizeAiText(response.reply) };
       const nextMessages: ChatMessage[] = [...history, assistantMessage];
 
       // Update thread with AI response
@@ -114,7 +127,7 @@ export const ChatSection = () => {
     } catch (error) {
       console.error('Failed to send message:', error);
       const assistantMessage: ChatMessage = { role: 'assistant', content: 'AI is currently unavailable.' };
-      const nextMessages: ChatMessage[] = [...messages, { role: 'user', content: text }, assistantMessage];
+      const nextMessages: ChatMessage[] = [...history, assistantMessage];
 
       try {
         await chatService.updateThread(activeThread.id, { messages: nextMessages });
@@ -164,7 +177,11 @@ export const ChatSection = () => {
   return (
     <div className="h-[calc(100dvh-8rem)] flex flex-col lg:flex-row gap-4 min-h-0 overflow-hidden">
       {/* Sidebar - Chat History */}
-      <aside className={`bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col min-h-0 transition-colors ${historyCollapsed ? 'hidden lg:flex lg:w-72' : 'flex w-full lg:w-72'} flex-shrink-0`}>
+      <aside
+        className={`bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col min-h-0 transition-colors ${
+          historyCollapsed ? 'hidden' : 'flex w-full lg:w-72'
+        } flex-shrink-0`}
+      >
         <div className="px-4 py-4 border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-white dark:from-slate-800 dark:to-slate-700 flex items-center justify-between flex-shrink-0">
           <div>
             <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Chats</h3>
@@ -238,6 +255,15 @@ export const ChatSection = () => {
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Ask anything about interviews, preparation, or questions.</p>
             </div>
             <div className="flex items-center gap-2">
+              {historyCollapsed && (
+                <button
+                  onClick={() => setHistoryCollapsed(false)}
+                  className="p-2 rounded-lg border border-slate-200 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400"
+                  title="Show history"
+                >
+                  {Icons.menu}
+                </button>
+              )}
               <button
                 onClick={() => setHistoryCollapsed((prev) => !prev)}
                 className="lg:hidden p-2 rounded-lg border border-slate-200 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400"
@@ -292,7 +318,9 @@ export const ChatSection = () => {
                       : 'bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-bl-sm'
                   }`}
                 >
-                  <p className="whitespace-pre-wrap break-words">{msg.content}</p>
+                  <p className={`whitespace-pre-wrap break-words ${msg.pending ? 'text-slate-500 dark:text-slate-400 italic' : ''}`}>
+                    {msg.role === 'assistant' ? sanitizeAiText(msg.content) : msg.content}
+                  </p>
                 </div>
                 {msg.role === 'user' && (
                   <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-900 dark:bg-slate-600 text-white flex items-center justify-center text-xs font-semibold flex-shrink-0">
@@ -302,7 +330,7 @@ export const ChatSection = () => {
               </div>
             ))
           )}
-          {isSending && (
+          {isSending && !hasPending && (
             <div className="flex gap-2 sm:gap-3 items-center">
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-semibold">
                 AI

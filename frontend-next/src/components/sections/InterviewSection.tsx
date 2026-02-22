@@ -7,6 +7,7 @@ import { sessionService } from '@/lib/services/sessionService';
 import { questionService } from '@/lib/services/questionService';
 import { aiService } from '@/lib/services/aiService';
 import { Icons } from '@/components/ui/Icons';
+import { sanitizeAiText } from '@/lib/utils/text';
 import { Message, Question, AIStatusResponse } from '@/types/api';
 
 type InputMode = 'text' | 'code' | 'voice';
@@ -711,7 +712,9 @@ export const InterviewSection = () => {
                           : 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-bl-sm'
                       }`}
                     >
-                      <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{msg.content}</p>
+                      <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
+                        {msg.role === 'interviewer' ? sanitizeAiText(msg.content) : msg.content}
+                      </p>
                       {msg.created_at && (
                         <p className={`text-[10px] mt-1.5 ${msg.role === 'student' ? 'text-indigo-200' : 'text-slate-400 dark:text-slate-500'}`}>
                           {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -720,6 +723,13 @@ export const InterviewSection = () => {
                     </div>
                   </div>
                 ))}
+                {loading.sending && (
+                  <div className="flex justify-start">
+                    <div className="max-w-[85%] lg:max-w-[75%] rounded-2xl px-3 py-2 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-bl-sm">
+                      <p className="text-sm leading-relaxed italic">Thinking...</p>
+                    </div>
+                  </div>
+                )}
                 <div ref={chatEndRef} />
               </>
             )}
