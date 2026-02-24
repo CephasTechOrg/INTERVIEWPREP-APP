@@ -26,3 +26,14 @@ body {
   overflow-y: auto;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+.app-root.high-contrast {
+  filter: contrast(1.12) saturate(1.05);
+}
+
+.app-root.reduce-motion * {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}

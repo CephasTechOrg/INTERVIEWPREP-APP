@@ -1602,6 +1602,18 @@ class InterviewEngine:
         db.commit()
         db.refresh(session)
 
+    def _set_question_type_state(self, db: Session, session: InterviewSession, q: Question) -> None:
+        try:
+            state = session.skill_state if isinstance(session.skill_state, dict) else {}
+        except Exception:
+            state = {}
+        state = dict(state)
+        state["question_type"] = self._question_type(q)
+        session.skill_state = state
+        db.add(session)
+        db.commit()
+        db.refresh(session)
+
     def _last_interviewer_message(self, db: Session, session_id: int) -> str | None:
         msgs = message_crud.list_messages(db, session_id, limit=200)
         for m in reversed(msgs):
@@ -1613,8 +1625,13 @@ class InterviewEngine:
         name = self._user_name_safe(user_name)
         greeting = f"Hi {name}!" if name else "Hi!"
         question_text = self._combine_question_text(q.title, q.prompt)
+        qt = self._question_type(q)
         if self._is_behavioral(q):
             body = f"{question_text} Please answer using STAR (Situation, Task, Action, Result)."
+        elif qt == "conceptual":
+            body = f"{question_text} Please explain the concept clearly and give a simple example."
+        elif qt == "system_design":
+            body = f"{question_text} Please clarify requirements, then outline a high-level design and trade-offs."
         else:
             body = (
                 f"{question_text} Start by restating the problem and clarifying constraints, "
@@ -1628,8 +1645,13 @@ class InterviewEngine:
 
     def _offline_next_question(self, q: Question, user_name: str | None = None, preface: str | None = None) -> str:
         question_text = self._combine_question_text(q.title, q.prompt)
+        qt = self._question_type(q)
         if self._is_behavioral(q):
             body = f"{question_text} Please answer using STAR (Situation, Task, Action, Result)."
+        elif qt == "conceptual":
+            body = f"{question_text} Please explain the concept clearly and give a simple example."
+        elif qt == "system_design":
+            body = f"{question_text} Please clarify requirements, then outline a high-level design and trade-offs."
         else:
             body = (
                 f"{question_text} Start with constraints and a brief plan, then share complexity and edge cases."
@@ -2274,6 +2296,7 @@ Question context: {question_context}
             return wrap
 
         self._reset_for_new_question(db, session, next_q.id)
+        self._set_question_type_state(db, session, next_q)
         session_question_crud.mark_question_asked(db, session.id, next_q.id)
         with contextlib.suppress(Exception):
             user_question_seen_crud.mark_question_seen(db, session.user_id, next_q.id)
@@ -2352,6 +2375,7 @@ Question context: {question_context}
                 return msg
 
             self._reset_for_new_question(db, session, q.id)
+            self._set_question_type_state(db, session, q)
             session_question_crud.mark_question_asked(db, session.id, q.id)
             with contextlib.suppress(Exception):
                 user_question_seen_crud.mark_question_seen(db, session.user_id, q.id)
@@ -2365,11 +2389,33 @@ Question context: {question_context}
                         self._set_intro_used(db, session)
             sys = interviewer_system_prompt(session.company_style, session.role, self._interviewer_name(session))
             title, prompt = self._render_question(session, q)
+            qt = self._question_type(q)
             if self._is_behavioral(q):
                 user = f"""
 Start the interview with a short greeting.
 Transition into the first behavioral question. Greet the candidate by name if available ({user_name or "name unavailable"}).
 Ask the candidate to answer using STAR (Situation, Task, Action, Result). Keep it conversational and concise.
+Preface (say this first if provided): {preface or ""}
+Do NOT use markdown or labels like "Title:" or "Prompt:".
+
+Question context: {self._combine_question_text(title, prompt)}
+""".strip()
+            elif qt == "conceptual":
+                user = f"""
+Start the interview with a short greeting.
+Ask the candidate to explain the concept clearly, then give a simple example or use case.
+Greet the candidate by name if available ({user_name or "name unavailable"}). Keep it concise and friendly.
+Preface (say this first if provided): {preface or ""}
+Do NOT use markdown or labels like "Title:" or "Prompt:".
+
+Question context: {self._combine_question_text(title, prompt)}
+""".strip()
+            elif qt == "system_design":
+                user = f"""
+Start the interview with a short greeting.
+Ask the candidate to clarify requirements and constraints, then outline a high-level design and key components.
+Ask for trade-offs and scalability considerations.
+Greet the candidate by name if available ({user_name or "name unavailable"}). Keep it concise and friendly.
 Preface (say this first if provided): {preface or ""}
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 
@@ -2812,15 +2858,15 @@ Question context: {self._combine_question_text(title, prompt)}
             force_followup = False
             if is_behavioral:
                 force_followup = len(behavioral_missing) >= 2
-            else:
+            elif not is_conceptual:
                 force_followup = "approach" in critical_missing or "correctness" in critical_missing
-            if signals.get("has_code") and not signals.get("mentions_approach"):
+            if not is_conceptual and signals.get("has_code") and not signals.get("mentions_approach"):
                 force_followup = True
             if force_followup:
                 targeted = None
                 if is_behavioral and behavioral_missing:
                     targeted = self._missing_focus_question("star", behavioral_missing)
-                elif signals.get("has_code") and not signals.get("mentions_approach"):
+                elif not is_conceptual and signals.get("has_code") and not signals.get("mentions_approach"):
                     targeted = "Walk me through your approach and key steps."
                 else:
                     targeted = self._phase_followup(
@@ -2856,6 +2902,7 @@ Question context: {self._combine_question_text(title, prompt)}
             skill_summary=skill_summary or None,
             response_quality=response_quality,
             is_behavioral=is_behavioral,
+            question_type=self._question_type(q),
         )
 
         intent = ""

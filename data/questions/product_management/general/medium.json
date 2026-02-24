@@ -1,142 +1,203 @@
-﻿{
-    "difficulty": "medium",
-    "questions": [
-        {
-            "title": "RICE Prioritization",
-            "prompt": "Explain the RICE prioritization framework and how to use it.",
-            "tags": ["prioritization", "frameworks"],
-            "followups": [
-                "What are the limitations of RICE?",
-                "How do you gather data for RICE scoring?"
-            ]
-        },
-        {
-            "title": "OKRs vs KPIs",
-            "prompt": "Explain the difference between OKRs and KPIs and when to use each.",
-            "tags": ["okrs", "kpis", "goal-setting"],
-            "followups": [
-                "How do you write effective OKRs?",
-                "What makes a good KPI for a product?"
-            ]
-        },
-        {
-            "title": "User Journey Mapping",
-            "prompt": "What is a user journey map and how do you create one?",
-            "tags": ["user-research", "journey-mapping"],
-            "followups": [
-                "What insights can you gain from journey mapping?",
-                "How do you identify pain points in a user journey?"
-            ]
-        },
-        {
-            "title": "A/B Testing Strategy",
-            "prompt": "How do you design and interpret A/B tests for product features?",
-            "tags": ["experimentation", "testing"],
-            "followups": [
-                "How do you determine sample size for an A/B test?",
-                "What are common pitfalls in A/B testing?"
-            ]
-        },
-        {
-            "title": "Market Segmentation",
-            "prompt": "How do you segment your market and why is it important?",
-            "tags": ["market-research", "segmentation"],
-            "followups": [
-                "What criteria can you use for segmentation?",
-                "How do you prioritize which segments to target?"
-            ]
-        },
-        {
-            "title": "Product Strategy Development",
-            "prompt": "How do you develop a product strategy from business objectives?",
-            "tags": ["strategy", "planning"],
-            "followups": [
-                "What elements should a product strategy include?",
-                "How do you align product strategy with company vision?"
-            ]
-        },
-        {
-            "title": "North Star Metric",
-            "prompt": "What is a North Star Metric and how do you choose one?",
-            "tags": ["metrics", "strategy"],
-            "followups": [
-                "What makes a good North Star Metric?",
-                "How do you align team goals around a North Star Metric?"
-            ]
-        },
-        {
-            "title": "Cross-functional Leadership",
-            "prompt": "How do you lead without authority across engineering, design, and marketing teams?",
-            "tags": ["leadership", "collaboration"],
-            "followups": [
-                "What strategies help build credibility with engineering teams?",
-                "How do you handle conflicts between departments?"
-            ]
-        },
-        {
-            "title": "Product Discovery Process",
-            "prompt": "Describe the product discovery process and its importance.",
-            "tags": ["discovery", "research"],
-            "followups": [
-                "What activities are included in product discovery?",
-                "How do you know when discovery is complete?"
-            ]
-        },
-        {
-            "title": "Technical Debt Management",
-            "prompt": "How do you balance new features with technical debt repayment?",
-            "tags": ["technical-debt", "prioritization"],
-            "followups": [
-                "How do you quantify technical debt?",
-                "What strategies help prevent technical debt accumulation?"
-            ]
-        },
-        {
-            "title": "Pricing Strategy",
-            "prompt": "How do you approach pricing for a new product or feature?",
-            "tags": ["pricing", "monetization"],
-            "followups": [
-                "What factors influence pricing decisions?",
-                "How do you test different pricing models?"
-            ]
-        },
-        {
-            "title": "Product-Market Fit Measurement",
-            "prompt": "How do you measure and improve product-market fit?",
-            "tags": ["product-market-fit", "metrics"],
-            "followups": [
-                "What surveys can help measure product-market fit?",
-                "How do you act on product-market fit insights?"
-            ]
-        },
-        {
-            "title": "Feature Adoption Analysis",
-            "prompt": "How do you measure and improve feature adoption?",
-            "tags": ["adoption", "analytics"],
-            "followups": [
-                "What metrics indicate healthy feature adoption?",
-                "How do you identify barriers to adoption?"
-            ]
-        },
-        {
-            "title": "Stakeholder Alignment",
-            "prompt": "How do you get executive alignment on product direction?",
-            "tags": ["stakeholders", "alignment"],
-            "followups": [
-                "What techniques help build consensus among executives?",
-                "How do you handle disagreement about product direction?"
-            ]
-        },
-        {
-            "title": "Data-Driven Decision Making",
-            "prompt": "How do you use data to make product decisions when data is incomplete or conflicting?",
-            "tags": ["data", "decision-making"],
-            "followups": [
-                "What do you do when qualitative and quantitative data conflict?",
-                "How do you balance data with intuition?"
-            ]
-        }
-    ],
-    "company_style": "general",
-    "track": "product_management"
+{
+  "difficulty": "medium",
+  "questions": [
+    {
+      "title": "RICE Prioritization",
+      "prompt": "Explain the RICE prioritization framework and how to use it.",
+      "tags": [
+        "prioritization",
+        "frameworks"
+      ],
+      "followups": [
+        "What are the limitations of RICE?",
+        "How do you gather data for RICE scoring?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "OKRs vs KPIs",
+      "prompt": "Explain the difference between OKRs and KPIs and when to use each.",
+      "tags": [
+        "okrs",
+        "kpis",
+        "goal-setting"
+      ],
+      "followups": [
+        "How do you write effective OKRs?",
+        "What makes a good KPI for a product?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "User Journey Mapping",
+      "prompt": "What is a user journey map and how do you create one?",
+      "tags": [
+        "user-research",
+        "journey-mapping"
+      ],
+      "followups": [
+        "What insights can you gain from journey mapping?",
+        "How do you identify pain points in a user journey?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "A/B Testing Strategy",
+      "prompt": "How do you design and interpret A/B tests for product features?",
+      "tags": [
+        "experimentation",
+        "testing"
+      ],
+      "followups": [
+        "How do you determine sample size for an A/B test?",
+        "What are common pitfalls in A/B testing?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Market Segmentation",
+      "prompt": "How do you segment your market and why is it important?",
+      "tags": [
+        "market-research",
+        "segmentation"
+      ],
+      "followups": [
+        "What criteria can you use for segmentation?",
+        "How do you prioritize which segments to target?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Product Strategy Development",
+      "prompt": "How do you develop a product strategy from business objectives?",
+      "tags": [
+        "strategy",
+        "planning"
+      ],
+      "followups": [
+        "What elements should a product strategy include?",
+        "How do you align product strategy with company vision?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "North Star Metric",
+      "prompt": "What is a North Star Metric and how do you choose one?",
+      "tags": [
+        "metrics",
+        "strategy"
+      ],
+      "followups": [
+        "What makes a good North Star Metric?",
+        "How do you align team goals around a North Star Metric?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Cross-functional Leadership",
+      "prompt": "How do you lead without authority across engineering, design, and marketing teams?",
+      "tags": [
+        "leadership",
+        "collaboration"
+      ],
+      "followups": [
+        "What strategies help build credibility with engineering teams?",
+        "How do you handle conflicts between departments?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Product Discovery Process",
+      "prompt": "Describe the product discovery process and its importance.",
+      "tags": [
+        "discovery",
+        "research"
+      ],
+      "followups": [
+        "What activities are included in product discovery?",
+        "How do you know when discovery is complete?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Technical Debt Management",
+      "prompt": "How do you balance new features with technical debt repayment?",
+      "tags": [
+        "technical-debt",
+        "prioritization"
+      ],
+      "followups": [
+        "How do you quantify technical debt?",
+        "What strategies help prevent technical debt accumulation?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Pricing Strategy",
+      "prompt": "How do you approach pricing for a new product or feature?",
+      "tags": [
+        "pricing",
+        "monetization"
+      ],
+      "followups": [
+        "What factors influence pricing decisions?",
+        "How do you test different pricing models?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Product-Market Fit Measurement",
+      "prompt": "How do you measure and improve product-market fit?",
+      "tags": [
+        "product-market-fit",
+        "metrics"
+      ],
+      "followups": [
+        "What surveys can help measure product-market fit?",
+        "How do you act on product-market fit insights?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Feature Adoption Analysis",
+      "prompt": "How do you measure and improve feature adoption?",
+      "tags": [
+        "adoption",
+        "analytics"
+      ],
+      "followups": [
+        "What metrics indicate healthy feature adoption?",
+        "How do you identify barriers to adoption?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Stakeholder Alignment",
+      "prompt": "How do you get executive alignment on product direction?",
+      "tags": [
+        "stakeholders",
+        "alignment"
+      ],
+      "followups": [
+        "What techniques help build consensus among executives?",
+        "How do you handle disagreement about product direction?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Data-Driven Decision Making",
+      "prompt": "How do you use data to make product decisions when data is incomplete or conflicting?",
+      "tags": [
+        "data",
+        "decision-making"
+      ],
+      "followups": [
+        "What do you do when qualitative and quantitative data conflict?",
+        "How do you balance data with intuition?"
+      ],
+      "question_type": "coding"
+    }
+  ],
+  "company_style": "general",
+  "track": "product_management"
 }

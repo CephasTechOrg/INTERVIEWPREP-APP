@@ -6,532 +6,781 @@
     {
       "title": "Two Numbers That Add Up (Explain Only)",
       "prompt": "You are given a small list of numbers and a target. Explain how you would find two numbers that add up to the target, without writing code.",
-      "tags": ["arrays", "logic", "fundamentals"],
+      "tags": [
+        "arrays",
+        "logic",
+        "fundamentals"
+      ],
       "followups": [
         "Would you check every pair or keep track of numbers you have seen?",
         "Why does your approach work?",
         "How would you explain this to a beginner?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Reverse a String (Thinking Process)",
       "prompt": "Explain how you would reverse a string like \"hello\" step by step.",
-      "tags": ["strings", "logic", "fundamentals"],
+      "tags": [
+        "strings",
+        "logic",
+        "fundamentals"
+      ],
       "followups": [
         "Where would you start?",
         "How do you know when to stop?",
         "How would you check your result?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Palindrome Check (Simple Reasoning)",
       "prompt": "Explain how you would check if a word reads the same forward and backward.",
-      "tags": ["strings", "logic", "fundamentals"],
+      "tags": [
+        "strings",
+        "logic",
+        "fundamentals"
+      ],
       "followups": [
         "Would capitalization or spaces matter?",
         "Why is checking from both ends useful?",
         "How could you simplify the input first?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Find the Largest Number",
       "prompt": "You have a list of numbers. Explain how you would find the largest one.",
-      "tags": ["arrays", "logic", "fundamentals"],
+      "tags": [
+        "arrays",
+        "logic",
+        "fundamentals"
+      ],
       "followups": [
         "Would you compare numbers one by one?",
         "How do you keep track of the current largest?",
         "Why is this simple approach effective?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Counting Items Using a Map",
       "prompt": "You have a list of items like names or fruits. Explain how you would count how many times each item appears.",
-      "tags": ["hashmap", "fundamentals"],
+      "tags": [
+        "hashmap",
+        "fundamentals"
+      ],
       "followups": [
         "Why is this better than counting manually?",
         "What would the key and value represent?",
         "Where is this useful in real applications?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Remove Duplicate Items",
       "prompt": "You have a list with repeated items. Explain how you would keep only one of each item.",
-      "tags": ["arrays", "logic", "fundamentals"],
+      "tags": [
+        "arrays",
+        "logic",
+        "fundamentals"
+      ],
       "followups": [
         "How do you know when something repeats?",
         "Does order matter?",
         "What would change if the list was very large?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Binary Search (Conceptual)",
       "prompt": "You have a sorted list of numbers. Explain how you could find a number faster than checking every element.",
-      "tags": ["binary-search", "fundamentals"],
+      "tags": [
+        "binary-search",
+        "fundamentals"
+      ],
       "followups": [
         "Why does sorting help?",
         "Why wouldn\u2019t this work on an unsorted list?",
         "What real-life example is similar?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Merge Two Sorted Lists (High Level)",
       "prompt": "You have two sorted lists of numbers. Explain how you would merge them into one sorted list.",
-      "tags": ["arrays", "logic", "fundamentals"],
+      "tags": [
+        "arrays",
+        "logic",
+        "fundamentals"
+      ],
       "followups": [
         "Which elements would you compare first?",
         "What happens when one list ends?",
         "How would you explain this visually?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Valid Parentheses (Idea Level)",
       "prompt": "Explain how you would check if brackets in a string are correctly matched.",
-      "tags": ["strings", "stack", "fundamentals"],
+      "tags": [
+        "strings",
+        "stack",
+        "fundamentals"
+      ],
       "followups": [
         "Why does order matter?",
         "What would make the string invalid?",
         "What real-life situation is similar?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Loops (Practical Use)",
       "prompt": "Explain when and why you would use a loop in a program.",
-      "tags": ["loops", "fundamentals"],
+      "tags": [
+        "loops",
+        "fundamentals"
+      ],
       "followups": [
         "What happens if you don\u2019t use loops?",
         "What is a common mistake with loops?",
         "How do you make sure a loop stops?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "If Statements (Decision Making)",
       "prompt": "Explain how an if statement helps a program make decisions.",
-      "tags": ["control-flow", "logic", "fundamentals"],
+      "tags": [
+        "control-flow",
+        "logic",
+        "fundamentals"
+      ],
       "followups": [
         "What happens when the condition is false?",
         "Can you give a real-life example?",
         "Why are conditions important?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Functions (Why They Matter)",
       "prompt": "Explain why breaking code into functions is helpful.",
-      "tags": ["functions", "fundamentals"],
+      "tags": [
+        "functions",
+        "fundamentals"
+      ],
       "followups": [
         "How do functions help with reuse?",
         "How do they make debugging easier?",
         "What happens if everything is in one function?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Arrays vs Linked Lists (Practical Difference)",
       "prompt": "Explain one practical difference between arrays and linked lists.",
-      "tags": ["data-structures", "fundamentals"],
+      "tags": [
+        "data-structures",
+        "fundamentals"
+      ],
       "followups": [
         "Which one is easier to use?",
         "Which one is more flexible?",
         "Why might a company choose one over the other?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Big-O (Intuition Only)",
       "prompt": "Without using formulas, explain what Big-O helps developers think about.",
-      "tags": ["performance", "fundamentals"],
+      "tags": [
+        "performance",
+        "fundamentals"
+      ],
       "followups": [
         "Why does performance matter?",
         "Is the fastest solution always necessary?",
         "When is a simple solution good enough?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Debugging Basics",
       "prompt": "Your program doesn\u2019t work as expected. Explain the first steps you would take to debug it.",
-      "tags": ["debugging", "fundamentals"],
+      "tags": [
+        "debugging",
+        "fundamentals"
+      ],
       "followups": [
         "Why start with small checks?",
         "What tools would you use first?",
         "When would you ask for help?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Testing a Simple Function",
       "prompt": "Explain how you would check that a small function works correctly.",
-      "tags": ["testing", "fundamentals"],
+      "tags": [
+        "testing",
+        "fundamentals"
+      ],
       "followups": [
         "Why test more than one input?",
         "What happens if you skip testing?",
         "How do tests help later?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Why Apple? (Easy Technical Angle)",
       "prompt": "Why do you want to intern at Apple, and how does software contribute to Apple\u2019s products?",
-      "tags": ["behavioral", "product-thinking"],
+      "tags": [
+        "behavioral",
+        "product-thinking"
+      ],
       "followups": [
         "What Apple product do you like?",
         "How does software improve user experience?",
         "What do you hope to learn at Apple?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Find the Smallest Number",
       "prompt": "Explain how you would find the smallest number in a list of integers.",
-      "tags": ["arrays", "logic", "fundamentals"],
+      "tags": [
+        "arrays",
+        "logic",
+        "fundamentals"
+      ],
       "followups": [
         "How is this similar to finding the largest number?",
         "What if all numbers are negative?",
         "Why is this a common programming task?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Sorting Concepts",
       "prompt": "Explain why sorting data can be useful in programming.",
-      "tags": ["sorting", "fundamentals"],
+      "tags": [
+        "sorting",
+        "fundamentals"
+      ],
       "followups": [
         "What operations become easier with sorted data?",
         "Name a real-world Apple use case for sorting",
         "Is sorting always necessary?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "String Concatenation",
       "prompt": "Explain how you would combine two or more strings together.",
-      "tags": ["strings", "fundamentals"],
+      "tags": [
+        "strings",
+        "fundamentals"
+      ],
       "followups": [
         "What's a simple example?",
         "Why is this useful in real programs?",
         "How would you combine user input with a message?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Basic Error Handling",
       "prompt": "Explain what you would do if your program encounters an error or unexpected input.",
-      "tags": ["error-handling", "fundamentals"],
+      "tags": [
+        "error-handling",
+        "fundamentals"
+      ],
       "followups": [
         "Why is it important to handle errors gracefully?",
         "What information should error messages provide?",
         "How does error handling improve user experience?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Comments in Code",
       "prompt": "Explain why adding comments to code can be helpful.",
-      "tags": ["code-quality", "fundamentals"],
+      "tags": [
+        "code-quality",
+        "fundamentals"
+      ],
       "followups": [
         "When should you add comments?",
         "What makes a good comment?",
         "Can comments ever be unhelpful?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Version Control Basics",
       "prompt": "Explain why using version control (like Git) is important for team projects.",
-      "tags": ["version-control", "collaboration", "fundamentals"],
+      "tags": [
+        "version-control",
+        "collaboration",
+        "fundamentals"
+      ],
       "followups": [
         "How does it help with collaboration?",
         "What happens if you make a mistake?",
         "Why does Apple use version control?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "User Input Validation",
       "prompt": "Explain why it's important to validate user input in applications.",
-      "tags": ["validation", "security", "fundamentals"],
+      "tags": [
+        "validation",
+        "security",
+        "fundamentals"
+      ],
       "followups": [
         "What types of validation are important?",
         "How does this protect Apple's products?",
         "What happens without validation?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Variables and Data Types",
       "prompt": "Explain how variables help store and manage different types of data.",
-      "tags": ["fundamentals", "variables"],
+      "tags": [
+        "fundamentals",
+        "variables"
+      ],
       "followups": [
         "Why not hardcode all values?",
         "What are common data types?",
         "How do variables improve code readability?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Simple iOS App Concept",
       "prompt": "Explain at a high level how a simple iOS app might work.",
-      "tags": ["ios", "apple-context", "fundamentals"],
+      "tags": [
+        "ios",
+        "apple-context",
+        "fundamentals"
+      ],
       "followups": [
         "What are basic components of an iOS app?",
         "How does user interaction work?",
         "Where does data come from?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Apple Product Integration",
       "prompt": "Explain how different Apple products might work together (like iPhone and Apple Watch).",
-      "tags": ["apple-context", "product-thinking", "integration"],
+      "tags": [
+        "apple-context",
+        "product-thinking",
+        "integration"
+      ],
       "followups": [
         "What benefits come from integration?",
         "How does software enable this?",
         "What challenges might arise?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Accessibility Basics",
       "prompt": "Explain why making software accessible to all users is important.",
-      "tags": ["accessibility", "inclusion", "fundamentals"],
+      "tags": [
+        "accessibility",
+        "inclusion",
+        "fundamentals"
+      ],
       "followups": [
         "Who benefits from accessible design?",
         "What simple improvements help accessibility?",
         "Why does Apple emphasize accessibility?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Privacy and Security Basics",
       "prompt": "Explain why privacy and security are crucial for Apple's products.",
-      "tags": ["privacy", "security", "apple-context"],
+      "tags": [
+        "privacy",
+        "security",
+        "apple-context"
+      ],
       "followups": [
         "What sensitive data do Apple products handle?",
         "What are basic security practices?",
         "How does privacy build user trust?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Performance Considerations",
       "prompt": "Explain why performance matters in software, especially on mobile devices.",
-      "tags": ["performance", "mobile", "fundamentals"],
+      "tags": [
+        "performance",
+        "mobile",
+        "fundamentals"
+      ],
       "followups": [
         "What affects app performance?",
         "Why is battery life important?",
         "How do you balance features with performance?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Simple Algorithm for Photos App",
       "prompt": "Explain a simple way to organize photos by date in an app like Photos.",
-      "tags": ["algorithms", "apple-context", "logic"],
+      "tags": [
+        "algorithms",
+        "apple-context",
+        "logic"
+      ],
       "followups": [
         "What data would you use?",
         "How would you group photos?",
         "Why is this useful for users?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Handling Multiple Tasks",
       "prompt": "Explain why apps need to handle multiple tasks or users at once.",
-      "tags": ["concurrency", "fundamentals"],
+      "tags": [
+        "concurrency",
+        "fundamentals"
+      ],
       "followups": [
         "What problems could occur with multiple users?",
         "How does Apple handle millions of users?",
         "Why is this important for messaging apps?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Database Basics",
       "prompt": "Explain why apps need databases to store information.",
-      "tags": ["databases", "fundamentals"],
+      "tags": [
+        "databases",
+        "fundamentals"
+      ],
       "followups": [
         "What types of data would Apple apps store?",
         "Why not use files instead?",
         "How do databases help with speed?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Caching Concept",
       "prompt": "Explain why caching frequently accessed data can improve app performance.",
-      "tags": ["caching", "performance", "fundamentals"],
+      "tags": [
+        "caching",
+        "performance",
+        "fundamentals"
+      ],
       "followups": [
         "What Apple app data might be cached?",
         "What are trade-offs of caching?",
         "How does caching help during slow network?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Mobile vs Desktop Differences",
       "prompt": "Explain why mobile apps might need different approaches than desktop software.",
-      "tags": ["mobile", "apple-context", "user-experience"],
+      "tags": [
+        "mobile",
+        "apple-context",
+        "user-experience"
+      ],
       "followups": [
         "What differences might exist?",
         "Why is touch interface important?",
         "How would you approach this as a developer?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Team Collaboration",
       "prompt": "Explain why working well in a team is important at Apple.",
-      "tags": ["collaboration", "teamwork", "behavioral"],
+      "tags": [
+        "collaboration",
+        "teamwork",
+        "behavioral"
+      ],
       "followups": [
         "What makes a good team member?",
         "How do teams solve complex problems?",
         "Why does Apple value collaboration?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Learning from Mistakes",
       "prompt": "Tell me about a time you made a mistake in coding and what you learned.",
-      "tags": ["behavioral", "learning", "growth"],
+      "tags": [
+        "behavioral",
+        "learning",
+        "growth"
+      ],
       "followups": [
         "How did you discover the mistake?",
         "What did you do to fix it?",
         "How did this help you improve?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Technical Challenge",
       "prompt": "Describe a technical challenge you faced and how you approached it.",
-      "tags": ["behavioral", "problem-solving", "technical"],
+      "tags": [
+        "behavioral",
+        "problem-solving",
+        "technical"
+      ],
       "followups": [
         "What made it challenging?",
         "What resources did you use?",
         "What was the outcome?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Project Experience",
       "prompt": "Tell me about a programming project you worked on.",
-      "tags": ["behavioral", "experience", "projects"],
+      "tags": [
+        "behavioral",
+        "experience",
+        "projects"
+      ],
       "followups": [
         "What was your role?",
         "What did you learn?",
         "What would you improve?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "User-Centric Thinking",
       "prompt": "How would you improve the user experience of an Apple product?",
-      "tags": ["behavioral", "user-experience", "apple-context"],
+      "tags": [
+        "behavioral",
+        "user-experience",
+        "apple-context"
+      ],
       "followups": [
         "What pain points have you noticed?",
         "How would you implement your idea?",
         "How would you test your improvement?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Adaptability",
       "prompt": "Tell me about a time you had to learn something new quickly.",
-      "tags": ["behavioral", "adaptability", "learning"],
+      "tags": [
+        "behavioral",
+        "adaptability",
+        "learning"
+      ],
       "followups": [
         "What was the situation?",
         "How did you approach learning?",
         "What was the result?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Communication Skills",
       "prompt": "Explain a technical concept to someone without a technical background.",
-      "tags": ["behavioral", "communication", "teaching"],
+      "tags": [
+        "behavioral",
+        "communication",
+        "teaching"
+      ],
       "followups": [
         "How do you simplify complex ideas?",
         "Why is clear communication important?",
         "How do you know if someone understands?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Initiative",
       "prompt": "Tell me about a time you went beyond what was required.",
-      "tags": ["behavioral", "initiative", "ownership"],
+      "tags": [
+        "behavioral",
+        "initiative",
+        "ownership"
+      ],
       "followups": [
         "What motivated you?",
         "What was the impact?",
         "What did you learn?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Time Management",
       "prompt": "How do you prioritize tasks when you have multiple deadlines?",
-      "tags": ["behavioral", "time-management", "organization"],
+      "tags": [
+        "behavioral",
+        "time-management",
+        "organization"
+      ],
       "followups": [
         "What strategies do you use?",
         "How do you handle unexpected tasks?",
         "What tools help you stay organized?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Feedback Reception",
       "prompt": "Tell me about a time you received feedback on your work.",
-      "tags": ["behavioral", "feedback", "growth"],
+      "tags": [
+        "behavioral",
+        "feedback",
+        "growth"
+      ],
       "followups": [
         "How did you respond?",
         "What did you change?",
         "How did it improve your work?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Problem Solving Approach",
       "prompt": "Walk me through how you would approach a new programming problem.",
-      "tags": ["behavioral", "problem-solving", "process"],
+      "tags": [
+        "behavioral",
+        "problem-solving",
+        "process"
+      ],
       "followups": [
         "Where do you start?",
         "How do you break down complex problems?",
         "When do you ask for help?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Apple Innovation",
       "prompt": "What Apple innovation or technology impresses you most?",
-      "tags": ["behavioral", "apple-context", "innovation"],
+      "tags": [
+        "behavioral",
+        "apple-context",
+        "innovation"
+      ],
       "followups": [
         "Why does it impress you?",
         "How does it help users?",
         "What technical challenges might it involve?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Career Goals",
       "prompt": "What do you hope to gain from an Apple internship?",
-      "tags": ["behavioral", "goals", "career"],
+      "tags": [
+        "behavioral",
+        "goals",
+        "career"
+      ],
       "followups": [
         "What skills do you want to develop?",
         "How does this fit your long-term goals?",
         "What unique opportunities does Apple offer?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Diversity and Inclusion",
       "prompt": "Why is diversity important in technology teams?",
-      "tags": ["behavioral", "diversity", "inclusion"],
+      "tags": [
+        "behavioral",
+        "diversity",
+        "inclusion"
+      ],
       "followups": [
         "How does diversity improve products?",
         "What can individuals do to promote inclusion?",
         "Why does Apple value diverse perspectives?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Work-Life Balance",
       "prompt": "How do you maintain balance while working on challenging projects?",
-      "tags": ["behavioral", "wellbeing", "balance"],
+      "tags": [
+        "behavioral",
+        "wellbeing",
+        "balance"
+      ],
       "followups": [
         "What strategies help you stay productive?",
         "How do you avoid burnout?",
         "Why is balance important for creativity?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Design Thinking",
       "prompt": "Explain why design is important in software development.",
-      "tags": ["behavioral", "design-thinking", "apple-context"],
+      "tags": [
+        "behavioral",
+        "design-thinking",
+        "apple-context"
+      ],
       "followups": [
         "How does design affect user experience?",
         "Why does Apple focus on design?",
         "How do developers collaborate with designers?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Quality Focus",
       "prompt": "Why is quality important in software, especially at Apple?",
-      "tags": ["behavioral", "quality", "apple-context"],
+      "tags": [
+        "behavioral",
+        "quality",
+        "apple-context"
+      ],
       "followups": [
         "What does quality mean in software?",
         "How do you ensure quality in your work?",
         "Why do users expect quality from Apple?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Environmental Responsibility",
       "prompt": "How can software contribute to environmental sustainability?",
-      "tags": ["behavioral", "sustainability", "apple-context"],
+      "tags": [
+        "behavioral",
+        "sustainability",
+        "apple-context"
+      ],
       "followups": [
         "What Apple initiatives relate to sustainability?",
         "How can software reduce environmental impact?",
         "Why is this important for technology companies?"
-      ]
+      ],
+      "question_type": "behavioral"
     }
   ]
 }

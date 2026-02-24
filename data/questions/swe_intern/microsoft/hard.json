@@ -6,572 +6,849 @@
     {
       "title": "Design a Distributed File Storage System",
       "prompt": "Design a distributed file storage system (upload, download, metadata, replication) with reliability and scalability in mind.",
-      "tags": ["system-design", "distributed-systems", "scalability"],
+      "tags": [
+        "system-design",
+        "distributed-systems",
+        "scalability"
+      ],
       "followups": [
         "How do you ensure durability under failures?",
         "How do you handle large files and streaming?",
         "What consistency guarantees do you provide?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Real-Time Chat System",
       "prompt": "Design a real-time chat system with online presence, message delivery guarantees, and read receipts.",
-      "tags": ["system-design", "reliability", "scalability"],
+      "tags": [
+        "system-design",
+        "reliability",
+        "scalability"
+      ],
       "followups": [
         "How do you handle offline users?",
         "How do you ensure message ordering per conversation?",
         "How do you prevent duplicate deliveries?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Implement a Thread-Safe LRU Cache",
       "prompt": "Implement an LRU cache and make it safe for concurrent access with minimal contention.",
-      "tags": ["concurrency", "design", "hashmap"],
+      "tags": [
+        "concurrency",
+        "design",
+        "hashmap"
+      ],
       "followups": [
         "What lock granularity would you use?",
         "What are potential deadlocks and how do you avoid them?",
         "How do you measure contention?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Job Scheduler",
       "prompt": "Design a job scheduling system that supports retries, backoff, priority, and worker scaling.",
-      "tags": ["system-design", "reliability"],
+      "tags": [
+        "system-design",
+        "reliability"
+      ],
       "followups": [
         "How do you ensure at-least-once vs exactly-once execution?",
         "How do you avoid duplicate work on retries?",
         "How do you monitor stuck jobs?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design an Authentication System",
       "prompt": "Design an authentication system (login, token issuance, refresh, revocation) for a web + mobile app.",
-      "tags": ["security", "system-design"],
+      "tags": [
+        "security",
+        "system-design"
+      ],
       "followups": [
         "How do you store secrets/tokens securely?",
         "How do you defend against replay attacks?",
         "How do you handle account takeover scenarios?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Scalable Notifications Service",
       "prompt": "Design a notifications system that supports email/SMS/push with retries, throttling, and user preferences.",
-      "tags": ["system-design", "scalability", "reliability"],
+      "tags": [
+        "system-design",
+        "scalability",
+        "reliability"
+      ],
       "followups": [
         "How do you prevent spamming users?",
         "How do you handle provider outages?",
         "How do you ensure idempotency?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Debugging: Memory Leak Under Load",
       "prompt": "A service slowly increases memory usage and crashes after hours under load. Describe how you would find the root cause and fix it.",
-      "tags": ["debugging", "memory", "performance"],
+      "tags": [
+        "debugging",
+        "memory",
+        "performance"
+      ],
       "followups": [
         "How do you distinguish leak vs cache growth?",
         "What tools/telemetry would you use?",
         "How do you validate the fix in production safely?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Multi-Tenant Database Strategy",
       "prompt": "Design a multi-tenant system for enterprise customers. Explain data isolation, scaling, and migration strategy.",
-      "tags": ["databases", "system-design", "scalability"],
+      "tags": [
+        "databases",
+        "system-design",
+        "scalability"
+      ],
       "followups": [
         "Shared DB vs separate DB per tenant?",
         "How do you handle noisy neighbors?",
         "How do you backup and restore per tenant?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Implement a Mini Compiler Pipeline (High Level)",
       "prompt": "Describe a high-level design for parsing an input language into an AST and evaluating it. Include error reporting.",
-      "tags": ["design", "parsing", "system-thinking"],
+      "tags": [
+        "design",
+        "parsing",
+        "system-thinking"
+      ],
       "followups": [
         "How do you represent tokens and AST nodes?",
         "How do you produce helpful error messages?",
         "What tests would you write first?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Feature Store for ML",
       "prompt": "Design a feature store that serves features for training and for online inference with consistency considerations.",
-      "tags": ["system-design", "ml-thinking", "distributed-systems"],
+      "tags": [
+        "system-design",
+        "ml-thinking",
+        "distributed-systems"
+      ],
       "followups": [
         "How do you avoid training/serving skew?",
         "How do you version features?",
         "How do you monitor feature drift?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "High Throughput API Gateway",
       "prompt": "Design an API gateway for multiple services with authentication, rate limiting, logging, and routing at high throughput.",
-      "tags": ["system-design", "security", "scalability"],
+      "tags": [
+        "system-design",
+        "security",
+        "scalability"
+      ],
       "followups": [
         "Where do you enforce authz vs authn?",
         "How do you implement rate limiting at scale?",
         "How do you handle partial outages?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Distributed Rate Limiter",
       "prompt": "Design a distributed rate limiter that is accurate enough but resilient under failures.",
-      "tags": ["distributed-systems", "system-design"],
+      "tags": [
+        "distributed-systems",
+        "system-design"
+      ],
       "followups": [
         "Token bucket vs leaky bucket?",
         "How do you handle clock skew?",
         "How do you prevent a thundering herd?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Consistency Trade-offs in Sync",
       "prompt": "You are designing data sync across devices. Explain strong vs eventual consistency trade-offs and choose one for a notes app.",
-      "tags": ["distributed-systems", "system-thinking"],
+      "tags": [
+        "distributed-systems",
+        "system-thinking"
+      ],
       "followups": [
         "What user-facing bugs appear under eventual consistency?",
         "How do you resolve conflicts?",
         "How do you test concurrency issues?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Security: Threat Modeling an API",
       "prompt": "Threat model a public API endpoint and propose mitigations (auth, validation, rate limiting, logging).",
-      "tags": ["security", "design", "system-thinking"],
+      "tags": [
+        "security",
+        "design",
+        "system-thinking"
+      ],
       "followups": [
         "What is the highest-risk threat and why?",
         "How do you handle secrets in logs?",
         "How do you test security controls?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Performance: 99th Percentile Latency",
       "prompt": "A service meets average latency targets but fails at p99. Explain how you diagnose and fix tail latency.",
-      "tags": ["performance", "system-thinking"],
+      "tags": [
+        "performance",
+        "system-thinking"
+      ],
       "followups": [
         "What causes tail latency in distributed systems?",
         "How do you instrument p95/p99 effectively?",
         "What mitigations reduce tail latency?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Reliable Event Processing System",
       "prompt": "Design an event processing system that ingests events, processes them, and stores results reliably with replay support.",
-      "tags": ["system-design", "reliability", "distributed-systems"],
+      "tags": [
+        "system-design",
+        "reliability",
+        "distributed-systems"
+      ],
       "followups": [
         "How do you ensure exactly-once vs at-least-once processing?",
         "How do you handle schema evolution?",
         "How do you support replay without double counting?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Concurrency: Deadlock Investigation",
       "prompt": "A multi-threaded app occasionally deadlocks in production. Describe your process to identify and fix it.",
-      "tags": ["concurrency", "debugging"],
+      "tags": [
+        "concurrency",
+        "debugging"
+      ],
       "followups": [
         "What telemetry helps detect deadlocks?",
         "How do you reproduce it?",
         "What design changes prevent it long-term?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Search Service (High Level)",
       "prompt": "Design a search service that supports indexing, querying, ranking, and pagination.",
-      "tags": ["system-design", "scalability"],
+      "tags": [
+        "system-design",
+        "scalability"
+      ],
       "followups": [
         "How do you build and update the index?",
         "How do you rank results efficiently?",
         "How do you handle spam/abuse?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Large-Scale Data Migration Plan",
       "prompt": "You must migrate billions of records to a new schema with minimal downtime. Outline a safe plan.",
-      "tags": ["databases", "reliability", "system-thinking"],
+      "tags": [
+        "databases",
+        "reliability",
+        "system-thinking"
+      ],
       "followups": [
         "How do you validate correctness during migration?",
         "How do you rollback if issues appear?",
         "What metrics do you monitor?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Behavioral: Cross-Team Influence",
       "prompt": "Tell me about a time you influenced a decision across teams without direct authority.",
-      "tags": ["behavioral", "communication", "collaboration"],
+      "tags": [
+        "behavioral",
+        "communication",
+        "collaboration"
+      ],
       "followups": [
         "How did you build trust?",
         "How did you handle pushback?",
         "What was the outcome?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Design Microsoft OneDrive Sync Engine",
       "prompt": "Design the sync engine for Microsoft OneDrive that keeps files consistent across devices and handles conflicts.",
-      "tags": ["system-design", "distributed-systems", "microsoft-context"],
+      "tags": [
+        "system-design",
+        "distributed-systems",
+        "microsoft-context"
+      ],
       "followups": [
         "How do you detect and resolve conflicts?",
         "How do you handle offline edits?",
         "What consistency model do you choose and why?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design Microsoft Teams Presence System",
       "prompt": "Design the presence system for Microsoft Teams that shows online, away, busy, offline status at scale.",
-      "tags": ["system-design", "real-time", "microsoft-context"],
+      "tags": [
+        "system-design",
+        "real-time",
+        "microsoft-context"
+      ],
       "followups": [
         "How do you handle presence across millions of concurrent users?",
         "How do you prevent status thrashing?",
         "What's the trade-off between accuracy and performance?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design Outlook's Email Search",
       "prompt": "Design the search system for Outlook that indexes and retrieves emails quickly across millions of mailboxes.",
-      "tags": ["system-design", "search", "microsoft-context"],
+      "tags": [
+        "system-design",
+        "search",
+        "microsoft-context"
+      ],
       "followups": [
         "What fields would you index?",
         "How do you handle real-time indexing of new emails?",
         "How do you support advanced filters and attachments?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design Azure AD Authentication",
       "prompt": "Design Azure Active Directory's authentication system handling billions of login requests with SSO and MFA.",
-      "tags": ["system-design", "security", "microsoft-context"],
+      "tags": [
+        "system-design",
+        "security",
+        "microsoft-context"
+      ],
       "followups": [
         "How do you handle token issuance and validation at scale?",
         "How do you implement MFA without degrading UX?",
         "How do you detect and block compromised accounts?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design SQL Server Query Optimizer (Conceptual)",
       "prompt": "Explain how SQL Server's query optimizer works at a high level. How does it choose between different execution plans?",
-      "tags": ["databases", "sql-server", "optimization"],
+      "tags": [
+        "databases",
+        "sql-server",
+        "optimization"
+      ],
       "followups": [
         "What statistics does the optimizer use?",
         "How do you handle parameter sniffing?",
         "When would you use query hints and why are they risky?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Distributed Transaction Coordinator",
       "prompt": "Design a distributed transaction coordinator that ensures ACID properties across multiple databases.",
-      "tags": ["distributed-systems", "databases", "transactions"],
+      "tags": [
+        "distributed-systems",
+        "databases",
+        "transactions"
+      ],
       "followups": [
         "Two-phase commit vs three-phase commit?",
         "How do you handle coordinator failure?",
         "What are the performance implications?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design Azure Blob Storage Tiering",
       "prompt": "Design the tiering system for Azure Blob Storage that moves data between hot, cool, and archive tiers based on access patterns.",
-      "tags": ["system-design", "storage", "azure"],
+      "tags": [
+        "system-design",
+        "storage",
+        "azure"
+      ],
       "followups": [
         "How do you track access frequency at scale?",
         "What's the trade-off between cost and latency?",
         "How do you handle lifecycle policies for billions of blobs?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Lock-Free Concurrent Queue",
       "prompt": "Implement a lock-free concurrent queue for high-throughput scenarios in C#.",
-      "tags": ["concurrency", "csharp", "data-structures"],
+      "tags": [
+        "concurrency",
+        "csharp",
+        "data-structures"
+      ],
       "followups": [
         "How do you handle the ABA problem?",
         "What memory ordering guarantees do you need?",
         "When is lock-free faster than locking?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "C#: Async/Await Deep Dive",
       "prompt": "Explain the state machine generated by async/await in C#. How does it handle synchronization context?",
-      "tags": ["microsoft-context", "csharp", "concurrency"],
+      "tags": [
+        "microsoft-context",
+        "csharp",
+        "concurrency"
+      ],
       "followups": [
         "What happens when you await a completed task?",
         "How does ConfigureAwait(false) affect performance?",
         "What are common deadlock scenarios with async/await?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "C#: ValueTask Advanced Usage",
       "prompt": "When should you use ValueTask over Task? What are the pitfalls?",
-      "tags": ["microsoft-context", "csharp", "performance"],
+      "tags": [
+        "microsoft-context",
+        "csharp",
+        "performance"
+      ],
       "followups": [
         "Why can't you await ValueTask multiple times?",
         "How does ValueTask reduce allocations?",
         "What is ValueTaskSource and when would you implement it?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": ".NET: Garbage Collection Tuning",
       "prompt": "How would you tune the .NET GC for a low-latency server application vs a high-throughput batch processing system?",
-      "tags": ["microsoft-context", "memory", "performance"],
+      "tags": [
+        "microsoft-context",
+        "memory",
+        "performance"
+      ],
       "followups": [
         "Workstation GC vs Server GC?",
         "What is background GC and when is it beneficial?",
         "How do you monitor GC pressure in production?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": ".NET: Memory Pooling",
       "prompt": "Design a memory pooling system in .NET to reduce allocation pressure and GC pauses.",
-      "tags": ["microsoft-context", "memory", "performance"],
+      "tags": [
+        "microsoft-context",
+        "memory",
+        "performance"
+      ],
       "followups": [
         "What is ArrayPool<T> and how does it work?",
         "How do you prevent memory leaks in pools?",
         "When is pooling harmful?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "C#: Span<T> and Memory<T>",
       "prompt": "Explain Span<T> and Memory<T> in C#. How do they improve performance?",
-      "tags": ["microsoft-context", "csharp", "performance"],
+      "tags": [
+        "microsoft-context",
+        "csharp",
+        "performance"
+      ],
       "followups": [
         "What is the stack-only nature of Span<T>?",
         "How do they reduce allocations?",
         "When would you use Memory<T> instead?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "C#: Source Generators",
       "prompt": "What are C# source generators and what problems do they solve? Design a source generator for INotifyPropertyChanged.",
-      "tags": ["microsoft-context", "csharp", "metaprogramming"],
+      "tags": [
+        "microsoft-context",
+        "csharp",
+        "metaprogramming"
+      ],
       "followups": [
         "How do source generators differ from reflection?",
         "What are the performance benefits?",
         "How do you debug source generators?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Entity Framework: Performance at Scale",
       "prompt": "Your EF Core application is slow with complex queries. How do you diagnose and fix performance issues?",
-      "tags": ["microsoft-context", "ef-core", "performance"],
+      "tags": [
+        "microsoft-context",
+        "ef-core",
+        "performance"
+      ],
       "followups": [
         "How do you identify N+1 queries?",
         "When would you use raw SQL over EF?",
         "How do you handle large result sets efficiently?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "SQL Server: Deadlock Analysis",
       "prompt": "You have recurring deadlocks in SQL Server. How do you identify the cause and resolve them?",
-      "tags": ["microsoft-context", "sql-server", "concurrency"],
+      "tags": [
+        "microsoft-context",
+        "sql-server",
+        "concurrency"
+      ],
       "followups": [
         "How do you read a deadlock graph?",
         "What are common deadlock patterns?",
         "How does isolation level affect deadlocks?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "SQL Server: Index Maintenance",
       "prompt": "Design an index maintenance strategy for a large SQL Server database with high availability requirements.",
-      "tags": ["microsoft-context", "sql-server", "performance"],
+      "tags": [
+        "microsoft-context",
+        "sql-server",
+        "performance"
+      ],
       "followups": [
         "How do you detect fragmented indexes?",
         "What's the difference between reorganize and rebuild?",
         "How do you minimize downtime during maintenance?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Azure: Designing for Disaster Recovery",
       "prompt": "Design a disaster recovery strategy for a mission-critical application on Azure with RTO < 1 hour and RPO < 15 minutes.",
-      "tags": ["microsoft-context", "azure", "reliability"],
+      "tags": [
+        "microsoft-context",
+        "azure",
+        "reliability"
+      ],
       "followups": [
         "Active-active vs active-passive?",
         "How do you handle database replication across regions?",
         "How do you test failover without impacting users?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Azure: Kubernetes (AKS) Networking",
       "prompt": "Design a secure and scalable networking strategy for Azure Kubernetes Service.",
-      "tags": ["microsoft-context", "azure", "containers"],
+      "tags": [
+        "microsoft-context",
+        "azure",
+        "containers"
+      ],
       "followups": [
         "Azure CNI vs kubenet?",
         "How do you implement network policies?",
         "How do you expose services securely to the internet?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Version Control System",
       "prompt": "Design a simplified version control system like Git. How do you store commits, branches, and handle merges?",
-      "tags": ["system-design", "distributed-systems"],
+      "tags": [
+        "system-design",
+        "distributed-systems"
+      ],
       "followups": [
         "How do you represent commits and parent relationships?",
         "How do you detect and resolve merge conflicts?",
         "How do you optimize storage for large repositories?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Collaborative Whiteboard",
       "prompt": "Design a real-time collaborative whiteboard like Microsoft Whiteboard with low-latency updates and offline support.",
-      "tags": ["system-design", "real-time", "microsoft-context"],
+      "tags": [
+        "system-design",
+        "real-time",
+        "microsoft-context"
+      ],
       "followups": [
         "CRDT vs OT for conflict resolution?",
         "How do you handle large canvases with many objects?",
         "What's the trade-off between resolution and bandwidth?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a WebAssembly Runtime",
       "prompt": "Design a high-level architecture for a WebAssembly runtime like Blazor. How do you execute untrusted code safely?",
-      "tags": ["system-design", "security", "microsoft-context"],
+      "tags": [
+        "system-design",
+        "security",
+        "microsoft-context"
+      ],
       "followups": [
         "What sandboxing techniques do you use?",
         "How do you manage memory safely?",
         "How do you handle interop with JavaScript?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Algorithm: Median of Two Sorted Arrays",
       "prompt": "Find the median of two sorted arrays in O(log(min(m,n))) time.",
-      "tags": ["binary-search", "arrays", "algorithms"],
+      "tags": [
+        "binary-search",
+        "arrays",
+        "algorithms"
+      ],
       "followups": [
         "Why is binary search applicable here?",
         "How do you handle even vs odd total length?",
         "What edge cases make this tricky?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Algorithm: Merge K Sorted Lists",
       "prompt": "Merge k sorted linked lists into one sorted list. Compare heap vs divide-and-conquer approaches.",
-      "tags": ["heap", "divide-and-conquer", "linked-list"],
+      "tags": [
+        "heap",
+        "divide-and-conquer",
+        "linked-list"
+      ],
       "followups": [
         "Time complexity in terms of total nodes N and k?",
         "How do you handle empty lists?",
         "What about streaming lists?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Algorithm: Trapping Rain Water",
       "prompt": "Given elevation map, compute how much water it can trap. Solve in O(n) time with O(1) space.",
-      "tags": ["arrays", "two-pointers", "algorithms"],
+      "tags": [
+        "arrays",
+        "two-pointers",
+        "algorithms"
+      ],
       "followups": [
         "Why does the two-pointer approach work?",
         "How would you solve for 2D elevation?",
         "What's the intuition behind the algorithm?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Algorithm: Serialize and Deserialize Binary Tree",
       "prompt": "Design an algorithm to serialize and deserialize a binary tree. Optimize for space and time.",
-      "tags": ["trees", "design", "algorithms"],
+      "tags": [
+        "trees",
+        "design",
+        "algorithms"
+      ],
       "followups": [
         "What format minimizes space?",
         "How do you handle null nodes efficiently?",
         "How would you handle N-ary trees?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Algorithm: Word Ladder II",
       "prompt": "Given two words and a dictionary, find all shortest transformation sequences.",
-      "tags": ["graphs", "bfs", "backtracking"],
+      "tags": [
+        "graphs",
+        "bfs",
+        "backtracking"
+      ],
       "followups": [
         "How do you avoid exponential blow-up?",
         "Why build the graph backward?",
         "Time and space complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Algorithm: Largest Rectangle in Histogram",
       "prompt": "Given bar heights, find the largest rectangle area in the histogram in O(n) time.",
-      "tags": ["stack", "monotonic-stack", "arrays"],
+      "tags": [
+        "stack",
+        "monotonic-stack",
+        "arrays"
+      ],
       "followups": [
         "Why does a stack help here?",
         "What is the intuition?",
         "How would you solve for 2D matrix?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Algorithm: Regular Expression Matching",
       "prompt": "Implement regular expression matching with support for '.' and '*'.",
-      "tags": ["dp", "strings", "algorithms"],
+      "tags": [
+        "dp",
+        "strings",
+        "algorithms"
+      ],
       "followups": [
         "What is the DP state and recurrence?",
         "Why does greedy fail for '*'?",
         "How do you handle large inputs?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Microsoft Culture: Growth Mindset in Action",
       "prompt": "Tell me about a time you failed significantly and how you grew from the experience.",
-      "tags": ["behavioral", "microsoft-culture", "growth-mindset"],
+      "tags": [
+        "behavioral",
+        "microsoft-culture",
+        "growth-mindset"
+      ],
       "followups": [
         "What was the failure?",
         "How did you respond immediately?",
         "What systems did you change to prevent recurrence?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Microsoft Culture: Customer Obsession at Scale",
       "prompt": "Tell me about a time you had to advocate for a customer need that wasn't immediately obvious to stakeholders.",
-      "tags": ["behavioral", "microsoft-culture", "customer-obsession"],
+      "tags": [
+        "behavioral",
+        "microsoft-culture",
+        "customer-obsession"
+      ],
       "followups": [
         "How did you gather evidence?",
         "How did you convince others?",
         "What was the impact on customers?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Microsoft Culture: Inclusive Design",
       "prompt": "Tell me about a time you designed a feature with accessibility or inclusion as a primary consideration.",
-      "tags": ["behavioral", "microsoft-culture", "accessibility"],
+      "tags": [
+        "behavioral",
+        "microsoft-culture",
+        "accessibility"
+      ],
       "followups": [
         "What accessibility barriers did you identify?",
         "How did you validate your solution?",
         "How did this benefit all users?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Microsoft Culture: One Microsoft",
       "prompt": "Tell me about a time you collaborated across organizational boundaries to achieve a shared goal.",
-      "tags": ["behavioral", "microsoft-culture", "collaboration"],
+      "tags": [
+        "behavioral",
+        "microsoft-culture",
+        "collaboration"
+      ],
       "followups": [
         "What were the challenges?",
         "How did you align different priorities?",
         "What was the outcome?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Technical Leadership: Mentoring",
       "prompt": "Describe your approach to mentoring a junior engineer. How do you adapt to different learning styles?",
-      "tags": ["behavioral", "leadership", "mentorship"],
+      "tags": [
+        "behavioral",
+        "leadership",
+        "mentorship"
+      ],
       "followups": [
         "How do you assess their current level?",
         "How do you give feedback effectively?",
         "What's the most challenging mentoring situation you've faced?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Technical Leadership: Architecture Decision",
       "prompt": "Tell me about a time you made a significant architecture decision. How did you evaluate trade-offs?",
-      "tags": ["behavioral", "architecture", "decision-making"],
+      "tags": [
+        "behavioral",
+        "architecture",
+        "decision-making"
+      ],
       "followups": [
         "What alternatives did you consider?",
         "How did you gather input?",
         "How do you know it was the right decision?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Debugging: Production Outage",
       "prompt": "Walk me through how you would handle a major production outage affecting millions of users.",
-      "tags": ["behavioral", "incident-response", "reliability"],
+      "tags": [
+        "behavioral",
+        "incident-response",
+        "reliability"
+      ],
       "followups": [
         "What do you do in the first 5 minutes?",
         "How do you communicate during the incident?",
         "What does a post-mortem look like?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "System Thinking: Technical Debt Strategy",
       "prompt": "How do you approach technical debt in a large, mature codebase? How do you prioritize what to fix?",
-      "tags": ["behavioral", "technical-debt", "strategy"],
+      "tags": [
+        "behavioral",
+        "technical-debt",
+        "strategy"
+      ],
       "followups": [
         "How do you measure technical debt?",
         "How do you get buy-in from product management?",
         "How do you prevent new debt from accumulating?"
-      ]
+      ],
+      "question_type": "behavioral"
     }
   ]
 }

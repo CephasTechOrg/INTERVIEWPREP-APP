@@ -71,6 +71,46 @@ export const Icons = {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
     </svg>
   ),
+  userCircle: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 12a4 4 0 100-8 4 4 0 000 8z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 20a8 8 0 0116 0" />
+    </svg>
+  ),
+  palette: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3a9 9 0 100 18c1.5 0 2-1 2-2 0-1.2-.8-2-2-2h-1a2 2 0 01-2-2V7a4 4 0 014-4z" />
+      <circle cx="8" cy="8" r="1" />
+      <circle cx="16" cy="8" r="1" />
+      <circle cx="18" cy="12" r="1" />
+      <circle cx="6" cy="12" r="1" />
+    </svg>
+  ),
+  accessibility: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 8h14" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 8l1 10m6-10l-1 10" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 18h6" />
+    </svg>
+  ),
+  bell: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 17a3 3 0 006 0" />
+    </svg>
+  ),
+  shield: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7l7-4z" />
+    </svg>
+  ),
+  warning: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v4m0 4h.01" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.3 3.9L1.9 18a2 2 0 001.7 3h16.8a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" />
+    </svg>
+  ),
   close: (
     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />

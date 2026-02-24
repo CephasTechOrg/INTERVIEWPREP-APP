@@ -33,4 +33,7 @@ def get_current_user(db: Session = Depends(get_db), token: str = Depends(oauth2_
         raise HTTPException(status_code=401, detail="User not found.")
     if not getattr(user, "is_verified", False):
         raise HTTPException(status_code=403, detail="Email not verified. Use the 6-digit verification code.")
+    profile = getattr(user, "profile", None) or {}
+    if isinstance(profile, dict) and profile.get("deactivated"):
+        raise HTTPException(status_code=403, detail="Account is deactivated.")
     return user

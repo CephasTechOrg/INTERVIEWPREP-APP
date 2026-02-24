@@ -97,10 +97,12 @@ export const Sidebar = () => {
         <div className="px-5 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/25">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+              <div className="w-12 h-12 rounded-xl overflow-hidden bg-slate-900/40 shadow-lg shadow-slate-900/30">
+                <img
+                  src="/interview.png.png"
+                  alt="InterviewPrep"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <span className="text-base font-semibold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">

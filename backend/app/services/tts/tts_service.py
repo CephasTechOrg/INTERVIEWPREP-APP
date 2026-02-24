@@ -56,7 +56,11 @@ def generate_speech(text: str) -> tuple[bytes | None, str | None, str]:
                     logger.info("TTS provider used: %s", PROVIDER_ELEVENLABS)
                     return audio, ctype, PROVIDER_ELEVENLABS
             except Exception as e:  # noqa: BLE001
-                logger.exception("ElevenLabs failed, will try fallback. Reason: %s", str(e))
+                msg = str(e)
+                if "quota_exceeded" in msg or "quota exceeded" in msg:
+                    logger.warning("ElevenLabs quota exceeded; falling back to default TTS.")
+                else:
+                    logger.exception("ElevenLabs failed, will try fallback. Reason: %s", msg)
                 continue
 
         if provider == PROVIDER_DEFAULT:

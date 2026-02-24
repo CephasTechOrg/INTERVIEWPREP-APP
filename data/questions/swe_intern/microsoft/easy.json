@@ -6,912 +6,1302 @@
     {
       "title": "OOP Basics",
       "prompt": "Explain Object-Oriented Programming (OOP) in simple terms and name its main ideas.",
-      "tags": ["oop", "fundamentals"],
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
       "followups": [
         "What is a class?",
         "What is an object?",
         "Give a simple real-world example."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Class vs Object",
       "prompt": "What is the difference between a class and an object?",
-      "tags": ["oop", "fundamentals"],
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
       "followups": [
         "Give a simple example using a 'Car' or 'Student'.",
         "Why do we create objects from classes?",
         "What does an object store?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Encapsulation (Simple)",
       "prompt": "What is encapsulation and why is it useful?",
-      "tags": ["oop", "design", "fundamentals"],
+      "tags": [
+        "oop",
+        "design",
+        "fundamentals"
+      ],
       "followups": [
         "What is a private field in simple terms?",
         "How does encapsulation prevent mistakes?",
         "Give a simple example."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Abstraction (Simple)",
       "prompt": "What is abstraction? Explain it using a simple example.",
-      "tags": ["oop", "design", "fundamentals"],
+      "tags": [
+        "oop",
+        "design",
+        "fundamentals"
+      ],
       "followups": [
         "Why does abstraction make code easier to use?",
         "What is an example of hiding details?",
         "What is one sign of a confusing abstraction?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Inheritance (Basic Idea)",
       "prompt": "What is inheritance in OOP? Explain it with an easy example.",
-      "tags": ["oop", "fundamentals"],
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
       "followups": [
         "What is a parent/base class?",
         "What is a child/derived class?",
         "When can inheritance be helpful?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Composition (Basic Idea)",
       "prompt": "What does it mean to build one class using another class (composition)?",
-      "tags": ["oop", "design", "fundamentals"],
+      "tags": [
+        "oop",
+        "design",
+        "fundamentals"
+      ],
       "followups": [
         "Give a simple example (e.g., Car has an Engine).",
         "Why can composition be flexible?",
         "How is this different from inheritance?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Interface (Simple)",
       "prompt": "What is an interface? Explain why teams use interfaces.",
-      "tags": ["oop", "design", "fundamentals"],
+      "tags": [
+        "oop",
+        "design",
+        "fundamentals"
+      ],
       "followups": [
         "What is the main purpose of an interface?",
         "Give a simple example (e.g., IShape).",
         "How can interfaces help testing?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Abstract Class (Simple)",
       "prompt": "What is an abstract class and why might you use it?",
-      "tags": ["oop", "design", "fundamentals"],
+      "tags": [
+        "oop",
+        "design",
+        "fundamentals"
+      ],
       "followups": [
         "What does 'cannot be instantiated' mean?",
         "Give a simple example.",
         "When would you choose an abstract class?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "API Basics",
       "prompt": "What is an API? Explain it in simple terms and give an example.",
-      "tags": ["api", "fundamentals", "communication"],
+      "tags": [
+        "api",
+        "fundamentals",
+        "communication"
+      ],
       "followups": [
         "Why do apps use APIs?",
         "What is JSON often used for?",
         "What makes an API easy to use?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "REST Basics (Simple)",
       "prompt": "What is a REST API? Explain using a simple example like users or products.",
-      "tags": ["api", "rest", "fundamentals"],
+      "tags": [
+        "api",
+        "rest",
+        "fundamentals"
+      ],
       "followups": [
         "What does GET do?",
         "What does POST do?",
         "Name one common HTTP status code and meaning."
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "GET vs POST (Simple)",
       "prompt": "Explain the difference between GET and POST in simple terms.",
-      "tags": ["http", "api", "fundamentals"],
+      "tags": [
+        "http",
+        "api",
+        "fundamentals"
+      ],
       "followups": [
         "When would you use GET?",
         "When would you use POST?",
         "What data usually goes in the body?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Debugging First Steps",
       "prompt": "Your program crashes. What are the first things you check?",
-      "tags": ["debugging", "fundamentals"],
+      "tags": [
+        "debugging",
+        "fundamentals"
+      ],
       "followups": [
         "What error message would you look for?",
         "How do you reproduce the issue?",
         "What is one simple fix you try first?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Logging (Basics)",
       "prompt": "What is logging and why is it useful when debugging?",
-      "tags": ["debugging", "fundamentals"],
+      "tags": [
+        "debugging",
+        "fundamentals"
+      ],
       "followups": [
         "What is one example of a good log message?",
         "Why not log sensitive data?",
         "How can logs help in production?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Exceptions (Basic Understanding)",
       "prompt": "What is an exception in programming, and why do we handle exceptions?",
-      "tags": ["fundamentals", "debugging"],
+      "tags": [
+        "fundamentals",
+        "debugging"
+      ],
       "followups": [
         "Give a simple example of an exception.",
         "What happens if you don't handle it?",
         "What is a try/catch in simple terms?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Unit Testing (Purpose)",
       "prompt": "What is unit testing and why do teams write unit tests?",
-      "tags": ["testing", "fundamentals"],
+      "tags": [
+        "testing",
+        "fundamentals"
+      ],
       "followups": [
         "What is one thing a unit test checks?",
         "Why test more than one input?",
         "What is one benefit of automated tests?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Test Cases (Easy)",
       "prompt": "How do you choose simple test cases for a function?",
-      "tags": ["testing", "fundamentals"],
+      "tags": [
+        "testing",
+        "fundamentals"
+      ],
       "followups": [
         "What is an edge case?",
         "Give an example of a good test case.",
         "Why include an empty input test?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Version Control (Basics)",
       "prompt": "What is version control and why is it important?",
-      "tags": ["git", "collaboration", "fundamentals"],
+      "tags": [
+        "git",
+        "collaboration",
+        "fundamentals"
+      ],
       "followups": [
         "What is a commit?",
         "What is a branch?",
         "Why do teams use pull requests?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Pull Requests (Basics)",
       "prompt": "What is a pull request and why do teams use it?",
-      "tags": ["git", "collaboration", "communication"],
+      "tags": [
+        "git",
+        "collaboration",
+        "communication"
+      ],
       "followups": [
         "What do code reviews help with?",
         "What is one sign of a good PR?",
         "How do you respond to review comments?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Merge Conflicts (Simple)",
       "prompt": "What is a merge conflict and how do you resolve it in a safe way?",
-      "tags": ["git", "collaboration"],
+      "tags": [
+        "git",
+        "collaboration"
+      ],
       "followups": [
         "Why do merge conflicts happen?",
         "What is one safe way to avoid them?",
         "What do you do after resolving a conflict?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Clean Code (Basics)",
       "prompt": "What does 'clean code' mean to you? Name a few simple practices.",
-      "tags": ["code-quality", "fundamentals"],
+      "tags": [
+        "code-quality",
+        "fundamentals"
+      ],
       "followups": [
         "Why are clear names important?",
         "Why keep functions small?",
         "How do comments help (and hurt)?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Refactoring (Simple)",
       "prompt": "What is refactoring? Give an example of a small refactor.",
-      "tags": ["code-quality", "fundamentals"],
+      "tags": [
+        "code-quality",
+        "fundamentals"
+      ],
       "followups": [
         "Why refactor if the code works?",
         "When should you avoid refactoring?",
         "How do tests help refactoring?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Data Structures: Array (Easy)",
       "prompt": "What is an array and when is it useful?",
-      "tags": ["data-structures", "arrays", "fundamentals"],
+      "tags": [
+        "data-structures",
+        "arrays",
+        "fundamentals"
+      ],
       "followups": [
         "What is one benefit of arrays?",
         "What is one downside?",
         "Give a simple example."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Data Structures: List (Easy)",
       "prompt": "What is a list and how is it different from a fixed-size array?",
-      "tags": ["data-structures", "fundamentals"],
+      "tags": [
+        "data-structures",
+        "fundamentals"
+      ],
       "followups": [
         "Why are lists flexible?",
         "Give a simple example.",
         "When would you choose a list?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Hash Map (Simple Use)",
       "prompt": "What is a hash map and what problem does it solve?",
-      "tags": ["hashmap", "data-structures", "fundamentals"],
+      "tags": [
+        "hashmap",
+        "data-structures",
+        "fundamentals"
+      ],
       "followups": [
         "Give an example like counting items.",
         "What is a key and value?",
         "Why is it useful in real apps?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Stack (Simple Use)",
       "prompt": "What is a stack? Explain using a real-life example.",
-      "tags": ["stack", "data-structures", "fundamentals"],
+      "tags": [
+        "stack",
+        "data-structures",
+        "fundamentals"
+      ],
       "followups": [
         "What does LIFO mean?",
         "Where have you seen stacks used?",
         "Why is undo a common example?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Queue (Simple Use)",
       "prompt": "What is a queue? Explain using a real-life example.",
-      "tags": ["queue", "data-structures", "fundamentals"],
+      "tags": [
+        "queue",
+        "data-structures",
+        "fundamentals"
+      ],
       "followups": [
         "What does FIFO mean?",
         "Where are queues used in software?",
         "How is it different from a stack?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Linked List (High Level)",
       "prompt": "What is a linked list and how is it different from an array (high level)?",
-      "tags": ["linked-list", "data-structures", "fundamentals"],
+      "tags": [
+        "linked-list",
+        "data-structures",
+        "fundamentals"
+      ],
       "followups": [
         "What is a node?",
         "Why does memory layout matter?",
         "When might a linked list be used?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Big-O (Very Simple)",
       "prompt": "In plain English, what does Big-O help you understand about code?",
-      "tags": ["complexity", "fundamentals"],
+      "tags": [
+        "complexity",
+        "fundamentals"
+      ],
       "followups": [
         "Why does it matter as data grows?",
         "When is a simple solution good enough?",
         "Give a real-life example of something scaling."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "String vs Integer",
       "prompt": "What is the difference between a string and an integer? Give examples.",
-      "tags": ["fundamentals"],
+      "tags": [
+        "fundamentals"
+      ],
       "followups": [
         "Why does type matter?",
         "What happens if you try to add a string and an integer?",
         "Give a practical example from an app."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Null / None (Basics)",
       "prompt": "What does null (or None) mean in programming? Why is it important?",
-      "tags": ["fundamentals"],
+      "tags": [
+        "fundamentals"
+      ],
       "followups": [
         "What bugs can null cause?",
         "How can you prevent null errors?",
         "Give a simple example."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Frontend vs Backend",
       "prompt": "Explain the difference between frontend and backend.",
-      "tags": ["web", "fundamentals"],
+      "tags": [
+        "web",
+        "fundamentals"
+      ],
       "followups": [
         "Which part does the user see?",
         "Which part stores data?",
         "How do they communicate?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Database Basics",
       "prompt": "What is a database and why do apps use databases?",
-      "tags": ["databases", "fundamentals"],
+      "tags": [
+        "databases",
+        "fundamentals"
+      ],
       "followups": [
         "What is a table?",
         "What is a row?",
         "Give an example of data an app might store."
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "SQL vs NoSQL (Simple)",
       "prompt": "What is one simple difference between SQL and NoSQL databases?",
-      "tags": ["databases", "fundamentals"],
+      "tags": [
+        "databases",
+        "fundamentals"
+      ],
       "followups": [
         "When might you choose SQL?",
         "When might you choose NoSQL?",
         "What is a simple example of each?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Authentication vs Authorization",
       "prompt": "Explain authentication vs authorization using a simple example.",
-      "tags": ["security", "fundamentals"],
+      "tags": [
+        "security",
+        "fundamentals"
+      ],
       "followups": [
         "Which one is login?",
         "Which one is permissions?",
         "Why does this matter in apps?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Password Safety (Basics)",
       "prompt": "Name a few simple best practices for handling passwords in an app.",
-      "tags": ["security", "fundamentals"],
+      "tags": [
+        "security",
+        "fundamentals"
+      ],
       "followups": [
         "Why shouldn't you store plain text passwords?",
         "What is hashing in simple terms?",
         "Why use multi-factor authentication?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Caching (Simple Idea)",
       "prompt": "What is caching and why can it make apps faster?",
-      "tags": ["performance", "fundamentals"],
+      "tags": [
+        "performance",
+        "fundamentals"
+      ],
       "followups": [
         "Give a simple real-world caching example.",
         "What is one risk of caching?",
         "Where might caching be used?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Concurrency (Very Simple)",
       "prompt": "In simple terms, what does it mean for a program to do two things at once?",
-      "tags": ["fundamentals", "concurrency"],
+      "tags": [
+        "fundamentals",
+        "concurrency"
+      ],
       "followups": [
         "Give a real-life example.",
         "Why can concurrency cause bugs?",
         "What is one way teams reduce risk?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Communication: Explaining a Bug",
       "prompt": "How would you explain a bug you found to a teammate clearly?",
-      "tags": ["communication", "collaboration", "fundamentals"],
+      "tags": [
+        "communication",
+        "collaboration",
+        "fundamentals"
+      ],
       "followups": [
         "What details should you include?",
         "Why include steps to reproduce?",
         "What screenshots or logs might help?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Collaboration: Asking for Help",
       "prompt": "Describe how you ask for help when you are stuck on a technical problem.",
-      "tags": ["collaboration", "communication", "growth-mindset"],
+      "tags": [
+        "collaboration",
+        "communication",
+        "growth-mindset"
+      ],
       "followups": [
         "What do you try before asking?",
         "How do you describe what you already attempted?",
         "How do you apply the help you receive?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Learning Quickly",
       "prompt": "Tell me about a time you learned a new tool or concept quickly.",
-      "tags": ["behavioral", "growth-mindset", "communication"],
+      "tags": [
+        "behavioral",
+        "growth-mindset",
+        "communication"
+      ],
       "followups": [
         "How did you structure your learning?",
         "How did you validate your understanding?",
         "What result did you achieve?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Handling Feedback (Easy)",
       "prompt": "Tell me about a time you received feedback on your work and what you did with it.",
-      "tags": ["behavioral", "communication", "growth-mindset"],
+      "tags": [
+        "behavioral",
+        "communication",
+        "growth-mindset"
+      ],
       "followups": [
         "What was the feedback?",
         "How did you respond?",
         "What changed after that?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Teamwork (Easy)",
       "prompt": "Describe a time you worked on a team project. What was your role and what was the outcome?",
-      "tags": ["behavioral", "collaboration", "communication"],
+      "tags": [
+        "behavioral",
+        "collaboration",
+        "communication"
+      ],
       "followups": [
         "How did you divide the work?",
         "How did you keep everyone aligned?",
         "What did you learn?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Conflict (Easy)",
       "prompt": "Describe a small disagreement in a team and how it was resolved.",
-      "tags": ["behavioral", "collaboration", "communication"],
+      "tags": [
+        "behavioral",
+        "collaboration",
+        "communication"
+      ],
       "followups": [
         "What was the disagreement about?",
         "How did you communicate?",
         "What was the result?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Time Management",
       "prompt": "How do you manage your time when you have multiple tasks to complete?",
-      "tags": ["behavioral", "fundamentals", "communication"],
+      "tags": [
+        "behavioral",
+        "fundamentals",
+        "communication"
+      ],
       "followups": [
         "How do you prioritize tasks?",
         "How do you track progress?",
         "What do you do if you're behind?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "User-Focused Thinking",
       "prompt": "Tell me about a time you built or improved something for users.",
-      "tags": ["behavioral", "product-thinking", "communication"],
+      "tags": [
+        "behavioral",
+        "product-thinking",
+        "communication"
+      ],
       "followups": [
         "Who were the users?",
         "What problem did you solve?",
         "How did you know it helped?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Why Microsoft?",
       "prompt": "Why do you want to intern at Microsoft? Mention a product, team area, or value that motivates you.",
-      "tags": ["behavioral", "communication"],
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
       "followups": [
         "What Microsoft product do you use most?",
         "What would you like to learn during the internship?",
         "How does Microsoft align with your goals?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "What Do You Want to Learn?",
       "prompt": "What are 2 or 3 skills you want to grow during this internship, and how will you work on them?",
-      "tags": ["behavioral", "growth-mindset", "communication"],
+      "tags": [
+        "behavioral",
+        "growth-mindset",
+        "communication"
+      ],
       "followups": [
         "How do you learn new tech quickly?",
         "How do you handle being stuck?",
         "How do you balance learning with delivering results?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Polymorphism (Simple Idea)",
       "prompt": "What is polymorphism in OOP? Explain it with a simple example.",
-      "tags": ["oop", "design", "fundamentals"],
+      "tags": [
+        "oop",
+        "design",
+        "fundamentals"
+      ],
       "followups": [
         "What does 'many forms' mean?",
         "How do interfaces enable polymorphism?",
         "Give an example using shapes or animals."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Method Overloading",
       "prompt": "What is method overloading? When might you use it?",
-      "tags": ["oop", "fundamentals"],
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
       "followups": [
         "How is it different from overriding?",
         "Give a simple example like calculating area.",
         "Why is this convenient for developers?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Method Overriding",
       "prompt": "What is method overriding and why is it useful in inheritance?",
-      "tags": ["oop", "fundamentals"],
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
       "followups": [
         "What does @Override or virtual mean?",
         "Give an example with a base class and derived class.",
         "How does this enable polymorphism?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Constructor Basics",
       "prompt": "What is a constructor and what is its purpose?",
-      "tags": ["oop", "fundamentals"],
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
       "followups": [
         "When is a constructor called?",
         "What is a default constructor?",
         "What is constructor overloading?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Static vs Instance Members",
       "prompt": "What is the difference between static and instance members (fields/methods)?",
-      "tags": ["oop", "fundamentals"],
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
       "followups": [
         "When would you make something static?",
         "How do you access static vs instance members?",
         "Give a simple example like Math.PI."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Value Type vs Reference Type",
       "prompt": "What is the difference between a value type and a reference type?",
-      "tags": ["fundamentals", "memory"],
+      "tags": [
+        "fundamentals",
+        "memory"
+      ],
       "followups": [
         "Give examples of each in C#/Java.",
         "Where are they stored?",
         "How does assignment behave differently?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Pass by Value vs Pass by Reference",
       "prompt": "Explain the difference between pass by value and pass by reference.",
-      "tags": ["fundamentals", "memory"],
+      "tags": [
+        "fundamentals",
+        "memory"
+      ],
       "followups": [
         "What happens to the original variable?",
         "Give an example where this matters.",
         "How does C#/Java handle this?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "What is .NET?",
       "prompt": "What is .NET? Explain it at a high level.",
-      "tags": ["microsoft-context", "fundamentals"],
+      "tags": [
+        "microsoft-context",
+        "fundamentals"
+      ],
       "followups": [
         "What is the difference between .NET Framework and .NET Core?",
         "What languages run on .NET?",
         "What is the CLR?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "What is C#?",
       "prompt": "What is C# and what kinds of applications can you build with it?",
-      "tags": ["microsoft-context", "fundamentals"],
+      "tags": [
+        "microsoft-context",
+        "fundamentals"
+      ],
       "followups": [
         "How is C# different from Java?",
         "What are some key features of C#?",
         "Why does Microsoft use C#?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "What is Azure?",
       "prompt": "What is Microsoft Azure? Describe it in simple terms.",
-      "tags": ["microsoft-context", "cloud", "fundamentals"],
+      "tags": [
+        "microsoft-context",
+        "cloud",
+        "fundamentals"
+      ],
       "followups": [
         "What is cloud computing?",
         "Give an example of an Azure service.",
         "Why do companies use Azure?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Windows vs Linux (Basic)",
       "prompt": "What is one major difference between Windows and Linux operating systems?",
-      "tags": ["microsoft-context", "fundamentals"],
+      "tags": [
+        "microsoft-context",
+        "fundamentals"
+      ],
       "followups": [
         "Why does Microsoft support Linux now?",
         "What is WSL?",
         "When might you choose one over the other?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "What is Visual Studio?",
       "prompt": "What is Visual Studio and what is it used for?",
-      "tags": ["microsoft-context", "tools"],
+      "tags": [
+        "microsoft-context",
+        "tools"
+      ],
       "followups": [
         "How is it different from VS Code?",
         "What features make it useful for developers?",
         "What have you built with it?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "What is GitHub?",
       "prompt": "What is GitHub and why is it important for developers?",
-      "tags": ["microsoft-context", "git", "collaboration"],
+      "tags": [
+        "microsoft-context",
+        "git",
+        "collaboration"
+      ],
       "followups": [
         "Why did Microsoft acquire GitHub?",
         "What is a repository?",
         "How do you contribute to open source on GitHub?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "SOLID: Single Responsibility",
       "prompt": "What is the Single Responsibility Principle? Give a simple example.",
-      "tags": ["design-principles", "oop"],
+      "tags": [
+        "design-principles",
+        "oop"
+      ],
       "followups": [
         "Why is it better to have one reason to change?",
         "What problems happen when a class does too much?",
         "How do you identify violations?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "SOLID: Open-Closed",
       "prompt": "What does it mean for code to be 'open for extension, closed for modification'?",
-      "tags": ["design-principles", "oop"],
+      "tags": [
+        "design-principles",
+        "oop"
+      ],
       "followups": [
         "Give a simple example using interfaces.",
         "Why is this important for maintainability?",
         "How does this reduce bugs?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "SOLID: Liskov Substitution",
       "prompt": "Explain the Liskov Substitution Principle in simple terms.",
-      "tags": ["design-principles", "oop"],
+      "tags": [
+        "design-principles",
+        "oop"
+      ],
       "followups": [
         "What does 'subtypes must be substitutable for their base types' mean?",
         "Give an example of a violation (square vs rectangle).",
         "Why does this matter in inheritance?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "SOLID: Interface Segregation",
       "prompt": "What is the Interface Segregation Principle?",
-      "tags": ["design-principles", "oop"],
+      "tags": [
+        "design-principles",
+        "oop"
+      ],
       "followups": [
         "Why are smaller, focused interfaces better?",
         "Give an example of a 'fat' interface problem.",
         "How does this relate to the Single Responsibility Principle?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "SOLID: Dependency Inversion",
       "prompt": "Explain the Dependency Inversion Principle in simple terms.",
-      "tags": ["design-principles", "oop"],
+      "tags": [
+        "design-principles",
+        "oop"
+      ],
       "followups": [
         "What does it mean to depend on abstractions, not concretions?",
         "How does dependency injection help?",
         "Why does this make code more testable?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Dependency Injection (Concept)",
       "prompt": "What is dependency injection in simple terms?",
-      "tags": ["design-patterns", "testing"],
+      "tags": [
+        "design-patterns",
+        "testing"
+      ],
       "followups": [
         "Why does this make code easier to test?",
         "Give an example without DI and with DI.",
         "How does constructor injection work?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "IDisposable / Dispose Pattern",
       "prompt": "What is the purpose of IDisposable in .NET?",
-      "tags": ["microsoft-context", "memory"],
+      "tags": [
+        "microsoft-context",
+        "memory"
+      ],
       "followups": [
         "What resources need explicit cleanup?",
         "What is a using statement?",
         "What happens if you don't dispose?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "What is Garbage Collection?",
       "prompt": "Explain garbage collection in simple terms.",
-      "tags": ["fundamentals", "memory"],
+      "tags": [
+        "fundamentals",
+        "memory"
+      ],
       "followups": [
         "How does it help developers?",
         "What is a managed language?",
         "What are common GC optimizations?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Boxing and Unboxing",
       "prompt": "What is boxing and unboxing in .NET/C#?",
-      "tags": ["microsoft-context", "performance"],
+      "tags": [
+        "microsoft-context",
+        "performance"
+      ],
       "followups": [
         "Why can this impact performance?",
         "Give an example.",
         "How do generics help avoid boxing?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "IEnumerable vs IEnumerator",
       "prompt": "What is the difference between IEnumerable and IEnumerator?",
-      "tags": ["microsoft-context", "collections"],
+      "tags": [
+        "microsoft-context",
+        "collections"
+      ],
       "followups": [
         "What does foreach work with?",
         "How does yield return work?",
         "When would you implement these interfaces?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Collections: List vs Dictionary",
       "prompt": "When would you use a List vs a Dictionary?",
-      "tags": ["collections", "data-structures"],
+      "tags": [
+        "collections",
+        "data-structures"
+      ],
       "followups": [
         "What is the lookup time for each?",
         "What if you need to store unique keys?",
         "Give a practical example for each."
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Collections: Stack vs Queue",
       "prompt": "When would you choose a Stack over a Queue?",
-      "tags": ["collections", "data-structures"],
+      "tags": [
+        "collections",
+        "data-structures"
+      ],
       "followups": [
         "Give a real-world example for each.",
         "What are the primary operations?",
         "How do their orders differ?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Exception Handling: try-catch-finally",
       "prompt": "Explain the purpose of try, catch, and finally blocks.",
-      "tags": ["fundamentals", "debugging"],
+      "tags": [
+        "fundamentals",
+        "debugging"
+      ],
       "followups": [
         "What code belongs in finally?",
         "What happens if you don't catch an exception?",
         "When would you use multiple catch blocks?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Checked vs Unchecked",
       "prompt": "What are checked and unchecked contexts in C#?",
-      "tags": ["microsoft-context", "math"],
+      "tags": [
+        "microsoft-context",
+        "math"
+      ],
       "followups": [
         "What is integer overflow?",
         "When would you enable checked?",
         "Why would you disable it?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "const vs readonly",
       "prompt": "What is the difference between const and readonly in C#?",
-      "tags": ["microsoft-context", "fundamentals"],
+      "tags": [
+        "microsoft-context",
+        "fundamentals"
+      ],
       "followups": [
         "When is each evaluated?",
         "Can a const be a reference type?",
         "When would you choose readonly?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "String vs StringBuilder",
       "prompt": "Why is StringBuilder more efficient for many string operations?",
-      "tags": ["strings", "performance"],
+      "tags": [
+        "strings",
+        "performance"
+      ],
       "followups": [
         "Why are strings immutable?",
         "When should you use StringBuilder?",
         "When is regular string concatenation fine?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "var vs explicit type",
       "prompt": "When would you use var vs explicitly declaring the type?",
-      "tags": ["microsoft-context", "code-quality"],
+      "tags": [
+        "microsoft-context",
+        "code-quality"
+      ],
       "followups": [
         "What does var mean in C#?",
         "Does var affect performance?",
         "What are readability considerations?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Microsoft Product: Visual Studio Code",
       "prompt": "What do you like about VS Code as a code editor?",
-      "tags": ["microsoft-context", "tools"],
+      "tags": [
+        "microsoft-context",
+        "tools"
+      ],
       "followups": [
         "What extensions do you use?",
         "How does it help with productivity?",
         "How is it different from full Visual Studio?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Microsoft Product: Teams",
       "prompt": "How do you use Microsoft Teams for collaboration?",
-      "tags": ["microsoft-context", "collaboration"],
+      "tags": [
+        "microsoft-context",
+        "collaboration"
+      ],
       "followups": [
         "What features are useful for developers?",
         "How does it compare to Slack?",
         "What could be improved?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Microsoft Product: Windows",
       "prompt": "What do you think makes Windows a popular operating system?",
-      "tags": ["microsoft-context", "fundamentals"],
+      "tags": [
+        "microsoft-context",
+        "fundamentals"
+      ],
       "followups": [
         "What improvements would you suggest?",
         "How has Windows evolved for developers?",
         "What is WSL and why is it significant?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Microsoft Culture: Growth Mindset",
       "prompt": "Microsoft values a 'growth mindset.' What does this mean to you?",
-      "tags": ["behavioral", "microsoft-culture"],
+      "tags": [
+        "behavioral",
+        "microsoft-culture"
+      ],
       "followups": [
         "Tell me about a time you demonstrated this.",
         "How do you handle not knowing something?",
         "How do you learn from failures?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Microsoft Culture: Customer Obsession",
       "prompt": "Microsoft focuses on 'customer obsession.' How have you focused on users in your projects?",
-      "tags": ["behavioral", "microsoft-culture"],
+      "tags": [
+        "behavioral",
+        "microsoft-culture"
+      ],
       "followups": [
         "How did you gather user feedback?",
         "What did you change based on feedback?",
         "How did you measure success?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Microsoft Culture: Diversity & Inclusion",
       "prompt": "Why is diversity and inclusion important in tech?",
-      "tags": ["behavioral", "microsoft-culture"],
+      "tags": [
+        "behavioral",
+        "microsoft-culture"
+      ],
       "followups": [
         "How does diversity improve products?",
         "What can individuals do to foster inclusion?",
         "Why does Microsoft prioritize this?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Microsoft Mission",
       "prompt": "Microsoft's mission is to 'empower every person and every organization on the planet to achieve more.' How does this resonate with you?",
-      "tags": ["behavioral", "microsoft-culture"],
+      "tags": [
+        "behavioral",
+        "microsoft-culture"
+      ],
       "followups": [
         "What Microsoft product empowers you?",
         "How can software empower people?",
         "What does this mission mean for developers?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Inclusive Design",
       "prompt": "What is inclusive design and why does Microsoft emphasize it?",
-      "tags": ["behavioral", "microsoft-culture", "accessibility"],
+      "tags": [
+        "behavioral",
+        "microsoft-culture",
+        "accessibility"
+      ],
       "followups": [
         "Give an example of inclusive design in Microsoft products.",
         "How would you design for accessibility?",
         "Why is this good for all users?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Ethics in AI",
       "prompt": "Why should engineers consider ethics when building AI systems?",
-      "tags": ["behavioral", "ethics"],
+      "tags": [
+        "behavioral",
+        "ethics"
+      ],
       "followups": [
         "What are Microsoft's AI principles?",
         "What could go wrong with biased AI?",
         "How can engineers reduce bias?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Sustainability at Microsoft",
       "prompt": "Microsoft has committed to being carbon negative. How can software engineers contribute to sustainability?",
-      "tags": ["behavioral", "sustainability"],
+      "tags": [
+        "behavioral",
+        "sustainability"
+      ],
       "followups": [
         "How can code be more energy efficient?",
         "What Azure services support sustainability?",
         "Why is this important for tech companies?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Remote Collaboration",
       "prompt": "How do you effectively collaborate with teammates remotely?",
-      "tags": ["behavioral", "collaboration"],
+      "tags": [
+        "behavioral",
+        "collaboration"
+      ],
       "followups": [
         "What tools do you use?",
         "How do you communicate clearly in writing?",
         "How do you build rapport remotely?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Handling Uncertainty",
       "prompt": "Tell me about a time you had to work on something you didn't understand yet.",
-      "tags": ["behavioral", "growth-mindset"],
+      "tags": [
+        "behavioral",
+        "growth-mindset"
+      ],
       "followups": [
         "How did you approach learning?",
         "What resources did you use?",
         "What was the outcome?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Project Planning",
       "prompt": "How do you approach starting a new coding project from scratch?",
-      "tags": ["behavioral", "planning"],
+      "tags": [
+        "behavioral",
+        "planning"
+      ],
       "followups": [
         "What do you do before writing code?",
         "How do you break down the work?",
         "How do you track progress?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Microsoft Internship Goals",
       "prompt": "What do you hope to accomplish during a Microsoft internship?",
-      "tags": ["behavioral", "goals"],
+      "tags": [
+        "behavioral",
+        "goals"
+      ],
       "followups": [
         "What skills do you want to develop?",
         "What kind of impact do you want to make?",
         "How will you seek feedback?"
-      ]
+      ],
+      "question_type": "behavioral"
     }
   ]
 }

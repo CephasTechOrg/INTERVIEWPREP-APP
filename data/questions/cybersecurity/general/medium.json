@@ -1,142 +1,203 @@
-﻿{
-    "difficulty": "medium",
-    "questions": [
-        {
-            "title": "SQL Injection Attack",
-            "prompt": "Explain what a SQL injection attack is and how it can be prevented.",
-            "tags": ["web-security", "owasp"],
-            "followups": [
-                "What are parameterized queries and how do they prevent SQL injection?",
-                "Can you provide an example of a SQL injection payload?"
-            ]
-        },
-        {
-            "title": "Zero Trust Architecture",
-            "prompt": "Explain the core principles of Zero Trust security architecture.",
-            "tags": ["network-security", "architecture"],
-            "followups": [
-                "How does Zero Trust differ from traditional perimeter-based security?",
-                "What are some challenges in implementing Zero Trust?"
-            ]
-        },
-        {
-            "title": "Cross-Site Scripting (XSS)",
-            "prompt": "Describe the different types of XSS attacks and their potential impact.",
-            "tags": ["web-security", "owasp"],
-            "followups": [
-                "How does Content Security Policy (CSP) help prevent XSS?",
-                "What's the difference between stored XSS and reflected XSS?"
-            ]
-        },
-        {
-            "title": "Penetration Testing Process",
-            "prompt": "Walk through the typical phases of a penetration test.",
-            "tags": ["ethical-hacking", "penetration-testing"],
-            "followups": [
-                "What is the difference between black box and white box testing?",
-                "Why is reconnaissance important in the penetration testing process?"
-            ]
-        },
-        {
-            "title": "Incident Response Steps",
-            "prompt": "Describe the key steps in an incident response process.",
-            "tags": ["incident-response", "security-operations"],
-            "followups": [
-                "What should be included in an incident response plan?",
-                "How do you prioritize incidents based on severity?"
-            ]
-        },
-        {
-            "title": "OWASP Top 10",
-            "prompt": "Name and briefly describe three vulnerabilities from the OWASP Top 10.",
-            "tags": ["web-security", "owasp", "vulnerability"],
-            "followups": [
-                "Why is broken access control a common web application vulnerability?",
-                "How can security misconfigurations be prevented?"
-            ]
-        },
-        {
-            "title": "Cryptographic Hash Functions",
-            "prompt": "Explain what cryptographic hash functions are and their properties.",
-            "tags": ["cryptography", "authentication"],
-            "followups": [
-                "How are hash functions used in password storage?",
-                "What is a salt and why is it important in password hashing?"
-            ]
-        },
-        {
-            "title": "Man-in-the-Middle Attacks",
-            "prompt": "Explain how a man-in-the-middle attack works and common prevention methods.",
-            "tags": ["network-security", "encryption"],
-            "followups": [
-                "How does certificate pinning help prevent MITM attacks?",
-                "What role do Certificate Authorities play in preventing MITM?"
-            ]
-        },
-        {
-            "title": "Security Information and Event Management",
-            "prompt": "What is SIEM and how does it help security teams?",
-            "tags": ["security-operations", "monitoring"],
-            "followups": [
-                "What types of data sources feed into a SIEM?",
-                "How does correlation differ from simple log collection?"
-            ]
-        },
-        {
-            "title": "Network Segmentation",
-            "prompt": "Explain the concept of network segmentation and its security benefits.",
-            "tags": ["network-security", "architecture"],
-            "followups": [
-                "What is the principle of least privilege in network design?",
-                "How does microsegmentation differ from traditional segmentation?"
-            ]
-        },
-        {
-            "title": "DDoS Attacks",
-            "prompt": "Describe how a DDoS attack works and common mitigation strategies.",
-            "tags": ["network-security", "availability"],
-            "followups": [
-                "What's the difference between volumetric and application-layer DDoS attacks?",
-                "How do CDNs help mitigate DDoS attacks?"
-            ]
-        },
-        {
-            "title": "Risk Assessment",
-            "prompt": "Explain the basic components of a cybersecurity risk assessment.",
-            "tags": ["risk-management", "governance"],
-            "followups": [
-                "How do you calculate risk using likelihood and impact?",
-                "What's the difference between inherent risk and residual risk?"
-            ]
-        },
-        {
-            "title": "Public Key Infrastructure",
-            "prompt": "Explain how Public Key Infrastructure (PKI) works and its main components.",
-            "tags": ["cryptography", "authentication"],
-            "followups": [
-                "What is a Certificate Authority and what role does it play in PKI?",
-                "How does certificate revocation work?"
-            ]
-        },
-        {
-            "title": "Endpoint Detection and Response",
-            "prompt": "What is EDR and how does it differ from traditional antivirus?",
-            "tags": ["endpoint-security", "threat-detection"],
-            "followups": [
-                "What types of behaviors does EDR typically monitor for?",
-                "How does EDR help with incident investigation?"
-            ]
-        },
-        {
-            "title": "Buffer Overflow",
-            "prompt": "Explain what a buffer overflow vulnerability is and how it can be exploited.",
-            "tags": ["vulnerability", "memory-security"],
-            "followups": [
-                "What are some modern protections against buffer overflow attacks?",
-                "How does Address Space Layout Randomization (ASLR) help?"
-            ]
-        }
-    ],
-    "company_style": "general",
-    "track": "cybersecurity"
+{
+  "difficulty": "medium",
+  "questions": [
+    {
+      "title": "SQL Injection Attack",
+      "prompt": "Explain what a SQL injection attack is and how it can be prevented.",
+      "tags": [
+        "web-security",
+        "owasp"
+      ],
+      "followups": [
+        "What are parameterized queries and how do they prevent SQL injection?",
+        "Can you provide an example of a SQL injection payload?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Zero Trust Architecture",
+      "prompt": "Explain the core principles of Zero Trust security architecture.",
+      "tags": [
+        "network-security",
+        "architecture"
+      ],
+      "followups": [
+        "How does Zero Trust differ from traditional perimeter-based security?",
+        "What are some challenges in implementing Zero Trust?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "Cross-Site Scripting (XSS)",
+      "prompt": "Describe the different types of XSS attacks and their potential impact.",
+      "tags": [
+        "web-security",
+        "owasp"
+      ],
+      "followups": [
+        "How does Content Security Policy (CSP) help prevent XSS?",
+        "What's the difference between stored XSS and reflected XSS?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Penetration Testing Process",
+      "prompt": "Walk through the typical phases of a penetration test.",
+      "tags": [
+        "ethical-hacking",
+        "penetration-testing"
+      ],
+      "followups": [
+        "What is the difference between black box and white box testing?",
+        "Why is reconnaissance important in the penetration testing process?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Incident Response Steps",
+      "prompt": "Describe the key steps in an incident response process.",
+      "tags": [
+        "incident-response",
+        "security-operations"
+      ],
+      "followups": [
+        "What should be included in an incident response plan?",
+        "How do you prioritize incidents based on severity?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "OWASP Top 10",
+      "prompt": "Name and briefly describe three vulnerabilities from the OWASP Top 10.",
+      "tags": [
+        "web-security",
+        "owasp",
+        "vulnerability"
+      ],
+      "followups": [
+        "Why is broken access control a common web application vulnerability?",
+        "How can security misconfigurations be prevented?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Cryptographic Hash Functions",
+      "prompt": "Explain what cryptographic hash functions are and their properties.",
+      "tags": [
+        "cryptography",
+        "authentication"
+      ],
+      "followups": [
+        "How are hash functions used in password storage?",
+        "What is a salt and why is it important in password hashing?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Man-in-the-Middle Attacks",
+      "prompt": "Explain how a man-in-the-middle attack works and common prevention methods.",
+      "tags": [
+        "network-security",
+        "encryption"
+      ],
+      "followups": [
+        "How does certificate pinning help prevent MITM attacks?",
+        "What role do Certificate Authorities play in preventing MITM?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Security Information and Event Management",
+      "prompt": "What is SIEM and how does it help security teams?",
+      "tags": [
+        "security-operations",
+        "monitoring"
+      ],
+      "followups": [
+        "What types of data sources feed into a SIEM?",
+        "How does correlation differ from simple log collection?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Network Segmentation",
+      "prompt": "Explain the concept of network segmentation and its security benefits.",
+      "tags": [
+        "network-security",
+        "architecture"
+      ],
+      "followups": [
+        "What is the principle of least privilege in network design?",
+        "How does microsegmentation differ from traditional segmentation?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "DDoS Attacks",
+      "prompt": "Describe how a DDoS attack works and common mitigation strategies.",
+      "tags": [
+        "network-security",
+        "availability"
+      ],
+      "followups": [
+        "What's the difference between volumetric and application-layer DDoS attacks?",
+        "How do CDNs help mitigate DDoS attacks?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Risk Assessment",
+      "prompt": "Explain the basic components of a cybersecurity risk assessment.",
+      "tags": [
+        "risk-management",
+        "governance"
+      ],
+      "followups": [
+        "How do you calculate risk using likelihood and impact?",
+        "What's the difference between inherent risk and residual risk?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Public Key Infrastructure",
+      "prompt": "Explain how Public Key Infrastructure (PKI) works and its main components.",
+      "tags": [
+        "cryptography",
+        "authentication"
+      ],
+      "followups": [
+        "What is a Certificate Authority and what role does it play in PKI?",
+        "How does certificate revocation work?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Endpoint Detection and Response",
+      "prompt": "What is EDR and how does it differ from traditional antivirus?",
+      "tags": [
+        "endpoint-security",
+        "threat-detection"
+      ],
+      "followups": [
+        "What types of behaviors does EDR typically monitor for?",
+        "How does EDR help with incident investigation?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Buffer Overflow",
+      "prompt": "Explain what a buffer overflow vulnerability is and how it can be exploited.",
+      "tags": [
+        "vulnerability",
+        "memory-security"
+      ],
+      "followups": [
+        "What are some modern protections against buffer overflow attacks?",
+        "How does Address Space Layout Randomization (ASLR) help?"
+      ],
+      "question_type": "coding"
+    }
+  ],
+  "company_style": "general",
+  "track": "cybersecurity"
 }

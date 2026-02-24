@@ -1,107 +1,156 @@
 {
-    "track": "founder_interview",
-    "company_style": "y_combinator",
-    "difficulty": "easy",
-    "questions": [
-      {
-        "title": "The One-Liner (What do you do?)",
-        "prompt": "Explain what your company does in one or two clear, jargon-free sentences. Who are your users and what problem do you solve?",
-        "tags": ["pitch", "value-proposition", "fundamentals", "yc-first-question"],
-        "followups": [
-          "Can you say that without using the words 'platform', 'AI', or 'blockchain'?",
-          "Would my parents understand what you just said?",
-          "What is the specific job-to-be-done for your customer?"
-        ]
-      },
-      {
-        "title": "The Problem",
-        "prompt": "What specific problem are you solving? How do you know it's a real problem?",
-        "tags": ["problem", "validation", "pain-point"],
-        "followups": [
-          "Who has this problem today? Be specific.",
-          "How are people solving this problem right now (without your product)?",
-          "What is the 'before' state for your user?"
-        ]
-      },
-      {
-        "title": "Your Progress So Far",
-        "prompt": "What have you built so far? What is your current status?",
-        "tags": ["progress", "mvp", "demo"],
-        "followups": [
-          "Do you have a demo you can show us right now?",
-          "When did you start working on this?",
-          "What did you launch with?"
-        ]
-      },
-      {
-        "title": "The Vision (10 Years)",
-        "prompt": "If you are wildly successful, what does this company look like in 10 years?",
-        "tags": ["vision", "ambition", "long-term"],
-        "followups": [
-          "What is the headline you want to read about your company?",
-          "How big can this be?",
-          "Why does this need to exist as a company?"
-        ]
-      },
-      {
-        "title": "Why Now?",
-        "prompt": "Why is this the exact right time to start this company? Why hasn't it been built before?",
-        "tags": ["timing", "market-timing", "insight"],
-        "followups": [
-          "What has changed in the last 2-3 years to make this possible?",
-          "Is it technology, consumer behavior, or regulation?",
-          "Why didn't Google/Amazon/Facebook do this 5 years ago?"
-        ]
-      },
-      {
-        "title": "The Team (Roles)",
-        "prompt": "Who is on the team and what does each person focus on?",
-        "tags": ["team", "roles", "cofounders"],
-        "followups": [
-          "How did you meet?",
-          "How long have you known each other?",
-          "What is the equity split and why?"
-        ]
-      },
-      {
-        "title": "Full-time Commitment",
-        "prompt": "Is everyone on the team working on this full-time?",
-        "tags": ["commitment", "risk"],
-        "followups": [
-          "If not, when will you be full-time?",
-          "What are you leaving behind to do this?",
-          "What is your burn rate?"
-        ]
-      },
-      {
-        "title": "Users (If Launched)",
-        "prompt": "How many users do you have?",
-        "tags": ["traction", "users", "metrics-basic"],
-        "followups": [
-          "How many are active today? This week?",
-          "Where do new users come from?",
-          "What is your week-over-week growth rate?"
-        ]
-      },
-      {
-        "title": "Revenue (If Monetizing)",
-        "prompt": "How much revenue are you generating?",
-        "tags": ["revenue", "monetization", "metrics-basic"],
-        "followups": [
-          "What is your Monthly Recurring Revenue (MRR)?",
-          "Who is paying you?",
-          "How did you land your first customer?"
-        ]
-      },
-      {
-        "title": "Why YC?",
-        "prompt": "Why are you applying to Y Combinator specifically?",
-        "tags": ["motivation", "yc-fit"],
-        "followups": [
-          "What do you hope to get out of the program?",
-          "What is the biggest gap in your knowledge right now?",
-          "What does success look like for you after 3 months in the batch?"
-        ]
-      }
-    ]
-  }
+  "track": "founder_interview",
+  "company_style": "y_combinator",
+  "difficulty": "easy",
+  "questions": [
+    {
+      "title": "The One-Liner (What do you do?)",
+      "prompt": "Explain what your company does in one or two clear, jargon-free sentences. Who are your users and what problem do you solve?",
+      "tags": [
+        "pitch",
+        "value-proposition",
+        "fundamentals",
+        "yc-first-question"
+      ],
+      "followups": [
+        "Can you say that without using the words 'platform', 'AI', or 'blockchain'?",
+        "Would my parents understand what you just said?",
+        "What is the specific job-to-be-done for your customer?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "The Problem",
+      "prompt": "What specific problem are you solving? How do you know it's a real problem?",
+      "tags": [
+        "problem",
+        "validation",
+        "pain-point"
+      ],
+      "followups": [
+        "Who has this problem today? Be specific.",
+        "How are people solving this problem right now (without your product)?",
+        "What is the 'before' state for your user?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Your Progress So Far",
+      "prompt": "What have you built so far? What is your current status?",
+      "tags": [
+        "progress",
+        "mvp",
+        "demo"
+      ],
+      "followups": [
+        "Do you have a demo you can show us right now?",
+        "When did you start working on this?",
+        "What did you launch with?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "The Vision (10 Years)",
+      "prompt": "If you are wildly successful, what does this company look like in 10 years?",
+      "tags": [
+        "vision",
+        "ambition",
+        "long-term"
+      ],
+      "followups": [
+        "What is the headline you want to read about your company?",
+        "How big can this be?",
+        "Why does this need to exist as a company?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Why Now?",
+      "prompt": "Why is this the exact right time to start this company? Why hasn't it been built before?",
+      "tags": [
+        "timing",
+        "market-timing",
+        "insight"
+      ],
+      "followups": [
+        "What has changed in the last 2-3 years to make this possible?",
+        "Is it technology, consumer behavior, or regulation?",
+        "Why didn't Google/Amazon/Facebook do this 5 years ago?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "The Team (Roles)",
+      "prompt": "Who is on the team and what does each person focus on?",
+      "tags": [
+        "team",
+        "roles",
+        "cofounders"
+      ],
+      "followups": [
+        "How did you meet?",
+        "How long have you known each other?",
+        "What is the equity split and why?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Full-time Commitment",
+      "prompt": "Is everyone on the team working on this full-time?",
+      "tags": [
+        "commitment",
+        "risk"
+      ],
+      "followups": [
+        "If not, when will you be full-time?",
+        "What are you leaving behind to do this?",
+        "What is your burn rate?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Users (If Launched)",
+      "prompt": "How many users do you have?",
+      "tags": [
+        "traction",
+        "users",
+        "metrics-basic"
+      ],
+      "followups": [
+        "How many are active today? This week?",
+        "Where do new users come from?",
+        "What is your week-over-week growth rate?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Revenue (If Monetizing)",
+      "prompt": "How much revenue are you generating?",
+      "tags": [
+        "revenue",
+        "monetization",
+        "metrics-basic"
+      ],
+      "followups": [
+        "What is your Monthly Recurring Revenue (MRR)?",
+        "Who is paying you?",
+        "How did you land your first customer?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Why YC?",
+      "prompt": "Why are you applying to Y Combinator specifically?",
+      "tags": [
+        "motivation",
+        "yc-fit"
+      ],
+      "followups": [
+        "What do you hope to get out of the program?",
+        "What is the biggest gap in your knowledge right now?",
+        "What does success look like for you after 3 months in the batch?"
+      ],
+      "question_type": "coding"
+    }
+  ]
+}

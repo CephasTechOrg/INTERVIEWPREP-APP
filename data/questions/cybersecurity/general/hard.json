@@ -1,142 +1,202 @@
-﻿{
-    "difficulty": "hard",
-    "questions": [
-        {
-            "title": "Advanced Persistent Threats",
-            "prompt": "Explain what Advanced Persistent Threats (APTs) are and their typical characteristics.",
-            "tags": ["threat-intelligence", "nation-state"],
-            "followups": [
-                "How do APTs typically maintain persistence in a network?",
-                "What are some common indicators of APT activity?"
-            ]
-        },
-        {
-            "title": "Kerberos Authentication",
-            "prompt": "Walk through the Kerberos authentication protocol step by step.",
-            "tags": ["authentication", "active-directory"],
-            "followups": [
-                "What are the weaknesses of Kerberos that attackers often exploit?",
-                "How does Golden Ticket attack work against Kerberos?"
-            ]
-        },
-        {
-            "title": "Memory Corruption Exploits",
-            "prompt": "Explain how Return-Oriented Programming (ROP) chains work to bypass DEP.",
-            "tags": ["exploit-development", "memory-security"],
-            "followups": [
-                "What are gadgets in the context of ROP?",
-                "How does Control Flow Integrity help prevent ROP attacks?"
-            ]
-        },
-        {
-            "title": "Cloud Security Shared Responsibility",
-            "prompt": "Explain the shared responsibility model in cloud security for IaaS, PaaS, and SaaS.",
-            "tags": ["cloud-security", "architecture"],
-            "followups": [
-                "How does security responsibility shift between different cloud service models?",
-                "What are common security misconfigurations in cloud environments?"
-            ]
-        },
-        {
-            "title": "Reverse Engineering Malware",
-            "prompt": "Describe the process and tools used for reverse engineering a suspicious executable.",
-            "tags": ["malware-analysis", "reverse-engineering"],
-            "followups": [
-                "What are the differences between static and dynamic analysis?",
-                "How do you safely analyze malware in a controlled environment?"
-            ]
-        },
-        {
-            "title": "Blockchain Security",
-            "prompt": "Explain the security model of blockchain and common vulnerabilities in smart contracts.",
-            "tags": ["cryptography", "web3"],
-            "followups": [
-                "What is a 51% attack and how does it threaten blockchain security?",
-                "How do reentrancy attacks work in smart contracts?"
-            ]
-        },
-        {
-            "title": "Container Security",
-            "prompt": "What are the main security considerations for containerized environments like Docker and Kubernetes?",
-            "tags": ["cloud-security", "devsecops"],
-            "followups": [
-                "How do you secure container images throughout their lifecycle?",
-                "What are the security implications of container breakout vulnerabilities?"
-            ]
-        },
-        {
-            "title": "ICS/SCADA Security",
-            "prompt": "Explain the unique security challenges of Industrial Control Systems and SCADA networks.",
-            "tags": ["critical-infrastructure", "iot"],
-            "followups": [
-                "Why are traditional IT security solutions often inadequate for ICS environments?",
-                "What was the attack vector in the Stuxnet attack?"
-            ]
-        },
-        {
-            "title": "Quantum Computing Threats",
-            "prompt": "Explain how quantum computing threatens current cryptographic algorithms.",
-            "tags": ["cryptography", "future-threats"],
-            "followups": [
-                "Which current encryption algorithms are vulnerable to quantum attacks?",
-                "What are post-quantum cryptography algorithms?"
-            ]
-        },
-        {
-            "title": "Advanced Phishing Techniques",
-            "prompt": "Describe advanced phishing techniques like homograph attacks and adversary-in-the-middle frameworks.",
-            "tags": ["social-engineering", "threat-actors"],
-            "followups": [
-                "How do attackers bypass multi-factor authentication in sophisticated phishing attacks?",
-                "What is a reverse proxy phishing kit and how does it work?"
-            ]
-        },
-        {
-            "title": "Threat Hunting Methodology",
-            "prompt": "Explain the process of proactive threat hunting in an enterprise environment.",
-            "tags": ["threat-hunting", "security-operations"],
-            "followups": [
-                "What are some common hypotheses that drive threat hunting?",
-                "How do you differentiate between normal behavior and malicious activity?"
-            ]
-        },
-        {
-            "title": "Supply Chain Attacks",
-            "prompt": "Explain what software supply chain attacks are and how they can be prevented.",
-            "tags": ["vulnerability", "software-development"],
-            "followups": [
-                "What was the attack vector in the SolarWinds breach?",
-                "How can Software Bill of Materials (SBOM) help mitigate supply chain risks?"
-            ]
-        },
-        {
-            "title": "Active Directory Attacks",
-            "prompt": "Describe common attack techniques against Active Directory environments.",
-            "tags": ["active-directory", "penetration-testing"],
-            "followups": [
-                "How does the DCSync attack work and what privileges are needed?",
-                "What are some best practices for securing Active Directory?"
-            ]
-        },
-        {
-            "title": "Web Application Firewall Evasion",
-            "prompt": "Explain techniques attackers use to bypass Web Application Firewalls (WAFs).",
-            "tags": ["web-security", "penetration-testing"],
-            "followups": [
-                "What is obfuscation and how is it used to evade WAFs?",
-                "How can rate limiting help prevent WAF bypass attempts?"
-            ]
-        },
-        {
-            "title": "Deception Technology",
-            "prompt": "Explain how deception technology works and its role in modern security architectures.",
-            "tags": ["threat-detection", "architecture"],
-            "followups": [
-                "What are honeypots and how do they differ from honeytokens?",
-                "How can deception technology help with early threat detection?"
-            ]
-        }
-    ],
-    "company_style": "general",
-    "track": "cybersecurity"
+{
+  "difficulty": "hard",
+  "questions": [
+    {
+      "title": "Advanced Persistent Threats",
+      "prompt": "Explain what Advanced Persistent Threats (APTs) are and their typical characteristics.",
+      "tags": [
+        "threat-intelligence",
+        "nation-state"
+      ],
+      "followups": [
+        "How do APTs typically maintain persistence in a network?",
+        "What are some common indicators of APT activity?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Kerberos Authentication",
+      "prompt": "Walk through the Kerberos authentication protocol step by step.",
+      "tags": [
+        "authentication",
+        "active-directory"
+      ],
+      "followups": [
+        "What are the weaknesses of Kerberos that attackers often exploit?",
+        "How does Golden Ticket attack work against Kerberos?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Memory Corruption Exploits",
+      "prompt": "Explain how Return-Oriented Programming (ROP) chains work to bypass DEP.",
+      "tags": [
+        "exploit-development",
+        "memory-security"
+      ],
+      "followups": [
+        "What are gadgets in the context of ROP?",
+        "How does Control Flow Integrity help prevent ROP attacks?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Cloud Security Shared Responsibility",
+      "prompt": "Explain the shared responsibility model in cloud security for IaaS, PaaS, and SaaS.",
+      "tags": [
+        "cloud-security",
+        "architecture"
+      ],
+      "followups": [
+        "How does security responsibility shift between different cloud service models?",
+        "What are common security misconfigurations in cloud environments?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "Reverse Engineering Malware",
+      "prompt": "Describe the process and tools used for reverse engineering a suspicious executable.",
+      "tags": [
+        "malware-analysis",
+        "reverse-engineering"
+      ],
+      "followups": [
+        "What are the differences between static and dynamic analysis?",
+        "How do you safely analyze malware in a controlled environment?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Blockchain Security",
+      "prompt": "Explain the security model of blockchain and common vulnerabilities in smart contracts.",
+      "tags": [
+        "cryptography",
+        "web3"
+      ],
+      "followups": [
+        "What is a 51% attack and how does it threaten blockchain security?",
+        "How do reentrancy attacks work in smart contracts?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Container Security",
+      "prompt": "What are the main security considerations for containerized environments like Docker and Kubernetes?",
+      "tags": [
+        "cloud-security",
+        "devsecops"
+      ],
+      "followups": [
+        "How do you secure container images throughout their lifecycle?",
+        "What are the security implications of container breakout vulnerabilities?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "ICS/SCADA Security",
+      "prompt": "Explain the unique security challenges of Industrial Control Systems and SCADA networks.",
+      "tags": [
+        "critical-infrastructure",
+        "iot"
+      ],
+      "followups": [
+        "Why are traditional IT security solutions often inadequate for ICS environments?",
+        "What was the attack vector in the Stuxnet attack?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Quantum Computing Threats",
+      "prompt": "Explain how quantum computing threatens current cryptographic algorithms.",
+      "tags": [
+        "cryptography",
+        "future-threats"
+      ],
+      "followups": [
+        "Which current encryption algorithms are vulnerable to quantum attacks?",
+        "What are post-quantum cryptography algorithms?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Advanced Phishing Techniques",
+      "prompt": "Describe advanced phishing techniques like homograph attacks and adversary-in-the-middle frameworks.",
+      "tags": [
+        "social-engineering",
+        "threat-actors"
+      ],
+      "followups": [
+        "How do attackers bypass multi-factor authentication in sophisticated phishing attacks?",
+        "What is a reverse proxy phishing kit and how does it work?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Threat Hunting Methodology",
+      "prompt": "Explain the process of proactive threat hunting in an enterprise environment.",
+      "tags": [
+        "threat-hunting",
+        "security-operations"
+      ],
+      "followups": [
+        "What are some common hypotheses that drive threat hunting?",
+        "How do you differentiate between normal behavior and malicious activity?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Supply Chain Attacks",
+      "prompt": "Explain what software supply chain attacks are and how they can be prevented.",
+      "tags": [
+        "vulnerability",
+        "software-development"
+      ],
+      "followups": [
+        "What was the attack vector in the SolarWinds breach?",
+        "How can Software Bill of Materials (SBOM) help mitigate supply chain risks?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Active Directory Attacks",
+      "prompt": "Describe common attack techniques against Active Directory environments.",
+      "tags": [
+        "active-directory",
+        "penetration-testing"
+      ],
+      "followups": [
+        "How does the DCSync attack work and what privileges are needed?",
+        "What are some best practices for securing Active Directory?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Web Application Firewall Evasion",
+      "prompt": "Explain techniques attackers use to bypass Web Application Firewalls (WAFs).",
+      "tags": [
+        "web-security",
+        "penetration-testing"
+      ],
+      "followups": [
+        "What is obfuscation and how is it used to evade WAFs?",
+        "How can rate limiting help prevent WAF bypass attempts?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Deception Technology",
+      "prompt": "Explain how deception technology works and its role in modern security architectures.",
+      "tags": [
+        "threat-detection",
+        "architecture"
+      ],
+      "followups": [
+        "What are honeypots and how do they differ from honeytokens?",
+        "How can deception technology help with early threat detection?"
+      ],
+      "question_type": "system_design"
+    }
+  ],
+  "company_style": "general",
+  "track": "cybersecurity"
 }

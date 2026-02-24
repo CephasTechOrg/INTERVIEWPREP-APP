@@ -3,14 +3,22 @@
 import { ReactNode } from 'react';
 import { Sidebar } from './Sidebar';
 import { TopBar } from './TopBar';
+import { useUIStore } from '@/lib/stores/uiStore';
 
 interface MainLayoutProps {
   children: ReactNode;
 }
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
+  const { reduceMotion, highContrast, fontScale } = useUIStore();
+
   return (
-    <div className="min-h-[100dvh] bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-300">
+    <div
+      className={`app-root min-h-[100dvh] bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-300 ${
+        reduceMotion ? 'reduce-motion' : ''
+      } ${highContrast ? 'high-contrast' : ''}`}
+      style={{ fontSize: `${fontScale}%` }}
+    >
       <Sidebar />
       <TopBar />
       {/* Main content area - scrollable by default, children can override */}

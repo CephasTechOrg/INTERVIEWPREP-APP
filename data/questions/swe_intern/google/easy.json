@@ -6,652 +6,912 @@
     {
       "title": "Two Numbers That Add Up (Explain)",
       "prompt": "Explain how you would find two numbers in a list that add up to a target, without writing full code.",
-      "tags": ["arrays", "logic", "fundamentals"],
+      "tags": [
+        "arrays",
+        "logic",
+        "fundamentals"
+      ],
       "followups": [
         "Why might remembering previous numbers help?",
         "Give a small example.",
         "What edge case would you test?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Reverse a String (Steps)",
       "prompt": "Explain step by step how you would reverse a string like \"google\".",
-      "tags": ["strings", "logic"],
+      "tags": [
+        "strings",
+        "logic"
+      ],
       "followups": [
         "Where would you start?",
         "How do you know when to stop?",
         "How do you verify the result?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Valid Parentheses (Idea Level)",
       "prompt": "Explain how you would check if parentheses in a string are correctly matched.",
-      "tags": ["stack", "strings"],
+      "tags": [
+        "stack",
+        "strings"
+      ],
       "followups": [
         "Why does order matter?",
         "Give a valid and invalid example.",
         "How would you explain this simply?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Binary Search (Concept)",
       "prompt": "Explain how binary search works on a sorted list, without writing code.",
-      "tags": ["binary-search", "fundamentals"],
+      "tags": [
+        "binary-search",
+        "fundamentals"
+      ],
       "followups": [
         "Why must the list be sorted?",
         "What does cutting the list in half mean?",
         "Give a real-world example."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Find Maximum Value",
       "prompt": "Explain how you would find the maximum value in a list of numbers.",
-      "tags": ["arrays", "logic"],
+      "tags": [
+        "arrays",
+        "logic"
+      ],
       "followups": [
         "How do you track the largest value?",
         "What if the list has one number?",
         "Why is this approach simple?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Palindrome Check",
       "prompt": "Explain how you would check if a word is a palindrome.",
-      "tags": ["strings", "logic"],
+      "tags": [
+        "strings",
+        "logic"
+      ],
       "followups": [
         "Would case matter?",
         "Why compare from both ends?",
         "Give a simple example."
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "FizzBuzz (Reasoning)",
       "prompt": "Explain the rules of FizzBuzz and how you would solve it.",
-      "tags": ["fundamentals", "logic"],
+      "tags": [
+        "fundamentals",
+        "logic"
+      ],
       "followups": [
         "Why is this question asked?",
         "What common mistake do beginners make?",
         "How do you keep the code readable?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Merge Two Sorted Arrays (High Level)",
       "prompt": "Explain how you would merge two sorted arrays into one sorted array.",
-      "tags": ["arrays", "logic"],
+      "tags": [
+        "arrays",
+        "logic"
+      ],
       "followups": [
         "What do you compare first?",
         "What happens when one array finishes?",
         "Give a small example."
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Hash Map (Basic Use)",
       "prompt": "Explain what a hash map is and when it is useful.",
-      "tags": ["hashmap", "fundamentals"],
+      "tags": [
+        "hashmap",
+        "fundamentals"
+      ],
       "followups": [
         "What is stored as the key and value?",
         "Why is lookup fast?",
         "Give a simple use case."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Recursion (Basic Idea)",
       "prompt": "Explain recursion using a simple example.",
-      "tags": ["recursion", "fundamentals"],
+      "tags": [
+        "recursion",
+        "fundamentals"
+      ],
       "followups": [
         "What is a base case?",
         "What happens if there is no base case?",
         "Why can recursion be risky?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Stacks (Practical Understanding)",
       "prompt": "Explain what a stack is using a real-life example.",
-      "tags": ["stack", "fundamentals"],
+      "tags": [
+        "stack",
+        "fundamentals"
+      ],
       "followups": [
         "What does LIFO mean?",
         "Where are stacks used?",
         "Why are stacks useful?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Queues (Practical Understanding)",
       "prompt": "Explain what a queue is using a real-life example.",
-      "tags": ["queue", "fundamentals"],
+      "tags": [
+        "queue",
+        "fundamentals"
+      ],
       "followups": [
         "What does FIFO mean?",
         "Where are queues used?",
         "How is this different from a stack?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Array vs Linked List (Simple Difference)",
       "prompt": "Explain one main difference between arrays and linked lists.",
-      "tags": ["data-structures", "fundamentals"],
+      "tags": [
+        "data-structures",
+        "fundamentals"
+      ],
       "followups": [
         "Which is easier to use?",
         "Which is more flexible?",
         "Why does memory layout matter?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Big-O (Plain English)",
       "prompt": "Explain what Big-O helps programmers understand, without formulas.",
-      "tags": ["complexity", "fundamentals"],
+      "tags": [
+        "complexity",
+        "fundamentals"
+      ],
       "followups": [
         "Why does performance matter?",
         "Is faster always better?",
         "When is a simple solution enough?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Tree Traversal (High Level)",
       "prompt": "Explain how you might visit all nodes in a tree.",
-      "tags": ["trees", "fundamentals"],
+      "tags": [
+        "trees",
+        "fundamentals"
+      ],
       "followups": [
         "What does visiting a node mean?",
         "Why start at the root?",
         "Where are trees used?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Detect Duplicates",
       "prompt": "Explain how you would check if a list contains duplicate values.",
-      "tags": ["arrays", "hashset"],
+      "tags": [
+        "arrays",
+        "hashset"
+      ],
       "followups": [
         "Why does tracking seen values help?",
         "What happens if the list is large?",
         "Give a small example."
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Reverse a Linked List (Concept)",
       "prompt": "Explain the idea behind reversing a linked list.",
-      "tags": ["linked-list", "fundamentals"],
+      "tags": [
+        "linked-list",
+        "fundamentals"
+      ],
       "followups": [
         "Why do pointers matter?",
         "What is one tricky part?",
         "What edge case would you test?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Graph Basics",
       "prompt": "Explain what a graph is using a real-world example.",
-      "tags": ["graphs", "fundamentals"],
+      "tags": [
+        "graphs",
+        "fundamentals"
+      ],
       "followups": [
         "What are nodes and edges?",
         "Where are graphs used?",
         "Why are graphs powerful?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Unit Testing (Purpose)",
       "prompt": "Explain why developers write unit tests.",
-      "tags": ["testing", "fundamentals"],
+      "tags": [
+        "testing",
+        "fundamentals"
+      ],
       "followups": [
         "What makes a good test?",
         "Why automate tests?",
         "What happens without tests?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Handling Errors",
       "prompt": "Explain how you would handle errors in a simple program.",
-      "tags": ["fundamentals", "debugging"],
+      "tags": [
+        "fundamentals",
+        "debugging"
+      ],
       "followups": [
         "Why not ignore errors?",
         "What is an exception?",
         "Why is logging useful?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Loops vs Recursion",
       "prompt": "Explain one difference between loops and recursion.",
-      "tags": ["fundamentals"],
+      "tags": [
+        "fundamentals"
+      ],
       "followups": [
         "Which is easier to understand?",
         "When might recursion be risky?",
         "Why do both exist?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Variables Scope",
       "prompt": "Explain what variable scope means.",
-      "tags": ["fundamentals"],
+      "tags": [
+        "fundamentals"
+      ],
       "followups": [
         "Why does scope matter?",
         "What problems happen with global variables?",
         "Give a simple example."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Functions (Design)",
       "prompt": "Explain why small functions are better than very large ones.",
-      "tags": ["functions", "fundamentals"],
+      "tags": [
+        "functions",
+        "fundamentals"
+      ],
       "followups": [
         "How do small functions help testing?",
         "How do they help teamwork?",
         "What happens with very large functions?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "APIs (Basic Use)",
       "prompt": "Explain how an app might use an API to get data.",
-      "tags": ["api", "fundamentals"],
+      "tags": [
+        "api",
+        "fundamentals"
+      ],
       "followups": [
         "Why not store all data locally?",
         "What kind of data might an API return?",
         "Give an example you've seen."
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "REST APIs (Simple)",
       "prompt": "Explain what a REST API is using a simple example.",
-      "tags": ["api", "rest"],
+      "tags": [
+        "api",
+        "rest"
+      ],
       "followups": [
         "What does GET do?",
         "What does POST do?",
         "Why is REST common?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Frontend vs Backend",
       "prompt": "Explain how frontend and backend work together in an app.",
-      "tags": ["web", "fundamentals"],
+      "tags": [
+        "web",
+        "fundamentals"
+      ],
       "followups": [
         "Which part handles user input?",
         "Which part handles data?",
         "How do they communicate?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Debugging Mindset",
       "prompt": "Your code does not work. Explain how you would start debugging.",
-      "tags": ["debugging", "fundamentals"],
+      "tags": [
+        "debugging",
+        "fundamentals"
+      ],
       "followups": [
         "Why start small?",
         "What tools help?",
         "When do you ask for help?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Why Google?",
       "prompt": "Why do you want to intern at Google?",
-      "tags": ["behavioral"],
+      "tags": [
+        "behavioral"
+      ],
       "followups": [
         "What Google product do you like?",
         "What excites you about problem solving?",
         "What do you want to learn at Google?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Find Smallest Number",
       "prompt": "Explain how you would find the smallest number in a list of integers.",
-      "tags": ["arrays", "logic"],
+      "tags": [
+        "arrays",
+        "logic"
+      ],
       "followups": [
         "How is this similar to finding the largest number?",
         "What if all numbers are negative?",
         "Why is this a common starting problem?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Count Character Occurrences",
       "prompt": "Explain how you would count how many times each character appears in a string.",
-      "tags": ["strings", "hashmap"],
+      "tags": [
+        "strings",
+        "hashmap"
+      ],
       "followups": [
         "What would you use as a key and value?",
         "Why is this useful in real applications?",
         "How would you handle Unicode characters?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Remove Duplicates from Array",
       "prompt": "Explain how you would remove duplicates from an array.",
-      "tags": ["arrays", "hashset"],
+      "tags": [
+        "arrays",
+        "hashset"
+      ],
       "followups": [
         "How do you detect duplicates?",
         "Does the order matter?",
         "What if you can't use extra memory?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Check if Array is Sorted",
       "prompt": "Explain how you would check if an array is sorted in ascending order.",
-      "tags": ["arrays", "logic"],
+      "tags": [
+        "arrays",
+        "logic"
+      ],
       "followups": [
         "What pairs of elements would you compare?",
         "What edge cases would you test?",
         "Why is this important for algorithms like binary search?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "String vs StringBuilder",
       "prompt": "Explain why concatenating many strings can be inefficient and how to do it better.",
-      "tags": ["strings", "performance"],
+      "tags": [
+        "strings",
+        "performance"
+      ],
       "followups": [
         "Why are strings immutable in many languages?",
         "How does StringBuilder work differently?",
         "When would you notice the performance difference?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "What is a Compiler?",
       "prompt": "Explain what a compiler does in simple terms.",
-      "tags": ["fundamentals", "systems"],
+      "tags": [
+        "fundamentals",
+        "systems"
+      ],
       "followups": [
         "How is it different from an interpreter?",
         "What does 'compiled language' mean?",
         "What languages are typically compiled vs interpreted?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Google Search - High Level",
       "prompt": "Explain at a very high level how Google Search might work.",
-      "tags": ["system-thinking", "google-context"],
+      "tags": [
+        "system-thinking",
+        "google-context"
+      ],
       "followups": [
         "How does Google find web pages?",
         "How does it know what pages to show first?",
         "Why does search happen so fast?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Google Maps Directions",
       "prompt": "Explain how Google Maps might find the shortest route between two locations.",
-      "tags": ["system-thinking", "google-context", "graphs"],
+      "tags": [
+        "system-thinking",
+        "google-context",
+        "graphs"
+      ],
       "followups": [
         "What does a graph have to do with this?",
         "What might 'shortest' mean (time vs distance)?",
         "Why is this challenging for many locations?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Auto-Complete Feature",
       "prompt": "Explain how Google Search suggests completions as you type.",
-      "tags": ["system-thinking", "google-context"],
+      "tags": [
+        "system-thinking",
+        "google-context"
+      ],
       "followups": [
         "How does Google know popular searches?",
         "Why do suggestions change over time?",
         "What data structure might help with prefixes?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Version Control Basics",
       "prompt": "Explain why version control (like Git) is important for teams.",
-      "tags": ["fundamentals", "collaboration"],
+      "tags": [
+        "fundamentals",
+        "collaboration"
+      ],
       "followups": [
         "How does it help when multiple people work on the same code?",
         "What happens if you make a mistake?",
         "Why does Google use version control?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Code Review Benefits",
       "prompt": "Explain why Google emphasizes code reviews.",
-      "tags": ["collaboration", "code-quality"],
+      "tags": [
+        "collaboration",
+        "code-quality"
+      ],
       "followups": [
         "What kinds of issues can code reviews catch?",
         "How do you give constructive feedback?",
         "How do you receive feedback well?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Comments in Code",
       "prompt": "Explain when and why you should add comments to code.",
-      "tags": ["code-quality", "fundamentals"],
+      "tags": [
+        "code-quality",
+        "fundamentals"
+      ],
       "followups": [
         "What makes a comment helpful vs unnecessary?",
         "Should you comment obvious code?",
         "How do comments help with maintenance?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "User Input Validation",
       "prompt": "Explain why it's important to validate user input in applications.",
-      "tags": ["security", "fundamentals"],
+      "tags": [
+        "security",
+        "fundamentals"
+      ],
       "followups": [
         "What could happen without validation?",
         "What are examples of malicious input?",
         "How does this protect users?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Google's Go Programming Language",
       "prompt": "Have you heard of Go? Why might Google have created a new programming language?",
-      "tags": ["google-context", "fundamentals"],
+      "tags": [
+        "google-context",
+        "fundamentals"
+      ],
       "followups": [
         "What problems was Go designed to solve?",
         "How is it different from Python or Java?",
         "What are goroutines?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Web Browser Basics",
       "prompt": "Explain what happens when you type google.com into a browser and press Enter.",
-      "tags": ["web", "fundamentals"],
+      "tags": [
+        "web",
+        "fundamentals"
+      ],
       "followups": [
         "What is DNS and why is it needed?",
         "What does the browser do with the response?",
         "Why does the page load quickly sometimes but slowly other times?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "HTTPS vs HTTP",
       "prompt": "Explain the difference between HTTP and HTTPS.",
-      "tags": ["security", "web"],
+      "tags": [
+        "security",
+        "web"
+      ],
       "followups": [
         "What does the 'S' stand for?",
         "Why does Google use HTTPS everywhere?",
         "How does encryption protect users?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Cookie vs LocalStorage",
       "prompt": "Explain the difference between cookies and localStorage in simple terms.",
-      "tags": ["web", "fundamentals"],
+      "tags": [
+        "web",
+        "fundamentals"
+      ],
       "followups": [
         "Where is each stored?",
         "When would you use one over the other?",
         "What are security considerations for each?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Mobile App vs Web App",
       "prompt": "Explain the difference between a mobile app and a web app.",
-      "tags": ["fundamentals", "product-thinking"],
+      "tags": [
+        "fundamentals",
+        "product-thinking"
+      ],
       "followups": [
         "When might Google choose to build a mobile app?",
         "What are the trade-offs?",
         "How do they update differently?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Google's Culture (High Level)",
       "prompt": "What do you know about Google's engineering culture?",
-      "tags": ["behavioral", "google-context"],
+      "tags": [
+        "behavioral",
+        "google-context"
+      ],
       "followups": [
         "What is 'psychological safety' in teams?",
         "Why is collaboration important at Google?",
         "What does 'fail fast' mean?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Learning New Technologies",
       "prompt": "How do you approach learning a new programming language or framework?",
-      "tags": ["behavioral", "learning"],
+      "tags": [
+        "behavioral",
+        "learning"
+      ],
       "followups": [
         "What resources do you use?",
         "How do you practice?",
         "Tell me about a time you learned something new quickly."
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Team Collaboration",
       "prompt": "Describe how you work effectively in a team setting.",
-      "tags": ["behavioral", "collaboration"],
+      "tags": [
+        "behavioral",
+        "collaboration"
+      ],
       "followups": [
         "How do you handle disagreements?",
         "How do you contribute to team discussions?",
         "Why is teamwork important in software engineering?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Handling Ambiguity",
       "prompt": "Tell me about a time you worked on a problem with unclear requirements.",
-      "tags": ["behavioral", "problem-solving"],
+      "tags": [
+        "behavioral",
+        "problem-solving"
+      ],
       "followups": [
         "How did you clarify the requirements?",
         "Who did you talk to?",
         "What was the outcome?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Project You're Proud Of",
       "prompt": "Describe a programming project you're proud of and explain your role.",
-      "tags": ["behavioral", "projects"],
+      "tags": [
+        "behavioral",
+        "projects"
+      ],
       "followups": [
         "What was your contribution?",
         "What challenges did you face?",
         "What did you learn?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Time Management",
       "prompt": "How do you prioritize tasks when you have multiple deadlines?",
-      "tags": ["behavioral", "organization"],
+      "tags": [
+        "behavioral",
+        "organization"
+      ],
       "followups": [
         "What strategies do you use?",
         "How do you handle interruptions?",
         "What tools help you stay organized?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Receiving Feedback",
       "prompt": "Tell me about a time you received constructive feedback on your work.",
-      "tags": ["behavioral", "growth"],
+      "tags": [
+        "behavioral",
+        "growth"
+      ],
       "followups": [
         "How did you respond?",
         "What did you change?",
         "How did it help you improve?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Google's Products",
       "prompt": "What Google product do you use most and how would you improve it?",
-      "tags": ["behavioral", "product-thinking", "google-context"],
+      "tags": [
+        "behavioral",
+        "product-thinking",
+        "google-context"
+      ],
       "followups": [
         "Why did you choose this product?",
         "What problem would your improvement solve?",
         "How would you know if it was successful?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Diversity in Tech",
       "prompt": "Why is diversity important in technology teams?",
-      "tags": ["behavioral", "inclusion"],
+      "tags": [
+        "behavioral",
+        "inclusion"
+      ],
       "followups": [
         "How does diversity improve products?",
         "What can individuals do to promote inclusion?",
         "Why does Google value diverse perspectives?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Ethics in AI",
       "prompt": "Why should engineers consider ethics when building AI systems?",
-      "tags": ["behavioral", "ethics", "google-context"],
+      "tags": [
+        "behavioral",
+        "ethics",
+        "google-context"
+      ],
       "followups": [
         "What could go wrong with biased AI?",
         "How can engineers reduce bias?",
         "Why is this important at Google?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Constant vs Variable",
       "prompt": "Explain the difference between a constant and a variable.",
-      "tags": ["fundamentals"],
+      "tags": [
+        "fundamentals"
+      ],
       "followups": [
         "When would you use a constant?",
         "Why do constants improve code readability?",
         "What are naming conventions for constants?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Integer Overflow",
       "prompt": "Explain what integer overflow is and why it matters.",
-      "tags": ["fundamentals", "memory"],
+      "tags": [
+        "fundamentals",
+        "memory"
+      ],
       "followups": [
         "What happens when you exceed the maximum value?",
         "Give a real-world example of why this is a problem.",
         "How do languages handle this differently?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Floating Point Precision",
       "prompt": "Why might 0.1 + 0.2 not equal exactly 0.3 in programming?",
-      "tags": ["fundamentals", "math"],
+      "tags": [
+        "fundamentals",
+        "math"
+      ],
       "followups": [
         "How do computers represent decimal numbers?",
         "When is this a problem?",
         "How would you compare floating point numbers safely?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Infinite Loops",
       "prompt": "What is an infinite loop and how do you avoid it?",
-      "tags": ["fundamentals", "debugging"],
+      "tags": [
+        "fundamentals",
+        "debugging"
+      ],
       "followups": [
         "Give an example of code that causes an infinite loop.",
         "How do you stop a program stuck in an infinite loop?",
         "How do you test that your loop will terminate?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "If Statements vs Switch",
       "prompt": "When would you use a switch statement instead of multiple if-else statements?",
-      "tags": ["fundamentals", "control-flow"],
+      "tags": [
+        "fundamentals",
+        "control-flow"
+      ],
       "followups": [
         "What are the readability differences?",
         "Are there performance differences?",
         "What languages have switch statements?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Pass by Value vs Reference",
       "prompt": "Explain the difference between pass by value and pass by reference.",
-      "tags": ["fundamentals", "memory"],
+      "tags": [
+        "fundamentals",
+        "memory"
+      ],
       "followups": [
         "What happens to the original variable in each case?",
         "Which is more efficient and why?",
         "Give an example where this matters."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "What is an IDE?",
       "prompt": "What is an IDE and why do developers use them?",
-      "tags": ["fundamentals", "tools"],
+      "tags": [
+        "fundamentals",
+        "tools"
+      ],
       "followups": [
         "What features make IDEs useful?",
         "What IDEs have you used?",
         "How do they help with debugging?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Google's PageRank (Conceptual)",
       "prompt": "Explain the basic idea behind Google's PageRank algorithm in simple terms.",
-      "tags": ["google-context", "algorithms"],
+      "tags": [
+        "google-context",
+        "algorithms"
+      ],
       "followups": [
         "How does counting links help determine importance?",
         "Why are links from important pages more valuable?",
         "How is this different from keyword matching?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Gmail Search",
       "prompt": "How might Gmail implement search through millions of emails so quickly?",
-      "tags": ["system-thinking", "google-context"],
+      "tags": [
+        "system-thinking",
+        "google-context"
+      ],
       "followups": [
         "What is an index and why is it useful?",
         "What would you index in an email?",
         "How do you handle new emails arriving?"
-      ]
+      ],
+      "question_type": "system_design"
     }
   ]
 }

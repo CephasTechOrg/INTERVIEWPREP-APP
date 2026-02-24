@@ -15,7 +15,8 @@
       "followups": [
         "How do you handle hot keys and caching?",
         "How do you prevent abuse/spam?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Queue-Based Background Jobs",
@@ -28,7 +29,8 @@
       "followups": [
         "How do you handle retries and poison messages?",
         "How would you ensure at-least-once vs exactly-once behavior?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Database Indexing Strategy",
@@ -40,7 +42,8 @@
       "followups": [
         "What are trade-offs of adding indexes (writes/storage)?",
         "What is a composite index and when is it useful?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Consistent Hashing (Conceptual)",
@@ -52,7 +55,8 @@
       "followups": [
         "How does it reduce rebalancing when nodes change?",
         "Where have you seen it used (caches, sharding)?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Merge Intervals",
@@ -64,7 +68,8 @@
       "followups": [
         "What edge cases would you test?",
         "Can you do it in-place?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Webhook Delivery System",
@@ -78,7 +83,8 @@
       "followups": [
         "How do you sign webhooks securely?",
         "How do you handle customer endpoints that are slow or down?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Chunked File Uploads",
@@ -92,7 +98,8 @@
       "followups": [
         "How do you handle partial uploads and cleanup?",
         "Where do you store upload state (DB, Redis)?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design an Email Verification Flow",
@@ -105,7 +112,8 @@
       "followups": [
         "How do you prevent token leakage and replay?",
         "How do you rate limit resends?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Notification Service",
@@ -118,7 +126,8 @@
       "followups": [
         "How do you avoid duplicate notifications?",
         "How do you handle user preferences and unsubscribes?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Comment System",
@@ -132,7 +141,8 @@
       "followups": [
         "How would you index for fast reads?",
         "How do you handle soft delete vs hard delete?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Zero-Downtime Database Migration",
@@ -145,7 +155,8 @@
       "followups": [
         "How do you backfill safely?",
         "How do you deploy app changes around the migration?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Multi-Tenant SaaS Schema",
@@ -158,7 +169,8 @@
       "followups": [
         "How do you prevent tenant data leaks?",
         "How do you handle noisy neighbors?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Caching Strategy for a Read-Heavy Endpoint",
@@ -171,7 +183,8 @@
       "followups": [
         "Cache-aside vs write-through: when would you choose each?",
         "How do you handle stale data?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Leaderboard (Top N)",
@@ -184,7 +197,8 @@
       "followups": [
         "What storage fits best (sorted set, DB index) and why?",
         "How do you handle ties and pagination?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Implement Kth Largest Element",
@@ -197,7 +211,8 @@
       "followups": [
         "When is quickselect better than a heap?",
         "What edge cases do you test?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design Search Autocomplete",
@@ -210,7 +225,8 @@
       "followups": [
         "Trie vs prefix index: trade-offs?",
         "How do you keep results fresh as data changes?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Per-User Rate Limits Across Servers",
@@ -224,7 +240,8 @@
       "followups": [
         "What trade-off between accuracy and speed is acceptable?",
         "How do you handle burst traffic?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Delayed Job Scheduler (Simple)",
@@ -237,7 +254,8 @@
       "followups": [
         "How do you handle retries and duplicates?",
         "How do you scale workers safely?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Idempotency in a Multi-Instance API",
@@ -250,7 +268,8 @@
       "followups": [
         "How do you choose idempotency key TTL?",
         "How do you handle large request bodies?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Observability: Metrics, Logs, Traces",
@@ -262,7 +281,8 @@
       "followups": [
         "How do you identify the slow dependency?",
         "What SLOs would you define?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Cache Consistency for User Profiles",
@@ -275,7 +295,8 @@
       "followups": [
         "What cache invalidation strategies would you consider?",
         "How do you prevent cache stampedes?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Recommendation Endpoint (Simple)",
@@ -288,7 +309,8 @@
       "followups": [
         "How do you evaluate quality and latency?",
         "How do you handle cold start users?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Debugging a Production Incident",
@@ -301,7 +323,8 @@
       "followups": [
         "What signals do you check first?",
         "How do you prevent this next time?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Large Backfill Job",
@@ -314,7 +337,8 @@
       "followups": [
         "How do you make it resumable?",
         "How do you monitor progress and failures?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Merge K Sorted Lists",
@@ -327,7 +351,8 @@
       "followups": [
         "What if lists are very long?",
         "How do you test performance?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Real-time Chat System",
@@ -341,7 +366,8 @@
       "followups": [
         "How would you handle message persistence?",
         "What are the challenges with scaling WebSocket connections?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Implement a Trie",
@@ -354,7 +380,8 @@
       "followups": [
         "What are the time complexities for each operation?",
         "How would you implement autocomplete using a trie?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Distributed Counter",
@@ -367,7 +394,8 @@
       "followups": [
         "How do you handle concurrent increments?",
         "What trade-offs exist between accuracy and performance?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Longest Substring Without Repeating Characters",
@@ -380,7 +408,8 @@
       "followups": [
         "What's the optimal time complexity?",
         "How would you extend this to find the substring itself?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Rate Limiter with Redis",
@@ -393,7 +422,8 @@
       "followups": [
         "How does this compare to token bucket implementation?",
         "How do you handle race conditions in distributed Redis?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Simple Search Engine",
@@ -406,7 +436,8 @@
       "followups": [
         "How would you handle spelling corrections?",
         "What data structures are optimal for inverted indexes?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Implement a Circular Buffer",
@@ -419,7 +450,8 @@
       "followups": [
         "How would you make it thread-safe?",
         "What are practical use cases for circular buffers?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a File Upload Service with CDN",
@@ -433,7 +465,8 @@
       "followups": [
         "How do you handle file access permissions?",
         "What about virus scanning and content moderation?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Find All Anagrams in a String",
@@ -446,7 +479,8 @@
       "followups": [
         "What's the time and space complexity?",
         "How would you optimize for large alphabets?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Social Graph",
@@ -459,7 +493,8 @@
       "followups": [
         "How would you store edges for efficient traversal?",
         "How do you find mutual friends efficiently?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Implement a Thread Pool",
@@ -472,7 +507,8 @@
       "followups": [
         "How do you handle task failures?",
         "How would you implement graceful shutdown?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Shopping Cart System",
@@ -485,7 +521,8 @@
       "followups": [
         "How do you handle concurrent modifications?",
         "How would you implement cart abandonment tracking?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Word Break Problem",
@@ -498,7 +535,8 @@
       "followups": [
         "What's the time complexity of DP solution?",
         "How would you return all possible segmentations?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Metrics Aggregation System",
@@ -511,7 +549,8 @@
       "followups": [
         "How do you handle high cardinality dimensions?",
         "What storage backend would you choose (time-series DB vs OLAP)?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Implement a Least Recently Used (LRU) Cache",
@@ -525,7 +564,8 @@
       "followups": [
         "How would you make it thread-safe?",
         "What about implementing an LFU cache?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Feature Flag System",
@@ -538,7 +578,8 @@
       "followups": [
         "How do you ensure low latency flag evaluation?",
         "How would you audit flag changes?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Container With Most Water",
@@ -551,7 +592,8 @@
       "followups": [
         "What's the intuition behind the two-pointer solution?",
         "How would you prove the algorithm's correctness?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Distributed Lock Service",
@@ -564,7 +606,8 @@
       "followups": [
         "How do you handle lock expiration and renewal?",
         "What are the challenges with clock drift?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Implement a Binary Search Tree Iterator",
@@ -577,7 +620,8 @@
       "followups": [
         "What's the time and space complexity?",
         "How would you handle modifications to the tree during iteration?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Video Streaming Service",
@@ -591,7 +635,8 @@
       "followups": [
         "How do you handle different video qualities?",
         "What about live streaming vs on-demand?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Course Schedule (Topological Sort)",
@@ -604,7 +649,8 @@
       "followups": [
         "How would you find a valid course order?",
         "What's the time complexity for adjacency list?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a API Gateway",
@@ -617,7 +663,8 @@
       "followups": [
         "How do you handle service discovery?",
         "What about circuit breaking and fallbacks?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Implement a Min Stack",
@@ -630,7 +677,8 @@
       "followups": [
         "What's the space complexity?",
         "How would you extend this to support max as well?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Distributed Task Scheduler",
@@ -643,7 +691,8 @@
       "followups": [
         "How do you ensure tasks are executed exactly once?",
         "How would you prioritize different types of tasks?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Number of Islands",
@@ -657,7 +706,8 @@
       "followups": [
         "Compare DFS and BFS approaches",
         "How would you handle very large grids that don't fit in memory?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Content Management System",
@@ -670,7 +720,8 @@
       "followups": [
         "How would you implement draft vs published states?",
         "What about content search and tagging?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Serialize and Deserialize Binary Tree",
@@ -683,7 +734,8 @@
       "followups": [
         "What serialization format would you choose?",
         "How do you handle null values?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Payment Processing System",
@@ -696,7 +748,8 @@
       "followups": [
         "How do you handle payment gateway failures?",
         "What about fraud detection?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Validate Binary Search Tree",
@@ -709,7 +762,8 @@
       "followups": [
         "What's the time and space complexity?",
         "How would you handle duplicate values?"
-      ]
+      ],
+      "question_type": "coding"
     }
   ]
 }

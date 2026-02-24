@@ -127,6 +127,13 @@ export const authService = {
   },
 
   /**
+   * Deactivate current user's account
+   */
+  async deactivateAccount(): Promise<{ ok: boolean; message?: string }> {
+    return apiClient.post('/users/deactivate', {});
+  },
+
+  /**
    * Get the stored signup email (for verify page auto-fill)
    */
   getStoredSignupEmail(): string | null {

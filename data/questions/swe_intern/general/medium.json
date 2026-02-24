@@ -15,7 +15,8 @@
         "What is the invariant maintained by the sliding window?",
         "What is the time complexity and why?",
         "How would you return the substring itself, not just length?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Group Anagrams",
@@ -29,7 +30,8 @@
         "What key do you use for grouping?",
         "What is the complexity of your approach?",
         "How would you optimize for large alphabets?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Top K Frequent Elements",
@@ -43,7 +45,8 @@
         "Can you do better than O(n log n)?",
         "What is the time and space complexity?",
         "How do you handle ties?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Binary Tree Level Order Traversal",
@@ -57,7 +60,8 @@
         "Why is BFS a good fit here?",
         "What is the time and space complexity?",
         "How would you return a single flattened list instead?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Coin Change (Minimum Coins)",
@@ -69,7 +73,8 @@
         "What's the DP state and transition?",
         "What is the complexity?",
         "How would you also reconstruct the actual coins used?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "3Sum",
@@ -83,7 +88,8 @@
         "How do you avoid duplicate triplets?",
         "What is the time complexity?",
         "How would you extend this to k-sum?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Container With Most Water",
@@ -96,7 +102,8 @@
         "Why does the two-pointer approach work?",
         "What's the time complexity?",
         "How would you prove correctness?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Generate Parentheses",
@@ -110,7 +117,8 @@
         "What is the pruning condition?",
         "How many valid combinations exist?",
         "Can you solve iteratively?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Word Break",
@@ -123,7 +131,8 @@
         "What is the DP recurrence?",
         "What's the time and space complexity?",
         "How would you return all possible segmentations?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Kth Largest Element in an Array",
@@ -137,7 +146,8 @@
         "Compare heap vs quickselect trade-offs.",
         "What's the worst-case time complexity?",
         "How do you handle duplicates?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Course Schedule",
@@ -151,7 +161,8 @@
         "How do you detect cycles in a directed graph?",
         "Compare BFS (Kahn's) vs DFS approaches.",
         "How would you return the ordering of courses?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Course Schedule II",
@@ -165,7 +176,8 @@
         "How does the algorithm change from detecting feasibility to producing an order?",
         "What's the time complexity?",
         "How do you detect and report cycles?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design Add and Search Words Data Structure",
@@ -179,7 +191,8 @@
         "How does a trie help with prefix matching?",
         "How do you handle '.' wildcard efficiently?",
         "What's the time complexity of search?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Number of Islands",
@@ -194,7 +207,8 @@
         "Compare DFS vs BFS approaches.",
         "What's the time and space complexity?",
         "How would you count islands in a very large grid?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Rotting Oranges",
@@ -207,7 +221,8 @@
         "Why is BFS more suitable than DFS?",
         "How do you handle multiple sources?",
         "What if there are oranges that can never rot?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Pacific Atlantic Water Flow",
@@ -221,7 +236,8 @@
         "Why is reverse traversal efficient?",
         "What's the time complexity?",
         "How would you solve with BFS instead?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Longest Palindromic Substring",
@@ -235,7 +251,8 @@
         "Compare DP vs expand-around-center approaches.",
         "What's the time complexity of each?",
         "How would you handle very long strings?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Unique Paths",
@@ -248,7 +265,8 @@
         "What's the DP recurrence?",
         "What's the mathematical formula?",
         "How would you optimize space?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Jump Game",
@@ -262,7 +280,8 @@
         "Why is greedy optimal here?",
         "What's the time complexity?",
         "How would you find the minimum jumps needed?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Jump Game II",
@@ -276,7 +295,8 @@
         "How does BFS on intervals work?",
         "What's the time complexity?",
         "Can you do it in O(1) space?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Set Matrix Zeroes",
@@ -289,7 +309,8 @@
         "How do you avoid overwriting state?",
         "What's the trick with first row/column markers?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Spiral Matrix",
@@ -302,7 +323,8 @@
         "How do you handle boundary conditions?",
         "What's the time complexity?",
         "How would you generate a spiral matrix?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Subsets",
@@ -315,7 +337,8 @@
         "Compare backtracking vs bitmask approaches.",
         "What's the time complexity?",
         "How would you handle duplicates?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Subsets II",
@@ -327,7 +350,8 @@
         "How do you avoid duplicates?",
         "Why sort the array first?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Combination Sum",
@@ -339,7 +363,8 @@
         "What's the pruning condition?",
         "How does the algorithm differ if numbers can be reused?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Combination Sum II",
@@ -351,7 +376,8 @@
         "How do you avoid duplicate combinations?",
         "Why sort the array?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Permutations",
@@ -364,7 +390,8 @@
         "What's the recurrence relation?",
         "How many permutations exist?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Permutations II",
@@ -376,7 +403,8 @@
         "How do you prune duplicate branches?",
         "What's the time complexity?",
         "How would you solve iteratively?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Rotate Image",
@@ -389,7 +417,8 @@
         "How do you do it layer by layer?",
         "What's the in-place approach?",
         "How would you rotate counter-clockwise?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Word Search",
@@ -403,7 +432,8 @@
         "How do you mark visited cells?",
         "What's the time complexity?",
         "How would you optimize with pruning?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Decode Ways",
@@ -416,7 +446,8 @@
         "What's the DP recurrence?",
         "How do you handle leading zeros?",
         "What's the space-optimized solution?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "House Robber",
@@ -429,7 +460,8 @@
         "What's the DP recurrence?",
         "How do you optimize space?",
         "What about circular houses (House Robber II)?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "House Robber II",
@@ -442,7 +474,8 @@
         "How do you break the circular dependency?",
         "What's the recurrence?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Task Scheduler",
@@ -456,7 +489,8 @@
         "Why is the greedy formula optimal?",
         "How does the math solution work?",
         "What if tasks have different cooldowns?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Partition Equal Subset Sum",
@@ -469,7 +503,8 @@
         "What's the DP state and transition?",
         "Can you optimize space?",
         "Why is this a 0/1 knapsack problem?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Find All Duplicates in an Array",
@@ -481,7 +516,8 @@
         "How do you use indices as markers?",
         "What's the trick with negating values?",
         "What if integers are not in range [1, n]?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Product of Array Except Self",
@@ -494,7 +530,8 @@
         "How do you compute prefix and suffix products?",
         "Can you do it with O(1) extra space?",
         "How do you handle zeros?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Gas Station",
@@ -507,7 +544,8 @@
         "Why can you skip intermediate indices?",
         "What's the invariant that guarantees correctness?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Copy List with Random Pointer",
@@ -520,7 +558,8 @@
         "Compare O(n) space vs O(1) space approaches.",
         "How do you handle cycles in random pointers?",
         "What's the interweaving technique?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Sort Colors (Dutch National Flag)",
@@ -534,7 +573,8 @@
         "What's the invariant maintained by three pointers?",
         "Why is this O(n) and one-pass?",
         "How would you generalize to k colors?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Kth Smallest Element in a BST",
@@ -548,7 +588,8 @@
         "What's the in-order traversal property?",
         "How would you handle frequent modifications?",
         "What about kth largest?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Binary Tree Right Side View",
@@ -562,7 +603,8 @@
         "How do you solve with BFS vs DFS?",
         "What's the time complexity?",
         "How about the left side view?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Flatten Binary Tree to Linked List",
@@ -575,7 +617,8 @@
         "What's the order (preorder) of the linked list?",
         "How do you do it iteratively?",
         "What's the Morris traversal approach?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Construct Binary Tree from Preorder and Inorder",
@@ -588,7 +631,8 @@
         "How do you find the root in inorder array?",
         "What's the time complexity with hashmap optimization?",
         "What about postorder + inorder?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Construct Binary Tree from Inorder and Postorder",
@@ -601,7 +645,8 @@
         "How does this differ from preorder+inorder?",
         "What's the recursive pattern?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Path Sum II",
@@ -615,7 +660,8 @@
         "How do you track the current path?",
         "What's the time complexity?",
         "How would you handle negative values?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Populating Next Right Pointers in Each Node",
@@ -628,7 +674,8 @@
         "How do you solve with O(1) extra space?",
         "What's the level order traversal without queue?",
         "How would you handle non-perfect trees?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Populating Next Right Pointers in Each Node II",
@@ -641,7 +688,8 @@
         "How does the algorithm change for non-perfect trees?",
         "How do you traverse levels without a queue?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Implement Trie (Prefix Tree)",
@@ -654,7 +702,8 @@
         "What's the space complexity?",
         "How would you handle deletions?",
         "How would you implement autocomplete?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design Circular Queue",
@@ -668,7 +717,8 @@
         "How do you differentiate full vs empty conditions?",
         "What's the time complexity of operations?",
         "How would you make it thread-safe?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Evaluate Reverse Polish Notation",
@@ -681,7 +731,8 @@
         "Why use a stack?",
         "How do you handle division truncation?",
         "What about negative numbers?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Daily Temperatures",
@@ -694,7 +745,8 @@
         "Why is a monotonic decreasing stack efficient?",
         "What's the time complexity?",
         "How would you solve with brute force first?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Minimum Path Sum",
@@ -707,7 +759,8 @@
         "What's the DP recurrence?",
         "How do you optimize space?",
         "What if you can move in all four directions?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Longest Increasing Subsequence",
@@ -717,10 +770,11 @@
         "binary-search"
       ],
       "followups": [
-        "Compare O(n²) DP vs O(n log n) patience sorting.",
+        "Compare O(n\u00b2) DP vs O(n log n) patience sorting.",
         "What's the DP recurrence?",
         "How would you reconstruct the subsequence?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Coin Change II",
@@ -733,7 +787,8 @@
         "How does this differ from Coin Change I?",
         "What's the DP recurrence?",
         "Why does the loop order matter?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Maximum Product Subarray",
@@ -746,7 +801,8 @@
         "Why do you need to track both max and min?",
         "How do you handle zeros and negatives?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Wiggle Sort II",
@@ -759,7 +815,8 @@
         "What's the median finding approach?",
         "How do you handle duplicates?",
         "What's the virtual indexing trick?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Partition Labels",
@@ -773,7 +830,8 @@
         "What's the greedy approach?",
         "How do you track last occurrences?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Battleships in a Board",
@@ -785,7 +843,8 @@
         "How do you avoid double counting?",
         "What's the invariant for counting only the head?",
         "How would you solve if adjacent ships were allowed?"
-      ]
+      ],
+      "question_type": "coding"
     }
   ]
 }

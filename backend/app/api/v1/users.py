@@ -1,3 +1,5 @@
+from datetime import UTC, datetime
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
@@ -37,3 +39,13 @@ def update_me(
         role_pref=getattr(updated, "role_pref", None),
         profile=getattr(updated, "profile", None) or {},
     )
+
+
+@router.post("/deactivate")
+def deactivate_me(
+    db: Session = Depends(get_db),
+    user=Depends(get_current_user),
+):
+    now = datetime.now(UTC).isoformat()
+    update_user_profile(db, user, profile={"deactivated": True, "deactivated_at": now})
+    return {"ok": True, "message": "Account deactivated."}

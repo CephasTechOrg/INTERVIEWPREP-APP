@@ -117,6 +117,14 @@ def elevenlabs_tts(text: str) -> tuple[bytes | None, str]:
         except Exception as e:  # noqa: BLE001
             last_err = e
             elapsed = time.perf_counter() - start
+            # Short-circuit on quota errors to avoid noisy retries.
+            quota_exceeded = False
+            status = getattr(e, "status_code", None)
+            body = getattr(e, "body", None)
+            if status in {401, 402, 429} and isinstance(body, dict):
+                detail = body.get("detail")
+                if isinstance(detail, dict) and detail.get("status") == "quota_exceeded":
+                    quota_exceeded = True
             logger.exception(
                 "ElevenLabs TTS attempt %s/%s failed after %.1f ms (voice=%s, model=%s, format=%s): %s",
                 idx + 1,
@@ -127,6 +135,8 @@ def elevenlabs_tts(text: str) -> tuple[bytes | None, str]:
                 output_format,
                 str(e),
             )
+            if quota_exceeded:
+                break
             if elapsed >= soft_timeout:
                 break
             if idx < attempts - 1:

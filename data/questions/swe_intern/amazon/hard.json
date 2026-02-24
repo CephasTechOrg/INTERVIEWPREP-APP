@@ -6,512 +6,779 @@
     {
       "title": "Design a Highly Available URL Shortener",
       "prompt": "Design a URL shortener that supports billions of reads/day, strong abuse prevention, and high availability.",
-      "tags": ["system-design", "scalability", "reliability"],
+      "tags": [
+        "system-design",
+        "scalability",
+        "reliability"
+      ],
       "followups": [
         "How do you generate unique short codes at scale?",
         "How do you handle hot keys and caching strategy?",
         "How do you prevent abuse and spam?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Distributed Rate Limiter",
       "prompt": "Design a distributed rate limiter across multiple regions with good accuracy under failures.",
-      "tags": ["distributed-systems", "system-design", "reliability"],
+      "tags": [
+        "distributed-systems",
+        "system-design",
+        "reliability"
+      ],
       "followups": [
         "How do you handle clock skew?",
         "Token bucket vs sliding window trade-offs?",
         "How do you avoid a single point of failure?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Durable Event Processing System",
       "prompt": "Design an event processing system with replay support and strong operational reliability.",
-      "tags": ["system-design", "distributed-systems", "reliability"],
+      "tags": [
+        "system-design",
+        "distributed-systems",
+        "reliability"
+      ],
       "followups": [
         "At-least-once vs exactly-once processing?",
         "How do you design idempotency keys?",
         "How do you handle schema evolution?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Large-Scale Notification Platform",
       "prompt": "Design a notifications platform supporting email/SMS/push with retries, throttling, and user preferences.",
-      "tags": ["system-design", "scalability", "reliability"],
+      "tags": [
+        "system-design",
+        "scalability",
+        "reliability"
+      ],
       "followups": [
         "How do you prevent over-sending and respect preferences?",
         "How do you handle provider outages and retries safely?",
         "How do you ensure idempotency and deduplication?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Debugging: Heisenbug Under Load",
       "prompt": "A bug appears only under heavy load and disappears when logging is enabled. Describe how you would find the root cause and ship a safe fix.",
-      "tags": ["debugging", "concurrency", "reliability"],
+      "tags": [
+        "debugging",
+        "concurrency",
+        "reliability"
+      ],
       "followups": [
         "What low-overhead signals would you add?",
         "How do you reproduce deterministically?",
         "How do you roll out the fix safely?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Tail Latency (p99) Investigation",
       "prompt": "A service meets average latency but fails p99 targets. Explain how you diagnose and reduce tail latency.",
-      "tags": ["performance", "system-thinking", "distributed-systems"],
+      "tags": [
+        "performance",
+        "system-thinking",
+        "distributed-systems"
+      ],
       "followups": [
         "What causes tail latency in distributed systems?",
         "How do you instrument tracing effectively?",
         "What mitigations reduce p99 without hurting throughput?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Concurrent Data Structure: Thread-Safe Cache",
       "prompt": "Design a thread-safe cache with minimal contention that supports read-heavy workloads.",
-      "tags": ["concurrency", "design", "performance"],
+      "tags": [
+        "concurrency",
+        "design",
+        "performance"
+      ],
       "followups": [
         "What lock granularity do you choose and why?",
         "How do you prevent deadlocks?",
         "How do you measure contention and throughput?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Multi-Tenant Service",
       "prompt": "Design a multi-tenant SaaS service for enterprise customers: data isolation, scaling, and noisy-neighbor mitigation.",
-      "tags": ["system-design", "databases", "scalability"],
+      "tags": [
+        "system-design",
+        "databases",
+        "scalability"
+      ],
       "followups": [
         "Shared DB vs DB-per-tenant trade-offs?",
         "How do you enforce isolation and access control?",
         "How do you handle backups and restores per tenant?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Distributed Cache Invalidation Strategy",
       "prompt": "Design a caching layer in front of a database and describe invalidation/consistency strategies under concurrent updates.",
-      "tags": ["distributed-systems", "system-thinking", "design"],
+      "tags": [
+        "distributed-systems",
+        "system-thinking",
+        "design"
+      ],
       "followups": [
         "Write-through vs write-back vs cache-aside?",
         "How do you avoid cache stampedes?",
         "What consistency model do you target and why?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Graph: Critical Connections",
       "prompt": "Given an undirected graph, find all critical connections whose removal disconnects the graph.",
-      "tags": ["graphs", "dfs", "algorithms"],
+      "tags": [
+        "graphs",
+        "dfs",
+        "algorithms"
+      ],
       "followups": [
         "What are low-link values conceptually?",
         "Why is DFS the right tool here?",
         "Time and space complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "DP: Edit Distance",
       "prompt": "Given two strings, compute the minimum number of edits (insert/delete/replace) to convert one into the other.",
-      "tags": ["dp", "strings", "algorithms"],
+      "tags": [
+        "dp",
+        "strings",
+        "algorithms"
+      ],
       "followups": [
         "Define your DP state clearly.",
         "How do you optimize space?",
         "What edge cases do you test?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "DP: Burst Balloons",
       "prompt": "Given balloons with values, maximize coins by bursting them in optimal order.",
-      "tags": ["dp", "interval-dp", "algorithms"],
+      "tags": [
+        "dp",
+        "interval-dp",
+        "algorithms"
+      ],
       "followups": [
         "What is the subproblem definition?",
         "Why does greedy fail?",
         "What is the complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Design a Secure Auth System",
       "prompt": "Design authentication for web/mobile: login, token issuance, refresh, revocation, and secure storage.",
-      "tags": ["security", "system-design", "reliability"],
+      "tags": [
+        "security",
+        "system-design",
+        "reliability"
+      ],
       "followups": [
         "How do you defend against token theft?",
         "How do you rotate keys and revoke sessions?",
         "How do you store tokens safely on device?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Large-Scale Data Migration Plan",
       "prompt": "You must migrate billions of records to a new schema with minimal downtime. Outline a safe plan.",
-      "tags": ["databases", "reliability", "system-thinking"],
+      "tags": [
+        "databases",
+        "reliability",
+        "system-thinking"
+      ],
       "followups": [
         "How do you validate correctness during migration?",
         "How do you do rollback safely?",
         "What metrics do you monitor?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design a Search Service (High Level)",
       "prompt": "Design a search service that supports indexing, querying, ranking, and pagination with operational considerations.",
-      "tags": ["system-design", "scalability", "performance"],
+      "tags": [
+        "system-design",
+        "scalability",
+        "performance"
+      ],
       "followups": [
         "How do you build and update the index?",
         "How do you handle hot queries and caching?",
         "How do you fight spam/abuse?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Behavioral (LP): Dive Deep (Hard Case)",
       "prompt": "Tell me about the hardest root-cause analysis you\u2019ve done. What data did you use and how did you confirm the fix?",
-      "tags": ["behavioral", "leadership-principles", "debugging"],
+      "tags": [
+        "behavioral",
+        "leadership-principles",
+        "debugging"
+      ],
       "followups": [
         "How did you prove causality (not correlation)?",
         "What was the long-term preventative change?",
         "How did you communicate the incident?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Behavioral (LP): Ownership (Failure Scenario)",
       "prompt": "Tell me about a time you owned a failure. What happened, what did you do immediately, and what changed afterward?",
-      "tags": ["behavioral", "leadership-principles", "communication"],
+      "tags": [
+        "behavioral",
+        "leadership-principles",
+        "communication"
+      ],
       "followups": [
         "How did you manage stakeholders?",
         "What did you change in process/tech to prevent recurrence?",
         "What did you learn?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Behavioral (LP): Insist on the Highest Standards (Pushback)",
       "prompt": "Tell me about a time you pushed for higher standards and faced pushback. How did you handle it?",
-      "tags": ["behavioral", "leadership-principles", "collaboration"],
+      "tags": [
+        "behavioral",
+        "leadership-principles",
+        "collaboration"
+      ],
       "followups": [
         "How did you quantify the quality risk?",
         "What compromise (if any) did you accept?",
         "What was the outcome?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Behavioral (LP): Deliver Results (Hard Constraints)",
       "prompt": "Describe a time you delivered results under severe constraints (time, people, budget, or technical limits).",
-      "tags": ["behavioral", "leadership-principles"],
+      "tags": [
+        "behavioral",
+        "leadership-principles"
+      ],
       "followups": [
         "What did you cut and why?",
         "How did you ensure correctness and reliability?",
         "How did you measure success?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Behavioral (LP): Earn Trust (Cross-Team)",
       "prompt": "Tell me about a time you had to earn trust across teams to deliver a shared outcome.",
-      "tags": ["behavioral", "leadership-principles", "communication"],
+      "tags": [
+        "behavioral",
+        "leadership-principles",
+        "communication"
+      ],
       "followups": [
         "How did you align on goals and responsibilities?",
         "How did you handle conflict or ambiguity?",
         "What was the outcome?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Design Amazon Prime Video Streaming",
       "prompt": "Design a video streaming platform like Amazon Prime Video with adaptive bitrate, global CDN distribution, and offline viewing.",
-      "tags": ["system-design", "video", "cdn", "scalability"],
+      "tags": [
+        "system-design",
+        "video",
+        "cdn",
+        "scalability"
+      ],
       "followups": [
         "How do you handle adaptive bitrate streaming?",
         "What CDN strategy minimizes latency globally?",
         "How do you implement DRM and content protection?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design Amazon Go Checkout System",
       "prompt": "Design the real-time checkout system for Amazon Go stores that tracks items automatically and processes payments.",
-      "tags": ["system-design", "real-time", "iot", "computer-vision"],
+      "tags": [
+        "system-design",
+        "real-time",
+        "iot",
+        "computer-vision"
+      ],
       "followups": [
         "How do you ensure accurate item tracking?",
         "What happens during network outages?",
         "How do you handle disputed charges?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design AWS Lambda at Scale",
       "prompt": "Design a serverless compute platform like AWS Lambda that handles cold starts, scaling, and isolation.",
-      "tags": ["system-design", "serverless", "scalability", "aws"],
+      "tags": [
+        "system-design",
+        "serverless",
+        "scalability",
+        "aws"
+      ],
       "followups": [
         "How do you minimize cold start latency?",
         "How do you isolate customer code securely?",
         "How do you handle resource allocation and billing?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design Amazon's Recommendation Engine",
       "prompt": "Design Amazon's product recommendation system that handles real-time updates and personalization at scale.",
-      "tags": ["system-design", "recommendations", "machine-learning", "real-time"],
+      "tags": [
+        "system-design",
+        "recommendations",
+        "machine-learning",
+        "real-time"
+      ],
       "followups": [
         "How do you update recommendations in real-time?",
         "How do you handle cold start for new users?",
         "How do you A/B test recommendation algorithms?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design DynamoDB-like Key-Value Store",
       "prompt": "Design a distributed key-value store with partition tolerance, eventual consistency, and tunable consistency levels.",
-      "tags": ["system-design", "distributed-systems", "databases", "consistency"],
+      "tags": [
+        "system-design",
+        "distributed-systems",
+        "databases",
+        "consistency"
+      ],
       "followups": [
         "How do you handle partition tolerance?",
         "What consistency models do you support?",
         "How do you handle replica synchronization?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design Alexa Voice Processing Pipeline",
       "prompt": "Design the backend system for Alexa that processes voice commands, handles natural language understanding, and integrates with skills.",
-      "tags": ["system-design", "nlp", "real-time", "aws"],
+      "tags": [
+        "system-design",
+        "nlp",
+        "real-time",
+        "aws"
+      ],
       "followups": [
         "How do you handle speech-to-text at scale?",
         "How do you manage skill integration and isolation?",
         "What about latency requirements for real-time responses?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design Amazon's Real-Time Pricing System",
       "prompt": "Design a system that updates product prices in real-time based on demand, competition, and inventory.",
-      "tags": ["system-design", "real-time", "pricing", "scalability"],
+      "tags": [
+        "system-design",
+        "real-time",
+        "pricing",
+        "scalability"
+      ],
       "followups": [
         "How do you ensure price consistency across regions?",
         "How do you handle flash sales and traffic spikes?",
         "How do you prevent race conditions during price updates?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design Amazon's Order Fulfillment System",
       "prompt": "Design the system that manages order processing from checkout to delivery across multiple warehouses.",
-      "tags": ["system-design", "ecommerce", "inventory", "distributed-systems"],
+      "tags": [
+        "system-design",
+        "ecommerce",
+        "inventory",
+        "distributed-systems"
+      ],
       "followups": [
         "How do you optimize warehouse selection?",
         "How do you handle inventory consistency?",
         "What about failed deliveries and returns?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design Amazon's Fraud Detection System",
       "prompt": "Design a real-time fraud detection system that analyzes transactions and user behavior to prevent fraud.",
-      "tags": ["system-design", "fraud-detection", "machine-learning", "real-time"],
+      "tags": [
+        "system-design",
+        "fraud-detection",
+        "machine-learning",
+        "real-time"
+      ],
       "followups": [
         "How do you balance false positives vs false negatives?",
         "How do you update fraud models in production?",
         "How do you handle adversarial attacks?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Design Amazon's Review System",
       "prompt": "Design a review system that prevents fake reviews, handles moderation, and provides helpful insights.",
-      "tags": ["system-design", "moderation", "spam-detection", "social"],
+      "tags": [
+        "system-design",
+        "moderation",
+        "spam-detection",
+        "social"
+      ],
       "followups": [
         "How do you detect and prevent fake reviews?",
         "How do you rank reviews by helpfulness?",
         "How do you handle review bombing campaigns?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Algorithm: Serialize and Deserialize N-ary Tree",
       "prompt": "Design an algorithm to serialize and deserialize an N-ary tree efficiently.",
-      "tags": ["trees", "serialization", "algorithms"],
+      "tags": [
+        "trees",
+        "serialization",
+        "algorithms"
+      ],
       "followups": [
         "What serialization format would you choose?",
         "How do you handle large trees?",
         "What's the time and space complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Algorithm: Word Ladder II",
       "prompt": "Given two words and a dictionary, find all shortest transformation sequences from beginWord to endWord.",
-      "tags": ["graphs", "bfs", "backtracking", "algorithms"],
+      "tags": [
+        "graphs",
+        "bfs",
+        "backtracking",
+        "algorithms"
+      ],
       "followups": [
         "How do you avoid exponential blow-up?",
         "How do you handle large dictionaries?",
         "What's the worst-case complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Algorithm: Trapping Rain Water II",
       "prompt": "Given an m x n matrix of positive integers representing the height of each unit cell, compute how much water it can trap.",
-      "tags": ["heap", "graphs", "algorithms"],
+      "tags": [
+        "heap",
+        "graphs",
+        "algorithms"
+      ],
       "followups": [
         "How does this differ from the 1D version?",
         "What data structure optimizes the solution?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Algorithm: Minimum Window Substring",
       "prompt": "Given two strings s and t, find the minimum window in s which contains all characters of t.",
-      "tags": ["sliding-window", "hashmap", "strings", "algorithms"],
+      "tags": [
+        "sliding-window",
+        "hashmap",
+        "strings",
+        "algorithms"
+      ],
       "followups": [
         "How do you handle duplicate characters in t?",
         "What's the time complexity?",
         "How would you extend to handle Unicode characters?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Algorithm: Russian Doll Envelopes",
       "prompt": "Given envelopes with width and height, find the maximum number of envelopes you can Russian doll (one inside another).",
-      "tags": ["dp", "sorting", "binary-search", "algorithms"],
+      "tags": [
+        "dp",
+        "sorting",
+        "binary-search",
+        "algorithms"
+      ],
       "followups": [
         "Why does sorting by one dimension help?",
         "How does this relate to longest increasing subsequence?",
         "What's the optimal solution?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Concurrency: Lock-Free Queue",
       "prompt": "Design a lock-free queue using compare-and-swap operations.",
-      "tags": ["concurrency", "lock-free", "data-structures"],
+      "tags": [
+        "concurrency",
+        "lock-free",
+        "data-structures"
+      ],
       "followups": [
         "How do you handle the ABA problem?",
         "What about memory reclamation?",
         "How do you test correctness?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Concurrency: Scalable Reader-Writer Lock",
       "prompt": "Design a reader-writer lock that scales well with many readers and minimizes writer starvation.",
-      "tags": ["concurrency", "synchronization", "performance"],
+      "tags": [
+        "concurrency",
+        "synchronization",
+        "performance"
+      ],
       "followups": [
         "How do you reduce cache contention?",
         "What about fairness between readers and writers?",
         "How do you measure scalability?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Database: Distributed Transactions",
       "prompt": "Design a system for distributed transactions across multiple databases with ACID guarantees.",
-      "tags": ["distributed-systems", "databases", "transactions"],
+      "tags": [
+        "distributed-systems",
+        "databases",
+        "transactions"
+      ],
       "followups": [
         "Two-phase commit vs three-phase commit?",
         "How do you handle network partitions?",
         "What about performance implications?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Database: Time-Series Data at Scale",
       "prompt": "Design a system to store and query time-series data (like metrics) at Amazon scale.",
-      "tags": ["databases", "time-series", "scalability"],
+      "tags": [
+        "databases",
+        "time-series",
+        "scalability"
+      ],
       "followups": [
         "How do you handle high write throughput?",
         "How do you optimize range queries?",
         "What about data retention and compaction?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Security: Zero-Trust Architecture",
       "prompt": "Design a zero-trust architecture for Amazon's internal services.",
-      "tags": ["security", "architecture", "zero-trust"],
+      "tags": [
+        "security",
+        "architecture",
+        "zero-trust"
+      ],
       "followups": [
         "How do you implement identity-based access?",
         "What about service-to-service authentication?",
         "How do you monitor for anomalies?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Performance: Global Load Balancing",
       "prompt": "Design a global load balancing system that routes traffic to the nearest healthy region.",
-      "tags": ["networking", "load-balancing", "global"],
+      "tags": [
+        "networking",
+        "load-balancing",
+        "global"
+      ],
       "followups": [
         "How do you detect region health?",
         "What about DNS propagation delays?",
         "How do you handle failover?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Behavioral (LP): Think Big (Ambitious Project)",
       "prompt": "Tell me about the most ambitious technical project you've proposed or worked on.",
-      "tags": ["behavioral", "leadership-principles", "ambition"],
+      "tags": [
+        "behavioral",
+        "leadership-principles",
+        "ambition"
+      ],
       "followups": [
         "How did you scope the project?",
         "What risks did you identify?",
         "What was the impact?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Behavioral (LP): Learn and Be Curious (Complex Domain)",
       "prompt": "Tell me about a time you had to learn a complex technical domain quickly.",
-      "tags": ["behavioral", "leadership-principles", "learning"],
+      "tags": [
+        "behavioral",
+        "leadership-principles",
+        "learning"
+      ],
       "followups": [
         "How did you structure your learning?",
         "How did you validate your understanding?",
         "How did you apply what you learned?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Behavioral (LP): Bias for Action (High-Stakes)",
       "prompt": "Describe a time you had to make a quick decision with significant consequences.",
-      "tags": ["behavioral", "leadership-principles", "decision-making"],
+      "tags": [
+        "behavioral",
+        "leadership-principles",
+        "decision-making"
+      ],
       "followups": [
         "How did you assess the situation?",
         "What data informed your decision?",
         "What was the outcome?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Behavioral (LP): Frugality (Large-Scale)",
       "prompt": "Tell me about a time you optimized costs at scale.",
-      "tags": ["behavioral", "leadership-principles", "cost-optimization"],
+      "tags": [
+        "behavioral",
+        "leadership-principles",
+        "cost-optimization"
+      ],
       "followups": [
         "How did you identify optimization opportunities?",
         "What trade-offs did you consider?",
         "What was the impact?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Behavioral: Technical Leadership",
       "prompt": "Describe a time you provided technical leadership on a challenging project.",
-      "tags": ["behavioral", "leadership", "technical"],
+      "tags": [
+        "behavioral",
+        "leadership",
+        "technical"
+      ],
       "followups": [
         "How did you guide technical decisions?",
         "How did you handle differing opinions?",
         "What was the result?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Behavioral: Scaling Challenges",
       "prompt": "Tell me about a time you faced scaling challenges and how you addressed them.",
-      "tags": ["behavioral", "scaling", "problem-solving"],
+      "tags": [
+        "behavioral",
+        "scaling",
+        "problem-solving"
+      ],
       "followups": [
         "What symptoms indicated scaling issues?",
         "How did you diagnose the bottlenecks?",
         "What architectural changes did you make?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Behavioral: Mentoring Junior Engineers",
       "prompt": "Describe your experience mentoring junior engineers or peers.",
-      "tags": ["behavioral", "mentorship", "leadership"],
+      "tags": [
+        "behavioral",
+        "mentorship",
+        "leadership"
+      ],
       "followups": [
         "How did you assess their needs?",
         "What approach did you take?",
         "What was the outcome?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Behavioral: Handling Production Incident",
       "prompt": "Walk me through how you handled a major production incident.",
-      "tags": ["behavioral", "incident-response", "reliability"],
+      "tags": [
+        "behavioral",
+        "incident-response",
+        "reliability"
+      ],
       "followups": [
         "How did you prioritize during the incident?",
         "How did you communicate with stakeholders?",
         "What post-mortem actions did you take?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Behavioral: Technical Debt Management",
       "prompt": "Describe how you've managed technical debt in a large codebase.",
-      "tags": ["behavioral", "technical-debt", "maintenance"],
+      "tags": [
+        "behavioral",
+        "technical-debt",
+        "maintenance"
+      ],
       "followups": [
         "How did you identify and prioritize debt?",
         "How did you balance new features vs debt repayment?",
         "What was the impact?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Behavioral: Cross-Functional Collaboration",
       "prompt": "Tell me about a time you worked with non-technical stakeholders to deliver a technical project.",
-      "tags": ["behavioral", "collaboration", "communication"],
+      "tags": [
+        "behavioral",
+        "collaboration",
+        "communication"
+      ],
       "followups": [
         "How did you bridge the technical gap?",
         "How did you manage expectations?",
         "What was the outcome?"
-      ]
+      ],
+      "question_type": "behavioral"
     }
   ]
 }

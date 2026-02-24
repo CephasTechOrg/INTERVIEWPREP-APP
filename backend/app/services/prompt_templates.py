@@ -285,11 +285,22 @@ def interviewer_controller_user_prompt(
     skill_summary: str | None = None,
     response_quality: str | None = None,
     is_behavioral: bool = False,
+    question_type: str | None = None,
 ) -> str:
     signal_block = f"\nSignals: {signal_summary}\n" if signal_summary else ""
     missing_block = f"Missing focus: {missing_focus}\n" if missing_focus else ""
     skill_block = f"Skill summary: {skill_summary}\n" if skill_summary else ""
     quality_block = f"Response quality (heuristic): {response_quality}\n" if response_quality else ""
+    qt = (question_type or "").strip().lower()
+    type_block = ""
+    if qt == "conceptual":
+        type_block = "Question type: conceptual. Ask for a clear definition/explanation and a simple example; avoid coding followups.\n"
+    elif qt == "system_design":
+        type_block = "Question type: system_design. Ask for requirements, high-level design, trade-offs, and scalability.\n"
+    elif qt == "behavioral" or is_behavioral:
+        type_block = "Question type: behavioral. Ensure STAR (Situation, Task, Action, Result) and outcomes.\n"
+    elif qt:
+        type_block = f"Question type: {qt}.\n"
     behavioral_block = (
         "Behavioral focus: ensure STAR (Situation, Task, Action, Result) and outcomes.\n" if is_behavioral else ""
     )
@@ -304,7 +315,7 @@ Prompt: {question_prompt}
 Candidate latest message:
 {candidate_latest}
 
-{signal_block}{missing_block}{skill_block}{quality_block}{behavioral_block}
+{signal_block}{missing_block}{skill_block}{quality_block}{type_block}{behavioral_block}
 Progress:
 followups_used={followups_used} (max {max_followups})
 questions_asked_count={questions_asked_count} (max {max_questions})

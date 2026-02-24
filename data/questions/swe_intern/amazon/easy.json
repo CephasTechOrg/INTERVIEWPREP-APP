@@ -6,632 +6,913 @@
     {
       "title": "Two Numbers That Add Up (Explain Only)",
       "prompt": "Explain how you would find two numbers in a small list that add up to a target, without writing code.",
-      "tags": ["arrays", "logic", "fundamentals"],
+      "tags": [
+        "arrays",
+        "logic",
+        "fundamentals"
+      ],
       "followups": [
         "Would you check all pairs or remember past numbers?",
         "Give a small example.",
         "What edge case would you test first?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Reverse a String (Steps)",
       "prompt": "Explain step by step how you would reverse a string like \"amazon\".",
-      "tags": ["strings", "logic"],
+      "tags": [
+        "strings",
+        "logic"
+      ],
       "followups": [
         "Where do you start?",
         "How do you know when to stop?",
         "How do you verify the result?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Palindrome Check",
       "prompt": "Explain how you would check if a word reads the same forward and backward.",
-      "tags": ["strings", "logic"],
+      "tags": [
+        "strings",
+        "logic"
+      ],
       "followups": [
         "Would case matter?",
         "Why compare from both ends?",
         "Give a simple example."
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Find the Largest Number",
       "prompt": "Explain how you would find the largest number in a list.",
-      "tags": ["arrays", "logic"],
+      "tags": [
+        "arrays",
+        "logic"
+      ],
       "followups": [
         "How do you track the current maximum?",
         "What if the list is empty?",
         "Why is this approach simple?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Counting Items",
       "prompt": "Explain how you would count how many times each item appears in a list.",
-      "tags": ["hashmap", "fundamentals"],
+      "tags": [
+        "hashmap",
+        "fundamentals"
+      ],
       "followups": [
         "Why not count manually?",
         "What is the key and value?",
         "Where is this useful?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Remove Duplicates (Conceptual)",
       "prompt": "Explain how you would remove duplicate items from a list.",
-      "tags": ["arrays", "logic"],
+      "tags": [
+        "arrays",
+        "logic"
+      ],
       "followups": [
         "How do you detect duplicates?",
         "Does order matter?",
         "What edge case would you test?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Binary Search (Idea Only)",
       "prompt": "Explain how you could search a sorted list faster than checking every item.",
-      "tags": ["binary-search", "fundamentals"],
+      "tags": [
+        "binary-search",
+        "fundamentals"
+      ],
       "followups": [
         "Why must the list be sorted?",
         "What does \"cutting in half\" mean?",
         "Give a real-life example."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Merge Two Sorted Lists",
       "prompt": "Explain how you would merge two sorted lists into one sorted list.",
-      "tags": ["arrays", "logic"],
+      "tags": [
+        "arrays",
+        "logic"
+      ],
       "followups": [
         "What do you compare first?",
         "What happens when one list ends?",
         "Give a small example."
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Valid Parentheses (Idea Level)",
       "prompt": "Explain how you would check if brackets in a string are correctly matched.",
-      "tags": ["strings", "stack"],
+      "tags": [
+        "strings",
+        "stack"
+      ],
       "followups": [
         "Why does order matter?",
         "What makes a string invalid?",
         "Give an example."
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Loops (Practical Use)",
       "prompt": "Explain when and why you would use a loop.",
-      "tags": ["loops", "fundamentals"],
+      "tags": [
+        "loops",
+        "fundamentals"
+      ],
       "followups": [
         "What happens if a loop never stops?",
         "Why are loops useful?",
         "Give a simple use case."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "If Statements",
       "prompt": "Explain how an if statement helps a program make decisions.",
-      "tags": ["control-flow", "fundamentals"],
+      "tags": [
+        "control-flow",
+        "fundamentals"
+      ],
       "followups": [
         "What happens if the condition is false?",
         "Give a real-life example.",
         "Why are conditions important?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Functions (Purpose)",
       "prompt": "Explain why functions are useful in programming.",
-      "tags": ["functions", "fundamentals"],
+      "tags": [
+        "functions",
+        "fundamentals"
+      ],
       "followups": [
         "How do functions reduce repetition?",
         "How do they help debugging?",
         "What happens without functions?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Variables (Usage)",
       "prompt": "Explain how variables help store and manage data.",
-      "tags": ["fundamentals"],
+      "tags": [
+        "fundamentals"
+      ],
       "followups": [
         "Why not hardcode values?",
         "What happens when variables change?",
         "How do they improve readability?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Arrays vs Lists",
       "prompt": "Explain one difference between arrays and lists.",
-      "tags": ["data-structures", "fundamentals"],
+      "tags": [
+        "data-structures",
+        "fundamentals"
+      ],
       "followups": [
         "Which is easier to use?",
         "Which is more flexible?",
         "Why might Amazon choose one?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Big-O (Plain English)",
       "prompt": "Explain what Big-O helps developers think about, without formulas.",
-      "tags": ["complexity", "fundamentals"],
+      "tags": [
+        "complexity",
+        "fundamentals"
+      ],
       "followups": [
         "Why does performance matter?",
         "Is faster always better?",
         "When is simple good enough?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Debugging Basics",
       "prompt": "Your code is not working. Explain the first steps you would take to debug it.",
-      "tags": ["debugging", "fundamentals"],
+      "tags": [
+        "debugging",
+        "fundamentals"
+      ],
       "followups": [
         "Why start small?",
         "What tools help?",
         "When do you ask for help?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Testing Basics",
       "prompt": "Explain how you would test a small function.",
-      "tags": ["testing", "fundamentals"],
+      "tags": [
+        "testing",
+        "fundamentals"
+      ],
       "followups": [
         "Why test multiple inputs?",
         "What happens if you skip testing?",
         "How do tests save time?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "APIs (Usage)",
       "prompt": "Explain how an app might use an API to get data.",
-      "tags": ["api", "fundamentals"],
+      "tags": [
+        "api",
+        "fundamentals"
+      ],
       "followups": [
         "Why not build everything yourself?",
         "What data could an API return?",
         "Give an example."
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "REST Basics",
       "prompt": "Explain what a REST API is using a simple example.",
-      "tags": ["api", "rest"],
+      "tags": [
+        "api",
+        "rest"
+      ],
       "followups": [
         "What does GET do?",
         "What does POST do?",
         "Why is REST popular?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Frontend vs Backend",
       "prompt": "Explain how frontend and backend work together.",
-      "tags": ["web", "fundamentals"],
+      "tags": [
+        "web",
+        "fundamentals"
+      ],
       "followups": [
         "Which handles user input?",
         "Which handles data?",
         "How do they communicate?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Leadership Principle: Customer Obsession",
       "prompt": "Tell me about a time you improved something based on user feedback.",
-      "tags": ["behavioral", "leadership-principles"],
+      "tags": [
+        "behavioral",
+        "leadership-principles"
+      ],
       "followups": [
         "How did you get the feedback?",
         "What did you change?",
         "How did you measure success?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Leadership Principle: Ownership",
       "prompt": "Tell me about a time you took responsibility for a task.",
-      "tags": ["behavioral", "leadership-principles"],
+      "tags": [
+        "behavioral",
+        "leadership-principles"
+      ],
       "followups": [
         "What was your role?",
         "What challenges did you face?",
         "What did you learn?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Leadership Principle: Bias for Action",
       "prompt": "Describe a time you acted quickly to solve a problem.",
-      "tags": ["behavioral", "leadership-principles"],
+      "tags": [
+        "behavioral",
+        "leadership-principles"
+      ],
       "followups": [
         "Why was it urgent?",
         "How did you manage risk?",
         "What was the outcome?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Leadership Principle: Learn and Be Curious",
       "prompt": "Tell me about something technical you learned quickly.",
-      "tags": ["behavioral", "leadership-principles"],
+      "tags": [
+        "behavioral",
+        "leadership-principles"
+      ],
       "followups": [
         "How did you learn it?",
         "How did you apply it?",
         "What did you build?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Leadership Principle: Dive Deep",
       "prompt": "Tell me about a time you investigated a problem to find the root cause.",
-      "tags": ["behavioral", "leadership-principles"],
+      "tags": [
+        "behavioral",
+        "leadership-principles"
+      ],
       "followups": [
         "How did you investigate?",
         "What clue helped most?",
         "What did you fix?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Leadership Principle: Earn Trust",
       "prompt": "Tell me about a time you earned trust on a team.",
-      "tags": ["behavioral", "leadership-principles"],
+      "tags": [
+        "behavioral",
+        "leadership-principles"
+      ],
       "followups": [
         "What actions built trust?",
         "How did communication help?",
         "What was the result?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Leadership Principle: Deliver Results",
       "prompt": "Tell me about a time you delivered results under pressure.",
-      "tags": ["behavioral", "leadership-principles"],
+      "tags": [
+        "behavioral",
+        "leadership-principles"
+      ],
       "followups": [
         "What was the goal?",
         "What obstacles did you face?",
         "What was the outcome?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Why Amazon?",
       "prompt": "Why do you want to intern at Amazon?",
-      "tags": ["behavioral", "communication", "leadership-principles"],
+      "tags": [
+        "behavioral",
+        "communication",
+        "leadership-principles"
+      ],
       "followups": [
         "Which leadership principle fits you best?",
         "What Amazon product do you like?",
         "What do you want to learn?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Find the Smallest Number",
       "prompt": "Explain how you would find the smallest number in a list of integers.",
-      "tags": ["arrays", "logic"],
+      "tags": [
+        "arrays",
+        "logic"
+      ],
       "followups": [
         "How is this similar to finding the largest?",
         "What if all numbers are negative?",
         "Why is this a common interview question?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Sorting Concepts",
       "prompt": "Explain why sorting data can be helpful in programming.",
-      "tags": ["sorting", "fundamentals"],
+      "tags": [
+        "sorting",
+        "fundamentals"
+      ],
       "followups": [
         "What operations become easier with sorted data?",
         "Name a real Amazon use case for sorting",
         "Is sorting always necessary?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Data Structures for Shopping Cart",
       "prompt": "What data structure would you use to store items in an Amazon shopping cart?",
-      "tags": ["data-structures", "amazon-context"],
+      "tags": [
+        "data-structures",
+        "amazon-context"
+      ],
       "followups": [
         "Why choose that structure?",
         "How would you handle adding/removing items?",
         "What about calculating totals?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "String Concatenation",
       "prompt": "Explain how you would combine two strings together.",
-      "tags": ["strings", "fundamentals"],
+      "tags": [
+        "strings",
+        "fundamentals"
+      ],
       "followups": [
         "What's a simple example?",
         "Why is this useful in real programs?",
         "How would you combine multiple strings?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Basic Error Handling",
       "prompt": "Explain what you would do if your program encounters an error.",
-      "tags": ["error-handling", "fundamentals"],
+      "tags": [
+        "error-handling",
+        "fundamentals"
+      ],
       "followups": [
         "Why is it important to handle errors?",
         "What information should error messages provide?",
         "How does error handling improve user experience?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Comments in Code",
       "prompt": "Explain why adding comments to code can be helpful.",
-      "tags": ["code-quality", "fundamentals"],
+      "tags": [
+        "code-quality",
+        "fundamentals"
+      ],
       "followups": [
         "When should you add comments?",
         "What makes a good comment?",
         "Can comments ever be unhelpful?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Version Control Basics",
       "prompt": "Explain why using version control (like Git) is important for team projects.",
-      "tags": ["version-control", "collaboration"],
+      "tags": [
+        "version-control",
+        "collaboration"
+      ],
       "followups": [
         "How does it help with collaboration?",
         "What happens if you make a mistake?",
         "Why does Amazon use version control?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Simple Amazon Product Search",
       "prompt": "Explain how you would search for a product in a small list of Amazon items.",
-      "tags": ["search", "amazon-context", "arrays"],
+      "tags": [
+        "search",
+        "amazon-context",
+        "arrays"
+      ],
       "followups": [
         "What information would you search by?",
         "How would you handle multiple matches?",
         "What if the product isn't found?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Calculate Order Total",
       "prompt": "Explain how you would calculate the total price of items in an order.",
-      "tags": ["arrays", "amazon-context", "logic"],
+      "tags": [
+        "arrays",
+        "amazon-context",
+        "logic"
+      ],
       "followups": [
         "What data would you need?",
         "How would you handle taxes or discounts?",
         "Why is accuracy important?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Check Stock Availability",
       "prompt": "Explain how you would check if an Amazon product is in stock.",
-      "tags": ["logic", "amazon-context", "conditionals"],
+      "tags": [
+        "logic",
+        "amazon-context",
+        "conditionals"
+      ],
       "followups": [
         "What conditions would you check?",
         "How would you display the result to users?",
         "What if stock changes while processing?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "User Input Validation",
       "prompt": "Explain why it's important to validate user input in forms.",
-      "tags": ["validation", "security", "fundamentals"],
+      "tags": [
+        "validation",
+        "security",
+        "fundamentals"
+      ],
       "followups": [
         "What types of validation are important?",
         "How does this protect Amazon's systems?",
         "What happens without validation?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Simple Recommendation System",
       "prompt": "Explain a basic way Amazon might recommend products to users.",
-      "tags": ["algorithms", "amazon-context", "logic"],
+      "tags": [
+        "algorithms",
+        "amazon-context",
+        "logic"
+      ],
       "followups": [
         "What data would you use?",
         "How simple could you make this?",
         "Why are recommendations valuable?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Track Package Status",
       "prompt": "Explain how you would track the status of an Amazon package.",
-      "tags": ["state-management", "amazon-context", "logic"],
+      "tags": [
+        "state-management",
+        "amazon-context",
+        "logic"
+      ],
       "followups": [
         "What statuses might a package have?",
         "How would you update the status?",
         "How would you display this to customers?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Handle Multiple User Sessions",
       "prompt": "Explain why websites need to handle multiple users at once.",
-      "tags": ["concurrency", "web", "fundamentals"],
+      "tags": [
+        "concurrency",
+        "web",
+        "fundamentals"
+      ],
       "followups": [
         "What problems could occur with multiple users?",
         "How does Amazon handle millions of users?",
         "Why is this important for shopping sites?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Database Basics",
       "prompt": "Explain why Amazon needs databases to store information.",
-      "tags": ["databases", "amazon-context", "fundamentals"],
+      "tags": [
+        "databases",
+        "amazon-context",
+        "fundamentals"
+      ],
       "followups": [
         "What types of data would Amazon store?",
         "Why not use files instead?",
         "How do databases help with speed?"
-      ]
+      ],
+      "question_type": "system_design"
     },
     {
       "title": "Caching Concept",
       "prompt": "Explain why caching frequently accessed data can improve performance.",
-      "tags": ["caching", "performance", "fundamentals"],
+      "tags": [
+        "caching",
+        "performance",
+        "fundamentals"
+      ],
       "followups": [
         "What Amazon data might be cached?",
         "What are trade-offs of caching?",
         "How does caching help during busy times?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Mobile vs Desktop Experience",
       "prompt": "Explain why Amazon might need different experiences for mobile and desktop.",
-      "tags": ["web", "amazon-context", "user-experience"],
+      "tags": [
+        "web",
+        "amazon-context",
+        "user-experience"
+      ],
       "followups": [
         "What differences might exist?",
         "Why is mobile important for shopping?",
         "How would you approach this as a developer?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Accessibility Basics",
       "prompt": "Explain why making websites accessible to all users is important.",
-      "tags": ["accessibility", "inclusion", "fundamentals"],
+      "tags": [
+        "accessibility",
+        "inclusion",
+        "fundamentals"
+      ],
       "followups": [
         "Who benefits from accessible design?",
         "What simple improvements help accessibility?",
         "Why does Amazon care about accessibility?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Security Basics",
       "prompt": "Explain why security is crucial for Amazon's systems.",
-      "tags": ["security", "amazon-context", "fundamentals"],
+      "tags": [
+        "security",
+        "amazon-context",
+        "fundamentals"
+      ],
       "followups": [
         "What sensitive data does Amazon handle?",
         "What are basic security practices?",
         "How does security build customer trust?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Scaling Concepts",
       "prompt": "Explain why Amazon needs to handle more users during holiday seasons.",
-      "tags": ["scaling", "amazon-context", "fundamentals"],
+      "tags": [
+        "scaling",
+        "amazon-context",
+        "fundamentals"
+      ],
       "followups": [
         "What challenges come with more users?",
         "How might Amazon prepare for busy times?",
         "Why is scaling important for business?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Team Collaboration",
       "prompt": "Explain why working well in a team is important at Amazon.",
-      "tags": ["collaboration", "teamwork", "behavioral"],
+      "tags": [
+        "collaboration",
+        "teamwork",
+        "behavioral"
+      ],
       "followups": [
         "What makes a good team member?",
         "How do teams solve complex problems?",
         "Why does Amazon value collaboration?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Learning from Mistakes",
       "prompt": "Tell me about a time you made a mistake in coding and what you learned.",
-      "tags": ["behavioral", "learning", "growth"],
+      "tags": [
+        "behavioral",
+        "learning",
+        "growth"
+      ],
       "followups": [
         "How did you discover the mistake?",
         "What did you do to fix it?",
         "How did this help you improve?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Technical Challenge",
       "prompt": "Describe a technical challenge you faced and how you approached it.",
-      "tags": ["behavioral", "problem-solving", "technical"],
+      "tags": [
+        "behavioral",
+        "problem-solving",
+        "technical"
+      ],
       "followups": [
         "What made it challenging?",
         "What resources did you use?",
         "What was the outcome?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Project Experience",
       "prompt": "Tell me about a programming project you worked on.",
-      "tags": ["behavioral", "experience", "projects"],
+      "tags": [
+        "behavioral",
+        "experience",
+        "projects"
+      ],
       "followups": [
         "What was your role?",
         "What did you learn?",
         "What would you improve?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Customer-Centric Thinking",
       "prompt": "How would you improve the Amazon shopping experience for customers?",
-      "tags": ["behavioral", "customer-obsession", "amazon-context"],
+      "tags": [
+        "behavioral",
+        "customer-obsession",
+        "amazon-context"
+      ],
       "followups": [
         "What pain points have you noticed?",
         "How would you implement your idea?",
         "How would you measure success?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Adaptability",
       "prompt": "Tell me about a time you had to learn something new quickly.",
-      "tags": ["behavioral", "adaptability", "learning"],
+      "tags": [
+        "behavioral",
+        "adaptability",
+        "learning"
+      ],
       "followups": [
         "What was the situation?",
         "How did you approach learning?",
         "What was the result?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Communication Skills",
       "prompt": "Explain a technical concept to someone without a technical background.",
-      "tags": ["behavioral", "communication", "teaching"],
+      "tags": [
+        "behavioral",
+        "communication",
+        "teaching"
+      ],
       "followups": [
         "How do you simplify complex ideas?",
         "Why is clear communication important?",
         "How do you know if someone understands?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Initiative",
       "prompt": "Tell me about a time you went beyond what was required.",
-      "tags": ["behavioral", "initiative", "ownership"],
+      "tags": [
+        "behavioral",
+        "initiative",
+        "ownership"
+      ],
       "followups": [
         "What motivated you?",
         "What was the impact?",
         "What did you learn?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Time Management",
       "prompt": "How do you prioritize tasks when you have multiple deadlines?",
-      "tags": ["behavioral", "time-management", "organization"],
+      "tags": [
+        "behavioral",
+        "time-management",
+        "organization"
+      ],
       "followups": [
         "What strategies do you use?",
         "How do you handle unexpected tasks?",
         "What tools help you stay organized?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Feedback Reception",
       "prompt": "Tell me about a time you received feedback on your work.",
-      "tags": ["behavioral", "feedback", "growth"],
+      "tags": [
+        "behavioral",
+        "feedback",
+        "growth"
+      ],
       "followups": [
         "How did you respond?",
         "What did you change?",
         "How did it improve your work?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Problem Solving Approach",
       "prompt": "Walk me through how you would approach a new programming problem.",
-      "tags": ["behavioral", "problem-solving", "process"],
+      "tags": [
+        "behavioral",
+        "problem-solving",
+        "process"
+      ],
       "followups": [
         "Where do you start?",
         "How do you break down complex problems?",
         "When do you ask for help?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Amazon Innovation",
       "prompt": "What Amazon innovation or technology impresses you most?",
-      "tags": ["behavioral", "amazon-context", "innovation"],
+      "tags": [
+        "behavioral",
+        "amazon-context",
+        "innovation"
+      ],
       "followups": [
         "Why does it impress you?",
         "How does it help customers?",
         "What technical challenges might it involve?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Career Goals",
       "prompt": "What do you hope to gain from an Amazon internship?",
-      "tags": ["behavioral", "goals", "career"],
+      "tags": [
+        "behavioral",
+        "goals",
+        "career"
+      ],
       "followups": [
         "What skills do you want to develop?",
         "How does this fit your long-term goals?",
         "What unique opportunities does Amazon offer?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Diversity and Inclusion",
       "prompt": "Why is diversity important in technology teams?",
-      "tags": ["behavioral", "diversity", "inclusion"],
+      "tags": [
+        "behavioral",
+        "diversity",
+        "inclusion"
+      ],
       "followups": [
         "How does diversity improve products?",
         "What can individuals do to promote inclusion?",
         "Why does Amazon value diverse perspectives?"
-      ]
+      ],
+      "question_type": "behavioral"
     },
     {
       "title": "Work-Life Balance",
       "prompt": "How do you maintain balance while working on challenging projects?",
-      "tags": ["behavioral", "wellbeing", "balance"],
+      "tags": [
+        "behavioral",
+        "wellbeing",
+        "balance"
+      ],
       "followups": [
         "What strategies help you stay productive?",
         "How do you avoid burnout?",
         "Why is balance important for long-term success?"
-      ]
+      ],
+      "question_type": "behavioral"
     }
   ]
 }
