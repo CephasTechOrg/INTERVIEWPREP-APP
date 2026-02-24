@@ -44,9 +44,13 @@ export const ChatSection = () => {
   const [activeId, setActiveId] = useState<number | null>(null);
   const [input, setInput] = useState('');
   const [isSending, setIsSending] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [speechSupported, setSpeechSupported] = useState(false);
   const [historyCollapsed, setHistoryCollapsed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const recognitionRef = useRef<any>(null);
+  const baseInputRef = useRef('');
 
   // Load threads from backend on mount
   useEffect(() => {
@@ -97,6 +101,52 @@ export const ChatSection = () => {
   }, []);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) return;
+
+    setSpeechSupported(true);
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+
+    recognition.onresult = (event: any) => {
+      let finalText = '';
+      let interimText = '';
+
+      for (let i = event.resultIndex; i < event.results.length; i += 1) {
+        const transcript = event.results[i][0]?.transcript ?? '';
+        if (event.results[i].isFinal) {
+          finalText += transcript;
+        } else {
+          interimText += transcript;
+        }
+      }
+
+      setInput(`${baseInputRef.current}${finalText}${interimText}`);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognition.onerror = () => {
+      setIsListening(false);
+    };
+
+    recognitionRef.current = recognition;
+
+    return () => {
+      recognition.onresult = null;
+      recognition.onend = null;
+      recognition.onerror = null;
+      recognition.stop?.();
+      recognitionRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [activeId, threads.length, isSending]);
 
@@ -108,9 +158,14 @@ export const ChatSection = () => {
   const messages = activeThread?.messages ?? [];
   const hasPending = messages.some((m) => m.pending);
 
-  const handleSend = async (e: React.FormEvent) => {
+  const handleSend = async (e?: React.FormEvent) => {
     e.preventDefault();
     
+
+    if (isListening) {
+      recognitionRef.current?.stop?.();
+      setIsListening(false);
+    }
     // Set loading state FIRST to prevent concurrent sends
     if (isSending || isLoading) return;
     setIsSending(true);
@@ -188,6 +243,141 @@ export const ChatSection = () => {
     } finally {
       setIsSending(false);
     }
+  };
+
+  const toggleListening = () => {
+    if (!speechSupported) return;
+    const recognition = recognitionRef.current;
+    if (!recognition) return;
+
+    if (isListening) {
+      recognition.stop?.();
+      return;
+    }
+
+    baseInputRef.current = input ? `${input} ` : '';
+    try {
+      recognition.start?.();
+      setIsListening(true);
+    } catch {
+      setIsListening(false);
+    }
+  };
+
+  const renderInline = (text: string, keyPrefix: string) => {
+    const boldParts = text.split(/(\*\*[^*]+\*\*)/g);
+    return boldParts.flatMap((boldPart, bIdx) => {
+      if (boldPart.startsWith('**') && boldPart.endsWith('**')) {
+        const content = boldPart.slice(2, -2);
+        return (
+          <strong key={`${keyPrefix}-b-${bIdx}`} className="font-semibold text-slate-900 dark:text-slate-100">
+            {content}
+          </strong>
+        );
+      }
+
+      const codeParts = boldPart.split(/(`[^`]+`)/g);
+      return codeParts.map((codePart, cIdx) => {
+        if (codePart.startsWith('`') && codePart.endsWith('`')) {
+          const content = codePart.slice(1, -1);
+          return (
+            <code
+              key={`${keyPrefix}-c-${bIdx}-${cIdx}`}
+              className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[0.9em] font-mono"
+            >
+              {content}
+            </code>
+          );
+        }
+
+        return (
+          <span key={`${keyPrefix}-t-${bIdx}-${cIdx}`}>
+            {codePart}
+          </span>
+        );
+      });
+    });
+  };
+
+  const renderTextBlock = (block: string, keyPrefix: string) => {
+    const lines = block.split('\n');
+    const elements: React.ReactNode[] = [];
+    let listItems: string[] = [];
+
+    const flushList = (idx: number) => {
+      if (!listItems.length) return;
+      elements.push(
+        <ul key={`${keyPrefix}-list-${idx}`} className="list-disc pl-5 space-y-1">
+          {listItems.map((item, li) => (
+            <li key={`${keyPrefix}-li-${idx}-${li}`}>
+              {renderInline(item, `${keyPrefix}-li-${idx}-${li}`)}
+            </li>
+          ))}
+        </ul>
+      );
+      listItems = [];
+    };
+
+    lines.forEach((line, idx) => {
+      const bulletMatch = line.match(/^\s*[-*]\s+(.*)$/);
+      if (bulletMatch) {
+        listItems.push(bulletMatch[1]);
+        return;
+      }
+
+      flushList(idx);
+
+      if (!line.trim()) {
+        elements.push(<div key={`${keyPrefix}-sp-${idx}`} className="h-2" />);
+        return;
+      }
+
+      elements.push(
+        <p key={`${keyPrefix}-p-${idx}`} className="whitespace-pre-wrap break-words">
+          {renderInline(line, `${keyPrefix}-p-${idx}`)}
+        </p>
+      );
+    });
+
+    flushList(lines.length);
+    return elements;
+  };
+
+  const renderAiMessage = (text: string) => {
+    const safe = sanitizeAiText(text);
+    const parts = safe.split(/```/g);
+
+    return parts.map((part, idx) => {
+      if (idx % 2 === 1) {
+        const lines = part.split('\n');
+        let language = '';
+        let code = part;
+
+        if (lines.length > 1 && /^[a-zA-Z0-9#.+_-]+$/.test(lines[0].trim())) {
+          language = lines[0].trim();
+          code = lines.slice(1).join('\n');
+        }
+
+        return (
+          <div key={`code-${idx}`} className="space-y-2">
+            {language && (
+              <span className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                {language}
+              </span>
+            )}
+            <pre className="bg-slate-900 text-slate-100 rounded-lg p-3 text-xs sm:text-sm overflow-x-auto">
+              <code className="font-mono whitespace-pre-wrap">{code.trimEnd()}</code>
+            </pre>
+          </div>
+        );
+      }
+
+      return (
+        <div key={`txt-${idx}`} className="space-y-2">
+          {renderTextBlock(part, `txt-${idx}`)}
+        </div>
+      );
+    });
   };
 
   const handleNewChat = async () => {
@@ -386,9 +576,9 @@ export const ChatSection = () => {
                       : 'bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-bl-sm'
                   }`}
                 >
-                  <p className={`whitespace-pre-wrap break-words ${msg.pending ? 'text-slate-500 dark:text-slate-400 italic' : ''}`}>
-                    {msg.role === 'assistant' ? sanitizeAiText(msg.content) : msg.content}
-                  </p>
+                  <div className={msg.pending ? 'text-slate-500 dark:text-slate-400 italic' : ''}>
+                    {msg.role === 'assistant' ? renderAiMessage(msg.content) : msg.content}
+                  </div>
                 </div>
                 {msg.role === 'user' && (
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 dark:from-slate-500 dark:to-slate-700 text-white flex items-center justify-center text-xs sm:text-sm font-bold flex-shrink-0 shadow-md">
@@ -423,7 +613,13 @@ export const ChatSection = () => {
             <textarea
               id="chatInput"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (isListening) {
+                  baseInputRef.current = value;
+                }
+                setInput(value);
+              }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                   e.preventDefault();
@@ -435,6 +631,17 @@ export const ChatSection = () => {
               disabled={isSending || isLoading}
               rows={1}
             />
+            <button
+              type="button"
+              onClick={toggleListening}
+              disabled={!speechSupported || isLoading}
+              className={`h-10 w-10 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 flex items-center justify-center transition-all ${
+                isListening ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700'
+              } ${!speechSupported ? 'opacity-50 cursor-not-allowed' : ''}`}
+              title={speechSupported ? (isListening ? 'Stop voice input' : 'Start voice input') : 'Voice input not supported'}
+            >
+              {Icons.mic}
+            </button>
             <button
               type="submit"
               disabled={isSending || !input.trim() || isLoading}

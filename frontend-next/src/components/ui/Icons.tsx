@@ -93,6 +93,13 @@ export const Icons = {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
     </svg>
   ),
+  mic: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 1a3 3 0 00-3 3v7a3 3 0 006 0V4a3 3 0 00-3-3z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 10a7 7 0 01-14 0" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 17v4m-4 0h8" />
+    </svg>
+  ),
   plus: (
     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 5v14m-7-7h14" />

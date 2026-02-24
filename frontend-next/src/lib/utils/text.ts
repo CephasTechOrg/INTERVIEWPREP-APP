@@ -20,13 +20,6 @@ export const sanitizeAiText = (text: string): string => {
     .map((ch) => (replacements[ch] ? replacements[ch] : ch))
     .join('');
 
-  // Strip markdown code fences but keep code content.
-  out = out.replace(/^\s*```.*$/gm, '');
-  // Remove markdown headings while keeping text.
-  out = out.replace(/^\s*#{1,6}\s+/gm, '');
-  // Remove bullets while keeping text.
-  out = out.replace(/^\s*[-*]\s+/gm, '');
-
   // Remove non-printable characters (keep tabs/newlines and common Unicode ranges)
   // This preserves emoji and international characters
   out = out.replace(/[^\x09\x0A\x0D\x20-\x7E\u00A0-\uFFFF]/g, '');
