@@ -7,124 +7,194 @@ Make the interview engine smarter by:
 - detecting question type (conceptual vs coding vs behavioral),
 - using adaptive difficulty only when user enables it,
 - adding basic code checking support,
-- improving follow-up logic and rubric-driven guidance.
+- improving follow-up logic and rubric-driven guidance,
+- selecting questions that target candidate's weak areas.
 
 ---
 
-## Phase 1 — Question-Type Awareness
+## Phase 1 � Question-Type Awareness ?
 
 **Objective:** Distinguish question types so the interviewer avoids STAR prompts for non-behavioral questions and avoids code checks for conceptual prompts.
 
-**Implementation Steps:**
+**Status:** Complete
 
-1. **Add question type classifier** (rule-based, then LLM-backed):
-   - Inputs: question tags, title/prompt keywords, and existing `_is_behavioral()` / `_is_conceptual_question()`.
-   - Output: `question_type = behavioral | coding | conceptual | system_design`.
-2. **Store question type in session state** for current question.
-3. **Route prompts based on type**:
-   - Behavioral → STAR prompts allowed.
-   - Conceptual → definition/explanation prompts, no STAR.
-   - Coding → approach, complexity, edge cases, tests.
-   - System design → tradeoffs, scaling, APIs, data modeling.
+**Key Changes:**
+- Added _question_type() classifier using tags and keywords
+- Routed prompts based on type (behavioral, coding, conceptual, system_design)
+- Updated prompt templates with type-specific guidance
 
 **Files:**
-
 - backend/app/services/interview_engine.py
 - backend/app/services/prompt_templates.py
 
 ---
 
-## Phase 2 — Adaptive Difficulty Toggle
+## Phase 2 � Adaptive Difficulty Toggle ?
 
 **Objective:** Allow users to choose adaptive difficulty; otherwise keep fixed.
 
-**Implementation Steps:**
+**Status:** Complete
 
-1. Add `adaptive_difficulty_enabled` to InterviewSession (db).
-2. Add UI toggle on interview start.
-3. Update engine:
-   - If adaptive enabled → allow `_maybe_bump_difficulty_current()`.
-   - If disabled → keep current behavior (fixed).
+**Key Changes:**
+- Added daptive_difficulty_enabled to InterviewSession (database)
+- Created Alembic migration
+- Updated UI with toggle on interview start
+- Engine respects flag when adjusting difficulty
 
 **Files:**
-
 - backend/app/models/interview_session.py
-- backend/alembic/versions (migration)
+- backend/alembic/versions/c1f2a8d5b6e7_add_adaptive_difficulty_enabled.py
 - backend/app/services/interview_engine.py
 - frontend-next/src/components/sections/InterviewSection.tsx
-- backend/app/api/v1/interviews.py (if needed)
 
 ---
 
-## Phase 3 — Code Checking / Validation
+## Phase 3 � Code Checking / Validation ?
 
 **Objective:** Detect coding responses and run lightweight checks to validate logic.
 
-**Implementation Steps:**
+**Status:** Complete
 
-1. Add **code detection** in engine: look for code blocks or syntax signals.
-2. If coding question + code detected:
-   - Run static checks (complexity mention, edge cases mention).
-   - (Optional) run sandboxed unit tests later.
-3. Provide feedback prompt: highlight potential bugs, missing tests, or edge cases.
+**Key Changes:**
+- Added code block detection signal
+- Added test coverage mention detection
+- Provides signals for follow-up logic
+- (Sandboxed execution deferred to future phase)
 
 **Files:**
-
 - backend/app/services/interview_engine.py
-- backend/app/services/code_check.py (new)
 
 ---
 
-## Phase 4 — Smarter Follow-ups
+## Phase 4 � Smarter Follow-ups ?
 
 **Objective:** Make follow-ups adaptive based on missing rubric elements and prior answers.
 
-**Implementation Steps:**
+**Status:** Complete
 
-1. Expand rubric focus:
-   - `correctness_reasoning`, `complexity`, `edge_cases`, `tradeoffs`, `testing`.
-2. Use last rubric scores to pick follow-up focus.
-3. Allow 2 follow-ups only if confidence is low or missing focus is high.
+**Key Changes:**
+
+1. **Rubric-aware gap detection** (new method _critical_rubric_gaps):
+   - Extracts rubric dimensions with low scores (< 5)
+   - Maps to focus keys: correctness, approach, complexity, edge_cases, communication
+   - Returns list of areas to target in follow-ups
+
+2. **Enhanced follow-up decision logic**:
+   - Integrates rubric gaps into critical_missing list
+   - Allows second follow-up if confidence < 0.6 (model uncertain)
+   - Allows second follow-up if intent == DEEPEN with rubric gaps
+   - Ensures depth only when strategically needed
+
+3. **Enhanced LLM prompts**:
+   - System: Added Phase 4 rules for allow_second_followup
+   - User: Added Phase 4 guidance section
 
 **Files:**
-
 - backend/app/services/interview_engine.py
-- backend/app/services/llm_schemas.py
+- backend/app/services/prompt_templates.py
+
+**How It Works:**
+- Stores rolling rubric scores in session.skill_state
+- Extracts weak dimensions on next response
+- Merges rubric gaps into critical_missing for follow-ups
+- Respects max 2 follow-ups with intelligent depth control
 
 ---
 
-## Phase 5 — Coverage & Progress Tracking
+## Phase 5 � Weakness-Targeted Question Selection ?
 
-**Objective:** Avoid repetitive topics and ensure coverage.
+**Objective:** Prefer questions that target candidate's weak rubric areas.
 
-**Implementation Steps:**
+**Status:** Complete
 
-1. Track topic coverage in `skill_state`.
-2. Prefer questions from under-covered areas.
+**Key Changes:**
+
+1. **Rubric gap extraction** (reuses Phase 4 _critical_rubric_gaps):
+   - Identifies weak rubric dimensions
+   - Maps to focus keys for question targeting
+
+2. **Question scoring by rubric alignment** (new method _question_rubric_alignment_score):
+   - Examines question's meta.evaluation_focus metadata
+   - Scores +10 for each rubric gap the question targets
+   - Example: weak on complexity ? questions with "complexity" focus score higher
+
+3. **Enhanced technical question selection**:
+   - _pick_next_technical_question includes rubric_score
+   - Scoring: (tag_overlap * 5) + weak_score + rubric_score - tag_penalty
+   - Next question automatically targets weak areas
 
 **Files:**
-
 - backend/app/services/interview_engine.py
+
+**How It Works:**
+- When picking next technical question:
+  - Call _critical_rubric_gaps to detect weak dimensions
+  - Score each candidate question by alignment with gaps
+  - Prefer questions targeting weaknesses
+- Example: Candidate weak on "edge_cases" + "complexity" ? Q2 (targets both) gets +20, selected over Q1
+
+**Key Benefit:**
+- **Targeted learning:** Interview steers toward candidate's weak areas
+- **Efficient depth:** Reinforces weak skills with strategic question selection
 
 ---
 
-## Phase 6 — UI Feedback Enhancements
+## Phase 6 � UI Feedback Enhancements
 
 **Objective:** Show user hints about interview style and adaptive mode.
 
-**Implementation Steps:**
+**Status:** Pending
 
-1. Add labels to Interview UI: question type + difficulty level.
-2. Add toggle for adaptive difficulty in interview setup.
+**Implementation Steps:**
+1. Add labels to Interview UI: question type + difficulty level
+2. Display adaptive mode toggle result
+3. Show rubric feedback in real-time during interview
 
 **Files:**
-
 - frontend-next/src/components/sections/InterviewSection.tsx
 
 ---
 
-## Next Step (Start With)
+## Summary of Completed Phases
 
-**Phase 1**: Question-type awareness.
+| Phase | Focus                        | Status  | Key Feature |
+|-------|------------------------------|---------|------------|
+| 1     | Question-type awareness      | ? Done | Type-specific prompts (behavioral, coding, conceptual, system design) |
+| 2     | Adaptive difficulty toggle   | ? Done | User-controlled difficulty adjustment |
+| 3     | Code checking signals        | ? Done | Code detection, test coverage tracking |
+| 4     | Smarter follow-ups           | ? Done | Rubric-gap targeted, confidence-aware 2nd followup |
+| 5     | Weakness-targeted questions  | ? Done | Next question targets candidate's weak rubric areas |
+| 6     | UI feedback enhancements     | Pending | Real-time rubric + type display |
 
-If you approve, I’ll start Phase 1 with the engine changes and prompt routing logic.
+---
+
+## Implementation Notes
+
+**Key Metrics:**
+- 5 rubric dimensions tracked: communication, problem_solving, correctness_reasoning, complexity, edge_cases
+- Max 2 follow-ups per question with intelligent depth control
+- Questions tagged with type: behavioral, coding, conceptual, system_design
+- Adaptive difficulty only when user enables toggle
+- Phase 5: Questions ranked by rubric gap alignment (+10 per matching gap)
+
+**Architecture:**
+- Rolling rubric state stored in session.skill_state (EMA tracking)
+- Question scoring combines: tag overlap, weakness score, rubric alignment, penalty for repetition
+- RAG context (from similar sessions) enhances LLM prompts for follow-ups
+- Interview engine automatically targets weak areas without explicit user input
+
+**Testing Checklist:**
+1. ? Question-type routing (behavioral vs coding vs conceptual)
+2. ? Adaptive difficulty toggle on/off behavior
+3. ? Code detection signals (has_code, mentions_tests)
+4. ? Follow-ups respect rubric gaps
+5. ? Low confidence allows second follow-up
+6. ? DEEPEN intent with gaps allows depth
+7. ? Question selection targets weak areas
+8. TODO: UI labels for type/difficulty display
+
+**Future Enhancements (Beyond Phase 6):**
+- Topic coverage tracking to avoid repetition across full interview
+- Difficulty prediction based on candidate performance
+- Skill clustering (group weak skills for efficiency)
+- Post-interview weakness report with recommended practice areas

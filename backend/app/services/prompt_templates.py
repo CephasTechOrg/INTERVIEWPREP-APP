@@ -265,10 +265,17 @@ Rules:
 - "message" must be what the interviewer will say next.
 - Keep "message" concise (<= 120 words).
 - Use any signal or missing-focus hints to decide targeted follow-ups.
-- For technical questions, guide the candidate through plan -> solve -> optimize -> validate.
+- For technical questions, guide the candidate through plan -> solve -> optimize -> validate (include tests when code is provided).
 - If the candidate provided only code, ask them to explain their approach and complexity.
 - Do NOT reference any prior interviews or other sessions. Only use the current session context.
+
+Phase 4 (Smarter Follow-ups):
+- Prioritize missing rubric focus: If complexity or edge_cases are weak, ask targeted follow-ups about those areas.
+- Allow 2 follow-ups only when confident (confidence >= 0.6) AND there is critical missing focus.
+- Set allow_second_followup=true ONLY if you intend to ask a second follow-up AND the candidate needs depth on a key rubric area.
+- For DEEPEN intent: allow follow-ups to go deeper into approach, correctness, or testing when gaps are present.
 """.strip()
+
 
 
 def interviewer_controller_user_prompt(
@@ -324,10 +331,16 @@ Interview pacing:
 - Prefer at most 1 follow-up if the candidate is doing well.
 - NEVER exceed 2 follow-ups total for a question.
 - If followups_used is already 1, prefer MOVE_TO_NEXT_QUESTION; only ask a second follow-up when truly necessary.
-- Set allow_second_followup=true ONLY when you are asking that second follow-up.
+- Set allow_second_followup=true ONLY when you are asking that second follow-up AND confidence >= 0.6 AND critical focus is missing.
 - Prefer WRAP_UP only after at least 5 questions have been asked, unless there are no questions available.
 - If Missing focus is provided, treat the answer as incomplete and ask a targeted follow-up (do not move on) unless followups_used already hit the max.
 - If response quality is strong and only optional items are missing, it is OK to MOVE_TO_NEXT_QUESTION.
+
+Phase 4 guidance:
+- For low confidence (< 0.6): Allow second follow-up to clarify weak areas (approach, correctness, complexity).
+- For DEEPEN intent: Ask targeted follow-ups on rubric gaps (test coverage, trade-offs, edge cases).
+- Rubric-focused: If complexity or edge_cases missing, prioritize those in follow-up questions.
+- Coverage: Mark true/false for each focus area based on candidate's response.
 
 Also return a quick rubric score for the candidate's latest response (0-10 each). If you don't have enough info, use 5.
 Set "intent" to one of: CLARIFY, DEEPEN, CHALLENGE, ADVANCE, WRAP_UP.
@@ -365,6 +378,7 @@ Return JSON with shape:
   }}
 }}
 """.strip()
+
 
 
 def evaluator_system_prompt(rag_context: str | None = None) -> str:

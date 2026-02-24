@@ -493,6 +493,64 @@ class InterviewEngine:
                 weakest = k
         return weakest
 
+    def _critical_rubric_gaps(self, session: InterviewSession, threshold: int = 5) -> list[str]:
+        """
+        Phase 4: Extract critical rubric gaps (score < threshold) to guide follow-ups.
+        
+        Maps rubric dimensions to missing focus keys for targeted follow-ups.
+        """
+        state = session.skill_state if isinstance(getattr(session, "skill_state", None), dict) else None
+        if not state:
+            return []
+
+        last = state.get("last")
+        if not isinstance(last, dict):
+            return []
+
+        gaps: list[str] = []
+        # Map rubric dimensions to focus keys
+        dim_to_focus = {
+            "correctness_reasoning": "correctness",
+            "problem_solving": "approach",
+            "complexity": "complexity",
+            "edge_cases": "edge_cases",
+            "communication": "approach",  # fallback for communication issues
+        }
+
+        for dim, focus_key in dim_to_focus.items():
+            try:
+                score = int(last.get(dim))
+            except (ValueError, TypeError):
+                continue
+            if score < threshold and focus_key not in gaps:
+                gaps.append(focus_key)
+
+        return gaps
+
+    def _question_rubric_alignment_score(self, q: Question, rubric_gaps: list[str]) -> int:
+        """
+        Phase 5: Score how well a question targets the candidate's rubric gaps.
+        
+        Questions with evaluation_focus matching rubric gaps get higher scores.
+        """
+        if not rubric_gaps:
+            return 0
+        
+        meta = getattr(q, "meta", None)
+        if not isinstance(meta, dict):
+            return 0
+        
+        eval_focus = meta.get("evaluation_focus")
+        if not isinstance(eval_focus, list):
+            return 0
+        
+        focus_keys = {self._normalize_focus_key(str(f)) for f in eval_focus}
+        focus_keys.discard(None)
+        
+        # Score: +10 for each gap the question targets
+        matching_gaps = sum(1 for gap in rubric_gaps if gap in focus_keys)
+        return matching_gaps * 10
+
     def _weakness_keywords(self, dimension: str | None) -> list[str]:
         dim = (dimension or "").strip().lower()
         if dim == "edge_cases":
@@ -521,13 +579,38 @@ class InterviewEngine:
 
     def _maybe_bump_difficulty_current(self, db: Session, session: InterviewSession) -> None:
         """
-        Difficulty is locked to the user's selected value for the entire session.
+        If adaptive difficulty is disabled, lock to user's selected value.
+        If enabled, allow difficulty_current to move toward the selected cap based on performance.
         """
         selected = (getattr(session, "difficulty", None) or "easy").strip().lower()
         if selected not in ("easy", "medium", "hard"):
             selected = "easy"
-        if getattr(session, "difficulty_current", None) != selected:
-            session.difficulty_current = selected
+        adaptive_enabled = bool(getattr(session, "adaptive_difficulty_enabled", False))
+        if not adaptive_enabled:
+            if getattr(session, "difficulty_current", None) != selected:
+                session.difficulty_current = selected
+                db.add(session)
+                db.commit()
+                db.refresh(session)
+            return
+
+        current = (getattr(session, "difficulty_current", None) or selected).strip().lower()
+        if current not in ("easy", "medium", "hard"):
+            current = selected
+
+        cap_rank = self._difficulty_rank(selected)
+        current_rank = self._difficulty_rank(current)
+        last_overall = self._skill_last_overall(session)
+        good_streak, weak_streak = self._skill_streaks(session)
+
+        bumped = current_rank
+        if last_overall is not None and good_streak >= 2 and last_overall >= 7.5:
+            bumped = min(cap_rank, current_rank + 1)
+        elif last_overall is not None and weak_streak >= 2 and last_overall <= 4.5:
+            bumped = max(0, current_rank - 1)
+
+        if bumped != current_rank:
+            session.difficulty_current = self._rank_to_difficulty(bumped)
             db.add(session)
             db.commit()
             db.refresh(session)
@@ -1012,6 +1095,26 @@ class InterviewEngine:
             ["correct", "proof", "invariant", "why it works", "guarantee"],
         )
 
+    def _mentions_tests(self, text: str | None) -> bool:
+        t = self._normalize_text(text)
+        return self._contains_any(
+            t,
+            [
+                "test",
+                "tests",
+                "unit test",
+                "unit tests",
+                "example",
+                "examples",
+                "cases",
+                "test case",
+                "test cases",
+                "validate",
+                "verification",
+                "assert",
+            ],
+        )
+
     def _behavioral_missing_parts(self, text: str | None) -> list[str]:
         t = self._normalize_text(text)
         if "star" in t:
@@ -1037,6 +1140,7 @@ class InterviewEngine:
             "mentions_approach": self._mentions_approach(text),
             "mentions_tradeoffs": self._mentions_tradeoffs(text),
             "mentions_correctness": self._mentions_correctness(text),
+            "mentions_tests": self._mentions_tests(text),
         }
 
     def _missing_focus_keys(self, q: Question, signals: dict[str, bool], behavioral_missing: list[str]) -> list[str]:
@@ -1258,6 +1362,8 @@ class InterviewEngine:
             return "How would you validate correctness and edge cases for this solution?"
         if not signals.get("mentions_edge_cases"):
             return "What edge cases would you test or handle?"
+        if signals.get("has_code") and not signals.get("mentions_tests"):
+            return "What tests would you run to validate your solution?"
         if not signals.get("mentions_correctness"):
             return "Why is your approach correct? Any invariant you rely on?"
 
@@ -1274,6 +1380,7 @@ class InterviewEngine:
             f"mentions_complexity={signals.get('mentions_complexity', False)}",
             f"mentions_edge_cases={signals.get('mentions_edge_cases', False)}",
             f"mentions_tradeoffs={signals.get('mentions_tradeoffs', False)}",
+            f"mentions_tests={signals.get('mentions_tests', False)}",
         ]
         summary = "; ".join(bits)
         missing_summary = self._missing_focus_summary(missing, behavioral_missing)
@@ -1737,6 +1844,9 @@ class InterviewEngine:
             for q in asked:
                 asked_tags.update({t.strip().lower() for t in (q.tags() or []) if t})
 
+        # Phase 5: Get rubric gaps to target weak areas
+        rubric_gaps = self._critical_rubric_gaps(session, threshold=5)
+
         best = None
         best_score = -10_000
         for q in candidates:
@@ -1744,7 +1854,9 @@ class InterviewEngine:
             overlap = len(tags & focus_tags) if focus_tags else 0
             penalty = len(tags & asked_tags) if asked_tags else 0
             weak_score = self._weakness_score(q, self._weakness_keywords(self._weakest_dimension(session)))
-            score = (overlap * 5) + weak_score - penalty
+            rubric_score = self._question_rubric_alignment_score(q, rubric_gaps)
+            # Phase 5: Heavily weight rubric alignment (+20 boost)
+            score = (overlap * 5) + weak_score + rubric_score - penalty
             if best is None or score > best_score:
                 best = q
                 best_score = score
@@ -2977,6 +3089,12 @@ Question context: {self._combine_question_text(title, prompt)}
             if action == "FOLLOWUP":
                 action = "MOVE_TO_NEXT_QUESTION"
 
+        # Phase 4: Check rubric-based gaps for smarter follow-ups
+        rubric_gaps = self._critical_rubric_gaps(session, threshold=5)
+        for gap in rubric_gaps:
+            if gap not in critical_missing:
+                critical_missing.append(gap)
+
         force_clarify = (
             bool(critical_missing)
             and not self._max_followups_reached(session)
@@ -2991,6 +3109,18 @@ Question context: {self._combine_question_text(title, prompt)}
                 message = self._missing_focus_question(critical_missing[0], behavioral_missing) or ""
         elif critical_missing and clarify_attempts >= 2 and action == "FOLLOWUP":
             action = "MOVE_TO_NEXT_QUESTION"
+
+        # Phase 4: Allow second follow-up when confidence is low or missing critical rubric focus
+        if (
+            int(session.followups_used or 0) == 1
+            and not self._max_followups_reached(session)
+            and action == "FOLLOWUP"
+            and not allow_second_followup
+        ):
+            if confidence < 0.6:
+                allow_second_followup = True
+            elif intent == "DEEPEN" and (rubric_gaps or critical_missing):
+                allow_second_followup = True
 
         if prefer_move_on and action == "FOLLOWUP" and not force_clarify:
             action = "MOVE_TO_NEXT_QUESTION"

@@ -89,6 +89,7 @@ export const DashboardSection = () => {
   const [behavioralTarget, setBehavioralTarget] = useState(2);
   const [selectedInterviewer, setSelectedInterviewer] = useState<string>('alex');
   const [isStarting, setIsStarting] = useState(false);
+  const [adaptiveDifficultyEnabled, setAdaptiveDifficultyEnabled] = useState(false);
 
   // Derive track from role
   const track: Track = ROLE_TO_TRACK[(role || '').trim().toLowerCase()] || 'swe_intern';
@@ -203,6 +204,7 @@ export const DashboardSection = () => {
         difficulty,
         interviewer: interviewer ? { id: interviewer.id, name: interviewer.name, gender: interviewer.gender, image_url: interviewer.image_url } : undefined,
         behavioral_questions_target: behavioralTarget,
+        adaptive_difficulty_enabled: adaptiveDifficultyEnabled,
       });
       setCurrentSession(session);
       setCurrentPage('interview');
@@ -275,6 +277,30 @@ export const DashboardSection = () => {
                     This role uses General style questions only.
                   </p>
                 )}
+              </div>
+
+              {/* Adaptive Difficulty */}
+              <div className="sm:col-span-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Adaptive Difficulty</label>
+                <div className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-2">
+                  <div>
+                    <p className="text-sm text-slate-900 dark:text-white">Auto-adjust difficulty</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                      Uses your selected difficulty as the starting point and cap. It can move down if you struggle, or up if you perform well.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setAdaptiveDifficultyEnabled((prev) => !prev)}
+                    className={`px-4 py-2 rounded-lg text-sm transition-colors ${
+                      adaptiveDifficultyEnabled
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white'
+                    }`}
+                    type="button"
+                  >
+                    {adaptiveDifficultyEnabled ? 'On' : 'Off'}
+                  </button>
+                </div>
               </div>
 
               {/* Difficulty */}

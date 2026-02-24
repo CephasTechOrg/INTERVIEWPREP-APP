@@ -17,6 +17,7 @@ class CreateSessionRequest(BaseModel):
     difficulty: str = "easy"
     behavioral_questions_target: int = Field(default=2, ge=0, le=10)
     interviewer: InterviewerProfile | None = None
+    adaptive_difficulty_enabled: bool = False
 
 
 class SessionOut(BaseModel):
@@ -25,6 +26,7 @@ class SessionOut(BaseModel):
     track: str
     company_style: str
     difficulty: str
+    adaptive_difficulty_enabled: bool = False
     stage: str
     current_question_id: int | None = None
     interviewer: InterviewerProfile | None = None
@@ -36,6 +38,7 @@ class SessionSummaryOut(BaseModel):
     track: str
     company_style: str
     difficulty: str
+    adaptive_difficulty_enabled: bool = False
     stage: str
     current_question_id: int | None = None
     questions_asked_count: int = 0

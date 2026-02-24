@@ -27,6 +27,7 @@ def create_session(
     behavioral_questions_target: int = 2,
     max_questions: int | None = None,
     interviewer: dict | None = None,
+    adaptive_difficulty_enabled: bool = False,
 ) -> InterviewSession:
     # Ensure historical sessions contribute to "seen questions" so new sessions
     # don't repeatedly start with the same prompt.
@@ -49,6 +50,7 @@ def create_session(
         company_style=company_style,
         difficulty=difficulty,
         difficulty_current=_initial_difficulty_current(difficulty),
+        adaptive_difficulty_enabled=bool(adaptive_difficulty_enabled),
         stage="intro",
         questions_asked_count=0,
         followups_used=0,
