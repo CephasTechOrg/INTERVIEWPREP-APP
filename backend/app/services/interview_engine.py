@@ -33,6 +33,7 @@ from app.services.prompt_templates import (
     warmup_tone_classifier_system_prompt,
     warmup_tone_classifier_user_prompt,
 )
+from app.services.interview_engine_utils import InterviewEngineUtils
 
 _engine_logger = logging.getLogger(__name__)
 
@@ -52,7 +53,7 @@ def _get_rag_context_for_interview(db: Session, session_id: int) -> str | None:
         return None
 
 
-class InterviewEngine:
+class InterviewEngine(InterviewEngineUtils):
     """
     Controls interview flow and conversational quality.
 
@@ -65,6 +66,7 @@ class InterviewEngine:
     """
 
     def __init__(self) -> None:
+        super().__init__()
         self.llm = DeepSeekClient()
 
     _RUBRIC_KEYS: tuple[str, ...] = (
