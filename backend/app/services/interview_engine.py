@@ -33,7 +33,7 @@ from app.services.prompt_templates import (
     warmup_tone_classifier_system_prompt,
     warmup_tone_classifier_user_prompt,
 )
-from app.services.interview_engine_signals import InterviewEngineSignals
+from app.services.interview_engine_rubric import InterviewEngineRubric
 
 _engine_logger = logging.getLogger(__name__)
 
@@ -53,7 +53,7 @@ def _get_rag_context_for_interview(db: Session, session_id: int) -> str | None:
         return None
 
 
-class InterviewEngine(InterviewEngineSignals):
+class InterviewEngine(InterviewEngineRubric):
     """
     Controls interview flow and conversational quality.
 
