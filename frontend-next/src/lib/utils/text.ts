@@ -27,8 +27,9 @@ export const sanitizeAiText = (text: string): string => {
   // Remove bullets while keeping text.
   out = out.replace(/^\s*[-*]\s+/gm, '');
 
-  // Remove non-printable characters (keep tabs/newlines).
-  out = out.replace(/[^\x09\x0A\x0D\x20-\x7E]/g, '');
+  // Remove non-printable characters (keep tabs/newlines and common Unicode ranges)
+  // This preserves emoji and international characters
+  out = out.replace(/[^\x09\x0A\x0D\x20-\x7E\u00A0-\uFFFF]/g, '');
   out = out.replace(/\r\n/g, '\n');
   out = out.replace(/\n{3,}/g, '\n\n');
 

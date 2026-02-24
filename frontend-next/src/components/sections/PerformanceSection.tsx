@@ -163,17 +163,17 @@ export const PerformanceSection = () => {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div className="space-y-8">
+      {/* Page Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Performance Analytics</h1>
-          <p className="text-slate-500 dark:text-slate-400 mt-1">Track your interview progress and identify areas for improvement</p>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Performance Analytics</h1>
+          <p className="text-slate-500 dark:text-slate-400 text-sm font-medium mt-1">Track your interview progress and identify areas for improvement</p>
         </div>
         <button
           onClick={loadSessions}
           disabled={loading}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-lg font-medium transition-colors disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-lg font-medium transition-colors disabled:opacity-50 w-fit"
         >
           <span className={loading ? 'animate-spin' : ''}>{Icons.refresh}</span>
           Refresh
@@ -181,7 +181,7 @@ export const PerformanceSection = () => {
       </div>
 
       {loading ? (
-        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-8 text-center transition-colors">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8 text-center transition-colors">
           <div className="text-slate-400 mb-2">{Icons.spinner}</div>
           <p className="text-slate-500 dark:text-slate-400 text-sm">Loading performance data...</p>
         </div>
@@ -189,48 +189,48 @@ export const PerformanceSection = () => {
         <>
           {/* Metrics Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
-            <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 transition-colors">
-              <div className="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/50 rounded-md flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-2">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 transition-all hover:shadow-md">
+              <div className="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-2">
                 {Icons.play}
               </div>
               <div className="text-xl font-bold text-slate-900 dark:text-white">{stats.totalSessions}</div>
               <div className="text-xs text-slate-500 dark:text-slate-400">Total Sessions</div>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 transition-colors">
-              <div className="w-8 h-8 bg-green-100 dark:bg-green-900/50 rounded-md flex items-center justify-center text-green-600 dark:text-green-400 mb-2">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 transition-all hover:shadow-md">
+              <div className="w-8 h-8 bg-emerald-100 dark:bg-emerald-900/50 rounded-lg flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-2">
                 {Icons.checkCircle}
               </div>
               <div className="text-xl font-bold text-slate-900 dark:text-white">{stats.completedSessions}</div>
               <div className="text-xs text-slate-500 dark:text-slate-400">Completed</div>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 transition-colors">
-              <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/50 rounded-md flex items-center justify-center text-purple-600 dark:text-purple-400 mb-2">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 transition-all hover:shadow-md">
+              <div className="w-8 h-8 bg-violet-100 dark:bg-violet-900/50 rounded-lg flex items-center justify-center text-violet-600 dark:text-violet-400 mb-2">
                 {Icons.chart}
               </div>
               <div className="text-xl font-bold text-slate-900 dark:text-white">{stats.avgScore || '-'}</div>
               <div className="text-xs text-slate-500 dark:text-slate-400">Avg Score</div>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 transition-colors">
-              <div className="w-8 h-8 bg-amber-100 dark:bg-amber-900/50 rounded-md flex items-center justify-center text-amber-600 dark:text-amber-400 mb-2">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 transition-all hover:shadow-md">
+              <div className="w-8 h-8 bg-amber-100 dark:bg-amber-900/50 rounded-lg flex items-center justify-center text-amber-600 dark:text-amber-400 mb-2">
                 {Icons.trophy}
               </div>
               <div className="text-xl font-bold text-slate-900 dark:text-white">{stats.bestScore || '-'}</div>
               <div className="text-xs text-slate-500 dark:text-slate-400">Best Score</div>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 transition-colors">
-              <div className="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/50 rounded-md flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-2">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 transition-all hover:shadow-md">
+              <div className="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-2">
                 {Icons.results}
               </div>
               <div className="text-xl font-bold text-slate-900 dark:text-white">{stats.medianScore || '-'}</div>
               <div className="text-xs text-slate-500 dark:text-slate-400">Median Score</div>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 transition-colors">
-              <div className="w-8 h-8 bg-orange-100 dark:bg-orange-900/50 rounded-md flex items-center justify-center text-orange-600 dark:text-orange-400 mb-2">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 transition-all hover:shadow-md">
+              <div className="w-8 h-8 bg-orange-100 dark:bg-orange-900/50 rounded-lg flex items-center justify-center text-orange-600 dark:text-orange-400 mb-2">
                 {Icons.fire}
               </div>
               <div className="text-xl font-bold text-slate-900 dark:text-white">{stats.streak}</div>
@@ -238,114 +238,110 @@ export const PerformanceSection = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Score Trend Chart */}
-            <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-colors">
-              <div className="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-                <h3 className="font-semibold text-slate-900 dark:text-white">Score Trend</h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400">Your recent interview scores</p>
+            <div className="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-colors">
+              <div className="mb-8">
+                <h3 className="font-bold text-lg text-slate-900 dark:text-white">Score Trend</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Your recent interview scores</p>
               </div>
-              <div className="p-5">
-                {recentScores.length > 0 ? (
-                  <div className="h-40 flex items-end justify-between gap-1">
-                    {recentScores.map((item, i) => (
-                      <div key={i} className="flex-1 flex flex-col items-center gap-1">
+              {recentScores.length > 0 ? (
+                <div className="h-64 flex items-end justify-between gap-3 pb-4">
+                  {recentScores.map((item, i) => (
+                    <div key={i} className="flex-1 flex flex-col items-center gap-2 group">
+                      <div className="w-full h-full relative">
                         <div 
-                          className={`w-full rounded-t ${scoreBandColors[getScoreBand(item.score)]} transition-all`}
+                          className={`w-full rounded-t-lg ${scoreBandColors[getScoreBand(item.score)]} transition-all group-hover:shadow-lg relative`}
                           style={{ height: `${item.score}%` }}
                           title={`${item.score}%`}
-                        />
-                        <span className="text-[10px] text-slate-500 dark:text-slate-400 whitespace-nowrap">{item.date}</span>
+                        >
+                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-slate-700 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                            {item.score}%
+                          </div>
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="h-40 flex items-center justify-center text-slate-400">
-                    <p className="text-sm">No score data yet</p>
-                  </div>
-                )}
-              </div>
+                      <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 whitespace-nowrap mt-2">{item.date}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="h-64 flex items-center justify-center text-slate-400">
+                  <p className="text-sm">No score data yet</p>
+                </div>
+              )}
             </div>
 
             {/* Difficulty Breakdown */}
-            <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-colors">
-              <div className="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-                <h3 className="font-semibold text-slate-900 dark:text-white">Difficulty Breakdown</h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400">Sessions by difficulty level</p>
-              </div>
-              <div className="p-5">
-                <div className="space-y-3">
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Easy</span>
-                      <span className="text-xs text-slate-500 dark:text-slate-400">{byDifficulty.easy} sessions</span>
-                    </div>
-                    <div className="w-full h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-green-500 rounded-full transition-all"
-                        style={{ width: `${(byDifficulty.easy / difficultyTotal) * 100}%` }}
-                      />
-                    </div>
+            <div className="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col">
+              <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-8">Difficulty Breakdown</h3>
+              <div className="space-y-6 flex-1">
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-600 dark:text-slate-400 font-medium">Easy</span>
+                    <span className="font-bold text-slate-900 dark:text-white">{byDifficulty.easy}</span>
                   </div>
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Medium</span>
-                      <span className="text-xs text-slate-500 dark:text-slate-400">{byDifficulty.medium} sessions</span>
-                    </div>
-                    <div className="w-full h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-amber-500 rounded-full transition-all"
-                        style={{ width: `${(byDifficulty.medium / difficultyTotal) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Hard</span>
-                      <span className="text-xs text-slate-500 dark:text-slate-400">{byDifficulty.hard} sessions</span>
-                    </div>
-                    <div className="w-full h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-red-500 rounded-full transition-all"
-                        style={{ width: `${(byDifficulty.hard / difficultyTotal) * 100}%` }}
-                      />
-                    </div>
+                  <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-green-500 rounded-full transition-all"
+                      style={{ width: `${(byDifficulty.easy / difficultyTotal) * 100}%` }}
+                    />
                   </div>
                 </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-600 dark:text-slate-400 font-medium">Medium</span>
+                    <span className="font-bold text-slate-900 dark:text-white">{byDifficulty.medium}</span>
+                  </div>
+                  <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-amber-500 rounded-full transition-all"
+                      style={{ width: `${(byDifficulty.medium / difficultyTotal) * 100}%` }}
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-600 dark:text-slate-400 font-medium">Hard</span>
+                    <span className="font-bold text-slate-900 dark:text-white">{byDifficulty.hard}</span>
+                  </div>
+                  <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-rose-500 rounded-full transition-all"
+                      style={{ width: `${(byDifficulty.hard / difficultyTotal) * 100}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="mt-8 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg text-xs text-slate-500 dark:text-slate-400">
+                Focus on <span className="text-rose-500 font-bold">Hard</span> level questions to reach your target score.
               </div>
             </div>
 
             {/* Performance by Track */}
-            <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-colors">
-              <div className="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-                <h3 className="font-semibold text-slate-900 dark:text-white">Performance by Track</h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400">Average scores per interview track</p>
-              </div>
-              <div className="p-5">
+            <div className="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+              <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-6">Performance by Track</h3>
+              <div className="space-y-4">
                 {Object.entries(byTrack).length > 0 ? (
-                  <div className="space-y-2">
-                    {Object.entries(byTrack).map(([track, data]) => (
-                      <div key={track} className="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-700 rounded-lg">
-                        <div>
-                          <span className="font-medium text-slate-900 dark:text-white text-sm capitalize">
-                            {track.replace(/_/g, ' ')}
-                          </span>
-                          <span className="text-xs text-slate-500 dark:text-slate-400 ml-2">({data.count})</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-12 h-1.5 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden">
-                            <div 
-                              className={`h-full ${scoreBandColors[getScoreBand(data.avgScore)]} rounded-full`}
-                              style={{ width: `${data.avgScore}%` }}
-                            />
-                          </div>
-                          <span className="font-semibold text-slate-900 dark:text-white text-sm w-6 text-right">
-                            {data.avgScore}
-                          </span>
-                        </div>
+                  Object.entries(byTrack).map(([track, data]) => (
+                    <div key={track} className="flex items-center gap-4">
+                      <div className="size-10 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                        📈
                       </div>
-                    ))}
-                  </div>
+                      <div className="flex-1">
+                        <div className="flex justify-between mb-1">
+                          <span className="text-sm font-semibold text-slate-900 dark:text-white capitalize">{track.replace(/_/g, ' ')}</span>
+                          <span className="text-sm text-slate-600 dark:text-slate-400">{data.avgScore}%</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                          <div 
+                            className="h-full bg-indigo-500 rounded-full transition-all"
+                            style={{ width: `${data.avgScore}%` }}
+                          />
+                        </div>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{data.count} sessions</p>
+                      </div>
+                    </div>
+                  ))
                 ) : (
                   <div className="text-center text-slate-400 py-6">
                     <p className="text-sm">Complete interviews to see track performance</p>
@@ -355,17 +351,13 @@ export const PerformanceSection = () => {
             </div>
 
             {/* Score Distribution */}
-            <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-colors">
-              <div className="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-                <h3 className="font-semibold text-slate-900 dark:text-white">Score Distribution</h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400">How your scores are distributed</p>
-              </div>
-              <div className="p-5">
-                <div className="space-y-2">
-                  {(['excellent', 'good', 'average', 'needsWork'] as ScoreBand[]).map((band) => {
-                    const scores = completed.map(s => s.overall_score ?? 80);
-                    const count = scores.filter(s => getScoreBand(s) === band).length;
-                    const percentage = completed.length ? Math.round((count / completed.length) * 100) : 0;
+            <div className="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+              <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-6">Score Distribution</h3>
+              <div className="space-y-3">
+                {(['excellent', 'good', 'average', 'needsWork'] as ScoreBand[]).map((band) => {
+                  const scores = completed.map(s => s.overall_score ?? 80);
+                  const count = scores.filter(s => getScoreBand(s) === band).length;
+                  const percentage = completed.length ? Math.round((count / completed.length) * 100) : 0;
                     
                     return (
                       <div key={band} className="flex items-center gap-2">
@@ -376,28 +368,35 @@ export const PerformanceSection = () => {
                       </div>
                     );
                   })}
-                </div>
               </div>
             </div>
           </div>
 
-          {/* Completion Rate */}
-          <div className="bg-indigo-600 rounded-xl p-5 text-white">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div>
-                <h3 className="font-semibold">Session Completion Rate</h3>
-                <p className="text-indigo-100 text-sm mt-0.5">
-                  You have completed {stats.completedSessions} out of {stats.totalSessions} sessions
-                </p>
+          {/* Session Completion CTA */}
+          <div className="bg-gradient-to-r from-indigo-600 to-indigo-700 rounded-2xl p-8 text-white relative overflow-hidden">
+            {/* Background Accent */}
+            <div className="absolute -right-12 -bottom-12 size-64 bg-white/10 rounded-full blur-3xl"></div>
+            <div className="flex flex-col md:flex-row items-center gap-8 relative z-10">
+              <div className="flex-1 space-y-4 text-center md:text-left">
+                <h3 className="text-2xl font-bold">You're on track to your goal!</h3>
+                <p className="text-indigo-100 opacity-90 max-w-lg">Keep practicing consistently to improve your scores and master technical interviews.</p>
+                <div className="flex items-center gap-2 text-sm font-medium">
+                  <span>Completion Rate:</span>
+                  <span className="text-xl font-bold">{stats.completionRate}%</span>
+                </div>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-24 h-2 bg-white/20 rounded-full overflow-hidden">
+              <div className="w-full md:w-48 space-y-3">
+                <div className="flex justify-between text-sm font-bold">
+                  <span>Progress</span>
+                  <span>{stats.completedSessions}/{stats.totalSessions}</span>
+                </div>
+                <div className="w-full h-3 bg-white/20 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-white rounded-full transition-all"
                     style={{ width: `${stats.completionRate}%` }}
                   />
                 </div>
-                <span className="text-xl font-bold">{stats.completionRate}%</span>
+                <p className="text-[11px] font-medium opacity-70 text-center">{stats.completedSessions} sessions completed</p>
               </div>
             </div>
           </div>

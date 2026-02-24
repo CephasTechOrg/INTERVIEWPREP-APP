@@ -19,6 +19,7 @@ export const aiService = {
     const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
     const response = await axios.post(`${getBaseURL()}/tts`, data, {
       responseType: 'arraybuffer',
+      timeout: 15000, // 15 second timeout
       headers: {
         'Content-Type': 'application/json',
         ...(token ? { Authorization: `Bearer ${token}` } : {}),

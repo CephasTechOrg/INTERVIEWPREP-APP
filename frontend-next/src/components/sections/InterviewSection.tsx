@@ -57,6 +57,7 @@ export const InterviewSection = () => {
   });
   const [isLeftPanelCollapsed, setIsLeftPanelCollapsed] = useState(false);
   const [isPageExpanded, setIsPageExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [aiStatus, setAiStatus] = useState<AIStatusResponse | null>(null);
   const [question, setQuestion] = useState<Question | null>(null);
   const [elapsedSec, setElapsedSec] = useState(0);
@@ -76,6 +77,8 @@ export const InterviewSection = () => {
   const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
   const lastSpokenMessageIdRef = useRef<string | null>(null);
   const startRequestedRef = useRef(false);
+  const audioBlobUrls = useRef<string[]>([]);
+  const loadMessagesAbortRef = useRef<AbortController | null>(null);
 
   // Auto-resize textarea
   const autoResizeTextarea = useCallback(() => {
@@ -96,6 +99,21 @@ export const InterviewSection = () => {
     return currentSession.current_question_id ?? null;
   }, [messages, currentSession?.current_question_id]);
 
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+      // Auto-collapse on mobile
+      if (window.innerWidth < 1024) {
+        setIsLeftPanelCollapsed(true);
+      }
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Initialize session and load messages on mount
   useEffect(() => {
     if (currentSession) {
@@ -108,7 +126,7 @@ export const InterviewSection = () => {
     if (messagesContainerRef.current) {
       messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
-  }, [messages.length, isLeftPanelCollapsed]);
+  }, [messages.length]);
 
   // Auto-resize textarea when text changes
   useEffect(() => {
@@ -117,21 +135,26 @@ export const InterviewSection = () => {
 
   // Timer effect
   useEffect(() => {
-    if (!currentSession || currentSession.stage === 'done') {
-      return;
-    }
+    if (!currentSession) return;
+    
     const timer = setInterval(() => {
-      setElapsedSec((prev) => prev + 1);
+      // Check stage in callback to ensure timer stops when session ends
+      if (currentSession.stage !== 'done') {
+        setElapsedSec((prev) => prev + 1);
+      }
     }, 1000);
+    
     return () => clearInterval(timer);
   }, [currentSession?.id, currentSession?.stage]);
 
-  // Load AI status on mount
+  // Load AI status on mount and poll periodically (only when session active)
   useEffect(() => {
+    if (currentSession?.stage === 'done') return;
+    
     loadAIStatus();
     const statusInterval = setInterval(loadAIStatus, 30000);
     return () => clearInterval(statusInterval);
-  }, []);
+  }, [currentSession?.stage]);
 
   // Initialize speech recognition
   useEffect(() => {
@@ -188,8 +211,25 @@ export const InterviewSection = () => {
     setVoiceSupported(true);
 
     return () => {
-      recognitionRef.current?.abort();
-      recognitionRef.current = null;
+      if (recognitionRef.current) {
+        recognitionRef.current.abort();
+        recognitionRef.current = null;
+      }
+      setIsListening(false);
+    };
+  }, []);
+
+  // Cleanup audio on unmount
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = '';
+        audioRef.current.load();
+      }
+      // Revoke all blob URLs
+      audioBlobUrls.current.forEach((url) => URL.revokeObjectURL(url));
+      audioBlobUrls.current = [];
     };
   }, []);
 
@@ -281,6 +321,11 @@ export const InterviewSection = () => {
 
   const loadMessages = async () => {
     if (!currentSession) return;
+    
+    // Cancel any previous load operation
+    loadMessagesAbortRef.current?.abort();
+    loadMessagesAbortRef.current = new AbortController();
+    
     try {
       setLoading((prev) => ({ ...prev, messages: true }));
       setLocalError(null);
@@ -298,6 +343,8 @@ export const InterviewSection = () => {
       }
     } catch (err) {
       startRequestedRef.current = false;
+      // Ignore abort errors
+      if (err instanceof Error && err.name === 'AbortError') return;
       const errorMsg = err instanceof Error ? err.message : 'Failed to load messages';
       setLocalError(errorMsg);
       setError(errorMsg);
@@ -356,8 +403,14 @@ export const InterviewSection = () => {
     e?.preventDefault();
     if (!currentSession || loading.sending) return;
 
+    // Set loading state FIRST to prevent concurrent sends
+    setLoading((prev) => ({ ...prev, sending: true }));
+
     const content = buildMessagePayload();
-    if (!content) return;
+    if (!content) {
+      setLoading((prev) => ({ ...prev, sending: false }));
+      return;
+    }
 
     const tempId = Date.now();
     const studentMessage: Message = {
@@ -376,10 +429,11 @@ export const InterviewSection = () => {
     } else setMessageText('');
 
     try {
-      setLoading((prev) => ({ ...prev, sending: true }));
       const reply = await sessionService.sendMessage(currentSession.id, { content });
       addMessage(reply);
     } catch (err) {
+      // Remove the optimistic message on error
+      setMessages((prevMessages) => prevMessages.filter((m) => m.id !== tempId));
       const errorMsg = err instanceof Error ? err.message : 'Failed to send message';
       setLocalError(errorMsg);
       setError(errorMsg);
@@ -422,6 +476,13 @@ export const InterviewSection = () => {
 
   const playTts = async (text: string) => {
     if (!text?.trim()) return;
+    
+    // Stop any current playback to prevent overlap
+    if (audioRef.current && !audioRef.current.paused) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    
     try {
       const response = await aiService.generateSpeech({ text });
       
@@ -432,7 +493,17 @@ export const InterviewSection = () => {
       if (response.mode === 'audio' && response.audio_url) {
         if (!audioRef.current) {
           audioRef.current = new Audio();
+          // Setup cleanup handler for blob URLs
+          audioRef.current.onended = () => {
+            if (audioBlobUrls.current.length > 0) {
+              const oldUrl = audioBlobUrls.current.shift();
+              if (oldUrl) URL.revokeObjectURL(oldUrl);
+            }
+          };
         }
+        
+        // Track blob URL for cleanup
+        audioBlobUrls.current.push(response.audio_url);
         audioRef.current.src = response.audio_url;
         await audioRef.current.play();
       }
@@ -746,7 +817,17 @@ export const InterviewSection = () => {
                     <button
                       key={mode}
                       type="button"
-                      onClick={() => setInputMode(mode)}
+                      onClick={() => {
+                        // Clear voice mode data when switching away
+                        if (inputMode === 'voice' && mode !== 'voice') {
+                          setVoiceText('');
+                          setVoiceInterim('');
+                          if (isListening) {
+                            recognitionRef.current?.stop();
+                          }
+                        }
+                        setInputMode(mode);
+                      }}
                       disabled={loading.sending || currentSession.stage === 'done' || (mode === 'voice' && !voiceSupported)}
                       className={`p-1.5 rounded transition-all ${
                         inputMode === mode
