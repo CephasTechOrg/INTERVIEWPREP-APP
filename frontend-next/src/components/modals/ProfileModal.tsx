@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState, useCallback } from 'react';
+import { useEffect, useMemo, useState, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { authService } from '@/lib/services/authService';
 import { useAuthStore } from '@/lib/stores/authStore';
@@ -34,8 +34,11 @@ export const ProfileModal = ({ open, onClose }: ProfileModalProps) => {
   const [fullName, setFullName] = useState('');
   const [rolePref, setRolePref] = useState('');
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; msg: string } | null>(null);
   const [mounted, setMounted] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Client-only mount flag for portal
   useEffect(() => setMounted(true), []);
@@ -46,6 +49,7 @@ export const ProfileModal = ({ open, onClose }: ProfileModalProps) => {
       setFullName(user?.full_name || '');
       setRolePref(user?.role_pref || '');
       setFeedback(null);
+      setAvatarPreview(null);
     }
   }, [open, user]);
 
@@ -101,6 +105,28 @@ export const ProfileModal = ({ open, onClose }: ProfileModalProps) => {
     }
   }, [user, fullName, rolePref, saving, onClose, setUser]);
 
+  const handleAvatarChange = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    // Local preview while uploading
+    const objectUrl = URL.createObjectURL(file);
+    setAvatarPreview(objectUrl);
+    setUploading(true);
+    setFeedback(null);
+    try {
+      const updated = await authService.uploadAvatar(file);
+      setUser(updated);
+      setFeedback({ type: 'success', msg: 'Profile photo updated.' });
+    } catch (err: any) {
+      setAvatarPreview(null);
+      setFeedback({ type: 'error', msg: err?.message || 'Failed to upload photo.' });
+    } finally {
+      setUploading(false);
+      // Reset file input so the same file can be re-selected
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  }, [setUser]);
+
   if (!open || !mounted) return null;
 
   // Derive initials (up to 2 chars from full name, else first char of email)
@@ -133,9 +159,48 @@ export const ProfileModal = ({ open, onClose }: ProfileModalProps) => {
       >
         {/* ── Header ── */}
         <div className="px-6 pt-6 pb-4 flex items-start gap-4 flex-shrink-0">
-          <div className="w-[52px] h-[52px] rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0">
-            {initials}
-          </div>
+          {/* Clickable avatar with camera overlay */}
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+            className="relative w-[52px] h-[52px] rounded-full flex-shrink-0 group focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            title="Change profile photo"
+          >
+            {(avatarPreview || (user?.profile as any)?.avatar_url) ? (
+              <img
+                src={avatarPreview || (user?.profile as any)?.avatar_url}
+                alt="Profile photo"
+                className="w-full h-full rounded-full object-cover shadow-lg"
+              />
+            ) : (
+              <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                {initials}
+              </div>
+            )}
+            {/* Camera icon overlay on hover */}
+            <span className="absolute inset-0 rounded-full bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              {uploading ? (
+                <svg className="w-5 h-5 text-white animate-spin" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              )}
+            </span>
+          </button>
+          {/* Hidden file input */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            className="hidden"
+            onChange={handleAvatarChange}
+          />
           <div className="flex-1 min-w-0">
             <h2 id="profile-title" className="text-xl font-bold text-slate-900 dark:text-white truncate">
               {user?.full_name || 'Your Profile'}

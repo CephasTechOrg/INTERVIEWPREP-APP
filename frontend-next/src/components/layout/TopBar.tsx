@@ -89,8 +89,14 @@ export const TopBar = () => {
               onClick={() => setDropdownOpen(v => !v)}
               className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
             >
-              <div className="w-7 h-7 rounded-full bg-indigo-600 flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0">
-                {initials}
+              <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0">
+                {(user?.profile as any)?.avatar_url ? (
+                  <img src={(user.profile as any).avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full bg-indigo-600 flex items-center justify-center text-white text-[11px] font-bold">
+                    {initials}
+                  </div>
+                )}
               </div>
               <span className="hidden md:block text-[13px] font-medium text-slate-700 dark:text-slate-300">
                 {firstName}
@@ -110,8 +116,14 @@ export const TopBar = () => {
                 {/* User info */}
                 <div className="px-4 py-4 bg-slate-50 dark:bg-slate-800/40 border-b border-slate-100 dark:border-slate-700/60">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                      {initials}
+                    <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+                      {(user?.profile as any)?.avatar_url ? (
+                        <img src={(user.profile as any).avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="w-full h-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
+                          {initials}
+                        </div>
+                      )}
                     </div>
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">
