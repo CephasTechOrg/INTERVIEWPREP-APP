@@ -322,17 +322,11 @@
         "What indexes would you add to optimize this query?",
         "How would you write this as a window function (RANK/DENSE_RANK)?"
       ],
-      "question_type": "system_design",
-      "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -347,11 +341,15 @@
         "What is deadlock avoidance vs detection vs recovery?",
         "How do you prevent deadlock in a Java multithreaded application?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -386,17 +384,11 @@
         "How do tools like Jaeger or Zipkin work?",
         "What information should be included in the trace context?"
       ],
-      "question_type": "system_design",
-      "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -411,17 +403,15 @@
         "What is rate limiting and how would you implement it?",
         "How does an API Gateway handle authentication?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -437,11 +427,15 @@
         "What is auto-configuration and how does it work?",
         "What is the purpose of application.properties?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {

@@ -16,14 +16,15 @@
         "How would you handle duplicate numbers in the array?",
         "What if the array is sorted? Can you optimize further?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "hash map usage",
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -38,11 +39,15 @@
         "How would you handle Unicode characters?",
         "Can you write the iterative and recursive versions?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -57,11 +62,15 @@
         "Why is comparing from both ends more efficient?",
         "What edge cases (empty string, single character) would you test?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -76,13 +85,15 @@
         "How many comparisons are needed in the worst case?",
         "What if the array contains negative numbers or is empty?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -98,15 +109,11 @@
         "What are the limitations of this approach?",
         "How would you handle large numbers (overflow)?"
       ],
-      "question_type": "conceptual",
-      "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -121,14 +128,15 @@
         "How would you handle very large input where memory is constrained?",
         "What if the elements are only positive integers in a fixed range?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "hash map usage",
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -143,13 +151,15 @@
         "How does the algorithm change if the array is unsorted?",
         "Why is the two-pointer approach optimal here?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -187,13 +197,15 @@
         "How would you merge them in-place if the first array has enough buffer space?",
         "Can you generalize this to merge K sorted lists?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -208,13 +220,15 @@
         "What makes a string invalid?",
         "How would you extend this to support other delimiter pairs?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "stack data structure"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -323,14 +337,15 @@
         "How would you implement a queue using two stacks?",
         "Where is a queue used in operating systems?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "stack data structure",
-        "queue data structure"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -345,13 +360,15 @@
         "When does a HashMap convert a linked list to a red-black tree in Java 8+?",
         "What is a good hash function?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "hash map usage"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -366,17 +383,15 @@
         "How do you find customers who have never placed an order?",
         "What is a self-join? Can you give an example?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -461,11 +476,15 @@
         "What is the Bill Pugh Singleton implementation?",
         "What are the drawbacks of the Singleton pattern?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -504,16 +523,15 @@
         "What steps are you taking to improve your weakness?",
         "How do your strengths make you a good fit for this role?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {

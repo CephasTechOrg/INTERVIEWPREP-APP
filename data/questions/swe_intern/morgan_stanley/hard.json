@@ -140,17 +140,15 @@
         "What happens if you call a transactional method from within the same class?",
         "How do you test transactional code?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -210,11 +208,15 @@
         "What are the performance implications of reference counting?",
         "How does Python's GC handle cycles?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -296,11 +298,15 @@
         "How do you handle versioning of the FIX protocol?",
         "How do you ensure your parser is efficient for high-frequency trading?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -340,16 +346,15 @@
         "Did you face any conflicts? How did you resolve them?",
         "What would you do differently next time?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     }
   ]

@@ -229,17 +229,15 @@
         "How do you choose what to index?",
         "How do you measure whether an index helps?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -329,17 +327,15 @@
         "How do you rollback quickly?",
         "What metrics would you track?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -423,11 +419,15 @@
         "How do you differentiate CPU vs IO bottlenecks?",
         "How do you prevent regressions?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1294,11 +1294,15 @@
         "What is ConfigureAwait(false) and when to use it?",
         "How do you handle exceptions in async methods?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1314,11 +1318,15 @@
         "When would you use Thread directly?",
         "What is Task.Run?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1334,11 +1342,15 @@
         "What are the limitations of ValueTask?",
         "How does this reduce allocations?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1354,11 +1366,15 @@
         "How do ToList(), ToArray() change behavior?",
         "Why can deferred execution cause bugs?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1374,11 +1390,15 @@
         "What is the state machine behind yield?",
         "What are the performance implications?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1418,11 +1438,15 @@
         "How do you suppress warnings when you know it's safe?",
         "How does this help prevent null reference exceptions?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1457,11 +1481,15 @@
         "Why are objects promoted?",
         "What is the Large Object Heap (LOH)?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1521,11 +1549,15 @@
         "How do you secure blob storage?",
         "What is SAS (Shared Access Signature)?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1541,17 +1573,15 @@
         "How does global distribution work?",
         "When would you choose Cosmos DB over SQL Database?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1567,11 +1597,15 @@
         "How does scaling work?",
         "What are cold starts and how do you mitigate them?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1587,11 +1621,15 @@
         "What are index seeks vs scans?",
         "What are common query anti-patterns?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1607,11 +1645,15 @@
         "How does Include() help?",
         "When might eager loading be harmful?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1626,11 +1668,15 @@
         "How do AsNoTracking() improve performance?",
         "When would you use detached entities?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1697,17 +1743,15 @@
         "What are the trade-offs of each?",
         "How do you handle partial failures?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1722,17 +1766,15 @@
         "How does it differ from a load balancer?",
         "What Azure services provide gateway functionality?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1798,16 +1840,15 @@
         "What did you learn from them?",
         "How did this improve the outcome?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1846,16 +1887,15 @@
         "How did you document the trade-off?",
         "Did you ever revisit that decision?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {

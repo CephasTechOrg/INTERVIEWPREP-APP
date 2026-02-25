@@ -352,17 +352,13 @@
         "What about pull vs push models?",
         "How to scale to millions of users?"
       ],
-      "question_type": "system_design",
+      "question_type": "coding",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "hash map usage"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "complexity",
+        "edge_cases"
       ]
     },
     {

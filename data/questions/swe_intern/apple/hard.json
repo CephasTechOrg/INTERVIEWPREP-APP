@@ -68,11 +68,15 @@
         "When would you use lock-free vs locking?",
         "How would you validate linearizability or correctness?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -108,17 +112,15 @@
         "How do you handle long-running tasks?",
         "What data structures support efficient scheduling?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -408,17 +410,15 @@
         "How do you communicate these trade-offs to non-engineers?",
         "What metrics reveal user pain from inconsistency?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -434,17 +434,15 @@
         "How do you reproduce issues deterministically?",
         "How do you roll out and validate the fix safely?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -642,11 +640,17 @@
         "What encryption scheme protects health data in transit and at rest?",
         "How do you manage storage for years of health data?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {
@@ -711,11 +715,17 @@
         "What about handling edits and derivatives?",
         "How do you optimize storage across the user base?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {
@@ -997,16 +1007,15 @@
         "How do you communicate with stakeholders?",
         "What post-mortem actions would you take?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1049,16 +1058,11 @@
         "What solution did you propose?",
         "How did stakeholders react?"
       ],
-      "question_type": "behavioral",
-      "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -1101,16 +1105,15 @@
         "How did you arrive at your solution?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1179,16 +1182,15 @@
         "How would you balance new features vs debt repayment?",
         "How would you get buy-in from stakeholders?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1205,16 +1207,15 @@
         "What trade-offs did you accept?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {

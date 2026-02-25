@@ -298,17 +298,11 @@
         "How do you scale crawling?",
         "How do you handle failures?"
       ],
-      "question_type": "system_design",
-      "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -342,17 +336,15 @@
         "How do you avoid filter bubbles?",
         "How do you measure success?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -550,17 +542,11 @@
         "How do you compute shortest paths at scale?",
         "How do you handle real-time traffic?"
       ],
-      "question_type": "system_design",
-      "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -1221,11 +1207,15 @@
         "What is the teleportation probability?",
         "How do you compute PageRank for billions of pages?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1240,17 +1230,15 @@
         "How do you handle failures?",
         "What are the limitations of MapReduce?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1265,17 +1253,15 @@
         "How does Spanner handle clock uncertainty?",
         "What are the trade-offs compared to other databases?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {

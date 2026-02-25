@@ -47,11 +47,15 @@
         "In your custom cache, how do you proactively evict expired entries without blocking `get()` requests?",
         "What are the memory visibility guarantees between threads using your cache?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -145,11 +149,15 @@
         "How do you force a Full GC and why is it dangerous in production?",
         "What is the difference between a minor, major, and full GC event?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -194,11 +202,15 @@
         "If the list is large, what is the performance impact of your defensive copying strategy?",
         "What is the difference between shallow immutability and deep immutability?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -243,11 +255,15 @@
         "What is the difference between Singleton and Prototype scope in terms of lifecycle?",
         "How would you implement your own `@InjectRandomInt` annotation using a `BeanPostProcessor`?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {

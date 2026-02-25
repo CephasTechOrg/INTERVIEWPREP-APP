@@ -85,11 +85,17 @@
         "How do you represent the graph for the `traverse()` function?",
         "What is the time complexity of your cycle detection algorithm?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {
@@ -129,11 +135,15 @@
         "What specific issues arise with `ConcurrentHashMap`?",
         "How does `ConcurrentHashMap` achieve thread-safety (bucket locking, CAS)?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -324,11 +334,15 @@
         "How does the `volatile` keyword help in Double-Checked Locking?",
         "What is the Bill Pugh Singleton (static inner class) approach?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -344,11 +358,15 @@
         "Can you use both in the same class?",
         "How do you handle null values when sorting?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -389,17 +407,15 @@
         "How does REST leverage HTTP methods?",
         "In what scenario might SOAP still be preferred in banking?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -415,11 +431,15 @@
         "How does Spring handle circular dependencies?",
         "What is the `@Primary` annotation used for?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     }
   ]

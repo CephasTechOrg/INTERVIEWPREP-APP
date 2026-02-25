@@ -89,17 +89,15 @@
         "How does it reduce rebalancing when nodes change?",
         "Where have you seen it used (caches, sharding)?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -113,13 +111,15 @@
         "What edge cases would you test?",
         "Can you do it in-place?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -287,17 +287,15 @@
         "How do you prevent tenant data leaks?",
         "How do you handle noisy neighbors?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -608,11 +606,15 @@
         "What if lists are very long?",
         "How do you test performance?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -716,17 +718,11 @@
         "How does this compare to token bucket implementation?",
         "How do you handle race conditions in distributed Redis?"
       ],
-      "question_type": "system_design",
-      "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "complexity",
+        "edge_cases"
       ]
     },
     {

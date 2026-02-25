@@ -217,11 +217,15 @@
         "Deadlocks?",
         "Performance trade-offs?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -256,11 +260,15 @@
         "Avoiding vanity metrics?",
         "Experiment design?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -626,17 +634,11 @@
         "How do you handle real-time traffic?",
         "How do you compute the shortest path?"
       ],
-      "question_type": "system_design",
-      "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "complexity",
+        "edge_cases"
       ]
     },
     {

@@ -82,17 +82,11 @@
         "What happens if the payment service crashes after debiting the account but before completing the order?",
         "How do you ensure idempotency for retried requests?"
       ],
-      "question_type": "system_design",
-      "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -264,16 +258,15 @@
         "What communication strategies did you use?",
         "How did you measure adoption and compliance?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {

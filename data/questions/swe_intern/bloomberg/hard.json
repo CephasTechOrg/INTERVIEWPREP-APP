@@ -21,17 +21,11 @@
         "How would you implement this using lock-free techniques (e.g., hazard pointers, RCU) to reduce contention?",
         "What happens to callbacks if a subscription is removed while `onNewTrade` is iterating over the callback list?"
       ],
-      "question_type": "system_design",
-      "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -206,16 +200,15 @@
         "How did you prove (with data) that your optimization was actually better and not just different?",
         "If you had to re-implement this today, what would you do differently?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -234,17 +227,15 @@
         "If the deadlock disappears when you turn on logging (Heisenbug), how do you catch it?",
         "How do you validate that your fix actually resolved the issue without introducing new contention?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {

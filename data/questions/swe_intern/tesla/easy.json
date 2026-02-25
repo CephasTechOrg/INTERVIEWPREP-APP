@@ -39,11 +39,15 @@
         "What is the time and space complexity?",
         "Can you solve this without using extra space for filtering?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -58,15 +62,11 @@
         "How would you extend this to support additional rules (e.g., multiples of 7)?",
         "What is the simplest way to avoid repetitive modulus operations?"
       ],
-      "question_type": "conceptual",
-      "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -232,15 +232,11 @@
         "How does this adhere to the Open-Closed Principle?",
         "Where would you use dependency injection here?"
       ],
-      "question_type": "conceptual",
-      "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -354,16 +350,15 @@
         "How did you balance this with your core responsibilities?",
         "What was the impact of your initiative?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     }
   ]

@@ -282,17 +282,13 @@
         "How do you handle distributed systems?",
         "How do you measure and monitor effectiveness?"
       ],
-      "question_type": "system_design",
+      "question_type": "coding",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "hash map usage"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -308,15 +304,11 @@
         "How do you handle digits in the input?",
         "How would you optimize for large strings?"
       ],
-      "question_type": "conceptual",
-      "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -398,11 +390,15 @@
         "How do you write a regression test?",
         "How do you ensure the fix doesn’t cause performance regressions?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -418,16 +414,11 @@
         "How do you document technical debt?",
         "How do you align on quality standards?"
       ],
-      "question_type": "behavioral",
-      "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
-      ],
+      "question_type": "coding",
+      "expected_topics": [],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -656,11 +647,17 @@
         "How would you implement recurring events?",
         "What about timezone handling?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {
@@ -742,11 +739,17 @@
         "How would you handle different data types (heart rate, steps, sleep)?",
         "What about data synchronization across devices?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {
@@ -762,17 +765,15 @@
         "How do indexes help and when do they hurt?",
         "What about query caching strategies?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -977,16 +978,15 @@
         "What challenges did you face?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1027,16 +1027,15 @@
         "How do you decide what to learn next?",
         "What was the most challenging technology you learned?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1178,16 +1177,15 @@
         "How did you make your decision?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {

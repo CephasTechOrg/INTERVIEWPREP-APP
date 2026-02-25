@@ -55,11 +55,16 @@
         "What do you have that they can't copy?",
         "Is your market big enough for them to care?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "star_format",
+        "impact"
       ]
     },
     {
@@ -114,11 +119,15 @@
         "What are the three things you are doing to move this number?",
         "What is your goal for the next 4 weeks?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -133,11 +142,15 @@
         "How did you calculate LTV? What is your assumption for customer lifespan?",
         "Is your unit economy improving or getting worse as you scale?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -152,11 +165,15 @@
         "Are you doing a top-down or bottom-up calculation?",
         "How many people actually have this problem AND will pay for it?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -190,11 +207,15 @@
         "Do you have domain expertise?",
         "Do you have proprietary data or distribution?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {

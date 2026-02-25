@@ -88,15 +88,13 @@
         "How do you keep track of the current largest?",
         "Why is this simple approach effective?"
       ],
-      "question_type": "conceptual",
+      "question_type": "coding",
       "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
+        "array manipulation"
       ],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -391,16 +389,15 @@
         "How does software improve user experience?",
         "What do you hope to learn at Apple?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -416,15 +413,13 @@
         "What if all numbers are negative?",
         "Why is this a common programming task?"
       ],
-      "question_type": "conceptual",
+      "question_type": "coding",
       "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
+        "array manipulation"
       ],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "complexity",
+        "edge_cases"
       ]
     },
     {
@@ -627,11 +622,15 @@
         "How does software enable this?",
         "What challenges might arise?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -671,11 +670,15 @@
         "What are basic security practices?",
         "How does privacy build user trust?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -715,11 +718,15 @@
         "How would you group photos?",
         "Why is this useful for users?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -757,17 +764,15 @@
         "Why not use files instead?",
         "How do databases help with speed?"
       ],
-      "question_type": "system_design",
+      "question_type": "conceptual",
       "expected_topics": [
-        "architecture",
-        "data flow",
-        "bottlenecks",
-        "scaling strategy"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "scalability",
-        "trade_offs",
-        "components"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -807,11 +812,15 @@
         "Why is touch interface important?",
         "How would you approach this as a developer?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -827,16 +836,15 @@
         "How do teams solve complex problems?",
         "Why does Apple value collaboration?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -877,16 +885,15 @@
         "What resources did you use?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -977,16 +984,15 @@
         "Why is clear communication important?",
         "How do you know if someone understands?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1152,16 +1158,15 @@
         "What can individuals do to promote inclusion?",
         "Why does Apple value diverse perspectives?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1202,16 +1207,15 @@
         "Why does Apple focus on design?",
         "How do developers collaborate with designers?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1227,16 +1231,15 @@
         "How do you ensure quality in your work?",
         "Why do users expect quality from Apple?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
