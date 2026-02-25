@@ -1,142 +1,203 @@
-﻿{
-    "difficulty": "medium",
-    "questions": [
-        {
-            "title": "Kubernetes Architecture",
-            "prompt": "Explain the main components of Kubernetes architecture.",
-            "tags": ["kubernetes", "architecture"],
-            "followups": [
-                "What is the role of the kube-scheduler?",
-                "How does etcd fit into the Kubernetes architecture?"
-            ]
-        },
-        {
-            "title": "Dockerfile Best Practices",
-            "prompt": "What are some best practices for writing Dockerfiles?",
-            "tags": ["docker", "best-practices"],
-            "followups": [
-                "Why should you use multi-stage builds?",
-                "How do you minimize Docker image size?"
-            ]
-        },
-        {
-            "title": "Terraform vs CloudFormation",
-            "prompt": "Compare Terraform and AWS CloudFormation for infrastructure as code.",
-            "tags": ["iac", "terraform", "cloudformation"],
-            "followups": [
-                "What are the advantages of Terraform being cloud-agnostic?",
-                "How does Terraform state management work?"
-            ]
-        },
-        {
-            "title": "CI/CD Pipeline Design",
-            "prompt": "Describe the stages of a typical CI/CD pipeline.",
-            "tags": ["ci-cd", "pipelines"],
-            "followups": [
-                "What should happen in each stage?",
-                "How do you handle database migrations in CI/CD?"
-            ]
-        },
-        {
-            "title": "Service Mesh",
-            "prompt": "What is a service mesh and what problems does it solve?",
-            "tags": ["microservices", "networking"],
-            "followups": [
-                "How does Istio or Linkerd provide service discovery?",
-                "What are the benefits of having a service mesh?"
-            ]
-        },
-        {
-            "title": "Container Orchestration",
-            "prompt": "Explain what container orchestration is and why it's necessary at scale.",
-            "tags": ["orchestration", "containers"],
-            "followups": [
-                "How does Kubernetes schedule containers?",
-                "What alternatives exist to Kubernetes?"
-            ]
-        },
-        {
-            "title": "Immutable Infrastructure",
-            "prompt": "Explain the concept of immutable infrastructure and its benefits.",
-            "tags": ["infrastructure", "best-practices"],
-            "followups": [
-                "How does immutable infrastructure improve security?",
-                "What challenges come with immutable infrastructure?"
-            ]
-        },
-        {
-            "title": "Secret Management",
-            "prompt": "How should you manage secrets in a DevOps environment?",
-            "tags": ["security", "secrets"],
-            "followups": [
-                "What tools are available for secret management?",
-                "How do you securely inject secrets into containers?"
-            ]
-        },
-        {
-            "title": "Monitoring vs Observability",
-            "prompt": "Explain the difference between monitoring and observability.",
-            "tags": ["monitoring", "observability"],
-            "followups": [
-                "What are the three pillars of observability?",
-                "How do distributed traces help with observability?"
-            ]
-        },
-        {
-            "title": "Blue-Green Deployment",
-            "prompt": "Explain how blue-green deployment works and its advantages.",
-            "tags": ["deployment", "strategies"],
-            "followups": [
-                "How do you handle database migrations in blue-green deployments?",
-                "What infrastructure is needed for blue-green deployments?"
-            ]
-        },
-        {
-            "title": "Cloud Cost Optimization",
-            "prompt": "What are common strategies for optimizing cloud costs?",
-            "tags": ["cloud", "cost-optimization"],
-            "followups": [
-                "How do reserved instances help with cost savings?",
-                "What tools can help monitor and optimize cloud spending?"
-            ]
-        },
-        {
-            "title": "Infrastructure Testing",
-            "prompt": "How can you test infrastructure as code?",
-            "tags": ["testing", "iac"],
-            "followups": [
-                "What tools are available for infrastructure testing?",
-                "How do you validate Terraform plans before applying?"
-            ]
-        },
-        {
-            "title": "High Availability Design",
-            "prompt": "What design patterns ensure high availability in cloud applications?",
-            "tags": ["availability", "architecture"],
-            "followups": [
-                "How do you design for failure in the cloud?",
-                "What is the difference between availability zones and regions?"
-            ]
-        },
-        {
-            "title": "Container Security",
-            "prompt": "What are key security considerations for containerized applications?",
-            "tags": ["security", "containers"],
-            "followups": [
-                "How do you scan container images for vulnerabilities?",
-                "What security best practices should you follow for containers?"
-            ]
-        },
-        {
-            "title": "GitOps Principles",
-            "prompt": "Explain what GitOps is and its core principles.",
-            "tags": ["gitops", "deployment"],
-            "followups": [
-                "How does GitOps differ from traditional CI/CD?",
-                "What tools support GitOps workflows?"
-            ]
-        }
-    ],
-    "company_style": "general",
-    "track": "devops_cloud"
+{
+  "difficulty": "medium",
+  "questions": [
+    {
+      "title": "Kubernetes Architecture",
+      "prompt": "Explain the main components of Kubernetes architecture.",
+      "tags": [
+        "kubernetes",
+        "architecture"
+      ],
+      "followups": [
+        "What is the role of the kube-scheduler?",
+        "How does etcd fit into the Kubernetes architecture?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "Dockerfile Best Practices",
+      "prompt": "What are some best practices for writing Dockerfiles?",
+      "tags": [
+        "docker",
+        "best-practices"
+      ],
+      "followups": [
+        "Why should you use multi-stage builds?",
+        "How do you minimize Docker image size?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Terraform vs CloudFormation",
+      "prompt": "Compare Terraform and AWS CloudFormation for infrastructure as code.",
+      "tags": [
+        "iac",
+        "terraform",
+        "cloudformation"
+      ],
+      "followups": [
+        "What are the advantages of Terraform being cloud-agnostic?",
+        "How does Terraform state management work?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "CI/CD Pipeline Design",
+      "prompt": "Describe the stages of a typical CI/CD pipeline.",
+      "tags": [
+        "ci-cd",
+        "pipelines"
+      ],
+      "followups": [
+        "What should happen in each stage?",
+        "How do you handle database migrations in CI/CD?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Service Mesh",
+      "prompt": "What is a service mesh and what problems does it solve?",
+      "tags": [
+        "microservices",
+        "networking"
+      ],
+      "followups": [
+        "How does Istio or Linkerd provide service discovery?",
+        "What are the benefits of having a service mesh?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Container Orchestration",
+      "prompt": "Explain what container orchestration is and why it's necessary at scale.",
+      "tags": [
+        "orchestration",
+        "containers"
+      ],
+      "followups": [
+        "How does Kubernetes schedule containers?",
+        "What alternatives exist to Kubernetes?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Immutable Infrastructure",
+      "prompt": "Explain the concept of immutable infrastructure and its benefits.",
+      "tags": [
+        "infrastructure",
+        "best-practices"
+      ],
+      "followups": [
+        "How does immutable infrastructure improve security?",
+        "What challenges come with immutable infrastructure?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Secret Management",
+      "prompt": "How should you manage secrets in a DevOps environment?",
+      "tags": [
+        "security",
+        "secrets"
+      ],
+      "followups": [
+        "What tools are available for secret management?",
+        "How do you securely inject secrets into containers?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Monitoring vs Observability",
+      "prompt": "Explain the difference between monitoring and observability.",
+      "tags": [
+        "monitoring",
+        "observability"
+      ],
+      "followups": [
+        "What are the three pillars of observability?",
+        "How do distributed traces help with observability?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "Blue-Green Deployment",
+      "prompt": "Explain how blue-green deployment works and its advantages.",
+      "tags": [
+        "deployment",
+        "strategies"
+      ],
+      "followups": [
+        "How do you handle database migrations in blue-green deployments?",
+        "What infrastructure is needed for blue-green deployments?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Cloud Cost Optimization",
+      "prompt": "What are common strategies for optimizing cloud costs?",
+      "tags": [
+        "cloud",
+        "cost-optimization"
+      ],
+      "followups": [
+        "How do reserved instances help with cost savings?",
+        "What tools can help monitor and optimize cloud spending?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Infrastructure Testing",
+      "prompt": "How can you test infrastructure as code?",
+      "tags": [
+        "testing",
+        "iac"
+      ],
+      "followups": [
+        "What tools are available for infrastructure testing?",
+        "How do you validate Terraform plans before applying?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "High Availability Design",
+      "prompt": "What design patterns ensure high availability in cloud applications?",
+      "tags": [
+        "availability",
+        "architecture"
+      ],
+      "followups": [
+        "How do you design for failure in the cloud?",
+        "What is the difference between availability zones and regions?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "Container Security",
+      "prompt": "What are key security considerations for containerized applications?",
+      "tags": [
+        "security",
+        "containers"
+      ],
+      "followups": [
+        "How do you scan container images for vulnerabilities?",
+        "What security best practices should you follow for containers?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "GitOps Principles",
+      "prompt": "Explain what GitOps is and its core principles.",
+      "tags": [
+        "gitops",
+        "deployment"
+      ],
+      "followups": [
+        "How does GitOps differ from traditional CI/CD?",
+        "What tools support GitOps workflows?"
+      ],
+      "question_type": "coding"
+    }
+  ],
+  "company_style": "general",
+  "track": "devops_cloud"
 }

@@ -1,123 +1,193 @@
 {
-    "track": "swe_intern",
-    "company_style": "bloomberg",
-    "difficulty": "hard",
-    "questions": [
-      {
-        "title": "Design In-Memory Trade Subscription Processor (C++)",
-        "prompt": "Design and implement the internal logic of an in-memory `TradeProcessor` in C++. It receives trades via `onNewTrade(Trade)` and supports `subscribe(Filter, Callback)` and `unsubscribe(Handle)`. Requirements: (1) Up to 100k active subscriptions. (2) Tens of thousands of trades/sec. (3) Filters match on `symbol` (exact), and optionally `size` and `flag` if non-zero in filter. (4) Must be thread-safe (one thread writing trades, others managing subs).",
-        "tags": ["system-design", "concurrency", "c++", "low-latency", "financial", "bloomberg-hard"],
-        "followups": [
-          "What data structures do you use to achieve O(1) or O(log N) matching?",
-          "How do you handle the `unsubscribe(handle)` operation efficiently without iterating through all subscribers?",
-          "If you use a reader-writer lock, how do you prevent writer starvation under heavy subscribe/unsubscribe load?",
-          "How would you implement this using lock-free techniques (e.g., hazard pointers, RCU) to reduce contention?",
-          "What happens to callbacks if a subscription is removed while `onNewTrade` is iterating over the callback list?"
-        ]
-      },
-      {
-        "title": "Multi-Exchange Stock Price Aggregator",
-        "prompt": "Design a system that pulls real-time stock price data from multiple independent exchanges (e.g., NASDAQ, NYSE, LSE). The system must: (1) Provide a client with the current price for a given stock from *all* exchanges. (2) Provide the top K most frequently traded stocks globally (across all exchanges) in the last hour. Data volume is massive and low-latency is critical.",
-        "tags": ["system-design", "distributed-systems", "streaming", "pub-sub", "real-time", "bloomberg-hard"],
-        "followups": [
-          "How do you handle different data formats and protocols from different exchanges?",
-          "If a client requests a stock price, do you poll the exchanges on-demand or maintain a local cache? What are the trade-offs?",
-          "For the Top K service, how do you maintain counts for millions of tickers with sliding windows?",
-          "The interviewer pushed back on a simple pub/sub model. How do you use consistent hashing to shard the ticker map?",
-          "How would you use probabilistic data structures (e.g., Count-Min Sketch) to approximate Top K with less memory?",
-          "How do you handle latency when an exchange feed is down or delayed?"
-        ]
-      },
-      {
-        "title": "One-Edit Dictionary (Magic Dictionary)",
-        "prompt": "Design a data structure that supports `buildDict(words: List[str])` and `search(query: str) -> bool`. `search` returns true IFF there exists a word in the dictionary that can be obtained by changing *exactly one* character in the `query`. The dictionary contains up to 1 million words. Optimize for search speed.",
-        "tags": ["algorithms", "data-structures", "trie", "hashing", "optimization"],
-        "followups": [
-          "What are the space/time trade-offs between generating all possible 'neighbors' of the query vs traversing a Trie with wildcards?",
-          "How do you handle words of different lengths? Should they immediately return false?",
-          "If you use a bucket by length + word pattern (e.g., `*ord`), how do you avoid false positives?",
-          "How does your solution change if the dictionary is static vs constantly updated?",
-          "What is the risk of hash collisions in your approach and how do you mitigate it?"
-        ]
-      },
-      {
-        "title": "Design Secure Web Authentication & Top-N Active Users",
-        "prompt": "Design a browser-based web application backend supporting sign-up, sign-in, and a personalized greeting. Additionally, design an endpoint that returns the Top N most active users over a recent sliding window (e.g., last 5 minutes). Defend your choices regarding session security, password storage, and scaling the Top-N calculation.",
-        "tags": ["system-design", "security", "auth", "api-design", "scalability"],
-        "followups": [
-          "JWT vs Server-side sessions: Which do you choose for Bloomberg's context and why?",
-          "How do you prevent CSRF and XSS in your session/token storage strategy?",
-          "For the Top N service, define 'active'. Is it requests, CPU time, or specific actions?",
-          "How do you compute the sliding window Top N efficiently for millions of users without scanning all data on every request?",
-          "What are the consistency trade-offs? Is it acceptable if the Top N list is slightly stale?",
-          "How do you rate limit this endpoint to prevent abuse?"
-        ]
-      },
-      {
-        "title": "Telephone Directory (Bi-Directional O(1))",
-        "prompt": "Design a telephone directory data structure that supports O(1) lookup by `Name -> PhoneNumber` AND O(1) lookup by `PhoneNumber -> Name`. Additionally, support `addEntry`, `deleteEntry`, and `updateEntry` in O(1). Memory is not a primary constraint, but consistency is critical.",
-        "tags": ["design", "data-structures", "hashmap", "O(1)", "bloomberg-classic"],
-        "followups": [
-          "If you use two hash maps, how do you guarantee they never get out of sync?",
-          "What is the transaction boundary for an `update` operation that changes both the name and number?",
-          "How do you handle hash collisions in your custom implementation?",
-          "What if you need to support prefix search on names (autocomplete) in addition to exact lookup? How does this change your architecture?"
-        ]
-      },
-      {
-        "title": "Dynamic Memory Allocation Strategy (Linked List)",
-        "prompt": "You are implementing a custom `LinkedList` class that must support O(1) access to the head and must grow dynamically. How much extra memory do you allocate when the list exceeds its current capacity? Defend your strategy with reasoning about time complexity and memory fragmentation.",
-        "tags": ["c++", "memory", "data-structures", "optimization", "bloomberg-specific"],
-        "followups": [
-          "If you allocate 2x the current size (doubling), what is the amortized time complexity of insertions?",
-          "The interviewer asked for a 'learning algorithm'. How would you design an allocator that adapts to the user's historical insertion patterns?",
-          "How do you handle memory fragmentation in C++ if you are frequently reallocating?",
-          "What are the trade-offs of using `realloc` vs allocating a new block and copying?"
-        ]
-      },
-      {
-        "title": "Vertical Order Traversal of Binary Tree",
-        "prompt": "Given a binary tree, assign coordinates: root at (row=0, col=0), left child (row+1, col-1), right child (row+1, col+1). Output the concatenation of node values (strings) ordered by column ascending, then row ascending. Break ties by left-to-right.",
-        "tags": ["trees", "dfs", "sorting", "algorithms"],
-        "followups": [
-          "What is the time complexity if you use BFS to collect nodes and then a stable sort?",
-          "Can you do this in O(N) time without a full sort? (Hint: column range is limited).",
-          "How would you handle a tree with 10 million nodes? What is the memory bottleneck?",
-          "If the values are large strings, how do you minimize memory allocation during concatenation?"
-        ]
-      },
-      {
-        "title": "Optimize a Complex Algorithm (Resume Deep Dive)",
-        "prompt": "Walk me through a project where you optimized a complex algorithm. How did you identify the bottleneck, what metric did you use to measure improvement, and what was the final impact?",
-        "tags": ["behavioral", "technical-deep-dive", "optimization", "resume"],
-        "followups": [
-          "What was the time complexity before and after your change?",
-          "Why didn't you implement the theoretically optimal solution immediately?",
-          "How did you prove (with data) that your optimization was actually better and not just different?",
-          "If you had to re-implement this today, what would you do differently?"
-        ]
-      },
-      {
-        "title": "Trade Feed Handling & Concurrency Debugging",
-        "prompt": "You have a trade feed handler that processes 50,000 messages/sec. Occasionally, under peak load, the system deadlocks or exhibits a priority inversion. Describe your step-by-step process to identify, reproduce, and fix this issue in production.",
-        "tags": ["debugging", "concurrency", "os", "system-thinking", "hard"],
-        "followups": [
-          "What tools do you use to capture a thread dump or core dump without stopping the process?",
-          "How do you differentiate between a deadlock and livelock?",
-          "If the deadlock disappears when you turn on logging (Heisenbug), how do you catch it?",
-          "How do you validate that your fix actually resolved the issue without introducing new contention?"
-        ]
-      },
-      {
-        "title": "Stock Ticker - Top K with Real-Time Updates",
-        "prompt": "You are receiving a stream of trades: `[Ticker, Volume]`. You need to maintain a data structure that can return the Top K most traded stocks *by volume* at any given moment. New trades are streaming in continuously (millions per second). Implement `addTrade(ticker, volume)` and `getTopK(k)`.",
-        "tags": ["heap", "hashmap", "streaming", "real-time", "optimization"],
-        "followups": [
-          "A max-heap gives you O(1) access to the max, but how do you update the heap when a ticker's volume increases?",
-          "If you use a hashmap pointing into the heap, how do you handle the 'bubble-up' operation?",
-          "What is the time complexity of your `getTopK(k)` if k is variable (e.g., 1 vs 100)?",
-          "How does your design change if we allow negative volume (cancellations)?"
-        ]
-      }
-    ]
-  }
+  "track": "swe_intern",
+  "company_style": "bloomberg",
+  "difficulty": "hard",
+  "questions": [
+    {
+      "title": "Design In-Memory Trade Subscription Processor (C++)",
+      "prompt": "Design and implement the internal logic of an in-memory `TradeProcessor` in C++. It receives trades via `onNewTrade(Trade)` and supports `subscribe(Filter, Callback)` and `unsubscribe(Handle)`. Requirements: (1) Up to 100k active subscriptions. (2) Tens of thousands of trades/sec. (3) Filters match on `symbol` (exact), and optionally `size` and `flag` if non-zero in filter. (4) Must be thread-safe (one thread writing trades, others managing subs).",
+      "tags": [
+        "system-design",
+        "concurrency",
+        "c++",
+        "low-latency",
+        "financial",
+        "bloomberg-hard"
+      ],
+      "followups": [
+        "What data structures do you use to achieve O(1) or O(log N) matching?",
+        "How do you handle the `unsubscribe(handle)` operation efficiently without iterating through all subscribers?",
+        "If you use a reader-writer lock, how do you prevent writer starvation under heavy subscribe/unsubscribe load?",
+        "How would you implement this using lock-free techniques (e.g., hazard pointers, RCU) to reduce contention?",
+        "What happens to callbacks if a subscription is removed while `onNewTrade` is iterating over the callback list?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "Multi-Exchange Stock Price Aggregator",
+      "prompt": "Design a system that pulls real-time stock price data from multiple independent exchanges (e.g., NASDAQ, NYSE, LSE). The system must: (1) Provide a client with the current price for a given stock from *all* exchanges. (2) Provide the top K most frequently traded stocks globally (across all exchanges) in the last hour. Data volume is massive and low-latency is critical.",
+      "tags": [
+        "system-design",
+        "distributed-systems",
+        "streaming",
+        "pub-sub",
+        "real-time",
+        "bloomberg-hard"
+      ],
+      "followups": [
+        "How do you handle different data formats and protocols from different exchanges?",
+        "If a client requests a stock price, do you poll the exchanges on-demand or maintain a local cache? What are the trade-offs?",
+        "For the Top K service, how do you maintain counts for millions of tickers with sliding windows?",
+        "The interviewer pushed back on a simple pub/sub model. How do you use consistent hashing to shard the ticker map?",
+        "How would you use probabilistic data structures (e.g., Count-Min Sketch) to approximate Top K with less memory?",
+        "How do you handle latency when an exchange feed is down or delayed?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "One-Edit Dictionary (Magic Dictionary)",
+      "prompt": "Design a data structure that supports `buildDict(words: List[str])` and `search(query: str) -> bool`. `search` returns true IFF there exists a word in the dictionary that can be obtained by changing *exactly one* character in the `query`. The dictionary contains up to 1 million words. Optimize for search speed.",
+      "tags": [
+        "algorithms",
+        "data-structures",
+        "trie",
+        "hashing",
+        "optimization"
+      ],
+      "followups": [
+        "What are the space/time trade-offs between generating all possible 'neighbors' of the query vs traversing a Trie with wildcards?",
+        "How do you handle words of different lengths? Should they immediately return false?",
+        "If you use a bucket by length + word pattern (e.g., `*ord`), how do you avoid false positives?",
+        "How does your solution change if the dictionary is static vs constantly updated?",
+        "What is the risk of hash collisions in your approach and how do you mitigate it?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Design Secure Web Authentication & Top-N Active Users",
+      "prompt": "Design a browser-based web application backend supporting sign-up, sign-in, and a personalized greeting. Additionally, design an endpoint that returns the Top N most active users over a recent sliding window (e.g., last 5 minutes). Defend your choices regarding session security, password storage, and scaling the Top-N calculation.",
+      "tags": [
+        "system-design",
+        "security",
+        "auth",
+        "api-design",
+        "scalability"
+      ],
+      "followups": [
+        "JWT vs Server-side sessions: Which do you choose for Bloomberg's context and why?",
+        "How do you prevent CSRF and XSS in your session/token storage strategy?",
+        "For the Top N service, define 'active'. Is it requests, CPU time, or specific actions?",
+        "How do you compute the sliding window Top N efficiently for millions of users without scanning all data on every request?",
+        "What are the consistency trade-offs? Is it acceptable if the Top N list is slightly stale?",
+        "How do you rate limit this endpoint to prevent abuse?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "Telephone Directory (Bi-Directional O(1))",
+      "prompt": "Design a telephone directory data structure that supports O(1) lookup by `Name -> PhoneNumber` AND O(1) lookup by `PhoneNumber -> Name`. Additionally, support `addEntry`, `deleteEntry`, and `updateEntry` in O(1). Memory is not a primary constraint, but consistency is critical.",
+      "tags": [
+        "design",
+        "data-structures",
+        "hashmap",
+        "O(1)",
+        "bloomberg-classic"
+      ],
+      "followups": [
+        "If you use two hash maps, how do you guarantee they never get out of sync?",
+        "What is the transaction boundary for an `update` operation that changes both the name and number?",
+        "How do you handle hash collisions in your custom implementation?",
+        "What if you need to support prefix search on names (autocomplete) in addition to exact lookup? How does this change your architecture?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Dynamic Memory Allocation Strategy (Linked List)",
+      "prompt": "You are implementing a custom `LinkedList` class that must support O(1) access to the head and must grow dynamically. How much extra memory do you allocate when the list exceeds its current capacity? Defend your strategy with reasoning about time complexity and memory fragmentation.",
+      "tags": [
+        "c++",
+        "memory",
+        "data-structures",
+        "optimization",
+        "bloomberg-specific"
+      ],
+      "followups": [
+        "If you allocate 2x the current size (doubling), what is the amortized time complexity of insertions?",
+        "The interviewer asked for a 'learning algorithm'. How would you design an allocator that adapts to the user's historical insertion patterns?",
+        "How do you handle memory fragmentation in C++ if you are frequently reallocating?",
+        "What are the trade-offs of using `realloc` vs allocating a new block and copying?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Vertical Order Traversal of Binary Tree",
+      "prompt": "Given a binary tree, assign coordinates: root at (row=0, col=0), left child (row+1, col-1), right child (row+1, col+1). Output the concatenation of node values (strings) ordered by column ascending, then row ascending. Break ties by left-to-right.",
+      "tags": [
+        "trees",
+        "dfs",
+        "sorting",
+        "algorithms"
+      ],
+      "followups": [
+        "What is the time complexity if you use BFS to collect nodes and then a stable sort?",
+        "Can you do this in O(N) time without a full sort? (Hint: column range is limited).",
+        "How would you handle a tree with 10 million nodes? What is the memory bottleneck?",
+        "If the values are large strings, how do you minimize memory allocation during concatenation?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Optimize a Complex Algorithm (Resume Deep Dive)",
+      "prompt": "Walk me through a project where you optimized a complex algorithm. How did you identify the bottleneck, what metric did you use to measure improvement, and what was the final impact?",
+      "tags": [
+        "behavioral",
+        "technical-deep-dive",
+        "optimization",
+        "resume"
+      ],
+      "followups": [
+        "What was the time complexity before and after your change?",
+        "Why didn't you implement the theoretically optimal solution immediately?",
+        "How did you prove (with data) that your optimization was actually better and not just different?",
+        "If you had to re-implement this today, what would you do differently?"
+      ],
+      "question_type": "behavioral"
+    },
+    {
+      "title": "Trade Feed Handling & Concurrency Debugging",
+      "prompt": "You have a trade feed handler that processes 50,000 messages/sec. Occasionally, under peak load, the system deadlocks or exhibits a priority inversion. Describe your step-by-step process to identify, reproduce, and fix this issue in production.",
+      "tags": [
+        "debugging",
+        "concurrency",
+        "os",
+        "system-thinking",
+        "hard"
+      ],
+      "followups": [
+        "What tools do you use to capture a thread dump or core dump without stopping the process?",
+        "How do you differentiate between a deadlock and livelock?",
+        "If the deadlock disappears when you turn on logging (Heisenbug), how do you catch it?",
+        "How do you validate that your fix actually resolved the issue without introducing new contention?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "Stock Ticker - Top K with Real-Time Updates",
+      "prompt": "You are receiving a stream of trades: `[Ticker, Volume]`. You need to maintain a data structure that can return the Top K most traded stocks *by volume* at any given moment. New trades are streaming in continuously (millions per second). Implement `addTrade(ticker, volume)` and `getTopK(k)`.",
+      "tags": [
+        "heap",
+        "hashmap",
+        "streaming",
+        "real-time",
+        "optimization"
+      ],
+      "followups": [
+        "A max-heap gives you O(1) access to the max, but how do you update the heap when a ticker's volume increases?",
+        "If you use a hashmap pointing into the heap, how do you handle the 'bubble-up' operation?",
+        "What is the time complexity of your `getTopK(k)` if k is variable (e.g., 1 vs 100)?",
+        "How does your design change if we allow negative volume (cancellations)?"
+      ],
+      "question_type": "coding"
+    }
+  ]
+}

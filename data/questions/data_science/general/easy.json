@@ -1,142 +1,202 @@
-﻿{
-    "difficulty": "easy",
-    "questions": [
-        {
-            "title": "What is Data Science?",
-            "prompt": "Explain what data science is in simple terms and how it differs from related fields like statistics or computer science.",
-            "tags": ["fundamentals", "definition"],
-            "followups": [
-                "What are the main stages of a typical data science project?",
-                "How does data science create business value?"
-            ]
-        },
-        {
-            "title": "Supervised vs Unsupervised Learning",
-            "prompt": "Explain the difference between supervised and unsupervised machine learning.",
-            "tags": ["machine-learning", "fundamentals"],
-            "followups": [
-                "Give an example of each type of learning",
-                "What is reinforcement learning and how does it differ from these two?"
-            ]
-        },
-        {
-            "title": "Basic Data Types",
-            "prompt": "What are the main types of data (numerical, categorical, etc.) and how would you handle each type differently?",
-            "tags": ["data-types", "preprocessing"],
-            "followups": [
-                "What's the difference between nominal and ordinal categorical data?",
-                "How would you handle missing values in different data types?"
-            ]
-        },
-        {
-            "title": "Mean, Median, Mode",
-            "prompt": "Explain when you would use mean, median, or mode to describe a dataset and why.",
-            "tags": ["statistics", "descriptive"],
-            "followups": [
-                "In what situations is median better than mean?",
-                "What does the mode tell you about a distribution?"
-            ]
-        },
-        {
-            "title": "What is Overfitting?",
-            "prompt": "Explain what overfitting is in machine learning and why it's a problem.",
-            "tags": ["machine-learning", "modeling"],
-            "followups": [
-                "How can you detect overfitting?",
-                "What are some basic ways to prevent it?"
-            ]
-        },
-        {
-            "title": "Correlation vs Causation",
-            "prompt": "Explain the difference between correlation and causation with an example.",
-            "tags": ["statistics", "interpretation"],
-            "followups": [
-                "Why is correlation not enough to prove causation?",
-                "What methods can help establish causality?"
-            ]
-        },
-        {
-            "title": "Regression vs Classification",
-            "prompt": "What's the difference between regression and classification problems?",
-            "tags": ["machine-learning", "problem-types"],
-            "followups": [
-                "Give an example of each type of problem",
-                "Can some algorithms handle both types of problems?"
-            ]
-        },
-        {
-            "title": "What is a Feature?",
-            "prompt": "Explain what features are in machine learning and why feature selection is important.",
-            "tags": ["features", "preprocessing"],
-            "followups": [
-                "What makes a good feature?",
-                "What is feature engineering?"
-            ]
-        },
-        {
-            "title": "Training and Test Sets",
-            "prompt": "Why do we split data into training and test sets?",
-            "tags": ["model-evaluation", "validation"],
-            "followups": [
-                "What is a typical split ratio?",
-                "What happens if we don't use a test set?"
-            ]
-        },
-        {
-            "title": "What is a Hypothesis?",
-            "prompt": "In the context of A/B testing, what is a hypothesis and how do you formulate one?",
-            "tags": ["experimentation", "statistics"],
-            "followups": [
-                "What's the difference between null and alternative hypotheses?",
-                "How do you determine if results are statistically significant?"
-            ]
-        },
-        {
-            "title": "Data Visualization Purpose",
-            "prompt": "Why is data visualization important in data science?",
-            "tags": ["visualization", "communication"],
-            "followups": [
-                "What are some common types of charts and when would you use each?",
-                "How does visualization help in exploratory data analysis?"
-            ]
-        },
-        {
-            "title": "Accuracy Metric",
-            "prompt": "What is accuracy as a metric and when is it appropriate to use?",
-            "tags": ["metrics", "evaluation"],
-            "followups": [
-                "When might accuracy be misleading?",
-                "What are some alternatives to accuracy?"
-            ]
-        },
-        {
-            "title": "Bias-Variance Tradeoff",
-            "prompt": "Explain the bias-variance tradeoff in simple terms.",
-            "tags": ["machine-learning", "theory"],
-            "followups": [
-                "What does high bias indicate about a model?",
-                "What does high variance indicate?"
-            ]
-        },
-        {
-            "title": "What is Big Data?",
-            "prompt": "Explain what big data is and the three Vs that characterize it.",
-            "tags": ["big-data", "fundamentals"],
-            "followups": [
-                "What are some challenges of working with big data?",
-                "How does big data differ from traditional data analysis?"
-            ]
-        },
-        {
-            "title": "SQL Basics",
-            "prompt": "Why is SQL important for data scientists and what are some basic SQL operations?",
-            "tags": ["sql", "data-querying"],
-            "followups": [
-                "What's the difference between WHERE and HAVING clauses?",
-                "How do JOIN operations work?"
-            ]
-        }
-    ],
-    "company_style": "general",
-    "track": "data_science"
+{
+  "difficulty": "easy",
+  "questions": [
+    {
+      "title": "What is Data Science?",
+      "prompt": "Explain what data science is in simple terms and how it differs from related fields like statistics or computer science.",
+      "tags": [
+        "fundamentals",
+        "definition"
+      ],
+      "followups": [
+        "What are the main stages of a typical data science project?",
+        "How does data science create business value?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "Supervised vs Unsupervised Learning",
+      "prompt": "Explain the difference between supervised and unsupervised machine learning.",
+      "tags": [
+        "machine-learning",
+        "fundamentals"
+      ],
+      "followups": [
+        "Give an example of each type of learning",
+        "What is reinforcement learning and how does it differ from these two?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "Basic Data Types",
+      "prompt": "What are the main types of data (numerical, categorical, etc.) and how would you handle each type differently?",
+      "tags": [
+        "data-types",
+        "preprocessing"
+      ],
+      "followups": [
+        "What's the difference between nominal and ordinal categorical data?",
+        "How would you handle missing values in different data types?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Mean, Median, Mode",
+      "prompt": "Explain when you would use mean, median, or mode to describe a dataset and why.",
+      "tags": [
+        "statistics",
+        "descriptive"
+      ],
+      "followups": [
+        "In what situations is median better than mean?",
+        "What does the mode tell you about a distribution?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "What is Overfitting?",
+      "prompt": "Explain what overfitting is in machine learning and why it's a problem.",
+      "tags": [
+        "machine-learning",
+        "modeling"
+      ],
+      "followups": [
+        "How can you detect overfitting?",
+        "What are some basic ways to prevent it?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Correlation vs Causation",
+      "prompt": "Explain the difference between correlation and causation with an example.",
+      "tags": [
+        "statistics",
+        "interpretation"
+      ],
+      "followups": [
+        "Why is correlation not enough to prove causation?",
+        "What methods can help establish causality?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Regression vs Classification",
+      "prompt": "What's the difference between regression and classification problems?",
+      "tags": [
+        "machine-learning",
+        "problem-types"
+      ],
+      "followups": [
+        "Give an example of each type of problem",
+        "Can some algorithms handle both types of problems?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "What is a Feature?",
+      "prompt": "Explain what features are in machine learning and why feature selection is important.",
+      "tags": [
+        "features",
+        "preprocessing"
+      ],
+      "followups": [
+        "What makes a good feature?",
+        "What is feature engineering?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Training and Test Sets",
+      "prompt": "Why do we split data into training and test sets?",
+      "tags": [
+        "model-evaluation",
+        "validation"
+      ],
+      "followups": [
+        "What is a typical split ratio?",
+        "What happens if we don't use a test set?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "What is a Hypothesis?",
+      "prompt": "In the context of A/B testing, what is a hypothesis and how do you formulate one?",
+      "tags": [
+        "experimentation",
+        "statistics"
+      ],
+      "followups": [
+        "What's the difference between null and alternative hypotheses?",
+        "How do you determine if results are statistically significant?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Data Visualization Purpose",
+      "prompt": "Why is data visualization important in data science?",
+      "tags": [
+        "visualization",
+        "communication"
+      ],
+      "followups": [
+        "What are some common types of charts and when would you use each?",
+        "How does visualization help in exploratory data analysis?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Accuracy Metric",
+      "prompt": "What is accuracy as a metric and when is it appropriate to use?",
+      "tags": [
+        "metrics",
+        "evaluation"
+      ],
+      "followups": [
+        "When might accuracy be misleading?",
+        "What are some alternatives to accuracy?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Bias-Variance Tradeoff",
+      "prompt": "Explain the bias-variance tradeoff in simple terms.",
+      "tags": [
+        "machine-learning",
+        "theory"
+      ],
+      "followups": [
+        "What does high bias indicate about a model?",
+        "What does high variance indicate?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "What is Big Data?",
+      "prompt": "Explain what big data is and the three Vs that characterize it.",
+      "tags": [
+        "big-data",
+        "fundamentals"
+      ],
+      "followups": [
+        "What are some challenges of working with big data?",
+        "How does big data differ from traditional data analysis?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "SQL Basics",
+      "prompt": "Why is SQL important for data scientists and what are some basic SQL operations?",
+      "tags": [
+        "sql",
+        "data-querying"
+      ],
+      "followups": [
+        "What's the difference between WHERE and HAVING clauses?",
+        "How do JOIN operations work?"
+      ],
+      "question_type": "coding"
+    }
+  ],
+  "company_style": "general",
+  "track": "data_science"
 }

@@ -26,7 +26,7 @@ class APIClient {
     // Attach token to requests
     this.client.interceptors.request.use((config) => {
       if (typeof window !== 'undefined') {
-        const token = localStorage.getItem('access_token');
+        const token = useAuthStore.getState().token;
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }
@@ -101,12 +101,20 @@ class APIClient {
     };
   }
 
+  private toError(error: AxiosError): Error & ErrorResponse {
+    const parsed = this.parseError(error);
+    const err = new Error(parsed.message) as Error & ErrorResponse;
+    err.status = parsed.status;
+    err.details = parsed.details;
+    return err;
+  }
+
   async get<T>(url: string): Promise<T> {
     try {
       const response = await this.client.get<T>(url);
       return response.data;
     } catch (error) {
-      throw this.parseError(error as AxiosError);
+      throw this.toError(error as AxiosError);
     }
   }
 
@@ -115,7 +123,7 @@ class APIClient {
       const response = await this.client.post<T>(url, data);
       return response.data;
     } catch (error) {
-      throw this.parseError(error as AxiosError);
+      throw this.toError(error as AxiosError);
     }
   }
 
@@ -124,7 +132,7 @@ class APIClient {
       const response = await this.client.put<T>(url, data);
       return response.data;
     } catch (error) {
-      throw this.parseError(error as AxiosError);
+      throw this.toError(error as AxiosError);
     }
   }
 
@@ -133,7 +141,7 @@ class APIClient {
       const response = await this.client.patch<T>(url, data);
       return response.data;
     } catch (error) {
-      throw this.parseError(error as AxiosError);
+      throw this.toError(error as AxiosError);
     }
   }
 
@@ -142,7 +150,7 @@ class APIClient {
       const response = await this.client.delete<T>(url);
       return response.data;
     } catch (error) {
-      throw this.parseError(error as AxiosError);
+      throw this.toError(error as AxiosError);
     }
   }
 }

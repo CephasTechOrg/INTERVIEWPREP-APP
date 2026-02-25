@@ -47,8 +47,6 @@ def hash_token(token: str) -> str:
 def token_matches(raw: str, stored: str | None) -> bool:
     if not raw or not stored:
         return False
-    if hmac.compare_digest(stored, raw):
-        return True
     try:
         hashed = hash_token(raw)
     except Exception:

@@ -151,8 +151,8 @@ def reset_password(db: Session, token: str, new_password: str, email: str | None
     now = datetime.now(UTC)
     token_hash = hash_token(token)
     query = db.query(User).filter(
-        User.reset_token.in_([token, token_hash]),
-        User.reset_token_expires_at is not None,
+        User.reset_token == token_hash,
+        User.reset_token_expires_at.isnot(None),
         User.reset_token_expires_at > now,
     )
     if email:

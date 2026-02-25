@@ -89,6 +89,7 @@ def list_user_sessions(limit: int = 50, db: Session = Depends(get_db), user=Depe
                 track=s.track,
                 company_style=s.company_style,
                 difficulty=s.difficulty,
+                adaptive_difficulty_enabled=bool(getattr(s, "adaptive_difficulty_enabled", False)),
                 stage=s.stage,
                 current_question_id=s.current_question_id,
                 questions_asked_count=int(getattr(s, "questions_asked_count", 0) or 0),
@@ -136,6 +137,7 @@ def create_session(payload: CreateSessionRequest, db: Session = Depends(get_db),
     _validate_session_inputs(track, company_style, difficulty)
     interviewer = payload.interviewer.model_dump() if payload.interviewer else None
     behavioral_target = max(0, int(payload.behavioral_questions_target or 0))
+    adaptive_enabled = bool(getattr(payload, "adaptive_difficulty_enabled", False))
 
     tech_count = question_crud.count_technical_questions(db, track, company_style, difficulty)
     behavioral_count = question_crud.count_behavioral_questions(db, track, company_style, difficulty)
@@ -169,6 +171,7 @@ def create_session(payload: CreateSessionRequest, db: Session = Depends(get_db),
         behavioral_questions_target=behavioral_target,
         max_questions=max_questions,
         interviewer=interviewer,
+        adaptive_difficulty_enabled=adaptive_enabled,
     )
     return SessionOut(
         id=s.id,
@@ -176,6 +179,7 @@ def create_session(payload: CreateSessionRequest, db: Session = Depends(get_db),
         track=s.track,
         company_style=s.company_style,
         difficulty=s.difficulty,
+        adaptive_difficulty_enabled=bool(getattr(s, "adaptive_difficulty_enabled", False)),
         stage=s.stage,
         current_question_id=s.current_question_id,
         interviewer=_session_interviewer(s),

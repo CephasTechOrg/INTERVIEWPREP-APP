@@ -1,247 +1,348 @@
 {
-    "track": "swe_intern",
-    "company_style": "morgan_stanley",
-    "difficulty": "easy",
-    "questions": [
-      {
-        "title": "Two Sum (Explain Only)",
-        "prompt": "Explain how you would find two numbers in an array that add up to a specific target. You may assume exactly one solution.",
-        "tags": ["arrays", "hashmap", "logic"],
-        "followups": [
-          "What is the time complexity difference between the brute force and hash map approaches?",
-          "How would you handle duplicate numbers in the array?",
-          "What if the array is sorted? Can you optimize further?"
-        ]
-      },
-      {
-        "title": "Reverse a String (In-Place)",
-        "prompt": "Explain step-by-step how you would reverse a string in-place without using any built-in reverse functions.",
-        "tags": ["strings", "two-pointers"],
-        "followups": [
-          "What is the space complexity of your approach?",
-          "How would you handle Unicode characters?",
-          "Can you write the iterative and recursive versions?"
-        ]
-      },
-      {
-        "title": "Palindrome Check",
-        "prompt": "Explain how you would check if a given string reads the same forwards and backwards.",
-        "tags": ["strings", "logic"],
-        "followups": [
-          "Would you ignore case sensitivity and non-alphanumeric characters?",
-          "Why is comparing from both ends more efficient?",
-          "What edge cases (empty string, single character) would you test?"
-        ]
-      },
-      {
-        "title": "Find the Largest and Smallest Number",
-        "prompt": "Explain how you would find both the largest and smallest number in an unsorted array in a single pass.",
-        "tags": ["arrays", "logic"],
-        "followups": [
-          "What is the time complexity?",
-          "How many comparisons are needed in the worst case?",
-          "What if the array contains negative numbers or is empty?"
-        ]
-      },
-      {
-        "title": "Factorial Without Loops or Recursion",
-        "prompt": "Is it possible to find the factorial of a given number without using any loop or recursion? If yes, explain how.",
-        "tags": ["math", "c-programming", "fundamentals"],
-        "followups": [
-          "Can you use compile-time evaluation (e.g., templates in C++)?",
-          "What are the limitations of this approach?",
-          "How would you handle large numbers (overflow)?"
-        ]
-      },
-      {
-        "title": "Count Frequency of Elements",
-        "prompt": "Explain how you would count the frequency of each element in an array.",
-        "tags": ["hashmap", "arrays"],
-        "followups": [
-          "What data structure provides O(1) average time for insert and lookup?",
-          "How would you handle very large input where memory is constrained?",
-          "What if the elements are only positive integers in a fixed range?"
-        ]
-      },
-      {
-        "title": "Remove Duplicates from Sorted Array",
-        "prompt": "Explain how you would remove duplicates from a sorted array in-place and return the new length.",
-        "tags": ["arrays", "two-pointers"],
-        "followups": [
-          "What is the time and space complexity?",
-          "How does the algorithm change if the array is unsorted?",
-          "Why is the two-pointer approach optimal here?"
-        ]
-      },
-      {
-        "title": "Binary Search (Concept)",
-        "prompt": "Explain how binary search works on a sorted list and why it is efficient.",
-        "tags": ["binary-search", "fundamentals"],
-        "followups": [
-          "What is the time complexity of binary search?",
-          "What happens if the list contains duplicates?",
-          "How do you avoid integer overflow when calculating the mid-point?"
-        ]
-      },
-      {
-        "title": "Merge Two Sorted Arrays",
-        "prompt": "Explain how you would merge two sorted arrays into one sorted array.",
-        "tags": ["arrays", "two-pointers"],
-        "followups": [
-          "What is the time and space complexity?",
-          "How would you merge them in-place if the first array has enough buffer space?",
-          "Can you generalize this to merge K sorted lists?"
-        ]
-      },
-      {
-        "title": "Valid Parentheses",
-        "prompt": "Explain how you would check if a string containing brackets '()', '{}', '[]' is correctly matched and nested.",
-        "tags": ["stack", "strings"],
-        "followups": [
-          "Why is a stack the appropriate data structure here?",
-          "What makes a string invalid?",
-          "How would you extend this to support other delimiter pairs?"
-        ]
-      },
-      {
-        "title": "OOP: Class vs Object",
-        "prompt": "What is the difference between a class and an object? Provide a real-world banking example.",
-        "tags": ["oop", "fundamentals", "java"],
-        "followups": [
-          "Can you have an object without a class?",
-          "What is the memory allocation difference?",
-          "Give an example using an 'Account' class."
-        ]
-      },
-      {
-        "title": "OOP: Four Pillars",
-        "prompt": "Explain the four pillars of Object-Oriented Programming with real-world examples.",
-        "tags": ["oop", "fundamentals"],
-        "followups": [
-          "How do you achieve abstraction codewise (abstract classes vs interfaces)?",
-          "Why is encapsulation important for data security in banking applications?",
-          "Give an example of polymorphism using method overloading and overriding."
-        ]
-      },
-      {
-        "title": "Overloading vs Overriding",
-        "prompt": "What is the difference between method overloading and method overriding?",
-        "tags": ["oop", "java"],
-        "followups": [
-          "Which one is resolved at compile-time and which at runtime?",
-          "Can you override a private method?",
-          "What is the @Override annotation used for?"
-        ]
-      },
-      {
-        "title": "Array vs Linked List",
-        "prompt": "What are the key differences between an array and a linked list?",
-        "tags": ["data-structures", "fundamentals"],
-        "followups": [
-          "Which one would you prefer for stack implementation and why?",
-          "What are the cache locality implications?",
-          "When would you choose a linked list over an array?"
-        ]
-      },
-      {
-        "title": "Stack vs Queue",
-        "prompt": "Explain the difference between a stack and a queue. Provide real-life examples.",
-        "tags": ["stack", "queue", "data-structures"],
-        "followups": [
-          "What does LIFO and FIFO mean?",
-          "How would you implement a queue using two stacks?",
-          "Where is a queue used in operating systems?"
-        ]
-      },
-      {
-        "title": "HashMap Collision Resolution",
-        "prompt": "Explain how a HashMap handles collisions. What are the different collision resolution strategies?",
-        "tags": ["hashmap", "data-structures"],
-        "followups": [
-          "What is separate chaining vs open addressing?",
-          "When does a HashMap convert a linked list to a red-black tree in Java 8+?",
-          "What is a good hash function?"
-        ]
-      },
-      {
-        "title": "SQL: Basic Join",
-        "prompt": "Explain the difference between INNER JOIN and LEFT JOIN using 'Customers' and 'Orders' tables.",
-        "tags": ["sql", "databases"],
-        "followups": [
-          "What happens to the columns from the right table if there is no match in a LEFT JOIN?",
-          "How do you find customers who have never placed an order?",
-          "What is a self-join? Can you give an example?"
-        ]
-      },
-      {
-        "title": "Call by Value vs Call by Reference",
-        "prompt": "Explain the difference between call by value and call by reference. Illustrate using the call stack.",
-        "tags": ["fundamentals", "c++", "java"],
-        "followups": [
-          "Is Java pass-by-value or pass-by-reference?",
-          "How does this affect object references?",
-          "Write a code example that demonstrates the difference."
-        ]
-      },
-      {
-        "title": "Process vs Thread",
-        "prompt": "What is the difference between a process and a thread?",
-        "tags": ["os", "fundamentals"],
-        "followups": [
-          "Which one has more overhead for creation and context switching?",
-          "How do threads share memory?",
-          "What are the advantages of multi-threading?"
-        ]
-      },
-      {
-        "title": "TCP vs UDP",
-        "prompt": "What are the key differences between TCP and UDP? When would you use each?",
-        "tags": ["networking", "fundamentals"],
-        "followups": [
-          "Why does HTTP use TCP?",
-          "What is the three-way handshake?",
-          "Can you explain the four-way wave and why it needs four steps?"
-        ]
-      },
-      {
-        "title": "Singleton Pattern",
-        "prompt": "Explain the Singleton design pattern. When and why would you use it?",
-        "tags": ["design-patterns", "java"],
-        "followups": [
-          "How do you make a Singleton thread-safe?",
-          "What is the Bill Pugh Singleton implementation?",
-          "What are the drawbacks of the Singleton pattern?"
-        ]
-      },
-      {
-        "title": "Why Morgan Stanley? (Intern Focus)",
-        "prompt": "Why do you want to intern at Morgan Stanley? What do you know about the firm?",
-        "tags": ["behavioral", "company-fit"],
-        "followups": [
-          "What do you know about Morgan Stanley's stock or investment banking divisions?",
-          "How does Morgan Stanley's technology culture differ from other banks?",
-          "Why should we choose you over other candidates?"
-        ]
-      },
-      {
-        "title": "Behavioral: Strengths and Weaknesses",
-        "prompt": "What are your greatest strengths and weaknesses?",
-        "tags": ["behavioral", "self-awareness"],
-        "followups": [
-          "Give a specific example of how you've used this strength in a project.",
-          "What steps are you taking to improve your weakness?",
-          "How do your strengths make you a good fit for this role?"
-        ]
-      },
-      {
-        "title": "Behavioral: Tell Me About Yourself",
-        "prompt": "Walk me through your resume and tell me about yourself.",
-        "tags": ["behavioral", "communication"],
-        "followups": [
-          "Why did you choose your major?",
-          "What project are you most proud of?",
-          "Where do you see yourself in 5 years?"
-        ]
-      }
-    ]
-  }
+  "track": "swe_intern",
+  "company_style": "morgan_stanley",
+  "difficulty": "easy",
+  "questions": [
+    {
+      "title": "Two Sum (Explain Only)",
+      "prompt": "Explain how you would find two numbers in an array that add up to a specific target. You may assume exactly one solution.",
+      "tags": [
+        "arrays",
+        "hashmap",
+        "logic"
+      ],
+      "followups": [
+        "What is the time complexity difference between the brute force and hash map approaches?",
+        "How would you handle duplicate numbers in the array?",
+        "What if the array is sorted? Can you optimize further?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Reverse a String (In-Place)",
+      "prompt": "Explain step-by-step how you would reverse a string in-place without using any built-in reverse functions.",
+      "tags": [
+        "strings",
+        "two-pointers"
+      ],
+      "followups": [
+        "What is the space complexity of your approach?",
+        "How would you handle Unicode characters?",
+        "Can you write the iterative and recursive versions?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Palindrome Check",
+      "prompt": "Explain how you would check if a given string reads the same forwards and backwards.",
+      "tags": [
+        "strings",
+        "logic"
+      ],
+      "followups": [
+        "Would you ignore case sensitivity and non-alphanumeric characters?",
+        "Why is comparing from both ends more efficient?",
+        "What edge cases (empty string, single character) would you test?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Find the Largest and Smallest Number",
+      "prompt": "Explain how you would find both the largest and smallest number in an unsorted array in a single pass.",
+      "tags": [
+        "arrays",
+        "logic"
+      ],
+      "followups": [
+        "What is the time complexity?",
+        "How many comparisons are needed in the worst case?",
+        "What if the array contains negative numbers or is empty?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Factorial Without Loops or Recursion",
+      "prompt": "Is it possible to find the factorial of a given number without using any loop or recursion? If yes, explain how.",
+      "tags": [
+        "math",
+        "c-programming",
+        "fundamentals"
+      ],
+      "followups": [
+        "Can you use compile-time evaluation (e.g., templates in C++)?",
+        "What are the limitations of this approach?",
+        "How would you handle large numbers (overflow)?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "Count Frequency of Elements",
+      "prompt": "Explain how you would count the frequency of each element in an array.",
+      "tags": [
+        "hashmap",
+        "arrays"
+      ],
+      "followups": [
+        "What data structure provides O(1) average time for insert and lookup?",
+        "How would you handle very large input where memory is constrained?",
+        "What if the elements are only positive integers in a fixed range?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Remove Duplicates from Sorted Array",
+      "prompt": "Explain how you would remove duplicates from a sorted array in-place and return the new length.",
+      "tags": [
+        "arrays",
+        "two-pointers"
+      ],
+      "followups": [
+        "What is the time and space complexity?",
+        "How does the algorithm change if the array is unsorted?",
+        "Why is the two-pointer approach optimal here?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Binary Search (Concept)",
+      "prompt": "Explain how binary search works on a sorted list and why it is efficient.",
+      "tags": [
+        "binary-search",
+        "fundamentals"
+      ],
+      "followups": [
+        "What is the time complexity of binary search?",
+        "What happens if the list contains duplicates?",
+        "How do you avoid integer overflow when calculating the mid-point?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "Merge Two Sorted Arrays",
+      "prompt": "Explain how you would merge two sorted arrays into one sorted array.",
+      "tags": [
+        "arrays",
+        "two-pointers"
+      ],
+      "followups": [
+        "What is the time and space complexity?",
+        "How would you merge them in-place if the first array has enough buffer space?",
+        "Can you generalize this to merge K sorted lists?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Valid Parentheses",
+      "prompt": "Explain how you would check if a string containing brackets '()', '{}', '[]' is correctly matched and nested.",
+      "tags": [
+        "stack",
+        "strings"
+      ],
+      "followups": [
+        "Why is a stack the appropriate data structure here?",
+        "What makes a string invalid?",
+        "How would you extend this to support other delimiter pairs?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "OOP: Class vs Object",
+      "prompt": "What is the difference between a class and an object? Provide a real-world banking example.",
+      "tags": [
+        "oop",
+        "fundamentals",
+        "java"
+      ],
+      "followups": [
+        "Can you have an object without a class?",
+        "What is the memory allocation difference?",
+        "Give an example using an 'Account' class."
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "OOP: Four Pillars",
+      "prompt": "Explain the four pillars of Object-Oriented Programming with real-world examples.",
+      "tags": [
+        "oop",
+        "fundamentals"
+      ],
+      "followups": [
+        "How do you achieve abstraction codewise (abstract classes vs interfaces)?",
+        "Why is encapsulation important for data security in banking applications?",
+        "Give an example of polymorphism using method overloading and overriding."
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "Overloading vs Overriding",
+      "prompt": "What is the difference between method overloading and method overriding?",
+      "tags": [
+        "oop",
+        "java"
+      ],
+      "followups": [
+        "Which one is resolved at compile-time and which at runtime?",
+        "Can you override a private method?",
+        "What is the @Override annotation used for?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "Array vs Linked List",
+      "prompt": "What are the key differences between an array and a linked list?",
+      "tags": [
+        "data-structures",
+        "fundamentals"
+      ],
+      "followups": [
+        "Which one would you prefer for stack implementation and why?",
+        "What are the cache locality implications?",
+        "When would you choose a linked list over an array?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "Stack vs Queue",
+      "prompt": "Explain the difference between a stack and a queue. Provide real-life examples.",
+      "tags": [
+        "stack",
+        "queue",
+        "data-structures"
+      ],
+      "followups": [
+        "What does LIFO and FIFO mean?",
+        "How would you implement a queue using two stacks?",
+        "Where is a queue used in operating systems?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "HashMap Collision Resolution",
+      "prompt": "Explain how a HashMap handles collisions. What are the different collision resolution strategies?",
+      "tags": [
+        "hashmap",
+        "data-structures"
+      ],
+      "followups": [
+        "What is separate chaining vs open addressing?",
+        "When does a HashMap convert a linked list to a red-black tree in Java 8+?",
+        "What is a good hash function?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "SQL: Basic Join",
+      "prompt": "Explain the difference between INNER JOIN and LEFT JOIN using 'Customers' and 'Orders' tables.",
+      "tags": [
+        "sql",
+        "databases"
+      ],
+      "followups": [
+        "What happens to the columns from the right table if there is no match in a LEFT JOIN?",
+        "How do you find customers who have never placed an order?",
+        "What is a self-join? Can you give an example?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "Call by Value vs Call by Reference",
+      "prompt": "Explain the difference between call by value and call by reference. Illustrate using the call stack.",
+      "tags": [
+        "fundamentals",
+        "c++",
+        "java"
+      ],
+      "followups": [
+        "Is Java pass-by-value or pass-by-reference?",
+        "How does this affect object references?",
+        "Write a code example that demonstrates the difference."
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "Process vs Thread",
+      "prompt": "What is the difference between a process and a thread?",
+      "tags": [
+        "os",
+        "fundamentals"
+      ],
+      "followups": [
+        "Which one has more overhead for creation and context switching?",
+        "How do threads share memory?",
+        "What are the advantages of multi-threading?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "TCP vs UDP",
+      "prompt": "What are the key differences between TCP and UDP? When would you use each?",
+      "tags": [
+        "networking",
+        "fundamentals"
+      ],
+      "followups": [
+        "Why does HTTP use TCP?",
+        "What is the three-way handshake?",
+        "Can you explain the four-way wave and why it needs four steps?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "Singleton Pattern",
+      "prompt": "Explain the Singleton design pattern. When and why would you use it?",
+      "tags": [
+        "design-patterns",
+        "java"
+      ],
+      "followups": [
+        "How do you make a Singleton thread-safe?",
+        "What is the Bill Pugh Singleton implementation?",
+        "What are the drawbacks of the Singleton pattern?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Why Morgan Stanley? (Intern Focus)",
+      "prompt": "Why do you want to intern at Morgan Stanley? What do you know about the firm?",
+      "tags": [
+        "behavioral",
+        "company-fit"
+      ],
+      "followups": [
+        "What do you know about Morgan Stanley's stock or investment banking divisions?",
+        "How does Morgan Stanley's technology culture differ from other banks?",
+        "Why should we choose you over other candidates?"
+      ],
+      "question_type": "behavioral"
+    },
+    {
+      "title": "Behavioral: Strengths and Weaknesses",
+      "prompt": "What are your greatest strengths and weaknesses?",
+      "tags": [
+        "behavioral",
+        "self-awareness"
+      ],
+      "followups": [
+        "Give a specific example of how you've used this strength in a project.",
+        "What steps are you taking to improve your weakness?",
+        "How do your strengths make you a good fit for this role?"
+      ],
+      "question_type": "behavioral"
+    },
+    {
+      "title": "Behavioral: Tell Me About Yourself",
+      "prompt": "Walk me through your resume and tell me about yourself.",
+      "tags": [
+        "behavioral",
+        "communication"
+      ],
+      "followups": [
+        "Why did you choose your major?",
+        "What project are you most proud of?",
+        "Where do you see yourself in 5 years?"
+      ],
+      "question_type": "behavioral"
+    }
+  ]
+}

@@ -13,7 +13,8 @@
       "followups": [
         "What is the time complexity and why?",
         "What edge cases should we consider?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Valid Parentheses",
@@ -25,7 +26,8 @@
       "followups": [
         "Why is a stack the right data structure here?",
         "What is the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Contains Duplicate",
@@ -37,7 +39,8 @@
       "followups": [
         "What is the time and space complexity?",
         "How would you solve this if memory was limited?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Palindrome Number",
@@ -48,7 +51,8 @@
       "followups": [
         "How do you handle negative numbers?",
         "What is the complexity of your approach?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Majority Element",
@@ -58,9 +62,10 @@
         "greedy"
       ],
       "followups": [
-        "Explain the Boyer–Moore voting idea.",
+        "Explain the Boyer\u2013Moore voting idea.",
         "What's the time and space complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Reverse String",
@@ -72,7 +77,8 @@
       "followups": [
         "What is the time complexity?",
         "How would you handle Unicode characters?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Binary Search",
@@ -84,7 +90,8 @@
       "followups": [
         "Why does binary search require sorted data?",
         "What happens with duplicate values?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Linked List Cycle",
@@ -96,7 +103,8 @@
       "followups": [
         "Explain Floyd's cycle detection algorithm.",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Valid Anagram",
@@ -108,7 +116,8 @@
       "followups": [
         "What's the time and space complexity?",
         "Can you solve with constant space?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "First Unique Character",
@@ -120,7 +129,8 @@
       "followups": [
         "What's the time and space complexity?",
         "What if the string is very long?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Move Zeroes",
@@ -132,7 +142,8 @@
       "followups": [
         "What's the time complexity?",
         "Can you minimize operations?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Missing Number",
@@ -144,7 +155,8 @@
       "followups": [
         "What's the mathematical solution?",
         "What about XOR solution?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Reverse Linked List",
@@ -155,7 +167,8 @@
       "followups": [
         "What's the iterative approach?",
         "What's the recursive approach?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "First Bad Version",
@@ -166,7 +179,8 @@
       "followups": [
         "Why use binary search?",
         "What about overflow in midpoint calculation?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Ransom Note",
@@ -178,7 +192,8 @@
       "followups": [
         "What's the time and space complexity?",
         "What if magazine is very large?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Single Number",
@@ -190,7 +205,8 @@
       "followups": [
         "Why does XOR work?",
         "What if numbers appear three times?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Happy Number",
@@ -202,7 +218,8 @@
       "followups": [
         "How to detect cycles?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Power of Two",
@@ -214,7 +231,8 @@
       "followups": [
         "What's the bit manipulation solution?",
         "What about negative numbers?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Excel Sheet Column Number",
@@ -226,7 +244,8 @@
       "followups": [
         "What's the mathematical formula?",
         "How would you do reverse conversion?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Valid Palindrome",
@@ -238,7 +257,8 @@
       "followups": [
         "What's the time and space complexity?",
         "Can you solve with constant space?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Longest Common Prefix",
@@ -249,7 +269,8 @@
       "followups": [
         "What's the time complexity?",
         "What if strings are very long?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Remove Duplicates from Sorted Array",
@@ -261,7 +282,8 @@
       "followups": [
         "What's the time complexity?",
         "What if array isn't sorted?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Maximum Depth of Binary Tree",
@@ -273,7 +295,8 @@
       "followups": [
         "What's the time complexity?",
         "Can you solve iteratively?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Invert Binary Tree",
@@ -285,7 +308,8 @@
       "followups": [
         "What's the time complexity?",
         "Can you solve iteratively?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Same Tree",
@@ -297,7 +321,8 @@
       "followups": [
         "What's the time complexity?",
         "Can you solve iteratively?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Convert Sorted Array to BST",
@@ -309,7 +334,8 @@
       "followups": [
         "Why is middle element root?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Merge Sorted Array",
@@ -321,7 +347,8 @@
       "followups": [
         "Why merge from end?",
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Pascal's Triangle",
@@ -333,7 +360,8 @@
       "followups": [
         "What's the mathematical formula?",
         "What if we only need specific row?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Length of Last Word",
@@ -344,7 +372,8 @@
       "followups": [
         "What's the time complexity?",
         "Can you solve without splitting?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Add Binary",
@@ -356,7 +385,8 @@
       "followups": [
         "What's the time complexity?",
         "How handle very large strings?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Merge Two Sorted Lists",
@@ -367,7 +397,8 @@
       ],
       "followups": [
         "What is the time and space complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Maximum Subarray",
@@ -378,7 +409,8 @@
       ],
       "followups": [
         "Explain Kadane's algorithm."
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Climbing Stairs",
@@ -389,7 +421,8 @@
       ],
       "followups": [
         "How does this relate to Fibonacci?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Best Time to Buy Sell Stock",
@@ -400,7 +433,8 @@
       ],
       "followups": [
         "What if you could buy and sell multiple times?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Palindrome Linked List",
@@ -411,7 +445,8 @@
       ],
       "followups": [
         "What's the time and space complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Implement Queue using Stacks",
@@ -422,7 +457,8 @@
       ],
       "followups": [
         "What's the amortized time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Number of 1 Bits",
@@ -432,7 +468,8 @@
       ],
       "followups": [
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Counting Bits",
@@ -443,7 +480,8 @@
       ],
       "followups": [
         "What's the DP relation?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Plus One",
@@ -454,7 +492,8 @@
       ],
       "followups": [
         "What's the worst-case scenario?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Intersection of Two Arrays",
@@ -465,7 +504,8 @@
       ],
       "followups": [
         "What if arrays are sorted?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Remove Element",
@@ -476,7 +516,8 @@
       ],
       "followups": [
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Search Insert Position",
@@ -487,7 +528,8 @@
       ],
       "followups": [
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Path Sum",
@@ -498,7 +540,8 @@
       ],
       "followups": [
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Balanced Binary Tree",
@@ -509,7 +552,8 @@
       ],
       "followups": [
         "What's the time complexity?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Best Time to Buy Sell Stock II",
@@ -520,7 +564,8 @@
       ],
       "followups": [
         "Explain greedy approach."
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Sqrt(x)",
@@ -531,7 +576,8 @@
       ],
       "followups": [
         "Why binary search?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Range Sum Query Immutable",
@@ -542,7 +588,8 @@
       ],
       "followups": [
         "What's the preprocessing time?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Middle of Linked List",
@@ -553,7 +600,8 @@
       ],
       "followups": [
         "Explain fast-slow pointer approach."
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Last Stone Weight",
@@ -563,7 +611,8 @@
       ],
       "followups": [
         "Why use max-heap?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Find the Difference",
@@ -574,7 +623,8 @@
       ],
       "followups": [
         "What's the XOR solution?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Third Maximum Number",
@@ -582,7 +632,8 @@
       "tags": [
         "arrays"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "coding"
     },
     {
       "title": "Find All Numbers Disappeared",
@@ -590,7 +641,8 @@
       "tags": [
         "arrays"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "coding"
     },
     {
       "title": "Assign Cookies",
@@ -599,7 +651,8 @@
         "arrays",
         "greedy"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "coding"
     },
     {
       "title": "Island Perimeter",
@@ -608,7 +661,8 @@
         "arrays",
         "matrix"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "coding"
     },
     {
       "title": "Heaters",
@@ -617,7 +671,8 @@
         "arrays",
         "binary search"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "coding"
     },
     {
       "title": "Number Complement",
@@ -625,7 +680,8 @@
       "tags": [
         "bit manipulation"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "coding"
     },
     {
       "title": "License Key Formatting",
@@ -633,7 +689,8 @@
       "tags": [
         "strings"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "coding"
     },
     {
       "title": "Max Consecutive Ones",
@@ -641,7 +698,8 @@
       "tags": [
         "arrays"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "coding"
     },
     {
       "title": "Construct Quad Tree",
@@ -650,7 +708,8 @@
         "tree",
         "recursion"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "coding"
     },
     {
       "title": "N-ary Tree Preorder",
@@ -659,7 +718,8 @@
         "tree",
         "recursion"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "coding"
     },
     {
       "title": "To Lower Case",
@@ -667,7 +727,8 @@
       "tags": [
         "strings"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "coding"
     },
     {
       "title": "What is API?",
@@ -675,7 +736,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "Define JSON",
@@ -683,7 +745,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "Describe OOP",
@@ -691,7 +754,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "REST vs GraphQL",
@@ -699,7 +763,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "Explain Git",
@@ -707,7 +772,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "What is a Database?",
@@ -715,7 +781,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "SQL vs NoSQL",
@@ -723,7 +790,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "What is HTTPS?",
@@ -731,7 +799,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "Define DNS",
@@ -739,7 +808,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "What is MVC?",
@@ -747,7 +817,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "Explain Agile",
@@ -755,7 +826,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "What is Testing?",
@@ -763,7 +835,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "Define Algorithm",
@@ -771,7 +844,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "What is Big O?",
@@ -779,7 +853,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "Explain Recursion",
@@ -787,7 +862,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "What is a Framework?",
@@ -795,7 +871,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "Explain Cloud Computing",
@@ -803,7 +880,8 @@
       "tags": [
         "concepts"
       ],
-      "followups": []
+      "followups": [],
+      "question_type": "conceptual"
     },
     {
       "title": "Variables",
@@ -815,7 +893,8 @@
         "Can you give an example of a variable in a real program?",
         "What are common bugs related to variables (scope, shadowing)?",
         "How do you choose good variable names?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Variable vs Constant",
@@ -827,7 +906,8 @@
         "Why do constants improve maintainability?",
         "How do constants relate to immutability?",
         "What's an example of a constant you'd define in an API client?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Data Types",
@@ -839,7 +919,8 @@
         "What are examples of common primitive types?",
         "How do types prevent bugs?",
         "What's the difference between static and dynamic typing?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Primitive vs Non-Primitive Types",
@@ -852,7 +933,8 @@
         "How does pass-by-value vs pass-by-reference relate?",
         "What kinds of bugs come from mutating non-primitive types?",
         "How do arrays/objects behave differently from primitives?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Array vs List",
@@ -865,7 +947,8 @@
         "Why are arrays often faster due to cache locality?",
         "What happens when a dynamic array grows?",
         "When would a linked list be a better fit?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Functions",
@@ -877,7 +960,8 @@
         "What is a function signature?",
         "What is purity and side effects?",
         "How do you choose function parameters vs global state?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Function vs Method",
@@ -890,7 +974,8 @@
         "What does 'this' / 'self' mean in a method?",
         "How does method overriding relate to polymorphism?",
         "When should behavior live on an object vs be a standalone function?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Recursion Basics",
@@ -903,7 +988,8 @@
         "How does recursion relate to the call stack?",
         "What is stack overflow and when can it happen?",
         "Give an example of a naturally recursive problem."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Recursion vs Loop",
@@ -916,7 +1002,8 @@
         "What is tail recursion (and does your language optimize it)?",
         "How do you convert recursion to iteration?",
         "What are the trade-offs for performance?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Stack vs Heap Memory",
@@ -929,7 +1016,8 @@
         "How does garbage collection relate to heap memory?",
         "What is a memory leak?",
         "How does stack allocation impact performance?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Object-Oriented Programming (OOP)",
@@ -942,7 +1030,8 @@
         "Give a real example where OOP helped.",
         "When might OOP be a poor fit?",
         "How do you choose between OOP and functional style?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Four Pillars of OOP",
@@ -955,7 +1044,8 @@
         "Which pillar do you use most in real projects and why?",
         "What's a common misuse of inheritance?",
         "How do these pillars relate to maintainable code?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Encapsulation",
@@ -968,7 +1058,8 @@
         "How is encapsulation different from abstraction?",
         "What does 'private' mean and why is it useful?",
         "Give an example of hiding internal state safely."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Inheritance",
@@ -981,7 +1072,8 @@
         "What is method overriding?",
         "How can inheritance cause fragile code?",
         "Give an example where composition is better."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Polymorphism",
@@ -994,7 +1086,8 @@
         "What's the difference between compile-time and runtime polymorphism?",
         "How do interfaces enable polymorphism?",
         "When can polymorphism hurt performance or clarity?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Abstraction",
@@ -1007,7 +1100,8 @@
         "How do you design a good abstraction?",
         "What are signs of a leaky abstraction?",
         "Give an example of a clean abstraction you've used."
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Class",
@@ -1020,7 +1114,8 @@
         "What is a field/property vs a method?",
         "How do access modifiers apply?",
         "How does a class relate to a type?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Object",
@@ -1033,7 +1128,8 @@
         "What is object identity vs equality?",
         "How does mutability affect object state?",
         "How do you avoid unintended shared state?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Class vs Object",
@@ -1046,7 +1142,8 @@
         "How do you create an object from a class?",
         "Can you have multiple objects from the same class?",
         "How does this relate to memory allocation?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Constructor",
@@ -1059,7 +1156,8 @@
         "What are common pitfalls of heavy work in constructors?",
         "How do you handle failures during initialization?",
         "How does dependency injection relate to construction?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "What Is a Data Structure?",
@@ -1072,7 +1170,8 @@
         "Give examples of data structures you've used recently.",
         "How do you choose the right data structure?",
         "How do data structures affect complexity?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "Array vs Linked List",
@@ -1086,7 +1185,8 @@
         "Why are arrays often faster in practice?",
         "What changes if the array is dynamic (vector/ArrayList)?",
         "When is a linked list a good choice?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Stack",
@@ -1099,7 +1199,8 @@
         "How would you implement a stack?",
         "What's the time complexity of push/pop?",
         "Give an example where a stack naturally appears."
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Queue",
@@ -1112,7 +1213,8 @@
         "How would you implement a queue efficiently?",
         "What's the time complexity of enqueue/dequeue?",
         "Where do queues appear in systems?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Hash Table / Hash Map",
@@ -1125,7 +1227,8 @@
         "What collision strategies do you know?",
         "What's average-case vs worst-case complexity?",
         "What makes a good hash function?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Stack vs Queue",
@@ -1139,7 +1242,8 @@
         "What real-world process behaves like a queue?",
         "What real-world process behaves like a stack?",
         "How does BFS relate to queues and DFS relate to stacks?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Tree",
@@ -1152,7 +1256,8 @@
         "What's the difference between a binary tree and a BST?",
         "When do you use BFS vs DFS on a tree?",
         "Give an example of a tree problem."
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Binary Tree",
@@ -1165,7 +1270,8 @@
         "What's the difference between a binary tree and a binary search tree?",
         "What are in-order, pre-order, and post-order traversals?",
         "What is the typical complexity of operations in a balanced BST?"
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Graph",
@@ -1178,7 +1284,8 @@
         "Adjacency list vs adjacency matrix: when would you choose each?",
         "What's the complexity of BFS/DFS in terms of V and E?",
         "Give a real-world example modeled as a graph."
-      ]
+      ],
+      "question_type": "coding"
     },
     {
       "title": "Big-O Notation (Data Structures)",
@@ -1191,7 +1298,8 @@
         "Give examples: array access, hash map lookup, tree traversal.",
         "How do constants and cache locality matter in practice?",
         "What is amortized analysis?"
-      ]
+      ],
+      "question_type": "conceptual"
     },
     {
       "title": "What Is an Algorithm?",
@@ -1204,7 +1312,8 @@
         "What makes an algorithm correct?",
         "How do you estimate time complexity?",
         "How do you test edge cases?"
-      ]
+      ],
+      "question_type": "conceptual"
     }
   ]
 }

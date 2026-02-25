@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import JSON, DateTime, Integer, String, func
+from sqlalchemy import JSON, Boolean, DateTime, Integer, String, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -20,6 +20,7 @@ class InterviewSession(Base):
     # Adaptive difficulty: this is the current difficulty used for question selection.
     # `difficulty` remains the user's selected cap (easy|medium|hard).
     difficulty_current: Mapped[str] = mapped_column(String(20), default="easy", nullable=False)
+    adaptive_difficulty_enabled: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
 
     # stage controller: "intro"|"question"|"followups"|"evaluation"|"done"
     stage: Mapped[str] = mapped_column(String(30), default="intro", nullable=False)

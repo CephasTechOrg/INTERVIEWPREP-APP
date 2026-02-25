@@ -1,227 +1,336 @@
 {
-    "track": "swe_intern",
-    "company_style": "morgan_stanley",
-    "difficulty": "medium",
-    "questions": [
-      {
-        "title": "House Robber (DP)",
-        "prompt": "Given an integer array `nums` representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police (cannot rob two adjacent houses).",
-        "tags": ["dynamic-programming", "arrays", "leetcode-198"],
-        "followups": [
-          "What is the DP recurrence relation?",
-          "How do you optimize space to O(1)?",
-          "What if the houses are arranged in a circle (House Robber II)?"
-        ]
-      },
-      {
-        "title": "Binary Tree Boundary Traversal",
-        "prompt": "Given a binary tree, print all the boundary nodes in anti-clockwise order starting from the root. Boundary includes left boundary (excluding leaves), leaves, and right boundary (excluding leaves) in reverse order.",
-        "tags": ["trees", "dfs", "leetcode-545"],
-        "followups": [
-          "How do you handle a single node tree?",
-          "What is the time and space complexity?",
-          "How would you modify this for a N-ary tree?"
-        ]
-      },
-      {
-        "title": "Minimum Window Substring",
-        "prompt": "Given two strings `s` and `t`, return the minimum window substring of `s` such that every character in `t` (including duplicates) is included in the window. If there is no such substring, return an empty string.",
-        "tags": ["strings", "sliding-window", "hashmap", "hard-tagged"],
-        "followups": [
-          "What invariant does your sliding window maintain?",
-          "What is the time and space complexity?",
-          "How would you handle very large strings (streaming)?"
-        ]
-      },
-      {
-        "title": "Subsequence Removal (Unique Integers)",
-        "prompt": "Given an array of unique integers, you repeatedly remove a subsequence and append it to the result. The removed subsequence must be strictly increasing. What is the minimum number of operations required to remove all elements?",
-        "tags": ["greedy", "arrays", "morgan-stanley-specific"],
-        "followups": [
-          "How does the algorithm change if duplicates are allowed?",
-          "Can you solve this in O(n) time?",
-          "What is the connection to patience sorting (LIS)?"
-        ]
-      },
-      {
-        "title": "Next Greater Even Number (Same Digits)",
-        "prompt": "Given an integer, generate the smallest even number that is strictly larger than the given number and uses the exact same digits. If no such number exists, return -1.",
-        "tags": ["strings", "math", "permutation", "morgan-stanley-oa"],
-        "followups": [
-          "How is this related to the next permutation problem?",
-          "What edge cases (leading zeros, large numbers) must you handle?",
-          "What is the time complexity?"
-        ]
-      },
-      {
-        "title": "Rotate Matrix 90 Degrees (In-Place)",
-        "prompt": "Given an N x N 2D matrix, rotate it by 90 degrees clockwise in-place.",
-        "tags": ["matrix", "arrays", "leetcode-48"],
-        "followups": [
-          "What is the space complexity of the transpose + reverse method?",
-          "How would you rotate a non-square (M x N) matrix?",
-          "How do you rotate counter-clockwise?"
-        ]
-      },
-      {
-        "title": "Spiral Matrix",
-        "prompt": "Given an m x n matrix, return all elements of the matrix in spiral order.",
-        "tags": ["matrix", "simulation", "leetcode-54"],
-        "followups": [
-          "How do you manage the boundary conditions?",
-          "What is the time complexity?",
-          "How would you generate a spiral matrix given n?"
-        ]
-      },
-      {
-        "title": "Remove Nth Node From End of List",
-        "prompt": "Given the head of a linked list, remove the nth node from the end of the list and return its head. Do it in one pass.",
-        "tags": ["linked-list", "two-pointers", "leetcode-19"],
-        "followups": [
-          "Why does the two-pointer (fast-slow) approach work?",
-          "How do you handle the case where n equals the length of the list (removing the head)?",
-          "What is the time and space complexity?"
-        ]
-      },
-      {
-        "title": "BFS: Find N-Degree Friends",
-        "prompt": "Given a social network graph (adjacency list) and a starting user, find all users who are exactly 'N' degrees of connection away (i.e., N-degree friends).",
-        "tags": ["graphs", "bfs", "algorithms"],
-        "followups": [
-          "Why is BFS more suitable than DFS for this problem?",
-          "How do you prevent revisiting nodes (cycles)?",
-          "What is the time complexity in terms of V and E?"
-        ]
-      },
-      {
-        "title": "LFU Cache (Least Frequently Used)",
-        "prompt": "Design and implement a data structure for a Least Frequently Used (LFU) cache. Implement `get(key)` and `put(key, value)`. When the cache reaches capacity, it should invalidate the least frequently used item. If there is a tie, the least recently used item among them should be removed.",
-        "tags": ["design", "hashmap", "linked-list", "leetcode-460"],
-        "followups": [
-          "What is the time complexity of your get and put operations?",
-          "How do you maintain frequency counts efficiently?",
-          "How does this differ from LRU cache?"
-        ]
-      },
-      {
-        "title": "Sort HashMap by Value",
-        "prompt": "Given a HashMap<String, Integer>, sort the map by its values in ascending or descending order. Write the code.",
-        "tags": ["java", "collections", "sorting"],
-        "followups": [
-          "How do you sort a Map using Streams in Java 8+?",
-          "What is the time complexity?",
-          "Can you sort a HashMap directly? Why not?"
-        ]
-      },
-      {
-        "title": "Immutable Class in Java",
-        "prompt": "How do you make a class immutable in Java? Provide a step-by-step example.",
-        "tags": ["java", "oop", "concurrency"],
-        "followups": [
-          "Why are immutable objects thread-safe?",
-          "What are the requirements for an immutable class?",
-          "How do you handle mutable fields like Date or List?"
-        ]
-      },
-      {
-        "title": "Low-Level Design: Office Printer Queue",
-        "prompt": "Design a printer queue system for an office with four floors, each having four printers. There are two types of printers: Color and B&W. A B&W printer can only print B&W jobs, but a Color printer can print both color and B&W jobs. A printer queue should not have more than N jobs. Implement the core logic.",
-        "tags": ["lld", "design", "queue", "morgan-stanley-specific"],
-        "followups": [
-          "What data structures would you use to manage the queues?",
-          "How do you balance the load between printers on the same floor?",
-          "How would you prioritize jobs (e.g., urgent vs normal)?"
-        ]
-      },
-      {
-        "title": "Real-Life Scenario: Elevator/Lift System Design",
-        "prompt": "Design an elevator control system for a building with 3 lifts and a single call button on each floor. How do you prioritize which lift should respond to a call? Consider factors like distance, direction, and current load.",
-        "tags": ["lld", "system-design", "real-life-scenario"],
-        "followups": [
-          "What data structure would you use to represent the state of each lift?",
-          "How do you handle multiple requests simultaneously?",
-          "What algorithm minimizes average waiting time?"
-        ]
-      },
-      {
-        "title": "SQL: Query with Complex Aggregation",
-        "prompt": "Given a table `Transactions(account_id, transaction_date, amount)`, write a SQL query to find the top 3 accounts with the highest total transaction amount in the last 30 days.",
-        "tags": ["sql", "databases"],
-        "followups": [
-          "How do you handle ties in the top 3?",
-          "What indexes would you add to optimize this query?",
-          "How would you write this as a window function (RANK/DENSE_RANK)?"
-        ]
-      },
-      {
-        "title": "OS: Deadlock Conditions",
-        "prompt": "What are the four necessary conditions for a deadlock to occur? Explain each.",
-        "tags": ["os", "concurrency"],
-        "followups": [
-          "How does the Banker's algorithm prevent deadlock?",
-          "What is deadlock avoidance vs detection vs recovery?",
-          "How do you prevent deadlock in a Java multithreaded application?"
-        ]
-      },
-      {
-        "title": "Concurrency: Find Maximum in Matrix with Threads",
-        "prompt": "Given a large random matrix, how would you find the maximum element using multiple threads? Explain your design.",
-        "tags": ["concurrency", "multithreading", "java"],
-        "followups": [
-          "How do you divide the matrix among threads?",
-          "How do you aggregate the results from each thread?",
-          "What is the trade-off between number of threads and performance?"
-        ]
-      },
-      {
-        "title": "Distributed Tracing in Microservices",
-        "prompt": "How do you track a single request as it travels across multiple microservices? What is distributed tracing and how is it implemented?",
-        "tags": ["microservices", "system-design"],
-        "followups": [
-          "What is a Correlation ID?",
-          "How do tools like Jaeger or Zipkin work?",
-          "What information should be included in the trace context?"
-        ]
-      },
-      {
-        "title": "API Gateway Responsibilities",
-        "prompt": "What is an API Gateway and what are its primary responsibilities in a microservices architecture?",
-        "tags": ["system-design", "microservices"],
-        "followups": [
-          "How does it differ from a load balancer?",
-          "What is rate limiting and how would you implement it?",
-          "How does an API Gateway handle authentication?"
-        ]
-      },
-      {
-        "title": "Spring vs Spring Boot",
-        "prompt": "What is the difference between Spring Framework and Spring Boot? Why would you choose one over the other?",
-        "tags": ["spring", "java", "frameworks"],
-        "followups": [
-          "What are Spring Boot starters?",
-          "What is auto-configuration and how does it work?",
-          "What is the purpose of application.properties?"
-        ]
-      },
-      {
-        "title": "Behavioral: Reaction to Not Being Promoted",
-        "prompt": "Imagine you have been working very hard, but you are not promoted. You see your junior colleague getting promoted. How would you react and what would you do?",
-        "tags": ["behavioral", "managerial", "resilience"],
-        "followups": [
-          "Would you confront your manager?",
-          "How do you seek feedback on your performance?",
-          "What steps would you take to improve your chances next time?"
-        ]
-      },
-      {
-        "title": "Behavioral: Reporting to a Junior",
-        "prompt": "How would you feel if you were asked to report to someone who joined the company after you or has less experience than you?",
-        "tags": ["behavioral", "leadership"],
-        "followups": [
-          "How do you handle your ego in such a situation?",
-          "What if you disagree with their technical decisions?",
-          "How do you continue to grow and contribute?"
-        ]
-      }
-    ]
-  }
+  "track": "swe_intern",
+  "company_style": "morgan_stanley",
+  "difficulty": "medium",
+  "questions": [
+    {
+      "title": "House Robber (DP)",
+      "prompt": "Given an integer array `nums` representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police (cannot rob two adjacent houses).",
+      "tags": [
+        "dynamic-programming",
+        "arrays",
+        "leetcode-198"
+      ],
+      "followups": [
+        "What is the DP recurrence relation?",
+        "How do you optimize space to O(1)?",
+        "What if the houses are arranged in a circle (House Robber II)?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Binary Tree Boundary Traversal",
+      "prompt": "Given a binary tree, print all the boundary nodes in anti-clockwise order starting from the root. Boundary includes left boundary (excluding leaves), leaves, and right boundary (excluding leaves) in reverse order.",
+      "tags": [
+        "trees",
+        "dfs",
+        "leetcode-545"
+      ],
+      "followups": [
+        "How do you handle a single node tree?",
+        "What is the time and space complexity?",
+        "How would you modify this for a N-ary tree?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Minimum Window Substring",
+      "prompt": "Given two strings `s` and `t`, return the minimum window substring of `s` such that every character in `t` (including duplicates) is included in the window. If there is no such substring, return an empty string.",
+      "tags": [
+        "strings",
+        "sliding-window",
+        "hashmap",
+        "hard-tagged"
+      ],
+      "followups": [
+        "What invariant does your sliding window maintain?",
+        "What is the time and space complexity?",
+        "How would you handle very large strings (streaming)?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Subsequence Removal (Unique Integers)",
+      "prompt": "Given an array of unique integers, you repeatedly remove a subsequence and append it to the result. The removed subsequence must be strictly increasing. What is the minimum number of operations required to remove all elements?",
+      "tags": [
+        "greedy",
+        "arrays",
+        "morgan-stanley-specific"
+      ],
+      "followups": [
+        "How does the algorithm change if duplicates are allowed?",
+        "Can you solve this in O(n) time?",
+        "What is the connection to patience sorting (LIS)?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Next Greater Even Number (Same Digits)",
+      "prompt": "Given an integer, generate the smallest even number that is strictly larger than the given number and uses the exact same digits. If no such number exists, return -1.",
+      "tags": [
+        "strings",
+        "math",
+        "permutation",
+        "morgan-stanley-oa"
+      ],
+      "followups": [
+        "How is this related to the next permutation problem?",
+        "What edge cases (leading zeros, large numbers) must you handle?",
+        "What is the time complexity?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Rotate Matrix 90 Degrees (In-Place)",
+      "prompt": "Given an N x N 2D matrix, rotate it by 90 degrees clockwise in-place.",
+      "tags": [
+        "matrix",
+        "arrays",
+        "leetcode-48"
+      ],
+      "followups": [
+        "What is the space complexity of the transpose + reverse method?",
+        "How would you rotate a non-square (M x N) matrix?",
+        "How do you rotate counter-clockwise?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Spiral Matrix",
+      "prompt": "Given an m x n matrix, return all elements of the matrix in spiral order.",
+      "tags": [
+        "matrix",
+        "simulation",
+        "leetcode-54"
+      ],
+      "followups": [
+        "How do you manage the boundary conditions?",
+        "What is the time complexity?",
+        "How would you generate a spiral matrix given n?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Remove Nth Node From End of List",
+      "prompt": "Given the head of a linked list, remove the nth node from the end of the list and return its head. Do it in one pass.",
+      "tags": [
+        "linked-list",
+        "two-pointers",
+        "leetcode-19"
+      ],
+      "followups": [
+        "Why does the two-pointer (fast-slow) approach work?",
+        "How do you handle the case where n equals the length of the list (removing the head)?",
+        "What is the time and space complexity?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "BFS: Find N-Degree Friends",
+      "prompt": "Given a social network graph (adjacency list) and a starting user, find all users who are exactly 'N' degrees of connection away (i.e., N-degree friends).",
+      "tags": [
+        "graphs",
+        "bfs",
+        "algorithms"
+      ],
+      "followups": [
+        "Why is BFS more suitable than DFS for this problem?",
+        "How do you prevent revisiting nodes (cycles)?",
+        "What is the time complexity in terms of V and E?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "LFU Cache (Least Frequently Used)",
+      "prompt": "Design and implement a data structure for a Least Frequently Used (LFU) cache. Implement `get(key)` and `put(key, value)`. When the cache reaches capacity, it should invalidate the least frequently used item. If there is a tie, the least recently used item among them should be removed.",
+      "tags": [
+        "design",
+        "hashmap",
+        "linked-list",
+        "leetcode-460"
+      ],
+      "followups": [
+        "What is the time complexity of your get and put operations?",
+        "How do you maintain frequency counts efficiently?",
+        "How does this differ from LRU cache?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Sort HashMap by Value",
+      "prompt": "Given a HashMap<String, Integer>, sort the map by its values in ascending or descending order. Write the code.",
+      "tags": [
+        "java",
+        "collections",
+        "sorting"
+      ],
+      "followups": [
+        "How do you sort a Map using Streams in Java 8+?",
+        "What is the time complexity?",
+        "Can you sort a HashMap directly? Why not?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Immutable Class in Java",
+      "prompt": "How do you make a class immutable in Java? Provide a step-by-step example.",
+      "tags": [
+        "java",
+        "oop",
+        "concurrency"
+      ],
+      "followups": [
+        "Why are immutable objects thread-safe?",
+        "What are the requirements for an immutable class?",
+        "How do you handle mutable fields like Date or List?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "Low-Level Design: Office Printer Queue",
+      "prompt": "Design a printer queue system for an office with four floors, each having four printers. There are two types of printers: Color and B&W. A B&W printer can only print B&W jobs, but a Color printer can print both color and B&W jobs. A printer queue should not have more than N jobs. Implement the core logic.",
+      "tags": [
+        "lld",
+        "design",
+        "queue",
+        "morgan-stanley-specific"
+      ],
+      "followups": [
+        "What data structures would you use to manage the queues?",
+        "How do you balance the load between printers on the same floor?",
+        "How would you prioritize jobs (e.g., urgent vs normal)?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Real-Life Scenario: Elevator/Lift System Design",
+      "prompt": "Design an elevator control system for a building with 3 lifts and a single call button on each floor. How do you prioritize which lift should respond to a call? Consider factors like distance, direction, and current load.",
+      "tags": [
+        "lld",
+        "system-design",
+        "real-life-scenario"
+      ],
+      "followups": [
+        "What data structure would you use to represent the state of each lift?",
+        "How do you handle multiple requests simultaneously?",
+        "What algorithm minimizes average waiting time?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "SQL: Query with Complex Aggregation",
+      "prompt": "Given a table `Transactions(account_id, transaction_date, amount)`, write a SQL query to find the top 3 accounts with the highest total transaction amount in the last 30 days.",
+      "tags": [
+        "sql",
+        "databases"
+      ],
+      "followups": [
+        "How do you handle ties in the top 3?",
+        "What indexes would you add to optimize this query?",
+        "How would you write this as a window function (RANK/DENSE_RANK)?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "OS: Deadlock Conditions",
+      "prompt": "What are the four necessary conditions for a deadlock to occur? Explain each.",
+      "tags": [
+        "os",
+        "concurrency"
+      ],
+      "followups": [
+        "How does the Banker's algorithm prevent deadlock?",
+        "What is deadlock avoidance vs detection vs recovery?",
+        "How do you prevent deadlock in a Java multithreaded application?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Concurrency: Find Maximum in Matrix with Threads",
+      "prompt": "Given a large random matrix, how would you find the maximum element using multiple threads? Explain your design.",
+      "tags": [
+        "concurrency",
+        "multithreading",
+        "java"
+      ],
+      "followups": [
+        "How do you divide the matrix among threads?",
+        "How do you aggregate the results from each thread?",
+        "What is the trade-off between number of threads and performance?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Distributed Tracing in Microservices",
+      "prompt": "How do you track a single request as it travels across multiple microservices? What is distributed tracing and how is it implemented?",
+      "tags": [
+        "microservices",
+        "system-design"
+      ],
+      "followups": [
+        "What is a Correlation ID?",
+        "How do tools like Jaeger or Zipkin work?",
+        "What information should be included in the trace context?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "API Gateway Responsibilities",
+      "prompt": "What is an API Gateway and what are its primary responsibilities in a microservices architecture?",
+      "tags": [
+        "system-design",
+        "microservices"
+      ],
+      "followups": [
+        "How does it differ from a load balancer?",
+        "What is rate limiting and how would you implement it?",
+        "How does an API Gateway handle authentication?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "Spring vs Spring Boot",
+      "prompt": "What is the difference between Spring Framework and Spring Boot? Why would you choose one over the other?",
+      "tags": [
+        "spring",
+        "java",
+        "frameworks"
+      ],
+      "followups": [
+        "What are Spring Boot starters?",
+        "What is auto-configuration and how does it work?",
+        "What is the purpose of application.properties?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Behavioral: Reaction to Not Being Promoted",
+      "prompt": "Imagine you have been working very hard, but you are not promoted. You see your junior colleague getting promoted. How would you react and what would you do?",
+      "tags": [
+        "behavioral",
+        "managerial",
+        "resilience"
+      ],
+      "followups": [
+        "Would you confront your manager?",
+        "How do you seek feedback on your performance?",
+        "What steps would you take to improve your chances next time?"
+      ],
+      "question_type": "behavioral"
+    },
+    {
+      "title": "Behavioral: Reporting to a Junior",
+      "prompt": "How would you feel if you were asked to report to someone who joined the company after you or has less experience than you?",
+      "tags": [
+        "behavioral",
+        "leadership"
+      ],
+      "followups": [
+        "How do you handle your ego in such a situation?",
+        "What if you disagree with their technical decisions?",
+        "How do you continue to grow and contribute?"
+      ],
+      "question_type": "behavioral"
+    }
+  ]
+}

@@ -98,6 +98,7 @@ export interface SessionCreateRequest {
   difficulty: Difficulty;
   behavioral_questions_target?: number;
   interviewer?: InterviewerProfile | null;
+  adaptive_difficulty_enabled?: boolean;
 }
 
 export interface InterviewSession {
@@ -106,6 +107,7 @@ export interface InterviewSession {
   track: Track;
   company_style: string;
   difficulty: Difficulty;
+  adaptive_difficulty_enabled?: boolean;
   stage: SessionStage;
   current_question_id?: number | null;
   interviewer?: InterviewerProfile | null;
@@ -117,6 +119,7 @@ export interface SessionSummary {
   track: Track;
   company_style: string;
   difficulty: Difficulty;
+  adaptive_difficulty_enabled?: boolean;
   stage: SessionStage;
   current_question_id?: number | null;
   questions_asked_count?: number;
@@ -209,6 +212,7 @@ export interface AIChatResponse {
 // Voice/TTS Types
 export interface TTSRequest {
   text: string;
+  interviewer_id?: string | null;
 }
 
 export interface TTSResponseText {

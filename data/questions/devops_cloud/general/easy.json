@@ -1,142 +1,202 @@
-﻿{
-    "difficulty": "easy",
-    "questions": [
-        {
-            "title": "What is DevOps?",
-            "prompt": "Explain what DevOps is and its main goals.",
-            "tags": ["devops", "fundamentals"],
-            "followups": [
-                "How does DevOps differ from traditional development approaches?",
-                "What are some benefits of adopting DevOps practices?"
-            ]
-        },
-        {
-            "title": "What is Cloud Computing?",
-            "prompt": "Explain cloud computing in simple terms and name the three main service models.",
-            "tags": ["cloud", "fundamentals"],
-            "followups": [
-                "What are the advantages of cloud computing over on-premises infrastructure?",
-                "What does IaaS, PaaS, and SaaS stand for?"
-            ]
-        },
-        {
-            "title": "CI/CD Basics",
-            "prompt": "What does CI/CD stand for and why is it important?",
-            "tags": ["ci-cd", "automation"],
-            "followups": [
-                "What's the difference between continuous integration and continuous deployment?",
-                "What are some popular CI/CD tools?"
-            ]
-        },
-        {
-            "title": "Containers vs Virtual Machines",
-            "prompt": "Explain the main differences between containers and virtual machines.",
-            "tags": ["containers", "virtualization"],
-            "followups": [
-                "What are the advantages of using containers?",
-                "What is Docker and how does it relate to containers?"
-            ]
-        },
-        {
-            "title": "What is Git?",
-            "prompt": "Explain what Git is and why it's important for DevOps.",
-            "tags": ["version-control", "git"],
-            "followups": [
-                "What's the difference between Git and GitHub?",
-                "What are some basic Git commands?"
-            ]
-        },
-        {
-            "title": "Infrastructure as Code",
-            "prompt": "What is Infrastructure as Code (IaC) and why is it useful?",
-            "tags": ["iac", "automation"],
-            "followups": [
-                "What are some popular IaC tools?",
-                "What are the benefits of treating infrastructure as code?"
-            ]
-        },
-        {
-            "title": "Monitoring Basics",
-            "prompt": "Why is monitoring important in DevOps and what should you monitor?",
-            "tags": ["monitoring", "observability"],
-            "followups": [
-                "What's the difference between metrics, logs, and traces?",
-                "What are some key metrics to track for application health?"
-            ]
-        },
-        {
-            "title": "Microservices Architecture",
-            "prompt": "What are microservices and how do they differ from monolithic architecture?",
-            "tags": ["architecture", "microservices"],
-            "followups": [
-                "What are the advantages of microservices?",
-                "What challenges come with microservices?"
-            ]
-        },
-        {
-            "title": "Public Cloud Providers",
-            "prompt": "Name the three major public cloud providers and one key service from each.",
-            "tags": ["cloud-providers", "fundamentals"],
-            "followups": [
-                "What factors might influence which cloud provider to choose?",
-                "What is hybrid cloud?"
-            ]
-        },
-        {
-            "title": "Load Balancing",
-            "prompt": "What is load balancing and why is it important?",
-            "tags": ["networking", "scalability"],
-            "followups": [
-                "What's the difference between application and network load balancers?",
-                "How does load balancing improve availability?"
-            ]
-        },
-        {
-            "title": "Auto-scaling",
-            "prompt": "What is auto-scaling and when would you use it?",
-            "tags": ["scalability", "cloud"],
-            "followups": [
-                "What metrics might trigger auto-scaling?",
-                "What are the benefits of auto-scaling?"
-            ]
-        },
-        {
-            "title": "What is Kubernetes?",
-            "prompt": "Explain what Kubernetes is in simple terms.",
-            "tags": ["kubernetes", "orchestration"],
-            "followups": [
-                "What problem does Kubernetes solve?",
-                "How does Kubernetes relate to Docker?"
-            ]
-        },
-        {
-            "title": "Deployment Strategies",
-            "prompt": "Name and briefly describe two common deployment strategies.",
-            "tags": ["deployment", "strategies"],
-            "followups": [
-                "What are blue-green deployments?",
-                "What are canary releases?"
-            ]
-        },
-        {
-            "title": "Configuration Management",
-            "prompt": "What is configuration management and why is it important?",
-            "tags": ["configuration", "automation"],
-            "followups": [
-                "What are some popular configuration management tools?",
-                "How does configuration management help with consistency?"
-            ]
-        },
-        {
-            "title": "Disaster Recovery",
-            "prompt": "What is disaster recovery and why is it important in the cloud?",
-            "tags": ["reliability", "backup"],
-            "followups": [
-                "What's the difference between backup and disaster recovery?",
-                "What are RTO and RPO?"
-            ]
-        }
-    ],
-    "company_style": "general",
-    "track": "devops_cloud"
+{
+  "difficulty": "easy",
+  "questions": [
+    {
+      "title": "What is DevOps?",
+      "prompt": "Explain what DevOps is and its main goals.",
+      "tags": [
+        "devops",
+        "fundamentals"
+      ],
+      "followups": [
+        "How does DevOps differ from traditional development approaches?",
+        "What are some benefits of adopting DevOps practices?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "What is Cloud Computing?",
+      "prompt": "Explain cloud computing in simple terms and name the three main service models.",
+      "tags": [
+        "cloud",
+        "fundamentals"
+      ],
+      "followups": [
+        "What are the advantages of cloud computing over on-premises infrastructure?",
+        "What does IaaS, PaaS, and SaaS stand for?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "CI/CD Basics",
+      "prompt": "What does CI/CD stand for and why is it important?",
+      "tags": [
+        "ci-cd",
+        "automation"
+      ],
+      "followups": [
+        "What's the difference between continuous integration and continuous deployment?",
+        "What are some popular CI/CD tools?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Containers vs Virtual Machines",
+      "prompt": "Explain the main differences between containers and virtual machines.",
+      "tags": [
+        "containers",
+        "virtualization"
+      ],
+      "followups": [
+        "What are the advantages of using containers?",
+        "What is Docker and how does it relate to containers?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "What is Git?",
+      "prompt": "Explain what Git is and why it's important for DevOps.",
+      "tags": [
+        "version-control",
+        "git"
+      ],
+      "followups": [
+        "What's the difference between Git and GitHub?",
+        "What are some basic Git commands?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Infrastructure as Code",
+      "prompt": "What is Infrastructure as Code (IaC) and why is it useful?",
+      "tags": [
+        "iac",
+        "automation"
+      ],
+      "followups": [
+        "What are some popular IaC tools?",
+        "What are the benefits of treating infrastructure as code?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Monitoring Basics",
+      "prompt": "Why is monitoring important in DevOps and what should you monitor?",
+      "tags": [
+        "monitoring",
+        "observability"
+      ],
+      "followups": [
+        "What's the difference between metrics, logs, and traces?",
+        "What are some key metrics to track for application health?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "Microservices Architecture",
+      "prompt": "What are microservices and how do they differ from monolithic architecture?",
+      "tags": [
+        "architecture",
+        "microservices"
+      ],
+      "followups": [
+        "What are the advantages of microservices?",
+        "What challenges come with microservices?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "Public Cloud Providers",
+      "prompt": "Name the three major public cloud providers and one key service from each.",
+      "tags": [
+        "cloud-providers",
+        "fundamentals"
+      ],
+      "followups": [
+        "What factors might influence which cloud provider to choose?",
+        "What is hybrid cloud?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "Load Balancing",
+      "prompt": "What is load balancing and why is it important?",
+      "tags": [
+        "networking",
+        "scalability"
+      ],
+      "followups": [
+        "What's the difference between application and network load balancers?",
+        "How does load balancing improve availability?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "Auto-scaling",
+      "prompt": "What is auto-scaling and when would you use it?",
+      "tags": [
+        "scalability",
+        "cloud"
+      ],
+      "followups": [
+        "What metrics might trigger auto-scaling?",
+        "What are the benefits of auto-scaling?"
+      ],
+      "question_type": "system_design"
+    },
+    {
+      "title": "What is Kubernetes?",
+      "prompt": "Explain what Kubernetes is in simple terms.",
+      "tags": [
+        "kubernetes",
+        "orchestration"
+      ],
+      "followups": [
+        "What problem does Kubernetes solve?",
+        "How does Kubernetes relate to Docker?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Deployment Strategies",
+      "prompt": "Name and briefly describe two common deployment strategies.",
+      "tags": [
+        "deployment",
+        "strategies"
+      ],
+      "followups": [
+        "What are blue-green deployments?",
+        "What are canary releases?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Configuration Management",
+      "prompt": "What is configuration management and why is it important?",
+      "tags": [
+        "configuration",
+        "automation"
+      ],
+      "followups": [
+        "What are some popular configuration management tools?",
+        "How does configuration management help with consistency?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Disaster Recovery",
+      "prompt": "What is disaster recovery and why is it important in the cloud?",
+      "tags": [
+        "reliability",
+        "backup"
+      ],
+      "followups": [
+        "What's the difference between backup and disaster recovery?",
+        "What are RTO and RPO?"
+      ],
+      "question_type": "system_design"
+    }
+  ],
+  "company_style": "general",
+  "track": "devops_cloud"
 }

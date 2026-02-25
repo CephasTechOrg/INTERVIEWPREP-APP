@@ -56,9 +56,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
     initializeAuth();
   }, [isHydrated, token, user, setUser, logout, setLoading]);
 
-  // Show nothing until hydrated to prevent flash
+  // Show loading state until hydrated to prevent layout flash
   if (!isHydrated) {
-    return null;
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+        <div className="animate-pulse text-white">Loading...</div>
+      </div>
+    );
   }
 
   return (

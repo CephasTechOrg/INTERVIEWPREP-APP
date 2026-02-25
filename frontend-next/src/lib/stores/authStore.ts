@@ -46,17 +46,11 @@ export const useAuthStore = create<AuthStore>()(
       clearError: () => set({ error: null }),
 
       login: (token, user) => {
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('access_token', token);
-          localStorage.setItem('user', JSON.stringify(user));
-        }
         set({ token, user, isAuthenticated: true, error: null });
       },
 
       logout: () => {
         if (typeof window !== 'undefined') {
-          localStorage.removeItem('access_token');
-          localStorage.removeItem('user');
           localStorage.removeItem('signup_email');
         }
         set({ ...initialState, isHydrated: true });

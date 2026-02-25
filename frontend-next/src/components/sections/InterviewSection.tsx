@@ -7,6 +7,7 @@ import { sessionService } from '@/lib/services/sessionService';
 import { questionService } from '@/lib/services/questionService';
 import { aiService } from '@/lib/services/aiService';
 import { Icons } from '@/components/ui/Icons';
+import { sanitizeAiText } from '@/lib/utils/text';
 import { Message, Question, AIStatusResponse } from '@/types/api';
 
 type InputMode = 'text' | 'code' | 'voice';
@@ -56,6 +57,7 @@ export const InterviewSection = () => {
   });
   const [isLeftPanelCollapsed, setIsLeftPanelCollapsed] = useState(false);
   const [isPageExpanded, setIsPageExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [aiStatus, setAiStatus] = useState<AIStatusResponse | null>(null);
   const [question, setQuestion] = useState<Question | null>(null);
   const [elapsedSec, setElapsedSec] = useState(0);
@@ -75,6 +77,8 @@ export const InterviewSection = () => {
   const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
   const lastSpokenMessageIdRef = useRef<string | null>(null);
   const startRequestedRef = useRef(false);
+  const audioBlobUrls = useRef<string[]>([]);
+  const loadMessagesAbortRef = useRef<AbortController | null>(null);
 
   // Auto-resize textarea
   const autoResizeTextarea = useCallback(() => {
@@ -95,6 +99,21 @@ export const InterviewSection = () => {
     return currentSession.current_question_id ?? null;
   }, [messages, currentSession?.current_question_id]);
 
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+      // Auto-collapse on mobile
+      if (window.innerWidth < 1024) {
+        setIsLeftPanelCollapsed(true);
+      }
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Initialize session and load messages on mount
   useEffect(() => {
     if (currentSession) {
@@ -107,7 +126,7 @@ export const InterviewSection = () => {
     if (messagesContainerRef.current) {
       messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
-  }, [messages.length, isLeftPanelCollapsed]);
+  }, [messages.length]);
 
   // Auto-resize textarea when text changes
   useEffect(() => {
@@ -116,21 +135,26 @@ export const InterviewSection = () => {
 
   // Timer effect
   useEffect(() => {
-    if (!currentSession || currentSession.stage === 'done') {
-      return;
-    }
+    if (!currentSession) return;
+    
     const timer = setInterval(() => {
-      setElapsedSec((prev) => prev + 1);
+      // Check stage in callback to ensure timer stops when session ends
+      if (currentSession.stage !== 'done') {
+        setElapsedSec((prev) => prev + 1);
+      }
     }, 1000);
+    
     return () => clearInterval(timer);
   }, [currentSession?.id, currentSession?.stage]);
 
-  // Load AI status on mount
+  // Load AI status on mount and poll periodically (only when session active)
   useEffect(() => {
+    if (currentSession?.stage === 'done') return;
+    
     loadAIStatus();
     const statusInterval = setInterval(loadAIStatus, 30000);
     return () => clearInterval(statusInterval);
-  }, []);
+  }, [currentSession?.stage]);
 
   // Initialize speech recognition
   useEffect(() => {
@@ -187,8 +211,25 @@ export const InterviewSection = () => {
     setVoiceSupported(true);
 
     return () => {
-      recognitionRef.current?.abort();
-      recognitionRef.current = null;
+      if (recognitionRef.current) {
+        recognitionRef.current.abort();
+        recognitionRef.current = null;
+      }
+      setIsListening(false);
+    };
+  }, []);
+
+  // Cleanup audio on unmount
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = '';
+        audioRef.current.load();
+      }
+      // Revoke all blob URLs
+      audioBlobUrls.current.forEach((url) => URL.revokeObjectURL(url));
+      audioBlobUrls.current = [];
     };
   }, []);
 
@@ -257,11 +298,8 @@ export const InterviewSection = () => {
 
     if (!lastSpokenMessageIdRef.current) {
       lastSpokenMessageIdRef.current = key;
+      // Only auto-play the opening message (messages.length <= 1 guards against re-playing history on rejoin)
       if (voiceEnabled && messages.length <= 1) {
-        if (!audioUnlocked) {
-          setNeedsAudioUnlock(true);
-          return;
-        }
         playTts(lastAiMessage.content);
       }
       return;
@@ -271,15 +309,16 @@ export const InterviewSection = () => {
     lastSpokenMessageIdRef.current = key;
 
     if (!voiceEnabled) return;
-    if (!audioUnlocked) {
-      setNeedsAudioUnlock(true);
-      return;
-    }
     playTts(lastAiMessage.content);
   }, [messages, voiceEnabled, loading.messages]);
 
   const loadMessages = async () => {
     if (!currentSession) return;
+    
+    // Cancel any previous load operation
+    loadMessagesAbortRef.current?.abort();
+    loadMessagesAbortRef.current = new AbortController();
+    
     try {
       setLoading((prev) => ({ ...prev, messages: true }));
       setLocalError(null);
@@ -297,6 +336,8 @@ export const InterviewSection = () => {
       }
     } catch (err) {
       startRequestedRef.current = false;
+      // Ignore abort errors
+      if (err instanceof Error && err.name === 'AbortError') return;
       const errorMsg = err instanceof Error ? err.message : 'Failed to load messages';
       setLocalError(errorMsg);
       setError(errorMsg);
@@ -355,8 +396,14 @@ export const InterviewSection = () => {
     e?.preventDefault();
     if (!currentSession || loading.sending) return;
 
+    // Set loading state FIRST to prevent concurrent sends
+    setLoading((prev) => ({ ...prev, sending: true }));
+
     const content = buildMessagePayload();
-    if (!content) return;
+    if (!content) {
+      setLoading((prev) => ({ ...prev, sending: false }));
+      return;
+    }
 
     const tempId = Date.now();
     const studentMessage: Message = {
@@ -375,10 +422,11 @@ export const InterviewSection = () => {
     } else setMessageText('');
 
     try {
-      setLoading((prev) => ({ ...prev, sending: true }));
       const reply = await sessionService.sendMessage(currentSession.id, { content });
       addMessage(reply);
     } catch (err) {
+      // Remove the optimistic message on error
+      setMessages((prevMessages) => prevMessages.filter((m) => m.id !== tempId));
       const errorMsg = err instanceof Error ? err.message : 'Failed to send message';
       setLocalError(errorMsg);
       setError(errorMsg);
@@ -421,8 +469,18 @@ export const InterviewSection = () => {
 
   const playTts = async (text: string) => {
     if (!text?.trim()) return;
+    
+    // Stop any current playback to prevent overlap
+    if (audioRef.current && !audioRef.current.paused) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    
     try {
-      const response = await aiService.generateSpeech({ text });
+      const response = await aiService.generateSpeech({
+        text,
+        interviewer_id: currentSession?.interviewer?.id ?? undefined,
+      });
       
       if (response.tts_provider) {
         setTtsProvider(response.tts_provider);
@@ -431,9 +489,29 @@ export const InterviewSection = () => {
       if (response.mode === 'audio' && response.audio_url) {
         if (!audioRef.current) {
           audioRef.current = new Audio();
+          // Setup cleanup handler for blob URLs
+          audioRef.current.onended = () => {
+            if (audioBlobUrls.current.length > 0) {
+              const oldUrl = audioBlobUrls.current.shift();
+              if (oldUrl) URL.revokeObjectURL(oldUrl);
+            }
+          };
         }
+        
+        // Track blob URL for cleanup
+        audioBlobUrls.current.push(response.audio_url);
         audioRef.current.src = response.audio_url;
-        await audioRef.current.play();
+        try {
+          await audioRef.current.play();
+          setNeedsAudioUnlock(false); // clear any pending unlock prompt on success
+        } catch (playErr) {
+          // Browser blocked autoplay — show the unlock button so user can tap to start
+          if (playErr instanceof DOMException && playErr.name === 'NotAllowedError') {
+            setNeedsAudioUnlock(true);
+          } else {
+            console.error('TTS play error:', playErr);
+          }
+        }
       }
     } catch (err) {
       console.error('TTS playback error:', err);
@@ -480,7 +558,7 @@ export const InterviewSection = () => {
     return (
       <div className="flex items-center justify-center h-full min-h-[400px]">
         <div className="text-center">
-          <div className="mx-auto w-16 h-16 rounded-full bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
+          <div className="mx-auto w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4">
             {Icons.play}
           </div>
           <p className="text-lg font-semibold text-slate-900 dark:text-white">No Active Session</p>
@@ -496,7 +574,7 @@ export const InterviewSection = () => {
     currentSession.stage === 'done'
       ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400'
       : currentSession.stage === 'intro'
-        ? 'bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-400'
+        ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400'
         : 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400';
 
   const aiStatusColor =
@@ -542,7 +620,7 @@ export const InterviewSection = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-current" />
               {currentSession.stage?.toUpperCase() || 'IDLE'}
             </span>
-            <div className="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-md bg-indigo-50 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300">
+            <div className="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-md bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">
               <div className="w-3.5 h-3.5">{Icons.clock}</div>
               <span className="font-mono font-bold text-xs">{formatTimer(elapsedSec)}</span>
             </div>
@@ -557,7 +635,7 @@ export const InterviewSection = () => {
           <div className="flex items-center gap-1.5">
             {needsAudioUnlock && voiceEnabled && (
               <button
-                onClick={() => { setAudioUnlocked(true); setNeedsAudioUnlock(false); if (lastAiMessage) playTts(lastAiMessage.content); }}
+                onClick={() => { setNeedsAudioUnlock(false); if (lastAiMessage) playTts(lastAiMessage.content); }}
                 className="px-2 py-1 rounded-md border border-amber-300 dark:border-amber-700 text-amber-700 dark:text-amber-400 text-xs hover:bg-amber-50 dark:hover:bg-amber-900/30"
               >
                 Audio
@@ -594,7 +672,7 @@ export const InterviewSection = () => {
             <button
               onClick={handleFinalize}
               disabled={loading.finalizing || currentSession.stage === 'done'}
-              className="px-3 py-1 rounded-md bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold disabled:opacity-50"
+              className="px-3 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold disabled:opacity-50 shadow-sm shadow-blue-500/25 transition-colors"
             >
               {loading.finalizing ? '...' : 'Submit & Evaluate'}
             </button>
@@ -611,7 +689,7 @@ export const InterviewSection = () => {
             <div className="flex-1 overflow-y-auto p-3 space-y-3">
               <div>
                 <h3 className="text-xs font-semibold text-slate-900 dark:text-white mb-2 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
                   Question
                 </h3>
                 {question ? (
@@ -623,7 +701,7 @@ export const InterviewSection = () => {
                     {question.tags && question.tags.length > 0 && (
                       <div className="flex flex-wrap gap-1">
                         {question.tags.slice(0, 3).map((tag) => (
-                          <span key={tag} className="px-1.5 py-0.5 rounded bg-indigo-50 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 text-[10px]">
+                          <span key={tag} className="px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-[10px]">
                             {tag}
                           </span>
                         ))}
@@ -646,7 +724,7 @@ export const InterviewSection = () => {
                     { n: 4, t: 'Validate', d: 'Edge cases' },
                   ].map((s) => (
                     <div key={s.n} className="flex items-center gap-2 p-1.5 rounded bg-slate-50 dark:bg-slate-700/50 border border-slate-100 dark:border-slate-600">
-                      <div className="w-4 h-4 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0">{s.n}</div>
+                      <div className="w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0">{s.n}</div>
                       <span className="text-[11px] text-slate-700 dark:text-slate-300"><span className="font-medium">{s.t}</span> - {s.d}</span>
                     </div>
                   ))}
@@ -687,14 +765,14 @@ export const InterviewSection = () => {
             {loading.messages ? (
               <div className="flex items-center justify-center h-full">
                 <div className="text-center">
-                  <div className="w-6 h-6 rounded-full border-2 border-indigo-200 dark:border-indigo-800 border-t-indigo-600 animate-spin mx-auto mb-2" />
+                  <div className="w-6 h-6 rounded-full border-2 border-blue-200 dark:border-blue-800 border-t-blue-600 animate-spin mx-auto mb-2" />
                   <p className="text-xs text-slate-500 dark:text-slate-400">Loading...</p>
                 </div>
               </div>
             ) : messages.length === 0 ? (
               <div className="flex items-center justify-center h-full">
                 <div className="text-center">
-                  <div className="w-10 h-10 rounded-full bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mx-auto mb-2">
+                  <div className="w-10 h-10 rounded-full bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto mb-2">
                     {Icons.messageCircle}
                   </div>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Waiting for interviewer...</p>
@@ -707,19 +785,28 @@ export const InterviewSection = () => {
                     <div
                       className={`max-w-[85%] lg:max-w-[75%] rounded-2xl px-3 py-2 ${
                         msg.role === 'student'
-                          ? 'bg-indigo-600 text-white rounded-br-sm'
+                          ? 'bg-blue-600 text-white rounded-br-sm'
                           : 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-bl-sm'
                       }`}
                     >
-                      <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{msg.content}</p>
+                      <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
+                        {msg.role === 'interviewer' ? sanitizeAiText(msg.content) : msg.content}
+                      </p>
                       {msg.created_at && (
-                        <p className={`text-[10px] mt-1.5 ${msg.role === 'student' ? 'text-indigo-200' : 'text-slate-400 dark:text-slate-500'}`}>
+                        <p className={`text-[10px] mt-1.5 ${msg.role === 'student' ? 'text-blue-200' : 'text-slate-400 dark:text-slate-500'}`}>
                           {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </p>
                       )}
                     </div>
                   </div>
                 ))}
+                {loading.sending && (
+                  <div className="flex justify-start">
+                    <div className="max-w-[85%] lg:max-w-[75%] rounded-2xl px-3 py-2 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-bl-sm">
+                      <p className="text-sm leading-relaxed italic">Thinking...</p>
+                    </div>
+                  </div>
+                )}
                 <div ref={chatEndRef} />
               </>
             )}
@@ -736,11 +823,21 @@ export const InterviewSection = () => {
                     <button
                       key={mode}
                       type="button"
-                      onClick={() => setInputMode(mode)}
+                      onClick={() => {
+                        // Clear voice mode data when switching away
+                        if (inputMode === 'voice' && mode !== 'voice') {
+                          setVoiceText('');
+                          setVoiceInterim('');
+                          if (isListening) {
+                            recognitionRef.current?.stop();
+                          }
+                        }
+                        setInputMode(mode);
+                      }}
                       disabled={loading.sending || currentSession.stage === 'done' || (mode === 'voice' && !voiceSupported)}
                       className={`p-1.5 rounded transition-all ${
                         inputMode === mode
-                          ? 'bg-indigo-600 text-white'
+                          ? 'bg-blue-600 text-white'
                           : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 disabled:opacity-50'
                       }`}
                       title={mode}
@@ -762,7 +859,7 @@ export const InterviewSection = () => {
                       value={codeText}
                       onChange={(e) => setCodeText(e.target.value)}
                       disabled={loading.sending || currentSession.stage === 'done'}
-                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 resize-none"
+                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 disabled:opacity-50 resize-none"
                       placeholder="Code..."
                       style={{ minHeight: '40px', maxHeight: '120px' }}
                     />
@@ -785,7 +882,7 @@ export const InterviewSection = () => {
                         type="text"
                         value={voiceText}
                         onChange={(e) => setVoiceText(e.target.value)}
-                        className="flex-1 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="flex-1 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                         placeholder={voiceInterim || 'Speak or type...'}
                       />
                     </div>
@@ -801,7 +898,7 @@ export const InterviewSection = () => {
                         }
                       }}
                       disabled={loading.sending || currentSession.stage === 'done'}
-                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 resize-none"
+                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 disabled:opacity-50 resize-none"
                       placeholder="Type your response... (Enter to send)"
                       style={{ minHeight: '40px', maxHeight: '120px' }}
                     />
@@ -816,7 +913,7 @@ export const InterviewSection = () => {
                     currentSession.stage === 'done' ||
                     (inputMode === 'code' ? !codeText.trim() : inputMode === 'voice' ? !buildVoiceDraft() : !messageText.trim())
                   }
-                  className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold disabled:opacity-50 shadow-sm transition-all flex items-center gap-1.5 h-[40px]"
+                  className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold disabled:opacity-50 shadow-sm shadow-blue-500/20 transition-all flex items-center gap-1.5 h-[40px]"
                 >
                   {loading.sending ? (
                     <div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />

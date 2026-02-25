@@ -1,142 +1,202 @@
-﻿{
-    "difficulty": "easy",
-    "questions": [
-        {
-            "title": "What is Product Management?",
-            "prompt": "Explain what product management is and what a product manager does.",
-            "tags": ["fundamentals", "role"],
-            "followups": [
-                "How does product management differ from project management?",
-                "What are the key responsibilities of a product manager?"
-            ]
-        },
-        {
-            "title": "Product Lifecycle",
-            "prompt": "What are the main stages of a product lifecycle?",
-            "tags": ["fundamentals", "lifecycle"],
-            "followups": [
-                "How do product manager responsibilities change at each stage?",
-                "What metrics might you track in each phase?"
-            ]
-        },
-        {
-            "title": "User Personas",
-            "prompt": "What are user personas and why are they important?",
-            "tags": ["user-research", "personas"],
-            "followups": [
-                "How do you create effective user personas?",
-                "What information should be included in a persona?"
-            ]
-        },
-        {
-            "title": "MVP Definition",
-            "prompt": "What does MVP stand for and why is it important?",
-            "tags": ["mvp", "product-development"],
-            "followups": [
-                "How do you decide what features go into an MVP?",
-                "What's the difference between MVP and prototype?"
-            ]
-        },
-        {
-            "title": "Prioritization Basics",
-            "prompt": "Why is prioritization important in product management?",
-            "tags": ["prioritization", "decision-making"],
-            "followups": [
-                "What factors should you consider when prioritizing features?",
-                "What are some simple prioritization frameworks?"
-            ]
-        },
-        {
-            "title": "Stakeholder Management",
-            "prompt": "Who are typical stakeholders a product manager works with?",
-            "tags": ["stakeholders", "communication"],
-            "followups": [
-                "How do you manage conflicting stakeholder requests?",
-                "Why is stakeholder communication important?"
-            ]
-        },
-        {
-            "title": "User Stories",
-            "prompt": "What are user stories and how are they written?",
-            "tags": ["requirements", "user-stories"],
-            "followups": [
-                "What makes a good user story?",
-                "What's the typical format for a user story?"
-            ]
-        },
-        {
-            "title": "Success Metrics",
-            "prompt": "What are some common metrics product managers track?",
-            "tags": ["metrics", "measurement"],
-            "followups": [
-                "What's the difference between leading and lagging indicators?",
-                "How do you choose which metrics to track?"
-            ]
-        },
-        {
-            "title": "Competitive Analysis",
-            "prompt": "Why is competitive analysis important for product managers?",
-            "tags": ["competitive-analysis", "market-research"],
-            "followups": [
-                "What information should you gather about competitors?",
-                "How often should you conduct competitive analysis?"
-            ]
-        },
-        {
-            "title": "Roadmap Basics",
-            "prompt": "What is a product roadmap and what should it include?",
-            "tags": ["roadmap", "planning"],
-            "followups": [
-                "What's the difference between a roadmap and a backlog?",
-                "How do you communicate roadmap changes to stakeholders?"
-            ]
-        },
-        {
-            "title": "Agile Methodology",
-            "prompt": "What is Agile and why do product teams use it?",
-            "tags": ["agile", "methodology"],
-            "followups": [
-                "What are the key principles of Agile?",
-                "How does Scrum differ from Kanban?"
-            ]
-        },
-        {
-            "title": "Customer Feedback",
-            "prompt": "Why is customer feedback important and how do you collect it?",
-            "tags": ["feedback", "user-research"],
-            "followups": [
-                "What are different methods for collecting feedback?",
-                "How do you handle negative customer feedback?"
-            ]
-        },
-        {
-            "title": "Product-Market Fit",
-            "prompt": "What is product-market fit and why is it important?",
-            "tags": ["product-market-fit", "strategy"],
-            "followups": [
-                "How do you know when you've achieved product-market fit?",
-                "What are signs that you don't have product-market fit?"
-            ]
-        },
-        {
-            "title": "Feature Definition",
-            "prompt": "How do you define what makes a good feature?",
-            "tags": ["features", "requirements"],
-            "followups": [
-                "What questions should you ask before building a feature?",
-                "How do you validate that a feature will be valuable?"
-            ]
-        },
-        {
-            "title": "Go-to-Market Strategy",
-            "prompt": "What is a go-to-market strategy and what does it include?",
-            "tags": ["gtm", "launch"],
-            "followups": [
-                "Who should be involved in creating a GTM strategy?",
-                "What are key components of a successful launch?"
-            ]
-        }
-    ],
-    "company_style": "general",
-    "track": "product_management"
+{
+  "difficulty": "easy",
+  "questions": [
+    {
+      "title": "What is Product Management?",
+      "prompt": "Explain what product management is and what a product manager does.",
+      "tags": [
+        "fundamentals",
+        "role"
+      ],
+      "followups": [
+        "How does product management differ from project management?",
+        "What are the key responsibilities of a product manager?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "Product Lifecycle",
+      "prompt": "What are the main stages of a product lifecycle?",
+      "tags": [
+        "fundamentals",
+        "lifecycle"
+      ],
+      "followups": [
+        "How do product manager responsibilities change at each stage?",
+        "What metrics might you track in each phase?"
+      ],
+      "question_type": "conceptual"
+    },
+    {
+      "title": "User Personas",
+      "prompt": "What are user personas and why are they important?",
+      "tags": [
+        "user-research",
+        "personas"
+      ],
+      "followups": [
+        "How do you create effective user personas?",
+        "What information should be included in a persona?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "MVP Definition",
+      "prompt": "What does MVP stand for and why is it important?",
+      "tags": [
+        "mvp",
+        "product-development"
+      ],
+      "followups": [
+        "How do you decide what features go into an MVP?",
+        "What's the difference between MVP and prototype?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Prioritization Basics",
+      "prompt": "Why is prioritization important in product management?",
+      "tags": [
+        "prioritization",
+        "decision-making"
+      ],
+      "followups": [
+        "What factors should you consider when prioritizing features?",
+        "What are some simple prioritization frameworks?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Stakeholder Management",
+      "prompt": "Who are typical stakeholders a product manager works with?",
+      "tags": [
+        "stakeholders",
+        "communication"
+      ],
+      "followups": [
+        "How do you manage conflicting stakeholder requests?",
+        "Why is stakeholder communication important?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "User Stories",
+      "prompt": "What are user stories and how are they written?",
+      "tags": [
+        "requirements",
+        "user-stories"
+      ],
+      "followups": [
+        "What makes a good user story?",
+        "What's the typical format for a user story?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Success Metrics",
+      "prompt": "What are some common metrics product managers track?",
+      "tags": [
+        "metrics",
+        "measurement"
+      ],
+      "followups": [
+        "What's the difference between leading and lagging indicators?",
+        "How do you choose which metrics to track?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Competitive Analysis",
+      "prompt": "Why is competitive analysis important for product managers?",
+      "tags": [
+        "competitive-analysis",
+        "market-research"
+      ],
+      "followups": [
+        "What information should you gather about competitors?",
+        "How often should you conduct competitive analysis?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Roadmap Basics",
+      "prompt": "What is a product roadmap and what should it include?",
+      "tags": [
+        "roadmap",
+        "planning"
+      ],
+      "followups": [
+        "What's the difference between a roadmap and a backlog?",
+        "How do you communicate roadmap changes to stakeholders?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Agile Methodology",
+      "prompt": "What is Agile and why do product teams use it?",
+      "tags": [
+        "agile",
+        "methodology"
+      ],
+      "followups": [
+        "What are the key principles of Agile?",
+        "How does Scrum differ from Kanban?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Customer Feedback",
+      "prompt": "Why is customer feedback important and how do you collect it?",
+      "tags": [
+        "feedback",
+        "user-research"
+      ],
+      "followups": [
+        "What are different methods for collecting feedback?",
+        "How do you handle negative customer feedback?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Product-Market Fit",
+      "prompt": "What is product-market fit and why is it important?",
+      "tags": [
+        "product-market-fit",
+        "strategy"
+      ],
+      "followups": [
+        "How do you know when you've achieved product-market fit?",
+        "What are signs that you don't have product-market fit?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Feature Definition",
+      "prompt": "How do you define what makes a good feature?",
+      "tags": [
+        "features",
+        "requirements"
+      ],
+      "followups": [
+        "What questions should you ask before building a feature?",
+        "How do you validate that a feature will be valuable?"
+      ],
+      "question_type": "coding"
+    },
+    {
+      "title": "Go-to-Market Strategy",
+      "prompt": "What is a go-to-market strategy and what does it include?",
+      "tags": [
+        "gtm",
+        "launch"
+      ],
+      "followups": [
+        "Who should be involved in creating a GTM strategy?",
+        "What are key components of a successful launch?"
+      ],
+      "question_type": "coding"
+    }
+  ],
+  "company_style": "general",
+  "track": "product_management"
 }
