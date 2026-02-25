@@ -81,7 +81,7 @@ export const ChartsSection = () => {
 
   const scoreBandColors: Record<ScoreBand, string> = {
     excellent: 'bg-green-500',
-    good: 'bg-indigo-500',
+    good: 'bg-blue-500',
     average: 'bg-amber-500',
     needsWork: 'bg-red-500',
   };
@@ -104,7 +104,7 @@ export const ChartsSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm transition-all hover:shadow-md">
               <div className="flex items-center justify-between mb-4">
-                <span className="p-2 bg-indigo-500/5 rounded-lg text-indigo-600 dark:text-indigo-400 text-2xl">📊</span>
+                <span className="p-2 bg-blue-500/5 rounded-lg text-blue-600 dark:text-blue-400 text-2xl">📊</span>
                 <span className="text-xs font-bold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded">Live</span>
               </div>
               <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Total Sessions</p>
@@ -179,7 +179,7 @@ export const ChartsSection = () => {
                       </div>
                       <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-indigo-500 dark:bg-indigo-400 rounded-full transition-all"
+                          className="h-full bg-blue-500 dark:bg-blue-400 rounded-full transition-all"
                           style={{ width: `${stats.average_score}%` }}
                         />
                       </div>

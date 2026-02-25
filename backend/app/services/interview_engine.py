@@ -104,6 +104,11 @@ class InterviewEngine(InterviewEngineMain):
         name = str(profile.get("name") or "").strip()
         return name or None
 
+    def _interviewer_id(self, session: InterviewSession) -> str | None:
+        profile = self._interviewer_profile(session)
+        id_ = str(profile.get("id") or "").strip().lower()
+        return id_ or None
+
     def _interviewer_intro_line(self, session: InterviewSession) -> str | None:
         name = self._interviewer_name(session)
         if not name:

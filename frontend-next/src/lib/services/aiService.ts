@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { apiClient } from '@/lib/api';
+import { useAuthStore } from '@/lib/stores/authStore';
 import { AIStatusResponse, AIChatRequest, AIChatResponse, TTSRequest, TTSResponse } from '@/types/api';
 
 const getBaseURL = () =>
@@ -16,8 +17,11 @@ export const aiService = {
     return apiClient.post('/ai/chat', data);
   },
   async generateSpeech(data: TTSRequest): Promise<TTSResponse> {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
-    const response = await axios.post(`${getBaseURL()}/tts`, data, {
+    const token = typeof window !== 'undefined' ? useAuthStore.getState().token : null;
+    // Only include interviewer_id if provided — backend resolves the matching ElevenLabs voice
+    const body: TTSRequest = { text: data.text };
+    if (data.interviewer_id) body.interviewer_id = data.interviewer_id;
+    const response = await axios.post(`${getBaseURL()}/tts`, body, {
       responseType: 'arraybuffer',
       timeout: 15000, // 15 second timeout
       headers: {

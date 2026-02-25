@@ -4,6 +4,8 @@ Follow-up Logic Module for Interview Engine.
 Handles follow-up decision making, focus identification, and follow-up question generation.
 """
 
+import random
+
 from app.models.question import Question
 from app.models.interview_session import InterviewSession
 from app.services.interview_engine_quality import InterviewEngineQuality
@@ -166,9 +168,19 @@ class InterviewEngineFollowups(InterviewEngineQuality):
         """Generate a gentle prompt asking the candidate to elaborate on missing focus."""
         if is_behavioral:
             if behavioral_missing:
-                parts = ", ".join(behavioral_missing[:2])
-                return "I want to make sure I understood. Can you briefly add the " f"{parts} and the outcome?"
-            return "Can you frame that with STAR (Situation, Task, Action, Result) and the outcome?"
+                parts = " and ".join(behavioral_missing[:2])
+                behavioral_nudges = [
+                    f"I want to make sure I caught everything — can you add the {parts} to that?",
+                    f"Almost there, just missing the {parts}. Can you add that?",
+                    f"Can you fill in the {parts} part and wrap it up with the outcome?",
+                ]
+                return random.choice(behavioral_nudges)
+            star_nudges = [
+                "Can you frame that using STAR — Situation, Task, Action, Result?",
+                "Walk me through that with STAR structure and include what happened in the end.",
+                "It'll help to hear that as STAR — can you try that format?",
+            ]
+            return random.choice(star_nudges)
 
         focus_bits = []
         if "approach" in missing_keys:
@@ -186,30 +198,84 @@ class InterviewEngineFollowups(InterviewEngineQuality):
 
         if focus_bits:
             focus_line = ", ".join(focus_bits[:3])
-            return f"I might be missing your core idea. Can you restate it and cover {focus_line}?"
+            nudges = [
+                f"I'm not quite following — can you walk me through {focus_line}?",
+                f"Let's back up a bit. Can you restate the core idea and cover {focus_line}?",
+                f"I want to make sure I understand. Can you explain {focus_line} more explicitly?",
+            ]
+            return random.choice(nudges)
 
-        return "I might be missing your core idea. Can you restate the problem and outline your plan and constraints?"
+        fallbacks = [
+            "I'm not fully following. Can you restate the problem and outline your plan?",
+            "Let's step back — walk me through your thinking from the start.",
+            "Can you give me a cleaner overview of your approach and assumptions?",
+        ]
+        return random.choice(fallbacks)
 
     def _missing_focus_question(self, key: str, behavioral_missing: list[str]) -> str | None:
         """Generate a targeted follow-up question for a specific missing focus area."""
         if key == "star":
             if behavioral_missing:
-                return "Could you structure that using STAR and include the outcome or impact?"
-            return "Could you structure that using STAR (Situation, Task, Action, Result)?"
+                parts = " and ".join(behavioral_missing[:2])
+                return f"Can you add the {parts} part to that? Walk me through it with STAR."
+            options = [
+                "Could you structure that as STAR — Situation, Task, Action, Result?",
+                "Walk me through that with STAR format and include the outcome.",
+                "Can you frame that using STAR and tell me what happened in the end?",
+            ]
+            return random.choice(options)
         if key == "impact":
-            return "What was the outcome or impact of your actions?"
+            options = [
+                "What was the actual outcome or impact of that?",
+                "And what happened as a result — what was the impact?",
+                "What did that change or improve in the end?",
+            ]
+            return random.choice(options)
         if key == "approach":
-            return "Start with a brief plan and the key steps. What is your high-level approach?"
+            options = [
+                "Walk me through your high-level approach before we get into the details.",
+                "What's the core idea here? Give me the plan first.",
+                "Before the code — what's your overall strategy?",
+                "What's your thinking at a high level? Step me through the approach.",
+            ]
+            return random.choice(options)
         if key == "constraints":
-            return "What constraints or assumptions are you making?"
+            options = [
+                "What assumptions are you making? Any constraints I should know about?",
+                "What constraints or edge cases are you designing around?",
+                "Let's nail down the constraints first — what are you assuming?",
+            ]
+            return random.choice(options)
         if key == "correctness":
-            return "Why is your approach correct? Any invariant you rely on?"
+            options = [
+                "Why does this work? What's the invariant you're relying on?",
+                "How do you know this is correct? Talk me through the reasoning.",
+                "What makes you confident this gives the right answer?",
+            ]
+            return random.choice(options)
         if key == "complexity":
-            return "What is the time and space complexity of your solution?"
+            options = [
+                "What's the time and space complexity here?",
+                "How does this scale? Time and space?",
+                "Walk me through the complexity — time and space.",
+                "What's the Big O for this?",
+            ]
+            return random.choice(options)
         if key == "edge_cases":
-            return "What edge cases would you test or handle?"
+            options = [
+                "What edge cases would you test or watch out for?",
+                "What inputs could break this — anything tricky?",
+                "What are the tricky edge cases you'd want to handle?",
+                "Any corner cases worth calling out?",
+            ]
+            return random.choice(options)
         if key == "tradeoffs":
-            return "What trade-offs did you consider, and why did you choose this approach?"
+            options = [
+                "What trade-offs did you consider? Why this approach over alternatives?",
+                "Were there other ways to solve this? Why did you go with this one?",
+                "What are the downsides of this approach, and why is it still the right call?",
+            ]
+            return random.choice(options)
         return None
 
     def _phase_followup(

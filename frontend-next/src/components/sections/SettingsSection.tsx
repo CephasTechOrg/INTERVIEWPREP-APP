@@ -69,7 +69,7 @@ export const SettingsSection = () => {
         {openSection === 'profile' && (
           <div className="px-4 sm:px-6 py-5 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 text-white flex items-center justify-center font-semibold">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center font-semibold">
                 {user?.full_name?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || 'U'}
               </div>
               <div>
@@ -120,7 +120,7 @@ export const SettingsSection = () => {
               <button
                 onClick={() => setVoiceEnabled(!voiceEnabled)}
                 className={`px-4 py-2 rounded-lg transition-colors text-sm ${
-                  voiceEnabled ? 'bg-indigo-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
+                  voiceEnabled ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
                 }`}
               >
                 {voiceEnabled ? 'Enabled' : 'Disabled'}
@@ -153,7 +153,7 @@ export const SettingsSection = () => {
               <button
                 onClick={() => setReduceMotion(!reduceMotion)}
                 className={`px-4 py-2 rounded-lg transition-colors text-sm ${
-                  reduceMotion ? 'bg-indigo-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
+                  reduceMotion ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
                 }`}
               >
                 {reduceMotion ? 'On' : 'Off'}
@@ -167,7 +167,7 @@ export const SettingsSection = () => {
               <button
                 onClick={() => setHighContrast(!highContrast)}
                 className={`px-4 py-2 rounded-lg transition-colors text-sm ${
-                  highContrast ? 'bg-indigo-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
+                  highContrast ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
                 }`}
               >
                 {highContrast ? 'On' : 'Off'}
@@ -188,7 +188,7 @@ export const SettingsSection = () => {
                 step={5}
                 value={fontScale}
                 onChange={(e) => setFontScale(Number(e.target.value))}
-                className="w-full accent-indigo-600"
+                className="w-full accent-blue-600"
               />
             </div>
           </div>
@@ -218,7 +218,7 @@ export const SettingsSection = () => {
               <button
                 onClick={() => setEmailNotifications(!emailNotifications)}
                 className={`px-4 py-2 rounded-lg transition-colors text-sm ${
-                  emailNotifications ? 'bg-indigo-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
+                  emailNotifications ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
                 }`}
               >
                 {emailNotifications ? 'On' : 'Off'}
@@ -232,7 +232,7 @@ export const SettingsSection = () => {
               <button
                 onClick={() => setProductUpdates(!productUpdates)}
                 className={`px-4 py-2 rounded-lg transition-colors text-sm ${
-                  productUpdates ? 'bg-indigo-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
+                  productUpdates ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
                 }`}
               >
                 {productUpdates ? 'On' : 'Off'}

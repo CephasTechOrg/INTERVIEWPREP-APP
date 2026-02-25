@@ -145,7 +145,7 @@ class InterviewEngineMain(InterviewEngineTransitions):
                     preface = intro_line
                     with contextlib.suppress(Exception):
                         self._set_intro_used(db, session)
-            sys = interviewer_system_prompt(session.company_style, session.role, self._interviewer_name(session))
+            sys = interviewer_system_prompt(session.company_style, session.role, self._interviewer_name(session), self._interviewer_id(session))
             title, prompt = self._render_question(session, q)
             qt = self._question_type(q)
             if self._is_behavioral(q):
@@ -307,74 +307,44 @@ Question context: {self._combine_question_text(title, prompt)}
                 return msg
 
             if warm_step == 1:
-                # Step 1: User responded to greeting, now continue conversation naturally
-                # Check if user is asking about the interviewer (reciprocal question)
+                # Step 1: User responded to greeting — generate a genuine, contextual reply.
                 t_lower = student_text.lower()
                 is_reciprocal = any(phrase in t_lower for phrase in [
                     "how are you", "how about you", "what about you", "how is your",
                     "how's your", "and you", "yourself"
                 ])
 
-                if is_reciprocal:
-                    # User asked about the interviewer - respond naturally then continue
-                    reciprocal_response = "I'm doing well, thank you for asking! "
-                    # Then add a smalltalk question
-                    profile = await self._classify_warmup_smalltalk(student_text)
-                    question = self._smalltalk_question(profile, student_text)
-                    msg = reciprocal_response + question
-                    meta: dict[str, Any] = {
-                        "smalltalk_question": question,
-                        "smalltalk_topic": (profile.topic if profile else None) or self._infer_smalltalk_topic(student_text),
-                    }
-                    if profile:
-                        meta.update({
-                            "tone": profile.tone,
-                            "energy": profile.energy,
-                            "tone_confidence": profile.confidence,
-                        })
-                    message_crud.add_message(db, session.id, "interviewer", msg)
-                    self._set_warmup_state(db, session, 2, False, **meta)
-                    session_crud.update_stage(db, session, "warmup_smalltalk")
-                    return msg
-
-                # Normal flow: classify and ask smalltalk
+                # Classify tone/topic so we can pick a natural follow-up question.
                 profile = await self._classify_warmup_smalltalk(student_text)
-                # If LLM is unavailable, still do a small-talk fallback before behavioral warmup.
-                if not profile and not getattr(self.llm, "api_key", None):
-                    question = self._smalltalk_question(None, student_text)
-                    ack_line = self._greeting_ack(student_text) or self._warmup_smalltalk_line(None)
-                    msg = self._warmup_smalltalk_reply(ack_line, question)
-                    meta: dict[str, Any] = {
-                        "smalltalk_question": question,
-                        "smalltalk_topic": self._infer_smalltalk_topic(student_text),
-                    }
-                    message_crud.add_message(db, session.id, "interviewer", msg)
-                    self._set_warmup_state(db, session, 2, False, **meta)
-                    session_crud.update_stage(db, session, "warmup_smalltalk")
-                    return msg
-
                 question = self._smalltalk_question(profile, student_text)
-                ack_line = self._greeting_ack(student_text) or self._warmup_smalltalk_line(profile)
-                msg = self._warmup_smalltalk_reply(ack_line, question)
+                tone = profile.tone if profile else None
+                topic = (profile.topic if profile else None) or self._infer_smalltalk_topic(student_text)
+
+                # Let the LLM craft a genuine, contextual reply — no more hardcoded strings.
+                msg = await self._warmup_generate_contextual_reply(
+                    session=session,
+                    student_text=student_text,
+                    user_name=user_name,
+                    follow_up_question=question,
+                    is_reciprocal=is_reciprocal,
+                    tone=tone,
+                )
                 meta: dict[str, Any] = {
                     "smalltalk_question": question,
-                    "smalltalk_topic": (profile.topic if profile else None) or self._infer_smalltalk_topic(student_text),
+                    "smalltalk_topic": topic,
                 }
                 if profile:
-                    meta.update(
-                        {
-                            "tone": profile.tone,
-                            "energy": profile.energy,
-                            "tone_confidence": profile.confidence,
-                        }
-                    )
+                    meta.update({
+                        "tone": profile.tone,
+                        "energy": profile.energy,
+                        "tone_confidence": profile.confidence,
+                    })
                 message_crud.add_message(db, session.id, "interviewer", msg)
                 self._set_warmup_state(db, session, 2, False, **meta)
                 session_crud.update_stage(db, session, "warmup_smalltalk")
                 return msg
 
-            # Step 2+: User responded to smalltalk - check for reciprocal or continue to behavioral
-            # Check if user is still engaging in conversation before moving to behavioral
+            # Step 2+: User responded to smalltalk — check for reciprocal or transition to behavioral.
             if warm_step == 2:
                 t_lower = student_text.lower()
                 is_reciprocal = any(phrase in t_lower for phrase in [
@@ -383,21 +353,35 @@ Question context: {self._combine_question_text(title, prompt)}
                 ])
 
                 if is_reciprocal:
-                    # User is continuing conversation - respond naturally
-                    natural_response = "I'm doing great, thanks for asking! "
-                    # Now transition to behavioral
+                    # User still chatting — respond genuinely, then transition.
                     behavioral_target = int(getattr(session, "behavioral_questions_target", 0) or 0)
+                    tone_from_state = self._warmup_profile_from_state(session)
+                    tone_val = tone_from_state.tone if tone_from_state else None
+
                     if behavioral_target <= 0:
-                        transition = "Let's dive into the interview."
+                        natural_response = await self._warmup_generate_contextual_reply(
+                            session=session,
+                            student_text=student_text,
+                            user_name=user_name,
+                            follow_up_question=None,
+                            is_reciprocal=True,
+                            tone=tone_val,
+                        )
                         self._set_warmup_state(db, session, 3, True)
                         session_crud.update_stage(db, session, "warmup_done")
-                        preface = natural_response + transition
-                        return await self.ensure_question_and_intro(db, session, user_name=user_name, preface=preface)
+                        return await self.ensure_question_and_intro(
+                            db, session, user_name=user_name, preface=natural_response
+                        )
                     else:
-                        # Continue to behavioral with natural transition
-                        transition = "Let's get started. "
                         question_text, qid = self._warmup_behavioral_question(db, session)
-                        msg = natural_response + transition + question_text
+                        msg = await self._warmup_generate_contextual_reply(
+                            session=session,
+                            student_text=student_text,
+                            user_name=user_name,
+                            follow_up_question=question_text,
+                            is_reciprocal=True,
+                            tone=tone_val,
+                        )
                         message_crud.add_message(db, session.id, "interviewer", msg)
                         self._set_warmup_state(db, session, 3, False)
                         session_crud.update_stage(db, session, "warmup_behavioral")
@@ -458,7 +442,7 @@ Question context: {self._combine_question_text(title, prompt)}
             elif m.role == "interviewer":
                 history.append({"role": "assistant", "content": m.content})
 
-        sys = interviewer_system_prompt(session.company_style, session.role, self._interviewer_name(session))
+        sys = interviewer_system_prompt(session.company_style, session.role, self._interviewer_name(session), self._interviewer_id(session))
 
         stage = session.stage or "intro"
         max_followups = int(session.max_followups_per_question or 2)

@@ -133,7 +133,7 @@ export const ProfileModal = ({ open, onClose }: ProfileModalProps) => {
       >
         {/* ── Header ── */}
         <div className="px-6 pt-6 pb-4 flex items-start gap-4 flex-shrink-0">
-          <div className="w-[52px] h-[52px] rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0">
+          <div className="w-[52px] h-[52px] rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0">
             {initials}
           </div>
           <div className="flex-1 min-w-0">
@@ -181,7 +181,7 @@ export const ProfileModal = ({ open, onClose }: ProfileModalProps) => {
               onChange={(e) => setFullName(e.target.value)}
               placeholder="e.g. Jane Doe"
               autoComplete="name"
-              className="w-full h-10 px-3.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition"
+              className="w-full h-10 px-3.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition"
             />
           </fieldset>
 
@@ -194,7 +194,7 @@ export const ProfileModal = ({ open, onClose }: ProfileModalProps) => {
               id="pf-role"
               value={rolePref}
               onChange={(e) => setRolePref(e.target.value)}
-              className="w-full h-10 px-3.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition cursor-pointer appearance-none"
+              className="w-full h-10 px-3.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition cursor-pointer appearance-none"
             >
               <option value="">Select a role…</option>
               {ROLE_OPTIONS.map((r) => (

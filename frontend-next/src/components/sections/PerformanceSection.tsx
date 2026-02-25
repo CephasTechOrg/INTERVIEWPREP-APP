@@ -190,7 +190,7 @@ export const PerformanceSection = () => {
           {/* Metrics Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
             <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 transition-all hover:shadow-md">
-              <div className="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-2">
+              <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400 mb-2">
                 {Icons.play}
               </div>
               <div className="text-xl font-bold text-slate-900 dark:text-white">{stats.totalSessions}</div>
@@ -222,7 +222,7 @@ export const PerformanceSection = () => {
             </div>
 
             <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 transition-all hover:shadow-md">
-              <div className="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-2">
+              <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400 mb-2">
                 {Icons.results}
               </div>
               <div className="text-xl font-bold text-slate-900 dark:text-white">{stats.medianScore || '-'}</div>
@@ -324,7 +324,7 @@ export const PerformanceSection = () => {
                 {Object.entries(byTrack).length > 0 ? (
                   Object.entries(byTrack).map(([track, data]) => (
                     <div key={track} className="flex items-center gap-4">
-                      <div className="size-10 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                      <div className="size-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
                         📈
                       </div>
                       <div className="flex-1">
@@ -334,7 +334,7 @@ export const PerformanceSection = () => {
                         </div>
                         <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-indigo-500 rounded-full transition-all"
+                            className="h-full bg-blue-500 rounded-full transition-all"
                             style={{ width: `${data.avgScore}%` }}
                           />
                         </div>
@@ -373,13 +373,13 @@ export const PerformanceSection = () => {
           </div>
 
           {/* Session Completion CTA */}
-          <div className="bg-gradient-to-r from-indigo-600 to-indigo-700 rounded-2xl p-8 text-white relative overflow-hidden">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white relative overflow-hidden">
             {/* Background Accent */}
             <div className="absolute -right-12 -bottom-12 size-64 bg-white/10 rounded-full blur-3xl"></div>
             <div className="flex flex-col md:flex-row items-center gap-8 relative z-10">
               <div className="flex-1 space-y-4 text-center md:text-left">
                 <h3 className="text-2xl font-bold">You're on track to your goal!</h3>
-                <p className="text-indigo-100 opacity-90 max-w-lg">Keep practicing consistently to improve your scores and master technical interviews.</p>
+                <p className="text-blue-100 opacity-90 max-w-lg">Keep practicing consistently to improve your scores and master technical interviews.</p>
                 <div className="flex items-center gap-2 text-sm font-medium">
                   <span>Completion Rate:</span>
                   <span className="text-xl font-bold">{stats.completionRate}%</span>

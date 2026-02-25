@@ -456,7 +456,7 @@ export const ChatSection = () => {
           <button
             onClick={handleNewChat}
             disabled={isLoading}
-            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 disabled:bg-slate-400 dark:disabled:bg-slate-600 transition-colors"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 disabled:bg-slate-400 dark:disabled:bg-slate-600 transition-colors"
           >
             {Icons.plus}
             New chat
@@ -492,7 +492,7 @@ export const ChatSection = () => {
                 }}
                 className={`w-full text-left px-4 py-3 rounded-xl transition-colors mb-2 border ${
                   thread.id === activeId
-                    ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-200 dark:border-indigo-700 text-indigo-900 dark:text-indigo-200'
+                    ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-200 dark:border-blue-700 text-blue-900 dark:text-blue-200'
                     : 'bg-white dark:bg-slate-800 border-transparent hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300'
                 }`}
               >
@@ -541,7 +541,7 @@ export const ChatSection = () => {
           ) : messages.length === 0 ? (
             <div className="flex items-center justify-center h-full text-slate-500 dark:text-slate-400 px-4">
               <div className="text-center max-w-xl space-y-4">
-                <div className="mx-auto w-16 h-16 rounded-full bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-6">
+                <div className="mx-auto w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-6">
                   {Icons.messageCircle}
                 </div>
                 <div className="space-y-2">
@@ -565,14 +565,14 @@ export const ChatSection = () => {
                 className={`flex gap-3 sm:gap-4 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {msg.role !== 'user' && (
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 text-white flex items-center justify-center text-xs sm:text-sm font-bold flex-shrink-0 shadow-md">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center text-xs sm:text-sm font-bold flex-shrink-0 shadow-md">
                     AI
                   </div>
                 )}
                 <div
                   className={`max-w-[75%] sm:max-w-[65%] lg:max-w-[60%] rounded-2xl px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base leading-relaxed shadow-sm ${
                     msg.role === 'user'
-                      ? 'bg-indigo-600 text-white rounded-br-sm'
+                      ? 'bg-blue-600 text-white rounded-br-sm'
                       : 'bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-bl-sm'
                   }`}
                 >
@@ -590,7 +590,7 @@ export const ChatSection = () => {
           )}
           {isSending && !hasPending && (
             <div className="flex gap-3 sm:gap-4 items-center">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 text-white flex items-center justify-center text-xs sm:text-sm font-bold shadow-md">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center text-xs sm:text-sm font-bold shadow-md">
                 AI
               </div>
               <div className="px-4 sm:px-5 py-3 rounded-2xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-500 dark:text-slate-400 text-sm flex items-center gap-2">
@@ -627,7 +627,7 @@ export const ChatSection = () => {
                 }
               }}
               placeholder="Message AI..."
-              className="flex-1 min-h-[40px] max-h-32 resize-none px-3 py-2 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 text-sm transition-all"
+              className="flex-1 min-h-[40px] max-h-32 resize-none px-3 py-2 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 text-sm transition-all"
               disabled={isSending || isLoading}
               rows={1}
             />
@@ -636,7 +636,7 @@ export const ChatSection = () => {
               onClick={toggleListening}
               disabled={!speechSupported || isLoading}
               className={`h-10 w-10 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 flex items-center justify-center transition-all ${
-                isListening ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700'
+                isListening ? 'bg-blue-600 text-white border-blue-600' : 'bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700'
               } ${!speechSupported ? 'opacity-50 cursor-not-allowed' : ''}`}
               title={speechSupported ? (isListening ? 'Stop voice input' : 'Start voice input') : 'Voice input not supported'}
             >
@@ -645,7 +645,7 @@ export const ChatSection = () => {
             <button
               type="submit"
               disabled={isSending || !input.trim() || isLoading}
-              className="h-10 px-4 rounded-lg bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-400 dark:disabled:bg-slate-600 text-white text-sm font-medium transition-all flex-shrink-0 disabled:cursor-not-allowed"
+              className="h-10 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:bg-slate-400 dark:disabled:bg-slate-600 text-white text-sm font-medium transition-all flex-shrink-0 disabled:cursor-not-allowed"
             >
               {isSending ? '...' : 'Send'}
             </button>

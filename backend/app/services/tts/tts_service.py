@@ -5,7 +5,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from app.services.tts.default_tts import default_tts
-from app.services.tts.elevenlabs_tts import elevenlabs_tts, is_elevenlabs_enabled
+from app.services.tts.elevenlabs_tts import elevenlabs_tts, get_voice_id_for_interviewer, is_elevenlabs_enabled
 
 # Load backend/.env regardless of the current working directory.
 _ENV_PATH = Path(__file__).resolve().parents[3] / ".env"
@@ -35,14 +35,21 @@ def _provider_order() -> list[str]:
     return order
 
 
-def generate_speech(text: str) -> tuple[bytes | None, str | None, str]:
+def generate_speech(
+    text: str,
+    interviewer_id: str | None = None,
+) -> tuple[bytes | None, str | None, str]:
     """
     Returns (audio_bytes, content_type, provider_used)
     - provider_used: "elevenlabs" | "default" | "none"
+    - interviewer_id: if provided, resolves the matching ElevenLabs voice ID
     Fallback order is driven by env vars.
     """
     if not text or not str(text).strip():
         return None, None, "none"
+
+    # Resolve per-interviewer voice ID (None = use env default)
+    voice_id = get_voice_id_for_interviewer(interviewer_id)
 
     providers = _provider_order()
 
@@ -51,9 +58,14 @@ def generate_speech(text: str) -> tuple[bytes | None, str | None, str]:
             if not is_elevenlabs_enabled():
                 continue
             try:
-                audio, ctype = elevenlabs_tts(text)
+                audio, ctype = elevenlabs_tts(text, voice_id=voice_id)
                 if audio:
-                    logger.info("TTS provider used: %s", PROVIDER_ELEVENLABS)
+                    logger.info(
+                        "TTS provider used: %s (interviewer=%s, voice=%s)",
+                        PROVIDER_ELEVENLABS,
+                        interviewer_id or "default",
+                        voice_id or "env-default",
+                    )
                     return audio, ctype, PROVIDER_ELEVENLABS
             except Exception as e:  # noqa: BLE001
                 msg = str(e)

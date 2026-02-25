@@ -1,11 +1,17 @@
 'use client';
 
+import { useState, useRef, useEffect } from 'react';
 import { useUIStore } from '@/lib/stores/uiStore';
 import { useAuthStore } from '@/lib/stores/authStore';
+import { useRouter } from 'next/navigation';
 
 export const TopBar = () => {
-  const { toggleSidebar, currentPage, theme, setTheme } = useUIStore();
-  const { user } = useAuthStore();
+  const { toggleSidebar, currentPage, theme, setTheme, setCurrentPage } = useUIStore();
+  const { user, logout } = useAuthStore();
+  const router = useRouter();
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const pageNames: Record<string, string> = {
     dashboard: 'Dashboard',
@@ -17,52 +23,136 @@ export const TopBar = () => {
     settings: 'Settings',
   };
 
+  const initials = (user?.full_name?.split(' ').map((w: string) => w[0]).slice(0, 2).join('') ||
+    user?.email?.[0] || 'U').toUpperCase();
+  const firstName = user?.full_name?.split(' ')[0] || user?.email?.split('@')[0] || 'User';
+
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [dropdownOpen]);
+
+  const handleLogout = () => {
+    setDropdownOpen(false);
+    logout();
+    router.push('/login');
+  };
+
   return (
-    <header className="fixed top-0 left-0 right-0 lg:left-60 h-16 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-700/80 z-20 transition-colors duration-300">
+    <header className="fixed top-0 left-0 right-0 lg:left-60 h-16 bg-white dark:bg-[#111318] border-b border-slate-100 dark:border-slate-800 z-20 transition-colors duration-300">
       <div className="h-full px-4 lg:px-6 flex items-center justify-between">
-        {/* Left: Menu button + Page title */}
+
+        {/* Left: Menu + Page title */}
         <div className="flex items-center gap-3">
           <button
             onClick={toggleSidebar}
-            className="lg:hidden p-2 -ml-2 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+            className="lg:hidden p-2 -ml-2 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <div>
-            <h1 className="text-lg font-semibold text-slate-900 dark:text-white">{pageNames[currentPage]}</h1>
-          </div>
+          <h1 className="text-[15px] font-semibold text-slate-900 dark:text-white">
+            {pageNames[currentPage] || 'Dashboard'}
+          </h1>
         </div>
 
-        {/* Right: Actions */}
-        <div className="flex items-center gap-2">
+        {/* Right: Theme + User */}
+        <div className="flex items-center gap-1">
+
           {/* Theme toggle */}
           <button
             onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-            className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
-            title="Toggle theme"
+            className="p-2 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+            title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
           >
             {theme === 'light' ? (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
               </svg>
             ) : (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
             )}
           </button>
 
-          {/* User info */}
-          <div className="hidden sm:flex items-center gap-3 ml-2 pl-4 border-l border-slate-200 dark:border-slate-700">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white text-sm font-medium">
-              {user?.full_name?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || 'U'}
-            </div>
-            <div className="hidden md:block">
-              <p className="text-sm font-medium text-slate-900 dark:text-white">{user?.full_name || 'User'}</p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">{user?.role_pref?.replace(/_/g, ' ') || 'Member'}</p>
-            </div>
+          {/* User dropdown */}
+          <div className="relative ml-1 pl-3 border-l border-slate-100 dark:border-slate-800" ref={dropdownRef}>
+            <button
+              onClick={() => setDropdownOpen(v => !v)}
+              className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            >
+              <div className="w-7 h-7 rounded-full bg-indigo-600 flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0">
+                {initials}
+              </div>
+              <span className="hidden md:block text-[13px] font-medium text-slate-700 dark:text-slate-300">
+                {firstName}
+              </span>
+              <svg
+                className={`hidden md:block w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
+                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {/* Dropdown panel */}
+            {dropdownOpen && (
+              <div className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-[#1a1d24] border border-slate-100 dark:border-slate-700/60 rounded-xl shadow-xl shadow-slate-900/[0.08] dark:shadow-black/40 z-50 overflow-hidden">
+
+                {/* User info */}
+                <div className="px-4 py-4 bg-slate-50 dark:bg-slate-800/40 border-b border-slate-100 dark:border-slate-700/60">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                      {initials}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">
+                        {user?.full_name || 'User'}
+                      </p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{user?.email}</p>
+                      <span className="inline-block mt-1 text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 px-1.5 py-0.5 rounded-md uppercase tracking-wide">
+                        {user?.role_pref?.replace(/_/g, ' ') || 'Member'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="p-1.5">
+                  <button
+                    onClick={() => { setCurrentPage('settings'); setDropdownOpen(false); }}
+                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors text-left"
+                  >
+                    <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.212-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Settings
+                  </button>
+                </div>
+
+                <div className="px-1.5 pb-1.5">
+                  <div className="h-px bg-slate-100 dark:bg-slate-700/60 mb-1" />
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/[0.08] transition-colors text-left"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                    </svg>
+                    Sign out
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

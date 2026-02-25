@@ -167,14 +167,14 @@ export const ResultsSection = () => {
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header Card with Score */}
         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden">
-          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-white/20 rounded-lg">
                 <TrophyIcon />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-white">Interview Results</h1>
-                <p className="text-indigo-100 text-sm">
+                <p className="text-blue-100 text-sm">
                   {currentSession ? `Session #${currentSession.id}` : 'Review your performance'}
                 </p>
               </div>
@@ -201,7 +201,7 @@ export const ResultsSection = () => {
                 
                 {currentSession && (
                   <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300">
                       {currentSession.track.replace(/_/g, ' ')}
                     </span>
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300">
@@ -297,7 +297,7 @@ export const ResultsSection = () => {
         {/* Rubric Breakdown */}
         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6">
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400">
+            <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400">
               <ChartIcon />
             </div>
             <div>
@@ -326,25 +326,25 @@ export const ResultsSection = () => {
 
         {/* Tips Section */}
         {!evaluation && (
-          <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-2xl p-6 border border-indigo-100 dark:border-indigo-800">
+          <div className="bg-gradient-to-r from-blue-50 to-blue-50 dark:from-blue-900/20 dark:to-blue-900/20 rounded-2xl p-6 border border-blue-100 dark:border-blue-800">
             <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
               💡 Interview Tips
             </h3>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-slate-700 dark:text-slate-300">
               <li className="flex items-start gap-2">
-                <span className="text-indigo-500">•</span>
+                <span className="text-blue-500">•</span>
                 Think out loud to show your problem-solving process
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-indigo-500">•</span>
+                <span className="text-blue-500">•</span>
                 Ask clarifying questions before diving in
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-indigo-500">•</span>
+                <span className="text-blue-500">•</span>
                 Consider edge cases and error handling
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-indigo-500">•</span>
+                <span className="text-blue-500">•</span>
                 Discuss time and space complexity
               </li>
             </ul>

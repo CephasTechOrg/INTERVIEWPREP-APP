@@ -212,6 +212,7 @@ export interface AIChatResponse {
 // Voice/TTS Types
 export interface TTSRequest {
   text: string;
+  interviewer_id?: string | null;
 }
 
 export interface TTSResponseText {

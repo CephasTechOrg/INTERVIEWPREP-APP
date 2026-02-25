@@ -52,7 +52,7 @@ export const HistorySection = () => {
     switch (stage) {
       case 'done': return 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400';
       case 'warmup': return 'bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-400';
-      case 'main': return 'bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400';
+      case 'main': return 'bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-400';
       case 'behavioral': return 'bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-400';
       default: return 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300';
     }
@@ -104,7 +104,7 @@ export const HistorySection = () => {
             </p>
             <button
               onClick={() => setCurrentPage('dashboard')}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-medium transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-colors"
             >
               {Icons.play}
               Start Interview
@@ -123,7 +123,7 @@ export const HistorySection = () => {
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                       session.stage === 'done' 
                         ? 'bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400' 
-                        : 'bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400'
+                        : 'bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400'
                     }`}>
                       {session.stage === 'done' ? Icons.checkCircle : Icons.play}
                     </div>
@@ -171,7 +171,7 @@ export const HistorySection = () => {
                             setCurrentSession(session as any);
                             setCurrentPage('interview');
                           }}
-                          className="inline-flex items-center gap-1.5 px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm rounded-lg font-medium transition-colors"
+                          className="inline-flex items-center gap-1.5 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg font-medium transition-colors"
                         >
                           {Icons.play}
                           Resume
@@ -182,7 +182,7 @@ export const HistorySection = () => {
                           setCurrentSession(session as any);
                           setCurrentPage('results');
                         }}
-                        className="inline-flex items-center gap-1.5 px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm rounded-lg font-medium transition-colors"
+                        className="inline-flex items-center gap-1.5 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg font-medium transition-colors"
                       >
                         {Icons.results}
                         Results
@@ -210,7 +210,7 @@ export const HistorySection = () => {
             <div className="text-sm text-slate-500 dark:text-slate-400">Completed</div>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4 transition-colors">
-            <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
               {sessions.filter(s => s.stage !== 'done').length}
             </div>
             <div className="text-sm text-slate-500 dark:text-slate-400">In Progress</div>

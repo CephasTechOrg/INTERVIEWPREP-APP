@@ -5,6 +5,7 @@ Handles question advancement, counters, and state transitions.
 """
 
 import contextlib
+import random
 
 from sqlalchemy.orm import Session
 
@@ -89,28 +90,24 @@ class InterviewEngineTransitions(InterviewEngineWarmup):
         user_name: str | None = None,
         preface: str | None = None,
     ) -> str:
-        sys = interviewer_system_prompt(session.company_style, session.role, self._interviewer_name(session))
+        sys = interviewer_system_prompt(session.company_style, session.role, self._interviewer_name(session), self._interviewer_id(session))
         title, prompt = self._render_question(session, q)
         question_context = self._combine_question_text(title, prompt)
         if self._is_behavioral(q):
             user = f"""
-This is a behavioral question. Ask it clearly and ask the candidate to answer using STAR (Situation, Task, Action, Result).
-Avoid extra greetings or transition phrases like "next question".
-Do not repeat the question.
-If a preface is provided, say it first.
-Do NOT use markdown or labels like "Title:" or "Prompt:".
+This is a behavioral question. Present it conversationally — like a real interviewer asking, not reading from a list.
+Ask the candidate to walk you through it using STAR (Situation, Task, Action, Result).
+If a preface is provided, lead with it naturally.
+Keep it concise and direct. Do NOT use markdown or labels like "Title:" or "Prompt:".
 Preface (optional): {preface or ""}
 
 Question context: {question_context}
 """.strip()
         else:
             user = f"""
-Briefly introduce the problem and ask the candidate to clarify constraints.
-Ask for a brief plan and key steps, then share "
-"complexity, edge cases, and how you'd validate correctness.
-Avoid extra greetings or transition phrases like "next question".
-Do not repeat the question.
-If a preface is provided, say it first.
+Introduce this problem naturally — like a senior engineer handing off a question, not reading a script.
+Ask the candidate to start by clarifying constraints and sharing their high-level approach.
+If a preface is provided, lead with it — it should flow into the question naturally.
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 Preface (optional): {preface or ""}
 
@@ -154,7 +151,13 @@ Question context: {question_context}
         preface: str | None = None,
     ) -> str:
         if self._max_questions_reached(session):
-            wrap = "Thanks - that's the end of the interview. When you're ready, click Finalize to get your score."
+            wrap_options = [
+                "That's a wrap — great effort today. Click Finalize whenever you're ready to see your results.",
+                "And that's all the questions for today. Nice work getting through them. Hit Finalize when you're ready.",
+                "Alright, we've covered everything. Click Finalize to get your full feedback and score.",
+                "That's the last one — well done for pushing through. Click Finalize to see how you did.",
+            ]
+            wrap = random.choice(wrap_options)
             message_crud.add_message(db, session.id, "interviewer", wrap)
             session_crud.update_stage(db, session, "wrapup")
             return wrap
@@ -165,7 +168,7 @@ Question context: {question_context}
 
         next_q = self._pick_next_main_question(db, session)
         if not next_q:
-            wrap = "No more questions available. Click Finalize to get your score."
+            wrap = "Looks like we've run through everything available. Go ahead and click Finalize to get your score."
             message_crud.add_message(db, session.id, "interviewer", wrap)
             session_crud.update_stage(db, session, "wrapup")
             return wrap

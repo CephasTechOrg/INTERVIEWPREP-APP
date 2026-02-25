@@ -17,6 +17,25 @@ def is_elevenlabs_enabled() -> bool:
     return bool(os.getenv("ELEVENLABS_API_KEY"))
 
 
+# Map interviewer id → env var name holding their voice ID
+_INTERVIEWER_VOICE_ENV: dict[str, str] = {
+    "alex": "ELEVENLABS_VOICE_ALEX",
+    "mason": "ELEVENLABS_VOICE_MASON",
+    "erica": "ELEVENLABS_VOICE_ERICA",
+    "maya": "ELEVENLABS_VOICE_MAYA",
+}
+
+
+def get_voice_id_for_interviewer(interviewer_id: str | None) -> str | None:
+    """Return the ElevenLabs voice ID for the given interviewer, or None."""
+    if not interviewer_id:
+        return None
+    env_var = _INTERVIEWER_VOICE_ENV.get(interviewer_id.strip().lower())
+    if not env_var:
+        return None
+    return os.getenv(env_var) or None
+
+
 def _client_timeout() -> float | None:
     raw = os.getenv("TTS_TIMEOUT_SECONDS")
     if raw is None:
@@ -66,15 +85,17 @@ def _consume_audio_stream(audio) -> bytes:
     return buf.getvalue()
 
 
-def elevenlabs_tts(text: str) -> tuple[bytes | None, str]:
+def elevenlabs_tts(text: str, voice_id: str | None = None) -> tuple[bytes | None, str]:
     """
     Convert text to speech using ElevenLabs. Returns (audio_bytes, content_type).
     Raises on errors; caller handles fallback.
+    Pass voice_id to override the default env-configured voice.
     """
     from elevenlabs.client import ElevenLabs  # import inside to avoid hard dependency when disabled
 
     api_key = os.getenv("ELEVENLABS_API_KEY")
-    voice_id = os.getenv("ELEVENLABS_VOICE_ID", "JBFqnCBsd6RMkjVDRZzb")
+    # Use the provided voice_id, fall back to env default, then to a hardcoded fallback
+    voice_id = voice_id or os.getenv("ELEVENLABS_VOICE_ID") or "JBFqnCBsd6RMkjVDRZzb"
     # Defaults favor lower latency (turbo) and smaller payload (lower bitrate).
     model_id = os.getenv("ELEVENLABS_MODEL_ID", "eleven_turbo_v2_5")
     output_format = os.getenv("ELEVENLABS_OUTPUT_FORMAT", "mp3_22050_32")

@@ -7,6 +7,7 @@ Handles warmup flows, smalltalk, and intent classification.
 from __future__ import annotations
 
 import contextlib
+import datetime
 import logging
 import re
 from typing import Any
@@ -25,6 +26,7 @@ from app.services.interview_engine_prompts import InterviewEnginePrompts
 from app.services.prompt_templates import (
     user_intent_classifier_system_prompt,
     user_intent_classifier_user_prompt,
+    warmup_contextual_reply_user_prompt,
     warmup_prompt_user_prompt,
     warmup_reply_user_prompt,
     warmup_smalltalk_system_prompt,
@@ -86,16 +88,73 @@ class InterviewEngineWarmup(InterviewEnginePrompts):
     def _warmup_behavioral_ack(self, student_text: str | None) -> str:
         return interview_warmup.warmup_ack(student_text)
 
+    def _get_time_of_day(self) -> str:
+        """Return 'morning', 'afternoon', or 'evening' based on current time."""
+        try:
+            hour = datetime.datetime.now().hour
+            if 5 <= hour < 12:
+                return "morning"
+            elif 12 <= hour < 18:
+                return "afternoon"
+            else:
+                return "evening"
+        except Exception:
+            return "day"
+
+    def _get_greeting_template(self, user_name: str | None, interviewer_name: str | None, time_of_day: str) -> str:
+        """Generate varied time-aware greetings."""
+        import random
+        
+        name = (user_name or "").strip() or "there"
+        interviewer = interviewer_name or "your interviewer"
+        
+        # Time-specific greeting variants
+        if time_of_day == "morning":
+            greetings = [
+                f"Good morning, {name}! I'm {interviewer}.",
+                f"Morning, {name}! I'm {interviewer}.",
+                f"Hi {name}! Hope your morning is going well. I'm {interviewer}.",
+            ]
+        elif time_of_day == "afternoon":
+            greetings = [
+                f"Good afternoon, {name}! I'm {interviewer}.",
+                f"Hi {name}! I'm {interviewer}.",
+                f"Hey {name}! I'm {interviewer}.",
+            ]
+        else:  # evening or default
+            greetings = [
+                f"Good evening, {name}! I'm {interviewer}.",
+                f"Hi {name}! I'm {interviewer}.",
+                f"Hey {name}! Thanks for joining. I'm {interviewer}.",
+            ]
+        
+        greeting = random.choice(greetings)
+        
+        # Varied check-in questions
+        check_ins = [
+            "How are you doing?",
+            "How's it going?",
+            "How are you feeling today?",
+            f"How's your {time_of_day} been so far?" if time_of_day != "day" else "How's your day been so far?",
+        ]
+        check_in = random.choice(check_ins)
+        
+        return f"{greeting} {check_in}"
+
     async def _warmup_prompt(self, session: InterviewSession, user_name: str | None = None) -> str:
-        sys = warmup_system_prompt(session.company_style, session.role, self._interviewer_name(session))
-        user = warmup_prompt_user_prompt(user_name, self._interviewer_name(session))
+        time_of_day = self._get_time_of_day()
+        sys = warmup_system_prompt(session.company_style, session.role, self._interviewer_name(session), self._interviewer_id(session))
+        user = warmup_prompt_user_prompt(user_name, self._interviewer_name(session), self._interviewer_id(session))
+        
+        # Fallback: use time-aware template
         if not getattr(self.llm, "api_key", None):
-            return interview_warmup.prompt_for_step(0, user_name=user_name, interviewer_name=self._interviewer_name(session)) or ""
+            return self._get_greeting_template(user_name, self._interviewer_name(session), time_of_day)
+        
         try:
             reply = await self.llm.chat(sys, user)
             return self._sanitize_ai_text(reply)
         except Exception:
-            return interview_warmup.prompt_for_step(0, user_name=user_name, interviewer_name=self._interviewer_name(session)) or ""
+            return self._get_greeting_template(user_name, self._interviewer_name(session), time_of_day)
 
     async def _warmup_reply(
         self,
@@ -108,7 +167,7 @@ class InterviewEngineWarmup(InterviewEnginePrompts):
     ) -> str:
         question_text, qid = self._warmup_behavioral_question(db, session)
         focus_line = self._warmup_focus_line(focus) or None
-        sys = warmup_system_prompt(session.company_style, session.role, self._interviewer_name(session))
+        sys = warmup_system_prompt(session.company_style, session.role, self._interviewer_name(session), self._interviewer_id(session))
         user = warmup_reply_user_prompt(student_text, user_name, question_text, focus_line=focus_line, tone_line=tone_line)
 
         if not getattr(self.llm, "api_key", None):
@@ -272,21 +331,37 @@ class InterviewEngineWarmup(InterviewEnginePrompts):
         return ""
 
     def _greeting_ack(self, text: str | None) -> str | None:
+        """Enhanced reciprocal greeting acknowledgment with varied responses."""
+        import random
+        
         t = self._normalize_text(text)
         if not t:
             return None
-        if any(
-            phrase in t
-            for phrase in (
-                "how are you",
-                "how are you doing",
-                "how are you doing today",
-                "how is it going",
-                "hows it going",
-                "how's it going",
-            )
-        ):
-            return "I'm doing well, thanks for asking."
+        
+        # Check for reciprocal questions
+        reciprocal_phrases = [
+            "how are you",
+            "how are you doing",
+            "how are you doing today",
+            "how is it going",
+            "hows it going",
+            "how's it going",
+            "how about you",
+            "what about you",
+            "and you",
+        ]
+        
+        if any(phrase in t for phrase in reciprocal_phrases):
+            # Varied responses to reciprocal questions
+            responses = [
+                "I'm doing well, thanks for asking!",
+                "I'm great, thanks for asking!",
+                "Doing well, thank you!",
+                "I'm good, thanks!",
+                "Pretty good, thanks for asking!",
+            ]
+            return random.choice(responses)
+        
         return None
 
     def _clean_smalltalk_question(self, question: str | None) -> str:
@@ -334,6 +409,9 @@ class InterviewEngineWarmup(InterviewEnginePrompts):
         return None
 
     def _smalltalk_question(self, profile: WarmupSmalltalkProfile | None, text: str) -> str:
+        """Generate varied smalltalk questions based on context and tone."""
+        import random
+        
         if profile:
             q = self._clean_smalltalk_question(profile.smalltalk_question)
             if q and not self._is_redundant_smalltalk(q):
@@ -346,11 +424,30 @@ class InterviewEngineWarmup(InterviewEnginePrompts):
         if by_topic:
             return by_topic
 
+        # Varied fallback questions based on tone
         if profile and profile.tone in ("excited", "positive"):
-            return "What's been the highlight of your day so far?"
+            positive_questions = [
+                "What's been the highlight of your day so far?",
+                "What's been keeping you busy lately?",
+                "Anything exciting you're working on?",
+            ]
+            return random.choice(positive_questions)
+        
         if profile and profile.tone in ("stressed", "tired"):
-            return "Has your day been pretty busy so far?"
-        return "How has your day been so far?"
+            empathetic_questions = [
+                "Has your day been pretty busy so far?",
+                "Been a long day?",
+                "Lot going on today?",
+            ]
+            return random.choice(empathetic_questions)
+        
+        # General fallback questions
+        general_questions = [
+            "How has your day been so far?",
+            "What have you been up to today?",
+            "How's everything going?",
+        ]
+        return random.choice(general_questions)
 
     def _warmup_smalltalk_line(self, profile: WarmupToneProfile | None) -> str:
         if not profile:
@@ -469,6 +566,47 @@ class InterviewEngineWarmup(InterviewEnginePrompts):
             return UserIntentClassification(intent="dont_know", confidence=0.7, reasoning="Keyword match")
         # Default to answering
         return UserIntentClassification(intent="answering", confidence=0.5, reasoning="Default fallback")
+
+    async def _warmup_generate_contextual_reply(
+        self,
+        session: InterviewSession,
+        student_text: str,
+        user_name: str | None,
+        follow_up_question: str | None = None,
+        is_reciprocal: bool = False,
+        tone: str | None = None,
+    ) -> str:
+        """Generate a genuine, contextual warmup reply using the LLM.
+
+        When ``is_reciprocal`` is True the candidate asked "how are YOU doing?" —
+        the LLM is instructed to answer that directly before moving on.
+        ``follow_up_question`` is the next thing we want the conversation to
+        naturally land on (a smalltalk question or a behavioral question).
+        """
+        sys = warmup_system_prompt(session.company_style, session.role, self._interviewer_name(session), self._interviewer_id(session))
+        user = warmup_contextual_reply_user_prompt(
+            candidate_text=student_text,
+            user_name=user_name,
+            follow_up_question=follow_up_question,
+            is_reciprocal=is_reciprocal,
+            tone=tone,
+        )
+
+        def _fallback() -> str:
+            base = "I'm doing well, thanks for asking!" if is_reciprocal else "Thanks for sharing."
+            if follow_up_question:
+                q = self._clean_smalltalk_question(follow_up_question) or follow_up_question
+                return f"{base} {q}"
+            return base
+
+        if not getattr(self.llm, "api_key", None):
+            return _fallback()
+
+        try:
+            reply = await self.llm.chat(sys, user)
+            return self._sanitize_ai_text(reply) or _fallback()
+        except Exception:
+            return _fallback()
 
     def _warmup_behavioral_reply(
         self,

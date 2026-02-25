@@ -19,23 +19,53 @@ class InterviewEnginePrompts(InterviewEngineQuestions):
         focus_dims = self._focus_dimensions(session)
         focus_line = ""
         if "complexity" in focus_dims and "edge_cases" in focus_dims:
-            focus_line = "I'll keep an eye on complexity and edge cases."
+            focus_line = "Next one, I'll be watching complexity and edge cases."
+        elif "complexity" in focus_dims:
+            focus_line = "I'll be paying attention to complexity here."
+        elif "edge_cases" in focus_dims:
+            focus_line = "Keep edge cases in mind for this one."
         elif focus_dims:
-            focus_line = f"I'll focus on {focus_dims[0].replace('_', ' ')}."
+            focus_line = f"Let's focus on {focus_dims[0].replace('_', ' ')} this time."
+
+        idx = int(session.questions_asked_count or 0)
 
         if reason == "move_on":
-            lead = "Understood."
-        elif reason == "dont_know":
-            lead = "No worries."
-        else:
-            lead = "Thanks."
+            leads = [
+                "Got it, let's move on.",
+                "No problem, let's skip to the next one.",
+                "Sure, moving on.",
+                "Alright, let's try a different one.",
+                "Fair enough, let's switch gears.",
+            ]
+            lead = leads[idx % len(leads)]
+            return f"{lead} {focus_line}".strip()
 
-        bridges = ["Let's continue.", "Let's keep going.", "Let's move on."]
-        idx = int(session.questions_asked_count or 0) % len(bridges)
-        bridge = bridges[idx]
+        if reason == "dont_know":
+            leads = [
+                "No worries — that one trips people up.",
+                "All good, happens to everyone.",
+                "That's fine, let's try something else.",
+                "No stress, let's keep going.",
+                "Totally fine. Let's move on.",
+            ]
+            lead = leads[idx % len(leads)]
+            return f"{lead} {focus_line}".strip()
+
+        # Normal transition after answering
+        bridges = [
+            "Alright, next one.",
+            "Good. Moving on.",
+            "Okay, let's try another.",
+            "Nice. Next question.",
+            "Right, let's keep going.",
+            "Got it. Here's the next one.",
+            "Okay, let's switch it up.",
+            "Good stuff. Next.",
+        ]
+        bridge = bridges[idx % len(bridges)]
         if focus_line:
-            return f"{lead} {focus_line} {bridge}"
-        return f"{lead} {bridge}"
+            return f"{bridge} {focus_line}"
+        return bridge
 
     def _clean_next_question_reply(self, text: str | None, user_name: str | None = None) -> str:
         if not text:
