@@ -50,6 +50,138 @@ def _get_rag_context_for_interview(db: Session, session_id: int) -> str | None:
 class InterviewEngineMain(InterviewEngineTransitions):
     """Main interview flow orchestrator."""
 
+    # ──────────────────────────────────────────
+    # Session-wide pattern tracking
+    # ──────────────────────────────────────────
+
+    def _update_session_patterns(
+        self,
+        db: Session,
+        session: InterviewSession,
+        signals: dict,
+        q: Any,
+        response_quality: str,
+    ) -> None:
+        """Accumulate cross-question behavioural patterns in skill_state["patterns"]."""
+        state = dict(session.skill_state or {})
+        pat = dict(state.get("patterns", {}))
+
+        n = int(pat.get("n", 0)) + 1
+        pat["n"] = n
+
+        # Track how often the candidate mentions complexity
+        if signals.get("mentions_complexity"):
+            pat["complexity_count"] = int(pat.get("complexity_count", 0)) + 1
+
+        # Track whether candidate explains approach before coding
+        if signals.get("mentions_approach"):
+            pat["approach_count"] = int(pat.get("approach_count", 0)) + 1
+
+        # Detect pattern of jumping straight to code
+        if signals.get("has_code") and not signals.get("mentions_approach"):
+            pat["code_without_plan"] = int(pat.get("code_without_plan", 0)) + 1
+
+        # Track tradeoff mentions
+        if signals.get("mentions_tradeoffs"):
+            pat["tradeoffs_count"] = int(pat.get("tradeoffs_count", 0)) + 1
+
+        # Track edge-case mentions
+        if signals.get("mentions_edge_cases"):
+            pat["edge_cases_count"] = int(pat.get("edge_cases_count", 0)) + 1
+
+        # Track question-type strengths / gaps
+        qt = self._question_type(q) if q else "coding"
+        if response_quality == "strong":
+            strong = list(pat.get("strong_types", []))
+            if qt not in strong:
+                strong.append(qt)
+            pat["strong_types"] = strong
+        elif response_quality == "weak":
+            weak = list(pat.get("weak_types", []))
+            if qt not in weak:
+                weak.append(qt)
+            pat["weak_types"] = weak
+
+        state["patterns"] = pat
+        session.skill_state = state
+        db.add(session)
+        db.commit()
+
+    def _session_patterns_summary(self, session: InterviewSession) -> str | None:
+        """
+        Convert accumulated patterns into a concise English summary for the controller.
+        Returns None if there isn't enough data yet (< 2 questions answered).
+        """
+        state = dict(session.skill_state or {})
+        pat = dict(state.get("patterns", {}))
+        n = int(pat.get("n", 0))
+        if n < 2:
+            return None
+
+        observations: list[str] = []
+
+        # Complexity pattern
+        cx = int(pat.get("complexity_count", 0))
+        if cx == 0:
+            observations.append(
+                "Candidate has NOT mentioned time/space complexity across any question so far — recurring gap."
+            )
+        elif cx < (n + 1) // 2:
+            observations.append("Candidate mentions complexity inconsistently — prompt for it when missing.")
+
+        # Approach pattern
+        ap = int(pat.get("approach_count", 0))
+        if ap < (n + 1) // 2:
+            observations.append("Candidate tends to skip explaining their approach and jumps to implementation.")
+
+        # Code-without-plan pattern
+        cwp = int(pat.get("code_without_plan", 0))
+        if cwp >= 2:
+            observations.append(
+                f"Candidate has jumped straight to code without a verbal plan {cwp} times — push them to plan first."
+            )
+
+        # Tradeoffs
+        tr = int(pat.get("tradeoffs_count", 0))
+        if tr == 0 and n >= 3:
+            observations.append("Candidate has not discussed trade-offs on any question — worth pushing on.")
+
+        # Edge cases
+        ec = int(pat.get("edge_cases_count", 0))
+        if ec == 0 and n >= 3:
+            observations.append("Candidate has not mentioned edge cases yet this session.")
+
+        # Strong / weak types
+        strong = list(pat.get("strong_types", []))
+        weak = list(pat.get("weak_types", []))
+        if strong:
+            observations.append(f"Strong on: {', '.join(strong)} questions.")
+        if weak:
+            observations.append(f"Weaker on: {', '.join(weak)} questions.")
+
+        return " | ".join(observations) if observations else None
+
+    # ──────────────────────────────────────────
+    # Per-question hint level tracking
+    # ──────────────────────────────────────────
+
+    def _get_hint_level(self, session: InterviewSession, q_id: int) -> int:
+        state = dict(session.skill_state or {})
+        hints = dict(state.get("hints", {}))
+        return int(hints.get(str(q_id), 0))
+
+    def _increment_hint_level(self, db: Session, session: InterviewSession, q_id: int) -> int:
+        state = dict(session.skill_state or {})
+        hints = dict(state.get("hints", {}))
+        current = int(hints.get(str(q_id), 0))
+        new_level = min(current + 1, 3)
+        hints[str(q_id)] = new_level
+        state["hints"] = hints
+        session.skill_state = state
+        db.add(session)
+        db.commit()
+        return new_level
+
     def _dimension_to_missing_key(self, dimension: str | None) -> str | None:
         if dimension == "edge_cases":
             return "edge_cases"
@@ -629,6 +761,13 @@ Question context: {self._combine_question_text(title, prompt)}
         # Get RAG context for smarter follow-ups (Phase 5)
         rag_context = _get_rag_context_for_interview(db, session.id)
 
+        # Build cross-question intelligence context
+        session_patterns = self._session_patterns_summary(session)
+        hint_level = self._get_hint_level(session, q.id)
+        # Escalate hint level when candidate is stuck (weak quality + has had a followup already)
+        if response_quality == "weak" and int(session.followups_used or 0) >= 1:
+            hint_level = self._increment_hint_level(db, session, q.id)
+
         ctrl_sys = interviewer_controller_system_prompt(session.company_style, session.role, rag_context=rag_context)
         ctrl_user = interviewer_controller_user_prompt(
             stage=stage,
@@ -645,6 +784,8 @@ Question context: {self._combine_question_text(title, prompt)}
             response_quality=response_quality,
             is_behavioral=is_behavioral,
             question_type=self._question_type(q),
+            session_patterns=session_patterns,
+            hint_level=hint_level,
         )
 
         intent = ""
@@ -678,6 +819,9 @@ Question context: {self._combine_question_text(title, prompt)}
         if student_text and student_text.strip():
             with contextlib.suppress(Exception):
                 self._update_skill_state(db, session, quick_rubric_raw, is_behavioral=self._is_behavioral(q))
+            # Accumulate cross-question patterns for future controller context.
+            with contextlib.suppress(Exception):
+                self._update_session_patterns(db, session, signals, q, response_quality)
 
         if intent == "WRAP_UP":
             action = "WRAP_UP"

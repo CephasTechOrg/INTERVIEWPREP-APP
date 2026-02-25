@@ -18,7 +18,15 @@
         "What is the time complexity of your approach?",
         "How would the solution change if the times were not sorted?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation",
+        "greedy algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Count Valid Substrings (No Adjacent Repeat)",
@@ -33,7 +41,12 @@
         "How does the sliding window maintain the invariant of 'no adjacent repeats'?",
         "How do you handle the length constraints dynamically?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Matrix Level Connections (JPMC Specific)",
@@ -45,11 +58,18 @@
         "jpmc-specific"
       ],
       "followups": [
-        "How do you precompute the count of 1s per row to avoid O(n\u00b2) scanning?",
+        "How do you precompute the count of 1s per row to avoid O(n²) scanning?",
         "What is the edge case where no connections are possible?",
         "Can you solve this in O(m*n) time?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Graph Cycle Detection (Add Node/Edge)",
@@ -65,7 +85,12 @@
         "How do you represent the graph for the `traverse()` function?",
         "What is the time complexity of your cycle detection algorithm?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Container With Most Water",
@@ -80,7 +105,15 @@
         "What is the intuition behind moving the pointer with the smaller height?",
         "What is the time and space complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation",
+        "greedy algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Code Review: ConcurrentHashMap & Synchronization",
@@ -96,7 +129,12 @@
         "What specific issues arise with `ConcurrentHashMap`?",
         "How does `ConcurrentHashMap` achieve thread-safety (bucket locking, CAS)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design a Fraud Detection Model (High Level)",
@@ -111,7 +149,18 @@
         "How do you handle low-latency requirements for approval?",
         "What features (data points) would you use to detect fraud?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a News Aggregator",
@@ -126,7 +175,18 @@
         "What database schema would you use for user preferences?",
         "How do you handle real-time updates pushing to the UI?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Combination Sum II (Recursion)",
@@ -141,7 +201,12 @@
         "Why is sorting the array necessary?",
         "What is the time complexity of the backtracking approach?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Longest Common Prefix",
@@ -155,7 +220,12 @@
         "How would a Trie optimize this for very large dictionaries?",
         "What edge cases (empty array, identical strings) need testing?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Move Zeroes (to end)",
@@ -169,7 +239,14 @@
         "Can you minimize the total number of write operations?",
         "What if we needed to move zeros to the front instead?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Best Time to Buy and Sell Stock",
@@ -184,7 +261,15 @@
         "How does this relate to Kadane's algorithm?",
         "How would you handle unlimited transactions (Stock II)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation",
+        "greedy algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Longest Increasing Subsequence (LIS)",
@@ -194,11 +279,18 @@
         "binary-search"
       ],
       "followups": [
-        "What is the O(n\u00b2) DP recurrence?",
+        "What is the O(n²) DP recurrence?",
         "How does the patience sorting algorithm achieve O(n log n)?",
         "How would you reconstruct the actual subsequence?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "binary search algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Coin Change (Minimum Coins)",
@@ -212,7 +304,12 @@
         "How do you detect if the amount is impossible to form?",
         "What is the space-optimized version of this DP?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Java: Singleton Pattern (Thread Safe)",
@@ -227,7 +324,12 @@
         "How does the `volatile` keyword help in Double-Checked Locking?",
         "What is the Bill Pugh Singleton (static inner class) approach?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Java: Comparable vs Comparator",
@@ -242,7 +344,12 @@
         "Can you use both in the same class?",
         "How do you handle null values when sorting?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "SQL: Find Duplicate Rows",
@@ -256,7 +363,18 @@
         "How would you delete duplicates while keeping one record?",
         "What index would you create to prevent future duplicates?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "REST vs SOAP",
@@ -271,7 +389,18 @@
         "How does REST leverage HTTP methods?",
         "In what scenario might SOAP still be preferred in banking?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Spring Boot: Dependency Injection & Autowiring",
@@ -286,7 +415,12 @@
         "How does Spring handle circular dependencies?",
         "What is the `@Primary` annotation used for?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     }
   ]
 }

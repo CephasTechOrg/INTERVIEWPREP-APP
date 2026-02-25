@@ -16,7 +16,14 @@
         "How do you optimize space to O(1)?",
         "What if the houses are arranged in a circle (House Robber II)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Binary Tree Boundary Traversal",
@@ -31,7 +38,12 @@
         "What is the time and space complexity?",
         "How would you modify this for a N-ary tree?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Minimum Window Substring",
@@ -47,7 +59,14 @@
         "What is the time and space complexity?",
         "How would you handle very large strings (streaming)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Subsequence Removal (Unique Integers)",
@@ -62,7 +81,15 @@
         "Can you solve this in O(n) time?",
         "What is the connection to patience sorting (LIS)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation",
+        "greedy algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Next Greater Even Number (Same Digits)",
@@ -78,7 +105,12 @@
         "What edge cases (leading zeros, large numbers) must you handle?",
         "What is the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Rotate Matrix 90 Degrees (In-Place)",
@@ -93,7 +125,14 @@
         "How would you rotate a non-square (M x N) matrix?",
         "How do you rotate counter-clockwise?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Spiral Matrix",
@@ -108,7 +147,12 @@
         "What is the time complexity?",
         "How would you generate a spiral matrix given n?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Remove Nth Node From End of List",
@@ -123,7 +167,12 @@
         "How do you handle the case where n equals the length of the list (removing the head)?",
         "What is the time and space complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "BFS: Find N-Degree Friends",
@@ -138,7 +187,12 @@
         "How do you prevent revisiting nodes (cycles)?",
         "What is the time complexity in terms of V and E?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "LFU Cache (Least Frequently Used)",
@@ -154,7 +208,14 @@
         "How do you maintain frequency counts efficiently?",
         "How does this differ from LRU cache?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Sort HashMap by Value",
@@ -169,7 +230,12 @@
         "What is the time complexity?",
         "Can you sort a HashMap directly? Why not?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Immutable Class in Java",
@@ -184,7 +250,16 @@
         "What are the requirements for an immutable class?",
         "How do you handle mutable fields like Date or List?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Low-Level Design: Office Printer Queue",
@@ -200,7 +275,14 @@
         "How do you balance the load between printers on the same floor?",
         "How would you prioritize jobs (e.g., urgent vs normal)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "queue data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Real-Life Scenario: Elevator/Lift System Design",
@@ -215,7 +297,18 @@
         "How do you handle multiple requests simultaneously?",
         "What algorithm minimizes average waiting time?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "SQL: Query with Complex Aggregation",
@@ -229,7 +322,18 @@
         "What indexes would you add to optimize this query?",
         "How would you write this as a window function (RANK/DENSE_RANK)?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "OS: Deadlock Conditions",
@@ -243,7 +347,12 @@
         "What is deadlock avoidance vs detection vs recovery?",
         "How do you prevent deadlock in a Java multithreaded application?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Concurrency: Find Maximum in Matrix with Threads",
@@ -258,7 +367,12 @@
         "How do you aggregate the results from each thread?",
         "What is the trade-off between number of threads and performance?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Distributed Tracing in Microservices",
@@ -272,7 +386,18 @@
         "How do tools like Jaeger or Zipkin work?",
         "What information should be included in the trace context?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "API Gateway Responsibilities",
@@ -286,7 +411,18 @@
         "What is rate limiting and how would you implement it?",
         "How does an API Gateway handle authentication?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Spring vs Spring Boot",
@@ -301,7 +437,12 @@
         "What is auto-configuration and how does it work?",
         "What is the purpose of application.properties?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Behavioral: Reaction to Not Being Promoted",
@@ -316,7 +457,17 @@
         "How do you seek feedback on your performance?",
         "What steps would you take to improve your chances next time?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Reporting to a Junior",
@@ -330,7 +481,17 @@
         "What if you disagree with their technical decisions?",
         "How do you continue to grow and contribute?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

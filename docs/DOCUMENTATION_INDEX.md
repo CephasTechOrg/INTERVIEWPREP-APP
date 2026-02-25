@@ -2,9 +2,7 @@
 
 ## 📚 Complete Documentation Suite
 
-I've created a comprehensive understanding of your project. Here's what's available:
 
----
 
 ## 🎯 START HERE
 
@@ -53,6 +51,38 @@ The project also contains these original documents:
 - **TESTING_GUIDE.md** - Testing procedures
 - **EDGE_CASES_TODO.md** - Known issues (31 edge cases in phases)
 - **PROJECT_REVIEW.md** - Comprehensive project review
+
+---
+
+## 🆕 Feature Documentation
+
+### [INTELLIGENCE_UPGRADE.md](INTELLIGENCE_UPGRADE.md)
+
+Documents the interview engine intelligence upgrade:
+- Controller cross-reference & full memory system
+- Session-wide pattern tracking (`skill_state["patterns"]`)
+- Progressive 3-level hint system (`skill_state["hints"]`)
+- Rich evaluator: hire signal, narrative, patterns observed, standout moments
+- `ResultsSection.tsx` redesign with `HireSignalBadge` and new cards
+- Difficulty-aware grading overview (see also [DIFFICULTY_GRADING.md](DIFFICULTY_GRADING.md))
+- Complete data flow diagram
+
+### [DIFFICULTY_GRADING.md](DIFFICULTY_GRADING.md)
+
+Documents the difficulty-aware grading system:
+- How `difficulty`, `difficulty_current`, and `adaptive_difficulty_enabled` drive evaluation
+- Calibrated hire-signal thresholds per difficulty level (easy / medium / hard / adaptive)
+- How the evaluator prompt changes based on what the candidate chose
+- Full data flow from session start → final grade
+- Threshold comparison table
+
+### [PROFILE_AVATAR.md](PROFILE_AVATAR.md)
+
+Documents the profile picture upload feature:
+- Supabase Storage integration (bucket `intervIQ`, fixed-path upsert)
+- `POST /api/v1/users/me/avatar` endpoint
+- Frontend: ProfileModal upload UI, TopBar + Sidebar avatar display
+- Supabase setup checklist (bucket, policies, env vars)
 
 ---
 

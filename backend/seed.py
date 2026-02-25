@@ -105,14 +105,11 @@ def _upsert_question(
         followups = []
 
     question_type = qinit._normalize_question_type(q_data.get("question_type"), tags_clean, track)
-    meta: dict = {}
     expected_topics = qinit._clean_list(q_data.get("expected_topics"))
     evaluation_focus = qinit._clean_list(q_data.get("evaluation_focus"))
+    
+    meta: dict = {}
     company_bar = str(q_data.get("company_bar") or "").strip()
-    if expected_topics:
-        meta["expected_topics"] = expected_topics
-    if evaluation_focus:
-        meta["evaluation_focus"] = evaluation_focus
     if company_bar:
         meta["company_bar"] = company_bar
 
@@ -133,6 +130,8 @@ def _upsert_question(
         existing.tags_csv = tags_csv
         existing.followups = followups
         existing.question_type = question_type
+        existing.expected_topics = expected_topics
+        existing.evaluation_focus = evaluation_focus
         existing.meta = meta
         db.add(existing)
         return "updated"
@@ -147,6 +146,8 @@ def _upsert_question(
             tags_csv=tags_csv,
             followups=followups,
             question_type=question_type,
+            expected_topics=expected_topics,
+            evaluation_focus=evaluation_focus,
             meta=meta,
         )
     )

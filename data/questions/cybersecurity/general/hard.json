@@ -1,4 +1,6 @@
 {
+  "track": "cybersecurity",
+  "company_style": "general",
   "difficulty": "hard",
   "questions": [
     {
@@ -12,7 +14,12 @@
         "How do APTs typically maintain persistence in a network?",
         "What are some common indicators of APT activity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Kerberos Authentication",
@@ -25,7 +32,12 @@
         "What are the weaknesses of Kerberos that attackers often exploit?",
         "How does Golden Ticket attack work against Kerberos?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Memory Corruption Exploits",
@@ -38,7 +50,12 @@
         "What are gadgets in the context of ROP?",
         "How does Control Flow Integrity help prevent ROP attacks?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Cloud Security Shared Responsibility",
@@ -51,7 +68,18 @@
         "How does security responsibility shift between different cloud service models?",
         "What are common security misconfigurations in cloud environments?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Reverse Engineering Malware",
@@ -64,7 +92,12 @@
         "What are the differences between static and dynamic analysis?",
         "How do you safely analyze malware in a controlled environment?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Blockchain Security",
@@ -77,7 +110,12 @@
         "What is a 51% attack and how does it threaten blockchain security?",
         "How do reentrancy attacks work in smart contracts?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Container Security",
@@ -90,7 +128,12 @@
         "How do you secure container images throughout their lifecycle?",
         "What are the security implications of container breakout vulnerabilities?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "ICS/SCADA Security",
@@ -103,7 +146,12 @@
         "Why are traditional IT security solutions often inadequate for ICS environments?",
         "What was the attack vector in the Stuxnet attack?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Quantum Computing Threats",
@@ -116,7 +164,12 @@
         "Which current encryption algorithms are vulnerable to quantum attacks?",
         "What are post-quantum cryptography algorithms?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Advanced Phishing Techniques",
@@ -129,7 +182,12 @@
         "How do attackers bypass multi-factor authentication in sophisticated phishing attacks?",
         "What is a reverse proxy phishing kit and how does it work?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Threat Hunting Methodology",
@@ -142,7 +200,12 @@
         "What are some common hypotheses that drive threat hunting?",
         "How do you differentiate between normal behavior and malicious activity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Supply Chain Attacks",
@@ -155,7 +218,12 @@
         "What was the attack vector in the SolarWinds breach?",
         "How can Software Bill of Materials (SBOM) help mitigate supply chain risks?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Active Directory Attacks",
@@ -168,7 +236,12 @@
         "How does the DCSync attack work and what privileges are needed?",
         "What are some best practices for securing Active Directory?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Web Application Firewall Evasion",
@@ -181,7 +254,12 @@
         "What is obfuscation and how is it used to evade WAFs?",
         "How can rate limiting help prevent WAF bypass attempts?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Deception Technology",
@@ -194,9 +272,18 @@
         "What are honeypots and how do they differ from honeytokens?",
         "How can deception technology help with early threat detection?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     }
-  ],
-  "company_style": "general",
-  "track": "cybersecurity"
+  ]
 }

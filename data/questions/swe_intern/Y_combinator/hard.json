@@ -16,7 +16,12 @@
         "What risk are you most worried about that you haven't mitigated yet?",
         "What keeps you up at night that you *can* control?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "The Peter Thiel Question",
@@ -31,7 +36,12 @@
         "If you are wrong, what does that mean for your business?",
         "What evidence would change your mind?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Path to $100k MRR",
@@ -46,7 +56,12 @@
         "What has to happen in your sales/marketing funnel to achieve that?",
         "How long will it take you?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Weakest Link",
@@ -61,7 +76,12 @@
         "What experiment are you running to de-risk that area?",
         "What help do you need to fix this weakness?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "The No YC Scenario",
@@ -76,7 +96,12 @@
         "How will you fundraise otherwise?",
         "Are you building this company regardless of external validation?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Advanced Unit Economics",
@@ -91,7 +116,12 @@
         "What is your path to profitability?",
         "How long can you survive with zero additional funding?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "The Monopoly Question",
@@ -106,7 +136,12 @@
         "Do you have network effects?",
         "Is it really a network effect or just viral growth?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Deep Dive: Retention Breakdown",
@@ -121,7 +156,12 @@
         "Why did the worst cohort churn?",
         "What specific feature do retained users use that churned users never touched?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Founder Market Fit (Deep)",
@@ -136,7 +176,12 @@
         "What is the origin story of this company?",
         "Why not give up and work on something easier?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Term Sheet Knowledge",
@@ -151,7 +196,12 @@
         "How much dilution are you willing to accept before Demo Day?",
         "What is your post-money valuation expectation?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "The Low Point Scenario",
@@ -166,7 +216,12 @@
         "What did you learn about yourself in that moment?",
         "What would you have done if you couldn't raise money?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Feedback on YC",
@@ -181,7 +236,12 @@
         "How do you measure success of a partner?",
         "What makes the difference between a good batch and a great batch?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     }
   ]
 }

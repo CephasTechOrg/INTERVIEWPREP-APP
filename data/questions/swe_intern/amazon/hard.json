@@ -16,7 +16,18 @@
         "How do you handle hot keys and caching strategy?",
         "How do you prevent abuse and spam?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Distributed Rate Limiter",
@@ -31,7 +42,18 @@
         "Token bucket vs sliding window trade-offs?",
         "How do you avoid a single point of failure?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Durable Event Processing System",
@@ -46,7 +68,18 @@
         "How do you design idempotency keys?",
         "How do you handle schema evolution?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Large-Scale Notification Platform",
@@ -61,7 +94,18 @@
         "How do you handle provider outages and retries safely?",
         "How do you ensure idempotency and deduplication?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Debugging: Heisenbug Under Load",
@@ -76,7 +120,18 @@
         "How do you reproduce deterministically?",
         "How do you roll out the fix safely?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Tail Latency (p99) Investigation",
@@ -91,7 +146,18 @@
         "How do you instrument tracing effectively?",
         "What mitigations reduce p99 without hurting throughput?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Concurrent Data Structure: Thread-Safe Cache",
@@ -106,7 +172,12 @@
         "How do you prevent deadlocks?",
         "How do you measure contention and throughput?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design a Multi-Tenant Service",
@@ -121,7 +192,18 @@
         "How do you enforce isolation and access control?",
         "How do you handle backups and restores per tenant?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Distributed Cache Invalidation Strategy",
@@ -136,7 +218,18 @@
         "How do you avoid cache stampedes?",
         "What consistency model do you target and why?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Graph: Critical Connections",
@@ -151,7 +244,12 @@
         "Why is DFS the right tool here?",
         "Time and space complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "DP: Edit Distance",
@@ -166,7 +264,14 @@
         "How do you optimize space?",
         "What edge cases do you test?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "dynamic programming approach"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "DP: Burst Balloons",
@@ -181,7 +286,14 @@
         "Why does greedy fail?",
         "What is the complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "dynamic programming approach"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design a Secure Auth System",
@@ -196,7 +308,18 @@
         "How do you rotate keys and revoke sessions?",
         "How do you store tokens safely on device?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Large-Scale Data Migration Plan",
@@ -211,7 +334,18 @@
         "How do you do rollback safely?",
         "What metrics do you monitor?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Search Service (High Level)",
@@ -226,11 +360,22 @@
         "How do you handle hot queries and caching?",
         "How do you fight spam/abuse?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Behavioral (LP): Dive Deep (Hard Case)",
-      "prompt": "Tell me about the hardest root-cause analysis you\u2019ve done. What data did you use and how did you confirm the fix?",
+      "prompt": "Tell me about the hardest root-cause analysis you’ve done. What data did you use and how did you confirm the fix?",
       "tags": [
         "behavioral",
         "leadership-principles",
@@ -241,7 +386,17 @@
         "What was the long-term preventative change?",
         "How did you communicate the incident?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Ownership (Failure Scenario)",
@@ -256,7 +411,17 @@
         "What did you change in process/tech to prevent recurrence?",
         "What did you learn?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Insist on the Highest Standards (Pushback)",
@@ -271,7 +436,17 @@
         "What compromise (if any) did you accept?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Deliver Results (Hard Constraints)",
@@ -285,7 +460,17 @@
         "How did you ensure correctness and reliability?",
         "How did you measure success?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Earn Trust (Cross-Team)",
@@ -300,7 +485,17 @@
         "How did you handle conflict or ambiguity?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Design Amazon Prime Video Streaming",
@@ -316,7 +511,18 @@
         "What CDN strategy minimizes latency globally?",
         "How do you implement DRM and content protection?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Amazon Go Checkout System",
@@ -332,7 +538,18 @@
         "What happens during network outages?",
         "How do you handle disputed charges?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design AWS Lambda at Scale",
@@ -348,7 +565,18 @@
         "How do you isolate customer code securely?",
         "How do you handle resource allocation and billing?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Amazon's Recommendation Engine",
@@ -364,7 +592,18 @@
         "How do you handle cold start for new users?",
         "How do you A/B test recommendation algorithms?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design DynamoDB-like Key-Value Store",
@@ -380,7 +619,18 @@
         "What consistency models do you support?",
         "How do you handle replica synchronization?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Alexa Voice Processing Pipeline",
@@ -396,7 +646,18 @@
         "How do you manage skill integration and isolation?",
         "What about latency requirements for real-time responses?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Amazon's Real-Time Pricing System",
@@ -412,7 +673,18 @@
         "How do you handle flash sales and traffic spikes?",
         "How do you prevent race conditions during price updates?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Amazon's Order Fulfillment System",
@@ -428,7 +700,18 @@
         "How do you handle inventory consistency?",
         "What about failed deliveries and returns?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Amazon's Fraud Detection System",
@@ -444,7 +727,18 @@
         "How do you update fraud models in production?",
         "How do you handle adversarial attacks?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Amazon's Review System",
@@ -460,7 +754,18 @@
         "How do you rank reviews by helpfulness?",
         "How do you handle review bombing campaigns?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Algorithm: Serialize and Deserialize N-ary Tree",
@@ -475,7 +780,12 @@
         "How do you handle large trees?",
         "What's the time and space complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Algorithm: Word Ladder II",
@@ -491,7 +801,12 @@
         "How do you handle large dictionaries?",
         "What's the worst-case complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Algorithm: Trapping Rain Water II",
@@ -506,7 +821,12 @@
         "What data structure optimizes the solution?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Algorithm: Minimum Window Substring",
@@ -522,7 +842,14 @@
         "What's the time complexity?",
         "How would you extend to handle Unicode characters?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Algorithm: Russian Doll Envelopes",
@@ -538,7 +865,15 @@
         "How does this relate to longest increasing subsequence?",
         "What's the optimal solution?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "binary search algorithm",
+        "dynamic programming approach"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Concurrency: Lock-Free Queue",
@@ -553,7 +888,12 @@
         "What about memory reclamation?",
         "How do you test correctness?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Concurrency: Scalable Reader-Writer Lock",
@@ -568,7 +908,12 @@
         "What about fairness between readers and writers?",
         "How do you measure scalability?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Database: Distributed Transactions",
@@ -583,7 +928,18 @@
         "How do you handle network partitions?",
         "What about performance implications?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Database: Time-Series Data at Scale",
@@ -598,7 +954,18 @@
         "How do you optimize range queries?",
         "What about data retention and compaction?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Security: Zero-Trust Architecture",
@@ -613,7 +980,18 @@
         "What about service-to-service authentication?",
         "How do you monitor for anomalies?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Performance: Global Load Balancing",
@@ -628,7 +1006,12 @@
         "What about DNS propagation delays?",
         "How do you handle failover?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Behavioral (LP): Think Big (Ambitious Project)",
@@ -643,7 +1026,17 @@
         "What risks did you identify?",
         "What was the impact?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Learn and Be Curious (Complex Domain)",
@@ -658,7 +1051,17 @@
         "How did you validate your understanding?",
         "How did you apply what you learned?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Bias for Action (High-Stakes)",
@@ -673,7 +1076,17 @@
         "What data informed your decision?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Frugality (Large-Scale)",
@@ -688,7 +1101,17 @@
         "What trade-offs did you consider?",
         "What was the impact?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Technical Leadership",
@@ -703,7 +1126,17 @@
         "How did you handle differing opinions?",
         "What was the result?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Scaling Challenges",
@@ -718,7 +1151,17 @@
         "How did you diagnose the bottlenecks?",
         "What architectural changes did you make?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Mentoring Junior Engineers",
@@ -733,7 +1176,17 @@
         "What approach did you take?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Handling Production Incident",
@@ -748,7 +1201,17 @@
         "How did you communicate with stakeholders?",
         "What post-mortem actions did you take?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Technical Debt Management",
@@ -763,7 +1226,17 @@
         "How did you balance new features vs debt repayment?",
         "What was the impact?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Cross-Functional Collaboration",
@@ -778,7 +1251,17 @@
         "How did you manage expectations?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

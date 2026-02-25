@@ -1,4 +1,6 @@
 {
+  "track": "devops_cloud",
+  "company_style": "general",
   "difficulty": "hard",
   "questions": [
     {
@@ -13,7 +15,12 @@
         "How do you implement microsegmentation in Kubernetes?",
         "What are the limitations of Kubernetes network policies?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Service Mesh Architecture",
@@ -27,7 +34,18 @@
         "How does Envoy proxy fit into the Istio architecture?",
         "What is the performance overhead of using a service mesh?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Multi-Cluster Kubernetes",
@@ -41,7 +59,12 @@
         "How does cluster federation work?",
         "What are the challenges with multi-cluster service discovery?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Cloud-Native Storage",
@@ -55,7 +78,12 @@
         "How do you choose between block, file, and object storage?",
         "What are CSI drivers and how do they work?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Chaos Engineering",
@@ -69,7 +97,18 @@
         "How do you design and run chaos experiments in production?",
         "What tools are available for chaos engineering?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "FinOps Implementation",
@@ -83,7 +122,12 @@
         "How do you implement showback/chargeback in cloud environments?",
         "What metrics and reports are essential for FinOps?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "GitOps at Scale",
@@ -97,7 +141,18 @@
         "How do you handle multiple teams and environments with GitOps?",
         "What are the challenges with GitOps at enterprise scale?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Serverless Architecture Patterns",
@@ -111,7 +166,18 @@
         "How do you handle state in serverless applications?",
         "What are the cold start challenges and mitigation strategies?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Kubernetes Operators",
@@ -125,7 +191,12 @@
         "How does the operator pattern extend Kubernetes functionality?",
         "What are some use cases for custom operators?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Disaster Recovery Strategies",
@@ -139,7 +210,12 @@
         "How do you test disaster recovery plans without impacting production?",
         "What are the trade-offs between different DR strategies (pilot light, warm standby, multi-site)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Edge Computing Architecture",
@@ -153,7 +229,18 @@
         "How do you manage applications across cloud and edge locations?",
         "What are the networking challenges with edge computing?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Policy as Code",
@@ -167,7 +254,12 @@
         "How does Open Policy Agent (OPA) work?",
         "How do you implement compliance as code?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "MLOps Pipeline Design",
@@ -181,7 +273,12 @@
         "How do you handle model versioning and rollbacks?",
         "What infrastructure is needed for model serving at scale?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Cloud Migration Strategies",
@@ -195,7 +292,12 @@
         "How do you assess applications for cloud migration?",
         "What are the challenges with migrating legacy applications?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Zero Trust Architecture Implementation",
@@ -209,9 +311,18 @@
         "How do you implement identity-aware proxies?",
         "What are the network implications of zero-trust?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     }
-  ],
-  "company_style": "general",
-  "track": "devops_cloud"
+  ]
 }

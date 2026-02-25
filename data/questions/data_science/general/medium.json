@@ -1,4 +1,6 @@
 {
+  "track": "data_science",
+  "company_style": "general",
   "difficulty": "medium",
   "questions": [
     {
@@ -12,7 +14,12 @@
         "What are the advantages of k-fold cross-validation over train-test split?",
         "When would you use stratified cross-validation?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Feature Scaling Methods",
@@ -25,7 +32,12 @@
         "When is feature scaling particularly important?",
         "Which algorithms are sensitive to feature scaling?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Regularization Techniques",
@@ -38,7 +50,12 @@
         "How does regularization help prevent overfitting?",
         "Why does L1 regularization lead to feature selection?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Confusion Matrix Metrics",
@@ -51,7 +68,12 @@
         "In what scenarios is precision more important than recall?",
         "How do you calculate ROC-AUC and what does it represent?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Handling Imbalanced Datasets",
@@ -64,7 +86,12 @@
         "What are the pros and cons of oversampling vs undersampling?",
         "How does SMOTE work and what are its limitations?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Gradient Descent",
@@ -77,7 +104,12 @@
         "What are common challenges with gradient descent?",
         "How do optimization algorithms like Adam improve upon basic gradient descent?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Decision Trees Splitting Criteria",
@@ -90,7 +122,12 @@
         "What are the advantages and disadvantages of decision trees?",
         "How do random forests address some of these limitations?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Principal Component Analysis",
@@ -103,7 +140,12 @@
         "How do you interpret principal components?",
         "What are some limitations of PCA?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Time Series Components",
@@ -116,7 +158,12 @@
         "How would you detrend a time series?",
         "What is stationarity and why is it important?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "A/B Test Analysis",
@@ -129,7 +176,12 @@
         "How do you calculate sample size for an A/B test?",
         "What are common pitfalls in A/B testing?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Bias in Machine Learning",
@@ -142,7 +194,12 @@
         "How can bias enter a machine learning pipeline?",
         "What techniques can help detect and mitigate bias?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "K-Means Clustering",
@@ -155,7 +212,12 @@
         "What are the assumptions of k-means?",
         "How does k-means++ initialization improve results?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Feature Importance Methods",
@@ -168,7 +230,12 @@
         "How does permutation feature importance work?",
         "What are SHAP values and how do they differ from traditional importance metrics?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Hyperparameter Tuning",
@@ -181,7 +248,12 @@
         "When would you choose random search over grid search?",
         "What is cross-validation's role in hyperparameter tuning?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Text Preprocessing Steps",
@@ -194,9 +266,12 @@
         "What are the differences between stemming and lemmatization?",
         "How do you handle stop words and when might you keep them?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     }
-  ],
-  "company_style": "general",
-  "track": "data_science"
+  ]
 }

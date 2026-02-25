@@ -16,7 +16,16 @@
         "Give a small example.",
         "What edge case would you test?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Reverse a String (Steps)",
@@ -30,7 +39,12 @@
         "How do you know when to stop?",
         "How do you verify the result?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Valid Parentheses (Idea Level)",
@@ -44,7 +58,14 @@
         "Give a valid and invalid example.",
         "How would you explain this simply?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "stack data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Binary Search (Concept)",
@@ -58,7 +79,16 @@
         "What does cutting the list in half mean?",
         "Give a real-world example."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Find Maximum Value",
@@ -72,7 +102,14 @@
         "What if the list has one number?",
         "Why is this approach simple?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Palindrome Check",
@@ -86,7 +123,12 @@
         "Why compare from both ends?",
         "Give a simple example."
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "FizzBuzz (Reasoning)",
@@ -100,7 +142,16 @@
         "What common mistake do beginners make?",
         "How do you keep the code readable?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Merge Two Sorted Arrays (High Level)",
@@ -114,7 +165,14 @@
         "What happens when one array finishes?",
         "Give a small example."
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Hash Map (Basic Use)",
@@ -128,7 +186,16 @@
         "Why is lookup fast?",
         "Give a simple use case."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Recursion (Basic Idea)",
@@ -142,7 +209,16 @@
         "What happens if there is no base case?",
         "Why can recursion be risky?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Stacks (Practical Understanding)",
@@ -156,7 +232,16 @@
         "Where are stacks used?",
         "Why are stacks useful?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Queues (Practical Understanding)",
@@ -170,7 +255,16 @@
         "Where are queues used?",
         "How is this different from a stack?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Array vs Linked List (Simple Difference)",
@@ -184,7 +278,16 @@
         "Which is more flexible?",
         "Why does memory layout matter?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Big-O (Plain English)",
@@ -198,7 +301,16 @@
         "Is faster always better?",
         "When is a simple solution enough?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Tree Traversal (High Level)",
@@ -212,7 +324,16 @@
         "Why start at the root?",
         "Where are trees used?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Detect Duplicates",
@@ -226,7 +347,14 @@
         "What happens if the list is large?",
         "Give a small example."
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Reverse a Linked List (Concept)",
@@ -240,7 +368,16 @@
         "What is one tricky part?",
         "What edge case would you test?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Graph Basics",
@@ -254,7 +391,16 @@
         "Where are graphs used?",
         "Why are graphs powerful?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Unit Testing (Purpose)",
@@ -268,7 +414,16 @@
         "Why automate tests?",
         "What happens without tests?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Handling Errors",
@@ -282,7 +437,16 @@
         "What is an exception?",
         "Why is logging useful?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Loops vs Recursion",
@@ -295,7 +459,16 @@
         "When might recursion be risky?",
         "Why do both exist?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Variables Scope",
@@ -308,7 +481,16 @@
         "What problems happen with global variables?",
         "Give a simple example."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Functions (Design)",
@@ -322,7 +504,16 @@
         "How do they help teamwork?",
         "What happens with very large functions?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "APIs (Basic Use)",
@@ -336,7 +527,18 @@
         "What kind of data might an API return?",
         "Give an example you've seen."
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "REST APIs (Simple)",
@@ -350,7 +552,18 @@
         "What does POST do?",
         "Why is REST common?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Frontend vs Backend",
@@ -364,7 +577,16 @@
         "Which part handles data?",
         "How do they communicate?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Debugging Mindset",
@@ -378,7 +600,16 @@
         "What tools help?",
         "When do you ask for help?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Why Google?",
@@ -391,7 +622,17 @@
         "What excites you about problem solving?",
         "What do you want to learn at Google?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Find Smallest Number",
@@ -405,7 +646,14 @@
         "What if all numbers are negative?",
         "Why is this a common starting problem?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Count Character Occurrences",
@@ -419,7 +667,14 @@
         "Why is this useful in real applications?",
         "How would you handle Unicode characters?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Remove Duplicates from Array",
@@ -433,7 +688,14 @@
         "Does the order matter?",
         "What if you can't use extra memory?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Check if Array is Sorted",
@@ -447,7 +709,14 @@
         "What edge cases would you test?",
         "Why is this important for algorithms like binary search?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "String vs StringBuilder",
@@ -461,7 +730,12 @@
         "How does StringBuilder work differently?",
         "When would you notice the performance difference?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "What is a Compiler?",
@@ -475,7 +749,16 @@
         "What does 'compiled language' mean?",
         "What languages are typically compiled vs interpreted?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Google Search - High Level",
@@ -489,7 +772,18 @@
         "How does it know what pages to show first?",
         "Why does search happen so fast?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Google Maps Directions",
@@ -504,7 +798,18 @@
         "What might 'shortest' mean (time vs distance)?",
         "Why is this challenging for many locations?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Auto-Complete Feature",
@@ -518,7 +823,18 @@
         "Why do suggestions change over time?",
         "What data structure might help with prefixes?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Version Control Basics",
@@ -532,7 +848,16 @@
         "What happens if you make a mistake?",
         "Why does Google use version control?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Code Review Benefits",
@@ -546,7 +871,12 @@
         "How do you give constructive feedback?",
         "How do you receive feedback well?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Comments in Code",
@@ -560,7 +890,16 @@
         "Should you comment obvious code?",
         "How do comments help with maintenance?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "User Input Validation",
@@ -574,7 +913,16 @@
         "What are examples of malicious input?",
         "How does this protect users?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Google's Go Programming Language",
@@ -588,7 +936,16 @@
         "How is it different from Python or Java?",
         "What are goroutines?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Web Browser Basics",
@@ -602,7 +959,16 @@
         "What does the browser do with the response?",
         "Why does the page load quickly sometimes but slowly other times?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "HTTPS vs HTTP",
@@ -616,7 +982,12 @@
         "Why does Google use HTTPS everywhere?",
         "How does encryption protect users?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Cookie vs LocalStorage",
@@ -630,7 +1001,16 @@
         "When would you use one over the other?",
         "What are security considerations for each?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Mobile App vs Web App",
@@ -644,7 +1024,16 @@
         "What are the trade-offs?",
         "How do they update differently?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Google's Culture (High Level)",
@@ -658,7 +1047,17 @@
         "Why is collaboration important at Google?",
         "What does 'fail fast' mean?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Learning New Technologies",
@@ -672,7 +1071,17 @@
         "How do you practice?",
         "Tell me about a time you learned something new quickly."
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Team Collaboration",
@@ -686,7 +1095,17 @@
         "How do you contribute to team discussions?",
         "Why is teamwork important in software engineering?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Handling Ambiguity",
@@ -700,7 +1119,17 @@
         "Who did you talk to?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Project You're Proud Of",
@@ -714,7 +1143,17 @@
         "What challenges did you face?",
         "What did you learn?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Time Management",
@@ -728,7 +1167,17 @@
         "How do you handle interruptions?",
         "What tools help you stay organized?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Receiving Feedback",
@@ -742,7 +1191,17 @@
         "What did you change?",
         "How did it help you improve?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Google's Products",
@@ -757,7 +1216,17 @@
         "What problem would your improvement solve?",
         "How would you know if it was successful?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Diversity in Tech",
@@ -771,7 +1240,17 @@
         "What can individuals do to promote inclusion?",
         "Why does Google value diverse perspectives?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Ethics in AI",
@@ -786,7 +1265,17 @@
         "How can engineers reduce bias?",
         "Why is this important at Google?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Constant vs Variable",
@@ -799,7 +1288,16 @@
         "Why do constants improve code readability?",
         "What are naming conventions for constants?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Integer Overflow",
@@ -813,7 +1311,16 @@
         "Give a real-world example of why this is a problem.",
         "How do languages handle this differently?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Floating Point Precision",
@@ -827,7 +1334,16 @@
         "When is this a problem?",
         "How would you compare floating point numbers safely?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Infinite Loops",
@@ -841,7 +1357,16 @@
         "How do you stop a program stuck in an infinite loop?",
         "How do you test that your loop will terminate?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "If Statements vs Switch",
@@ -855,7 +1380,16 @@
         "Are there performance differences?",
         "What languages have switch statements?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Pass by Value vs Reference",
@@ -869,7 +1403,16 @@
         "Which is more efficient and why?",
         "Give an example where this matters."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "What is an IDE?",
@@ -883,7 +1426,16 @@
         "What IDEs have you used?",
         "How do they help with debugging?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Google's PageRank (Conceptual)",
@@ -897,7 +1449,12 @@
         "Why are links from important pages more valuable?",
         "How is this different from keyword matching?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Gmail Search",
@@ -911,7 +1468,18 @@
         "What would you index in an email?",
         "How do you handle new emails arriving?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     }
   ]
 }

@@ -299,6 +299,11 @@ class EvaluationOutput(BaseModel):
     strengths: list[str] = Field(default_factory=list)
     weaknesses: list[str] = Field(default_factory=list)
     next_steps: list[str] = Field(default_factory=list)
+    # Rich fields from upgraded evaluator prompt
+    hire_signal: str = Field(default="borderline")
+    narrative: str = Field(default="")
+    patterns_observed: list[str] = Field(default_factory=list)
+    standout_moments: list[str] = Field(default_factory=list)
 
     @field_validator("overall_score", mode="before")
     @classmethod
@@ -312,7 +317,21 @@ class EvaluationOutput(BaseModel):
                 n = 50
         return max(0, min(100, n))
 
-    @field_validator("strengths", "weaknesses", "next_steps", mode="before")
+    @field_validator("hire_signal", mode="before")
+    @classmethod
+    def _coerce_hire_signal(cls, v):  # noqa: ANN001
+        if not v:
+            return "borderline"
+        s = str(v).strip().lower()
+        valid = {"strong_yes", "yes", "borderline", "no", "strong_no"}
+        return s if s in valid else "borderline"
+
+    @field_validator("narrative", "hire_signal", mode="before")
+    @classmethod
+    def _coerce_str(cls, v):  # noqa: ANN001
+        return str(v).strip() if v else ""
+
+    @field_validator("strengths", "weaknesses", "next_steps", "patterns_observed", "standout_moments", mode="before")
     @classmethod
     def _coerce_str_list(cls, v):  # noqa: ANN001
         if v is None:

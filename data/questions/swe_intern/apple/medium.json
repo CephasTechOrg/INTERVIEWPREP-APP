@@ -16,7 +16,14 @@
         "What are the edge cases (capacity 0/1, repeated puts, updates)?",
         "How would you make it thread-safe? What are the trade-offs?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Top K Frequent Elements",
@@ -31,7 +38,15 @@
         "How do you handle ties deterministically?",
         "What happens if k is close to n?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage",
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Longest Substring Without Repeating Characters",
@@ -46,7 +61,14 @@
         "How do you implement this efficiently for Unicode?",
         "What are the time and space complexities?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Kth Largest Element in an Array",
@@ -61,7 +83,14 @@
         "How do you handle many duplicates?",
         "What changes if the input is a stream?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Merge Intervals",
@@ -76,7 +105,14 @@
         "What are corner cases (touching endpoints, nested intervals)?",
         "Can you do it in-place and what does that mean here?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Binary Tree Level Order Traversal",
@@ -91,7 +127,14 @@
         "How would you return the average per level instead of values?",
         "How do you handle very deep trees (stack vs queue concerns)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "queue data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Lowest Common Ancestor (Binary Tree)",
@@ -106,7 +149,12 @@
         "What if one or both nodes may not exist in the tree?",
         "How would you avoid recursion?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Detect Cycle in a Linked List",
@@ -116,15 +164,20 @@
         "two-pointers"
       ],
       "followups": [
-        "Explain why Floyd\u2019s algorithm works.",
+        "Explain why Floyd’s algorithm works.",
         "What are time and space complexities?",
         "What changes if nodes can be modified (marking visited)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Product Feature Metrics (Apple-style)",
-      "prompt": "Pick a feature in an Apple product (e.g., Notes search, Photos memories, iOS keyboard). Propose 2\u20133 success metrics and how you would instrument them.",
+      "prompt": "Pick a feature in an Apple product (e.g., Notes search, Photos memories, iOS keyboard). Propose 2–3 success metrics and how you would instrument them.",
       "tags": [
         "product-thinking",
         "metrics",
@@ -135,7 +188,18 @@
         "What privacy constraints would you consider?",
         "What would be your rollback plan if metrics degrade?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Thread Safety Basics",
@@ -150,7 +214,16 @@
         "What is deadlock and how do you prevent it?",
         "When is immutability the best solution?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Memory Management and Leaks",
@@ -165,7 +238,16 @@
         "How would you confirm a leak vs a cache?",
         "What tools or techniques do you use to diagnose?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "API Design for a Small Module",
@@ -180,7 +262,12 @@
         "How do you validate and version preference keys?",
         "How do you test this module?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Build a Rate Limiter",
@@ -195,11 +282,22 @@
         "How do you handle distributed systems?",
         "How do you measure and monitor effectiveness?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "String Compression",
-      "prompt": "Implement basic string compression using counts of repeated characters (e.g., aabcccccaaa \u2192 a2b1c5a3). Return the original if not shorter.",
+      "prompt": "Implement basic string compression using counts of repeated characters (e.g., aabcccccaaa → a2b1c5a3). Return the original if not shorter.",
       "tags": [
         "strings",
         "two-pointers",
@@ -210,7 +308,16 @@
         "How do you handle digits in the input?",
         "How would you optimize for large strings?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Backtracking: Generate Parentheses",
@@ -225,7 +332,12 @@
         "How many outputs exist asymptotically?",
         "How would you convert this to iterative?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Matrix Rotate",
@@ -240,7 +352,14 @@
         "What is the space complexity and why?",
         "What edge cases would you test?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design: Logger with Levels",
@@ -255,7 +374,16 @@
         "How would you make it fast (buffering, async)?",
         "How do you test logging behavior?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Bug Hunt: Off-by-One in Production",
@@ -268,9 +396,14 @@
       "followups": [
         "What logs or signals would you add first?",
         "How do you write a regression test?",
-        "How do you ensure the fix doesn\u2019t cause performance regressions?"
+        "How do you ensure the fix doesn’t cause performance regressions?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design Review: Trade-offs",
@@ -285,7 +418,17 @@
         "How do you document technical debt?",
         "How do you align on quality standards?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Data Model: Notes Sync (Simplified)",
@@ -300,7 +443,18 @@
         "What is the minimal metadata you need per note?",
         "What would you test first?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Two Sum (Multiple Approaches)",
@@ -315,7 +469,15 @@
         "What if the array is sorted?",
         "How would you handle multiple pairs?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage",
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Valid Palindrome (Enhanced)",
@@ -329,7 +491,12 @@
         "What's the time and space complexity?",
         "Can you solve it with O(1) extra space?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Maximum Subarray (Kadane's Algorithm)",
@@ -343,7 +510,14 @@
         "How would you modify it to also return the subarray indices?",
         "What if all numbers are negative?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Implement Queue using Stacks",
@@ -358,7 +532,12 @@
         "How would you make peek() efficient?",
         "Can you implement a stack using queues?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Group Anagrams",
@@ -373,7 +552,14 @@
         "How would you handle large strings?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Container With Most Water",
@@ -387,7 +573,14 @@
         "How would you prove its correctness?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "3Sum",
@@ -402,7 +595,14 @@
         "What's the time complexity?",
         "How would you adapt for a different target sum?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Word Break",
@@ -416,7 +616,12 @@
         "How would you handle an empty dictionary?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design a Simple Cache",
@@ -431,7 +636,12 @@
         "How would you handle concurrent access?",
         "What about memory constraints?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design a Calendar Event System",
@@ -446,7 +656,12 @@
         "How would you implement recurring events?",
         "What about timezone handling?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design a Photo Gallery App",
@@ -461,7 +676,18 @@
         "How would you implement face recognition grouping?",
         "What about privacy considerations?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Music Streaming Service",
@@ -476,7 +702,12 @@
         "How would you implement shuffle algorithm?",
         "What about licensing and DRM?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design a Messaging App",
@@ -491,7 +722,12 @@
         "How would you implement end-to-end encryption?",
         "What about scalability for millions of users?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design a Health Data System",
@@ -506,7 +742,12 @@
         "How would you handle different data types (heart rate, steps, sleep)?",
         "What about data synchronization across devices?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "SQL: Query Optimization",
@@ -521,7 +762,18 @@
         "How do indexes help and when do they hurt?",
         "What about query caching strategies?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "SQL: Data Analysis for App",
@@ -536,7 +788,18 @@
         "What about retention rate?",
         "How do you handle timezone differences?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Concurrency: Producer-Consumer Pattern",
@@ -551,7 +814,12 @@
         "What about handling multiple producers and consumers?",
         "How would you test this implementation?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Concurrency: Read-Write Lock",
@@ -566,7 +834,12 @@
         "What about reentrancy?",
         "How would you implement this in Swift/Objective-C?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Object Design: Shopping Cart",
@@ -581,7 +854,16 @@
         "What about discounts and promotions?",
         "How do you ensure thread safety?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Object Design: File System",
@@ -596,7 +878,16 @@
         "What about file versioning?",
         "How would you implement search functionality?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Behavioral: Technical Challenge",
@@ -611,7 +902,17 @@
         "How did you debug the issue?",
         "What did you learn from the experience?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Code Review",
@@ -626,7 +927,17 @@
         "How do you handle constructive criticism?",
         "What was the impact of a particularly good code review?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Technical Debt",
@@ -641,7 +952,17 @@
         "How did you prioritize addressing it?",
         "What was the result?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Cross-Functional Collaboration",
@@ -656,7 +977,17 @@
         "What challenges did you face?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Handling Production Issues",
@@ -671,7 +1002,17 @@
         "How did you communicate with stakeholders?",
         "What preventive measures did you implement?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Learning New Technology",
@@ -686,7 +1027,17 @@
         "How do you decide what to learn next?",
         "What was the most challenging technology you learned?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Quality Focus",
@@ -701,7 +1052,17 @@
         "How do you balance speed with quality?",
         "What does quality mean to you in software development?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Privacy and Security",
@@ -717,7 +1078,17 @@
         "What trade-offs have you faced between features and security?",
         "How do you stay updated on security best practices?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: User Experience",
@@ -732,7 +1103,17 @@
         "How do you gather user feedback?",
         "How do you balance technical elegance with user needs?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Innovation at Apple",
@@ -747,7 +1128,17 @@
         "What technical challenges would you face?",
         "How would you measure success?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Sustainability in Tech",
@@ -762,7 +1153,17 @@
         "How can software reduce energy consumption?",
         "Why is this important for technology companies?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Technical Trade-offs",
@@ -777,7 +1178,17 @@
         "How did you make your decision?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Mentoring Experience",
@@ -792,7 +1203,17 @@
         "What approach did you take?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

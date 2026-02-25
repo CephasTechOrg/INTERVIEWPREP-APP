@@ -17,7 +17,15 @@
         "How would you handle duplicate transaction amounts?",
         "What is the time complexity trade-off between the two approaches?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage",
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Reverse a String (Steps)",
@@ -31,7 +39,12 @@
         "How do you verify the result without using built-in reverse functions?",
         "How would you do this in-place to save memory?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Palindrome Check",
@@ -45,7 +58,12 @@
         "Why is comparing from both ends efficient?",
         "What edge case would you test first?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Find the Largest Number",
@@ -59,7 +77,14 @@
         "What if the list is empty or contains negative amounts?",
         "Why is this approach considered O(n)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Counting Items (Frequency Map)",
@@ -74,7 +99,16 @@
         "Why is a hash map better than counting manually with nested loops?",
         "How would you handle millions of trades per second?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Remove Duplicates (Conceptual)",
@@ -89,7 +123,14 @@
         "Does the order of the original list need to be preserved?",
         "What is the time complexity difference between using a Set and comparing each pair?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Binary Search (Idea Only)",
@@ -104,7 +145,16 @@
         "What does 'cutting the search space in half' mean?",
         "Give a real-life example of using this at a bank."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Merge Two Sorted Lists",
@@ -118,7 +168,14 @@
         "What happens when one list finishes before the other?",
         "How would you handle millisecond precision in timestamps?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Valid Parentheses (Idea Level)",
@@ -132,7 +189,14 @@
         "What makes a string invalid?",
         "Give an example of a valid nested structure."
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "stack data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "FizzBuzz (Reasoning)",
@@ -146,7 +210,16 @@
         "How do you keep the code readable and maintainable?",
         "How would you extend this to print 'JPM' for multiples of 7?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Object-Oriented Programming (OOP) Basics",
@@ -161,7 +234,16 @@
         "Give a banking-related example of Encapsulation (e.g., Account class).",
         "Why is Polymorphism useful in large enterprise applications?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Array vs Linked List",
@@ -175,7 +257,16 @@
         "Which one is more memory efficient for inserting in the middle?",
         "Why would JPMC choose one over the other for a real-time trading log?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Stack vs Queue",
@@ -190,7 +281,15 @@
         "Where would a Stack be used in an undo feature for a trading application?",
         "Where would a Queue be used for processing loan applications?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "stack data structure",
+        "queue data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Big-O (Plain English)",
@@ -202,9 +301,18 @@
       "followups": [
         "Why does performance matter when processing 1 million transactions?",
         "Is the fastest algorithm always the best choice?",
-        "When is a simple O(n\u00b2) solution acceptable?"
+        "When is a simple O(n²) solution acceptable?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "HashMap Internals (High Level)",
@@ -219,7 +327,14 @@
         "How are collisions handled?",
         "What is the time complexity of get() and put() in ideal vs worst case?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "REST API Basics",
@@ -234,7 +349,18 @@
         "What is the difference between POST and PUT?",
         "What HTTP status code would you return for 'Account Not Found'?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "HTTP vs HTTPS",
@@ -249,7 +375,16 @@
         "How does encryption protect customer data?",
         "What is an SSL/TLS certificate?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Database Index Basics",
@@ -264,7 +399,18 @@
         "If a query is slow, is adding an index always the answer?",
         "What columns would you index in an 'Accounts' table?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "SQL: Basic Join",
@@ -278,7 +424,18 @@
         "Can you join a table to itself?",
         "How would you find customers who have no accounts?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Debugging Basics",
@@ -293,7 +450,16 @@
         "What tools do you use (IDE debugger, logs)?",
         "How do you prevent this from happening again?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Version Control (Git) Basics",
@@ -308,7 +474,16 @@
         "What is the purpose of branching?",
         "How do you resolve a simple merge conflict?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Why JPMorgan Chase? (Intern Focus)",
@@ -323,7 +498,17 @@
         "How does JPMC's focus on technology in finance appeal to you?",
         "What specific skills do you hope to learn in a financial services environment?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Learning from Mistakes",
@@ -338,7 +523,17 @@
         "What was the impact of the mistake?",
         "What process did you put in place to prevent it from happening again?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Teamwork",
@@ -352,7 +547,17 @@
         "How did you handle disagreements?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

@@ -16,7 +16,14 @@
         "What edge cases would you test (capacity 0/1, updates, repeats)?",
         "How would you make it thread-safe?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Top K Frequent Elements",
@@ -31,7 +38,15 @@
         "How do you handle ties deterministically?",
         "Time and space complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage",
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Longest Substring Without Repeating Characters",
@@ -46,7 +61,14 @@
         "Time/space complexity?",
         "How would you adapt for Unicode?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Merge Intervals",
@@ -60,7 +82,14 @@
         "What tricky edge cases exist (touching endpoints, nested)?",
         "Complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Search in Rotated Sorted Array",
@@ -74,7 +103,15 @@
         "How do duplicates change the approach?",
         "What edge cases would you test?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation",
+        "binary search algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Product of Array Except Self",
@@ -88,7 +125,14 @@
         "Space optimization (excluding output array)?",
         "Complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Validate Binary Search Tree",
@@ -102,7 +146,12 @@
         "Iterative vs recursive?",
         "Edge cases?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Lowest Common Ancestor (Binary Tree)",
@@ -117,7 +166,12 @@
         "What if nodes might not exist in the tree?",
         "How do you avoid recursion depth issues?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design a Rate Limiter (Single Region)",
@@ -132,7 +186,18 @@
         "How do you avoid retry storms?",
         "How do you test correctness?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Queue-Based Worker System",
@@ -147,7 +212,18 @@
         "At-least-once vs exactly-once processing?",
         "How do you monitor stuck jobs?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "SQL: Top Customers by Spend",
@@ -161,7 +237,18 @@
         "How do you handle ties?",
         "How would you paginate results?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Concurrency: Producer-Consumer",
@@ -175,7 +262,12 @@
         "What are condition variables used for?",
         "How do you reduce contention?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Object Design: Notification Service",
@@ -190,7 +282,16 @@
         "How would you test integrations?",
         "How do you handle retries and failures?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Behavioral (LP): Deliver Results",
@@ -205,7 +306,17 @@
         "How did you handle trade-offs?",
         "How did you measure success?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Earn Trust",
@@ -219,7 +330,17 @@
         "How did you handle misunderstandings?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Are Right, A Lot",
@@ -233,7 +354,17 @@
         "How did you validate quickly?",
         "What did you learn?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Invent and Simplify",
@@ -248,7 +379,17 @@
         "How did you prove the simplification worked?",
         "What trade-offs did you accept?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Insist on the Highest Standards",
@@ -263,7 +404,17 @@
         "How did you bring others along?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Think Big",
@@ -278,7 +429,17 @@
         "What risks did you identify?",
         "What was the outcome or next step?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Two Sum (Multiple Approaches)",
@@ -293,7 +454,15 @@
         "What if the array is sorted?",
         "How would you handle multiple pairs?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage",
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Valid Palindrome",
@@ -307,7 +476,12 @@
         "What's the time and space complexity?",
         "Can you solve it with O(1) extra space?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Maximum Subarray (Kadane's Algorithm)",
@@ -321,7 +495,14 @@
         "How would you modify it to also return the subarray indices?",
         "What if all numbers are negative?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Implement Queue using Stacks",
@@ -336,7 +517,12 @@
         "How would you make peek() efficient?",
         "Can you implement a stack using queues?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Group Anagrams",
@@ -351,7 +537,14 @@
         "How would you handle large strings?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Container With Most Water",
@@ -365,7 +558,14 @@
         "How would you prove its correctness?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "3Sum",
@@ -380,7 +580,14 @@
         "What's the time complexity?",
         "How would you adapt for a different target sum?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Word Break",
@@ -394,7 +601,12 @@
         "How would you handle an empty dictionary?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design Hit Counter",
@@ -408,7 +620,12 @@
         "What data structure optimizes for time range queries?",
         "How do you clean up old hits?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design Tic-Tac-Toe",
@@ -423,7 +640,14 @@
         "How would you extend to N x N board?",
         "What about undo functionality?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design Parking Lot",
@@ -438,7 +662,18 @@
         "How do you handle spot assignment?",
         "What about multiple entry/exit points?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design URL Shortener (Basic)",
@@ -453,7 +688,18 @@
         "What about collision handling?",
         "How would you scale this design?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Amazon Product Recommendation",
@@ -468,7 +714,18 @@
         "How would you match users with products?",
         "How do you handle new users or products?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Shopping Cart (Amazon Context)",
@@ -483,7 +740,18 @@
         "What about cart abandonment and recovery?",
         "How do you integrate with inventory and pricing systems?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Simple Search (Amazon)",
@@ -498,7 +766,18 @@
         "How would you handle typos?",
         "What about ranking results?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "SQL: Find Duplicate Products",
@@ -513,7 +792,18 @@
         "What if you need to find near-duplicates?",
         "How would you prevent duplicates during insertion?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "SQL: Customer Order History",
@@ -528,7 +818,18 @@
         "How would you handle large datasets?",
         "What about customers who never ordered?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Concurrency: Dining Philosophers",
@@ -543,7 +844,12 @@
         "How does resource hierarchy help?",
         "What about starvation?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Concurrency: Read-Write Lock",
@@ -558,7 +864,12 @@
         "What about reentrancy?",
         "How would you test this implementation?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Object Design: Amazon Payment System",
@@ -573,7 +884,16 @@
         "What about refunds and cancellations?",
         "How do you ensure transaction integrity?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Object Design: Inventory Management",
@@ -588,7 +908,16 @@
         "What about multiple warehouses?",
         "How do you handle restocking alerts?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Behavioral (LP): Customer Obsession",
@@ -603,7 +932,17 @@
         "What obstacles did you overcome?",
         "How did you measure the impact?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Ownership",
@@ -618,7 +957,17 @@
         "What challenges did you face?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Bias for Action",
@@ -633,7 +982,17 @@
         "How did you manage risks?",
         "What did you learn?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Frugality",
@@ -648,7 +1007,17 @@
         "How did you optimize resources?",
         "What was the result?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Learn and Be Curious",
@@ -663,7 +1032,17 @@
         "How did you apply what you learned?",
         "What challenges did you face?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Hire and Develop the Best",
@@ -678,7 +1057,17 @@
         "What approach did you take?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral (LP): Success and Scale Bring Broad Responsibility",
@@ -693,7 +1082,17 @@
         "How did you address them?",
         "What was the result?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Conflict Resolution",
@@ -708,7 +1107,17 @@
         "How did you approach the conversation?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Handling Failure",
@@ -723,7 +1132,17 @@
         "How did you recover?",
         "What would you do differently?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Amazon Innovation Question",
@@ -738,7 +1157,17 @@
         "What technical challenges might you face?",
         "How would you measure success?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Technical Trade-offs",
@@ -753,7 +1182,17 @@
         "How did you make your decision?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Code Review Experience",
@@ -768,7 +1207,17 @@
         "How did you deliver/receive it?",
         "What was the impact?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Technical Debt",
@@ -783,7 +1232,17 @@
         "How did you prioritize addressing it?",
         "What was the result?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

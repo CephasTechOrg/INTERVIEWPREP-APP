@@ -1,4 +1,6 @@
 {
+  "track": "data_science",
+  "company_style": "general",
   "difficulty": "easy",
   "questions": [
     {
@@ -12,7 +14,16 @@
         "What are the main stages of a typical data science project?",
         "How does data science create business value?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Supervised vs Unsupervised Learning",
@@ -25,7 +36,16 @@
         "Give an example of each type of learning",
         "What is reinforcement learning and how does it differ from these two?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Basic Data Types",
@@ -38,7 +58,12 @@
         "What's the difference between nominal and ordinal categorical data?",
         "How would you handle missing values in different data types?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Mean, Median, Mode",
@@ -51,7 +76,12 @@
         "In what situations is median better than mean?",
         "What does the mode tell you about a distribution?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "What is Overfitting?",
@@ -64,7 +94,12 @@
         "How can you detect overfitting?",
         "What are some basic ways to prevent it?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Correlation vs Causation",
@@ -77,7 +112,12 @@
         "Why is correlation not enough to prove causation?",
         "What methods can help establish causality?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Regression vs Classification",
@@ -90,7 +130,12 @@
         "Give an example of each type of problem",
         "Can some algorithms handle both types of problems?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "What is a Feature?",
@@ -103,7 +148,12 @@
         "What makes a good feature?",
         "What is feature engineering?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Training and Test Sets",
@@ -116,7 +166,12 @@
         "What is a typical split ratio?",
         "What happens if we don't use a test set?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "What is a Hypothesis?",
@@ -129,7 +184,12 @@
         "What's the difference between null and alternative hypotheses?",
         "How do you determine if results are statistically significant?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Data Visualization Purpose",
@@ -142,7 +202,12 @@
         "What are some common types of charts and when would you use each?",
         "How does visualization help in exploratory data analysis?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Accuracy Metric",
@@ -155,7 +220,12 @@
         "When might accuracy be misleading?",
         "What are some alternatives to accuracy?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Bias-Variance Tradeoff",
@@ -168,7 +238,12 @@
         "What does high bias indicate about a model?",
         "What does high variance indicate?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "What is Big Data?",
@@ -181,7 +256,16 @@
         "What are some challenges of working with big data?",
         "How does big data differ from traditional data analysis?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SQL Basics",
@@ -194,9 +278,12 @@
         "What's the difference between WHERE and HAVING clauses?",
         "How do JOIN operations work?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     }
-  ],
-  "company_style": "general",
-  "track": "data_science"
+  ]
 }

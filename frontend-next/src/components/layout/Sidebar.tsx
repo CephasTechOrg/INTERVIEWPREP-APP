@@ -89,7 +89,7 @@ export const Sidebar = () => {
           setCurrentPage(item.id as any);
           if (window.innerWidth < 1024) toggleSidebar();
         }}
-        className={`group relative w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-[13px] font-medium transition-all duration-200 ${
+        className={`group relative w-full flex items-center gap-3 px-3.5 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 ${
           isActive
             ? 'bg-blue-700/50 text-white'
             : 'text-blue-100 hover:text-white hover:bg-blue-800/40'
@@ -173,13 +173,13 @@ export const Sidebar = () => {
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 px-3 py-2 overflow-y-auto">
+        <nav className="flex-1 px-3 py-2 overflow-y-auto overflow-x-hidden scrollbar-hide">
           {/* Main */}
-          <div className="mb-5">
+          <div className="mb-4">
             <p className="px-3 mb-2 text-[10px] font-semibold text-blue-200 uppercase tracking-wider">
               Main
             </p>
-            <div className="space-y-1">
+            <div className="space-y-0.5">
               {mainNavItems.map(item => <NavButton key={item.id} item={item} />)}
             </div>
           </div>
@@ -189,7 +189,7 @@ export const Sidebar = () => {
             <p className="px-3 mb-2 text-[10px] font-semibold text-blue-200 uppercase tracking-wider">
               Tools
             </p>
-            <div className="space-y-1">
+            <div className="space-y-0.5">
               {secondaryNavItems.map(item => <NavButton key={item.id} item={item} />)}
             </div>
           </div>

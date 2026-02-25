@@ -22,7 +22,18 @@
         "How would you design Argo Workflows to orchestrate multi-step firmware builds across environments?",
         "How do you isolate build environments for different vehicle software teams (e.g., Autopilot vs Infotainment)?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Telemetry Platform for Millions of Vehicles",
@@ -42,7 +53,18 @@
         "How do you handle schema evolution of telemetry data?",
         "How would you provide engineers with the ability to query petabyte-scale data with low latency?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Concurrency: Double-Spending Prevention (Payment Account API)",
@@ -60,7 +82,18 @@
         "What happens if the payment service crashes after debiting the account but before completing the order?",
         "How do you ensure idempotency for retried requests?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Coordinate Workers Across Two Exclusive Targets",
@@ -77,7 +110,12 @@
         "What is the state space of your solution?",
         "How would you test this for deadlock conditions?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Shortest Path with Range Constraints (Tesla Charging Network)",
@@ -94,7 +132,12 @@
         "How do you handle the trade-off between charging time and detour distance?",
         "What if the car can charge partially (not necessarily to full)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "System Design: Autonomous Vehicle Compute Platform",
@@ -111,7 +154,18 @@
         "How do you handle sensor degradation or failure (e.g., camera occlusion)?",
         "How do you validate and verify safety-critical software?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Jenkins Scaling & Optimization (Deep Dive)",
@@ -130,7 +184,18 @@
         "How do you debug a Jenkins agent stuck in a Pending state on Kubernetes?",
         "What's your approach to running bare metal nodes under Kubernetes control?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Distributed Tracing & Anomaly Detection at Scale",
@@ -146,7 +211,18 @@
         "How do you store and index trace data for fast querying?",
         "What statistical methods can you use to automatically detect anomalous traces?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Behavioral: Migration Leadership",
@@ -163,7 +239,17 @@
         "What metrics did you use to measure the success of the migration?",
         "What would you do differently in hindsight?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Influencing Multiple Teams",
@@ -178,7 +264,17 @@
         "What communication strategies did you use?",
         "How did you measure adoption and compliance?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Elon Musk's Favorite Question",
@@ -195,7 +291,17 @@
         "Why didn't you solve it the obvious way?",
         "What did you learn from this experience that changed how you approach problems today?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

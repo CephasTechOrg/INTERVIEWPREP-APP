@@ -19,7 +19,7 @@ def is_elevenlabs_enabled() -> bool:
 
 # Map interviewer id → env var name holding their voice ID
 _INTERVIEWER_VOICE_ENV: dict[str, str] = {
-    "alex": "ELEVENLABS_VOICE_ALEX",
+    "cephas": "ELEVENLABS_VOICE_CEPHAS",
     "mason": "ELEVENLABS_VOICE_MASON",
     "erica": "ELEVENLABS_VOICE_ERICA",
     "maya": "ELEVENLABS_VOICE_MAYA",

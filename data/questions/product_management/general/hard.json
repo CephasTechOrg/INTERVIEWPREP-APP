@@ -1,4 +1,6 @@
 {
+  "track": "product_management",
+  "company_style": "general",
   "difficulty": "hard",
   "questions": [
     {
@@ -12,7 +14,12 @@
         "How do you allocate resources across different product lines?",
         "What frameworks help with portfolio-level decision making?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Platform Product Management",
@@ -25,7 +32,12 @@
         "How do you balance the needs of different platform stakeholders?",
         "What metrics are important for platform products?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Product-Led Growth Strategy",
@@ -39,7 +51,12 @@
         "How do you design products for viral growth?",
         "What are the key metrics for product-led growth companies?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "International Expansion Strategy",
@@ -53,7 +70,12 @@
         "How do you decide which markets to enter first?",
         "What are the key considerations for localization?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Monetization Strategy for Enterprise Products",
@@ -67,7 +89,12 @@
         "How do you handle enterprise negotiations and custom pricing?",
         "What are common enterprise pricing models and their trade-offs?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "M&A Integration Strategy",
@@ -81,7 +108,12 @@
         "What are the key risks in product integration after M&A?",
         "How do you prioritize integration work vs ongoing product development?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Zero-to-One Product Strategy",
@@ -95,7 +127,12 @@
         "What are the unique challenges of creating new markets?",
         "How do you validate demand for a product that doesn't exist yet?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Product Organization Design",
@@ -109,7 +146,12 @@
         "What are the trade-offs between feature teams and platform teams?",
         "How do you evolve team structure as a company grows?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Ethical Product Decisions",
@@ -123,7 +165,12 @@
         "What frameworks help with ethical decision making?",
         "How do you balance business objectives with ethical considerations?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Incumbent Disruption Strategy",
@@ -137,7 +184,12 @@
         "What are effective strategies for competing with much larger companies?",
         "How do you identify and exploit weaknesses in incumbent products?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Product-Led Sales Integration",
@@ -151,7 +203,12 @@
         "How do you design handoffs between self-serve and sales-assisted customers?",
         "What data should sales teams have access to from the product?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Regulatory Strategy",
@@ -165,7 +222,12 @@
         "How do you balance innovation with compliance requirements?",
         "What's the role of product in regulatory strategy?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "AI Product Strategy",
@@ -179,7 +241,12 @@
         "How do you manage uncertainty in AI model performance?",
         "What ethical considerations are unique to AI products?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Product Metrics at Scale",
@@ -193,7 +260,12 @@
         "How do you ensure metric consistency across teams?",
         "What systems are needed to support data-driven decision making at scale?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Product Innovation Process",
@@ -207,9 +279,12 @@
         "How do you balance incremental improvements with breakthrough innovations?",
         "What structures and processes support sustained innovation?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     }
-  ],
-  "company_style": "general",
-  "track": "product_management"
+  ]
 }

@@ -21,7 +21,18 @@
         "What is the saga pattern and how would you apply it here?",
         "How do you design a self-healing system for failed deliveries?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Distributed Transactions & Saga Pattern",
@@ -39,7 +50,18 @@
         "How do you handle idempotency for retried operations?",
         "What happens if the compensation itself fails?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Real-Time Collaborative Tool",
@@ -56,7 +78,18 @@
         "How do you scale WebSocket connections to millions of concurrent users?",
         "What is the role of a central server vs peer-to-peer?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Scalable Notification Service",
@@ -72,7 +105,18 @@
         "How do you ensure idempotency to prevent duplicate messages?",
         "What is the trade-off between at-least-once and exactly-once delivery?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Implement a Custom Task Scheduler",
@@ -88,7 +132,18 @@
         "How do you avoid duplicate work on retries?",
         "How do you handle a worker crashing mid-task?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Performance Optimization: P99 Latency",
@@ -104,7 +159,18 @@
         "What is head-of-line blocking and how do you fix it?",
         "How do you implement client-side timeouts and retries?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "JVM Deep Dive: Memory Leak Analysis",
@@ -121,7 +187,12 @@
         "What is a classloader leak and how do you fix it?",
         "How do you set up proactive monitoring to catch this before it crashes?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Multi-Threaded Rate Limiter",
@@ -137,7 +208,18 @@
         "How would you implement this in a distributed environment?",
         "What is the ABA problem in the context of CAS?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Global Distributed Cache",
@@ -153,7 +235,18 @@
         "What is a cache stampede and how do you prevent it?",
         "How do you handle network partitions?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Implement a Lock-Free Concurrent Data Structure",
@@ -169,7 +262,12 @@
         "What are the performance trade-offs between lock-free and locking?",
         "How do you test a lock-free data structure for correctness?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design Salesforce's Multi-Tenant Architecture",
@@ -184,7 +282,18 @@
         "How does Salesforce handle governor limits per tenant?",
         "How do you migrate a tenant from one shared instance to a dedicated instance?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Behavioral: Technical Grilling by Hiring Manager",
@@ -200,7 +309,17 @@
         "If you had to re-implement it today, what would you do differently?",
         "How do you mentor junior engineers on the team?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Leadership and Mentoring",
@@ -215,7 +334,17 @@
         "How do you handle a situation where a teammate is underperforming?",
         "What is your philosophy on code reviews?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Salesforce Product Knowledge",
@@ -230,7 +359,17 @@
         "What are the technical challenges in implementing this feature?",
         "How does it compete with other products in the market?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

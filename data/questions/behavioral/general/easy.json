@@ -12,9 +12,19 @@
       ],
       "followups": [
         "What specific team or area would you be excited to join, and why?",
-        "What\u2019s one value of {company} that resonates with you?"
+        "What’s one value of {company} that resonates with you?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Why Are You Leaving?",
@@ -24,10 +34,20 @@
         "communication"
       ],
       "followups": [
-        "What are you looking for that you can\u2019t get in your current role?",
+        "What are you looking for that you can’t get in your current role?",
         "What did you learn from your current/last role?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "What Are You Looking For Next?",
@@ -40,7 +60,17 @@
         "What kind of work energizes you the most?",
         "What environment helps you do your best work?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Conflict With a Coworker",
@@ -53,7 +83,17 @@
         "What would you do differently next time?",
         "How did you ensure the relationship stayed productive?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Influencing Others",
@@ -67,7 +107,17 @@
         "How did you build trust or alignment?",
         "What data or reasoning helped you convince them?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Current Project",
@@ -80,7 +130,17 @@
         "What trade-offs did you make and why?",
         "How did you measure success?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Most Challenging Aspect",
@@ -93,7 +153,17 @@
         "How did you break the problem down?",
         "What did you learn from dealing with it?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Hard Bug You Fixed",
@@ -106,7 +176,17 @@
         "How did you validate the fix and prevent regressions?",
         "What tools helped you the most?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Tough Challenge",
@@ -119,7 +199,17 @@
         "What was the key decision that helped you succeed?",
         "How did you communicate progress to others?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "What Excites You?",
@@ -132,7 +222,17 @@
         "How have you been pursuing that interest?",
         "How does it relate to this role?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "What Frustrates You?",
@@ -145,7 +245,17 @@
         "How do you prevent frustration from impacting the team?",
         "Give an example of turning frustration into an improvement."
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "First Day at {company}",
@@ -158,7 +268,17 @@
         "How would you validate the problem with users or data?",
         "How would you measure success?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Most Interesting Projects",
@@ -169,9 +289,19 @@
       ],
       "followups": [
         "What was your specific contribution?",
-        "What did you learn that you\u2019d apply again?"
+        "What did you learn that you’d apply again?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Disagreement With Manager",
@@ -184,7 +314,17 @@
         "How did you keep it constructive and respectful?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Project You're Passionate About",
@@ -197,7 +337,17 @@
         "What made it meaningful to you?",
         "What would you improve if you had more time?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Best Day of Work",
@@ -210,7 +360,17 @@
         "How do you create more days like that for yourself and your team?",
         "What habits help you be productive?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Pushing for Something",
@@ -223,7 +383,17 @@
         "How did you build alignment?",
         "What did you learn about influencing without authority?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Constructive Feedback",
@@ -236,7 +406,17 @@
         "What changed as a result?",
         "How do you ask for feedback proactively?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Perseverance Over Months",
@@ -249,7 +429,17 @@
         "What was the hardest moment and how did you handle it?",
         "What did you learn about yourself?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Tight Deadline",
@@ -262,7 +452,17 @@
         "What trade-offs did you make?",
         "How did you communicate risk and progress?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "First Annual Review",
@@ -275,7 +475,17 @@
         "What would you do in the first 90 days to be successful?",
         "How do you measure your own growth?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Time Management Skill",
@@ -288,7 +498,17 @@
         "What changed after you applied it?",
         "How do you prioritize when everything feels urgent?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Getting Along With an Associate",
@@ -301,7 +521,17 @@
         "How did you ensure the work still got done?",
         "What did you learn about communication styles?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Work Criticized Most Often",
@@ -314,7 +544,17 @@
         "What concrete steps did you take?",
         "How do you track improvement?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Handling Criticism",
@@ -327,7 +567,17 @@
         "How do you separate feedback from emotion?",
         "How do you respond when you disagree?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Strengths for the Role",
@@ -340,7 +590,17 @@
         "Give an example of using that strength on a project.",
         "What strength are you currently working to improve?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "How Colleagues Describe You",
@@ -353,7 +613,17 @@
         "What feedback have you received that supports this?",
         "How do you want to be known on a team?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "First Six Months Goals",
@@ -366,7 +636,17 @@
         "How would you learn the codebase quickly?",
         "How would you build relationships across the team?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Why You're a Good Fit",
@@ -376,10 +656,20 @@
         "communication"
       ],
       "followups": [
-        "What is one gap you\u2019re working on right now?",
-        "What\u2019s an example that demonstrates your fit?"
+        "What is one gap you’re working on right now?",
+        "What’s an example that demonstrates your fit?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Dealing with Ambiguity",
@@ -393,7 +683,17 @@
         "How did you seek clarity and define success?",
         "What steps did you take to manage uncertainty?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Mentoring Others",
@@ -407,7 +707,17 @@
         "How did you assess what they needed?",
         "What was the outcome for them and for the team?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Learning New Technology",
@@ -421,7 +731,17 @@
         "What was your learning strategy?",
         "How did you apply it to deliver value quickly?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Missed Deadline or Failure",
@@ -435,7 +755,17 @@
         "How did you communicate the situation?",
         "What would you do differently in hindsight?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Improving a Process",
@@ -449,7 +779,17 @@
         "How did you get buy-in from others?",
         "How did you measure the impact of your change?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Ethical Dilemma",
@@ -463,7 +803,17 @@
         "What principles guided your decision?",
         "Who did you consult with, if anyone?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Receiving Conflicting Feedback",
@@ -477,7 +827,17 @@
         "How did you decide which direction to take?",
         "How did you manage stakeholder expectations?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Working with Remote Team",
@@ -491,7 +851,17 @@
         "What tools or practices helped most?",
         "How did you build rapport with teammates you rarely saw in person?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Taking Initiative",
@@ -505,7 +875,17 @@
         "What was the outcome?",
         "How did you balance this with your core responsibilities?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Adapting to Change",
@@ -519,7 +899,17 @@
         "How did you help others adapt?",
         "What did you learn from the experience?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Saying No to a Request",
@@ -533,7 +923,17 @@
         "How did you explain your reasoning?",
         "What alternative did you propose, if any?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Building Trust",
@@ -547,7 +947,17 @@
         "What specific actions did you take?",
         "How did you know trust had been established?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Work-Life Balance",
@@ -561,7 +971,17 @@
         "What boundaries do you set?",
         "How do you recharge and avoid burnout?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Presenting to Leadership",
@@ -575,7 +995,17 @@
         "How did you tailor your message?",
         "What was the outcome of the presentation?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Cultural Fit",
@@ -589,7 +1019,17 @@
         "How do you contribute to a positive team culture?",
         "What's your approach when you join a new team?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Career Goals",
@@ -603,7 +1043,17 @@
         "What skills are you looking to develop in that time?",
         "How do you plan your professional development?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

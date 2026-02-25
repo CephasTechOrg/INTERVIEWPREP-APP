@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useUIStore } from '@/lib/stores/uiStore';
 import { useAuthStore } from '@/lib/stores/authStore';
 import { useRouter } from 'next/navigation';
+import { ProfileModal } from '@/components/modals/ProfileModal';
 
 export const TopBar = () => {
   const { toggleSidebar, currentPage, theme, setTheme, setCurrentPage } = useUIStore();
@@ -11,6 +12,7 @@ export const TopBar = () => {
   const router = useRouter();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const pageNames: Record<string, string> = {
@@ -45,8 +47,9 @@ export const TopBar = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 lg:left-60 h-16 bg-white dark:bg-[#111318] border-b border-slate-100 dark:border-slate-800 z-20 transition-colors duration-300">
-      <div className="h-full px-4 lg:px-6 flex items-center justify-between">
+    <>
+      <header className="fixed top-0 left-0 right-0 lg:left-60 h-16 bg-white dark:bg-[#111318] border-b border-slate-100 dark:border-slate-800 z-20 transition-colors duration-300">
+        <div className="h-full px-4 lg:px-6 flex items-center justify-between">
 
         {/* Left: Menu + Page title */}
         <div className="flex items-center gap-3">
@@ -140,6 +143,15 @@ export const TopBar = () => {
                 {/* Actions */}
                 <div className="p-1.5">
                   <button
+                    onClick={() => { setProfileOpen(true); setDropdownOpen(false); }}
+                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors text-left"
+                  >
+                    <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                    </svg>
+                    Profile
+                  </button>
+                  <button
                     onClick={() => { setCurrentPage('settings'); setDropdownOpen(false); }}
                     className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors text-left"
                   >
@@ -168,6 +180,9 @@ export const TopBar = () => {
           </div>
         </div>
       </div>
-    </header>
+      </header>
+
+      <ProfileModal open={profileOpen} onClose={() => setProfileOpen(false)} />
+    </>
   );
 };

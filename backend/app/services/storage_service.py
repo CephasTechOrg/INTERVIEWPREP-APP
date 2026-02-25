@@ -21,17 +21,11 @@ def upload_avatar(file_bytes: bytes, content_type: str, user_id: int) -> str | N
         client = create_client(settings.SUPABASE_URL, settings.SUPABASE_SERVICE_ROLE_KEY)
         bucket = settings.SUPABASE_BUCKET_PROFILE_PHOTOS
 
-        # Derive a clean file extension from the MIME type
-        mime_ext_map = {
-            "image/jpeg": "jpg",
-            "image/png": "png",
-            "image/webp": "webp",
-            "image/gif": "gif",
-        }
-        ext = mime_ext_map.get(content_type, "jpg")
-        path = f"avatars/{user_id}.{ext}"
+        # Fixed path per user — no extension — so any new upload always overwrites
+        # the same object regardless of image format.
+        path = f"avatars/{user_id}"
 
-        # upsert=True overwrites the previous photo
+        # upsert overwrites the previous photo
         client.storage.from_(bucket).upload(
             path,
             file_bytes,

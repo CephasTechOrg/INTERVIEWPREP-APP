@@ -16,7 +16,16 @@
         "Why does your approach work?",
         "How would you explain this to a beginner?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Reverse a String (Thinking Process)",
@@ -31,7 +40,16 @@
         "How do you know when to stop?",
         "How would you check your result?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Palindrome Check (Simple Reasoning)",
@@ -46,7 +64,16 @@
         "Why is checking from both ends useful?",
         "How could you simplify the input first?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Find the Largest Number",
@@ -61,7 +88,16 @@
         "How do you keep track of the current largest?",
         "Why is this simple approach effective?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Counting Items Using a Map",
@@ -75,7 +111,16 @@
         "What would the key and value represent?",
         "Where is this useful in real applications?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Remove Duplicate Items",
@@ -90,7 +135,16 @@
         "Does order matter?",
         "What would change if the list was very large?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Binary Search (Conceptual)",
@@ -101,10 +155,19 @@
       ],
       "followups": [
         "Why does sorting help?",
-        "Why wouldn\u2019t this work on an unsorted list?",
+        "Why wouldn’t this work on an unsorted list?",
         "What real-life example is similar?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Merge Two Sorted Lists (High Level)",
@@ -119,7 +182,16 @@
         "What happens when one list ends?",
         "How would you explain this visually?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Valid Parentheses (Idea Level)",
@@ -134,7 +206,16 @@
         "What would make the string invalid?",
         "What real-life situation is similar?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Loops (Practical Use)",
@@ -144,11 +225,20 @@
         "fundamentals"
       ],
       "followups": [
-        "What happens if you don\u2019t use loops?",
+        "What happens if you don’t use loops?",
         "What is a common mistake with loops?",
         "How do you make sure a loop stops?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "If Statements (Decision Making)",
@@ -163,7 +253,16 @@
         "Can you give a real-life example?",
         "Why are conditions important?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Functions (Why They Matter)",
@@ -177,7 +276,16 @@
         "How do they make debugging easier?",
         "What happens if everything is in one function?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Arrays vs Linked Lists (Practical Difference)",
@@ -191,7 +299,16 @@
         "Which one is more flexible?",
         "Why might a company choose one over the other?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Big-O (Intuition Only)",
@@ -205,11 +322,20 @@
         "Is the fastest solution always necessary?",
         "When is a simple solution good enough?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Debugging Basics",
-      "prompt": "Your program doesn\u2019t work as expected. Explain the first steps you would take to debug it.",
+      "prompt": "Your program doesn’t work as expected. Explain the first steps you would take to debug it.",
       "tags": [
         "debugging",
         "fundamentals"
@@ -219,7 +345,16 @@
         "What tools would you use first?",
         "When would you ask for help?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Testing a Simple Function",
@@ -233,11 +368,20 @@
         "What happens if you skip testing?",
         "How do tests help later?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Why Apple? (Easy Technical Angle)",
-      "prompt": "Why do you want to intern at Apple, and how does software contribute to Apple\u2019s products?",
+      "prompt": "Why do you want to intern at Apple, and how does software contribute to Apple’s products?",
       "tags": [
         "behavioral",
         "product-thinking"
@@ -247,7 +391,17 @@
         "How does software improve user experience?",
         "What do you hope to learn at Apple?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Find the Smallest Number",
@@ -262,7 +416,16 @@
         "What if all numbers are negative?",
         "Why is this a common programming task?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Sorting Concepts",
@@ -276,7 +439,16 @@
         "Name a real-world Apple use case for sorting",
         "Is sorting always necessary?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "String Concatenation",
@@ -290,7 +462,16 @@
         "Why is this useful in real programs?",
         "How would you combine user input with a message?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Basic Error Handling",
@@ -304,7 +485,16 @@
         "What information should error messages provide?",
         "How does error handling improve user experience?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Comments in Code",
@@ -318,7 +508,16 @@
         "What makes a good comment?",
         "Can comments ever be unhelpful?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Version Control Basics",
@@ -333,7 +532,16 @@
         "What happens if you make a mistake?",
         "Why does Apple use version control?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "User Input Validation",
@@ -348,7 +556,16 @@
         "How does this protect Apple's products?",
         "What happens without validation?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Variables and Data Types",
@@ -362,7 +579,16 @@
         "What are common data types?",
         "How do variables improve code readability?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Simple iOS App Concept",
@@ -377,7 +603,16 @@
         "How does user interaction work?",
         "Where does data come from?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Apple Product Integration",
@@ -392,7 +627,12 @@
         "How does software enable this?",
         "What challenges might arise?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Accessibility Basics",
@@ -407,7 +647,16 @@
         "What simple improvements help accessibility?",
         "Why does Apple emphasize accessibility?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Privacy and Security Basics",
@@ -422,7 +671,12 @@
         "What are basic security practices?",
         "How does privacy build user trust?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Performance Considerations",
@@ -437,7 +691,16 @@
         "Why is battery life important?",
         "How do you balance features with performance?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Simple Algorithm for Photos App",
@@ -452,7 +715,12 @@
         "How would you group photos?",
         "Why is this useful for users?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Handling Multiple Tasks",
@@ -466,7 +734,16 @@
         "How does Apple handle millions of users?",
         "Why is this important for messaging apps?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Database Basics",
@@ -480,7 +757,18 @@
         "Why not use files instead?",
         "How do databases help with speed?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Caching Concept",
@@ -495,7 +783,16 @@
         "What are trade-offs of caching?",
         "How does caching help during slow network?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Mobile vs Desktop Differences",
@@ -510,7 +807,12 @@
         "Why is touch interface important?",
         "How would you approach this as a developer?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Team Collaboration",
@@ -525,7 +827,17 @@
         "How do teams solve complex problems?",
         "Why does Apple value collaboration?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Learning from Mistakes",
@@ -540,7 +852,17 @@
         "What did you do to fix it?",
         "How did this help you improve?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Technical Challenge",
@@ -555,7 +877,17 @@
         "What resources did you use?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Project Experience",
@@ -570,7 +902,17 @@
         "What did you learn?",
         "What would you improve?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "User-Centric Thinking",
@@ -585,7 +927,17 @@
         "How would you implement your idea?",
         "How would you test your improvement?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Adaptability",
@@ -600,7 +952,17 @@
         "How did you approach learning?",
         "What was the result?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Communication Skills",
@@ -615,7 +977,17 @@
         "Why is clear communication important?",
         "How do you know if someone understands?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Initiative",
@@ -630,7 +1002,17 @@
         "What was the impact?",
         "What did you learn?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Time Management",
@@ -645,7 +1027,17 @@
         "How do you handle unexpected tasks?",
         "What tools help you stay organized?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Feedback Reception",
@@ -660,7 +1052,17 @@
         "What did you change?",
         "How did it improve your work?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Problem Solving Approach",
@@ -675,7 +1077,17 @@
         "How do you break down complex problems?",
         "When do you ask for help?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Apple Innovation",
@@ -690,7 +1102,17 @@
         "How does it help users?",
         "What technical challenges might it involve?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Career Goals",
@@ -705,7 +1127,17 @@
         "How does this fit your long-term goals?",
         "What unique opportunities does Apple offer?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Diversity and Inclusion",
@@ -720,7 +1152,17 @@
         "What can individuals do to promote inclusion?",
         "Why does Apple value diverse perspectives?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Work-Life Balance",
@@ -735,7 +1177,17 @@
         "How do you avoid burnout?",
         "Why is balance important for creativity?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Design Thinking",
@@ -750,7 +1202,17 @@
         "Why does Apple focus on design?",
         "How do developers collaborate with designers?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Quality Focus",
@@ -765,7 +1227,17 @@
         "How do you ensure quality in your work?",
         "Why do users expect quality from Apple?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Environmental Responsibility",
@@ -780,7 +1252,17 @@
         "How can software reduce environmental impact?",
         "Why is this important for technology companies?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

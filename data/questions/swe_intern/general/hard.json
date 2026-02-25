@@ -16,7 +16,12 @@
         "What is the time complexity in terms of total nodes N and k?",
         "What are edge cases (empty lists, null heads)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Serialize and Deserialize Binary Tree",
@@ -32,7 +37,12 @@
         "How do you handle null children?",
         "What is the complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Word Ladder",
@@ -46,7 +56,12 @@
         "How can you optimize neighbor generation?",
         "What is the complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Trapping Rain Water",
@@ -61,7 +76,14 @@
         "What is the time and space complexity of each?",
         "How would you solve if the elevation map is circular?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Median of Two Sorted Arrays",
@@ -76,7 +98,15 @@
         "Explain the partition approach.",
         "What are the edge cases (empty arrays, odd/even lengths)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation",
+        "binary search algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Alien Dictionary",
@@ -91,7 +121,12 @@
         "What if multiple valid orders exist?",
         "How do you build the graph efficiently?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Regular Expression Matching",
@@ -106,7 +141,12 @@
         "How does greedy fail for '*'?",
         "Can you optimize space complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Largest Rectangle in Histogram",
@@ -121,7 +161,15 @@
         "What is the time and space complexity?",
         "How would you solve for a 2D matrix?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation",
+        "stack data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Sliding Window Maximum",
@@ -136,7 +184,14 @@
         "How do you maintain indices vs values?",
         "What if k is very large?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Minimum Window Substring",
@@ -151,7 +206,14 @@
         "What's the time complexity?",
         "How do you handle very large strings?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "N-Queens",
@@ -165,7 +227,12 @@
         "What's the time complexity?",
         "How would you count only the number of solutions?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Sudoku Solver",
@@ -179,7 +246,12 @@
         "What pruning strategies can you use?",
         "How would you validate a solved Sudoku?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Longest Valid Parentheses",
@@ -194,7 +266,14 @@
         "How to solve in O(1) space?",
         "What are the edge cases?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "stack data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Edit Distance",
@@ -208,7 +287,12 @@
         "How can you optimize space?",
         "What if operations have different costs?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Maximum Profit in Job Scheduling",
@@ -223,7 +307,14 @@
         "How does binary search help?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "binary search algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Count of Smaller Numbers After Self",
@@ -239,7 +330,14 @@
         "What's the time complexity?",
         "How to handle duplicates?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design Twitter",
@@ -254,7 +352,18 @@
         "What about pull vs push models?",
         "How to scale to millions of users?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "LRU Cache",
@@ -269,7 +378,14 @@
         "How would you make it thread-safe?",
         "What about implementing LFU cache?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "LFU Cache",
@@ -284,7 +400,14 @@
         "How do you handle frequency ties?",
         "What's the space complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Word Search II",
@@ -299,7 +422,12 @@
         "How do you prune the search?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design In-Memory File System",
@@ -314,7 +442,18 @@
         "How do you handle relative vs absolute paths?",
         "What about file permissions and metadata?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "The Skyline Problem",
@@ -329,7 +468,12 @@
         "How do you handle overlapping buildings?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design Search Autocomplete System",
@@ -344,7 +488,12 @@
         "What about real-time updates?",
         "How to handle memory constraints?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Candy",
@@ -358,7 +507,15 @@
         "What's the time complexity?",
         "Can you solve with one pass?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation",
+        "greedy algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Text Justification",
@@ -372,7 +529,12 @@
         "What about the last line?",
         "What edge cases should you test?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Basic Calculator",
@@ -387,7 +549,14 @@
         "What about negative numbers?",
         "How to extend for more operators?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "stack data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Longest Increasing Path in a Matrix",
@@ -402,7 +571,14 @@
         "What's the time complexity?",
         "Can you solve with topological sort?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "dynamic programming approach"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Burst Balloons",
@@ -416,7 +592,12 @@
         "Why is greedy incorrect?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Russian Doll Envelopes",
@@ -431,7 +612,14 @@
         "What's the time complexity?",
         "How to handle equal widths?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "binary search algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design a Distributed Rate Limiter",
@@ -446,7 +634,18 @@
         "How do you handle clock skew?",
         "What about consistency vs availability trade-offs?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a URL Shortener at Scale",
@@ -461,7 +660,18 @@
         "What's your database choice and sharding strategy?",
         "How do you handle custom aliases and expiration?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Web Crawler",
@@ -476,7 +686,18 @@
         "How do you detect and avoid duplicate URLs?",
         "What about priority crawling?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Chat System",
@@ -491,7 +712,18 @@
         "What about offline messages and sync?",
         "How do you scale WebSocket connections?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Recommendation System",
@@ -506,7 +738,18 @@
         "How do you handle cold start?",
         "What metrics measure recommendation quality?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Notification System",
@@ -521,7 +764,18 @@
         "What about user preferences and rate limiting?",
         "How do you prevent duplicate notifications?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Key-Value Store",
@@ -536,7 +790,18 @@
         "How do you handle replication and sharding?",
         "What about failure detection and recovery?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Parking Lot System",
@@ -550,7 +815,16 @@
         "How do you handle pricing and payments?",
         "What about disabled spots and EV charging?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Maximum Frequency Stack",
@@ -565,7 +839,15 @@
         "How do you handle ties?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage",
+        "stack data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Find Median from Data Stream",
@@ -579,7 +861,12 @@
         "How do you maintain balance?",
         "What if you need to support removal?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Insert Delete GetRandom O(1)",
@@ -594,7 +881,15 @@
         "What's the space complexity?",
         "How does getRandom guarantee uniform distribution?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage",
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Longest Consecutive Sequence",
@@ -608,7 +903,14 @@
         "How do you achieve O(n)?",
         "What about memory constraints?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "First Missing Positive",
@@ -623,7 +925,15 @@
         "How do you use array indices as hash keys?",
         "What are the edge cases?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage",
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Max Points on a Line",
@@ -638,7 +948,14 @@
         "How do you handle duplicate points?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Expression Add Operators",
@@ -653,7 +970,12 @@
         "How do you avoid overflow?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Perfect Rectangle",
@@ -668,7 +990,14 @@
         "How do you detect overlaps efficiently?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Largest BST Subtree",
@@ -683,7 +1012,12 @@
         "How do you validate BST while traversing?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Recover Binary Search Tree",
@@ -698,7 +1032,12 @@
         "What about Morris traversal for O(1) space?",
         "What are the edge cases?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Binary Tree Maximum Path Sum",
@@ -713,7 +1052,14 @@
         "How do you handle negative values?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "dynamic programming approach"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Critical Connections in a Network",
@@ -728,7 +1074,12 @@
         "Why is Tarjan's algorithm O(V+E)?",
         "How do you handle duplicate edges?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Minimum Number of Refueling Stops",
@@ -743,7 +1094,15 @@
         "Why does a max-heap work?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "dynamic programming approach",
+        "greedy algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Swim in Rising Water",
@@ -758,7 +1117,14 @@
         "What's the time complexity of each?",
         "How does this relate to the minimax path problem?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "binary search algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Shortest Subarray with Sum at Least K",
@@ -773,7 +1139,14 @@
         "How does the deque maintain monotonicity?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     }
   ]
 }
