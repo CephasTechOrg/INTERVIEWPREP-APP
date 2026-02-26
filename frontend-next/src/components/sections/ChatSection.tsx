@@ -163,7 +163,7 @@ export const ChatSection = () => {
   const hasPending = messages.some((m) => m.pending);
 
   const handleSend = async (e?: React.FormEvent) => {
-    e.preventDefault();
+    e?.preventDefault();
     
 
     if (isListening) {
