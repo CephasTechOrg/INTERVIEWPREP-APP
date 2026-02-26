@@ -805,8 +805,8 @@ export const InterviewSection = () => {
                   <div key={msg.id} className={`flex gap-2 ${msg.role === 'student' ? 'flex-row-reverse' : 'flex-row'}`}>
                     <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 shadow-md mt-1">
                       {msg.role === 'student' ? (
-                        user?.profile && typeof user.profile === 'object' && 'avatar_url' in user.profile && user.profile.avatar_url ? (
-                          <img src={user.profile.avatar_url} alt="Your avatar" className="w-full h-full object-cover" />
+                        user?.profile && typeof user.profile === 'object' && 'avatar_url' in user.profile && (user?.profile as any)?.avatar_url ? (
+                          <img src={(user?.profile as any)?.avatar_url} alt="Your avatar" className="w-full h-full object-cover" />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-slate-700 to-slate-900 dark:from-slate-500 dark:to-slate-700 text-white flex items-center justify-center text-xs font-bold">
                             {(user?.full_name?.split(/\s+/)[0]?.[0] || user?.email?.[0] || 'U').toUpperCase()}
