@@ -11,6 +11,6 @@ class PendingSignup(Base):
     email: Mapped[str] = mapped_column(String(255), unique=True, index=True, nullable=False)
     full_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
-    verification_code: Mapped[str] = mapped_column(String(6), nullable=False)
+    verification_code: Mapped[str] = mapped_column(String(255), nullable=False)
     expires_at: Mapped[str | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[str] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
