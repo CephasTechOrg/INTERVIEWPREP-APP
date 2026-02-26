@@ -447,7 +447,7 @@ export const InterviewSection = () => {
       addMessage(reply);
     } catch (err) {
       // Remove the optimistic message on error
-      setMessages((prevMessages) => prevMessages.filter((m) => m.id !== tempId));
+      setMessages(messages.filter((m) => m.id !== tempId));
       const errorMsg = err instanceof Error ? err.message : 'Failed to send message';
       setLocalError(errorMsg);
       setError(errorMsg);
