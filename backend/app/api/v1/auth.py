@@ -1,6 +1,9 @@
 import contextlib
+import logging
 
 from fastapi import APIRouter, Depends, HTTPException, Request
+
+logger = logging.getLogger(__name__)
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_db
@@ -54,18 +57,27 @@ def signup(payload: SignupRequest, request: Request, db: Session = Depends(get_d
         password_hash=password_hash,
         full_name=payload.full_name,
     )
-    with contextlib.suppress(Exception):
+    email_sent = False
+    try:
         send_email(
             email,
             "Verify your email",
             (
                 "Welcome to InterviewPrep! Use this 6-digit code to finish your signup:\n\n"
                 f"{code}\n\n"
-                "This code expires in 30 minutes."
+                "This code expires in 60 minutes."
             ),
         )
+        email_sent = True
+    except Exception as exc:
+        logger.error("Failed to send verification email to %s: %s", email, exc)
     log_audit(db, "signup_pending", user_id=None, metadata={"email": email}, request=request)
-    return SignupResponse(ok=True, message="Verification code sent. Enter the 6-digit code to finish signup.")
+    if email_sent:
+        return SignupResponse(ok=True, message="Verification code sent. Check your inbox (and spam folder).")
+    return SignupResponse(
+        ok=True,
+        message="Account created but we couldn't send the verification email right now. Use 'Resend code' on the next page.",
+    )
 
 
 @router.post("/login", response_model=TokenResponse)

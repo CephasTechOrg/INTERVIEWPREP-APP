@@ -135,7 +135,7 @@ export default function VerifyPage() {
         {/* OTP boxes */}
         <div>
           <label className={labelCls}>Verification Code</label>
-          <div className="flex gap-2" onPaste={handlePaste}>
+          <div className="flex justify-between gap-2" onPaste={handlePaste}>
             {code.map((digit, index) => (
               <input
                 key={index}
@@ -146,7 +146,7 @@ export default function VerifyPage() {
                 value={digit}
                 onChange={(e) => handleCodeChange(index, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(index, e)}
-                className="flex-1 text-center text-xl font-bold py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all disabled:opacity-50"
+                className="w-11 h-12 sm:w-12 sm:h-14 text-center text-xl font-bold rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all disabled:opacity-50"
                 disabled={isSubmitting}
               />
             ))}

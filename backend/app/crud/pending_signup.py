@@ -3,7 +3,7 @@ from datetime import UTC, datetime, timedelta
 
 from sqlalchemy.orm import Session
 
-from app.core.security import token_matches
+from app.core.security import hash_token, token_matches
 from app.models.pending_signup import PendingSignup
 
 
@@ -20,15 +20,17 @@ def upsert_pending_signup(
     email: str,
     password_hash: str,
     full_name: str | None,
-    expires_minutes: int = 30,
+    expires_minutes: int = 60,
 ) -> tuple[PendingSignup, str]:
     code = _generate_verification_code()
+    # Store the HASHED code so token_matches() can verify it correctly.
+    code_hash = hash_token(code)
     expires_at = datetime.now(UTC) + timedelta(minutes=expires_minutes)
     existing = get_by_email(db, email)
     if existing:
         existing.password_hash = password_hash
         existing.full_name = full_name
-        existing.verification_code = code
+        existing.verification_code = code_hash
         existing.expires_at = expires_at
         db.add(existing)
         db.commit()
@@ -39,7 +41,7 @@ def upsert_pending_signup(
         email=email,
         full_name=full_name,
         password_hash=password_hash,
-        verification_code=code,
+        verification_code=code_hash,
         expires_at=expires_at,
     )
     db.add(pending)
