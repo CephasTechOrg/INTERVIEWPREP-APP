@@ -5,6 +5,8 @@ import { aiService } from '@/lib/services/aiService';
 import { chatService, type ChatMessage } from '@/lib/services/chatService';
 import { sanitizeAiText } from '@/lib/utils/text';
 import { Icons } from '@/components/ui/Icons';
+import { useAuthStore } from '@/lib/stores/authStore';
+import { useSessionStore } from '@/lib/stores/sessionStore';
 
 type UIChatMessage = ChatMessage & { pending?: boolean };
 
@@ -40,6 +42,8 @@ const buildTitle = (messages: ChatMessage[]) => {
 };
 
 export const ChatSection = () => {
+  const { user } = useAuthStore();
+  const { currentSession } = useSessionStore();
   const [threads, setThreads] = useState<ChatThread[]>([]);
   const [activeId, setActiveId] = useState<number | null>(null);
   const [input, setInput] = useState('');
@@ -562,15 +566,21 @@ export const ChatSection = () => {
             messages.map((msg, idx) => (
               <div
                 key={idx}
-                className={`flex gap-3 sm:gap-4 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex gap-2 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {msg.role !== 'user' && (
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center text-xs sm:text-sm font-bold flex-shrink-0 shadow-md">
-                    AI
+                  <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0 shadow-sm">
+                    {currentSession?.interviewer?.image_url ? (
+                      <img src={currentSession.interviewer.image_url} alt="Interviewer" className="w-full h-full object-cover object-top" />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center text-xs font-bold">
+                        {currentSession?.interviewer?.name?.[0] || 'AI'}
+                      </div>
+                    )}
                   </div>
                 )}
                 <div
-                  className={`max-w-[75%] sm:max-w-[65%] lg:max-w-[60%] rounded-2xl px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base leading-relaxed shadow-sm ${
+                  className={`max-w-[75%] sm:max-w-[65%] lg:max-w-[60%] rounded-xl px-3 py-2 text-sm leading-relaxed shadow-sm ${
                     msg.role === 'user'
                       ? 'bg-blue-600 text-white rounded-br-sm'
                       : 'bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-bl-sm'
@@ -581,8 +591,14 @@ export const ChatSection = () => {
                   </div>
                 </div>
                 {msg.role === 'user' && (
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 dark:from-slate-500 dark:to-slate-700 text-white flex items-center justify-center text-xs sm:text-sm font-bold flex-shrink-0 shadow-md">
-                    You
+                  <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0 shadow-sm">
+                    {user?.profile && typeof user.profile === 'object' && 'avatar_url' in user.profile && user.profile.avatar_url ? (
+                      <img src={user.profile.avatar_url} alt="Your avatar" className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-slate-700 to-slate-900 dark:from-slate-500 dark:to-slate-700 text-white flex items-center justify-center text-xs font-bold">
+                        {(user?.full_name?.split(/\s+/)[0]?.[0] || user?.email?.[0] || 'U').toUpperCase()}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

@@ -16,7 +16,16 @@
         "Give a small example.",
         "What edge case would you test first?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Reverse a String (Steps)",
@@ -30,7 +39,16 @@
         "How do you know when to stop?",
         "How do you verify the result?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Palindrome Check",
@@ -44,7 +62,16 @@
         "Why compare from both ends?",
         "Give a simple example."
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Find the Largest Number",
@@ -58,7 +85,16 @@
         "What if the list is empty?",
         "Why is this approach simple?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Counting Items",
@@ -72,7 +108,16 @@
         "What is the key and value?",
         "Where is this useful?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Remove Duplicates (Conceptual)",
@@ -86,7 +131,16 @@
         "Does order matter?",
         "What edge case would you test?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Binary Search (Idea Only)",
@@ -100,7 +154,16 @@
         "What does \"cutting in half\" mean?",
         "Give a real-life example."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Merge Two Sorted Lists",
@@ -114,7 +177,16 @@
         "What happens when one list ends?",
         "Give a small example."
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Valid Parentheses (Idea Level)",
@@ -128,7 +200,16 @@
         "What makes a string invalid?",
         "Give an example."
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Loops (Practical Use)",
@@ -142,7 +223,16 @@
         "Why are loops useful?",
         "Give a simple use case."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "If Statements",
@@ -156,7 +246,16 @@
         "Give a real-life example.",
         "Why are conditions important?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Functions (Purpose)",
@@ -170,7 +269,16 @@
         "How do they help debugging?",
         "What happens without functions?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Variables (Usage)",
@@ -183,7 +291,16 @@
         "What happens when variables change?",
         "How do they improve readability?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Arrays vs Lists",
@@ -197,7 +314,16 @@
         "Which is more flexible?",
         "Why might Amazon choose one?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Big-O (Plain English)",
@@ -211,7 +337,16 @@
         "Is faster always better?",
         "When is simple good enough?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Debugging Basics",
@@ -225,7 +360,16 @@
         "What tools help?",
         "When do you ask for help?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Testing Basics",
@@ -239,7 +383,16 @@
         "What happens if you skip testing?",
         "How do tests save time?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "APIs (Usage)",
@@ -253,7 +406,16 @@
         "What data could an API return?",
         "Give an example."
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "REST Basics",
@@ -267,7 +429,16 @@
         "What does POST do?",
         "Why is REST popular?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Frontend vs Backend",
@@ -281,7 +452,16 @@
         "Which handles data?",
         "How do they communicate?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Leadership Principle: Customer Obsession",
@@ -295,7 +475,17 @@
         "What did you change?",
         "How did you measure success?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Leadership Principle: Ownership",
@@ -309,7 +499,17 @@
         "What challenges did you face?",
         "What did you learn?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Leadership Principle: Bias for Action",
@@ -323,7 +523,16 @@
         "How did you manage risk?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Leadership Principle: Learn and Be Curious",
@@ -337,7 +546,17 @@
         "How did you apply it?",
         "What did you build?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Leadership Principle: Dive Deep",
@@ -351,7 +570,17 @@
         "What clue helped most?",
         "What did you fix?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Leadership Principle: Earn Trust",
@@ -365,7 +594,17 @@
         "How did communication help?",
         "What was the result?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Leadership Principle: Deliver Results",
@@ -379,7 +618,17 @@
         "What obstacles did you face?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Why Amazon?",
@@ -394,7 +643,17 @@
         "What Amazon product do you like?",
         "What do you want to learn?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Find the Smallest Number",
@@ -408,7 +667,16 @@
         "What if all numbers are negative?",
         "Why is this a common interview question?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Sorting Concepts",
@@ -422,7 +690,16 @@
         "Name a real Amazon use case for sorting",
         "Is sorting always necessary?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Data Structures for Shopping Cart",
@@ -436,7 +713,16 @@
         "How would you handle adding/removing items?",
         "What about calculating totals?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "String Concatenation",
@@ -450,7 +736,16 @@
         "Why is this useful in real programs?",
         "How would you combine multiple strings?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Basic Error Handling",
@@ -464,7 +759,16 @@
         "What information should error messages provide?",
         "How does error handling improve user experience?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Comments in Code",
@@ -478,7 +782,16 @@
         "What makes a good comment?",
         "Can comments ever be unhelpful?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Version Control Basics",
@@ -492,7 +805,16 @@
         "What happens if you make a mistake?",
         "Why does Amazon use version control?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Simple Amazon Product Search",
@@ -507,7 +829,16 @@
         "How would you handle multiple matches?",
         "What if the product isn't found?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Calculate Order Total",
@@ -522,7 +853,16 @@
         "How would you handle taxes or discounts?",
         "Why is accuracy important?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Check Stock Availability",
@@ -537,7 +877,16 @@
         "How would you display the result to users?",
         "What if stock changes while processing?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "User Input Validation",
@@ -552,7 +901,16 @@
         "How does this protect Amazon's systems?",
         "What happens without validation?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Simple Recommendation System",
@@ -567,7 +925,16 @@
         "How simple could you make this?",
         "Why are recommendations valuable?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Track Package Status",
@@ -582,7 +949,16 @@
         "How would you update the status?",
         "How would you display this to customers?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Handle Multiple User Sessions",
@@ -597,7 +973,16 @@
         "How does Amazon handle millions of users?",
         "Why is this important for shopping sites?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Database Basics",
@@ -612,7 +997,16 @@
         "Why not use files instead?",
         "How do databases help with speed?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Caching Concept",
@@ -627,7 +1021,16 @@
         "What are trade-offs of caching?",
         "How does caching help during busy times?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Mobile vs Desktop Experience",
@@ -642,7 +1045,16 @@
         "Why is mobile important for shopping?",
         "How would you approach this as a developer?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Accessibility Basics",
@@ -657,7 +1069,16 @@
         "What simple improvements help accessibility?",
         "Why does Amazon care about accessibility?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Security Basics",
@@ -672,7 +1093,16 @@
         "What are basic security practices?",
         "How does security build customer trust?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Scaling Concepts",
@@ -687,7 +1117,16 @@
         "How might Amazon prepare for busy times?",
         "Why is scaling important for business?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Team Collaboration",
@@ -702,7 +1141,16 @@
         "How do teams solve complex problems?",
         "Why does Amazon value collaboration?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Learning from Mistakes",
@@ -717,7 +1165,17 @@
         "What did you do to fix it?",
         "How did this help you improve?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Technical Challenge",
@@ -732,7 +1190,16 @@
         "What resources did you use?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Project Experience",
@@ -747,7 +1214,17 @@
         "What did you learn?",
         "What would you improve?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Customer-Centric Thinking",
@@ -762,7 +1239,17 @@
         "How would you implement your idea?",
         "How would you measure success?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Adaptability",
@@ -777,7 +1264,17 @@
         "How did you approach learning?",
         "What was the result?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Communication Skills",
@@ -792,7 +1289,16 @@
         "Why is clear communication important?",
         "How do you know if someone understands?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Initiative",
@@ -807,7 +1313,17 @@
         "What was the impact?",
         "What did you learn?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Time Management",
@@ -822,7 +1338,17 @@
         "How do you handle unexpected tasks?",
         "What tools help you stay organized?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Feedback Reception",
@@ -837,7 +1363,17 @@
         "What did you change?",
         "How did it improve your work?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Problem Solving Approach",
@@ -852,7 +1388,17 @@
         "How do you break down complex problems?",
         "When do you ask for help?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Amazon Innovation",
@@ -867,7 +1413,17 @@
         "How does it help customers?",
         "What technical challenges might it involve?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Career Goals",
@@ -882,7 +1438,17 @@
         "How does this fit your long-term goals?",
         "What unique opportunities does Amazon offer?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Diversity and Inclusion",
@@ -897,7 +1463,16 @@
         "What can individuals do to promote inclusion?",
         "Why does Amazon value diverse perspectives?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Work-Life Balance",
@@ -912,7 +1487,17 @@
         "How do you avoid burnout?",
         "Why is balance important for long-term success?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

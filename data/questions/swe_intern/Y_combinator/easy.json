@@ -1,6 +1,6 @@
 {
-  "track": "founder_interview",
-  "company_style": "y_combinator",
+  "track": "swe_intern",
+  "company_style": "Y_combinator",
   "difficulty": "easy",
   "questions": [
     {
@@ -17,7 +17,16 @@
         "Would my parents understand what you just said?",
         "What is the specific job-to-be-done for your customer?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "The Problem",
@@ -32,7 +41,16 @@
         "How are people solving this problem right now (without your product)?",
         "What is the 'before' state for your user?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Your Progress So Far",
@@ -47,7 +65,16 @@
         "When did you start working on this?",
         "What did you launch with?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "The Vision (10 Years)",
@@ -62,7 +89,16 @@
         "How big can this be?",
         "Why does this need to exist as a company?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Why Now?",
@@ -77,7 +113,16 @@
         "Is it technology, consumer behavior, or regulation?",
         "Why didn't Google/Amazon/Facebook do this 5 years ago?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "The Team (Roles)",
@@ -92,7 +137,16 @@
         "How long have you known each other?",
         "What is the equity split and why?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Full-time Commitment",
@@ -106,7 +160,16 @@
         "What are you leaving behind to do this?",
         "What is your burn rate?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Users (If Launched)",
@@ -121,7 +184,16 @@
         "Where do new users come from?",
         "What is your week-over-week growth rate?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Revenue (If Monetizing)",
@@ -136,7 +208,16 @@
         "Who is paying you?",
         "How did you land your first customer?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Why YC?",
@@ -150,7 +231,16 @@
         "What is the biggest gap in your knowledge right now?",
         "What does success look like for you after 3 months in the batch?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
   ]
 }

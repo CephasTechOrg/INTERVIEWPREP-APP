@@ -18,7 +18,18 @@
         "How do you maintain consistency between the 'available balance' and 'actual ledger' during check clearing (float)?",
         "The interviewer pushed back: 'Your design relies on a single database. What happens if that database region goes down during a deposit?' How do you handle multi-region failover?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "ConcurrentHashMap Internals & Custom Caching Layer",
@@ -36,7 +47,18 @@
         "In your custom cache, how do you proactively evict expired entries without blocking `get()` requests?",
         "What are the memory visibility guarantees between threads using your cache?"
       ],
-      "question_type": "coding"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "JVM Performance Tuning: High CPU / Memory Leak",
@@ -53,7 +75,16 @@
         "You find a classloader leak. How did that happen and how do you fix it without restarting the JVM?",
         "How do you set up proactive alerts to catch this before it crashes?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Real-Time Fraud Detection Engine",
@@ -70,7 +101,18 @@
         "What consistency trade-off do you make when reading the customer's blocklist?",
         "How do you audit why a specific transaction was declined for compliance?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Distributed Transaction Coordinator (Banking Ledger)",
@@ -87,7 +129,18 @@
         "If the orchestration service crashes after debiting Account A but before crediting Account B, how do you recover?",
         "How do you handle idempotency if the bank retries the request?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Garbage Collection Deep Dive",
@@ -102,7 +155,16 @@
         "How do you force a Full GC and why is it dangerous in production?",
         "What is the difference between a minor, major, and full GC event?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a High-Availability Payment Gateway",
@@ -118,7 +180,18 @@
         "How do you test chaos engineering (e.g., killing a random server) in this system?",
         "How do you reconcile transactions at the end of the day when banks send you files?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Code Review: Immutability and Thread Safety",
@@ -135,7 +208,16 @@
         "If the list is large, what is the performance impact of your defensive copying strategy?",
         "What is the difference between shallow immutability and deep immutability?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Database Design: Ride-Sharing Schema",
@@ -152,7 +234,18 @@
         "How do you partition the `rides` table by date?",
         "How do you maintain consistency between the ride status and the payment transaction?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Spring Boot: Internal Working of Autowiring",
@@ -168,7 +261,16 @@
         "What is the difference between Singleton and Prototype scope in terms of lifecycle?",
         "How would you implement your own `@InjectRandomInt` annotation using a `BeanPostProcessor`?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Behavioral: Handling Executive Pushback",
@@ -184,7 +286,17 @@
         "Did you compromise? If so, how did you ensure quality wasn't completely sacrificed?",
         "What was the outcome and what did you learn about influencing without authority?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Code for Good / Social Impact",
@@ -199,7 +311,17 @@
         "What constraints (time, resources, technical debt) did you face?",
         "How did you ensure the solution was sustainable after you left?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

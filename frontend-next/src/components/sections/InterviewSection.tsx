@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import { useSessionStore } from '@/lib/stores/sessionStore';
 import { useUIStore } from '@/lib/stores/uiStore';
+import { useAuthStore } from '@/lib/stores/authStore';
 import { sessionService } from '@/lib/services/sessionService';
 import { questionService } from '@/lib/services/questionService';
 import { aiService } from '@/lib/services/aiService';
@@ -32,7 +33,13 @@ type SpeechRecognitionInstance = {
   abort: () => void;
 };
 
+// Module-level map — survives component unmounts/remounts within the same tab.
+// Stores the last-spoken message key per session so navigating away and back
+// never replays a message the user already heard.
+const _ttsLastSpokenKey = new Map<number, string>();
+
 export const InterviewSection = () => {
+  const { user } = useAuthStore();
   const {
     currentSession,
     messages,
@@ -285,7 +292,10 @@ export const InterviewSection = () => {
     loadCurrentQuestion();
   }, [latestQuestionId]);
 
-  // Auto-play new interviewer messages
+  // Auto-play new interviewer messages.
+  // Uses a module-level Map (_ttsLastSpokenKey) so the last-spoken key survives
+  // component unmounts — preventing the message from replaying when the user
+  // navigates away and returns to the interview page.
   useEffect(() => {
     if (loading.messages) return;
     const lastAiMessage = [...messages].reverse().find((m) => m.role === 'interviewer');
@@ -296,17 +306,28 @@ export const InterviewSection = () => {
         ? `id:${lastAiMessage.id}`
         : `ts:${lastAiMessage.created_at ?? ''}:${lastAiMessage.content}`;
 
+    const sid = currentSession?.id;
+
+    // On component remount (e.g. returning from AI assistant page), restore the
+    // last-spoken key from the module-level map so we skip replay.
+    if (!lastSpokenMessageIdRef.current && sid) {
+      const stored = _ttsLastSpokenKey.get(sid) ?? null;
+      if (stored) lastSpokenMessageIdRef.current = stored;
+    }
+
     if (!lastSpokenMessageIdRef.current) {
+      // Genuinely first render for this session — mark the opening message and play it.
       lastSpokenMessageIdRef.current = key;
-      // Only auto-play the opening message (messages.length <= 1 guards against re-playing history on rejoin)
-      if (voiceEnabled && messages.length <= 1) {
-        playTts(lastAiMessage.content);
-      }
+      if (sid) _ttsLastSpokenKey.set(sid, key);
+      if (voiceEnabled) playTts(lastAiMessage.content);
       return;
     }
 
     if (lastSpokenMessageIdRef.current === key) return;
+
+    // New message arrived — update tracking and play it.
     lastSpokenMessageIdRef.current = key;
+    if (sid) _ttsLastSpokenKey.set(sid, key);
 
     if (!voiceEnabled) return;
     playTts(lastAiMessage.content);
@@ -781,7 +802,22 @@ export const InterviewSection = () => {
             ) : (
               <>
                 {messages.map((msg: Message) => (
-                  <div key={msg.id} className={`flex ${msg.role === 'student' ? 'justify-end' : 'justify-start'}`}>
+                  <div key={msg.id} className={`flex gap-2 ${msg.role === 'student' ? 'flex-row-reverse' : 'flex-row'}`}>
+                    <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 shadow-md mt-1">
+                      {msg.role === 'student' ? (
+                        user?.profile && typeof user.profile === 'object' && 'avatar_url' in user.profile && user.profile.avatar_url ? (
+                          <img src={user.profile.avatar_url} alt="Your avatar" className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-slate-700 to-slate-900 dark:from-slate-500 dark:to-slate-700 text-white flex items-center justify-center text-xs font-bold">
+                            {(user?.full_name?.split(/\s+/)[0]?.[0] || user?.email?.[0] || 'U').toUpperCase()}
+                          </div>
+                        )
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center text-xs font-bold">
+                          {currentSession?.interviewer?.name?.[0] || 'I'}
+                        </div>
+                      )}
+                    </div>
                     <div
                       className={`max-w-[85%] lg:max-w-[75%] rounded-2xl px-3 py-2 ${
                         msg.role === 'student'

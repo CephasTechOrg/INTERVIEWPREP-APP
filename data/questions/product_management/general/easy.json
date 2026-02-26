@@ -1,4 +1,6 @@
 {
+  "track": "product_management",
+  "company_style": "general",
   "difficulty": "easy",
   "questions": [
     {
@@ -12,7 +14,16 @@
         "How does product management differ from project management?",
         "What are the key responsibilities of a product manager?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Product Lifecycle",
@@ -25,7 +36,16 @@
         "How do product manager responsibilities change at each stage?",
         "What metrics might you track in each phase?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "User Personas",
@@ -38,7 +58,16 @@
         "How do you create effective user personas?",
         "What information should be included in a persona?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "MVP Definition",
@@ -51,7 +80,16 @@
         "How do you decide what features go into an MVP?",
         "What's the difference between MVP and prototype?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Prioritization Basics",
@@ -64,7 +102,16 @@
         "What factors should you consider when prioritizing features?",
         "What are some simple prioritization frameworks?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Stakeholder Management",
@@ -77,7 +124,16 @@
         "How do you manage conflicting stakeholder requests?",
         "Why is stakeholder communication important?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "User Stories",
@@ -90,7 +146,16 @@
         "What makes a good user story?",
         "What's the typical format for a user story?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Success Metrics",
@@ -103,7 +168,16 @@
         "What's the difference between leading and lagging indicators?",
         "How do you choose which metrics to track?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Competitive Analysis",
@@ -116,7 +190,16 @@
         "What information should you gather about competitors?",
         "How often should you conduct competitive analysis?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Roadmap Basics",
@@ -129,7 +212,16 @@
         "What's the difference between a roadmap and a backlog?",
         "How do you communicate roadmap changes to stakeholders?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Agile Methodology",
@@ -142,7 +234,16 @@
         "What are the key principles of Agile?",
         "How does Scrum differ from Kanban?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Customer Feedback",
@@ -155,7 +256,16 @@
         "What are different methods for collecting feedback?",
         "How do you handle negative customer feedback?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Product-Market Fit",
@@ -168,7 +278,16 @@
         "How do you know when you've achieved product-market fit?",
         "What are signs that you don't have product-market fit?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Feature Definition",
@@ -181,7 +300,16 @@
         "What questions should you ask before building a feature?",
         "How do you validate that a feature will be valuable?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Go-to-Market Strategy",
@@ -194,9 +322,16 @@
         "Who should be involved in creating a GTM strategy?",
         "What are key components of a successful launch?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
-  ],
-  "company_style": "general",
-  "track": "product_management"
+  ]
 }

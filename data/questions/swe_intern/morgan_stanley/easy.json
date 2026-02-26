@@ -16,7 +16,16 @@
         "How would you handle duplicate numbers in the array?",
         "What if the array is sorted? Can you optimize further?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Reverse a String (In-Place)",
@@ -30,7 +39,16 @@
         "How would you handle Unicode characters?",
         "Can you write the iterative and recursive versions?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Palindrome Check",
@@ -44,7 +62,16 @@
         "Why is comparing from both ends more efficient?",
         "What edge cases (empty string, single character) would you test?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Find the Largest and Smallest Number",
@@ -58,7 +85,16 @@
         "How many comparisons are needed in the worst case?",
         "What if the array contains negative numbers or is empty?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Factorial Without Loops or Recursion",
@@ -73,7 +109,16 @@
         "What are the limitations of this approach?",
         "How would you handle large numbers (overflow)?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Count Frequency of Elements",
@@ -87,7 +132,16 @@
         "How would you handle very large input where memory is constrained?",
         "What if the elements are only positive integers in a fixed range?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Remove Duplicates from Sorted Array",
@@ -101,7 +155,16 @@
         "How does the algorithm change if the array is unsorted?",
         "Why is the two-pointer approach optimal here?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Binary Search (Concept)",
@@ -115,7 +178,16 @@
         "What happens if the list contains duplicates?",
         "How do you avoid integer overflow when calculating the mid-point?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Merge Two Sorted Arrays",
@@ -129,7 +201,16 @@
         "How would you merge them in-place if the first array has enough buffer space?",
         "Can you generalize this to merge K sorted lists?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Valid Parentheses",
@@ -143,7 +224,16 @@
         "What makes a string invalid?",
         "How would you extend this to support other delimiter pairs?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "OOP: Class vs Object",
@@ -158,7 +248,16 @@
         "What is the memory allocation difference?",
         "Give an example using an 'Account' class."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "OOP: Four Pillars",
@@ -172,7 +271,16 @@
         "Why is encapsulation important for data security in banking applications?",
         "Give an example of polymorphism using method overloading and overriding."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Overloading vs Overriding",
@@ -186,7 +294,16 @@
         "Can you override a private method?",
         "What is the @Override annotation used for?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Array vs Linked List",
@@ -200,7 +317,16 @@
         "What are the cache locality implications?",
         "When would you choose a linked list over an array?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Stack vs Queue",
@@ -215,7 +341,16 @@
         "How would you implement a queue using two stacks?",
         "Where is a queue used in operating systems?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "HashMap Collision Resolution",
@@ -229,7 +364,16 @@
         "When does a HashMap convert a linked list to a red-black tree in Java 8+?",
         "What is a good hash function?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SQL: Basic Join",
@@ -243,7 +387,16 @@
         "How do you find customers who have never placed an order?",
         "What is a self-join? Can you give an example?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Call by Value vs Call by Reference",
@@ -258,7 +411,16 @@
         "How does this affect object references?",
         "Write a code example that demonstrates the difference."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Process vs Thread",
@@ -272,7 +434,16 @@
         "How do threads share memory?",
         "What are the advantages of multi-threading?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "TCP vs UDP",
@@ -286,7 +457,16 @@
         "What is the three-way handshake?",
         "Can you explain the four-way wave and why it needs four steps?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Singleton Pattern",
@@ -300,7 +480,16 @@
         "What is the Bill Pugh Singleton implementation?",
         "What are the drawbacks of the Singleton pattern?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Why Morgan Stanley? (Intern Focus)",
@@ -314,7 +503,17 @@
         "How does Morgan Stanley's technology culture differ from other banks?",
         "Why should we choose you over other candidates?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Strengths and Weaknesses",
@@ -328,7 +527,16 @@
         "What steps are you taking to improve your weakness?",
         "How do your strengths make you a good fit for this role?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Behavioral: Tell Me About Yourself",
@@ -342,7 +550,17 @@
         "What project are you most proud of?",
         "Where do you see yourself in 5 years?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

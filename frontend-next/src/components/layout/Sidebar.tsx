@@ -89,7 +89,7 @@ export const Sidebar = () => {
           setCurrentPage(item.id as any);
           if (window.innerWidth < 1024) toggleSidebar();
         }}
-        className={`group relative w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-[13px] font-medium transition-all duration-200 ${
+        className={`group relative w-full flex items-center gap-3 px-3.5 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 ${
           isActive
             ? 'bg-blue-700/50 text-white'
             : 'text-blue-100 hover:text-white hover:bg-blue-800/40'
@@ -173,13 +173,13 @@ export const Sidebar = () => {
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 px-3 py-2 overflow-y-auto">
+        <nav className="flex-1 px-3 py-2 overflow-y-auto overflow-x-hidden scrollbar-hide">
           {/* Main */}
-          <div className="mb-5">
+          <div className="mb-4">
             <p className="px-3 mb-2 text-[10px] font-semibold text-blue-200 uppercase tracking-wider">
               Main
             </p>
-            <div className="space-y-1">
+            <div className="space-y-0.5">
               {mainNavItems.map(item => <NavButton key={item.id} item={item} />)}
             </div>
           </div>
@@ -189,14 +189,33 @@ export const Sidebar = () => {
             <p className="px-3 mb-2 text-[10px] font-semibold text-blue-200 uppercase tracking-wider">
               Tools
             </p>
-            <div className="space-y-1">
+            <div className="space-y-0.5">
               {secondaryNavItems.map(item => <NavButton key={item.id} item={item} />)}
             </div>
           </div>
         </nav>
 
-        {/* Footer: Sign out */}
-        <div className="px-3 py-4 flex-shrink-0 border-t border-blue-900">
+        {/* Footer: User info + Sign out */}
+        <div className="px-3 py-4 flex-shrink-0 border-t border-blue-900 space-y-1">
+          {/* User mini-card */}
+          <div className="flex items-center gap-2.5 px-3 py-2">
+            <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+              {(user?.profile as any)?.avatar_url ? (
+                <img src={(user.profile as any).avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full bg-blue-600 flex items-center justify-center text-white text-[11px] font-bold">
+                  {((user?.full_name?.split(/\s+/).map((w: string) => w[0]).join('').toUpperCase().slice(0, 2)) ||
+                    (user?.email?.[0] || 'U').toUpperCase())}
+                </div>
+              )}
+            </div>
+            <div className="min-w-0">
+              <p className="text-[12px] font-semibold text-white truncate leading-tight">
+                {user?.full_name || user?.email?.split('@')[0] || 'User'}
+              </p>
+              <p className="text-[10px] text-blue-300 truncate leading-tight">{user?.email}</p>
+            </div>
+          </div>
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-blue-100 hover:text-white hover:bg-blue-800/40 transition-colors"

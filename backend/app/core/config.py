@@ -26,6 +26,11 @@ class Settings(BaseSettings):
     DEEPSEEK_MAX_RETRIES: int = 2
     DEEPSEEK_RETRY_BACKOFF_SECONDS: float = 0.8
 
+    # Supabase (Storage for profile photos, etc.)
+    SUPABASE_URL: str | None = None
+    SUPABASE_SERVICE_ROLE_KEY: str | None = None
+    SUPABASE_BUCKET_PROFILE_PHOTOS: str = "intervIQ"
+
     # Email (optional; dev prints emails to console if not set)
     SMTP_HOST: str | None = None
     SMTP_PORT: int | None = None

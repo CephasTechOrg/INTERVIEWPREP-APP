@@ -69,8 +69,14 @@ export const SettingsSection = () => {
         {openSection === 'profile' && (
           <div className="px-4 sm:px-6 py-5 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center font-semibold">
-                {user?.full_name?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || 'U'}
+              <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 shadow-md">
+                {user?.profile && typeof user.profile === 'object' && 'avatar_url' in user.profile && user.profile.avatar_url ? (
+                  <img src={user.profile.avatar_url} alt="Profile picture" className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center font-semibold text-sm">
+                    {user?.full_name?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || 'U'}
+                  </div>
+                )}
               </div>
               <div>
                 <p className="font-semibold text-slate-900 dark:text-white">{user?.full_name || 'User'}</p>

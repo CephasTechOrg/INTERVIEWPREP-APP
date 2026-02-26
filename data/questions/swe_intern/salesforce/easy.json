@@ -16,7 +16,16 @@
         "What if the array contains duplicates?",
         "How does your approach change if you need the top K elements?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Reverse Words in a Sentence (Linked List)",
@@ -31,7 +40,16 @@
         "What is the time and space complexity of your approach?",
         "How would you handle punctuation attached to words?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Maximum Units on a Truck",
@@ -46,7 +64,15 @@
         "What is the time complexity of your approach?",
         "How would you solve this without using a sort (counting sort)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation",
+        "greedy algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Remove Duplicates from Unsorted Linked List",
@@ -60,7 +86,14 @@
         "What is the time and space complexity?",
         "How would you solve this in O(1) extra space if the list was sorted?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Kth Largest Element in an Array",
@@ -75,7 +108,14 @@
         "How do you handle duplicate values?",
         "What if the array is a stream and you cannot store all elements?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Valid Parentheses",
@@ -89,7 +129,14 @@
         "What is the space complexity in the worst case?",
         "How would you extend this to validate XML/HTML tags?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "stack data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Merge Two Sorted Lists",
@@ -103,7 +150,16 @@
         "What are the edge cases (one list empty, both empty)?",
         "How would you merge K sorted lists?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Two Sum",
@@ -117,7 +173,15 @@
         "How would you handle duplicate pairs?",
         "What if the array is sorted?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage",
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Reverse a Linked List",
@@ -131,7 +195,16 @@
         "What is the space complexity of the recursive solution?",
         "How would you reverse a doubly linked list?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Min Stack",
@@ -145,7 +218,16 @@
         "What is the space complexity of your approach?",
         "Can you implement it with O(1) extra space?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Frequency Stack",
@@ -160,7 +242,16 @@
         "What data structure do you use to group elements by frequency?",
         "What is the time complexity of each operation?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Object-Oriented Programming (OOP) Pillars",
@@ -174,7 +265,16 @@
         "Give a Salesforce-specific example of polymorphism.",
         "Why is inheritance sometimes considered harmful (composition over inheritance)?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Class vs Object",
@@ -188,7 +288,16 @@
         "Can you have an object without a class?",
         "What is a static class?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Virtual Functions / Polymorphism",
@@ -203,7 +312,16 @@
         "What is the difference between virtual and pure virtual?",
         "Can constructors be virtual? Why or why not?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Method Overloading vs Overriding",
@@ -217,7 +335,16 @@
         "Can you override a private or static method?",
         "What is covariant return type?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Queue with getMax()",
@@ -232,7 +359,16 @@
         "How is this different from a stack with getMax()?",
         "What is the space complexity of your design?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Linked List Cycle Detection",
@@ -246,7 +382,16 @@
         "What is the time and space complexity?",
         "How do you find the node where the cycle begins?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Best Time to Buy and Sell Stock",
@@ -260,7 +405,14 @@
         "How would you handle unlimited transactions?",
         "What about transactions with a cooldown?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Move Zeroes",
@@ -274,7 +426,16 @@
         "How many write operations does your algorithm perform?",
         "What if you need to move zeros to the front instead?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Why Salesforce?",
@@ -288,7 +449,17 @@
         "Which Salesforce product or acquisition interests you the most (e.g., Slack, Tableau, MuleSoft)?",
         "How do you align with the Ohana culture?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Challenging Situation",
@@ -302,7 +473,17 @@
         "What was your specific role in the solution?",
         "What was the outcome and what did you learn?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: AI Tool Usage",
@@ -317,7 +498,16 @@
         "What are the risks of relying on AI?",
         "How do you think AI will change the role of software engineers?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
   ]
 }

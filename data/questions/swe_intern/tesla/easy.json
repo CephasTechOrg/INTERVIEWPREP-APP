@@ -17,7 +17,16 @@
         "How would you modify this to compute the median instead of the mean?",
         "What if the window size is extremely large (e.g., 1 million readings)?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Valid Palindrome (Car VIN Check)",
@@ -31,7 +40,16 @@
         "What is the time and space complexity?",
         "Can you solve this without using extra space for filtering?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "FizzBuzz (Tesla Edition)",
@@ -45,7 +63,16 @@
         "How would you extend this to support additional rules (e.g., multiples of 7)?",
         "What is the simplest way to avoid repetitive modulus operations?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Merge Sorted Arrays (Battery Cells)",
@@ -59,7 +86,16 @@
         "How would you merge K sorted lists?",
         "What if one list is much larger than the other?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Remove Duplicates from Sorted Array (Firmware Updates)",
@@ -73,7 +109,14 @@
         "What if the array is unsorted?",
         "How do you handle memory constraints for embedded systems?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "First Unique Character (Telemetry Signal)",
@@ -87,7 +130,14 @@
         "How would you handle a stream of infinite characters?",
         "What data structure minimizes memory usage?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Plus One (Odometer Increment)",
@@ -101,7 +151,14 @@
         "How do you handle the carry operation efficiently?",
         "Can you solve it without converting the array to an integer?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Linked List Cycle Detection (CAN Bus)",
@@ -115,7 +172,16 @@
         "What is the space complexity of your approach?",
         "How do you find the node where the cycle begins?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Stack using Queues (Charge Scheduling)",
@@ -130,7 +196,16 @@
         "Can you optimize one operation to be O(1)?",
         "What are the trade-offs between making push vs pop expensive?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "OOP: Encapsulation (Battery Management System)",
@@ -145,7 +220,18 @@
         "How do you validate input in setter methods?",
         "Would you use an interface or an abstract class for different battery chemistries (NMC, LFP)?"
       ],
-      "question_type": "conceptual"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "OOP: Polymorphism (Autopilot Sensor Fusion)",
@@ -160,7 +246,16 @@
         "How does this adhere to the Open-Closed Principle?",
         "Where would you use dependency injection here?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SDLC: Agile vs Waterfall",
@@ -175,7 +270,16 @@
         "How do you handle requirement changes in Agile?",
         "What is a sprint retrospective?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Black-box vs White-box Testing",
@@ -190,7 +294,16 @@
         "How do you test a function without knowing its internal implementation?",
         "What is code coverage and which testing method does it relate to?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Why Tesla? (Intern Focus)",
@@ -205,7 +318,17 @@
         "How do you align with Tesla's 'First Principles' problem-solving approach?",
         "What do you know about Tesla's energy business (Solar, Megapack) vs automotive?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Difficult Problem Solved",
@@ -220,7 +343,17 @@
         "How did you validate your solution?",
         "What would you have done differently in hindsight?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Taking Initiative",
@@ -235,7 +368,16 @@
         "How did you balance this with your core responsibilities?",
         "What was the impact of your initiative?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
   ]
 }

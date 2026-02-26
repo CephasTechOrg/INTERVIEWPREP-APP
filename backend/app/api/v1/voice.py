@@ -17,8 +17,8 @@ class TTSRequest(BaseModel):
 def tts(payload: TTSRequest | None = Body(None), text: str | None = None, _user=Depends(get_current_user)):
     """
     Returns audio when available (ElevenLabs primary, default fallback), otherwise JSON with the text.
-    Accepts either JSON body {"text": "...", "interviewer_id": "alex"} or a query/form "text=...".
-    interviewer_id selects the per-interviewer ElevenLabs voice (alex|mason|erica|maya).
+    Accepts either JSON body {"text": "...", "interviewer_id": "cephas"} or a query/form "text=...".
+    interviewer_id selects the per-interviewer ElevenLabs voice (cephas|mason|erica|maya).
     """
     content = (payload.text if payload else None) or text
     interviewer_id = (payload.interviewer_id if payload else None)

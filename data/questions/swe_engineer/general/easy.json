@@ -15,7 +15,18 @@
         "What are the time/space complexities and key invariants?",
         "How would you make it thread-safe?"
       ],
-      "question_type": "coding"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Rate Limiter (High Level)",
@@ -29,7 +40,18 @@
         "What trade-offs exist between fixed window and token bucket?",
         "How would you implement this in a distributed system?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Detect Duplicate Requests (Idempotency)",
@@ -43,7 +65,18 @@
         "What would you store as an idempotency key and where?",
         "What edge cases exist (expiry, collisions)?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Find the Most Frequent Element",
@@ -56,7 +89,15 @@
         "How does this change if you need the top K frequent elements?",
         "What's the complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage",
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Validate Input and Errors",
@@ -70,7 +111,18 @@
         "What status codes would you use for validation errors?",
         "How do you log safely?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Simple Load Balancer",
@@ -83,7 +135,16 @@
         "What metrics would you monitor on a load balancer?",
         "How does sticky sessions work?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Database Indexing",
@@ -96,7 +157,16 @@
         "What are the trade-offs of adding indexes?",
         "What makes a good index?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "API Versioning",
@@ -109,7 +179,18 @@
         "What are pros/cons of URL vs header versioning?",
         "How do you handle breaking changes?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Caching Strategy",
@@ -122,7 +203,16 @@
         "What are cache invalidation strategies?",
         "What's write-through vs write-behind caching?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Microservices vs Monolith",
@@ -135,7 +225,16 @@
         "When would you choose microservices?",
         "What challenges come with microservices?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "REST Principles",
@@ -148,7 +247,16 @@
         "What HTTP methods map to CRUD operations?",
         "What makes an API RESTful vs RPC?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Database Transactions",
@@ -160,7 +268,16 @@
         "What's the difference between rollback and commit?",
         "When would you use transactions?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SQL vs NoSQL",
@@ -172,7 +289,16 @@
         "What are examples of each type?",
         "What's eventual consistency?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Dependency Injection",
@@ -185,7 +311,16 @@
         "What are different ways to implement it?",
         "What's inversion of control?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Observer Pattern",
@@ -197,7 +332,16 @@
         "What's the difference between push and pull models?",
         "What problems can this pattern solve?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Factory Pattern",
@@ -209,7 +353,16 @@
         "What's the difference between factory and abstract factory?",
         "Give a real example where it's useful."
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Singleton Pattern",
@@ -221,7 +374,16 @@
         "What are thread safety concerns?",
         "When should you avoid singletons?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Reverse Linked List",
@@ -234,7 +396,16 @@
         "What's the time and space complexity for each?",
         "How would you handle a doubly linked list?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Binary Tree Traversal",
@@ -247,7 +418,16 @@
         "When would you use each type?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "HashMap Implementation",
@@ -260,7 +440,16 @@
         "What's the time complexity for operations?",
         "What happens when the load factor is high?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Stack vs Queue",
@@ -272,7 +461,16 @@
         "What operations are supported for each?",
         "When would you use one over the other?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "BFS vs DFS",
@@ -285,7 +483,16 @@
         "What data structures does each use?",
         "When would you choose BFS over DFS?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Merge Sort vs Quick Sort",
@@ -298,7 +505,16 @@
         "What's the time and space complexity for each?",
         "When would you use one over the other?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Binary Search",
@@ -311,7 +527,16 @@
         "What's the time complexity?",
         "What if the array isn't sorted?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Dijkstra's Algorithm",
@@ -324,7 +549,16 @@
         "What's the time complexity?",
         "What data structure is typically used?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Two Sum",
@@ -337,7 +571,14 @@
         "What's the optimal solution?",
         "What if the array is sorted?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Valid Parentheses",
@@ -350,7 +591,16 @@
         "What data structure would you use?",
         "What's the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Palindrome Check",
@@ -363,7 +613,16 @@
         "What's the optimal solution?",
         "How would you handle case sensitivity?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Fibonacci Sequence",
@@ -376,7 +635,12 @@
         "What's the naive approach and its problem?",
         "How can you optimize it?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Anagram Check",
@@ -389,7 +653,16 @@
         "What's the time complexity?",
         "Can you solve with constant space?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "HTTP Methods",
@@ -401,7 +674,16 @@
       "followups": [
         "What's idempotent vs safe?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Status Codes",
@@ -413,7 +695,16 @@
       "followups": [
         "When would you use 201 vs 200?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Cookies vs Session",
@@ -425,7 +716,16 @@
       "followups": [
         "Where is each stored?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "JWT Tokens",
@@ -437,7 +737,16 @@
       "followups": [
         "What are the parts of a JWT?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SQL Joins",
@@ -449,7 +758,16 @@
       "followups": [
         "When would you use LEFT JOIN vs INNER JOIN?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Database Normalization",
@@ -460,7 +778,16 @@
       "followups": [
         "What are the normal forms?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Primary Key vs Foreign Key",
@@ -471,7 +798,16 @@
       "followups": [
         "Can a table have multiple primary keys?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Git Branching Strategy",
@@ -483,7 +819,16 @@
       "followups": [
         "What's feature branching?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Merge vs Rebase",
@@ -495,7 +840,16 @@
       "followups": [
         "When would you use each?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Docker Basics",
@@ -507,7 +861,16 @@
       "followups": [
         "What's a Dockerfile?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "CI/CD Pipeline",
@@ -518,7 +881,16 @@
       "followups": [
         "What are typical stages in a pipeline?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Unit Testing",
@@ -529,7 +901,16 @@
       "followups": [
         "What's the difference between unit and integration tests?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Test-Driven Development",
@@ -541,7 +922,16 @@
       "followups": [
         "What are the red-green-refactor steps?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Agile Methodology",
@@ -552,7 +942,16 @@
       "followups": [
         "What are sprints and standups?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Scrum vs Kanban",
@@ -563,7 +962,16 @@
       "followups": [
         "When would you choose one over the other?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Object-Oriented Principles",
@@ -573,7 +981,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Functional Programming",
@@ -583,7 +1000,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SOLID Principles",
@@ -592,7 +1018,16 @@
         "design-principles"
       ],
       "followups": [],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "DRY Principle",
@@ -601,7 +1036,16 @@
         "design-principles"
       ],
       "followups": [],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "YAGNI Principle",
@@ -610,7 +1054,16 @@
         "design-principles"
       ],
       "followups": [],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Big O Notation",
@@ -620,7 +1073,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Time vs Space Complexity",
@@ -630,7 +1092,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Recursion",
@@ -640,7 +1111,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Garbage Collection",
@@ -650,7 +1130,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Static vs Dynamic Typing",
@@ -660,7 +1149,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Compiled vs Interpreted",
@@ -670,7 +1168,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "REST vs GraphQL",
@@ -680,7 +1187,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SOAP vs REST",
@@ -690,7 +1206,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Monolith vs Microservices",
@@ -700,7 +1225,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Vertical vs Horizontal Scaling",
@@ -710,7 +1244,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Synchronous vs Asynchronous",
@@ -720,7 +1263,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Blocking vs Non-blocking",
@@ -730,7 +1282,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "TCP vs UDP",
@@ -740,7 +1301,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "HTTP vs HTTPS",
@@ -750,7 +1320,16 @@
         "security"
       ],
       "followups": [],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SQL Injection",
@@ -760,7 +1339,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Cross-Site Scripting (XSS)",
@@ -770,7 +1358,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Cross-Site Request Forgery (CSRF)",
@@ -780,7 +1377,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Authentication vs Authorization",
@@ -790,7 +1396,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "OAuth 2.0",
@@ -800,7 +1415,16 @@
         "api"
       ],
       "followups": [],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "API Gateway",
@@ -810,7 +1434,16 @@
         "api"
       ],
       "followups": [],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Message Queue",
@@ -820,7 +1453,16 @@
         "messaging"
       ],
       "followups": [],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Event-Driven Architecture",
@@ -830,7 +1472,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Domain-Driven Design",
@@ -840,7 +1491,16 @@
         "design"
       ],
       "followups": [],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Test Pyramid",
@@ -850,7 +1510,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Mocking in Tests",
@@ -860,7 +1529,16 @@
         "concepts"
       ],
       "followups": [],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "API Pagination (Offset vs Cursor)",
@@ -875,7 +1553,16 @@
         "What are the trade-offs between offset and cursor pagination?",
         "How do you keep pagination stable when new rows are inserted?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "HTTP Status Codes and Error Responses",
@@ -889,7 +1576,16 @@
         "When would you use 400 vs 422?",
         "What should you avoid returning in error messages?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Graceful Degradation for Downstream Failures",
@@ -904,7 +1600,18 @@
         "What timeout and retry policy would you start with?",
         "When should you NOT retry?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Feature Flags (Basics)",
@@ -918,7 +1625,16 @@
         "How do you roll out to 1% then 100%?",
         "How do you prevent flags from becoming permanent?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Health Check vs Readiness Check",
@@ -932,7 +1648,16 @@
         "What are examples of bad health checks?",
         "Should readiness check the database? Why or why not?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Logging and Correlation IDs",
@@ -946,7 +1671,18 @@
         "How do you propagate the ID across HTTP calls?",
         "What log fields are most useful for debugging incidents?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Avoiding N+1 Database Queries",
@@ -960,7 +1696,16 @@
         "When is eager loading the right fix?",
         "What is the trade-off of joining too much data?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Basic Transactions",
@@ -974,7 +1719,17 @@
         "What is atomicity?",
         "How do you handle retries for transaction conflicts?"
       ],
-      "question_type": "system_design"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Design a Simple TTL Cache (In-Memory)",
@@ -988,7 +1743,16 @@
         "How do you handle a large number of expired keys efficiently?",
         "What happens if the server restarts?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SQL: Find Duplicate Emails",
@@ -1001,7 +1765,18 @@
         "What index or constraint would you add?",
         "How would you clean existing duplicates safely?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Race Condition (Simple Example)",
@@ -1015,7 +1790,16 @@
         "What is a deadlock?",
         "How would you test concurrent code?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Caching HTTP Responses (ETag)",
@@ -1029,7 +1813,18 @@
         "What is a 304 response?",
         "When is caching dangerous?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Write Unit Tests (Small Function)",
@@ -1042,7 +1837,16 @@
         "What edge cases should always be tested?",
         "When do you use mocks vs real dependencies?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Refactor a Large Function",
@@ -1055,7 +1859,16 @@
         "What tests do you add before refactoring?",
         "How do you avoid changing behavior?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Many-to-Many Schema",
@@ -1068,7 +1881,18 @@
         "How do you enforce uniqueness in the join table?",
         "What indexes help common queries?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Backpressure and Rate Limits (Conceptual)",
@@ -1081,7 +1905,16 @@
         "Where would you apply rate limits (client, gateway, service)?",
         "How do you communicate throttling to clients?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Input Sanitization vs Validation",
@@ -1094,7 +1927,16 @@
         "How do you prevent SQL injection and XSS?",
         "What should you log for invalid input?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design an Audit Log (Basic)",
@@ -1108,7 +1950,18 @@
         "What fields are essential?",
         "How do you prevent audit logs from being edited?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Timeouts vs Retries vs Circuit Breakers",
@@ -1121,7 +1974,16 @@
         "What metrics would you monitor?",
         "What is exponential backoff with jitter?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "String Manipulation Basics",
@@ -1134,7 +1996,12 @@
         "What's the time and space complexity?",
         "How would you handle Unicode characters?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Array Rotation",
@@ -1147,7 +2014,16 @@
         "What's the optimal solution for in-place rotation?",
         "How would you handle negative k values?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Find Missing Number",
@@ -1160,7 +2036,14 @@
         "What if the array isn't sorted?",
         "How would you find multiple missing numbers?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Binary Tree Height",
@@ -1173,11 +2056,20 @@
         "What's the time complexity?",
         "How would you find the diameter of a binary tree?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Check if Tree is Balanced",
-      "prompt": "Determine if a binary tree is balanced (height difference between left and right subtrees \u2264 1 for all nodes).",
+      "prompt": "Determine if a binary tree is balanced (height difference between left and right subtrees ≤ 1 for all nodes).",
       "tags": [
         "data-structures",
         "tree"
@@ -1186,7 +2078,16 @@
         "What's the time complexity?",
         "How would you optimize the solution?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Implement a Queue with Stacks",
@@ -1200,7 +2101,18 @@
         "What's the amortized time complexity?",
         "Can you implement a stack with queues?"
       ],
-      "question_type": "coding"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Find First Non-repeating Character",
@@ -1213,7 +2125,12 @@
         "What's the optimal time and space complexity?",
         "How would you handle case sensitivity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Merge Two Sorted Arrays",
@@ -1227,7 +2144,16 @@
         "What's the time complexity?",
         "How would you do it in-place if one array has extra space?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Find Majority Element",
@@ -1240,7 +2166,16 @@
         "What's Boyer-Moore Voting Algorithm?",
         "What if no element has majority?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Check if Array Contains Duplicates",
@@ -1253,7 +2188,16 @@
         "What's the optimal solution?",
         "How would you find all duplicates?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Basic Calculator",
@@ -1266,7 +2210,16 @@
         "How do you handle operator precedence?",
         "What about parentheses?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Parking Lot",
@@ -1279,7 +2232,16 @@
         "How would you handle different vehicle types?",
         "What methods would you implement?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Deck of Cards",
@@ -1292,7 +2254,16 @@
         "How would you implement different card games?",
         "What design patterns would be useful?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a URL Shortener (High Level)",
@@ -1305,7 +2276,18 @@
         "How do you generate unique short codes?",
         "How would you handle redirects and analytics?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Key-Value Store (Basic)",
@@ -1318,7 +2300,18 @@
         "How would you add TTL support?",
         "What about persistence to disk?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a File System (Conceptual)",
@@ -1331,7 +2324,18 @@
         "How would you represent files and directories?",
         "What about permissions and metadata?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Browser Rendering Process",
@@ -1344,7 +2348,16 @@
         "What's DNS resolution?",
         "How does the browser render HTML/CSS/JS?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
   ]
 }

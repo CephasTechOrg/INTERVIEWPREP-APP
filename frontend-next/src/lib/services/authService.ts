@@ -127,6 +127,15 @@ export const authService = {
   },
 
   /**
+   * Upload a profile photo — returns the updated User with avatar_url in profile
+   */
+  async uploadAvatar(file: File): Promise<User> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return apiClient.postMultipart<User>('/users/me/avatar', formData);
+  },
+
+  /**
    * Deactivate current user's account
    */
   async deactivateAccount(): Promise<{ ok: boolean; message?: string }> {

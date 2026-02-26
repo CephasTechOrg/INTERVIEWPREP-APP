@@ -18,7 +18,18 @@
         "How long do you hold a seat in the 'locked' state? What happens if the user doesn't complete payment?",
         "How would you scale this system to handle flash sales (e.g., Avengers: Endgame)?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Amazon/E-Commerce Platform (Optimized Queries)",
@@ -34,7 +45,18 @@
         "How do you track inventory and prevent overselling?",
         "How would you design a recommendation engine for 'customers who bought this also bought'?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design URL Shortening System (TinyURL)",
@@ -50,7 +72,18 @@
         "What database would you choose (SQL vs NoSQL) and why?",
         "How do you shard the data across multiple servers?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "LFU Cache (Deep Dive)",
@@ -66,7 +99,16 @@
         "How do you maintain the minimum frequency efficiently?",
         "What are the memory trade-offs of your approach?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Compare-And-Swap (CAS) in Java",
@@ -82,7 +124,16 @@
         "How does CAS compare to traditional locking in terms of performance?",
         "How is CAS used in `ConcurrentHashMap` for computeIfAbsent?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Transaction Management in Java (Spring)",
@@ -97,7 +148,16 @@
         "What happens if you call a transactional method from within the same class?",
         "How do you test transactional code?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "All-Pair Shortest Path (Graph)",
@@ -113,7 +173,16 @@
         "What is the time and space complexity of each approach?",
         "How would you detect a negative cycle?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Minimum Number of Taps to Water a Garden",
@@ -129,7 +198,14 @@
         "What is the greedy approach using sorting?",
         "What is the DP recurrence and its complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "greedy algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Python Garbage Collection (Deep Dive)",
@@ -144,7 +220,16 @@
         "What are the performance implications of reference counting?",
         "How does Python's GC handle cycles?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Multi-Threading: When does Python do actual multi-threading?",
@@ -159,7 +244,16 @@
         "How does the `multiprocessing` module bypass the GIL?",
         "What are the trade-offs of using multiprocessing vs threading in Python?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "NGO Tasks Problem (Complex Interval Processing)",
@@ -176,7 +270,16 @@
         "What is the time complexity of a brute force approach and how do you optimize it?",
         "How does this relate to difference arrays or sweep line algorithms?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Custom Sorting with Comparator",
@@ -192,7 +295,16 @@
         "What is the difference between `Comparable` and `Comparator`?",
         "How do you use Java 8 lambda expressions to write this concisely?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "OOP: Real-World Scenario - Fix Message Parser",
@@ -208,7 +320,18 @@
         "How do you handle versioning of the FIX protocol?",
         "How do you ensure your parser is efficient for high-frequency trading?"
       ],
-      "question_type": "coding"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Behavioral: Most Difficult Decision & Consequences",
@@ -223,7 +346,17 @@
         "Who did you consult before making the decision?",
         "What did you learn about yourself from this experience?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Experience as a Leader",
@@ -237,7 +370,16 @@
         "Did you face any conflicts? How did you resolve them?",
         "What would you do differently next time?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
   ]
 }

@@ -10,7 +10,7 @@ import { useAuthStore } from '@/lib/stores/authStore';
 import { Icons } from '@/components/ui/Icons';
 
 const INTERVIEWERS: Array<InterviewerProfile & { gender: string }> = [
-  { id: 'alex', name: 'Alex', gender: 'Male', image_url: '/alex.avif' },
+  { id: 'cephas', name: 'Cephas', gender: 'Male', image_url: '/cephas.png' },
   { id: 'mason', name: 'Mason', gender: 'Male', image_url: '/mason.jpg' },
   { id: 'erica', name: 'Erica', gender: 'Female', image_url: '/erica.jpeg' },
   { id: 'maya', name: 'Maya', gender: 'Female', image_url: '/maya.jpg' },
@@ -40,9 +40,14 @@ const COMPANY_STYLE_OPTIONS: Array<{ value: string; label: string }> = [
   { value: 'general', label: 'General Tech' },
   { value: 'amazon', label: 'Amazon' },
   { value: 'apple', label: 'Apple' },
+  { value: 'bloomberg', label: 'Bloomberg' },
   { value: 'google', label: 'Google' },
+  { value: 'jpmorgan_chase', label: 'JPMorgan Chase' },
   { value: 'microsoft', label: 'Microsoft' },
-  { value: 'meta', label: 'Meta' },
+  { value: 'morgan_stanley', label: 'Morgan Stanley' },
+  { value: 'salesforce', label: 'Salesforce' },
+  { value: 'tesla', label: 'Tesla' },
+  { value: 'Y_combinator', label: 'Y Combinator' },
 ];
 
 const supportsCompanyStyles = (track: Track) => track === 'swe_intern' || track === 'swe_engineer';
@@ -93,7 +98,7 @@ export const DashboardSection = () => {
   const [companyStyle, setCompanyStyle] = useState('general');
   const [difficulty, setDifficulty] = useState<Difficulty>('medium');
   const [behavioralTarget, setBehavioralTarget] = useState(2);
-  const [selectedInterviewer, setSelectedInterviewer] = useState<string>('alex');
+  const [selectedInterviewer, setSelectedInterviewer] = useState<string>('cephas');
   const [isStarting, setIsStarting] = useState(false);
   const [adaptiveDifficultyEnabled, setAdaptiveDifficultyEnabled] = useState(false);
 
@@ -335,7 +340,7 @@ export const DashboardSection = () => {
                     <div className={`relative w-12 h-12 mx-auto rounded-full overflow-hidden border-2 transition-all ${
                       selectedInterviewer === person.id ? 'border-blue-400' : 'border-slate-200 dark:border-slate-500'
                     }`}>
-                      <Image src={person.image_url || ''} alt={person.name} fill className="object-cover" sizes="48px" />
+                      <img src={person.image_url || ''} alt={person.name} className="w-full h-full object-cover object-top" />
                     </div>
                     <p className={`mt-1.5 font-semibold text-xs ${selectedInterviewer === person.id ? 'text-blue-700 dark:text-blue-400' : 'text-slate-700 dark:text-slate-300'}`}>
                       {person.name}

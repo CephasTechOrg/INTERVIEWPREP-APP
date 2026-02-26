@@ -1,4 +1,6 @@
 {
+  "track": "cybersecurity",
+  "company_style": "general",
   "difficulty": "medium",
   "questions": [
     {
@@ -12,7 +14,16 @@
         "What are parameterized queries and how do they prevent SQL injection?",
         "Can you provide an example of a SQL injection payload?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Zero Trust Architecture",
@@ -25,7 +36,16 @@
         "How does Zero Trust differ from traditional perimeter-based security?",
         "What are some challenges in implementing Zero Trust?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Cross-Site Scripting (XSS)",
@@ -38,7 +58,16 @@
         "How does Content Security Policy (CSP) help prevent XSS?",
         "What's the difference between stored XSS and reflected XSS?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Penetration Testing Process",
@@ -51,7 +80,16 @@
         "What is the difference between black box and white box testing?",
         "Why is reconnaissance important in the penetration testing process?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Incident Response Steps",
@@ -64,7 +102,16 @@
         "What should be included in an incident response plan?",
         "How do you prioritize incidents based on severity?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "OWASP Top 10",
@@ -78,7 +125,16 @@
         "Why is broken access control a common web application vulnerability?",
         "How can security misconfigurations be prevented?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Cryptographic Hash Functions",
@@ -91,7 +147,16 @@
         "How are hash functions used in password storage?",
         "What is a salt and why is it important in password hashing?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Man-in-the-Middle Attacks",
@@ -104,7 +169,16 @@
         "How does certificate pinning help prevent MITM attacks?",
         "What role do Certificate Authorities play in preventing MITM?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Security Information and Event Management",
@@ -117,7 +191,16 @@
         "What types of data sources feed into a SIEM?",
         "How does correlation differ from simple log collection?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Network Segmentation",
@@ -130,7 +213,16 @@
         "What is the principle of least privilege in network design?",
         "How does microsegmentation differ from traditional segmentation?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "DDoS Attacks",
@@ -143,7 +235,16 @@
         "What's the difference between volumetric and application-layer DDoS attacks?",
         "How do CDNs help mitigate DDoS attacks?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Risk Assessment",
@@ -156,7 +257,16 @@
         "How do you calculate risk using likelihood and impact?",
         "What's the difference between inherent risk and residual risk?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Public Key Infrastructure",
@@ -169,7 +279,16 @@
         "What is a Certificate Authority and what role does it play in PKI?",
         "How does certificate revocation work?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Endpoint Detection and Response",
@@ -182,7 +301,16 @@
         "What types of behaviors does EDR typically monitor for?",
         "How does EDR help with incident investigation?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Buffer Overflow",
@@ -195,9 +323,16 @@
         "What are some modern protections against buffer overflow attacks?",
         "How does Address Space Layout Randomization (ASLR) help?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
-  ],
-  "company_style": "general",
-  "track": "cybersecurity"
+  ]
 }

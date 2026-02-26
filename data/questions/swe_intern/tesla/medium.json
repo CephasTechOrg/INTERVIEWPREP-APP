@@ -18,7 +18,16 @@
         "What is the memory footprint of your design for billions of readings?",
         "The interviewer pushed back on O(n) mode retrieval. How do you achieve O(1) for get_mode()?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Trapping Rain Water (Battery Cooling)",
@@ -34,7 +43,16 @@
         "Explain the intuition behind the two-pointer O(1) space solution.",
         "How would this change if the bars had varying widths?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Contiguous Segment Allocator (Memory Management)",
@@ -51,7 +69,16 @@
         "What is the time complexity of your `allocate` and `free` operations?",
         "How would you handle fragmentation over time?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "H2O Molecule Synchronization (Concurrency)",
@@ -67,7 +94,16 @@
         "How would you implement this using Semaphores vs Monitors?",
         "Can you solve this without using a queue?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "In-Place Permutation Verification",
@@ -84,7 +120,16 @@
         "How do you handle negative numbers or values out of range?",
         "What is the time complexity of your solution?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Minimum Difference Pair (Latency Analysis)",
@@ -95,11 +140,18 @@
         "tesla-oa"
       ],
       "followups": [
-        "What is the brute force O(n\u00b2) approach?",
+        "What is the brute force O(n²) approach?",
         "How does sorting the array simplify the problem to O(n log n)?",
         "What if there are duplicate values? How do you handle the minimal difference of zero?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Fast Power (Exponentiation)",
@@ -115,7 +167,16 @@
         "How do you handle negative exponents?",
         "What edge cases (e.g., n = -2^31) cause overflow and how do you mitigate them?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Expression Evaluator (+, -, *, /)",
@@ -130,7 +191,14 @@
         "What is the time and space complexity?",
         "How would you extend this to support parentheses?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "stack data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "RDBMS vs NoSQL Trade-offs",
@@ -145,7 +213,16 @@
         "How do you handle schema migrations in a NoSQL database?",
         "Why might you choose a time-series database for telemetry data?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Kubernetes: Multi-Tenancy and GitOps",
@@ -161,7 +238,16 @@
         "How would you debug a Jenkins agent stuck in a Pending state on Kubernetes?",
         "What's your approach to running bare metal nodes under Kubernetes control?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Real-Time Vehicle Monitoring (System Design)",
@@ -177,7 +263,18 @@
         "How do you handle missing data or sensor drift?",
         "How do you balance real-time requirements with cost?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "HTTP Methods: Idempotency and Safety",
@@ -192,7 +289,16 @@
         "How do you implement an idempotent POST endpoint?",
         "What is the difference between PUT and PATCH?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Course Schedule (Dependency Resolution)",
@@ -207,7 +313,16 @@
         "Compare Kahn's algorithm (BFS) vs DFS for topological sorting.",
         "How would you return the actual build order?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Group Anagrams (Telemetry Signatures)",
@@ -222,7 +337,14 @@
         "How can you optimize using a character count array as a key?",
         "What if the strings are extremely long?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design a Hammock Stand",
@@ -237,7 +359,18 @@
         "What materials would you consider and why?",
         "How do you ensure stability without permanent fixtures?"
       ],
-      "question_type": "behavioral"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Behavioral: Disagreement with Manager",
@@ -252,7 +385,17 @@
         "Were you able to find a compromise?",
         "What did you learn about influencing without authority?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

@@ -21,7 +21,16 @@
         "How would you implement this using lock-free techniques (e.g., hazard pointers, RCU) to reduce contention?",
         "What happens to callbacks if a subscription is removed while `onNewTrade` is iterating over the callback list?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Multi-Exchange Stock Price Aggregator",
@@ -42,7 +51,18 @@
         "How would you use probabilistic data structures (e.g., Count-Min Sketch) to approximate Top K with less memory?",
         "How do you handle latency when an exchange feed is down or delayed?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "One-Edit Dictionary (Magic Dictionary)",
@@ -61,7 +81,16 @@
         "How does your solution change if the dictionary is static vs constantly updated?",
         "What is the risk of hash collisions in your approach and how do you mitigate it?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design Secure Web Authentication & Top-N Active Users",
@@ -81,7 +110,18 @@
         "What are the consistency trade-offs? Is it acceptable if the Top N list is slightly stale?",
         "How do you rate limit this endpoint to prevent abuse?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Telephone Directory (Bi-Directional O(1))",
@@ -99,7 +139,16 @@
         "How do you handle hash collisions in your custom implementation?",
         "What if you need to support prefix search on names (autocomplete) in addition to exact lookup? How does this change your architecture?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Dynamic Memory Allocation Strategy (Linked List)",
@@ -117,7 +166,16 @@
         "How do you handle memory fragmentation in C++ if you are frequently reallocating?",
         "What are the trade-offs of using `realloc` vs allocating a new block and copying?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Vertical Order Traversal of Binary Tree",
@@ -134,7 +192,16 @@
         "How would you handle a tree with 10 million nodes? What is the memory bottleneck?",
         "If the values are large strings, how do you minimize memory allocation during concatenation?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Optimize a Complex Algorithm (Resume Deep Dive)",
@@ -151,7 +218,16 @@
         "How did you prove (with data) that your optimization was actually better and not just different?",
         "If you had to re-implement this today, what would you do differently?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Trade Feed Handling & Concurrency Debugging",
@@ -169,7 +245,16 @@
         "If the deadlock disappears when you turn on logging (Heisenbug), how do you catch it?",
         "How do you validate that your fix actually resolved the issue without introducing new contention?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Stock Ticker - Top K with Real-Time Updates",
@@ -187,7 +272,14 @@
         "What is the time complexity of your `getTopK(k)` if k is variable (e.g., 1 vs 100)?",
         "How does your design change if we allow negative volume (cancellations)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     }
   ]
 }

@@ -1,4 +1,6 @@
 {
+  "track": "data_science",
+  "company_style": "general",
   "difficulty": "hard",
   "questions": [
     {
@@ -13,7 +15,16 @@
         "What is self-attention and how is it computed?",
         "Why does attention help with long-range dependencies?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "GAN Architecture",
@@ -26,7 +37,16 @@
         "What are common failure modes in GAN training?",
         "How do techniques like WGAN or StyleGAN improve upon basic GANs?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Causal Inference Methods",
@@ -39,7 +59,16 @@
         "What are the assumptions behind propensity score matching?",
         "How do you validate causal inference results?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Bayesian Neural Networks",
@@ -53,7 +82,16 @@
         "How does variational inference work in Bayesian neural networks?",
         "What are the computational challenges with Bayesian approaches?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Reinforcement Learning Algorithms",
@@ -66,7 +104,16 @@
         "What is the exploration-exploitation tradeoff?",
         "How does experience replay work in deep Q-networks?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Graph Neural Networks",
@@ -79,7 +126,16 @@
         "How do message passing algorithms work in GNNs?",
         "What are some challenges with scaling GNNs to large graphs?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Multi-Armed Bandit Problems",
@@ -92,7 +148,16 @@
         "How do contextual bandits extend the basic bandit problem?",
         "When would you use bandits instead of A/B testing?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Federated Learning",
@@ -105,7 +170,16 @@
         "How does federated averaging work?",
         "What are the privacy guarantees in federated learning?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Time Series Forecasting Models",
@@ -118,7 +192,16 @@
         "How do you handle multivariate time series forecasting?",
         "What are the challenges with long-horizon forecasting?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Optimization for Deep Learning",
@@ -131,7 +214,16 @@
         "Why is adaptive learning rate important?",
         "How do learning rate warmup and decay strategies work?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Meta-Learning",
@@ -144,7 +236,16 @@
         "How does meta-learning differ from traditional transfer learning?",
         "What are the challenges in evaluating meta-learning algorithms?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "AutoML Systems",
@@ -157,7 +258,16 @@
         "What are the limitations of current AutoML systems?",
         "How do neural architecture search algorithms work?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Explainable AI Techniques",
@@ -170,7 +280,16 @@
         "What are the theoretical foundations of SHAP values?",
         "How do you evaluate the quality of explanations?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Recommender System Algorithms",
@@ -183,7 +302,16 @@
         "How does matrix factorization work?",
         "What are the challenges with cold start problems?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Model Deployment Challenges",
@@ -196,9 +324,16 @@
         "How do you handle model drift in production?",
         "What are the considerations for real-time vs batch inference?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
-  ],
-  "company_style": "general",
-  "track": "data_science"
+  ]
 }

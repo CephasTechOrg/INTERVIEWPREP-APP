@@ -21,6 +21,8 @@ class Question(Base):
     question_type: Mapped[str] = mapped_column(
         String(50), default="coding", nullable=False
     )  # coding|system_design|behavioral|conceptual
+    expected_topics: Mapped[list] = mapped_column(JSON, default=list, nullable=False)  # topics the answer should cover
+    evaluation_focus: Mapped[list] = mapped_column(JSON, default=list, nullable=False)  # what to evaluate (e.g., complexity, edge_cases)
     meta: Mapped[dict] = mapped_column(JSON, default=dict, nullable=False)  # optional extra metadata
 
     created_at: Mapped[str] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)

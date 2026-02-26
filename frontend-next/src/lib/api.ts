@@ -153,6 +153,17 @@ class APIClient {
       throw this.toError(error as AxiosError);
     }
   }
+
+  async postMultipart<T>(url: string, formData: FormData): Promise<T> {
+    try {
+      const response = await this.client.post<T>(url, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      return response.data;
+    } catch (error) {
+      throw this.toError(error as AxiosError);
+    }
+  }
 }
 
 export const apiClient = new APIClient();

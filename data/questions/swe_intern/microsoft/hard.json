@@ -16,7 +16,18 @@
         "How do you handle large files and streaming?",
         "What consistency guarantees do you provide?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Real-Time Chat System",
@@ -31,7 +42,18 @@
         "How do you ensure message ordering per conversation?",
         "How do you prevent duplicate deliveries?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Implement a Thread-Safe LRU Cache",
@@ -46,7 +68,16 @@
         "What are potential deadlocks and how do you avoid them?",
         "How do you measure contention?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Job Scheduler",
@@ -60,7 +91,18 @@
         "How do you avoid duplicate work on retries?",
         "How do you monitor stuck jobs?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design an Authentication System",
@@ -74,7 +116,18 @@
         "How do you defend against replay attacks?",
         "How do you handle account takeover scenarios?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Scalable Notifications Service",
@@ -89,7 +142,18 @@
         "How do you handle provider outages?",
         "How do you ensure idempotency?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Debugging: Memory Leak Under Load",
@@ -104,7 +168,16 @@
         "What tools/telemetry would you use?",
         "How do you validate the fix in production safely?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Multi-Tenant Database Strategy",
@@ -119,7 +192,18 @@
         "How do you handle noisy neighbors?",
         "How do you backup and restore per tenant?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Implement a Mini Compiler Pipeline (High Level)",
@@ -134,7 +218,16 @@
         "How do you produce helpful error messages?",
         "What tests would you write first?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Feature Store for ML",
@@ -149,7 +242,18 @@
         "How do you version features?",
         "How do you monitor feature drift?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "High Throughput API Gateway",
@@ -164,7 +268,18 @@
         "How do you implement rate limiting at scale?",
         "How do you handle partial outages?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Distributed Rate Limiter",
@@ -178,7 +293,18 @@
         "How do you handle clock skew?",
         "How do you prevent a thundering herd?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Consistency Trade-offs in Sync",
@@ -192,7 +318,16 @@
         "How do you resolve conflicts?",
         "How do you test concurrency issues?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Security: Threat Modeling an API",
@@ -207,7 +342,18 @@
         "How do you handle secrets in logs?",
         "How do you test security controls?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Performance: 99th Percentile Latency",
@@ -221,7 +367,16 @@
         "How do you instrument p95/p99 effectively?",
         "What mitigations reduce tail latency?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Reliable Event Processing System",
@@ -236,7 +391,18 @@
         "How do you handle schema evolution?",
         "How do you support replay without double counting?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Concurrency: Deadlock Investigation",
@@ -250,7 +416,16 @@
         "How do you reproduce it?",
         "What design changes prevent it long-term?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Search Service (High Level)",
@@ -264,7 +439,18 @@
         "How do you rank results efficiently?",
         "How do you handle spam/abuse?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Large-Scale Data Migration Plan",
@@ -279,7 +465,18 @@
         "How do you rollback if issues appear?",
         "What metrics do you monitor?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Behavioral: Cross-Team Influence",
@@ -294,7 +491,17 @@
         "How did you handle pushback?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Design Microsoft OneDrive Sync Engine",
@@ -309,7 +516,18 @@
         "How do you handle offline edits?",
         "What consistency model do you choose and why?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Microsoft Teams Presence System",
@@ -324,7 +542,18 @@
         "How do you prevent status thrashing?",
         "What's the trade-off between accuracy and performance?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Outlook's Email Search",
@@ -339,7 +568,18 @@
         "How do you handle real-time indexing of new emails?",
         "How do you support advanced filters and attachments?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Azure AD Authentication",
@@ -354,7 +594,18 @@
         "How do you implement MFA without degrading UX?",
         "How do you detect and block compromised accounts?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design SQL Server Query Optimizer (Conceptual)",
@@ -369,7 +620,16 @@
         "How do you handle parameter sniffing?",
         "When would you use query hints and why are they risky?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Distributed Transaction Coordinator",
@@ -384,7 +644,18 @@
         "How do you handle coordinator failure?",
         "What are the performance implications?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Azure Blob Storage Tiering",
@@ -399,7 +670,18 @@
         "What's the trade-off between cost and latency?",
         "How do you handle lifecycle policies for billions of blobs?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Lock-Free Concurrent Queue",
@@ -414,7 +696,16 @@
         "What memory ordering guarantees do you need?",
         "When is lock-free faster than locking?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "C#: Async/Await Deep Dive",
@@ -429,7 +720,16 @@
         "How does ConfigureAwait(false) affect performance?",
         "What are common deadlock scenarios with async/await?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "C#: ValueTask Advanced Usage",
@@ -444,7 +744,16 @@
         "How does ValueTask reduce allocations?",
         "What is ValueTaskSource and when would you implement it?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": ".NET: Garbage Collection Tuning",
@@ -459,7 +768,16 @@
         "What is background GC and when is it beneficial?",
         "How do you monitor GC pressure in production?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": ".NET: Memory Pooling",
@@ -474,7 +792,16 @@
         "How do you prevent memory leaks in pools?",
         "When is pooling harmful?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "C#: Span<T> and Memory<T>",
@@ -489,7 +816,16 @@
         "How do they reduce allocations?",
         "When would you use Memory<T> instead?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "C#: Source Generators",
@@ -504,7 +840,18 @@
         "What are the performance benefits?",
         "How do you debug source generators?"
       ],
-      "question_type": "coding"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Entity Framework: Performance at Scale",
@@ -519,7 +866,16 @@
         "When would you use raw SQL over EF?",
         "How do you handle large result sets efficiently?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SQL Server: Deadlock Analysis",
@@ -534,7 +890,16 @@
         "What are common deadlock patterns?",
         "How does isolation level affect deadlocks?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SQL Server: Index Maintenance",
@@ -549,7 +914,16 @@
         "What's the difference between reorganize and rebuild?",
         "How do you minimize downtime during maintenance?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Azure: Designing for Disaster Recovery",
@@ -564,7 +938,18 @@
         "How do you handle database replication across regions?",
         "How do you test failover without impacting users?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Azure: Kubernetes (AKS) Networking",
@@ -579,7 +964,16 @@
         "How do you implement network policies?",
         "How do you expose services securely to the internet?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Version Control System",
@@ -593,7 +987,18 @@
         "How do you detect and resolve merge conflicts?",
         "How do you optimize storage for large repositories?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Collaborative Whiteboard",
@@ -608,7 +1013,18 @@
         "How do you handle large canvases with many objects?",
         "What's the trade-off between resolution and bandwidth?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a WebAssembly Runtime",
@@ -623,7 +1039,18 @@
         "How do you manage memory safely?",
         "How do you handle interop with JavaScript?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Algorithm: Median of Two Sorted Arrays",
@@ -638,7 +1065,16 @@
         "How do you handle even vs odd total length?",
         "What edge cases make this tricky?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Algorithm: Merge K Sorted Lists",
@@ -653,7 +1089,16 @@
         "How do you handle empty lists?",
         "What about streaming lists?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Algorithm: Trapping Rain Water",
@@ -668,7 +1113,16 @@
         "How would you solve for 2D elevation?",
         "What's the intuition behind the algorithm?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Algorithm: Serialize and Deserialize Binary Tree",
@@ -683,7 +1137,16 @@
         "How do you handle null nodes efficiently?",
         "How would you handle N-ary trees?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Algorithm: Word Ladder II",
@@ -698,7 +1161,16 @@
         "Why build the graph backward?",
         "Time and space complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Algorithm: Largest Rectangle in Histogram",
@@ -713,7 +1185,16 @@
         "What is the intuition?",
         "How would you solve for 2D matrix?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Algorithm: Regular Expression Matching",
@@ -728,7 +1209,16 @@
         "Why does greedy fail for '*'?",
         "How do you handle large inputs?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Microsoft Culture: Growth Mindset in Action",
@@ -743,7 +1233,17 @@
         "How did you respond immediately?",
         "What systems did you change to prevent recurrence?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Microsoft Culture: Customer Obsession at Scale",
@@ -758,7 +1258,17 @@
         "How did you convince others?",
         "What was the impact on customers?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Microsoft Culture: Inclusive Design",
@@ -773,7 +1283,17 @@
         "How did you validate your solution?",
         "How did this benefit all users?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Microsoft Culture: One Microsoft",
@@ -788,7 +1308,17 @@
         "How did you align different priorities?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Technical Leadership: Mentoring",
@@ -803,7 +1333,16 @@
         "How do you give feedback effectively?",
         "What's the most challenging mentoring situation you've faced?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Technical Leadership: Architecture Decision",
@@ -818,7 +1357,17 @@
         "How did you gather input?",
         "How do you know it was the right decision?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Debugging: Production Outage",
@@ -833,7 +1382,17 @@
         "How do you communicate during the incident?",
         "What does a post-mortem look like?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "System Thinking: Technical Debt Strategy",
@@ -848,7 +1407,17 @@
         "How do you get buy-in from product management?",
         "How do you prevent new debt from accumulating?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }

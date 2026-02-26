@@ -16,7 +16,18 @@
         "How would you support debugging without raw user data?",
         "How would you audit and monitor access to analytics?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Distributed Cache Invalidation",
@@ -31,7 +42,18 @@
         "How do you handle cache stampedes?",
         "How do you test correctness under race conditions?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Concurrent Queue (Correctness Focus)",
@@ -46,7 +68,18 @@
         "When would you use lock-free vs locking?",
         "How would you validate linearizability or correctness?"
       ],
-      "question_type": "coding"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Implement a File-System-like Trie",
@@ -61,7 +94,16 @@
         "How do you store metadata (permissions, timestamps)?",
         "What are the memory trade-offs?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Scheduler: Priorities and Fairness",
@@ -76,7 +118,18 @@
         "How do you handle long-running tasks?",
         "What data structures support efficient scheduling?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Search Autocomplete with Ranking",
@@ -91,7 +144,18 @@
         "How do you handle memory constraints on device?",
         "What tests ensure relevance and latency targets?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "On-Device Model Update Strategy",
@@ -106,7 +170,18 @@
         "How do you handle offline devices?",
         "How do you evaluate model quality without collecting raw user data?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Build a Crash Deduplication Pipeline",
@@ -121,7 +196,18 @@
         "How do you handle noisy stack traces (inlining, symbol changes)?",
         "How do you prioritize what engineers fix first?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Memory: ARC/GC + Performance Trade-offs",
@@ -136,7 +222,16 @@
         "What patterns reduce allocation churn?",
         "How do you measure and tune memory in production?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Real-Time Collaboration Engine",
@@ -151,7 +246,18 @@
         "How do you handle offline edits and re-merge?",
         "What are the minimal correctness guarantees you must provide?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "High-Performance Image Pipeline",
@@ -166,7 +272,18 @@
         "What caching strategy would you use (memory/disk)?",
         "How do you test performance regressions?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Implement a Mini Regex Engine",
@@ -181,7 +298,16 @@
         "How do you implement DP and what is the state?",
         "What test cases catch tricky bugs?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Secure Token System",
@@ -196,7 +322,18 @@
         "How do you handle compromised tokens?",
         "What logs/telemetry do you collect without leaking secrets?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Rate Limiting at Scale (Distributed)",
@@ -211,7 +348,18 @@
         "What consistency trade-offs are acceptable?",
         "How do you handle clock skew and burstiness?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Build a Dependency Graph Resolver",
@@ -226,7 +374,16 @@
         "How does this change with optional dependencies?",
         "What are performance constraints for large graphs?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design Review: Latency Budget",
@@ -241,7 +398,18 @@
         "How do you prevent regressions over time?",
         "How do you handle trade-offs between CPU, memory, and battery?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Consistency vs Availability Decision",
@@ -256,7 +424,16 @@
         "How do you communicate these trade-offs to non-engineers?",
         "What metrics reveal user pain from inconsistency?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Debugging: Heisenbug in Production",
@@ -271,7 +448,16 @@
         "How do you reproduce issues deterministically?",
         "How do you roll out and validate the fix safely?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Fault-Tolerant Upload System",
@@ -286,7 +472,18 @@
         "How do you handle partial failures and cleanup?",
         "How do you detect corruption and verify integrity end-to-end?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Security + Privacy: Local Data Storage",
@@ -301,7 +498,18 @@
         "How do you balance usability vs security (biometrics, lockouts)?",
         "What is your incident response if a vulnerability is discovered?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Apple's End-to-End Encryption for iMessage",
@@ -317,7 +525,18 @@
         "What about message recovery when a user loses their device?",
         "How do you prevent man-in-the-middle attacks?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Face ID's On-Device Machine Learning Pipeline",
@@ -333,7 +552,16 @@
         "What about security against spoofing attacks?",
         "How do you update the model without compromising user privacy?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design Apple Music's Global Streaming Infrastructure",
@@ -349,7 +577,18 @@
         "What DRM strategy protects content while ensuring smooth playback?",
         "How do you handle licensing and regional content restrictions?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design the iOS App Store's Review System",
@@ -365,7 +604,18 @@
         "What about handling appeals and disputed decisions?",
         "How do you prevent malicious apps from bypassing the review process?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Apple Pay's Transaction Processing System",
@@ -381,7 +631,18 @@
         "What about handling bank outages and network partitions?",
         "How do you ensure PCI DSS compliance throughout?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design HealthKit's Data Synchronization",
@@ -397,7 +658,18 @@
         "What encryption scheme protects health data in transit and at rest?",
         "How do you manage storage for years of health data?"
       ],
-      "question_type": "coding"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Siri's Voice Recognition Pipeline",
@@ -413,7 +685,16 @@
         "What about handling multiple languages and accents?",
         "How do you balance on-device vs cloud processing for privacy?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design Apple Maps' Real-Time Traffic System",
@@ -429,7 +710,18 @@
         "What algorithms predict traffic patterns and ETAs?",
         "How do you handle data freshness and accuracy?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design iCloud Photo Library's Deduplication",
@@ -445,7 +737,18 @@
         "What about handling edits and derivatives?",
         "How do you optimize storage across the user base?"
       ],
-      "question_type": "coding"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design Apple's Continuity Features",
@@ -461,7 +764,16 @@
         "What about handling network transitions (Wi-Fi to cellular)?",
         "How do you ensure low latency for seamless user experience?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Algorithm: Word Search II",
@@ -476,7 +788,16 @@
         "What optimizations reduce backtracking?",
         "What's the worst-case time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Algorithm: Serialize and Deserialize Binary Tree",
@@ -491,7 +812,16 @@
         "How do you handle null values?",
         "What about large trees and memory constraints?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Algorithm: Longest Increasing Path in Matrix",
@@ -507,7 +837,16 @@
         "How do you handle cycles?",
         "What's the time complexity with memoization?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Algorithm: Alien Dictionary",
@@ -522,7 +861,16 @@
         "How do you detect and handle cycles (invalid dictionary)?",
         "What about multiple valid orders?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Algorithm: Sliding Window Maximum",
@@ -537,7 +885,12 @@
         "How would you extend to find minimum as well?",
         "What about very large k values?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Concurrency: Lock-Free Hash Map",
@@ -552,7 +905,16 @@
         "What about resizing and rehashing?",
         "How do you ensure memory safety and reclamation?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Concurrency: Scalable Reader-Writer Lock",
@@ -567,7 +929,16 @@
         "What about fairness between readers and writers?",
         "How do you measure scalability under load?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Database: Distributed Transactions with Saga Pattern",
@@ -582,7 +953,18 @@
         "What about idempotency of compensation actions?",
         "How do you ensure eventual consistency?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Database: Time-Series Data at Apple Scale",
@@ -598,7 +980,18 @@
         "How do you optimize range queries and aggregations?",
         "What about data retention and compression?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Security: Zero-Trust Architecture for Internal Services",
@@ -614,7 +1007,18 @@
         "What about service-to-service authentication?",
         "How do you monitor for anomalies and breaches?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Performance: Global Load Balancing for Apple Services",
@@ -630,7 +1034,16 @@
         "What about DNS propagation and caching issues?",
         "How do you handle failover during outages?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Behavioral: Handling a Security Breach",
@@ -646,7 +1059,16 @@
         "How do you communicate with stakeholders?",
         "What post-mortem actions would you take?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Behavioral: Technical Leadership on Complex Project",
@@ -662,7 +1084,17 @@
         "How did you handle differing opinions?",
         "What was the impact?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Privacy vs Feature Trade-off",
@@ -678,7 +1110,16 @@
         "What solution did you propose?",
         "How did stakeholders react?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Behavioral: Scaling Challenges at Apple Scale",
@@ -694,7 +1135,17 @@
         "How did you diagnose the bottlenecks?",
         "What architectural changes did you make?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Innovating Within Constraints",
@@ -710,7 +1161,16 @@
         "How did you arrive at your solution?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Behavioral: Cross-Functional Leadership",
@@ -726,7 +1186,17 @@
         "What challenges did you face?",
         "What was the result?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Handling Production Incident at Scale",
@@ -742,7 +1212,17 @@
         "How would you communicate with different stakeholders?",
         "What post-incident actions would you take?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Behavioral: Technical Debt at Apple Scale",
@@ -758,7 +1238,16 @@
         "How would you balance new features vs debt repayment?",
         "How would you get buy-in from stakeholders?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Behavioral: Quality vs Time-to-Market",
@@ -774,7 +1263,16 @@
         "What trade-offs did you accept?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Behavioral: Mentoring in a High-Performance Environment",
@@ -790,7 +1288,16 @@
         "What challenges did you face?",
         "What was the impact on the team?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
   ]
 }

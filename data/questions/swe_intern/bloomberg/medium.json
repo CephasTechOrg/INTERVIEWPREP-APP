@@ -17,7 +17,16 @@
         "How would you make this thread-safe for concurrent requests?",
         "What is the memory trade-off between using a queue vs a circular array?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Lottery System (O(1) Storage)",
@@ -34,7 +43,16 @@
         "How do you handle removing a participant that is already removed?",
         "Can you implement this in C++ without using the standard library's random shuffle?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Combination Sum",
@@ -50,7 +68,14 @@
         "How do you avoid duplicate combinations?",
         "What if the array contains duplicates (Combination Sum II)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Number of Islands",
@@ -67,7 +92,12 @@
         "How would you solve this if the grid is too large to fit in memory (streaming)?",
         "Can you solve it without modifying the input grid?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Wordle Checker",
@@ -83,7 +113,16 @@
         "What if the words are not fixed length?",
         "How would you optimize this for millions of guesses per second?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Min Stack",
@@ -98,7 +137,16 @@
         "What is the space complexity of your approach?",
         "Can you implement it with O(1) extra space (store the difference)?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Valid Triangle Number",
@@ -113,7 +161,15 @@
         "How does sorting the array help?",
         "What edge cases cause overflow in C++?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation",
+        "binary search algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "LRU Cache (Variable Size)",
@@ -130,7 +186,16 @@
         "What happens if a single entry is larger than the total capacity?",
         "How do you prevent cache pollution from large, infrequent entries?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Find Peak Element",
@@ -144,7 +209,16 @@
         "What invariant do you maintain?",
         "How do you handle plateaus (equal neighbors)?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Box Nesting Problem (Containment Chains)",
@@ -160,7 +234,16 @@
         "What if rotation is allowed on all axes?",
         "How do you output the actual chain, not just the length?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Flatten a Multilevel Doubly Linked List",
@@ -175,7 +258,16 @@
         "How do you handle cycles in the child pointers?",
         "What is the time and space complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design Tic-Tac-Toe",
@@ -191,7 +283,16 @@
         "How would you extend this to 3D Tic-Tac-Toe?",
         "How do you detect a draw/tie condition?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Rotate Matrix/Image",
@@ -206,7 +307,16 @@
         "What is the space complexity of the transpose + reverse method?",
         "How would you rotate a non-square matrix (m x n)?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Count and Say",
@@ -221,7 +331,16 @@
         "How would you optimize this for very large n?",
         "Can you implement it iteratively?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Group Anagrams",
@@ -236,7 +355,14 @@
         "What is the space complexity?",
         "How would you handle very large inputs (streaming)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Expand Wildcard String",
@@ -251,7 +377,12 @@
         "How would you do this iteratively using a queue?",
         "What if the string is very long (1 million characters)?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Find the Two Innermost Characters",
@@ -266,7 +397,14 @@
         "What if there are multiple pairs at the same depth?",
         "What characters are allowed besides parentheses?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "stack data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Path in Grid with Obstacles",
@@ -281,7 +419,16 @@
         "How would you find all possible paths?",
         "What if you can move in all 4 directions?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design Fair Event Registration Queue",
@@ -297,7 +444,16 @@
         "How do you achieve O(1) for all operations?",
         "What if you need to prioritize VIP users?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Top K Frequent Elements",
@@ -312,7 +468,14 @@
         "What is the worst-case time complexity of quickselect?",
         "How would you handle a stream of data?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Binary Tree Level Order Traversal",
@@ -327,7 +490,14 @@
         "How would you do it using DFS?",
         "How would you return a zigzag/spiral order?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "queue data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "String Compression (with counts)",
@@ -341,7 +511,12 @@
         "How do you handle single characters?",
         "How would you handle digits in the original string?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Find Duplicate Subtrees",
@@ -356,7 +531,14 @@
         "What is the risk of using string concatenation?",
         "How would you optimize memory usage?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Implement Magic Dictionary",
@@ -372,7 +554,16 @@
         "How do you handle the 'exactly one' constraint?",
         "What if the dictionary is very large (millions of words)?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Simplify Path (Unix Style)",
@@ -386,7 +577,14 @@
         "What is the time complexity?",
         "How would you handle a network/URL path instead of a file path?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "stack data structure"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     }
   ]
 }

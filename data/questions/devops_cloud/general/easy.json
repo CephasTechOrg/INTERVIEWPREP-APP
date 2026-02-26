@@ -1,4 +1,6 @@
 {
+  "track": "devops_cloud",
+  "company_style": "general",
   "difficulty": "easy",
   "questions": [
     {
@@ -12,7 +14,16 @@
         "How does DevOps differ from traditional development approaches?",
         "What are some benefits of adopting DevOps practices?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "What is Cloud Computing?",
@@ -25,7 +36,16 @@
         "What are the advantages of cloud computing over on-premises infrastructure?",
         "What does IaaS, PaaS, and SaaS stand for?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "CI/CD Basics",
@@ -38,7 +58,16 @@
         "What's the difference between continuous integration and continuous deployment?",
         "What are some popular CI/CD tools?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Containers vs Virtual Machines",
@@ -51,7 +80,16 @@
         "What are the advantages of using containers?",
         "What is Docker and how does it relate to containers?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "What is Git?",
@@ -64,7 +102,16 @@
         "What's the difference between Git and GitHub?",
         "What are some basic Git commands?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Infrastructure as Code",
@@ -77,7 +124,16 @@
         "What are some popular IaC tools?",
         "What are the benefits of treating infrastructure as code?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Monitoring Basics",
@@ -90,7 +146,16 @@
         "What's the difference between metrics, logs, and traces?",
         "What are some key metrics to track for application health?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Microservices Architecture",
@@ -103,7 +168,16 @@
         "What are the advantages of microservices?",
         "What challenges come with microservices?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Public Cloud Providers",
@@ -116,7 +190,16 @@
         "What factors might influence which cloud provider to choose?",
         "What is hybrid cloud?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Load Balancing",
@@ -129,7 +212,16 @@
         "What's the difference between application and network load balancers?",
         "How does load balancing improve availability?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Auto-scaling",
@@ -142,7 +234,16 @@
         "What metrics might trigger auto-scaling?",
         "What are the benefits of auto-scaling?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "What is Kubernetes?",
@@ -155,7 +256,16 @@
         "What problem does Kubernetes solve?",
         "How does Kubernetes relate to Docker?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Deployment Strategies",
@@ -168,7 +278,16 @@
         "What are blue-green deployments?",
         "What are canary releases?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Configuration Management",
@@ -181,7 +300,16 @@
         "What are some popular configuration management tools?",
         "How does configuration management help with consistency?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Disaster Recovery",
@@ -194,9 +322,16 @@
         "What's the difference between backup and disaster recovery?",
         "What are RTO and RPO?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
-  ],
-  "company_style": "general",
-  "track": "devops_cloud"
+  ]
 }

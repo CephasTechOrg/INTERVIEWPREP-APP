@@ -16,7 +16,18 @@
         "How do you handle hot keys and caching?",
         "How do you prevent abuse/spam?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Queue-Based Background Jobs",
@@ -30,7 +41,18 @@
         "How do you handle retries and poison messages?",
         "How would you ensure at-least-once vs exactly-once behavior?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Database Indexing Strategy",
@@ -43,7 +65,18 @@
         "What are trade-offs of adding indexes (writes/storage)?",
         "What is a composite index and when is it useful?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Consistent Hashing (Conceptual)",
@@ -56,7 +89,16 @@
         "How does it reduce rebalancing when nodes change?",
         "Where have you seen it used (caches, sharding)?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Merge Intervals",
@@ -69,7 +111,16 @@
         "What edge cases would you test?",
         "Can you do it in-place?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Webhook Delivery System",
@@ -84,7 +135,18 @@
         "How do you sign webhooks securely?",
         "How do you handle customer endpoints that are slow or down?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Chunked File Uploads",
@@ -99,7 +161,18 @@
         "How do you handle partial uploads and cleanup?",
         "Where do you store upload state (DB, Redis)?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design an Email Verification Flow",
@@ -113,7 +186,18 @@
         "How do you prevent token leakage and replay?",
         "How do you rate limit resends?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Notification Service",
@@ -127,7 +211,18 @@
         "How do you avoid duplicate notifications?",
         "How do you handle user preferences and unsubscribes?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Comment System",
@@ -142,7 +237,18 @@
         "How would you index for fast reads?",
         "How do you handle soft delete vs hard delete?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Zero-Downtime Database Migration",
@@ -156,7 +262,18 @@
         "How do you backfill safely?",
         "How do you deploy app changes around the migration?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Multi-Tenant SaaS Schema",
@@ -170,7 +287,18 @@
         "How do you prevent tenant data leaks?",
         "How do you handle noisy neighbors?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Caching Strategy for a Read-Heavy Endpoint",
@@ -184,7 +312,18 @@
         "Cache-aside vs write-through: when would you choose each?",
         "How do you handle stale data?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Leaderboard (Top N)",
@@ -198,7 +337,18 @@
         "What storage fits best (sorted set, DB index) and why?",
         "How do you handle ties and pagination?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Implement Kth Largest Element",
@@ -212,7 +362,14 @@
         "When is quickselect better than a heap?",
         "What edge cases do you test?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design Search Autocomplete",
@@ -226,7 +383,18 @@
         "Trie vs prefix index: trade-offs?",
         "How do you keep results fresh as data changes?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Per-User Rate Limits Across Servers",
@@ -241,7 +409,18 @@
         "What trade-off between accuracy and speed is acceptable?",
         "How do you handle burst traffic?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Delayed Job Scheduler (Simple)",
@@ -255,7 +434,18 @@
         "How do you handle retries and duplicates?",
         "How do you scale workers safely?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Idempotency in a Multi-Instance API",
@@ -269,7 +459,18 @@
         "How do you choose idempotency key TTL?",
         "How do you handle large request bodies?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Observability: Metrics, Logs, Traces",
@@ -282,7 +483,18 @@
         "How do you identify the slow dependency?",
         "What SLOs would you define?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Cache Consistency for User Profiles",
@@ -296,7 +508,18 @@
         "What cache invalidation strategies would you consider?",
         "How do you prevent cache stampedes?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Recommendation Endpoint (Simple)",
@@ -310,7 +533,18 @@
         "How do you evaluate quality and latency?",
         "How do you handle cold start users?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Debugging a Production Incident",
@@ -324,7 +558,18 @@
         "What signals do you check first?",
         "How do you prevent this next time?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Large Backfill Job",
@@ -338,7 +583,18 @@
         "How do you make it resumable?",
         "How do you monitor progress and failures?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Merge K Sorted Lists",
@@ -352,7 +608,16 @@
         "What if lists are very long?",
         "How do you test performance?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Real-time Chat System",
@@ -367,7 +632,18 @@
         "How would you handle message persistence?",
         "What are the challenges with scaling WebSocket connections?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Implement a Trie",
@@ -381,7 +657,16 @@
         "What are the time complexities for each operation?",
         "How would you implement autocomplete using a trie?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Distributed Counter",
@@ -395,7 +680,18 @@
         "How do you handle concurrent increments?",
         "What trade-offs exist between accuracy and performance?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Longest Substring Without Repeating Characters",
@@ -409,7 +705,16 @@
         "What's the optimal time complexity?",
         "How would you extend this to find the substring itself?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Rate Limiter with Redis",
@@ -423,7 +728,16 @@
         "How does this compare to token bucket implementation?",
         "How do you handle race conditions in distributed Redis?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Simple Search Engine",
@@ -437,7 +751,18 @@
         "How would you handle spelling corrections?",
         "What data structures are optimal for inverted indexes?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Implement a Circular Buffer",
@@ -451,7 +776,16 @@
         "How would you make it thread-safe?",
         "What are practical use cases for circular buffers?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a File Upload Service with CDN",
@@ -466,7 +800,18 @@
         "How do you handle file access permissions?",
         "What about virus scanning and content moderation?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Find All Anagrams in a String",
@@ -480,7 +825,12 @@
         "What's the time and space complexity?",
         "How would you optimize for large alphabets?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design a Social Graph",
@@ -494,7 +844,18 @@
         "How would you store edges for efficient traversal?",
         "How do you find mutual friends efficiently?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Implement a Thread Pool",
@@ -508,7 +869,16 @@
         "How do you handle task failures?",
         "How would you implement graceful shutdown?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Shopping Cart System",
@@ -522,7 +892,18 @@
         "How do you handle concurrent modifications?",
         "How would you implement cart abandonment tracking?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Word Break Problem",
@@ -536,7 +917,12 @@
         "What's the time complexity of DP solution?",
         "How would you return all possible segmentations?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Design a Metrics Aggregation System",
@@ -550,7 +936,18 @@
         "How do you handle high cardinality dimensions?",
         "What storage backend would you choose (time-series DB vs OLAP)?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Implement a Least Recently Used (LRU) Cache",
@@ -565,7 +962,16 @@
         "How would you make it thread-safe?",
         "What about implementing an LFU cache?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Feature Flag System",
@@ -579,7 +985,18 @@
         "How do you ensure low latency flag evaluation?",
         "How would you audit flag changes?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Container With Most Water",
@@ -593,7 +1010,16 @@
         "What's the intuition behind the two-pointer solution?",
         "How would you prove the algorithm's correctness?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Distributed Lock Service",
@@ -607,7 +1033,18 @@
         "How do you handle lock expiration and renewal?",
         "What are the challenges with clock drift?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Implement a Binary Search Tree Iterator",
@@ -621,7 +1058,16 @@
         "What's the time and space complexity?",
         "How would you handle modifications to the tree during iteration?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Video Streaming Service",
@@ -636,7 +1082,18 @@
         "How do you handle different video qualities?",
         "What about live streaming vs on-demand?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Course Schedule (Topological Sort)",
@@ -650,7 +1107,16 @@
         "How would you find a valid course order?",
         "What's the time complexity for adjacency list?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a API Gateway",
@@ -664,7 +1130,18 @@
         "How do you handle service discovery?",
         "What about circuit breaking and fallbacks?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Implement a Min Stack",
@@ -678,7 +1155,16 @@
         "What's the space complexity?",
         "How would you extend this to support max as well?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Distributed Task Scheduler",
@@ -692,7 +1178,18 @@
         "How do you ensure tasks are executed exactly once?",
         "How would you prioritize different types of tasks?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Number of Islands",
@@ -707,7 +1204,16 @@
         "Compare DFS and BFS approaches",
         "How would you handle very large grids that don't fit in memory?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Content Management System",
@@ -721,7 +1227,18 @@
         "How would you implement draft vs published states?",
         "What about content search and tagging?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Serialize and Deserialize Binary Tree",
@@ -735,7 +1252,16 @@
         "What serialization format would you choose?",
         "How do you handle null values?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Design a Payment Processing System",
@@ -749,7 +1275,18 @@
         "How do you handle payment gateway failures?",
         "What about fraud detection?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Validate Binary Search Tree",
@@ -763,7 +1300,16 @@
         "What's the time and space complexity?",
         "How would you handle duplicate values?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
   ]
 }

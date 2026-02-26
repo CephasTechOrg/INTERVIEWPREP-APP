@@ -98,6 +98,11 @@ class ScoringEngine:
         session = db.query(InterviewSession).filter(InterviewSession.id == session_id).first()
         track = session.track if session else None
 
+        # Extract difficulty info — used to calibrate the evaluator's scoring thresholds.
+        difficulty: str = (getattr(session, "difficulty", None) or "medium").strip().lower()
+        difficulty_current: str = (getattr(session, "difficulty_current", None) or difficulty).strip().lower()
+        adaptive: bool = bool(getattr(session, "adaptive_difficulty_enabled", False))
+
         include_behavioral = False
         try:
             asked_ids = session_question_crud.list_asked_question_ids(db, session_id)
@@ -119,8 +124,22 @@ class ScoringEngine:
         # Get RAG context from similar sessions (Phase 5)
         rag_context = _get_rag_context_safe(db, session_id)
 
-        sys = evaluator_system_prompt(rag_context=rag_context)
-        user = evaluator_user_prompt(transcript, rubric_context=rubric_context or None)
+        sys = evaluator_system_prompt(
+            rag_context=rag_context,
+            difficulty=difficulty,
+            difficulty_current=difficulty_current,
+            adaptive=adaptive,
+        )
+        user = evaluator_user_prompt(
+            transcript,
+            rubric_context=rubric_context or None,
+            difficulty=difficulty,
+            adaptive=adaptive,
+        )
+        logger.info(
+            "Evaluating session_id=%s difficulty=%s adaptive=%s",
+            session_id, difficulty, adaptive,
+        )
 
         try:
             data = await self.llm.chat_json(sys, user)
@@ -136,12 +155,17 @@ class ScoringEngine:
             "strengths": parsed.strengths,
             "weaknesses": parsed.weaknesses,
             "next_steps": parsed.next_steps,
+            # Rich evaluation fields (displayed in ResultsSection)
+            "hire_signal": parsed.hire_signal,
+            "narrative": parsed.narrative,
+            "patterns_observed": parsed.patterns_observed,
+            "standout_moments": parsed.standout_moments,
         }
 
         evaluation_crud.upsert_evaluation(db, session_id, overall_score, rubric, summary)
-        logger.info("Evaluation stored session_id=%s score=%s", session_id, overall_score)
-        
+        logger.info("Evaluation stored session_id=%s score=%s hire_signal=%s", session_id, overall_score, parsed.hire_signal)
+
         # Generate embeddings for this session (Phase 5: builds RAG knowledge base)
         _trigger_embedding_generation(db, session_id)
-        
+
         return {"overall_score": overall_score, "rubric": rubric, "summary": summary}

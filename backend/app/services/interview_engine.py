@@ -520,20 +520,16 @@ class InterviewEngine(InterviewEngineMain):
     def _question_rubric_alignment_score(self, q: Question, rubric_gaps: list[str]) -> int:
         """
         Phase 5: Score how well a question targets the candidate's rubric gaps.
-        
+
         Questions with evaluation_focus matching rubric gaps get higher scores.
         """
         if not rubric_gaps:
             return 0
-        
-        meta = getattr(q, "meta", None)
-        if not isinstance(meta, dict):
-            return 0
-        
-        eval_focus = meta.get("evaluation_focus")
+
+        eval_focus = getattr(q, "evaluation_focus", None) or []
         if not isinstance(eval_focus, list):
             return 0
-        
+
         focus_keys = {self._normalize_focus_key(str(f)) for f in eval_focus}
         focus_keys.discard(None)
         

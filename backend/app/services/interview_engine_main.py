@@ -50,6 +50,138 @@ def _get_rag_context_for_interview(db: Session, session_id: int) -> str | None:
 class InterviewEngineMain(InterviewEngineTransitions):
     """Main interview flow orchestrator."""
 
+    # ──────────────────────────────────────────
+    # Session-wide pattern tracking
+    # ──────────────────────────────────────────
+
+    def _update_session_patterns(
+        self,
+        db: Session,
+        session: InterviewSession,
+        signals: dict,
+        q: Any,
+        response_quality: str,
+    ) -> None:
+        """Accumulate cross-question behavioural patterns in skill_state["patterns"]."""
+        state = dict(session.skill_state or {})
+        pat = dict(state.get("patterns", {}))
+
+        n = int(pat.get("n", 0)) + 1
+        pat["n"] = n
+
+        # Track how often the candidate mentions complexity
+        if signals.get("mentions_complexity"):
+            pat["complexity_count"] = int(pat.get("complexity_count", 0)) + 1
+
+        # Track whether candidate explains approach before coding
+        if signals.get("mentions_approach"):
+            pat["approach_count"] = int(pat.get("approach_count", 0)) + 1
+
+        # Detect pattern of jumping straight to code
+        if signals.get("has_code") and not signals.get("mentions_approach"):
+            pat["code_without_plan"] = int(pat.get("code_without_plan", 0)) + 1
+
+        # Track tradeoff mentions
+        if signals.get("mentions_tradeoffs"):
+            pat["tradeoffs_count"] = int(pat.get("tradeoffs_count", 0)) + 1
+
+        # Track edge-case mentions
+        if signals.get("mentions_edge_cases"):
+            pat["edge_cases_count"] = int(pat.get("edge_cases_count", 0)) + 1
+
+        # Track question-type strengths / gaps
+        qt = self._question_type(q) if q else "coding"
+        if response_quality == "strong":
+            strong = list(pat.get("strong_types", []))
+            if qt not in strong:
+                strong.append(qt)
+            pat["strong_types"] = strong
+        elif response_quality == "weak":
+            weak = list(pat.get("weak_types", []))
+            if qt not in weak:
+                weak.append(qt)
+            pat["weak_types"] = weak
+
+        state["patterns"] = pat
+        session.skill_state = state
+        db.add(session)
+        db.commit()
+
+    def _session_patterns_summary(self, session: InterviewSession) -> str | None:
+        """
+        Convert accumulated patterns into a concise English summary for the controller.
+        Returns None if there isn't enough data yet (< 2 questions answered).
+        """
+        state = dict(session.skill_state or {})
+        pat = dict(state.get("patterns", {}))
+        n = int(pat.get("n", 0))
+        if n < 2:
+            return None
+
+        observations: list[str] = []
+
+        # Complexity pattern
+        cx = int(pat.get("complexity_count", 0))
+        if cx == 0:
+            observations.append(
+                "Candidate has NOT mentioned time/space complexity across any question so far — recurring gap."
+            )
+        elif cx < (n + 1) // 2:
+            observations.append("Candidate mentions complexity inconsistently — prompt for it when missing.")
+
+        # Approach pattern
+        ap = int(pat.get("approach_count", 0))
+        if ap < (n + 1) // 2:
+            observations.append("Candidate tends to skip explaining their approach and jumps to implementation.")
+
+        # Code-without-plan pattern
+        cwp = int(pat.get("code_without_plan", 0))
+        if cwp >= 2:
+            observations.append(
+                f"Candidate has jumped straight to code without a verbal plan {cwp} times — push them to plan first."
+            )
+
+        # Tradeoffs
+        tr = int(pat.get("tradeoffs_count", 0))
+        if tr == 0 and n >= 3:
+            observations.append("Candidate has not discussed trade-offs on any question — worth pushing on.")
+
+        # Edge cases
+        ec = int(pat.get("edge_cases_count", 0))
+        if ec == 0 and n >= 3:
+            observations.append("Candidate has not mentioned edge cases yet this session.")
+
+        # Strong / weak types
+        strong = list(pat.get("strong_types", []))
+        weak = list(pat.get("weak_types", []))
+        if strong:
+            observations.append(f"Strong on: {', '.join(strong)} questions.")
+        if weak:
+            observations.append(f"Weaker on: {', '.join(weak)} questions.")
+
+        return " | ".join(observations) if observations else None
+
+    # ──────────────────────────────────────────
+    # Per-question hint level tracking
+    # ──────────────────────────────────────────
+
+    def _get_hint_level(self, session: InterviewSession, q_id: int) -> int:
+        state = dict(session.skill_state or {})
+        hints = dict(state.get("hints", {}))
+        return int(hints.get(str(q_id), 0))
+
+    def _increment_hint_level(self, db: Session, session: InterviewSession, q_id: int) -> int:
+        state = dict(session.skill_state or {})
+        hints = dict(state.get("hints", {}))
+        current = int(hints.get(str(q_id), 0))
+        new_level = min(current + 1, 3)
+        hints[str(q_id)] = new_level
+        state["hints"] = hints
+        session.skill_state = state
+        db.add(session)
+        db.commit()
+        return new_level
+
     def _dimension_to_missing_key(self, dimension: str | None) -> str | None:
         if dimension == "edge_cases":
             return "edge_cases"
@@ -139,20 +271,28 @@ class InterviewEngineMain(InterviewEngineTransitions):
                 user_question_seen_crud.mark_question_seen(db, session.user_id, q.id)
             self._increment_questions_asked(db, session)
 
-            if not preface and not self._intro_used(session):
+            # Only use the intro line if warmup was genuinely skipped (no warmup messages in history).
+            # After a normal warmup flow, intro_used is always True — this guard prevents mid-interview
+            # re-introductions if the flag was somehow not persisted.
+            _, warm_done_check = interview_warmup.get_state(session)
+            if not preface and not self._intro_used(session) and not warm_done_check:
                 intro_line = self._interviewer_intro_line(session)
                 if intro_line:
                     preface = intro_line
                     with contextlib.suppress(Exception):
                         self._set_intro_used(db, session)
+            # Always mark intro as used once the first question is being presented.
+            with contextlib.suppress(Exception):
+                self._set_intro_used(db, session)
             sys = interviewer_system_prompt(session.company_style, session.role, self._interviewer_name(session), self._interviewer_id(session))
             title, prompt = self._render_question(session, q)
             qt = self._question_type(q)
             if self._is_behavioral(q):
                 user = f"""
-Start the interview with a short greeting.
-Transition into the first behavioral question. Greet the candidate by name if available ({user_name or "name unavailable"}).
-Ask the candidate to answer using STAR (Situation, Task, Action, Result). Keep it conversational and concise.
+The warmup conversation just finished. Transition directly into the first question.
+Do NOT re-introduce yourself or say "nice to meet you" — you've already met during warmup.
+Present the behavioral question conversationally — like a real interviewer asking, not reading from a list.
+If a preface is provided, lead with it naturally before the question.
 Preface (say this first if provided): {preface or ""}
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 
@@ -160,9 +300,10 @@ Question context: {self._combine_question_text(title, prompt)}
 """.strip()
             elif qt == "conceptual":
                 user = f"""
-Start the interview with a short greeting.
-Ask the candidate to explain the concept clearly, then give a simple example or use case.
-Greet the candidate by name if available ({user_name or "name unavailable"}). Keep it concise and friendly.
+The warmup conversation just finished. Transition directly into the first question.
+Do NOT re-introduce yourself — you've already met during warmup.
+Ask about the concept in a natural, conversational way. Don't follow the same formula every time.
+If a preface is provided, lead with it naturally before the question.
 Preface (say this first if provided): {preface or ""}
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 
@@ -170,10 +311,10 @@ Question context: {self._combine_question_text(title, prompt)}
 """.strip()
             elif qt == "system_design":
                 user = f"""
-Start the interview with a short greeting.
-Ask the candidate to clarify requirements and constraints, then outline a high-level design and key components.
-Ask for trade-offs and scalability considerations.
-Greet the candidate by name if available ({user_name or "name unavailable"}). Keep it concise and friendly.
+The warmup conversation just finished. Transition directly into the first question.
+Do NOT re-introduce yourself — you've already met during warmup.
+Present the system design scenario naturally. Ask where they'd like to start — requirements, constraints, or high-level design.
+If a preface is provided, lead with it naturally before the question.
 Preface (say this first if provided): {preface or ""}
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 
@@ -181,10 +322,11 @@ Question context: {self._combine_question_text(title, prompt)}
 """.strip()
             else:
                 user = f"""
-Start the interview with a short greeting.
-Ask the candidate to restate the problem and clarify constraints, then start with a brief plan and key steps.
-Ask them to cover complexity, edge cases, and how they would validate correctness.
-Greet the candidate by name if available ({user_name or "name unavailable"}). Keep it concise and friendly.
+The warmup conversation just finished. Transition directly into the first coding question.
+Do NOT re-introduce yourself — you've already met during warmup.
+Present the problem naturally — like handing it off mid-conversation, not reading a script.
+Do NOT ask "could you restate the problem" — find a more natural entry point. Vary how you open each problem.
+If a preface is provided, lead with it naturally before the question.
 Preface (say this first if provided): {preface or ""}
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 
@@ -492,7 +634,7 @@ Question context: {self._combine_question_text(title, prompt)}
         if self._is_non_informative(student_text):
             tokens = self._clean_tokens(student_text)
             if len(tokens) <= 2:
-                preface = "Understood. Let's move on to the next question."
+                preface = self._transition_preface(session, reason="move_on")
                 session_crud.update_stage(db, session, "next_question")
                 return await self._advance_to_next_question(db, session, history, user_name=user_name, preface=preface)
             if self._max_followups_reached(session):
@@ -629,6 +771,13 @@ Question context: {self._combine_question_text(title, prompt)}
         # Get RAG context for smarter follow-ups (Phase 5)
         rag_context = _get_rag_context_for_interview(db, session.id)
 
+        # Build cross-question intelligence context
+        session_patterns = self._session_patterns_summary(session)
+        hint_level = self._get_hint_level(session, q.id)
+        # Escalate hint level when candidate is stuck (weak quality + has had a followup already)
+        if response_quality == "weak" and int(session.followups_used or 0) >= 1:
+            hint_level = self._increment_hint_level(db, session, q.id)
+
         ctrl_sys = interviewer_controller_system_prompt(session.company_style, session.role, rag_context=rag_context)
         ctrl_user = interviewer_controller_user_prompt(
             stage=stage,
@@ -645,6 +794,8 @@ Question context: {self._combine_question_text(title, prompt)}
             response_quality=response_quality,
             is_behavioral=is_behavioral,
             question_type=self._question_type(q),
+            session_patterns=session_patterns,
+            hint_level=hint_level,
         )
 
         intent = ""
@@ -678,6 +829,9 @@ Question context: {self._combine_question_text(title, prompt)}
         if student_text and student_text.strip():
             with contextlib.suppress(Exception):
                 self._update_skill_state(db, session, quick_rubric_raw, is_behavioral=self._is_behavioral(q))
+            # Accumulate cross-question patterns for future controller context.
+            with contextlib.suppress(Exception):
+                self._update_session_patterns(db, session, signals, q, response_quality)
 
         if intent == "WRAP_UP":
             action = "WRAP_UP"

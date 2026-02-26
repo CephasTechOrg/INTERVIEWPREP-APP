@@ -24,45 +24,45 @@ services:
     envVars:
       # Python version (must be major.minor.patch)
       - key: PYTHON_VERSION
-        value: "3.12.3"
-      
+        value: "3.11.9"
+
       # Pip settings
       - key: PIP_ROOT_USER_ACTION
         value: ignore
-      
+
       # Avoid Rust build issues for some packages
       - key: MISE_PYTHON_COMPILE
         value: "false"
-      
+
       # Application environment
       - key: ENV
         value: production
-      
+
       # Secret key for JWT (use Render's secret generator)
       - key: SECRET_KEY
         generateValue: true
-      
+
       # Database URL (linked from Render PostgreSQL)
       - key: DATABASE_URL
         fromDatabase:
           name: interviq-db
           property: connectionString
-      
+
       # Frontend URL for CORS
       - key: FRONTEND_ORIGINS
         value: https://interviq-frontend.onrender.com
-      
+
       - key: FRONTEND_URL
         value: https://interviq-frontend.onrender.com
-      
+
       # DeepSeek API Key (set manually in Render dashboard)
       - key: DEEPSEEK_API_KEY
         sync: false
-      
+
       # ElevenLabs TTS (optional - set manually if using)
       - key: ELEVENLABS_API_KEY
         sync: false
-      
+
       # SMTP settings (optional - set manually for email)
       - key: SMTP_HOST
         sync: false
@@ -80,31 +80,26 @@ services:
   # ============================================
   - type: web
     name: interviq-frontend
-    env: static
+    env: node
     region: oregon
     plan: free
     branch: main
-    rootDir: frontend
+    rootDir: frontend-next
 
-    buildCommand: echo "No build needed for static HTML"
-    
-    staticPublishPath: .
+    buildCommand: |
+      npm ci
+      npm run build
 
-    headers:
-      - path: /*
-        name: X-Content-Type-Options
-        value: nosniff
-      - path: /*
-        name: X-Frame-Options
-        value: DENY
-      - path: /*
-        name: Referrer-Policy
-        value: strict-origin-when-cross-origin
+    startCommand: npm run start -- -p $PORT
 
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
+    envVars:
+      - key: NODE_VERSION
+        value: "20.11.1"
+      # Public API base for Next.js (client-side)
+      - key: NEXT_PUBLIC_API_URL
+        value: https://interviq-backend.onrender.com/api/v1
+      - key: NEXT_PUBLIC_API_BASE
+        value: https://interviq-backend.onrender.com/api/v1
 
 # ============================================
 # DATABASE - PostgreSQL with pgvector

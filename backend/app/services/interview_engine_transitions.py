@@ -95,9 +95,9 @@ class InterviewEngineTransitions(InterviewEngineWarmup):
         question_context = self._combine_question_text(title, prompt)
         if self._is_behavioral(q):
             user = f"""
-This is a behavioral question. Present it conversationally — like a real interviewer asking, not reading from a list.
-Ask the candidate to walk you through it using STAR (Situation, Task, Action, Result).
-If a preface is provided, lead with it naturally.
+Present this behavioral question conversationally — like a real interviewer mid-session, not reading from a list.
+Do NOT re-introduce yourself or say "nice to meet you".
+If a preface is provided, lead with it naturally before the question.
 Keep it concise and direct. Do NOT use markdown or labels like "Title:" or "Prompt:".
 Preface (optional): {preface or ""}
 
@@ -105,8 +105,9 @@ Question context: {question_context}
 """.strip()
         else:
             user = f"""
-Introduce this problem naturally — like a senior engineer handing off a question, not reading a script.
-Ask the candidate to start by clarifying constraints and sharing their high-level approach.
+Present this problem naturally — like a senior engineer handing it off mid-conversation, not reading a script.
+Do NOT re-introduce yourself. Do NOT say "could you restate the problem" — find a fresh entry point.
+Vary how you open: sometimes focus on constraints, sometimes ask where they'd start, sometimes just present the scenario.
 If a preface is provided, lead with it — it should flow into the question naturally.
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 Preface (optional): {preface or ""}

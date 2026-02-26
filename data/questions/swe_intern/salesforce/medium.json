@@ -20,7 +20,16 @@
         "The interviewer pushed back on O(n) status checking. How would you achieve O(1)?",
         "How do you prevent a connection from being returned twice?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "LRU Cache Design",
@@ -38,7 +47,16 @@
         "How would you implement this using generics/templates?",
         "What is the space complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Array Reduction (Passes to Sort)",
@@ -50,12 +68,19 @@
         "salesforce-oa"
       ],
       "followups": [
-        "What is the brute force O(n\u00b2) approach?",
+        "What is the brute force O(n²) approach?",
         "How can you optimize this using a stack or linked list simulation?",
         "What data structure allows efficient removal of elements?",
         "What edge cases (empty array, already increasing) need to be handled?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "array manipulation"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Reconstruct Itinerary (No Cycles)",
@@ -70,7 +95,14 @@
         "Why is a hierarchical DFS necessary?",
         "What is the time complexity?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Count Palindromes of Size K",
@@ -85,7 +117,16 @@
         "How can you optimize palindrome checking using prefix hashing?",
         "How would you generalize this to any odd-sized palindrome?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Binary Heap / Priority Queue Implementation",
@@ -100,7 +141,16 @@
         "How do you implement `heapifyUp()` and `heapifyDown()`?",
         "What is the time complexity of building a heap from an array?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Maximum Frequency Stack",
@@ -116,7 +166,16 @@
         "How do you maintain a stack per frequency level?",
         "What is the time complexity of each operation?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Scalability & Database Sharding",
@@ -132,7 +191,16 @@
         "How do you choose a shard key?",
         "How do you handle cross-shard joins or transactions?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "High Latency API Debugging",
@@ -147,7 +215,16 @@
         "How do you identify if it's a CPU, I/O, or database bottleneck?",
         "How do you implement tracing to find the slow downstream dependency?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Idempotency in APIs",
@@ -162,7 +239,16 @@
         "How do you generate and store idempotency keys?",
         "What is the TTL for an idempotency key and why?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SOLID Principles Deep Dive",
@@ -177,7 +263,16 @@
         "Give a classic example of LSP violation (e.g., Square-Rectangle).",
         "How do interfaces help achieve Dependency Inversion?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "JWT Authentication Flow",
@@ -192,7 +287,16 @@
         "How do you handle token revocation?",
         "Where should you store JWTs on the client side?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "When and Why Not to Use Indexes?",
@@ -206,7 +310,18 @@
         "How do indexes affect write performance?",
         "What is index cardinality and why does it matter?"
       ],
-      "question_type": "system_design"
+      "question_type": "system_design",
+      "expected_topics": [
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
+      ],
+      "evaluation_focus": [
+        "scalability",
+        "trade_offs",
+        "components"
+      ]
     },
     {
       "title": "Design a Feature Delivery Pipeline",
@@ -221,7 +336,17 @@
         "What was your testing strategy?",
         "How did you handle feedback during the review process?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Binary Tree Maximum Path Sum",
@@ -237,7 +362,12 @@
         "How do you handle negative values?",
         "What is the time complexity of your solution?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Top K Frequent Elements",
@@ -252,7 +382,14 @@
         "How does bucket sort achieve O(n) time?",
         "What if `k` is close to `n`?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "hash map usage"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Number of Islands",
@@ -268,7 +405,12 @@
         "How would you solve this if the grid is too large to fit in memory?",
         "How do you handle diagonal connections?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Course Schedule (Cycle Detection)",
@@ -283,7 +425,16 @@
         "Compare Kahn's algorithm (BFS) vs DFS for topological sort.",
         "How would you return the order of courses?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Longest Increasing Subsequence",
@@ -293,11 +444,18 @@
         "binary-search"
       ],
       "followups": [
-        "What is the O(n\u00b2) DP recurrence?",
+        "What is the O(n²) DP recurrence?",
         "How does patience sorting achieve O(n log n)?",
         "How would you reconstruct the actual subsequence?"
       ],
-      "question_type": "coding"
+      "question_type": "coding",
+      "expected_topics": [
+        "binary search algorithm"
+      ],
+      "evaluation_focus": [
+        "complexity",
+        "edge_cases"
+      ]
     },
     {
       "title": "Knapsack (0/1) Problem",
@@ -311,7 +469,16 @@
         "How do you optimize space to O(capacity)?",
         "How would you handle fractional items (greedy)?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Operating Systems: Process Scheduling",
@@ -325,7 +492,16 @@
         "How does the Round Robin algorithm work?",
         "What is starvation and how do you prevent it?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
   ]
 }

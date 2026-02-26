@@ -16,7 +16,16 @@
         "Give a small example using stock prices or financial data.",
         "What edge case would you test first?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Reverse a String (Steps)",
@@ -30,7 +39,16 @@
         "How do you know when to stop?",
         "How do you verify the result without printing it?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Palindrome Check",
@@ -44,7 +62,16 @@
         "Why compare from both ends rather than reversing?",
         "Give a simple example using a ticker symbol like 'AAPL'."
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Find the Largest Number",
@@ -59,7 +86,16 @@
         "What if the list is empty or has negative prices?",
         "Why is this approach simple and fast for real-time data?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Counting Items (Stock Trades)",
@@ -74,7 +110,16 @@
         "Why is this better than counting manually?",
         "Where is this useful at Bloomberg (e.g., trade volume)?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Remove Duplicates (Ticker Symbols)",
@@ -89,7 +134,16 @@
         "Does the order of the first occurrence matter?",
         "What edge case would you test (e.g., all duplicates)?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Binary Search (Idea Only)",
@@ -104,7 +158,16 @@
         "What does \"cutting in half\" mean?",
         "Give a real-life example at Bloomberg (e.g., finding a price)."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Merge Two Sorted Lists",
@@ -119,7 +182,16 @@
         "What happens when one list ends?",
         "How would you handle millisecond precision?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Valid Parentheses (Idea Level)",
@@ -133,7 +205,16 @@
         "What makes a query string invalid?",
         "Give an example of a complex nested query."
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Loops (Practical Use)",
@@ -148,7 +229,16 @@
         "Why are loops useful for streaming data?",
         "Give a simple use case (e.g., calculating average price)."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "If Statements",
@@ -163,7 +253,16 @@
         "Give a real-life example (e.g., if price > threshold, execute trade).",
         "Why are conditions important in low-latency systems?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Functions (Purpose)",
@@ -177,7 +276,16 @@
         "How do they help with unit testing?",
         "What happens without functions in a large codebase?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Variables (Usage)",
@@ -190,7 +298,16 @@
         "What happens when variables change during market hours?",
         "How do you name variables for clarity in a trading system?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Arrays vs Linked Lists",
@@ -205,7 +322,16 @@
         "Which is more flexible for inserts/deletes?",
         "Why might Bloomberg choose one for a specific feature?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Big-O (Plain English)",
@@ -218,9 +344,18 @@
       "followups": [
         "Why does performance matter in financial systems?",
         "Is faster always better? (Consider power/heat).",
-        "When is a simple O(n\u00b2) solution good enough for prototyping?"
+        "When is a simple O(n²) solution good enough for prototyping?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Debugging Basics",
@@ -235,7 +370,16 @@
         "What tools help (logs, breakpoints)?",
         "When do you ask a senior engineer for help?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Testing Basics",
@@ -250,7 +394,16 @@
         "What happens if you skip testing?",
         "How do automated tests save time in a CI/CD pipeline?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "APIs (Usage)",
@@ -265,7 +418,16 @@
         "What data format would you expect (JSON, protobuf)?",
         "Give an example of a REST endpoint for 'AAPL' prices."
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "REST Basics",
@@ -279,7 +441,16 @@
         "What does POST do for submitting a trade?",
         "Why is REST popular for internal Bloomberg services?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Frontend vs Backend",
@@ -294,7 +465,16 @@
         "Which part calculates the chart data?",
         "How do they communicate (WebSockets vs HTTP)?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Bloomberg Value: Impact",
@@ -308,7 +488,17 @@
         "What was your specific role?",
         "How did you know the users were satisfied?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Bloomberg Value: Ownership",
@@ -322,7 +512,17 @@
         "What challenges did you face?",
         "What did you learn about yourself?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Bloomberg Value: Collaboration",
@@ -337,7 +537,16 @@
         "What happened when you disagreed?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Bloomberg Value: Resilience",
@@ -352,7 +561,17 @@
         "How did you communicate the delay?",
         "What did you do differently next time?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Why Bloomberg? (Intern Focus)",
@@ -367,7 +586,17 @@
         "What do you know about Bloomberg's engineering culture?",
         "How does this internship fit your career goals?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Implement a Simple Linked List",
@@ -382,7 +611,16 @@
         "How would you allocate new memory and resize dynamically?",
         "What strategy would you use to decide how much extra memory to allocate?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Telephone Directory Lookup",
@@ -397,7 +635,16 @@
         "How would you keep both maps in sync?",
         "What is the memory trade-off?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Maximum Nesting Depth",
@@ -411,7 +658,16 @@
         "How would you return the indices of the deepest pairs?",
         "What if there are multiple maximum depth pairs?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Stock Trade Tracker (Basic)",
@@ -426,7 +682,16 @@
         "How would you handle a burst of 10,000 trades per second?",
         "What if you later need the top K most traded stocks?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "String Permutation Palindrome",
@@ -441,7 +706,16 @@
         "How do you handle an even vs odd length string?",
         "Give an example using 'bloomberg' or 'ticker'."
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Find the 2 Innermost Characters",
@@ -455,7 +729,16 @@
         "How do you handle strings without nesting?",
         "Walk through an example like 'a(b(c)d)e'."
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Balanced Binary Tree Check",
@@ -469,7 +752,16 @@
         "Why is it important to avoid recomputing heights?",
         "What is the time complexity of your approach?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Linked List Cycle (Conceptual)",
@@ -483,7 +775,16 @@
         "What is the space complexity?",
         "What if you cannot modify the list?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Swap Opposite Nodes",
@@ -497,7 +798,16 @@
         "How would you traverse the tree?",
         "Can you do this iteratively with a queue?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Validate IP Address",
@@ -511,11 +821,20 @@
         "How do you handle leading zeros?",
         "What about IPv6? How would you extend it?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Time Complexity of Functions",
-      "prompt": "Explain what time complexity means and give an example of O(1), O(n), and O(n\u00b2) operations.",
+      "prompt": "Explain what time complexity means and give an example of O(1), O(n), and O(n²) operations.",
       "tags": [
         "complexity",
         "fundamentals"
@@ -525,7 +844,16 @@
         "Why is this important for Bloomberg's real-time systems?",
         "How do you measure performance empirically?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Fibonacci Sequence (Optimization)",
@@ -540,7 +868,16 @@
         "How does memoization help?",
         "What is the space complexity of the iterative approach?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "First Non-Repeating Character",
@@ -554,7 +891,16 @@
         "How many passes over the string do you need?",
         "What if the string is very long (e.g., a financial feed)?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "String Concatenation (Performance)",
@@ -568,7 +914,16 @@
         "How does StringBuilder or StringBuffer work?",
         "When would you notice the performance difference at Bloomberg?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Basic Error Handling",
@@ -583,7 +938,16 @@
         "What information should the error log contain?",
         "How does error handling improve user trust?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Comments in Code",
@@ -598,7 +962,16 @@
         "What makes a good comment vs obvious code?",
         "Can comments ever be misleading or harmful?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Version Control Basics",
@@ -612,7 +985,16 @@
         "What happens if you make a mistake and commit breaking code?",
         "Why does Bloomberg use version control for compliance?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Caching Concept",
@@ -627,7 +1009,16 @@
         "What are the risks of serving stale cached data?",
         "How do you invalidate the cache when a price updates?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Mobile vs Desktop Experience",
@@ -642,7 +1033,16 @@
         "Why is mobile important for traders on the go?",
         "How would you prioritize features for a mobile MVP?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Accessibility Basics",
@@ -657,7 +1057,16 @@
         "What simple improvements help with screen readers?",
         "Why does Bloomberg care about accessibility?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Security Basics",
@@ -672,7 +1081,16 @@
         "What are basic security practices for API authentication?",
         "How does security build trust with financial institutions?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Scaling Concepts",
@@ -687,7 +1105,16 @@
         "How might Bloomberg prepare for these predictable peaks?",
         "Why is scaling important for business reputation?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Team Collaboration",
@@ -702,7 +1129,16 @@
         "How do teams solve complex problems like a new Terminal feature?",
         "Why does Bloomberg value collaboration over individual heroics?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Learning from Mistakes",
@@ -717,7 +1153,17 @@
         "What did you do to fix it?",
         "How did this help you prevent similar issues?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Technical Challenge (Easy)",
@@ -732,7 +1178,16 @@
         "What resources did you use to overcome it?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Project Experience",
@@ -747,7 +1202,17 @@
         "What did you learn technically?",
         "What would you improve if you had more time?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "User-Focused Thinking",
@@ -762,7 +1227,17 @@
         "How would you implement your idea simply?",
         "How would you measure if the improvement was successful?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Adaptability",
@@ -777,7 +1252,17 @@
         "How did you approach learning (docs, courses, pair programming)?",
         "What was the result of your effort?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Communication Skills",
@@ -792,7 +1277,16 @@
         "Why is clear communication important at Bloomberg?",
         "How do you know if someone understands your explanation?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Initiative",
@@ -807,7 +1301,17 @@
         "What was the impact of your extra effort?",
         "What did you learn from taking initiative?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Time Management",
@@ -822,7 +1326,17 @@
         "How do you handle unexpected urgent tasks?",
         "What tools help you stay organized?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Feedback Reception",
@@ -837,7 +1351,17 @@
         "How did you initially react?",
         "What did you change, and how did it improve your work?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Problem Solving Approach",
@@ -852,7 +1376,17 @@
         "How do you break down complex problems?",
         "At what point do you ask for help or clarification?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Bloomberg Innovation",
@@ -867,7 +1401,17 @@
         "How does it help financial professionals?",
         "What technical challenges might it involve (e.g., low latency, data volume)?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Career Goals",
@@ -882,7 +1426,17 @@
         "How does this internship fit your long-term career goals?",
         "What unique opportunities does Bloomberg offer that other companies don't?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Diversity and Inclusion",
@@ -897,7 +1451,16 @@
         "What can individual engineers do to promote inclusion?",
         "Why does Bloomberg value diverse perspectives?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
   ]
 }

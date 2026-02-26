@@ -1,4 +1,6 @@
 {
+  "track": "product_management",
+  "company_style": "general",
   "difficulty": "medium",
   "questions": [
     {
@@ -12,7 +14,16 @@
         "What are the limitations of RICE?",
         "How do you gather data for RICE scoring?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "OKRs vs KPIs",
@@ -26,7 +37,16 @@
         "How do you write effective OKRs?",
         "What makes a good KPI for a product?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "User Journey Mapping",
@@ -39,7 +59,16 @@
         "What insights can you gain from journey mapping?",
         "How do you identify pain points in a user journey?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "A/B Testing Strategy",
@@ -52,7 +81,16 @@
         "How do you determine sample size for an A/B test?",
         "What are common pitfalls in A/B testing?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Market Segmentation",
@@ -65,7 +103,16 @@
         "What criteria can you use for segmentation?",
         "How do you prioritize which segments to target?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Product Strategy Development",
@@ -78,7 +125,16 @@
         "What elements should a product strategy include?",
         "How do you align product strategy with company vision?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "North Star Metric",
@@ -91,7 +147,16 @@
         "What makes a good North Star Metric?",
         "How do you align team goals around a North Star Metric?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Cross-functional Leadership",
@@ -104,7 +169,16 @@
         "What strategies help build credibility with engineering teams?",
         "How do you handle conflicts between departments?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Product Discovery Process",
@@ -117,7 +191,16 @@
         "What activities are included in product discovery?",
         "How do you know when discovery is complete?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Technical Debt Management",
@@ -130,7 +213,16 @@
         "How do you quantify technical debt?",
         "What strategies help prevent technical debt accumulation?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Pricing Strategy",
@@ -143,7 +235,16 @@
         "What factors influence pricing decisions?",
         "How do you test different pricing models?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Product-Market Fit Measurement",
@@ -156,7 +257,16 @@
         "What surveys can help measure product-market fit?",
         "How do you act on product-market fit insights?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Feature Adoption Analysis",
@@ -169,7 +279,16 @@
         "What metrics indicate healthy feature adoption?",
         "How do you identify barriers to adoption?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Stakeholder Alignment",
@@ -182,7 +301,16 @@
         "What techniques help build consensus among executives?",
         "How do you handle disagreement about product direction?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Data-Driven Decision Making",
@@ -195,9 +323,16 @@
         "What do you do when qualitative and quantitative data conflict?",
         "How do you balance data with intuition?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
-  ],
-  "company_style": "general",
-  "track": "product_management"
+  ]
 }

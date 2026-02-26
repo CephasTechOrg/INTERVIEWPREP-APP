@@ -1,4 +1,6 @@
 {
+  "track": "devops_cloud",
+  "company_style": "general",
   "difficulty": "medium",
   "questions": [
     {
@@ -12,7 +14,16 @@
         "What is the role of the kube-scheduler?",
         "How does etcd fit into the Kubernetes architecture?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Dockerfile Best Practices",
@@ -25,7 +36,16 @@
         "Why should you use multi-stage builds?",
         "How do you minimize Docker image size?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Terraform vs CloudFormation",
@@ -39,7 +59,16 @@
         "What are the advantages of Terraform being cloud-agnostic?",
         "How does Terraform state management work?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "CI/CD Pipeline Design",
@@ -52,7 +81,16 @@
         "What should happen in each stage?",
         "How do you handle database migrations in CI/CD?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Service Mesh",
@@ -65,7 +103,16 @@
         "How does Istio or Linkerd provide service discovery?",
         "What are the benefits of having a service mesh?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Container Orchestration",
@@ -78,7 +125,16 @@
         "How does Kubernetes schedule containers?",
         "What alternatives exist to Kubernetes?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Immutable Infrastructure",
@@ -91,7 +147,16 @@
         "How does immutable infrastructure improve security?",
         "What challenges come with immutable infrastructure?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Secret Management",
@@ -104,7 +169,16 @@
         "What tools are available for secret management?",
         "How do you securely inject secrets into containers?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Monitoring vs Observability",
@@ -117,7 +191,16 @@
         "What are the three pillars of observability?",
         "How do distributed traces help with observability?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Blue-Green Deployment",
@@ -130,7 +213,16 @@
         "How do you handle database migrations in blue-green deployments?",
         "What infrastructure is needed for blue-green deployments?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Cloud Cost Optimization",
@@ -143,7 +235,16 @@
         "How do reserved instances help with cost savings?",
         "What tools can help monitor and optimize cloud spending?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Infrastructure Testing",
@@ -156,7 +257,16 @@
         "What tools are available for infrastructure testing?",
         "How do you validate Terraform plans before applying?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "High Availability Design",
@@ -169,7 +279,16 @@
         "How do you design for failure in the cloud?",
         "What is the difference between availability zones and regions?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Container Security",
@@ -182,7 +301,16 @@
         "How do you scan container images for vulnerabilities?",
         "What security best practices should you follow for containers?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "GitOps Principles",
@@ -195,9 +323,16 @@
         "How does GitOps differ from traditional CI/CD?",
         "What tools support GitOps workflows?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
-  ],
-  "company_style": "general",
-  "track": "devops_cloud"
+  ]
 }

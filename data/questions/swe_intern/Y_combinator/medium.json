@@ -1,6 +1,6 @@
 {
-  "track": "founder_interview",
-  "company_style": "y_combinator",
+  "track": "swe_intern",
+  "company_style": "Y_combinator",
   "difficulty": "medium",
   "questions": [
     {
@@ -16,7 +16,16 @@
         "What did you learn from the paths you didn't take?",
         "How do you know you're not in a local maximum?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Competitors (Direct)",
@@ -30,7 +39,16 @@
         "What do you do better than them?",
         "If a customer chooses them over you, what is the reason?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "The 'Evil' Competitor Question",
@@ -45,7 +63,17 @@
         "What do you have that they can't copy?",
         "Is your market big enough for them to care?"
       ],
-      "question_type": "coding"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Go-to-Market: First 1000 Users",
@@ -60,7 +88,16 @@
         "Is that channel scalable?",
         "How much does it cost to acquire a user (CAC)?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Retention & Cohort Analysis",
@@ -75,7 +112,16 @@
         "What does your cohort chart look like?",
         "What is the #1 reason users churn?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Growth Rate",
@@ -89,7 +135,16 @@
         "What are the three things you are doing to move this number?",
         "What is your goal for the next 4 weeks?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Unit Economics (Basic)",
@@ -103,7 +158,16 @@
         "How did you calculate LTV? What is your assumption for customer lifespan?",
         "Is your unit economy improving or getting worse as you scale?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Market Size (TAM)",
@@ -117,7 +181,16 @@
         "Are you doing a top-down or bottom-up calculation?",
         "How many people actually have this problem AND will pay for it?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Differentiation",
@@ -131,7 +204,16 @@
         "How long will it take them to copy that feature?",
         "Do customers actually care about that difference?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "The 'Unfair' Advantage",
@@ -145,7 +227,16 @@
         "Do you have domain expertise?",
         "Do you have proprietary data or distribution?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Co-founder Dynamics",
@@ -160,7 +251,16 @@
         "How do you handle stress as a team?",
         "What would your co-founder say is your biggest weakness?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Scaling the Niche",
@@ -175,7 +275,16 @@
         "What needs to be true for that expansion to work?",
         "What stops you from doing that today?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     }
   ]
 }

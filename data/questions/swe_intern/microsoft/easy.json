@@ -15,7 +15,16 @@
         "What is an object?",
         "Give a simple real-world example."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Class vs Object",
@@ -29,7 +38,16 @@
         "Why do we create objects from classes?",
         "What does an object store?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Encapsulation (Simple)",
@@ -44,7 +62,16 @@
         "How does encapsulation prevent mistakes?",
         "Give a simple example."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Abstraction (Simple)",
@@ -59,7 +86,16 @@
         "What is an example of hiding details?",
         "What is one sign of a confusing abstraction?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Inheritance (Basic Idea)",
@@ -73,7 +109,16 @@
         "What is a child/derived class?",
         "When can inheritance be helpful?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Composition (Basic Idea)",
@@ -88,7 +133,16 @@
         "Why can composition be flexible?",
         "How is this different from inheritance?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Interface (Simple)",
@@ -103,7 +157,16 @@
         "Give a simple example (e.g., IShape).",
         "How can interfaces help testing?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Abstract Class (Simple)",
@@ -118,7 +181,16 @@
         "Give a simple example.",
         "When would you choose an abstract class?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "API Basics",
@@ -133,7 +205,16 @@
         "What is JSON often used for?",
         "What makes an API easy to use?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "REST Basics (Simple)",
@@ -148,7 +229,16 @@
         "What does POST do?",
         "Name one common HTTP status code and meaning."
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "GET vs POST (Simple)",
@@ -163,7 +253,16 @@
         "When would you use POST?",
         "What data usually goes in the body?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Debugging First Steps",
@@ -177,7 +276,16 @@
         "How do you reproduce the issue?",
         "What is one simple fix you try first?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Logging (Basics)",
@@ -191,7 +299,16 @@
         "Why not log sensitive data?",
         "How can logs help in production?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Exceptions (Basic Understanding)",
@@ -205,7 +322,16 @@
         "What happens if you don't handle it?",
         "What is a try/catch in simple terms?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Unit Testing (Purpose)",
@@ -219,7 +345,16 @@
         "Why test more than one input?",
         "What is one benefit of automated tests?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Test Cases (Easy)",
@@ -233,7 +368,16 @@
         "Give an example of a good test case.",
         "Why include an empty input test?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Version Control (Basics)",
@@ -248,7 +392,16 @@
         "What is a branch?",
         "Why do teams use pull requests?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Pull Requests (Basics)",
@@ -263,7 +416,16 @@
         "What is one sign of a good PR?",
         "How do you respond to review comments?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Merge Conflicts (Simple)",
@@ -277,7 +439,16 @@
         "What is one safe way to avoid them?",
         "What do you do after resolving a conflict?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Clean Code (Basics)",
@@ -291,7 +462,16 @@
         "Why keep functions small?",
         "How do comments help (and hurt)?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Refactoring (Simple)",
@@ -305,7 +485,16 @@
         "When should you avoid refactoring?",
         "How do tests help refactoring?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Data Structures: Array (Easy)",
@@ -320,7 +509,16 @@
         "What is one downside?",
         "Give a simple example."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Data Structures: List (Easy)",
@@ -334,7 +532,16 @@
         "Give a simple example.",
         "When would you choose a list?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Hash Map (Simple Use)",
@@ -349,7 +556,16 @@
         "What is a key and value?",
         "Why is it useful in real apps?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Stack (Simple Use)",
@@ -364,7 +580,16 @@
         "Where have you seen stacks used?",
         "Why is undo a common example?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Queue (Simple Use)",
@@ -379,7 +604,16 @@
         "Where are queues used in software?",
         "How is it different from a stack?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Linked List (High Level)",
@@ -394,7 +628,16 @@
         "Why does memory layout matter?",
         "When might a linked list be used?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Big-O (Very Simple)",
@@ -408,7 +651,16 @@
         "When is a simple solution good enough?",
         "Give a real-life example of something scaling."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "String vs Integer",
@@ -421,7 +673,16 @@
         "What happens if you try to add a string and an integer?",
         "Give a practical example from an app."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Null / None (Basics)",
@@ -434,7 +695,16 @@
         "How can you prevent null errors?",
         "Give a simple example."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Frontend vs Backend",
@@ -448,7 +718,16 @@
         "Which part stores data?",
         "How do they communicate?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Database Basics",
@@ -462,7 +741,16 @@
         "What is a row?",
         "Give an example of data an app might store."
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SQL vs NoSQL (Simple)",
@@ -476,7 +764,16 @@
         "When might you choose NoSQL?",
         "What is a simple example of each?"
       ],
-      "question_type": "system_design"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Authentication vs Authorization",
@@ -490,7 +787,16 @@
         "Which one is permissions?",
         "Why does this matter in apps?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Password Safety (Basics)",
@@ -504,7 +810,16 @@
         "What is hashing in simple terms?",
         "Why use multi-factor authentication?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Caching (Simple Idea)",
@@ -518,7 +833,16 @@
         "What is one risk of caching?",
         "Where might caching be used?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Concurrency (Very Simple)",
@@ -532,7 +856,16 @@
         "Why can concurrency cause bugs?",
         "What is one way teams reduce risk?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Communication: Explaining a Bug",
@@ -547,7 +880,16 @@
         "Why include steps to reproduce?",
         "What screenshots or logs might help?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Collaboration: Asking for Help",
@@ -562,7 +904,16 @@
         "How do you describe what you already attempted?",
         "How do you apply the help you receive?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Learning Quickly",
@@ -577,7 +928,17 @@
         "How did you validate your understanding?",
         "What result did you achieve?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Handling Feedback (Easy)",
@@ -592,7 +953,17 @@
         "How did you respond?",
         "What changed after that?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Teamwork (Easy)",
@@ -607,7 +978,16 @@
         "How did you keep everyone aligned?",
         "What did you learn?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Conflict (Easy)",
@@ -622,7 +1002,16 @@
         "How did you communicate?",
         "What was the result?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Time Management",
@@ -637,7 +1026,17 @@
         "How do you track progress?",
         "What do you do if you're behind?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "User-Focused Thinking",
@@ -652,7 +1051,17 @@
         "What problem did you solve?",
         "How did you know it helped?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Why Microsoft?",
@@ -666,7 +1075,17 @@
         "What would you like to learn during the internship?",
         "How does Microsoft align with your goals?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "What Do You Want to Learn?",
@@ -681,7 +1100,16 @@
         "How do you handle being stuck?",
         "How do you balance learning with delivering results?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Polymorphism (Simple Idea)",
@@ -696,7 +1124,16 @@
         "How do interfaces enable polymorphism?",
         "Give an example using shapes or animals."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Method Overloading",
@@ -710,7 +1147,16 @@
         "Give a simple example like calculating area.",
         "Why is this convenient for developers?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Method Overriding",
@@ -724,7 +1170,16 @@
         "Give an example with a base class and derived class.",
         "How does this enable polymorphism?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Constructor Basics",
@@ -738,7 +1193,16 @@
         "What is a default constructor?",
         "What is constructor overloading?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Static vs Instance Members",
@@ -752,7 +1216,16 @@
         "How do you access static vs instance members?",
         "Give a simple example like Math.PI."
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Value Type vs Reference Type",
@@ -766,7 +1239,16 @@
         "Where are they stored?",
         "How does assignment behave differently?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Pass by Value vs Pass by Reference",
@@ -780,7 +1262,16 @@
         "Give an example where this matters.",
         "How does C#/Java handle this?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "What is .NET?",
@@ -794,7 +1285,16 @@
         "What languages run on .NET?",
         "What is the CLR?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "What is C#?",
@@ -808,7 +1308,16 @@
         "What are some key features of C#?",
         "Why does Microsoft use C#?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "What is Azure?",
@@ -823,7 +1332,16 @@
         "Give an example of an Azure service.",
         "Why do companies use Azure?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Windows vs Linux (Basic)",
@@ -837,7 +1355,16 @@
         "What is WSL?",
         "When might you choose one over the other?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "What is Visual Studio?",
@@ -851,7 +1378,16 @@
         "What features make it useful for developers?",
         "What have you built with it?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "What is GitHub?",
@@ -866,7 +1402,16 @@
         "What is a repository?",
         "How do you contribute to open source on GitHub?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SOLID: Single Responsibility",
@@ -880,7 +1425,16 @@
         "What problems happen when a class does too much?",
         "How do you identify violations?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SOLID: Open-Closed",
@@ -894,7 +1448,16 @@
         "Why is this important for maintainability?",
         "How does this reduce bugs?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SOLID: Liskov Substitution",
@@ -908,7 +1471,16 @@
         "Give an example of a violation (square vs rectangle).",
         "Why does this matter in inheritance?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SOLID: Interface Segregation",
@@ -922,7 +1494,16 @@
         "Give an example of a 'fat' interface problem.",
         "How does this relate to the Single Responsibility Principle?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "SOLID: Dependency Inversion",
@@ -936,7 +1517,16 @@
         "How does dependency injection help?",
         "Why does this make code more testable?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Dependency Injection (Concept)",
@@ -950,7 +1540,16 @@
         "Give an example without DI and with DI.",
         "How does constructor injection work?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "IDisposable / Dispose Pattern",
@@ -964,7 +1563,16 @@
         "What is a using statement?",
         "What happens if you don't dispose?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "What is Garbage Collection?",
@@ -978,7 +1586,16 @@
         "What is a managed language?",
         "What are common GC optimizations?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Boxing and Unboxing",
@@ -992,7 +1609,16 @@
         "Give an example.",
         "How do generics help avoid boxing?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "IEnumerable vs IEnumerator",
@@ -1006,7 +1632,16 @@
         "How does yield return work?",
         "When would you implement these interfaces?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Collections: List vs Dictionary",
@@ -1020,7 +1655,16 @@
         "What if you need to store unique keys?",
         "Give a practical example for each."
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Collections: Stack vs Queue",
@@ -1034,7 +1678,16 @@
         "What are the primary operations?",
         "How do their orders differ?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Exception Handling: try-catch-finally",
@@ -1048,7 +1701,16 @@
         "What happens if you don't catch an exception?",
         "When would you use multiple catch blocks?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Checked vs Unchecked",
@@ -1062,7 +1724,16 @@
         "When would you enable checked?",
         "Why would you disable it?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "const vs readonly",
@@ -1076,7 +1747,16 @@
         "Can a const be a reference type?",
         "When would you choose readonly?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "String vs StringBuilder",
@@ -1090,7 +1770,16 @@
         "When should you use StringBuilder?",
         "When is regular string concatenation fine?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "var vs explicit type",
@@ -1104,7 +1793,16 @@
         "Does var affect performance?",
         "What are readability considerations?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Microsoft Product: Visual Studio Code",
@@ -1118,7 +1816,16 @@
         "How does it help with productivity?",
         "How is it different from full Visual Studio?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Microsoft Product: Teams",
@@ -1132,7 +1839,16 @@
         "How does it compare to Slack?",
         "What could be improved?"
       ],
-      "question_type": "coding"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Microsoft Product: Windows",
@@ -1146,7 +1862,16 @@
         "How has Windows evolved for developers?",
         "What is WSL and why is it significant?"
       ],
-      "question_type": "conceptual"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Microsoft Culture: Growth Mindset",
@@ -1160,7 +1885,16 @@
         "How do you handle not knowing something?",
         "How do you learn from failures?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Microsoft Culture: Customer Obsession",
@@ -1174,7 +1908,17 @@
         "What did you change based on feedback?",
         "How did you measure success?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Microsoft Culture: Diversity & Inclusion",
@@ -1188,7 +1932,16 @@
         "What can individuals do to foster inclusion?",
         "Why does Microsoft prioritize this?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Microsoft Mission",
@@ -1202,7 +1955,16 @@
         "How can software empower people?",
         "What does this mission mean for developers?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Inclusive Design",
@@ -1217,7 +1979,16 @@
         "How would you design for accessibility?",
         "Why is this good for all users?"
       ],
-      "question_type": "behavioral"
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
+      "evaluation_focus": [
+        "clarity",
+        "depth"
+      ]
     },
     {
       "title": "Ethics in AI",
@@ -1231,7 +2002,17 @@
         "What could go wrong with biased AI?",
         "How can engineers reduce bias?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Sustainability at Microsoft",
@@ -1245,7 +2026,17 @@
         "What Azure services support sustainability?",
         "Why is this important for tech companies?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Remote Collaboration",
@@ -1259,7 +2050,17 @@
         "How do you communicate clearly in writing?",
         "How do you build rapport remotely?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Handling Uncertainty",
@@ -1273,7 +2074,17 @@
         "What resources did you use?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Project Planning",
@@ -1287,7 +2098,17 @@
         "How do you break down the work?",
         "How do you track progress?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     },
     {
       "title": "Microsoft Internship Goals",
@@ -1301,7 +2122,17 @@
         "What kind of impact do you want to make?",
         "How will you seek feedback?"
       ],
-      "question_type": "behavioral"
+      "question_type": "behavioral",
+      "expected_topics": [
+        "situation",
+        "task",
+        "action",
+        "result"
+      ],
+      "evaluation_focus": [
+        "star_format",
+        "impact"
+      ]
     }
   ]
 }
