@@ -41,7 +41,13 @@ export default function LoginPage() {
       try { await authService.syncLocalProfile(trimmedEmail); } catch { /* non-blocking */ }
       const profile = await authService.getProfile();
       login(loginRes.access_token, profile);
-      router.push('/');
+      
+      // Redirect to admin dashboard if user is admin
+      if (profile.is_admin) {
+        router.push('/admin/dashboard');
+      } else {
+        router.push('/');
+      }
     } catch (err: unknown) {
       const errorObj = err as { message?: string; status?: number };
       const message = errorObj?.message || 'Login failed. Please try again.';

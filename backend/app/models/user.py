@@ -25,5 +25,7 @@ class User(Base):
     is_banned: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     ban_reason: Mapped[str | None] = mapped_column(String(500), nullable=True)
     banned_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    
+    is_admin: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
 
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)

@@ -1,6 +1,7 @@
 # InterviewPrep Admin Portal - Implementation Summary
 
 ## Overview
+
 Complete admin portal implementation for InterviewPrep platform with separate admin authentication, user management, dashboard, and audit logging.
 
 ## What Was Built
@@ -8,12 +9,14 @@ Complete admin portal implementation for InterviewPrep platform with separate ad
 ### Backend Implementation ✅
 
 **1. Admin Authentication**
+
 - New `AdminAccount` model with username/password (separate from user auth)
 - Secure password hashing with Argon2
 - JWT tokens with 24-hour expiry
 - Rate limiting on login (5 attempts per minute)
 
 **2. Admin Endpoints** (8 routes)
+
 - `POST /api/v1/admin/login` - Admin login with username/password
 - `GET /api/v1/admin/stats` - Dashboard statistics
 - `GET /api/v1/admin/users` - List all users (paginated, filterable)
@@ -24,6 +27,7 @@ Complete admin portal implementation for InterviewPrep platform with separate ad
 - `GET /api/v1/admin/users-count` - Get user count
 
 **3. User Management Features**
+
 - Ban users with optional reason
 - Unban users
 - View user details (email, verification status, join date, ban info)
@@ -31,17 +35,21 @@ Complete admin portal implementation for InterviewPrep platform with separate ad
 - Pagination support
 
 **4. Database**
+
 - New `admin_accounts` table
 - Added to `users`: `is_banned`, `ban_reason`, `banned_at` fields
 - Alembic migration for schema changes
 
 **5. CLI Tool**
+
 ```bash
 python backend/scripts/create_admin.py username password "Full Name"
 ```
+
 Creates admin accounts without requiring email verification.
 
 **6. Audit Logging**
+
 - All admin actions logged automatically
 - Captures: action, admin_id, target_type, target_id, metadata, timestamp
 - Accessible via audit logs endpoint
@@ -49,23 +57,27 @@ Creates admin accounts without requiring email verification.
 ### Frontend Implementation ✅
 
 **1. Admin Authentication Store**
+
 - Zustand store for admin token management
 - Persistent storage (localStorage)
 - Login/logout functionality
 
 **2. Admin Login Page** (`/admin`)
+
 - Clean, professional UI
 - Username/password form
 - Error handling
 - Loading states
 
 **3. Admin Layout**
+
 - Sidebar navigation (collapsible)
 - Top bar with user info
 - Logout button
 - Responsive design
 
 **4. Dashboard** (`/admin/dashboard`)
+
 - 5 stat cards:
   - Total Users
   - Verified Users
@@ -79,6 +91,7 @@ Creates admin accounts without requiring email verification.
 - Refresh button
 
 **5. User Management** (`/admin/users`)
+
 - User table with columns:
   - Email
   - Name
@@ -92,6 +105,7 @@ Creates admin accounts without requiring email verification.
 - Real-time updates
 
 **6. Audit Logs** (`/admin/audit-logs`)
+
 - Log table with:
   - Action
   - Admin ID
@@ -102,10 +116,12 @@ Creates admin accounts without requiring email verification.
 - Color-coded actions
 
 **7. AdminGuard Component**
+
 - Route protection
 - Redirect to login if not authenticated
 
 **8. Admin Service**
+
 - API client for all admin endpoints
 - Token management
 - Error handling
@@ -115,10 +131,12 @@ Creates admin accounts without requiring email verification.
 ## Deployment Status
 
 ### ✅ Deployed to Render
+
 - **Backend:** https://interviq-backend.onrender.com
 - **Frontend:** https://interviq-frontend.onrender.com
 
 ### Deployment Timeline
+
 1. Backend changes committed and pushed ✅
 2. Frontend changes committed and pushed ✅
 3. Render auto-triggered deployments ✅
@@ -132,6 +150,7 @@ Creates admin accounts without requiring email verification.
 ### 1. Create Admin Account (if not already done)
 
 **Local:**
+
 ```bash
 cd backend
 python scripts/create_admin.py admin123 securepassword123 "Admin User"
@@ -143,12 +162,14 @@ The admin account created locally (ID: 1, username: admin123) was seeded into pr
 ### 2. Access Admin Portal
 
 **Production:**
+
 - Login: https://interviq-frontend.onrender.com/admin
 - Dashboard: https://interviq-frontend.onrender.com/admin/dashboard
 - Users: https://interviq-frontend.onrender.com/admin/users
 - Logs: https://interviq-frontend.onrender.com/admin/audit-logs
 
 **Local (Dev):**
+
 - Start backend: `python -m uvicorn app.main:app --reload --port 8000`
 - Start frontend: `npm run dev`
 - Login: http://localhost:3000/admin
@@ -156,11 +177,13 @@ The admin account created locally (ID: 1, username: admin123) was seeded into pr
 ### 3. Admin Features
 
 **Dashboard:**
+
 - View platform statistics
 - Monitor user metrics
 - Check interview activity
 
 **Users:**
+
 - View all users
 - Filter by status
 - Ban users (with reason)
@@ -168,6 +191,7 @@ The admin account created locally (ID: 1, username: admin123) was seeded into pr
 - Check verification status
 
 **Audit Logs:**
+
 - See all admin actions
 - Track system activity
 - Monitor who did what and when
@@ -177,6 +201,7 @@ The admin account created locally (ID: 1, username: admin123) was seeded into pr
 ## Architecture
 
 ### Authentication Flow
+
 1. Admin enters username/password on login page
 2. Frontend calls `POST /api/v1/admin/login`
 3. Backend verifies credentials
@@ -185,11 +210,13 @@ The admin account created locally (ID: 1, username: admin123) was seeded into pr
 6. All subsequent requests include token in Authorization header
 
 ### Protected Routes
+
 - All admin pages wrapped in `AdminGuard`
 - AdminGuard checks if authenticated
 - If not, redirects to `/admin` (login page)
 
 ### Admin Actions Logging
+
 ```
 Admin Action → Backend Route → Database Audit Log
 ↓
@@ -208,6 +235,7 @@ Viewable in Audit Logs Page
 ## Key Features
 
 ### Security
+
 - Separate admin authentication (not mixed with user auth)
 - Secure password hashing (Argon2)
 - JWT tokens with expiry
@@ -216,6 +244,7 @@ Viewable in Audit Logs Page
 - All actions logged for audit trail
 
 ### Usability
+
 - Clean, intuitive UI
 - Responsive design (mobile-friendly)
 - Real-time data
@@ -224,6 +253,7 @@ Viewable in Audit Logs Page
 - Modal confirmations for destructive actions
 
 ### Scalability
+
 - Pagination support (default 50 users per page)
 - Optimized queries
 - Async/await for API calls
@@ -236,6 +266,7 @@ Viewable in Audit Logs Page
 ### What to Verify
 
 **Backend:**
+
 - [ ] Admin login returns token
 - [ ] Stats endpoint returns correct counts
 - [ ] User listing works with pagination
@@ -244,6 +275,7 @@ Viewable in Audit Logs Page
 - [ ] Unauthorized requests return 401
 
 **Frontend:**
+
 - [ ] Admin login page loads
 - [ ] Login with valid credentials works
 - [ ] Dashboard displays stats
@@ -256,12 +288,14 @@ Viewable in Audit Logs Page
 ### Test Scenarios
 
 **Scenario 1: Basic Login**
+
 1. Go to `/admin`
 2. Enter admin123 / securepassword123
 3. Should redirect to `/admin/dashboard`
 4. Dashboard should show stats
 
 **Scenario 2: User Management**
+
 1. Go to `/admin/users`
 2. Click Ban on any user
 3. Enter reason
@@ -270,6 +304,7 @@ Viewable in Audit Logs Page
 6. Check audit logs for ban action
 
 **Scenario 3: Audit Logs**
+
 1. Go to `/admin/audit-logs`
 2. Should see admin_login action
 3. Should see admin_ban_user if you tested scenario 2
@@ -280,6 +315,7 @@ Viewable in Audit Logs Page
 ## Files Created/Modified
 
 ### New Files
+
 - `backend/app/models/admin.py` - AdminAccount model
 - `backend/app/crud/admin.py` - Admin CRUD operations
 - `backend/app/schemas/admin.py` - Admin DTOs
@@ -296,6 +332,7 @@ Viewable in Audit Logs Page
 - `frontend-next/src/app/admin/audit-logs/page.tsx` - Audit logs
 
 ### Modified Files
+
 - `backend/app/models/user.py` - Added ban fields
 - `backend/app/crud/user.py` - Added ban/unban functions
 - `backend/app/core/security.py` - Added admin token functions
@@ -303,6 +340,7 @@ Viewable in Audit Logs Page
 - `backend/app/api/v1/router.py` - Registered admin router
 
 ### Documentation
+
 - `docs/ADMIN_PORTAL_IMPLEMENTATION_PLAN.md` - Detailed implementation plan
 - `docs/ADMIN_PORTAL_TESTING.md` - Testing guide and checklist
 
@@ -321,6 +359,7 @@ Viewable in Audit Logs Page
 ## Next Steps (Optional)
 
 ### Phase 2 Features (Future)
+
 1. **Question Management**
    - View all questions
    - Edit questions
@@ -363,12 +402,14 @@ A: Frontend still deploying. Do a hard refresh (Ctrl+Shift+R).
 
 **Q: Dashboard says "Failed to load stats"**
 A: Check browser console. Likely API connection issue. Verify:
+
 1. Backend is running
 2. adminService.ts has correct API URL
 3. Admin token is valid
 
 **Q: Can't create admin account**
 A: Make sure database migrations ran:
+
 ```bash
 python -m alembic upgrade head
 ```

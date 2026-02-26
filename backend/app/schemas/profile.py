@@ -6,6 +6,7 @@ class UserProfileOut(BaseModel):
     full_name: str | None = None
     role_pref: str | None = None
     profile: dict = Field(default_factory=dict)
+    is_admin: bool = False
 
 
 class UserProfileUpdate(BaseModel):

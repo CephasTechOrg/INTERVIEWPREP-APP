@@ -62,6 +62,7 @@ export interface User {
   full_name?: string | null;
   role_pref?: string | null;
   profile?: Record<string, unknown>;
+  is_admin?: boolean;
 }
 
 export interface UserProfileUpdate {

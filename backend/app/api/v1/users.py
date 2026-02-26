@@ -18,6 +18,7 @@ def get_me(user=Depends(get_current_user)):
         full_name=getattr(user, "full_name", None),
         role_pref=getattr(user, "role_pref", None),
         profile=getattr(user, "profile", None) or {},
+        is_admin=getattr(user, "is_admin", False),
     )
 
 
