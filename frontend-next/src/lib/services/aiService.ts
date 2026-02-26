@@ -3,10 +3,21 @@ import { apiClient } from '@/lib/api';
 import { useAuthStore } from '@/lib/stores/authStore';
 import { AIStatusResponse, AIChatRequest, AIChatResponse, TTSRequest, TTSResponse } from '@/types/api';
 
-const getBaseURL = () =>
-  process.env.NEXT_PUBLIC_API_URL ||
-  process.env.NEXT_PUBLIC_API_BASE ||
-  'http://127.0.0.1:8000/api/v1';
+const DEFAULT_API_URL = 'https://interviq-backend.onrender.com/api/v1';
+
+const getBaseURL = () => {
+  const envUrl = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE;
+  if (envUrl) return envUrl;
+
+  if (typeof window !== 'undefined') {
+    const host = window.location.hostname || '';
+    if (host.endsWith('onrender.com')) {
+      return DEFAULT_API_URL;
+    }
+  }
+
+  return 'http://127.0.0.1:8000/api/v1';
+};
 
 export const aiService = {
   async getStatus(): Promise<AIStatusResponse> {

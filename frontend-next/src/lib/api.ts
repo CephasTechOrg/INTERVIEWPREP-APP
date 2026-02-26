@@ -2,13 +2,21 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 import { ErrorResponse } from '@/types/api';
 import { useAuthStore } from '@/lib/stores/authStore';
 
+const DEFAULT_API_URL = 'https://interviq-backend.onrender.com/api/v1';
+
 // Use a function to get the URL to handle SSR properly
 const getBaseURL = () => {
-  return (
-    process.env.NEXT_PUBLIC_API_URL ||
-    process.env.NEXT_PUBLIC_API_BASE ||
-    'http://127.0.0.1:8000/api/v1'
-  );
+  const envUrl = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE;
+  if (envUrl) return envUrl;
+
+  if (typeof window !== 'undefined') {
+    const host = window.location.hostname || '';
+    if (host.endsWith('onrender.com')) {
+      return DEFAULT_API_URL;
+    }
+  }
+
+  return 'http://127.0.0.1:8000/api/v1';
 };
 
 class APIClient {
