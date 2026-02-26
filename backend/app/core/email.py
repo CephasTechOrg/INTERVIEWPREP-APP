@@ -31,10 +31,11 @@ def send_email(to_email: str, subject: str, body: str) -> None:
                 resp = client.post("https://api.sendgrid.com/v3/mail/send", json=payload, headers=headers)
             if resp.status_code >= 400:
                 raise RuntimeError(f"SendGrid error {resp.status_code}: {resp.text}")
+            logger.info("EMAIL: Successfully sent email to %s via SendGrid", to_email)
             return
         except Exception as e:
             logger.exception("EMAIL ERROR: SendGrid failed for %s: %s", to_email, str(e))
-            return
+            raise  # Re-raise to allow caller to handle
 
     host = getattr(settings, "SMTP_HOST", None)
     port = getattr(settings, "SMTP_PORT", None)

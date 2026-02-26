@@ -130,24 +130,28 @@ def resend_verification(payload: ResendVerificationRequest, request: Request, db
             password_hash=pending.password_hash,
             full_name=pending.full_name,
         )
-        with contextlib.suppress(Exception):
+        try:
             send_email(
                 email,
                 "Verify your email",
                 ("Use this 6-digit code to finish your signup:\n\n" f"{code}\n\n" "This code expires in 30 minutes."),
             )
+        except Exception as e:
+            logger.warning(f"Failed to send verification email to {email}: {e}")
         log_audit(db, "resend_verification", user_id=None, metadata={"email": email}, request=request)
         return {"ok": True}
 
     user = get_by_email(db, email)
     if user and not user.is_verified:
         token = set_verification_token(db, user)
-        with contextlib.suppress(Exception):
+        try:
             send_email(
                 user.email,
                 "Verify your email",
                 ("Use this 6-digit code to verify your account:\n\n" f"{token}\n\n" "This code expires in 30 minutes."),
             )
+        except Exception as e:
+            logger.warning(f"Failed to send verification email to {user.email}: {e}")
         log_audit(db, "resend_verification", user_id=user.id, metadata={"email": user.email}, request=request)
     return {"ok": True}
 
@@ -161,7 +165,7 @@ def request_password_reset(payload: ResetRequest, request: Request, db: Session 
         # do not reveal existence
         return {"ok": True}
     token = set_reset_token(db, user)
-    with contextlib.suppress(Exception):
+    try:
         lines = [
             "Use this 6-digit code to reset your password:",
             "",
@@ -170,6 +174,8 @@ def request_password_reset(payload: ResetRequest, request: Request, db: Session 
             "Code expires in 30 minutes.",
         ]
         send_email(user.email, "Reset your password", "\n".join(lines))
+    except Exception as e:
+        logger.warning(f"Failed to send password reset email to {user.email}: {e}")
     log_audit(db, "request_password_reset", user_id=user.id, metadata={"email": user.email}, request=request)
     resp: dict[str, str | bool] = {"ok": True}
     if settings.ENV == "dev":
