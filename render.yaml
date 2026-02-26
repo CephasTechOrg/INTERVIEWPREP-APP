@@ -19,6 +19,8 @@ services:
 
     startCommand: |
       alembic upgrade head
+      python create_test_user.py
+      python make_admin.py test@example.com
       uvicorn app.main:app --host 0.0.0.0 --port $PORT
 
     healthCheckPath: /health
