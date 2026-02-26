@@ -94,7 +94,7 @@ export const TopBar = () => {
             >
               <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0">
                 {(user?.profile as any)?.avatar_url ? (
-                  <img src={(user.profile as any).avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+                  <img src={(user?.profile as any)?.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full bg-indigo-600 flex items-center justify-center text-white text-[11px] font-bold">
                     {initials}
@@ -121,7 +121,7 @@ export const TopBar = () => {
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                       {(user?.profile as any)?.avatar_url ? (
-                        <img src={(user.profile as any).avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+                        <img src={(user?.profile as any)?.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
                           {initials}
