@@ -9,6 +9,7 @@ from app.api.v1.router import router as v1_router
 from app.core.config import settings
 from app.db.init_db import load_questions_from_folder
 from app.db.session import SessionLocal
+from app.models.question import Question
 
 logger = logging.getLogger(__name__)
 
@@ -78,12 +79,16 @@ def _startup_init_db() -> None:
     Note: Database schema is now managed by Alembic migrations.
     Run 'alembic upgrade head' before starting the application.
     """
-    if settings.ENV != "dev":
+    if settings.ENV != "dev" and not settings.SEED_QUESTIONS_ON_START:
         return
-    # Dev convenience: auto-load questions from `data/questions` (insert-only).
-    # This does not affect auth flows; it just ensures the interview has content.
+    # Auto-load questions from `data/questions` (insert-only).
+    # In production, this only runs when the DB is empty and the flag is enabled.
     try:
         db = SessionLocal()
+        if settings.ENV != "dev":
+            existing = db.query(Question).count()
+            if existing > 0:
+                return
         folder = str(Path(__file__).resolve().parents[2] / "data" / "questions")
         inserted = load_questions_from_folder(db, folder)
         if settings.ENV == "dev" and inserted > 0:

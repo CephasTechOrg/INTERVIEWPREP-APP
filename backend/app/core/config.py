@@ -19,6 +19,9 @@ class Settings(BaseSettings):
 
     DATABASE_URL: str
 
+    # Seed questions once on startup when DB is empty (production-safe)
+    SEED_QUESTIONS_ON_START: bool = False
+
     DEEPSEEK_API_KEY: str | None = None
     DEEPSEEK_BASE_URL: str = "https://api.deepseek.com"
     DEEPSEEK_MODEL: str = "deepseek-chat"

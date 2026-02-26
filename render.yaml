@@ -40,6 +40,10 @@ services:
       - key: ENV
         value: production
 
+      # Seed questions once when DB is empty
+      - key: SEED_QUESTIONS_ON_START
+        value: "true"
+
       # Secret key for JWT (use Render's secret generator)
       - key: SECRET_KEY
         generateValue: true
