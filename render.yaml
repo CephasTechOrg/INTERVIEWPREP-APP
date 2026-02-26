@@ -121,9 +121,11 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "20.11.1"
-      # Public API base for Next.js (client-side)
+      
+      # Public API base for Next.js (client-side) - MUST include /api/v1
       - key: NEXT_PUBLIC_API_URL
         value: https://interviq-backend.onrender.com/api/v1
+      
       - key: NEXT_PUBLIC_API_BASE
         value: https://interviq-backend.onrender.com/api/v1
 
