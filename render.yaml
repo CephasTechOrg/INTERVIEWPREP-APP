@@ -17,7 +17,9 @@ services:
       pip install --upgrade pip
       pip install -r requirements.txt
 
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    startCommand: |
+      alembic upgrade head
+      uvicorn app.main:app --host 0.0.0.0 --port $PORT
 
     healthCheckPath: /health
 
@@ -55,15 +57,30 @@ services:
       - key: FRONTEND_URL
         value: https://interviq-frontend.onrender.com
 
-      # DeepSeek API Key (set manually in Render dashboard)
+      # DeepSeek API Key (REQUIRED for AI interview features)
       - key: DEEPSEEK_API_KEY
         sync: false
 
-      # ElevenLabs TTS (optional - set manually if using)
+      # ElevenLabs TTS (OPTIONAL - for voice interviews)
       - key: ELEVENLABS_API_KEY
         sync: false
+      - key: ELEVENLABS_VOICE_CEPHAS
+        sync: false
+      - key: ELEVENLABS_VOICE_MASON
+        sync: false
+      - key: ELEVENLABS_VOICE_ERICA
+        sync: false
+      - key: ELEVENLABS_VOICE_MAYA
+        sync: false
 
-      # SMTP settings (optional - set manually for email)
+      # Supabase Storage (OPTIONAL - for profile photo uploads)
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+
+      # Email (OPTIONAL - if not set, emails print to console in dev)
+      # Use EITHER SMTP OR SendGrid (not both)
       - key: SMTP_HOST
         sync: false
       - key: SMTP_PORT
@@ -73,6 +90,11 @@ services:
       - key: SMTP_PASSWORD
         sync: false
       - key: SMTP_FROM
+        sync: false
+      # OR use SendGrid:
+      - key: SENDGRID_API_KEY
+        sync: false
+      - key: FROM_EMAIL
         sync: false
 
   # ============================================
