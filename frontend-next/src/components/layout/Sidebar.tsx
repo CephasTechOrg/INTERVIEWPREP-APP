@@ -201,7 +201,7 @@ export const Sidebar = () => {
           <div className="flex items-center gap-2.5 px-3 py-2">
             <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
               {(user?.profile as any)?.avatar_url ? (
-                <img src={(user.profile as any).avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+                <img src={(user?.profile as any)?.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full bg-blue-600 flex items-center justify-center text-white text-[11px] font-bold">
                   {((user?.full_name?.split(/\s+/).map((w: string) => w[0]).join('').toUpperCase().slice(0, 2)) ||
