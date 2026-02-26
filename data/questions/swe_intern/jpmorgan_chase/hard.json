@@ -47,15 +47,17 @@
         "In your custom cache, how do you proactively evict expired entries without blocking `get()` requests?",
         "What are the memory visibility guarantees between threads using your cache?"
       ],
-      "question_type": "conceptual",
+      "question_type": "system_design",
       "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
       ],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {
@@ -73,11 +75,15 @@
         "You find a classloader leak. How did that happen and how do you fix it without restarting the JVM?",
         "How do you set up proactive alerts to catch this before it crashes?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {

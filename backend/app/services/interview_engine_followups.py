@@ -42,11 +42,8 @@ class InterviewEngineFollowups(InterviewEngineQuality):
         return missing
 
     def _question_focus_keys(self, q: Question) -> list[str]:
-        """Extract focus areas from question metadata."""
-        meta = getattr(q, "meta", None)
-        if not isinstance(meta, dict):
-            return []
-        raw = meta.get("evaluation_focus")
+        """Extract focus areas from question evaluation_focus column."""
+        raw = getattr(q, "evaluation_focus", None) or []
         if not isinstance(raw, list):
             return []
         out: list[str] = []

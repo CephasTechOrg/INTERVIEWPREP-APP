@@ -42,13 +42,15 @@
         "What edge cases would you test?",
         "How would you make it thread-safe?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "hash map usage"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -86,11 +88,15 @@
         "How would you do this iteratively?",
         "What edge cases would you test?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -106,11 +112,15 @@
         "What if one node is not present?",
         "How do you avoid recursion depth issues?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -144,14 +154,15 @@
         "What tricky edge cases exist?",
         "How does duplicates change the solution?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation",
-        "binary search algorithm"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -166,11 +177,15 @@
         "How would you handle very large inputs efficiently?",
         "What test cases catch bugs?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -185,11 +200,15 @@
         "What are the trade-offs of bounded vs unbounded queues?",
         "When would you use condition variables?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -303,16 +322,15 @@
         "What would you do differently next time?",
         "How do you keep relationships strong during conflict?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -373,13 +391,15 @@
         "How do duplicates of the minimum affect your solution?",
         "Complexities?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "stack data structure"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -467,13 +487,15 @@
         "What is the time complexity?",
         "How would you extend this to 4Sum?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -488,13 +510,15 @@
         "How would you prove correctness?",
         "What is the time complexity?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -509,11 +533,15 @@
         "How many valid combinations exist?",
         "Can you solve iteratively?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -529,11 +557,15 @@
         "What about very large grids?",
         "How would you handle diagonal connections?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -548,11 +580,15 @@
         "How do you handle multiple sources?",
         "What if some oranges never rot?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -567,11 +603,15 @@
         "Compare DFS vs Kahn's algorithm?",
         "How would you return the course order?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -606,13 +646,15 @@
         "What is the time complexity of each?",
         "How would you handle very long strings?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -627,13 +669,15 @@
         "What is the mathematical formula?",
         "How do you optimize space?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -648,14 +692,15 @@
         "What is the time complexity?",
         "How would you find minimum jumps?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "dynamic programming approach",
-        "greedy algorithm"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -670,13 +715,15 @@
         "What is the time complexity?",
         "Can you do it in O(1) space?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "greedy algorithm"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -691,13 +738,15 @@
         "What is the first row/column trick?",
         "Time complexity?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -712,11 +761,15 @@
         "What edge cases exist?",
         "How would you generate a spiral matrix?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -767,11 +820,15 @@
         "Time complexity analysis?",
         "How does it differ from bounded usage?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -785,11 +842,15 @@
         "Why sort the array?",
         "What is the time complexity?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -840,13 +901,15 @@
         "How do you handle leading zeros?",
         "What is the space-optimized solution?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -861,14 +924,15 @@
         "How do you optimize space?",
         "What about circular houses?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation",
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -883,14 +947,15 @@
         "What is the recurrence?",
         "Time complexity?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation",
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -926,13 +991,15 @@
         "How do you optimize space?",
         "Why is this a 0/1 knapsack problem?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -947,14 +1014,15 @@
         "What invariant guarantees correctness?",
         "Time complexity?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation",
-        "greedy algorithm"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -969,13 +1037,15 @@
         "How does the interweaving technique work?",
         "What about cycles in random pointers?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "hash map usage"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -990,13 +1060,15 @@
         "Why is this O(n) and one-pass?",
         "How would you generalize to k colors?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1011,11 +1083,15 @@
         "How would you handle frequent modifications?",
         "What about kth largest?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1050,11 +1126,15 @@
         "How do you do it iteratively?",
         "What is the Morris traversal approach?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1069,11 +1149,15 @@
         "What is the time complexity with hashmap optimization?",
         "What about postorder + inorder?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1088,11 +1172,15 @@
         "What is the recursive pattern?",
         "Time complexity?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1108,11 +1196,15 @@
         "Time complexity?",
         "How would you handle negative values?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1127,11 +1219,15 @@
         "What about non-perfect trees?",
         "How does level traversal without queue work?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1146,11 +1242,15 @@
         "How do you traverse levels without a queue?",
         "Time complexity?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1165,13 +1265,15 @@
         "What is the time complexity?",
         "How would you solve with brute force first?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "stack data structure"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1186,13 +1288,15 @@
         "How do you optimize space?",
         "What if you can move in all four directions?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1207,14 +1311,15 @@
         "What is the DP recurrence?",
         "How would you reconstruct the subsequence?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "binary search algorithm",
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1229,13 +1334,15 @@
         "What is the DP recurrence?",
         "Why does the loop order matter?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1250,14 +1357,15 @@
         "How do you handle zeros and negatives?",
         "Time complexity?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation",
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1272,13 +1380,15 @@
         "How do you track last occurrences?",
         "Time complexity?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "greedy algorithm"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1461,11 +1571,15 @@
         "How does property pattern matching work?",
         "How does this improve code readability?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1505,11 +1619,15 @@
         "Why implement both?",
         "What is SuppressFinalize and why call it?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {

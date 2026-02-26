@@ -60,16 +60,15 @@
         "What kind of work energizes you the most?",
         "What environment helps you do your best work?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -153,16 +152,15 @@
         "How did you break the problem down?",
         "What did you learn from dealing with it?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -222,16 +220,15 @@
         "How have you been pursuing that interest?",
         "How does it relate to this role?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -291,16 +288,15 @@
         "What was your specific contribution?",
         "What did you learn that you’d apply again?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -406,16 +402,15 @@
         "What changed as a result?",
         "How do you ask for feedback proactively?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -707,16 +702,15 @@
         "How did you assess what they needed?",
         "What was the outcome for them and for the team?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -779,16 +773,15 @@
         "How did you get buy-in from others?",
         "How did you measure the impact of your change?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -851,16 +844,15 @@
         "What tools or practices helped most?",
         "How did you build rapport with teammates you rarely saw in person?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -923,16 +915,15 @@
         "How did you explain your reasoning?",
         "What alternative did you propose, if any?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -995,16 +986,15 @@
         "How did you tailor your message?",
         "What was the outcome of the presentation?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {

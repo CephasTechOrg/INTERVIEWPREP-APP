@@ -68,15 +68,17 @@
         "When would you use lock-free vs locking?",
         "How would you validate linearizability or correctness?"
       ],
-      "question_type": "conceptual",
+      "question_type": "system_design",
       "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
       ],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {
@@ -92,11 +94,15 @@
         "How do you store metadata (permissions, timestamps)?",
         "What are the memory trade-offs?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -112,15 +118,17 @@
         "How do you handle long-running tasks?",
         "What data structures support efficient scheduling?"
       ],
-      "question_type": "conceptual",
+      "question_type": "system_design",
       "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
       ],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {
@@ -290,13 +298,15 @@
         "How do you implement DP and what is the state?",
         "What test cases catch tricky bugs?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -364,11 +374,15 @@
         "How does this change with optional dependencies?",
         "What are performance constraints for large graphs?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -538,11 +552,15 @@
         "What about security against spoofing attacks?",
         "How do you update the model without compromising user privacy?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -667,11 +685,15 @@
         "What about handling multiple languages and accents?",
         "How do you balance on-device vs cloud processing for privacy?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -742,11 +764,15 @@
         "What about handling network transitions (Wi-Fi to cellular)?",
         "How do you ensure low latency for seamless user experience?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -762,11 +788,15 @@
         "What optimizations reduce backtracking?",
         "What's the worst-case time complexity?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -782,11 +812,15 @@
         "How do you handle null values?",
         "What about large trees and memory constraints?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -803,13 +837,15 @@
         "How do you handle cycles?",
         "What's the time complexity with memoization?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -825,11 +861,15 @@
         "How do you detect and handle cycles (invalid dictionary)?",
         "What about multiple valid orders?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -865,11 +905,15 @@
         "What about resizing and rehashing?",
         "How do you ensure memory safety and reclamation?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -885,11 +929,15 @@
         "What about fairness between readers and writers?",
         "How do you measure scalability under load?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -986,11 +1034,15 @@
         "What about DNS propagation and caching issues?",
         "How do you handle failover during outages?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1058,11 +1110,15 @@
         "What solution did you propose?",
         "How did stakeholders react?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1232,16 +1288,15 @@
         "What challenges did you face?",
         "What was the impact on the team?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     }
   ]

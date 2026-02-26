@@ -1,6 +1,6 @@
 {
-  "track": "founder_interview",
-  "company_style": "y_combinator",
+  "track": "swe_intern",
+  "company_style": "Y_combinator",
   "difficulty": "easy",
   "questions": [
     {
@@ -41,11 +41,15 @@
         "How are people solving this problem right now (without your product)?",
         "What is the 'before' state for your user?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -156,11 +160,15 @@
         "What are you leaving behind to do this?",
         "What is your burn rate?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -176,11 +184,15 @@
         "Where do new users come from?",
         "What is your week-over-week growth rate?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -196,11 +208,15 @@
         "Who is paying you?",
         "How did you land your first customer?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -215,11 +231,15 @@
         "What is the biggest gap in your knowledge right now?",
         "What does success look like for you after 3 months in the batch?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     }
   ]

@@ -120,11 +120,15 @@
         "How do you reproduce deterministically?",
         "How do you roll out the fix safely?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -164,11 +168,15 @@
         "How do you prevent deadlocks?",
         "How do you measure contention and throughput?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -210,15 +218,17 @@
         "How do you avoid cache stampedes?",
         "What consistency model do you target and why?"
       ],
-      "question_type": "conceptual",
+      "question_type": "system_design",
       "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
       ],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {
@@ -234,11 +244,15 @@
         "Why is DFS the right tool here?",
         "Time and space complexity?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -254,13 +268,15 @@
         "How do you optimize space?",
         "What edge cases do you test?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -276,13 +292,15 @@
         "Why does greedy fail?",
         "What is the complexity?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -769,11 +787,15 @@
         "How do you handle large trees?",
         "What's the time and space complexity?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -790,11 +812,15 @@
         "How do you handle large dictionaries?",
         "What's the worst-case complexity?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -810,11 +836,15 @@
         "What data structure optimizes the solution?",
         "What's the time complexity?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -831,13 +861,15 @@
         "What's the time complexity?",
         "How would you extend to handle Unicode characters?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "hash map usage"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -854,14 +886,15 @@
         "How does this relate to longest increasing subsequence?",
         "What's the optimal solution?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "binary search algorithm",
-        "dynamic programming approach"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -877,15 +910,17 @@
         "What about memory reclamation?",
         "How do you test correctness?"
       ],
-      "question_type": "conceptual",
+      "question_type": "system_design",
       "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
       ],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {
@@ -901,11 +936,15 @@
         "What about fairness between readers and writers?",
         "How do you measure scalability?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -999,11 +1038,15 @@
         "What about DNS propagation delays?",
         "How do you handle failover?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -1167,16 +1210,15 @@
         "What approach did you take?",
         "What was the outcome?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {

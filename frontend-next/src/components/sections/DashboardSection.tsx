@@ -40,9 +40,14 @@ const COMPANY_STYLE_OPTIONS: Array<{ value: string; label: string }> = [
   { value: 'general', label: 'General Tech' },
   { value: 'amazon', label: 'Amazon' },
   { value: 'apple', label: 'Apple' },
+  { value: 'bloomberg', label: 'Bloomberg' },
   { value: 'google', label: 'Google' },
+  { value: 'jpmorgan_chase', label: 'JPMorgan Chase' },
   { value: 'microsoft', label: 'Microsoft' },
-  { value: 'meta', label: 'Meta' },
+  { value: 'morgan_stanley', label: 'Morgan Stanley' },
+  { value: 'salesforce', label: 'Salesforce' },
+  { value: 'tesla', label: 'Tesla' },
+  { value: 'Y_combinator', label: 'Y Combinator' },
 ];
 
 const supportsCompanyStyles = (track: Track) => track === 'swe_intern' || track === 'swe_engineer';

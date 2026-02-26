@@ -99,11 +99,15 @@
         "How do you maintain the minimum frequency efficiently?",
         "What are the memory trade-offs of your approach?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -120,11 +124,15 @@
         "How does CAS compare to traditional locking in terms of performance?",
         "How is CAS used in `ConcurrentHashMap` for computeIfAbsent?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -165,11 +173,15 @@
         "What is the time and space complexity of each approach?",
         "How would you detect a negative cycle?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -232,11 +244,15 @@
         "How does the `multiprocessing` module bypass the GIL?",
         "What are the trade-offs of using multiprocessing vs threading in Python?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -254,13 +270,15 @@
         "What is the time complexity of a brute force approach and how do you optimize it?",
         "How does this relate to difference arrays or sweep line algorithms?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -277,11 +295,15 @@
         "What is the difference between `Comparable` and `Comparator`?",
         "How do you use Java 8 lambda expressions to write this concisely?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -298,15 +320,17 @@
         "How do you handle versioning of the FIX protocol?",
         "How do you ensure your parser is efficient for high-frequency trading?"
       ],
-      "question_type": "conceptual",
+      "question_type": "system_design",
       "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
       ],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {

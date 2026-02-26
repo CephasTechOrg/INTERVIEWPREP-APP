@@ -15,11 +15,15 @@
         "How do you implement microsegmentation in Kubernetes?",
         "What are the limitations of Kubernetes network policies?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -34,11 +38,15 @@
         "How does Envoy proxy fit into the Istio architecture?",
         "What is the performance overhead of using a service mesh?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -99,11 +107,15 @@
         "How do you design and run chaos experiments in production?",
         "What tools are available for chaos engineering?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -118,11 +130,15 @@
         "How do you implement showback/chargeback in cloud environments?",
         "What metrics and reports are essential for FinOps?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -137,11 +153,15 @@
         "How do you handle multiple teams and environments with GitOps?",
         "What are the challenges with GitOps at enterprise scale?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -202,15 +222,17 @@
         "How do you test disaster recovery plans without impacting production?",
         "What are the trade-offs between different DR strategies (pilot light, warm standby, multi-site)?"
       ],
-      "question_type": "conceptual",
+      "question_type": "system_design",
       "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
       ],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {
@@ -248,11 +270,15 @@
         "How does Open Policy Agent (OPA) work?",
         "How do you implement compliance as code?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -267,15 +293,17 @@
         "How do you handle model versioning and rollbacks?",
         "What infrastructure is needed for model serving at scale?"
       ],
-      "question_type": "conceptual",
+      "question_type": "system_design",
       "expected_topics": [
-        "clear definition",
-        "practical examples",
-        "use cases"
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
       ],
       "evaluation_focus": [
-        "clarity",
-        "depth"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {
@@ -313,11 +341,15 @@
         "How do you implement identity-aware proxies?",
         "What are the network implications of zero-trust?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     }
   ]

@@ -271,20 +271,28 @@ class InterviewEngineMain(InterviewEngineTransitions):
                 user_question_seen_crud.mark_question_seen(db, session.user_id, q.id)
             self._increment_questions_asked(db, session)
 
-            if not preface and not self._intro_used(session):
+            # Only use the intro line if warmup was genuinely skipped (no warmup messages in history).
+            # After a normal warmup flow, intro_used is always True — this guard prevents mid-interview
+            # re-introductions if the flag was somehow not persisted.
+            _, warm_done_check = interview_warmup.get_state(session)
+            if not preface and not self._intro_used(session) and not warm_done_check:
                 intro_line = self._interviewer_intro_line(session)
                 if intro_line:
                     preface = intro_line
                     with contextlib.suppress(Exception):
                         self._set_intro_used(db, session)
+            # Always mark intro as used once the first question is being presented.
+            with contextlib.suppress(Exception):
+                self._set_intro_used(db, session)
             sys = interviewer_system_prompt(session.company_style, session.role, self._interviewer_name(session), self._interviewer_id(session))
             title, prompt = self._render_question(session, q)
             qt = self._question_type(q)
             if self._is_behavioral(q):
                 user = f"""
-Start the interview with a short greeting.
-Transition into the first behavioral question. Greet the candidate by name if available ({user_name or "name unavailable"}).
-Ask the candidate to answer using STAR (Situation, Task, Action, Result). Keep it conversational and concise.
+The warmup conversation just finished. Transition directly into the first question.
+Do NOT re-introduce yourself or say "nice to meet you" — you've already met during warmup.
+Present the behavioral question conversationally — like a real interviewer asking, not reading from a list.
+If a preface is provided, lead with it naturally before the question.
 Preface (say this first if provided): {preface or ""}
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 
@@ -292,9 +300,10 @@ Question context: {self._combine_question_text(title, prompt)}
 """.strip()
             elif qt == "conceptual":
                 user = f"""
-Start the interview with a short greeting.
-Ask the candidate to explain the concept clearly, then give a simple example or use case.
-Greet the candidate by name if available ({user_name or "name unavailable"}). Keep it concise and friendly.
+The warmup conversation just finished. Transition directly into the first question.
+Do NOT re-introduce yourself — you've already met during warmup.
+Ask about the concept in a natural, conversational way. Don't follow the same formula every time.
+If a preface is provided, lead with it naturally before the question.
 Preface (say this first if provided): {preface or ""}
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 
@@ -302,10 +311,10 @@ Question context: {self._combine_question_text(title, prompt)}
 """.strip()
             elif qt == "system_design":
                 user = f"""
-Start the interview with a short greeting.
-Ask the candidate to clarify requirements and constraints, then outline a high-level design and key components.
-Ask for trade-offs and scalability considerations.
-Greet the candidate by name if available ({user_name or "name unavailable"}). Keep it concise and friendly.
+The warmup conversation just finished. Transition directly into the first question.
+Do NOT re-introduce yourself — you've already met during warmup.
+Present the system design scenario naturally. Ask where they'd like to start — requirements, constraints, or high-level design.
+If a preface is provided, lead with it naturally before the question.
 Preface (say this first if provided): {preface or ""}
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 
@@ -313,10 +322,11 @@ Question context: {self._combine_question_text(title, prompt)}
 """.strip()
             else:
                 user = f"""
-Start the interview with a short greeting.
-Ask the candidate to restate the problem and clarify constraints, then start with a brief plan and key steps.
-Ask them to cover complexity, edge cases, and how they would validate correctness.
-Greet the candidate by name if available ({user_name or "name unavailable"}). Keep it concise and friendly.
+The warmup conversation just finished. Transition directly into the first coding question.
+Do NOT re-introduce yourself — you've already met during warmup.
+Present the problem naturally — like handing it off mid-conversation, not reading a script.
+Do NOT ask "could you restate the problem" — find a more natural entry point. Vary how you open each problem.
+If a preface is provided, lead with it naturally before the question.
 Preface (say this first if provided): {preface or ""}
 Do NOT use markdown or labels like "Title:" or "Prompt:".
 
@@ -624,7 +634,7 @@ Question context: {self._combine_question_text(title, prompt)}
         if self._is_non_informative(student_text):
             tokens = self._clean_tokens(student_text)
             if len(tokens) <= 2:
-                preface = "Understood. Let's move on to the next question."
+                preface = self._transition_preface(session, reason="move_on")
                 session_crud.update_stage(db, session, "next_question")
                 return await self._advance_to_next_question(db, session, history, user_name=user_name, preface=preface)
             if self._max_followups_reached(session):

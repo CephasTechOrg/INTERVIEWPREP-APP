@@ -86,13 +86,15 @@
         "What if the list is empty or has negative prices?",
         "Why is this approach simple and fast for real-time data?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -609,11 +611,15 @@
         "How would you allocate new memory and resize dynamically?",
         "What strategy would you use to decide how much extra memory to allocate?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -629,13 +635,15 @@
         "How would you keep both maps in sync?",
         "What is the memory trade-off?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "hash map usage"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -650,13 +658,15 @@
         "How would you return the indices of the deepest pairs?",
         "What if there are multiple maximum depth pairs?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "stack data structure"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -719,11 +729,15 @@
         "How do you handle strings without nesting?",
         "Walk through an example like 'a(b(c)d)e'."
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -830,16 +844,15 @@
         "Why is this important for Bloomberg's real-time systems?",
         "How do you measure performance empirically?"
       ],
-      "question_type": "behavioral",
+      "question_type": "conceptual",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -878,13 +891,15 @@
         "How many passes over the string do you need?",
         "What if the string is very long (e.g., a financial feed)?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "hash map usage"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {

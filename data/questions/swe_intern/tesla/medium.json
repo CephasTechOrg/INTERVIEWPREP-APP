@@ -18,13 +18,15 @@
         "What is the memory footprint of your design for billions of readings?",
         "The interviewer pushed back on O(n) mode retrieval. How do you achieve O(1) for get_mode()?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "hash map usage"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -41,13 +43,15 @@
         "Explain the intuition behind the two-pointer O(1) space solution.",
         "How would this change if the bars had varying widths?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -65,11 +69,15 @@
         "What is the time complexity of your `allocate` and `free` operations?",
         "How would you handle fragmentation over time?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -86,11 +94,15 @@
         "How would you implement this using Semaphores vs Monitors?",
         "Can you solve this without using a queue?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -108,13 +120,15 @@
         "How do you handle negative numbers or values out of range?",
         "What is the time complexity of your solution?"
       ],
-      "question_type": "coding",
+      "question_type": "conceptual",
       "expected_topics": [
-        "array manipulation"
+        "clear definition",
+        "practical examples",
+        "use cases"
       ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -153,11 +167,15 @@
         "How do you handle negative exponents?",
         "What edge cases (e.g., n = -2^31) cause overflow and how do you mitigate them?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -295,11 +313,15 @@
         "Compare Kahn's algorithm (BFS) vs DFS for topological sorting.",
         "How would you return the actual build order?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -337,16 +359,17 @@
         "What materials would you consider and why?",
         "How do you ensure stability without permanent fixtures?"
       ],
-      "question_type": "behavioral",
+      "question_type": "system_design",
       "expected_topics": [
-        "situation",
-        "task",
-        "action",
-        "result"
+        "architecture",
+        "data flow",
+        "bottlenecks",
+        "scaling strategy"
       ],
       "evaluation_focus": [
-        "star_format",
-        "impact"
+        "scalability",
+        "trade_offs",
+        "components"
       ]
     },
     {

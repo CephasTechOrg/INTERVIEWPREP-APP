@@ -81,6 +81,16 @@ class InterviewEnginePrompts(InterviewEngineQuestions):
                 flags=re.I,
             )
         cleaned = re.sub(r"^(?:hi|hello|hey)(?:\s+there)?[\s,!.:-]*", "", cleaned, flags=re.I)
+        # Strip standalone "Understood." / "Got it." openers that duplicate the preface
+        cleaned = re.sub(r"^(?:understood|got it|sure|alright|okay|of course)[.,!]?\s*", "", cleaned, flags=re.I)
+        # Strip re-introductions mid-interview
+        cleaned = re.sub(
+            r"(?:hi|hello|hey)[,!]?\s+(?:i'm|i am)\s+\w+[,!]?\s+(?:and\s+)?i'?ll?\s+be\s+your\s+interviewer[^.]*\.",
+            "",
+            cleaned,
+            flags=re.I,
+        )
+        cleaned = re.sub(r"nice\s+to\s+meet\s+you[!.,]?\s*", "", cleaned, flags=re.I)
 
         paragraphs = [p.strip() for p in re.split(r"\n{2,}", cleaned) if p.strip()]
         if not paragraphs:
@@ -88,6 +98,7 @@ class InterviewEnginePrompts(InterviewEngineQuestions):
 
         transition_re = re.compile(r"\b(move to the next question|next question)\b", re.I)
         greeting_re = re.compile(r"^(hi|hello|hey)\b", re.I)
+        intro_re = re.compile(r"\bi'?ll?\s+be\s+your\s+interviewer\b", re.I)
         seen: set[str] = set()
         cleaned_paragraphs: list[str] = []
         for para in paragraphs:
@@ -100,6 +111,8 @@ class InterviewEnginePrompts(InterviewEngineQuestions):
                 if "?" not in s and greeting_re.search(s):
                     continue
                 if "?" not in s and transition_re.search(s):
+                    continue
+                if intro_re.search(s):
                     continue
                 norm = re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
                 if norm and norm in seen:
@@ -133,7 +146,7 @@ class InterviewEnginePrompts(InterviewEngineQuestions):
         question_text = self._combine_question_text(title_clean, prompt_clean)
         if not question_text:
             return cleaned
-        return f"{cleaned}\n\nHere's the question: {question_text}".strip()
+        return f"{cleaned}\n\n{question_text}".strip()
 
     def _combine_question_text(self, title: str | None, prompt: str | None) -> str:
         t = (title or "").strip()

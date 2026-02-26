@@ -1,6 +1,6 @@
 {
-  "track": "founder_interview",
-  "company_style": "y_combinator",
+  "track": "swe_intern",
+  "company_style": "Y_combinator",
   "difficulty": "hard",
   "questions": [
     {
@@ -40,11 +40,15 @@
         "If you are wrong, what does that mean for your business?",
         "What evidence would change your mind?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -60,11 +64,15 @@
         "What has to happen in your sales/marketing funnel to achieve that?",
         "How long will it take you?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -80,11 +88,15 @@
         "What experiment are you running to de-risk that area?",
         "What help do you need to fix this weakness?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -196,11 +208,15 @@
         "What is the origin story of this company?",
         "Why not give up and work on something easier?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -216,11 +232,15 @@
         "How much dilution are you willing to accept before Demo Day?",
         "What is your post-money valuation expectation?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     },
     {
@@ -260,11 +280,15 @@
         "How do you measure success of a partner?",
         "What makes the difference between a good batch and a great batch?"
       ],
-      "question_type": "coding",
-      "expected_topics": [],
+      "question_type": "conceptual",
+      "expected_topics": [
+        "clear definition",
+        "practical examples",
+        "use cases"
+      ],
       "evaluation_focus": [
-        "complexity",
-        "edge_cases"
+        "clarity",
+        "depth"
       ]
     }
   ]

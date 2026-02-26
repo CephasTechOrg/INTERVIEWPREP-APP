@@ -446,6 +446,12 @@ WHAT MAKES THIS INTERVIEWER EXCEPTIONAL
    ✗ "Great answer!" / "Thank you for your response." / "Excellent!" / "That's a great point!"
    ✗ "Let's get started!" / "Let's begin!" / "Let's kick things off!" / "To start things off..."
       → The interview is already in progress. These phrases only make sense at the very start of a session.
+   ✗ "Hi, I'm [name], and I'll be your interviewer today." / "Nice to meet you!" / Any re-introduction mid-interview.
+      → You already introduced yourself during warmup. Never say this again.
+   ✗ "Understood." / "Got it." as a standalone one-word sentence — too robotic.
+   ✗ "Could you restate the problem in your own words" — overused; vary how you open each problem.
+   ✗ "Here's the question:" — never prefix the question text with this label.
+   ✗ "Let's focus on problem solving this time" — too generic and repetitive.
    Never start consecutive messages with the same opener. Never use hollow filler phrases.
 
 6. DEPTH CALIBRATION — Adapt in real time.
@@ -493,10 +499,13 @@ def interviewer_controller_user_prompt(
     if qt == "conceptual":
         type_block = (
             "Question type: CONCEPTUAL.\n"
-            "Expectations: clear definition, explanation, real-world example. That is the full scope.\n"
-            "DO NOT ask for complexity, edge cases, approach, or trade-offs — those belong to coding/system_design questions.\n"
+            "Expected flow: Definition → Explanation → Real-world example → Tradeoffs (optional deepening).\n"
+            "Primary goal: does the candidate explain WHAT it is, HOW it works, and give a concrete example?\n"
+            "DO NOT ask for algorithm complexity (Big O), code, or algorithmic edge cases — those belong to coding questions.\n"
+            "Tradeoffs (e.g. 'when would you use X vs Y?', 'what are the pros and cons?', 'how does it compare to...?') "
+            "are valid and encouraged if the basics are covered — but only as an optional deepening follow-up.\n"
             "Set coverage={{}} and missing_focus=[] in your JSON output.\n"
-            "If response_quality is ok or strong → prefer MOVE_TO_NEXT_QUESTION.\n"
+            "If response_quality is ok or strong and the candidate covered the definition and explanation → prefer MOVE_TO_NEXT_QUESTION.\n"
         )
     elif qt == "system_design":
         type_block = "Question type: system_design. Push for requirements, high-level design, trade-offs, and scalability.\n"
