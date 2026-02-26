@@ -1,8 +1,9 @@
 from fastapi import APIRouter
 
-from app.api.v1 import ai, analytics, auth, chat_threads, embeddings, feedback, questions, sessions, users, voice
+from app.api.v1 import admin, ai, analytics, auth, chat_threads, embeddings, feedback, questions, sessions, users, voice
 
 router = APIRouter(prefix="/api/v1")
+router.include_router(admin.router, tags=["admin"])
 router.include_router(auth.router, tags=["auth"])
 router.include_router(questions.router, tags=["questions"])
 router.include_router(sessions.router, tags=["sessions"])

@@ -58,3 +58,28 @@ def create_access_token(subject: str, expires_minutes: int | None = None) -> str
     expire = datetime.now(UTC) + timedelta(minutes=expires_minutes or settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode: dict[str, Any] = {"sub": subject, "exp": expire}
     return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=ALGORITHM)
+
+
+def create_admin_access_token(admin_id: int, username: str, expires_hours: int = 24) -> str:
+    """Create JWT token for admin with shorter expiry (24 hours)."""
+    expire = datetime.now(UTC) + timedelta(hours=expires_hours)
+    to_encode: dict[str, Any] = {
+        "sub": str(admin_id),
+        "username": username,
+        "role": "admin",
+        "type": "admin_token",
+        "exp": expire,
+    }
+    return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=ALGORITHM)
+
+
+def verify_admin_token(token: str) -> dict[str, Any]:
+    """Verify and decode admin JWT token."""
+    try:
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[ALGORITHM])
+        if payload.get("role") != "admin" or payload.get("type") != "admin_token":
+            return None
+        return payload
+    except Exception:
+        return None
+

@@ -167,3 +167,50 @@ def reset_password(db: Session, token: str, new_password: str, email: str | None
     db.commit()
     db.refresh(user)
     return user
+
+
+def ban_user(db: Session, user_id: int, reason: str | None = None) -> User | None:
+    """Ban a user account."""
+    user = db.query(User).filter(User.id == user_id).first()
+    if user:
+        user.is_banned = True
+        user.ban_reason = reason
+        user.banned_at = datetime.now(UTC)
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+    return user
+
+
+def unban_user(db: Session, user_id: int) -> User | None:
+    """Unban a user account."""
+    user = db.query(User).filter(User.id == user_id).first()
+    if user:
+        user.is_banned = False
+        user.ban_reason = None
+        user.banned_at = None
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+    return user
+
+
+def get_all_users_paginated(
+    db: Session, skip: int = 0, limit: int = 50, filter_banned: bool | None = None
+) -> list[User]:
+    """Get all users with optional pagination and filtering."""
+    query = db.query(User)
+
+    if filter_banned is not None:
+        query = query.filter(User.is_banned == filter_banned)
+
+    return query.order_by(User.created_at.desc()).offset(skip).limit(limit).all()
+
+
+def get_user_count(db: Session, filter_banned: bool | None = None) -> int:
+    """Get total user count with optional filtering."""
+    query = db.query(User)
+    if filter_banned is not None:
+        query = query.filter(User.is_banned == filter_banned)
+    return query.count()
+
