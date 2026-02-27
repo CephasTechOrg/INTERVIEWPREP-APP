@@ -125,6 +125,22 @@ Free users need usage limits to control costs and encourage upgrades. This is th
 | **ElevenLabs Characters** | 3,000/month | Monthly               | ~2 interviews with premium voice         |
 | **Interview Sessions**    | Unlimited   | -                     | But ElevenLabs falls back to browser TTS |
 
+### ⚙️ Configurable via Environment Variables
+
+All limits are configurable without code changes. Update in `.env` (local) or Render Dashboard (production):
+
+```env
+# Rate Limits - Adjust anytime
+FREE_CHAT_LIMIT_DAILY=30
+FREE_TTS_LIMIT_MONTHLY=3000
+```
+
+**To change limits:**
+
+1. Update env variable in Render Dashboard → Environment
+2. Redeploy (or wait for next deploy)
+3. New limits apply immediately
+
 ### Key Design Decision: Graceful Degradation
 
 **ElevenLabs quota exhausted?** → Fall back to FREE browser TTS  
