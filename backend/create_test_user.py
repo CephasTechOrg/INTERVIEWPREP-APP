@@ -1,11 +1,16 @@
 #!/usr/bin/env python
-"""Create test user for testing the API."""
+"""Create test user for local development ONLY. Never run in production."""
 
+import os
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
+
+if os.getenv("ENV", "dev").lower() == "production":
+    print("✗ Refusing to create test user in production environment.")
+    sys.exit(0)
 
 from app.core.security import hash_password
 from app.db.session import SessionLocal

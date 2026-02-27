@@ -43,11 +43,8 @@ class InterviewEngineWarmup(InterviewEnginePrompts):
     """Warmup flow and smalltalk methods."""
 
     def _warmup_focus_line(self, focus: dict[str, Any]) -> str:
-        dims = focus.get("dimensions") or []
-        if "complexity" in dims and "edge_cases" in dims:
-            return "I'll keep an eye on complexity and edge cases."
-        if dims:
-            return f"I'll focus on {dims[0].replace('_', ' ')}."
+        # Removed: generic focus announcements ("I'll focus on problem solving.")
+        # sound robotic and add no value in the warmup → interview transition.
         return ""
 
     def _warmup_behavioral_question_id(self, session: InterviewSession) -> int | None:
@@ -469,7 +466,7 @@ class InterviewEngineWarmup(InterviewEnginePrompts):
 
     def _warmup_transition_line(self, profile: WarmupToneProfile | None) -> str:
         if not profile:
-            return "Thanks for sharing, let's get started."
+            return "Thanks for sharing."
         tone = profile.tone
         energy = profile.energy
 
@@ -480,7 +477,7 @@ class InterviewEngineWarmup(InterviewEnginePrompts):
                 return "Great to hear, let's keep that momentum."
             if energy == "low":
                 return "Great to hear, we'll keep a steady pace."
-            return "Great to hear, let's dive in."
+            return "Great to hear."
         if tone == "stressed":
             return "Totally fair, we'll take it step by step."
         if tone == "tired":
@@ -491,7 +488,7 @@ class InterviewEngineWarmup(InterviewEnginePrompts):
             return "Thanks for sharing, let's use that momentum."
         if energy == "low":
             return "Thanks for sharing, we'll keep the pace comfortable."
-        return "Thanks for sharing, let's get started."
+        return "Thanks for sharing."
 
     def _warmup_smalltalk_reply(self, ack_line: str | None, question: str) -> str:
         ack = (ack_line or "Thanks for sharing.").strip()
@@ -623,9 +620,9 @@ class InterviewEngineWarmup(InterviewEnginePrompts):
         # - contains "behavioral question"
         interviewer_name = self._interviewer_name(session)
         if interviewer_name:
-            base_ack = tone_line or f"I am doing well -- I'm {interviewer_name}, your interviewer. Let's get started."
+            base_ack = tone_line or f"I am doing well -- I'm {interviewer_name}, your interviewer."
         else:
-            base_ack = tone_line or "I am doing well -- I'm your interviewer. Let's get started."
+            base_ack = tone_line or "I am doing well -- I'm your interviewer."
         if base_ack and base_ack[-1] not in ".!?":
             base_ack = f"{base_ack}."
         parts = [base_ack]

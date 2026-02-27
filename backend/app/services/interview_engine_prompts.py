@@ -17,17 +17,22 @@ class InterviewEnginePrompts(InterviewEngineQuestions):
 
     def _transition_preface(self, session: InterviewSession, reason: str | None = None) -> str:
         focus_dims = self._focus_dimensions(session)
-        focus_line = ""
-        if "complexity" in focus_dims and "edge_cases" in focus_dims:
-            focus_line = "Next one, I'll be watching complexity and edge cases."
-        elif "complexity" in focus_dims:
-            focus_line = "I'll be paying attention to complexity here."
-        elif "edge_cases" in focus_dims:
-            focus_line = "Keep edge cases in mind for this one."
-        elif focus_dims:
-            focus_line = f"Let's focus on {focus_dims[0].replace('_', ' ')} this time."
-
         idx = int(session.questions_asked_count or 0)
+
+        # Only emit a focus hint every 3rd question (idx 0, 3, 6...) to avoid
+        # sounding like a broken record. Omit on move_on/dont_know — they're
+        # already awkward moments; no need to pile on.
+        show_focus = (reason is None) and bool(focus_dims) and (idx % 3 == 0) and (idx > 0)
+        focus_line = ""
+        if show_focus:
+            if "complexity" in focus_dims and "edge_cases" in focus_dims:
+                focus_line = "Pay attention to both complexity and edge cases here."
+            elif "complexity" in focus_dims:
+                focus_line = "Think carefully about complexity on this one."
+            elif "edge_cases" in focus_dims:
+                focus_line = "Watch out for edge cases."
+            elif focus_dims:
+                focus_line = f"This one's about {focus_dims[0].replace('_', ' ')}."
 
         if reason == "move_on":
             leads = [
@@ -37,8 +42,7 @@ class InterviewEnginePrompts(InterviewEngineQuestions):
                 "Alright, let's try a different one.",
                 "Fair enough, let's switch gears.",
             ]
-            lead = leads[idx % len(leads)]
-            return f"{lead} {focus_line}".strip()
+            return leads[idx % len(leads)]
 
         if reason == "dont_know":
             leads = [
@@ -48,8 +52,7 @@ class InterviewEnginePrompts(InterviewEngineQuestions):
                 "No stress, let's keep going.",
                 "Totally fine. Let's move on.",
             ]
-            lead = leads[idx % len(leads)]
-            return f"{lead} {focus_line}".strip()
+            return leads[idx % len(leads)]
 
         # Normal transition after answering
         bridges = [
@@ -137,16 +140,17 @@ class InterviewEnginePrompts(InterviewEngineQuestions):
         if not cleaned:
             return ""
         lower = cleaned.lower()
-        title_clean = (title or "").strip()
         prompt_clean = (prompt or "").strip()
-        if title_clean and title_clean.lower() in lower:
+        # Check if a meaningful portion of the prompt is already in the reply.
+        # Use a 60-char prefix so paraphrased intros don't trigger a redundant append.
+        prompt_prefix = prompt_clean[:60].lower()
+        if prompt_clean and (prompt_clean.lower() in lower or (prompt_prefix and prompt_prefix in lower)):
             return cleaned
-        if prompt_clean and prompt_clean.lower() in lower:
+        # Only append the prompt (not the LeetCode-style title) — the title is
+        # a UI display label that sounds unnatural when read aloud by TTS.
+        if not prompt_clean:
             return cleaned
-        question_text = self._combine_question_text(title_clean, prompt_clean)
-        if not question_text:
-            return cleaned
-        return f"{cleaned}\n\n{question_text}".strip()
+        return f"{cleaned}\n\n{prompt_clean}".strip()
 
     def _combine_question_text(self, title: str | None, prompt: str | None) -> str:
         t = (title or "").strip()

@@ -1,21 +1,15 @@
 import logging
 from datetime import UTC, datetime
 
-from fastapi import APIRouter, Depends, HTTPException, Query, Request
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_admin, get_db
-from app.api.rate_limit import rate_limit
-from app.core.security import create_admin_access_token
-from app.crud.admin import authenticate_admin, update_admin_last_login
 from app.crud.user import ban_user, get_all_users_paginated, get_user_count, unban_user
 from app.models.interview_session import InterviewSession
-from app.models.message import Message
 from app.models.question import Question
 from app.models.user import User
 from app.schemas.admin import (
-    AdminLoginRequest,
-    AdminLoginResponse,
     DashboardStats,
     UserBanRequest,
     UserDetailResponse,
@@ -24,30 +18,6 @@ from app.utils.audit import log_audit
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/admin", tags=["admin"])
-
-
-@router.post("/login", response_model=AdminLoginResponse)
-def admin_login(payload: AdminLoginRequest, request: Request, db: Session = Depends(get_db)):
-    """Admin login endpoint. Returns JWT token for admin operations."""
-    username = payload.username.strip()
-    rate_limit(request, key=f"admin_login:{request.client.host}:{username}", max_calls=5, window_sec=60)
-
-    admin = authenticate_admin(db, username, payload.password)
-    if not admin:
-        logger.warning(f"Failed admin login attempt for username: {username}")
-        raise HTTPException(status_code=401, detail="Invalid credentials")
-
-    update_admin_last_login(db, admin.id)
-    token = create_admin_access_token(admin.id, admin.username)
-
-    log_audit(db, "admin_login", user_id=None, metadata={"admin_id": admin.id}, request=request)
-
-    return AdminLoginResponse(
-        access_token=token,
-        admin_id=admin.id,
-        username=admin.username,
-        full_name=admin.full_name,
-    )
 
 
 @router.get("/stats", response_model=DashboardStats)

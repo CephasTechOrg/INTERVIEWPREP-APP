@@ -97,9 +97,7 @@ class InterviewEngineTransitions(InterviewEngineWarmup):
             user = f"""
 Present this behavioral question conversationally — like a real interviewer mid-session, not reading from a list.
 Do NOT re-introduce yourself or say "nice to meet you".
-If a preface is provided, lead with it naturally before the question.
 Keep it concise and direct. Do NOT use markdown or labels like "Title:" or "Prompt:".
-Preface (optional): {preface or ""}
 
 Question context: {question_context}
 """.strip()
@@ -108,9 +106,7 @@ Question context: {question_context}
 Present this problem naturally — like a senior engineer handing it off mid-conversation, not reading a script.
 Do NOT re-introduce yourself. Do NOT say "could you restate the problem" — find a fresh entry point.
 Vary how you open: sometimes focus on constraints, sometimes ask where they'd start, sometimes just present the scenario.
-If a preface is provided, lead with it — it should flow into the question naturally.
 Do NOT use markdown or labels like "Title:" or "Prompt:".
-Preface (optional): {preface or ""}
 
 Question context: {question_context}
 """.strip()
@@ -135,10 +131,9 @@ Question context: {question_context}
         if cleaned_reply:
             reply = cleaned_reply
         reply = self._ensure_question_in_reply(reply, title, prompt)
+        # Always prepend preface — never give it to the LLM to avoid duplicates
         if preface:
-            cleaned = preface.strip()
-            if cleaned and cleaned.lower() not in (reply or "").lower():
-                reply = f"{cleaned}\n\n{reply}"
+            reply = f"{preface.strip()}\n\n{reply}"
         message_crud.add_message(db, session.id, "interviewer", reply)
         session_crud.update_stage(db, session, "candidate_solution")
         return reply
@@ -153,10 +148,11 @@ Question context: {question_context}
     ) -> str:
         if self._max_questions_reached(session):
             wrap_options = [
-                "That's a wrap — great effort today. Click Finalize whenever you're ready to see your results.",
-                "And that's all the questions for today. Nice work getting through them. Hit Finalize when you're ready.",
-                "Alright, we've covered everything. Click Finalize to get your full feedback and score.",
-                "That's the last one — well done for pushing through. Click Finalize to see how you did.",
+                "That's a wrap — great effort today.",
+                "And that's all the questions for today. Nice work getting through them all.",
+                "Alright, we've covered everything. Well done.",
+                "That's the last one — great job pushing through.",
+                "We're all done. Solid effort today.",
             ]
             wrap = random.choice(wrap_options)
             message_crud.add_message(db, session.id, "interviewer", wrap)
@@ -169,7 +165,7 @@ Question context: {question_context}
 
         next_q = self._pick_next_main_question(db, session)
         if not next_q:
-            wrap = "Looks like we've run through everything available. Go ahead and click Finalize to get your score."
+            wrap = "Looks like we've run through everything available. Great work today."
             message_crud.add_message(db, session.id, "interviewer", wrap)
             session_crud.update_stage(db, session, "wrapup")
             return wrap

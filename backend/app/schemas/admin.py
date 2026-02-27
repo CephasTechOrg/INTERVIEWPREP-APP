@@ -3,36 +3,6 @@ from datetime import datetime
 from pydantic import BaseModel
 
 
-class AdminLoginRequest(BaseModel):
-    username: str
-    password: str
-
-
-class AdminLoginResponse(BaseModel):
-    access_token: str
-    admin_id: int
-    username: str
-    full_name: str | None = None
-
-
-class AdminCreateRequest(BaseModel):
-    username: str
-    password: str
-    full_name: str | None = None
-
-
-class AdminResponse(BaseModel):
-    id: int
-    username: str
-    full_name: str | None = None
-    is_active: bool
-    created_at: datetime
-    last_login: datetime | None = None
-
-    class Config:
-        from_attributes = True
-
-
 class UserBanRequest(BaseModel):
     reason: str | None = None
 

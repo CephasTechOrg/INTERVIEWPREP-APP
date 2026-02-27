@@ -96,15 +96,15 @@ class APIClient {
     }
     
     if (error.request) {
-      const baseUrl = getBaseURL();
+      // User-friendly message - don't expose internal URLs in production
       return {
-        message: `Network error: Unable to reach the server. Make sure the backend is running on ${baseUrl}`,
+        message: 'Unable to connect. Please check your internet connection and try again.',
         status: 0,
       };
     }
     
     return {
-      message: error.message || 'An unexpected error occurred',
+      message: 'Something went wrong. Please try again later.',
       status: 0,
     };
   }

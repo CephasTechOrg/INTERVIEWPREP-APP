@@ -19,8 +19,6 @@ services:
 
     startCommand: |
       alembic upgrade head
-      python create_test_user.py
-      python make_admin.py test@example.com
       uvicorn app.main:app --host 0.0.0.0 --port $PORT
 
     healthCheckPath: /health
@@ -46,9 +44,10 @@ services:
       - key: SEED_QUESTIONS_ON_START
         value: "true"
 
-      # Secret key for JWT (use Render's secret generator)
+      # Secret key for JWT — set this ONCE in Render dashboard and never change it.
+      # generateValue would create a NEW key on every deploy, invalidating all user sessions.
       - key: SECRET_KEY
-        generateValue: true
+        sync: false
 
       # Database URL (linked from Render PostgreSQL)
       - key: DATABASE_URL
