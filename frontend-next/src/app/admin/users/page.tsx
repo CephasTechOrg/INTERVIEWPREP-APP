@@ -23,6 +23,7 @@ export default function AdminUsersPage() {
   const limit = 50;
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [banReason, setBanReason] = useState('');
   const [actionLoading, setActionLoading] = useState(false);
 
@@ -49,6 +50,28 @@ export default function AdminUsersPage() {
     setSelectedUser(user);
     setBanReason(user.ban_reason || '');
     setShowModal(true);
+  };
+
+  const handleDeleteClick = (user: User) => {
+    setSelectedUser(user);
+    setShowDeleteModal(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!selectedUser) return;
+
+    try {
+      setActionLoading(true);
+      await adminService.deleteUser(selectedUser.id);
+      await fetchUsers();
+      setShowDeleteModal(false);
+      setSelectedUser(null);
+    } catch (err: unknown) {
+      const errorObj = err as { message?: string };
+      alert(errorObj?.message || 'Failed to delete user');
+    } finally {
+      setActionLoading(false);
+    }
   };
 
   const handleConfirmBan = async () => {
@@ -191,16 +214,24 @@ export default function AdminUsersPage() {
                     {new Date(user.created_at).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4 text-sm">
-                    <button
-                      onClick={() => handleBanClick(user)}
-                      className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                        user.is_banned
-                          ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-200 dark:hover:bg-emerald-900/50'
-                          : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50'
-                      }`}
-                    >
-                      {user.is_banned ? 'Unban' : 'Ban'}
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleBanClick(user)}
+                        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                          user.is_banned
+                            ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-200 dark:hover:bg-emerald-900/50'
+                            : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50'
+                        }`}
+                      >
+                        {user.is_banned ? 'Unban' : 'Ban'}
+                      </button>
+                      <button
+                        onClick={() => handleDeleteClick(user)}
+                        className="px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))
@@ -272,6 +303,46 @@ export default function AdminUsersPage() {
                 disabled={actionLoading}
               >
                 {actionLoading ? 'Processing...' : selectedUser.is_banned ? 'Unban' : 'Ban'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && selectedUser && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl p-6 max-w-md w-full border border-slate-200 dark:border-slate-700">
+            <h2 className="text-xl font-bold text-slate-800 dark:text-white mb-2">
+              Delete User
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 mb-2">
+              Are you sure you want to permanently delete this user?
+            </p>
+            <p className="text-slate-800 dark:text-white font-medium mb-4">
+              {selectedUser.email}
+            </p>
+            <p className="text-red-600 dark:text-red-400 text-sm mb-4">
+              ⚠️ This action cannot be undone. All user data including interviews and messages will be deleted.
+            </p>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setShowDeleteModal(false);
+                  setSelectedUser(null);
+                }}
+                className="flex-1 px-4 py-2.5 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors font-medium"
+                disabled={actionLoading}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirmDelete}
+                className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-medium"
+                disabled={actionLoading}
+              >
+                {actionLoading ? 'Deleting...' : 'Delete Permanently'}
               </button>
             </div>
           </div>

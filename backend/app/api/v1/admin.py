@@ -221,3 +221,36 @@ def get_users_count(
         metadata={"admin_id": admin.id, "filter_banned": filter_banned},
     )
     return {"total": count, "filter_banned": filter_banned}
+
+
+@router.delete("/users/{user_id}")
+def delete_user_endpoint(
+    user_id: int,
+    admin: User = Depends(get_admin),
+    db: Session = Depends(get_db),
+):
+    """Permanently delete a user and all their data."""
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    if user.is_admin:
+        raise HTTPException(status_code=400, detail="Cannot delete admin users")
+
+    if user.id == admin.id:
+        raise HTTPException(status_code=400, detail="Cannot delete yourself")
+
+    email = user.email  # Store for audit log
+
+    # Delete user (CASCADE will handle related records)
+    db.delete(user)
+    db.commit()
+
+    log_audit(
+        db,
+        "admin_delete_user",
+        user_id=None,  # User no longer exists
+        metadata={"admin_id": admin.id, "deleted_email": email, "deleted_user_id": user_id},
+    )
+
+    return {"ok": True, "message": f"User {email} has been permanently deleted"}

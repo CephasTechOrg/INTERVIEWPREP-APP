@@ -65,6 +65,10 @@ export const adminService = {
     return apiClient.post<{ ok: boolean; message: string }>(`/admin/users/${userId}/unban`, {});
   },
 
+  async deleteUser(userId: number): Promise<{ ok: boolean; message: string }> {
+    return apiClient.delete<{ ok: boolean; message: string }>(`/admin/users/${userId}`);
+  },
+
   // Audit Logs
   async getAuditLogs(skip: number = 0, limit: number = 100): Promise<{ logs: AuditLog[]; total: number }> {
     return apiClient.get<{ logs: AuditLog[]; total: number }>(`/admin/audit-logs?skip=${skip}&limit=${limit}`);
