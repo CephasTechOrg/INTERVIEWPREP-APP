@@ -49,11 +49,10 @@ services:
       - key: SECRET_KEY
         sync: false
 
-      # Database URL (linked from Render PostgreSQL)
+      # Database URL — set this manually in Render dashboard to your Supabase Session Pooler URL.
+      # Format: postgresql+psycopg2://postgres.[ref]:[password]@aws-1-[region].pooler.supabase.com:5432/postgres
       - key: DATABASE_URL
-        fromDatabase:
-          name: interviq-db
-          property: connectionString
+        sync: false
 
       # Frontend URL for CORS
       - key: FRONTEND_ORIGINS
@@ -130,14 +129,4 @@ services:
       - key: NEXT_PUBLIC_API_BASE
         value: https://interviq-backend.onrender.com/api/v1
 
-# ============================================
-# DATABASE - PostgreSQL with pgvector
-# ============================================
-databases:
-  - name: interviq-db
-    region: oregon
-    plan: free
-    databaseName: interviq
-    postgresMajorVersion: "16"
-    # Note: pgvector extension must be enabled manually in Render dashboard
-    # or via migration: CREATE EXTENSION IF NOT EXISTS vector;
+# Database is hosted on Supabase — no Render-managed PostgreSQL needed.

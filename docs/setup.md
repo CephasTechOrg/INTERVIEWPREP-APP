@@ -91,12 +91,12 @@ Or run migrations + seed together:
 python seed.py
 ```
 
-## 7) Create Test Admin User
+## 7) Create Your Admin Account
 
-```bash
-cd backend
-python create_test_user.py
-python make_admin.py test@example.com
+Register via the `/signup` page, then run this in Supabase SQL Editor (or local psql):
+
+```sql
+UPDATE users SET is_admin = true WHERE email = 'your@email.com';
 ```
 
 ## 8) Start Development Servers
@@ -153,8 +153,7 @@ On every `git push` to `main`:
 
 1. Render rebuilds and deploys
 2. Alembic runs migrations (`alembic upgrade head`)
-3. Test admin user is created
-4. Questions seed if database is empty
+3. Questions seed if database is empty
 
 ---
 
@@ -239,7 +238,7 @@ TRUNCATE users CASCADE;
 TRUNCATE users, questions, interview_sessions, messages, audit_logs CASCADE;
 ```
 
-After this, redeploy to re-seed questions and recreate test admin.
+After this, redeploy to re-seed questions. Then set your admin account via SQL (see Admin Management section).
 
 ---
 
@@ -307,10 +306,12 @@ UPDATE users SET is_verified = true WHERE email = 'user@email.com';
 2. If > 0, truncate first: `TRUNCATE questions CASCADE;`
 3. Redeploy
 
-## Admin Can't Access Dashboard
+## Admin Can't Access Dashboard / Not Redirected After Login
 
-1. Verify user is admin: `SELECT email, is_admin FROM users WHERE email = '...';`
-2. If not, set admin: `UPDATE users SET is_admin = true WHERE email = '...';`
+1. Verify `is_admin = true` in Supabase: `SELECT email, is_admin FROM users WHERE email = '...';`
+2. If not set: `UPDATE users SET is_admin = true WHERE email = '...';`
+3. **Log out completely**, then log back in — the old user object is cached in localStorage and must be refreshed
+4. Verify `DATABASE_URL` in Render dashboard points to the **Supabase Session Pooler URL** (not Render's own PostgreSQL)
 
 ---
 
@@ -328,13 +329,14 @@ UPDATE users SET is_verified = true WHERE email = 'user@email.com';
 
 ---
 
-# 🔐 INITIAL ADMIN CREDENTIALS
+# 🔐 ADMIN SETUP
 
-After fresh deploy:
+After a fresh deploy, there is no default admin account.
 
-- **Email:** `test@example.com`
-- **Password:** `password123`
-- **Login URL:** `/login`
-- **Admin Panel:** `/admin/dashboard`
-
-⚠️ **Recommended:** Create your own admin account, then ban or delete the test account.
+1. Sign up at `/signup` with your email
+2. Open Supabase SQL Editor and run:
+   ```sql
+   UPDATE users SET is_admin = true WHERE email = 'your@email.com';
+   ```
+3. Log out (if already logged in), then log back in at `/login`
+4. You will be redirected to `/admin/dashboard`
