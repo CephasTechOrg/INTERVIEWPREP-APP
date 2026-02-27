@@ -40,7 +40,7 @@ def admin_login(payload: AdminLoginRequest, request: Request, db: Session = Depe
     update_admin_last_login(db, admin.id)
     token = create_admin_access_token(admin.id, admin.username)
 
-    log_audit(db, "admin_login", user_id=None, admin_id=admin.id, request=request)
+    log_audit(db, "admin_login", user_id=None, metadata={"admin_id": admin.id}, request=request)
 
     return AdminLoginResponse(
         access_token=token,
@@ -60,7 +60,7 @@ def get_dashboard_stats(admin: User = Depends(get_admin), db: Session = Depends(
     active_interviews = db.query(InterviewSession).filter(InterviewSession.stage != "done").count()
     total_questions = db.query(Question).count()
 
-    log_audit(db, "admin_view_stats", user_id=None, admin_id=admin.id)
+    log_audit(db, "admin_view_stats", user_id=None, metadata={"admin_id": admin.id})
 
     return DashboardStats(
         total_users=total_users,
@@ -86,8 +86,7 @@ def list_users(
         db,
         "admin_list_users",
         user_id=None,
-        admin_id=admin.id,
-        metadata={"skip": skip, "limit": limit, "filter_banned": filter_banned},
+        metadata={"admin_id": admin.id, "skip": skip, "limit": limit, "filter_banned": filter_banned},
     )
     return users
 
@@ -103,7 +102,7 @@ def get_user_detail(
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
-    log_audit(db, "admin_view_user_detail", user_id=user_id, admin_id=admin.id)
+    log_audit(db, "admin_view_user_detail", user_id=user_id, metadata={"admin_id": admin.id})
     return user
 
 
@@ -127,8 +126,7 @@ def ban_user_endpoint(
         db,
         "admin_ban_user",
         user_id=user_id,
-        admin_id=admin.id,
-        metadata={"reason": payload.reason},
+        metadata={"admin_id": admin.id, "reason": payload.reason},
     )
 
     return {
@@ -153,7 +151,7 @@ def unban_user_endpoint(
         raise HTTPException(status_code=400, detail="User is not banned")
 
     unbanned_user = unban_user(db, user_id)
-    log_audit(db, "admin_unban_user", user_id=user_id, admin_id=admin.id)
+    log_audit(db, "admin_unban_user", user_id=user_id, metadata={"admin_id": admin.id})
 
     return {
         "ok": True,
@@ -186,8 +184,7 @@ def get_audit_logs(
             db,
             "admin_view_audit_logs",
             user_id=None,
-            admin_id=admin.id,
-            metadata={"skip": skip, "limit": limit},
+            metadata={"admin_id": admin.id, "skip": skip, "limit": limit},
         )
 
         return {"logs": logs, "total": total, "skip": skip, "limit": limit}
@@ -207,7 +204,6 @@ def get_users_count(
         db,
         "admin_get_user_count",
         user_id=None,
-        admin_id=admin.id,
-        metadata={"filter_banned": filter_banned},
+        metadata={"admin_id": admin.id, "filter_banned": filter_banned},
     )
     return {"total": count, "filter_banned": filter_banned}
