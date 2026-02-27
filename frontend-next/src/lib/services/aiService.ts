@@ -27,6 +27,7 @@ export const aiService = {
   async chat(data: AIChatRequest): Promise<AIChatResponse> {
     return apiClient.post('/ai/chat', data);
   },
+  
   async generateSpeech(data: TTSRequest): Promise<TTSResponse> {
     const token = typeof window !== 'undefined' ? useAuthStore.getState().token : null;
     // Only include interviewer_id if provided — backend resolves the matching ElevenLabs voice
@@ -55,8 +56,19 @@ export const aiService = {
 
     const text = new TextDecoder().decode(response.data);
     try {
-      const parsed = JSON.parse(text) as { text?: string; tts_provider?: string };
-      return { mode: 'text', text: parsed.text || '', tts_provider: parsed.tts_provider };
+      const parsed = JSON.parse(text) as { 
+        text?: string; 
+        tts_provider?: string;
+        limit_exceeded?: boolean;
+        message?: string;
+      };
+      return { 
+        mode: 'text', 
+        text: parsed.text || '', 
+        tts_provider: parsed.tts_provider,
+        limit_exceeded: parsed.limit_exceeded,
+        limit_message: parsed.message,
+      };
     } catch {
       return { mode: 'text', text };
     }

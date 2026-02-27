@@ -52,6 +52,7 @@ export const ChatSection = () => {
   const [speechSupported, setSpeechSupported] = useState(false);
   const [historyCollapsed, setHistoryCollapsed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [rateLimitMessage, setRateLimitMessage] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const recognitionRef = useRef<any>(null);
   const baseInputRef = useRef('');
@@ -219,8 +220,18 @@ export const ChatSection = () => {
             : t
         )
       );
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to send message:', error);
+      
+      // Check for rate limit error (429)
+      const isRateLimit = error?.response?.status === 429;
+      const rateLimitDetail = error?.response?.data?.detail;
+      
+      if (isRateLimit && rateLimitDetail?.message) {
+        setRateLimitMessage(rateLimitDetail.message);
+        // Auto-dismiss after 5 seconds
+        setTimeout(() => setRateLimitMessage(null), 5000);
+      }
       
       // Remove optimistic messages on error
       setThreads((prev) =>
@@ -231,10 +242,13 @@ export const ChatSection = () => {
         )
       );
       
-      // Show error message
+      // Show error message in chat
+      const errorContent = isRateLimit && rateLimitDetail?.message
+        ? rateLimitDetail.message
+        : 'Failed to send message. Please try again.';
       const errorMessage: UIChatMessage = { 
         role: 'assistant', 
-        content: 'Failed to send message. Please try again.'
+        content: errorContent
       };
       
       setThreads((prev) =>
@@ -427,6 +441,17 @@ export const ChatSection = () => {
 
   return (
     <div className="h-[calc(100dvh-6rem)] flex flex-col lg:flex-row gap-0 min-h-0 overflow-hidden relative -m-6">
+      {/* Rate Limit Info Toast */}
+      {rateLimitMessage && (
+        <div className="fixed top-20 right-4 z-[60] bg-amber-50 dark:bg-amber-900/90 border border-amber-200 dark:border-amber-800 rounded-xl p-3 shadow-xl max-w-sm">
+          <div className="flex items-start gap-2">
+            <div className="flex-shrink-0 w-4 h-4 text-amber-600 dark:text-amber-400 mt-0.5">{Icons.alertCircle}</div>
+            <p className="text-sm text-amber-900 dark:text-amber-100 flex-1">{rateLimitMessage}</p>
+            <button onClick={() => setRateLimitMessage(null)} className="text-amber-600 dark:text-amber-400 hover:text-amber-800">{Icons.close}</button>
+          </div>
+        </div>
+      )}
+
       {/* Sidebar - Chat History */}
       <aside
         className={`bg-white dark:bg-slate-800 flex flex-col min-h-0 transition-all duration-300 ease-in-out ${

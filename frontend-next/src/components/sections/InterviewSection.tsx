@@ -70,6 +70,7 @@ export const InterviewSection = () => {
   const [elapsedSec, setElapsedSec] = useState(0);
   const [localError, setLocalError] = useState<string | null>(null);
   const [ttsProvider, setTtsProvider] = useState<string | null>(null);
+  const [rateLimitMessage, setRateLimitMessage] = useState<string | null>(null);
   const [voiceSupported, setVoiceSupported] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [voiceText, setVoiceText] = useState('');
@@ -488,6 +489,21 @@ export const InterviewSection = () => {
     }
   };
 
+  // Browser TTS fallback using Web Speech API
+  const playBrowserTts = (text: string) => {
+    if (!text?.trim() || typeof window === 'undefined') return;
+    const synth = window.speechSynthesis;
+    if (!synth) return;
+    
+    // Cancel any ongoing speech
+    synth.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+    synth.speak(utterance);
+  };
+
   const playTts = async (text: string) => {
     if (!text?.trim()) return;
     
@@ -505,6 +521,18 @@ export const InterviewSection = () => {
       
       if (response.tts_provider) {
         setTtsProvider(response.tts_provider);
+      }
+
+      // Check if limit exceeded - use browser TTS fallback
+      if (response.mode === 'text' && response.limit_exceeded) {
+        if (response.limit_message) {
+          setRateLimitMessage(response.limit_message);
+          // Auto-dismiss after 5 seconds
+          setTimeout(() => setRateLimitMessage(null), 5000);
+        }
+        // Fall back to browser TTS
+        playBrowserTts(text);
+        return;
       }
 
       if (response.mode === 'audio' && response.audio_url) {
@@ -533,9 +561,14 @@ export const InterviewSection = () => {
             console.error('TTS play error:', playErr);
           }
         }
+      } else if (response.mode === 'text' && response.text) {
+        // Non-limit text fallback (e.g., ElevenLabs unavailable)
+        playBrowserTts(response.text);
       }
     } catch (err) {
       console.error('TTS playback error:', err);
+      // On any error, try browser TTS as last resort
+      playBrowserTts(text);
     }
   };
 
@@ -627,6 +660,17 @@ export const InterviewSection = () => {
             <div className="flex-shrink-0 w-4 h-4 text-red-600 dark:text-red-400 mt-0.5">{Icons.alertCircle}</div>
             <p className="text-sm text-red-900 dark:text-red-100 flex-1">{localError}</p>
             <button onClick={() => setLocalError(null)} className="text-red-600 dark:text-red-400 hover:text-red-800">{Icons.close}</button>
+          </div>
+        </div>
+      )}
+
+      {/* Rate Limit Info Toast */}
+      {rateLimitMessage && (
+        <div className="fixed top-20 right-4 z-[60] bg-amber-50 dark:bg-amber-900/90 border border-amber-200 dark:border-amber-800 rounded-xl p-3 shadow-xl max-w-sm">
+          <div className="flex items-start gap-2">
+            <div className="flex-shrink-0 w-4 h-4 text-amber-600 dark:text-amber-400 mt-0.5">{Icons.alertCircle}</div>
+            <p className="text-sm text-amber-900 dark:text-amber-100 flex-1">{rateLimitMessage}</p>
+            <button onClick={() => setRateLimitMessage(null)} className="text-amber-600 dark:text-amber-400 hover:text-amber-800">{Icons.close}</button>
           </div>
         </div>
       )}

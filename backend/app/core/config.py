@@ -44,5 +44,9 @@ class Settings(BaseSettings):
     SENDGRID_API_KEY: str | None = None
     FROM_EMAIL: str | None = None
 
+    # Rate Limits (configurable via env vars)
+    FREE_CHAT_LIMIT_DAILY: int = 30
+    FREE_TTS_LIMIT_MONTHLY: int = 3000
+
 
 settings = Settings()

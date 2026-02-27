@@ -220,6 +220,8 @@ export interface TTSResponseText {
   mode: 'text';
   text: string;
   tts_provider?: string;
+  limit_exceeded?: boolean;
+  limit_message?: string;
 }
 
 export interface TTSResponseAudio {
