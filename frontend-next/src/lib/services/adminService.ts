@@ -1,19 +1,4 @@
-import axios from 'axios';
-import { useAdminStore } from '@/lib/stores/adminStore';
-
-const API_BASE = 'https://interviq-backend.onrender.com/api/v1';
-
-interface AdminLoginRequest {
-  username: string;
-  password: string;
-}
-
-interface AdminLoginResponse {
-  access_token: string;
-  admin_id: number;
-  username: string;
-  full_name?: string;
-}
+import { apiClient } from '@/lib/api';
 
 interface DashboardStats {
   total_users: number;
@@ -49,97 +34,44 @@ interface AuditLog {
 }
 
 export const adminService = {
-  // Auth
-  async login(username: string, password: string): Promise<AdminLoginResponse> {
-    const response = await axios.post(`${API_BASE}/admin/login`, {
-      username,
-      password,
-    });
-    return response.data;
-  },
-
   // Dashboard
   async getStats(): Promise<DashboardStats> {
-    const token = useAdminStore.getState().getToken();
-    const response = await axios.get(`${API_BASE}/admin/stats`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
+    return apiClient.get<DashboardStats>('/admin/stats');
   },
 
   // Users
   async getUsers(skip: number = 0, limit: number = 50, filterBanned?: boolean): Promise<{ users: User[]; total: number }> {
-    const token = useAdminStore.getState().getToken();
     const params = new URLSearchParams();
     params.append('skip', skip.toString());
     params.append('limit', limit.toString());
     if (filterBanned !== undefined) {
       params.append('filter_banned', filterBanned.toString());
     }
-
-    const response = await axios.get(`${API_BASE}/admin/users?${params}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return { users: response.data, total: response.data.length };
+    const response = await apiClient.get<User[]>(`/admin/users?${params}`);
+    return { users: response, total: response.length };
   },
 
   async getUserDetail(userId: number): Promise<User> {
-    const token = useAdminStore.getState().getToken();
-    const response = await axios.get(`${API_BASE}/admin/users/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
+    return apiClient.get<User>(`/admin/users/${userId}`);
   },
 
   async banUser(userId: number, reason?: string): Promise<{ ok: boolean; message: string }> {
-    const token = useAdminStore.getState().getToken();
-    const response = await axios.post(
-      `${API_BASE}/admin/users/${userId}/ban`,
-      { reason: reason || null },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    return response.data;
+    return apiClient.post<{ ok: boolean; message: string }>(`/admin/users/${userId}/ban`, {
+      reason: reason || null,
+    });
   },
 
   async unbanUser(userId: number): Promise<{ ok: boolean; message: string }> {
-    const token = useAdminStore.getState().getToken();
-    const response = await axios.post(`${API_BASE}/admin/users/${userId}/unban`, {}, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
+    return apiClient.post<{ ok: boolean; message: string }>(`/admin/users/${userId}/unban`, {});
   },
 
   // Audit Logs
   async getAuditLogs(skip: number = 0, limit: number = 100): Promise<{ logs: AuditLog[]; total: number }> {
-    const token = useAdminStore.getState().getToken();
-    const response = await axios.get(`${API_BASE}/admin/audit-logs?skip=${skip}&limit=${limit}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
+    return apiClient.get<{ logs: AuditLog[]; total: number }>(`/admin/audit-logs?skip=${skip}&limit=${limit}`);
   },
 
   async getUsersCount(filterBanned?: boolean): Promise<{ total: number }> {
-    const token = useAdminStore.getState().getToken();
     const params = filterBanned !== undefined ? `?filter_banned=${filterBanned}` : '';
-    const response = await axios.get(`${API_BASE}/admin/users-count${params}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
+    return apiClient.get<{ total: number }>(`/admin/users-count${params}`);
   },
 };

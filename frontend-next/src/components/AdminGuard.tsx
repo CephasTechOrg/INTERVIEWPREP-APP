@@ -1,8 +1,9 @@
+
 'use client';
 
 import { useRouter } from 'next/navigation';
 import { useEffect, ReactNode } from 'react';
-import { useAdminStore } from '@/lib/stores/adminStore';
+import { useAuthStore } from '@/lib/stores/authStore';
 
 interface AdminGuardProps {
   children: ReactNode;
@@ -10,15 +11,21 @@ interface AdminGuardProps {
 
 export function AdminGuard({ children }: AdminGuardProps) {
   const router = useRouter();
-  const isAuthenticated = useAdminStore((state) => state.isAuthenticated());
+  const { isAuthenticated, isHydrated, user } = useAuthStore();
+  const isAdmin = !!user?.is_admin;
 
   useEffect(() => {
+    if (!isHydrated) return;
     if (!isAuthenticated) {
-      router.push('/admin');
+      router.push('/login');
+      return;
     }
-  }, [isAuthenticated, router]);
+    if (!isAdmin) {
+      router.push('/');
+    }
+  }, [isAuthenticated, isAdmin, isHydrated, router]);
 
-  if (!isAuthenticated) {
+  if (!isHydrated || !isAuthenticated || !isAdmin) {
     return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
   }
 

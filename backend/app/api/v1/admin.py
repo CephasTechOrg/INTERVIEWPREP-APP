@@ -9,7 +9,6 @@ from app.api.rate_limit import rate_limit
 from app.core.security import create_admin_access_token
 from app.crud.admin import authenticate_admin, update_admin_last_login
 from app.crud.user import ban_user, get_all_users_paginated, get_user_count, unban_user
-from app.models.admin import AdminAccount
 from app.models.interview_session import InterviewSession
 from app.models.message import Message
 from app.models.question import Question
@@ -52,12 +51,13 @@ def admin_login(payload: AdminLoginRequest, request: Request, db: Session = Depe
 
 
 @router.get("/stats", response_model=DashboardStats)
-def get_dashboard_stats(admin: AdminAccount = Depends(get_admin), db: Session = Depends(get_db)):
+def get_dashboard_stats(admin: User = Depends(get_admin), db: Session = Depends(get_db)):
     """Get dashboard statistics for admin panel."""
     total_users = db.query(User).count()
     verified_users = db.query(User).filter(User.is_verified == True).count()
     banned_users = db.query(User).filter(User.is_banned == True).count()
-    active_interviews = db.query(InterviewSession).filter(InterviewSession.status == "in_progress").count()
+    # Use 'stage' field - sessions not in 'done' stage are considered active
+    active_interviews = db.query(InterviewSession).filter(InterviewSession.stage != "done").count()
     total_questions = db.query(Question).count()
 
     log_audit(db, "admin_view_stats", user_id=None, admin_id=admin.id)
@@ -77,7 +77,7 @@ def list_users(
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=500),
     filter_banned: bool | None = Query(None),
-    admin: AdminAccount = Depends(get_admin),
+    admin: User = Depends(get_admin),
     db: Session = Depends(get_db),
 ):
     """Get paginated list of all users with optional filtering."""
@@ -95,7 +95,7 @@ def list_users(
 @router.get("/users/{user_id}", response_model=UserDetailResponse)
 def get_user_detail(
     user_id: int,
-    admin: AdminAccount = Depends(get_admin),
+    admin: User = Depends(get_admin),
     db: Session = Depends(get_db),
 ):
     """Get detailed information about a specific user."""
@@ -111,7 +111,7 @@ def get_user_detail(
 def ban_user_endpoint(
     user_id: int,
     payload: UserBanRequest,
-    admin: AdminAccount = Depends(get_admin),
+    admin: User = Depends(get_admin),
     db: Session = Depends(get_db),
 ):
     """Ban a user account."""
@@ -141,7 +141,7 @@ def ban_user_endpoint(
 @router.post("/users/{user_id}/unban")
 def unban_user_endpoint(
     user_id: int,
-    admin: AdminAccount = Depends(get_admin),
+    admin: User = Depends(get_admin),
     db: Session = Depends(get_db),
 ):
     """Unban a user account."""
@@ -166,7 +166,7 @@ def unban_user_endpoint(
 def get_audit_logs(
     skip: int = Query(0, ge=0),
     limit: int = Query(100, ge=1, le=1000),
-    admin: AdminAccount = Depends(get_admin),
+    admin: User = Depends(get_admin),
     db: Session = Depends(get_db),
 ):
     """Get audit logs for admin actions."""
@@ -198,7 +198,7 @@ def get_audit_logs(
 @router.get("/users-count")
 def get_users_count(
     filter_banned: bool | None = Query(None),
-    admin: AdminAccount = Depends(get_admin),
+    admin: User = Depends(get_admin),
     db: Session = Depends(get_db),
 ):
     """Get total count of users with optional filtering."""

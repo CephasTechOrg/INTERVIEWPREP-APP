@@ -4,11 +4,10 @@ from jose import JWTError, jwt
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
-from app.core.security import ALGORITHM, verify_admin_token
-from app.crud.admin import get_admin_by_id
+from app.core.security import ALGORITHM
 from app.crud.user import get_by_email
 from app.db.session import SessionLocal
-from app.models.admin import AdminAccount
+from app.models.user import User
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
 
@@ -41,17 +40,9 @@ def get_current_user(db: Session = Depends(get_db), token: str = Depends(oauth2_
     return user
 
 
-def get_admin(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)) -> AdminAccount:
-    """Dependency to get admin from token."""
-    payload = verify_admin_token(token)
-    if not payload:
-        raise HTTPException(status_code=401, detail="Invalid or expired admin token")
-
-    admin_id = int(payload.get("sub"))
-    admin = get_admin_by_id(db, admin_id)
-
-    if not admin or not admin.is_active:
-        raise HTTPException(status_code=401, detail="Admin account not found or inactive")
-
-    return admin
+def get_admin(user: User = Depends(get_current_user)) -> User:
+    """Dependency to ensure user is an admin."""
+    if not getattr(user, "is_admin", False):
+        raise HTTPException(status_code=403, detail="Admin access required")
+    return user
 
