@@ -173,7 +173,7 @@ def get_audit_logs(
 
         logs = (
             db.query(AuditLog)
-            .order_by(AuditLog.timestamp.desc())
+            .order_by(AuditLog.created_at.desc())
             .offset(skip)
             .limit(limit)
             .all()
@@ -187,7 +187,21 @@ def get_audit_logs(
             metadata={"admin_id": admin.id, "skip": skip, "limit": limit},
         )
 
-        return {"logs": logs, "total": total, "skip": skip, "limit": limit}
+        # Map model fields to expected response format
+        formatted_logs = [
+            {
+                "id": log.id,
+                "action": log.action,
+                "user_id": log.user_id,
+                "admin_id": log.meta.get("admin_id") if log.meta else None,
+                "metadata": log.meta,
+                "timestamp": log.created_at.isoformat() if log.created_at else None,
+                "ip": log.ip,
+            }
+            for log in logs
+        ]
+
+        return {"logs": formatted_logs, "total": total, "skip": skip, "limit": limit}
     except ImportError:
         return {"logs": [], "total": 0, "skip": skip, "limit": limit, "note": "Audit log model not available"}
 
