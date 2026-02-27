@@ -111,19 +111,19 @@ Free users need usage limits to control costs and encourage upgrades. This is th
 
 ### What Needs Limits
 
-| Feature             | What to Limit        | Why                       | After Limit            |
-| ------------------- | -------------------- | ------------------------- | ---------------------- |
-| AI Chat (Dashboard) | Messages per day     | DeepSeek API costs        | Blocked until tomorrow |
+| Feature             | What to Limit        | Why                       | After Limit               |
+| ------------------- | -------------------- | ------------------------- | ------------------------- |
+| AI Chat (Dashboard) | Messages per day     | DeepSeek API costs        | Blocked until tomorrow    |
 | ElevenLabs TTS      | Characters per month | Direct cost per character | Falls back to browser TTS |
-| Interview Sessions  | Unlimited            | -                         | Voice quality drops    |
+| Interview Sessions  | Unlimited            | -                         | Voice quality drops       |
 
 ### Suggested Free Tier Limits
 
-| Resource                  | Limit          | Reset Period          | Rationale                       |
-| ------------------------- | -------------- | --------------------- | ------------------------------- |
-| **AI Chat Messages**      | 30/day         | Daily at midnight UTC | ~$0.01/message, allows testing  |
-| **ElevenLabs Characters** | 5,000/month    | Monthly               | ~5-10 interviews with premium voice |
-| **Interview Sessions**    | Unlimited      | -                     | But ElevenLabs falls back to browser TTS |
+| Resource                  | Limit       | Reset Period          | Rationale                                |
+| ------------------------- | ----------- | --------------------- | ---------------------------------------- |
+| **AI Chat Messages**      | 30/day      | Daily at midnight UTC | ~$0.01/message, allows testing           |
+| **ElevenLabs Characters** | 3,000/month | Monthly               | ~2 interviews with premium voice         |
+| **Interview Sessions**    | Unlimited   | -                     | But ElevenLabs falls back to browser TTS |
 
 ### Key Design Decision: Graceful Degradation
 
@@ -132,18 +132,20 @@ Free users need usage limits to control costs and encourage upgrades. This is th
 
 #### User Experience Flow
 
-**Before Limit (First ~5-10 interviews):**
+**Before Limit (First ~2 interviews):**
+
 ```
 🎤 Interview with Sarah (Tech Lead)
 Voice: ElevenLabs Premium ✨
 ```
 
 **After Limit:**
+
 ```
-⚠️ You've used your monthly voice quota (5,000/5,000 characters).
+⚠️ You've used your monthly voice quota (3,000/3,000 characters).
 Interviews will now use browser voice. Upgrade to Pro for unlimited premium voice!
 
-🎤 Interview with Sarah (Tech Lead)  
+🎤 Interview with Sarah (Tech Lead)
 Voice: Browser TTS (Free)
 ```
 
@@ -195,6 +197,7 @@ CREATE INDEX idx_user_usage_lookup ON user_usage(user_id);
 ### Rate Limit Response
 
 **For AI Chat (blocked):**
+
 ```json
 {
   "detail": "Daily chat limit reached (30/30). Upgrade to Pro for unlimited access.",
@@ -205,27 +208,30 @@ CREATE INDEX idx_user_usage_lookup ON user_usage(user_id);
   "upgrade_url": "/pricing"
 }
 ```
+
 HTTP Status: `429 Too Many Requests`
 
 **For ElevenLabs TTS (graceful fallback):**
+
 ```json
 {
   "fallback": true,
   "reason": "quota_exceeded",
   "message": "ElevenLabs quota exceeded. Using browser voice.",
-  "current": 5000,
-  "limit": 5000,
+  "current": 3000,
+  "limit": 3000,
   "reset_at": "2026-03-01T00:00:00Z"
 }
 ```
+
 HTTP Status: `200 OK` (with fallback flag — frontend uses browser TTS)
 
 ### Where to Add Checks
 
-| Endpoint                | File                              | Check                           | Action When Exceeded |
-| ----------------------- | --------------------------------- | ------------------------------- | -------------------- |
-| `POST /chat/send`       | `backend/app/api/v1/chat.py`      | `chat_messages_today < 30`      | Return 429 error |
-| `POST /tts/generate`    | `backend/app/api/v1/tts.py`       | `tts_characters_month < 5000`   | Return fallback flag |
+| Endpoint             | File                         | Check                         | Action When Exceeded |
+| -------------------- | ---------------------------- | ----------------------------- | -------------------- |
+| `POST /chat/send`    | `backend/app/api/v1/chat.py` | `chat_messages_today < 30`    | Return 429 error     |
+| `POST /tts/generate` | `backend/app/api/v1/tts.py`  | `tts_characters_month < 3000` | Return fallback flag |
 
 ### Frontend Handling
 
@@ -248,14 +254,14 @@ HTTP Status: `200 OK` (with fallback flag — frontend uses browser TTS)
 
 ## 📊 Future: Premium Tiers
 
-| Feature             | Free           | Pro ($9/mo) | Enterprise |
-| ------------------- | -------------- | ----------- | ---------- |
-| AI Chat             | 30/day         | 300/day     | Unlimited  |
-| ElevenLabs Voice    | 5K chars/month | 50K/month   | 200K/month |
-| Interview Sessions  | Unlimited      | Unlimited   | Unlimited  |
-| Browser TTS Fallback| Yes            | Not needed  | Not needed |
-| Custom Interviewers | ❌             | ✅          | ✅         |
-| Priority Support    | ❌             | ✅          | ✅         |
+| Feature              | Free           | Pro ($9/mo) | Enterprise |
+| -------------------- | -------------- | ----------- | ---------- |
+| AI Chat              | 30/day         | 300/day     | Unlimited  |
+| ElevenLabs Voice     | 3K chars/month | 50K/month   | 200K/month |
+| Interview Sessions   | Unlimited      | Unlimited   | Unlimited  |
+| Browser TTS Fallback | Yes            | Not needed  | Not needed |
+| Custom Interviewers  | ❌             | ✅          | ✅         |
+| Priority Support     | ❌             | ✅          | ✅         |
 
 _This is for future reference - implement free tier limits first._
 
@@ -273,7 +279,7 @@ _This is for future reference - implement free tier limits first._
 3. 🔲 Create `user_usage` table + migration
 4. 🔲 Add usage tracking service
 5. 🔲 Implement chat message limits (30/day, blocks at limit)
-6. 🔲 Implement TTS character limits (5K/month, fallback to browser)
+6. 🔲 Implement TTS character limits (3K/month, fallback to browser)
 7. 🔲 Add browser TTS fallback in frontend
 8. 🔲 Add usage display on frontend
 
