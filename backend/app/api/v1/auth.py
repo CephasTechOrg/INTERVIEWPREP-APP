@@ -87,6 +87,9 @@ def login(payload: LoginRequest, request: Request, db: Session = Depends(get_db)
     user = authenticate(db, email, payload.password)
     if not user:
         raise HTTPException(status_code=401, detail="Invalid email or password.")
+    if user.is_banned:
+        log_audit(db, "login_banned", user_id=user.id, metadata={"email": user.email}, request=request)
+        raise HTTPException(status_code=403, detail="Your account has been suspended.")
     if not user.is_verified:
         log_audit(db, "login_unverified", user_id=user.id, metadata={"email": user.email}, request=request)
         raise HTTPException(status_code=403, detail="Email not verified. Enter the 6-digit code to finish signup.")
