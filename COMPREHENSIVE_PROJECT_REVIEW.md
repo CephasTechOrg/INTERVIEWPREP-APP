@@ -20,6 +20,110 @@
 
 ---
 
+## 📊 Detailed Technology Stack
+
+### Backend Dependencies (52 total)
+
+**Core Web Framework:**
+
+- `fastapi==0.115.6` - Async web framework with auto-validation via Pydantic
+- `uvicorn==0.34.0` - ASGI server with hot reload in dev
+
+**Database & ORM:**
+
+- `SQLAlchemy==2.0.36` - SQL toolkit with declarative ORM (2.0+ uses mapped_column)
+- `psycopg2-binary==2.9.10` - PostgreSQL driver (binary wheels, no compile needed)
+- `alembic>=1.18.0` - Database migration tool with auto-generation
+- `pgvector>=0.2.0` - PostgreSQL vector type for embeddings (RAG)
+
+**Authentication & Security:**
+
+- `python-jose==3.3.0` - JWT token creation/validation (HS256 algorithm)
+- `passlib==1.7.4` - Password hashing interface
+- `argon2-cffi==23.1.0` - Argon2 password hashing (industry standard, resistant to GPU/ASIC attacks)
+- `email-validator==2.1.1` - RFC 5321 email validation
+
+**LLM & AI:**
+
+- `httpx==0.28.1` - Async HTTP client (used for DeepSeek API calls)
+- `sentence-transformers>=2.2.0` - Pre-trained embeddings (all-MiniLM-L6-v2 or similar)
+  - 384 dimensions per embedding
+  - Runs locally (no API calls needed)
+  - ~40MB model size
+
+**Audio & Media:**
+
+- `elevenlabs>=1.0.0` - Text-to-speech API client
+- `supabase>=2.0.0` - Cloud storage for profile photos
+
+**Configuration & Validation:**
+
+- `pydantic==2.10.4` - Data validation using Python type hints
+- `pydantic-settings==2.7.0` - Settings management with env var override
+- `python-dotenv>=1.0.0` - Load .env files
+
+**HTTP & Forms:**
+
+- `python-multipart==0.0.20` - Multipart form data parsing
+
+**Testing (9 packages):**
+
+- `pytest>=9.0.2` - Test runner
+- `pytest-asyncio>=0.21.0` - Async/await test support
+- `pytest-mock>=3.11.0` - Mocking fixture
+- `pytest-cov>=7.0.0` - Coverage reporting
+- `coverage>=7.13.1` - Coverage analysis
+- `respx>=0.20.0` - HTTPX request mocking (replaces responses)
+
+**Code Quality (3 packages):**
+
+- `ruff>=0.1.0` - Fast Python linter (replaces flake8)
+- `black>=23.0.0` - Code formatter (120 char line length)
+- `mypy>=1.5.0` - Static type checker
+
+### Frontend Dependencies (20 total)
+
+**Core Framework:**
+
+- `next@16.1.6` - React meta-framework with SSR, App Router, built-in optimization
+- `react@19.2.3` - UI library with hooks, new compiler
+- `typescript@5` - JavaScript with static types
+
+**State Management & HTTP:**
+
+- `zustand@5.0.11` - Lightweight state container (1KB, no boilerplate)
+  - Creates store with create() function
+  - Hook-based consumption
+  - DevTools integration available
+- `axios@1.13.4` - HTTP client with interceptors
+  - Request: Adds Authorization header
+  - Response: Handles 401, redirects to login
+- `@tanstack/react-query@5.90.20` - Server state management (caching, refetching)
+  - Optional usage in some components
+  - Enables background refetch, stale-while-revalidate
+
+**UI & Styling:**
+
+- `tailwindcss@3.4.17` - Utility-first CSS framework
+- `autoprefixer@10.4.21` - PostCSS plugin for vendor prefixes
+- `postcss@8.5.3` - CSS transformation tool
+
+**Testing (9 packages):**
+
+- `vitest@4.0.18` - Fast unit test runner (replaces Jest)
+- `@testing-library/react@16.3.2` - Component testing utilities
+- `@testing-library/jest-dom@6.9.1` - Custom matchers
+- `jsdom@28.0.0` - DOM implementation for Node.js
+- `msw@2.12.7` - Mock Service Worker for API mocking
+
+**Type Definitions:**
+
+- `@types/node@20` - Node.js types
+- `@types/react@19` - React types
+- `@types/react-dom@19` - ReactDOM types
+
+---
+
 ## 🏗️ Architecture Overview
 
 ### System Components
