@@ -9,6 +9,7 @@ import {
   DashboardIcon,
   UsersIcon,
   AuditLogIcon,
+  StarIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   LogoutIcon,
@@ -35,6 +36,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const navItems = [
     { label: 'Dashboard', href: '/admin/dashboard', icon: DashboardIcon },
     { label: 'Users', href: '/admin/users', icon: UsersIcon },
+    { label: 'Feedback & Ratings', href: '/admin/feedback', icon: StarIcon },
     { label: 'Audit Logs', href: '/admin/audit-logs', icon: AuditLogIcon },
   ];
 

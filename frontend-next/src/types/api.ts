@@ -161,6 +161,42 @@ export interface Evaluation {
   summary: EvaluationSummary;
 }
 
+// ============================================
+// Level Calibration Types
+// ============================================
+
+export interface LevelStrength {
+  dimension: string;
+  actual_score: number;
+  threshold: number;
+  strength: string;
+}
+
+export interface LevelGap {
+  dimension: string;
+  actual_score: number;
+  target_score: number;
+  gap: number;
+  interpretation: string;
+}
+
+export interface InterviewLevelOutcome {
+  id: number;
+  session_id: number;
+  role: string;
+  company_tier: string;
+  estimated_level: string;
+  estimated_level_display: string;
+  readiness_percent: number;
+  confidence: 'low' | 'medium' | 'high';
+  next_level: string | null;
+  strengths: LevelStrength[];
+  gaps: LevelGap[];
+  next_actions: string[];
+  rubric_scores_used: Record<string, number>;
+  created_at: string;
+}
+
 // Question Types
 export interface Question {
   id: number;
@@ -241,4 +277,30 @@ export interface ErrorResponse {
   message: string;
   status: number;
   details?: unknown;
+}
+
+// ============================================
+// Feedback Types
+// ============================================
+
+export interface FeedbackCreate {
+  session_id: number;
+  rating: number;         // 1–5 stars
+  thumbs?: 'up' | 'down' | null;
+  comment?: string | null;
+  rating_questions?: number | null;    // 1–5
+  rating_feedback?: number | null;     // 1–5
+  rating_difficulty?: number | null;   // 1–5
+}
+
+export interface FeedbackOut {
+  id: number;
+  session_id: number;
+  rating: number;
+  thumbs: 'up' | 'down' | null;
+  comment: string | null;
+  rating_questions: number | null;
+  rating_feedback: number | null;
+  rating_difficulty: number | null;
+  created_at: string;
 }

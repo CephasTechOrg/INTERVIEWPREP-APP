@@ -4,13 +4,133 @@ import { useEffect, useState } from 'react';
 import { sessionService } from '@/lib/services/sessionService';
 import { useSessionStore } from '@/lib/stores/sessionStore';
 import { useUIStore } from '@/lib/stores/uiStore';
-import { SessionSummary } from '@/types/api';
+import { Message, SessionSummary } from '@/types/api';
 import { Icons } from '@/components/ui/Icons';
+
+// ── Transcript Modal ───────────────────────────────────────────────────────────
+function TranscriptModal({
+  session,
+  onClose,
+}: {
+  session: SessionSummary;
+  onClose: () => void;
+}) {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    sessionService.getMessages(session.id)
+      .then(setMessages)
+      .finally(() => setLoading(false));
+  }, [session.id]);
+
+  const handleDownload = () => {
+    const lines = messages.map((m) => {
+      const speaker = m.role === 'user' ? 'You' : 'Interviewer';
+      const time = m.created_at ? new Date(m.created_at).toLocaleTimeString() : '';
+      return `[${speaker}${time ? ' · ' + time : ''}]\n${m.content}`;
+    });
+    const text = [
+      `Interview Transcript`,
+      `Track: ${session.track?.replace(/_/g, ' ')} | Difficulty: ${session.difficulty} | Company: ${session.company_style}`,
+      `Date: ${session.created_at ? new Date(session.created_at).toLocaleDateString() : ''}`,
+      '─'.repeat(60),
+      '',
+      ...lines.map(l => l + '\n'),
+    ].join('\n');
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `interview-transcript-${session.id}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col border border-slate-200 dark:border-slate-700">
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 dark:border-slate-700 flex-shrink-0">
+          <div>
+            <h2 className="font-semibold text-slate-900 dark:text-white capitalize">
+              {session.track?.replace(/_/g, ' ')} — Transcript
+            </h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              {session.created_at ? new Date(session.created_at).toLocaleDateString() : ''} · {session.difficulty} · {session.company_style}
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            {messages.length > 0 && (
+              <button
+                onClick={handleDownload}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg transition-colors"
+              >
+                {Icons.download}
+                Download
+              </button>
+            )}
+            <button
+              onClick={onClose}
+              className="w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            >
+              {Icons.close}
+            </button>
+          </div>
+        </div>
+
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto p-5 space-y-4">
+          {loading ? (
+            <div className="flex items-center justify-center py-12 text-slate-400">
+              <span className="animate-spin mr-2">{Icons.spinner}</span>
+              Loading transcript...
+            </div>
+          ) : messages.length === 0 ? (
+            <div className="text-center py-12 text-slate-400">
+              <p>No messages found for this session.</p>
+            </div>
+          ) : (
+            messages
+              .filter(m => m.role !== 'system')
+              .map((m) => {
+                const isUser = m.role === 'user';
+                return (
+                  <div key={m.id} className={`flex gap-3 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
+                    <div className={`w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold text-white ${
+                      isUser ? 'bg-blue-600' : 'bg-gradient-to-br from-blue-500 to-blue-600'
+                    }`}>
+                      {isUser ? 'Y' : 'I'}
+                    </div>
+                    <div className={`max-w-[80%] ${isUser ? 'items-end' : 'items-start'} flex flex-col gap-1`}>
+                      <div className={`px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
+                        isUser
+                          ? 'bg-blue-600 text-white rounded-br-sm'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-bl-sm'
+                      }`}>
+                        {m.content}
+                      </div>
+                      {m.created_at && (
+                        <span className="text-[10px] text-slate-400 px-1">
+                          {new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export const HistorySection = () => {
   const [sessions, setSessions] = useState<SessionSummary[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [transcriptSession, setTranscriptSession] = useState<SessionSummary | null>(null);
   const { setCurrentSession, currentSession, clearSession } = useSessionStore();
   const { setCurrentPage } = useUIStore();
 
@@ -177,6 +297,15 @@ export const HistorySection = () => {
                           Resume
                         </button>
                       )}
+                      {session.stage === 'done' && (
+                        <button
+                          onClick={() => setTranscriptSession(session)}
+                          className="inline-flex items-center gap-1.5 px-3 py-2 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 text-sm rounded-lg font-medium transition-colors"
+                        >
+                          {Icons.fileText}
+                          Transcript
+                        </button>
+                      )}
                       <button
                         onClick={() => {
                           setCurrentSession(session as any);
@@ -222,6 +351,14 @@ export const HistorySection = () => {
             <div className="text-sm text-slate-500 dark:text-slate-400">Completion Rate</div>
           </div>
         </div>
+      )}
+
+      {/* Transcript Modal */}
+      {transcriptSession && (
+        <TranscriptModal
+          session={transcriptSession}
+          onClose={() => setTranscriptSession(null)}
+        />
       )}
     </div>
   );

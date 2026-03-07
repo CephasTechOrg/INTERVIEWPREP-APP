@@ -64,6 +64,7 @@ export const InterviewSection = () => {
   });
   const [isLeftPanelCollapsed, setIsLeftPanelCollapsed] = useState(false);
   const [isPageExpanded, setIsPageExpanded] = useState(false);
+  const [showEndConfirm, setShowEndConfirm] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [aiStatus, setAiStatus] = useState<AIStatusResponse | null>(null);
   const [question, setQuestion] = useState<Question | null>(null);
@@ -293,12 +294,26 @@ export const InterviewSection = () => {
     loadCurrentQuestion();
   }, [latestQuestionId]);
 
+  // Stop all audio immediately when the session reaches 'done' stage.
+  useEffect(() => {
+    if (currentSession?.stage !== 'done') return;
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+  }, [currentSession?.stage]);
+
   // Auto-play new interviewer messages.
   // Uses a module-level Map (_ttsLastSpokenKey) so the last-spoken key survives
   // component unmounts — preventing the message from replaying when the user
   // navigates away and returns to the interview page.
   useEffect(() => {
     if (loading.messages) return;
+    // Never play TTS for a finished session (covers page refresh scenario too).
+    if (currentSession?.stage === 'done') return;
     const lastAiMessage = [...messages].reverse().find((m) => m.role === 'interviewer');
     if (!lastAiMessage) return;
 
@@ -475,9 +490,9 @@ export const InterviewSection = () => {
 
   const handleEndSession = async () => {
     if (!currentSession || loading.ending) return;
+    setShowEndConfirm(false);
     try {
       setLoading((prev) => ({ ...prev, ending: true }));
-      // Just clear the session and go back to dashboard
       clearSession();
       setCurrentPage('dashboard');
     } catch (err) {
@@ -624,26 +639,20 @@ export const InterviewSection = () => {
     );
   }
 
+  // Status badge colors — designed for the dark blue-900 header background
   const statusColor =
     currentSession.stage === 'done'
-      ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400'
+      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
       : currentSession.stage === 'intro'
-        ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400'
-        : 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400';
-
-  const aiStatusColor =
-    aiStatus?.status === 'online'
-      ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400'
-      : aiStatus?.status === 'offline'
-        ? 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400'
-        : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400';
+        ? 'bg-blue-400/20 text-blue-200 border border-blue-400/30'
+        : 'bg-amber-500/20 text-amber-300 border border-amber-500/30';
 
   const aiStatusDot =
     aiStatus?.status === 'online'
-      ? 'bg-emerald-500'
+      ? 'bg-emerald-400'
       : aiStatus?.status === 'offline'
-        ? 'bg-red-500'
-        : 'bg-slate-400';
+        ? 'bg-red-400'
+        : 'bg-blue-400 animate-pulse';
 
   const lastAiMessage = [...messages].reverse().find((m) => m.role === 'interviewer');
 
@@ -675,24 +684,56 @@ export const InterviewSection = () => {
         </div>
       )}
 
-      {/* Slim Top Header Bar */}
-      <div className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-3 py-2 flex-shrink-0">
+      {/* End Session Confirmation Dialog */}
+      {showEndConfirm && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" onClick={() => setShowEndConfirm(false)}>
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-sm p-6 border border-slate-200 dark:border-slate-700" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/40 flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-bold text-slate-900 dark:text-white">End interview?</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Your conversation will be discarded and you'll return to the dashboard.</p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <button onClick={() => setShowEndConfirm(false)} className="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                Keep going
+              </button>
+              <button onClick={handleEndSession} disabled={loading.ending} className="flex-1 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-semibold disabled:opacity-50 transition-colors">
+                {loading.ending ? 'Ending...' : 'Yes, end it'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Header Bar — matches sidebar blue-900 for visual continuity */}
+      <div className="bg-blue-900 border-b border-blue-800 px-3 py-2 flex-shrink-0">
         <div className="flex items-center justify-between gap-3">
-          {/* Left: Title + Status + Timer */}
-          <div className="flex items-center gap-3 min-w-0">
-            <h1 className="text-base font-bold text-slate-900 dark:text-white">Interview</h1>
-            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold ${statusColor}`}>
+          {/* Left: Title + Status + Timer + Session info */}
+          <div className="flex items-center gap-2.5 min-w-0">
+            <h1 className="text-sm font-bold text-white tracking-wide flex-shrink-0">Interview</h1>
+            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold ${statusColor}`}>
               <span className="w-1.5 h-1.5 rounded-full bg-current" />
               {currentSession.stage?.toUpperCase() || 'IDLE'}
             </span>
-            <div className="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-md bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">
-              <div className="w-3.5 h-3.5">{Icons.clock}</div>
-              <span className="font-mono font-bold text-xs">{formatTimer(elapsedSec)}</span>
+            <div className="hidden sm:flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-800 text-blue-200">
+              <div className="w-3 h-3">{Icons.clock}</div>
+              <span className="font-mono font-bold text-[11px]">{formatTimer(elapsedSec)}</span>
             </div>
-            <div className="hidden md:flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
-              <span>{currentSession.role}</span>
-              <span>•</span>
+            <div className="hidden md:flex items-center gap-1.5 text-[11px] text-blue-300">
+              <span className="capitalize">{currentSession.role?.replace(/_/g, ' ')}</span>
+              <span className="text-blue-600">·</span>
               <span className="capitalize">{currentSession.difficulty}</span>
+            </div>
+            {/* AI online indicator — merged from removed sub-header */}
+            <div className="hidden lg:flex items-center gap-1 text-[10px] text-blue-300">
+              <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${aiStatusDot}`} />
+              <span>{aiStatus?.status === 'online' ? 'AI Online' : aiStatus?.status === 'offline' ? 'AI Offline' : 'AI...'}</span>
             </div>
           </div>
 
@@ -701,21 +742,21 @@ export const InterviewSection = () => {
             {needsAudioUnlock && voiceEnabled && (
               <button
                 onClick={() => { setNeedsAudioUnlock(false); if (lastAiMessage) playTts(lastAiMessage.content); }}
-                className="px-2 py-1 rounded-md border border-amber-300 dark:border-amber-700 text-amber-700 dark:text-amber-400 text-xs hover:bg-amber-50 dark:hover:bg-amber-900/30"
+                className="px-2 py-1 rounded-md border border-amber-500/40 text-amber-300 text-xs hover:bg-amber-900/30 transition-colors"
               >
                 Audio
               </button>
             )}
             <button
               onClick={() => setIsLeftPanelCollapsed(!isLeftPanelCollapsed)}
-              className="p-1.5 rounded-md border border-slate-200 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"
+              className="p-1.5 rounded-md border border-blue-700 text-blue-300 hover:bg-blue-800 hover:text-white transition-colors"
               title={isLeftPanelCollapsed ? 'Show panel' : 'Hide panel'}
             >
               <div className="w-4 h-4">{isLeftPanelCollapsed ? Icons.expand : Icons.collapse}</div>
             </button>
             <button
               onClick={() => setIsPageExpanded(!isPageExpanded)}
-              className="p-1.5 rounded-md border border-slate-200 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"
+              className="p-1.5 rounded-md border border-blue-700 text-blue-300 hover:bg-blue-800 hover:text-white transition-colors"
               title={isPageExpanded ? 'Exit fullscreen' : 'Fullscreen'}
             >
               <div className="w-4 h-4">{isPageExpanded ? Icons.minimize : Icons.maximize}</div>
@@ -723,21 +764,21 @@ export const InterviewSection = () => {
             <button
               onClick={handleReplayLast}
               disabled={loading.replaying || messages.length === 0}
-              className="px-2 py-1 rounded-md border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 text-xs hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-50"
+              className="px-2 py-1 rounded-md border border-blue-700 text-blue-300 text-xs hover:bg-blue-800 hover:text-white transition-colors disabled:opacity-40"
             >
               Replay
             </button>
             <button
-              onClick={handleEndSession}
+              onClick={() => setShowEndConfirm(true)}
               disabled={loading.ending}
-              className="px-2 py-1 rounded-md border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 text-xs hover:bg-red-50 dark:hover:bg-red-900/30 disabled:opacity-50"
+              className="px-2 py-1 rounded-md border border-red-500/40 text-red-300 text-xs hover:bg-red-900/40 transition-colors disabled:opacity-40"
             >
               End
             </button>
             <button
               onClick={handleFinalize}
               disabled={loading.finalizing || currentSession.stage === 'done'}
-              className="px-3 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold disabled:opacity-50 shadow-sm shadow-blue-500/25 transition-colors"
+              className="px-3 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold disabled:opacity-50 shadow-sm shadow-blue-500/30 transition-colors"
             >
               {loading.finalizing ? '...' : 'Submit & Evaluate'}
             </button>
@@ -816,15 +857,6 @@ export const InterviewSection = () => {
 
         {/* Chat Panel - Takes remaining space */}
         <div className="flex-1 flex flex-col min-w-0 bg-slate-50 dark:bg-slate-900">
-          {/* AI Status Bar */}
-          <div className="px-3 py-1.5 border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-between">
-            <span className="text-xs text-slate-500 dark:text-slate-400">Conversation</span>
-            <div className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium ${aiStatusColor}`}>
-              <span className={`w-1 h-1 rounded-full ${aiStatusDot}`} />
-              {aiStatus?.status === 'online' ? 'Online' : aiStatus?.status === 'offline' ? 'Offline' : '...'}
-            </div>
-          </div>
-
           {/* Messages Area - Maximum space */}
           <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-3 md:p-4 space-y-3">
             {loading.messages ? (
@@ -881,9 +913,14 @@ export const InterviewSection = () => {
                   </div>
                 ))}
                 {loading.sending && (
-                  <div className="flex justify-start">
-                    <div className="max-w-[85%] lg:max-w-[75%] rounded-2xl px-3 py-2 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-bl-sm">
-                      <p className="text-sm leading-relaxed italic">Thinking...</p>
+                  <div className="flex gap-2 flex-row">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 shadow-md mt-1">
+                      {currentSession?.interviewer?.name?.[0] || 'I'}
+                    </div>
+                    <div className="rounded-2xl rounded-bl-sm px-4 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="w-2 h-2 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="w-2 h-2 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: '300ms' }} />
                     </div>
                   </div>
                 )}

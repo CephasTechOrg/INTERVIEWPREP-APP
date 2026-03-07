@@ -8,11 +8,13 @@ type CurrentPage =
   | 'interview'
   | 'chat'
   | 'results'
-  | 'settings';
+  | 'settings'
+  | 'admin';
 
 interface UIStore {
   currentPage: CurrentPage;
   sidebarOpen: boolean;
+  sidebarCollapsed: boolean;
   theme: 'light' | 'dark';
   voiceEnabled: boolean;
   voiceEnabledTouched: boolean;
@@ -25,6 +27,7 @@ interface UIStore {
   setCurrentPage: (page: CurrentPage) => void;
   setSidebarOpen: (open: boolean) => void;
   toggleSidebar: () => void;
+  toggleSidebarCollapsed: () => void;
   setTheme: (theme: 'light' | 'dark') => void;
   setVoiceEnabled: (enabled: boolean) => void;
   setReduceMotion: (enabled: boolean) => void;
@@ -39,6 +42,7 @@ export const useUIStore = create<UIStore>()(
     (set) => ({
       currentPage: 'dashboard',
       sidebarOpen: true,
+      sidebarCollapsed: false,
       theme: 'light',
       voiceEnabled: true,
       voiceEnabledTouched: false,
@@ -51,6 +55,7 @@ export const useUIStore = create<UIStore>()(
       setCurrentPage: (page) => set({ currentPage: page }),
       setSidebarOpen: (open) => set({ sidebarOpen: open }),
       toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
+      toggleSidebarCollapsed: () => set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
       setTheme: (theme) => set({ theme }),
       setVoiceEnabled: (enabled) => set({ voiceEnabled: enabled, voiceEnabledTouched: true }),
       setReduceMotion: (enabled) => set({ reduceMotion: enabled }),

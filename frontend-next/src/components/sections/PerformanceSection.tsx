@@ -17,6 +17,135 @@ interface PerformanceStats {
   completionRate: number;
 }
 
+// ── SVG Line Chart ─────────────────────────────────────────────────────────────
+function ScoreLineChart({ scores }: { scores: { score: number; date: string }[] }) {
+  const [hovered, setHovered] = useState<number | null>(null);
+
+  const W = 500;
+  const H = 180;
+  const PAD = { top: 24, right: 16, bottom: 32, left: 36 };
+  const chartW = W - PAD.left - PAD.right;
+  const chartH = H - PAD.top - PAD.bottom;
+
+  const minScore = Math.max(0, Math.min(...scores.map(s => s.score)) - 10);
+  const maxScore = Math.min(100, Math.max(...scores.map(s => s.score)) + 10);
+  const range = maxScore - minScore || 10;
+
+  const toX = (i: number) => PAD.left + (i / (scores.length - 1)) * chartW;
+  const toY = (v: number) => PAD.top + chartH - ((v - minScore) / range) * chartH;
+
+  const points = scores.map((s, i) => `${toX(i)},${toY(s.score)}`).join(' ');
+  const areaPoints = [
+    `${toX(0)},${PAD.top + chartH}`,
+    ...scores.map((s, i) => `${toX(i)},${toY(s.score)}`),
+    `${toX(scores.length - 1)},${PAD.top + chartH}`,
+  ].join(' ');
+
+  const yTicks = [0, 25, 50, 75, 100].filter(t => t >= minScore - 5 && t <= maxScore + 5);
+
+  const getBandColor = (score: number) => {
+    if (score >= 90) return '#22c55e';
+    if (score >= 75) return '#3b82f6';
+    if (score >= 60) return '#f59e0b';
+    return '#ef4444';
+  };
+
+  return (
+    <div className="relative">
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        className="w-full h-52"
+        onMouseLeave={() => setHovered(null)}
+      >
+        {/* Y grid lines */}
+        {yTicks.map(t => (
+          <g key={t}>
+            <line
+              x1={PAD.left} y1={toY(t)}
+              x2={PAD.left + chartW} y2={toY(t)}
+              stroke="currentColor" strokeOpacity={0.08} strokeWidth={1}
+              className="text-slate-900 dark:text-white"
+            />
+            <text
+              x={PAD.left - 6} y={toY(t) + 4}
+              textAnchor="end" fontSize={9}
+              className="fill-slate-400 dark:fill-slate-500 font-medium"
+            >
+              {t}
+            </text>
+          </g>
+        ))}
+
+        {/* Area fill */}
+        <polygon
+          points={areaPoints}
+          fill="#3b82f6" fillOpacity={0.08}
+        />
+
+        {/* Line */}
+        <polyline
+          points={points}
+          fill="none" stroke="#3b82f6" strokeWidth={2.5}
+          strokeLinecap="round" strokeLinejoin="round"
+        />
+
+        {/* Data points + hover interaction */}
+        {scores.map((s, i) => (
+          <g key={i} onMouseEnter={() => setHovered(i)} style={{ cursor: 'pointer' }}>
+            {/* Hit target */}
+            <circle cx={toX(i)} cy={toY(s.score)} r={14} fill="transparent" />
+            {/* Outer ring on hover */}
+            {hovered === i && (
+              <circle
+                cx={toX(i)} cy={toY(s.score)} r={8}
+                fill={getBandColor(s.score)} fillOpacity={0.2}
+                stroke={getBandColor(s.score)} strokeWidth={1.5}
+              />
+            )}
+            {/* Inner dot */}
+            <circle
+              cx={toX(i)} cy={toY(s.score)} r={hovered === i ? 5 : 3.5}
+              fill={getBandColor(s.score)}
+              stroke="white" strokeWidth={1.5}
+            />
+            {/* X label */}
+            <text
+              x={toX(i)} y={H - 6}
+              textAnchor="middle" fontSize={9}
+              className="fill-slate-400 dark:fill-slate-500"
+            >
+              {s.date}
+            </text>
+          </g>
+        ))}
+
+        {/* Tooltip */}
+        {hovered !== null && (() => {
+          const s = scores[hovered];
+          const x = toX(hovered);
+          const y = toY(s.score);
+          const tipX = Math.min(Math.max(x - 24, PAD.left), W - PAD.right - 48);
+          return (
+            <g>
+              <rect
+                x={tipX} y={y - 28}
+                width={48} height={20}
+                rx={4} fill="#1e293b"
+              />
+              <text
+                x={tipX + 24} y={y - 14}
+                textAnchor="middle" fontSize={10} fill="white" fontWeight={600}
+              >
+                {s.score}%
+              </text>
+            </g>
+          );
+        })()}
+      </svg>
+    </div>
+  );
+}
+
 export const PerformanceSection = () => {
   const [sessions, setSessions] = useState<SessionSummary[]>([]);
   const [loading, setLoading] = useState(true);
@@ -240,32 +369,20 @@ export const PerformanceSection = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Score Trend Chart */}
-            <div className="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-colors">
-              <div className="mb-8">
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-colors">
+              <div className="mb-4">
                 <h3 className="font-bold text-lg text-slate-900 dark:text-white">Score Trend</h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Your recent interview scores</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Your recent interview scores over time</p>
               </div>
-              {recentScores.length > 0 ? (
-                <div className="h-64 flex items-end justify-between gap-3 pb-4">
-                  {recentScores.map((item, i) => (
-                    <div key={i} className="flex-1 flex flex-col items-center gap-2 group">
-                      <div className="w-full h-full relative">
-                        <div 
-                          className={`w-full rounded-t-lg ${scoreBandColors[getScoreBand(item.score)]} transition-all group-hover:shadow-lg relative`}
-                          style={{ height: `${item.score}%` }}
-                          title={`${item.score}%`}
-                        >
-                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-slate-700 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                            {item.score}%
-                          </div>
-                        </div>
-                      </div>
-                      <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 whitespace-nowrap mt-2">{item.date}</span>
-                    </div>
-                  ))}
+              {recentScores.length >= 2 ? (
+                <ScoreLineChart scores={recentScores} />
+              ) : recentScores.length === 1 ? (
+                <div className="h-52 flex flex-col items-center justify-center gap-2 text-slate-400">
+                  <div className="text-4xl font-bold text-blue-600 dark:text-blue-400">{recentScores[0].score}%</div>
+                  <p className="text-sm">Complete more interviews to see your trend</p>
                 </div>
               ) : (
-                <div className="h-64 flex items-center justify-center text-slate-400">
+                <div className="h-52 flex items-center justify-center text-slate-400">
                   <p className="text-sm">No score data yet</p>
                 </div>
               )}

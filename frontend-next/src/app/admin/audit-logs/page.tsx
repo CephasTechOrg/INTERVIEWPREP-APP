@@ -124,15 +124,26 @@ export default function AuditLogsPage() {
                       ? `${log.target_type} #${log.target_id}`
                       : log.user_id
                         ? `User #${log.user_id}`
-                        : '-'}
+                        : (log.metadata as any)?.deleted_email
+                          ? <span className="text-red-500">{(log.metadata as any).deleted_email}</span>
+                          : '-'}
                   </td>
                   <td className="px-6 py-4 text-slate-600 dark:text-slate-400">
                     {new Date(log.timestamp).toLocaleString()}
                   </td>
                   <td className="px-6 py-4 text-slate-600 dark:text-slate-400 max-w-xs">
-                    <span className="truncate block" title={log.metadata ? JSON.stringify(log.metadata) : undefined}>
-                      {log.metadata ? JSON.stringify(log.metadata) : '-'}
-                    </span>
+                    {log.metadata ? (
+                      <span
+                        className="truncate block text-xs font-mono"
+                        title={JSON.stringify(log.metadata, null, 2)}
+                      >
+                        {(log.metadata as any).reason
+                          ? <span className="text-red-500">Reason: {(log.metadata as any).reason}</span>
+                          : (log.metadata as any).deleted_email
+                            ? <span className="text-red-400">Deleted: {(log.metadata as any).deleted_email}</span>
+                            : JSON.stringify(log.metadata)}
+                      </span>
+                    ) : '-'}
                   </td>
                 </tr>
               ))

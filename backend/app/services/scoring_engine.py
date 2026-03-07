@@ -4,10 +4,12 @@ from pydantic import ValidationError
 from sqlalchemy.orm import Session
 
 from app.crud import evaluation as evaluation_crud
+from app.crud import interview_level_outcome as level_outcome_crud
 from app.crud import message as message_crud
 from app.crud import session_question as session_question_crud
 from app.models.interview_session import InterviewSession
 from app.models.question import Question
+from app.services.level_calibration_service import LevelCalibrationService
 from app.services.llm_client import DeepSeekClient, LLMClientError
 from app.services.llm_schemas import EvaluationOutput
 from app.services.prompt_templates import evaluator_system_prompt, evaluator_user_prompt
@@ -165,7 +167,38 @@ class ScoringEngine:
         evaluation_crud.upsert_evaluation(db, session_id, overall_score, rubric, summary)
         logger.info("Evaluation stored session_id=%s score=%s hire_signal=%s", session_id, overall_score, parsed.hire_signal)
 
+        # Generate level calibration (Phase 2)
+        level_outcome = None
+        try:
+            level_service = LevelCalibrationService()
+            company_tier = getattr(session, "company_tier", "startup")
+            # LLM scores rubric 0–10; level calibration thresholds are 0–100. Scale up.
+            level_outcome = level_service.estimate_level(
+                role=track,
+                company_tier=company_tier,
+                rubric_scores={
+                    "communication":        rubric.get("communication", 0) * 10,
+                    "problem_solving":      rubric.get("problem_solving", 0) * 10,
+                    "correctness_reasoning": rubric.get("correctness_reasoning", 0) * 10,
+                    "complexity":           rubric.get("complexity", 0) * 10,
+                    "edge_cases":           rubric.get("edge_cases", 0) * 10,
+                }
+            )
+            # Add role and company_tier to outcome before saving to DB
+            level_outcome["role"] = track
+            level_outcome["company_tier"] = company_tier
+            level_outcome_crud.create_level_outcome(db, session_id, level_outcome)
+            logger.info(
+                "Level calibration generated session_id=%s level=%s confidence=%s",
+                session_id,
+                level_outcome.get("estimated_level"),
+                level_outcome.get("confidence")
+            )
+        except Exception as e:
+            logger.warning("Level calibration generation failed session_id=%s: %s", session_id, str(e))
+            # Don't fail finalize - level calibration is enhancement, not required
+
         # Generate embeddings for this session (Phase 5: builds RAG knowledge base)
         _trigger_embedding_generation(db, session_id)
 
-        return {"overall_score": overall_score, "rubric": rubric, "summary": summary}
+        return {"overall_score": overall_score, "rubric": rubric, "summary": summary, "level_calibration": level_outcome}

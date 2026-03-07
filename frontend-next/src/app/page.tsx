@@ -10,6 +10,7 @@ import { HistorySection } from '@/components/sections/HistorySection';
 import { PerformanceSection } from '../components/sections/PerformanceSection';
 import { ChatSection } from '@/components/sections/ChatSection';
 import { SettingsSection } from '@/components/sections/SettingsSection';
+import AdminSection from '@/components/sections/AdminSection';
 import { useUIStore } from '@/lib/stores/uiStore';
 import { useAuth } from '@/lib/hooks/useAuth';
 
@@ -54,6 +55,8 @@ export default function Home() {
         return <ResultsSection />;
       case 'settings':
         return <SettingsSection />;
+      case 'admin':
+        return <AdminSection />;
       case 'dashboard':
       default:
         return <DashboardSection />;

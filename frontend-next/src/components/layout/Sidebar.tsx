@@ -41,6 +41,11 @@ const Icons = {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
     </svg>
   ),
+  admin: (
+    <svg className="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+    </svg>
+  ),
   logout: (
     <svg className="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
@@ -51,15 +56,20 @@ const Icons = {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M6 18L18 6M6 6l12 12" />
     </svg>
   ),
+  chevronLeft: (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+    </svg>
+  ),
   chevronRight: (
-    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
     </svg>
   ),
 };
 
 export const Sidebar = () => {
-  const { currentPage, setCurrentPage, sidebarOpen, toggleSidebar } = useUIStore();
+  const { currentPage, setCurrentPage, sidebarOpen, toggleSidebar, sidebarCollapsed, toggleSidebarCollapsed } = useUIStore();
   const { logout, user } = useAuthStore();
   const router = useRouter();
 
@@ -81,6 +91,10 @@ export const Sidebar = () => {
     { id: 'settings', label: 'Settings', icon: Icons.settings },
   ];
 
+  const adminNavItems = user?.is_admin
+    ? [{ id: 'admin', label: 'Admin Portal', icon: Icons.admin }]
+    : [];
+
   const NavButton = ({ item }: { item: { id: string; label: string; icon: React.ReactNode; shortcut?: string } }) => {
     const isActive = currentPage === item.id;
     return (
@@ -89,7 +103,12 @@ export const Sidebar = () => {
           setCurrentPage(item.id as any);
           if (window.innerWidth < 1024) toggleSidebar();
         }}
-        className={`group relative w-full flex items-center gap-3 px-3.5 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 ${
+        title={sidebarCollapsed ? item.label : undefined}
+        className={`group relative w-full flex items-center transition-all duration-200 rounded-lg text-[13px] font-medium ${
+          sidebarCollapsed
+            ? 'justify-center px-2 py-2.5'
+            : 'gap-3 px-3.5 py-2'
+        } ${
           isActive
             ? 'bg-blue-700/50 text-white'
             : 'text-blue-100 hover:text-white hover:bg-blue-800/40'
@@ -97,32 +116,32 @@ export const Sidebar = () => {
       >
         {/* Active left border indicator */}
         <span className={`absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full transition-all duration-200 ${
-          isActive 
-            ? 'bg-blue-300' 
+          isActive
+            ? 'bg-blue-300'
             : 'bg-transparent group-hover:bg-blue-700'
         }`} />
-        
+
         <span className={`flex-shrink-0 transition-all duration-200 ${
-          isActive
-            ? 'text-blue-200'
-            : 'text-blue-100 group-hover:text-white'
+          isActive ? 'text-blue-200' : 'text-blue-100 group-hover:text-white'
         }`}>
           {item.icon}
         </span>
-        <span className="flex-1 text-left">{item.label}</span>
-        
-        {/* Keyboard shortcut hint (shown on hover) */}
-        {item.shortcut && (
+
+        {/* Label — hidden in collapsed mode */}
+        {!sidebarCollapsed && (
+          <span className="flex-1 text-left">{item.label}</span>
+        )}
+
+        {/* Keyboard shortcut hint */}
+        {!sidebarCollapsed && item.shortcut && (
           <span className="hidden group-hover:flex items-center text-[10px] font-mono text-blue-300 bg-blue-900 px-1.5 py-0.5 rounded">
             {item.shortcut}
           </span>
         )}
-        
-        {/* Active indicator arrow */}
-        {isActive && (
-          <span className="text-blue-300">
-            {Icons.chevronRight}
-          </span>
+
+        {/* Active arrow */}
+        {!sidebarCollapsed && isActive && (
+          <span className="text-blue-300">{Icons.chevronRight}</span>
         )}
       </button>
     );
@@ -139,46 +158,62 @@ export const Sidebar = () => {
       )}
 
       <aside
-        className={`fixed left-0 top-0 h-screen w-64 z-40 transform transition-transform duration-300 ease-out flex flex-col
-          bg-blue-900 dark:bg-blue-900
-          border-r border-blue-800 dark:border-blue-800
-          shadow-sm dark:shadow-none
-          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
+        className={`fixed left-0 top-0 h-screen z-40 transform transition-all duration-300 ease-out flex flex-col
+          bg-blue-900 border-r border-blue-800 shadow-sm
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          w-64 ${sidebarCollapsed ? 'lg:w-14' : 'lg:w-64'}`}
       >
         {/* Brand Header */}
-        <div className="px-5 h-16 flex items-center flex-shrink-0">
-          <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-3">
+        <div className={`h-16 flex items-center flex-shrink-0 ${sidebarCollapsed ? 'lg:justify-center lg:px-0 px-5' : 'px-5'}`}>
+          {sidebarCollapsed ? (
+            /* Collapsed: just the logo icon + toggle below it */
+            <div className="hidden lg:flex flex-col items-center gap-1">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/25">
-                <svg className="w-4.5 h-4.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                 </svg>
               </div>
-              <div className="flex flex-col">
-                <span className="text-[15px] font-bold text-white tracking-tight">
-                  IntervIQ
-                </span>
-                <span className="text-[10px] text-blue-300 font-medium -mt-0.5">
-                  AI Interview Coach
-                </span>
-              </div>
             </div>
-            <button
-              onClick={toggleSidebar}
-              className="lg:hidden text-blue-200 hover:text-white p-1.5 rounded-lg hover:bg-blue-800 transition-colors"
-            >
-              {Icons.close}
-            </button>
-          </div>
+          ) : (
+            /* Expanded: full brand + toggle button */
+            <div className="flex items-center justify-between w-full">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/25">
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                  </svg>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[15px] font-bold text-white tracking-tight">IntervIQ</span>
+                  <span className="text-[10px] text-blue-300 font-medium -mt-0.5">AI Interview Coach</span>
+                </div>
+              </div>
+              {/* Desktop collapse button */}
+              <button
+                onClick={toggleSidebarCollapsed}
+                className="hidden lg:flex items-center justify-center w-7 h-7 rounded-lg text-blue-300 hover:text-white hover:bg-blue-800 transition-colors"
+                title="Collapse sidebar"
+              >
+                {Icons.chevronLeft}
+              </button>
+              {/* Mobile close button */}
+              <button
+                onClick={toggleSidebar}
+                className="lg:hidden text-blue-200 hover:text-white p-1.5 rounded-lg hover:bg-blue-800 transition-colors"
+              >
+                {Icons.close}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 px-3 py-2 overflow-y-auto overflow-x-hidden scrollbar-hide">
+        <nav className="flex-1 px-2 py-2 overflow-y-auto overflow-x-hidden scrollbar-hide">
           {/* Main */}
           <div className="mb-4">
-            <p className="px-3 mb-2 text-[10px] font-semibold text-blue-200 uppercase tracking-wider">
-              Main
-            </p>
+            {!sidebarCollapsed && (
+              <p className="px-3 mb-2 text-[10px] font-semibold text-blue-200 uppercase tracking-wider">Main</p>
+            )}
             <div className="space-y-0.5">
               {mainNavItems.map(item => <NavButton key={item.id} item={item} />)}
             </div>
@@ -186,19 +221,42 @@ export const Sidebar = () => {
 
           {/* Tools */}
           <div>
-            <p className="px-3 mb-2 text-[10px] font-semibold text-blue-200 uppercase tracking-wider">
-              Tools
-            </p>
+            {!sidebarCollapsed && (
+              <p className="px-3 mb-2 text-[10px] font-semibold text-blue-200 uppercase tracking-wider">Tools</p>
+            )}
             <div className="space-y-0.5">
               {secondaryNavItems.map(item => <NavButton key={item.id} item={item} />)}
             </div>
           </div>
+
+          {/* Admin (only for admin users) */}
+          {adminNavItems.length > 0 && (
+            <div className="mt-4">
+              {!sidebarCollapsed && (
+                <p className="px-3 mb-2 text-[10px] font-semibold text-blue-200 uppercase tracking-wider">Admin</p>
+              )}
+              <div className="space-y-0.5">
+                {adminNavItems.map(item => <NavButton key={item.id} item={item} />)}
+              </div>
+            </div>
+          )}
         </nav>
 
         {/* Footer: User info + Sign out */}
-        <div className="px-3 py-4 flex-shrink-0 border-t border-blue-900 space-y-1">
-          {/* User mini-card */}
-          <div className="flex items-center gap-2.5 px-3 py-2">
+        <div className={`py-3 flex-shrink-0 border-t border-blue-800 space-y-1 ${sidebarCollapsed ? 'px-1' : 'px-2'}`}>
+          {/* Expand button (only shown when collapsed on desktop) */}
+          {sidebarCollapsed && (
+            <button
+              onClick={toggleSidebarCollapsed}
+              className="hidden lg:flex w-full items-center justify-center p-2 rounded-lg text-blue-300 hover:text-white hover:bg-blue-800 transition-colors mb-1"
+              title="Expand sidebar"
+            >
+              {Icons.chevronRight}
+            </button>
+          )}
+
+          {/* User avatar */}
+          <div className={`flex items-center gap-2.5 px-2 py-2 ${sidebarCollapsed ? 'justify-center' : ''}`}>
             <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
               {(user?.profile as any)?.avatar_url ? (
                 <img src={(user?.profile as any)?.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
@@ -209,19 +267,26 @@ export const Sidebar = () => {
                 </div>
               )}
             </div>
-            <div className="min-w-0">
-              <p className="text-[12px] font-semibold text-white truncate leading-tight">
-                {user?.full_name || user?.email?.split('@')[0] || 'User'}
-              </p>
-              <p className="text-[10px] text-blue-300 truncate leading-tight">{user?.email}</p>
-            </div>
+            {!sidebarCollapsed && (
+              <div className="min-w-0">
+                <p className="text-[12px] font-semibold text-white truncate leading-tight">
+                  {user?.full_name || user?.email?.split('@')[0] || 'User'}
+                </p>
+                <p className="text-[10px] text-blue-300 truncate leading-tight">{user?.email}</p>
+              </div>
+            )}
           </div>
+
+          {/* Sign out */}
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-blue-100 hover:text-white hover:bg-blue-800/40 transition-colors"
+            title={sidebarCollapsed ? 'Sign out' : undefined}
+            className={`w-full flex items-center rounded-lg text-[13px] font-medium text-blue-100 hover:text-white hover:bg-blue-800/40 transition-colors ${
+              sidebarCollapsed ? 'justify-center p-2' : 'gap-2.5 px-3 py-2'
+            }`}
           >
             {Icons.logout}
-            <span>Sign out</span>
+            {!sidebarCollapsed && <span>Sign out</span>}
           </button>
         </div>
       </aside>

@@ -16,6 +16,7 @@ class InterviewSession(Base):
     role: Mapped[str] = mapped_column(String(100), default="SWE Intern", nullable=False)
     track: Mapped[str] = mapped_column(String(50), default="swe_intern", nullable=False)
     company_style: Mapped[str] = mapped_column(String(50), default="general", nullable=False)
+    company_tier: Mapped[str] = mapped_column(String(50), default="startup", nullable=False)
     difficulty: Mapped[str] = mapped_column(String(20), default="easy", nullable=False)
     # Adaptive difficulty: this is the current difficulty used for question selection.
     # `difficulty` remains the user's selected cap (easy|medium|hard).
