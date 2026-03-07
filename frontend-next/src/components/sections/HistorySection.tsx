@@ -17,6 +17,7 @@ function TranscriptModal({
 }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     sessionService.getMessages(session.id)
@@ -24,70 +25,121 @@ function TranscriptModal({
       .finally(() => setLoading(false));
   }, [session.id]);
 
-  const handleDownload = () => {
-    const filtered = messages.filter(m => m.role !== 'system');
-    const sessionDate = session.created_at ? new Date(session.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
-    const track = session.track?.replace(/_/g, ' ') ?? '';
+  const handleDownload = async () => {
+    setDownloading(true);
+    const { jsPDF } = await import('jspdf');
 
-    const bubbles = filtered.map((m) => {
+    const filtered = messages.filter(m => m.role !== 'system');
+    const track = (session.track?.replace(/_/g, ' ') ?? 'Interview').replace(/\b\w/g, c => c.toUpperCase());
+    const sessionDate = session.created_at
+      ? new Date(session.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+      : '';
+
+    const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+    const margin = 48;
+    const contentW = pageW - margin * 2;
+    const bubblePadX = 10;
+    const bubblePadY = 8;
+    const maxBubbleW = contentW * 0.72;
+
+    let y = margin;
+
+    // ── Header bar ─────────────────────────────────────────────────────────────
+    doc.setFillColor(37, 99, 235);           // blue-600
+    doc.rect(0, 0, pageW, 72, 'F');
+
+    doc.setTextColor(255, 255, 255);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(17);
+    doc.text(`Interview Transcript`, margin, 30);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9.5);
+    doc.text(
+      `${track}  ·  ${session.difficulty ?? ''}  ·  ${session.company_style ?? ''}  ·  ${sessionDate}`,
+      margin,
+      50,
+    );
+
+    doc.setTextColor(147, 197, 253);         // blue-300
+    doc.setFontSize(8.5);
+    doc.text(`Session #${session.id}  ·  ${filtered.length} messages`, margin, 64);
+
+    y = 90;
+
+    // ── Messages ───────────────────────────────────────────────────────────────
+    const newPageIfNeeded = (needed: number) => {
+      if (y + needed > pageH - margin) {
+        doc.addPage();
+        y = margin;
+      }
+    };
+
+    for (const m of filtered) {
       const isUser = m.role === 'user';
       const speaker = isUser ? 'You' : 'AI Interviewer';
-      const time = m.created_at ? new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
-      const content = (m.content ?? '').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
-      return `
-        <div class="msg ${isUser ? 'user' : 'ai'}">
-          <div class="speaker">${speaker}${time ? `<span class="time">${time}</span>` : ''}</div>
-          <div class="bubble">${content}</div>
-        </div>`;
-    }).join('');
+      const time = m.created_at
+        ? new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        : '';
+      const rawText = m.content ?? '';
 
-    const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Interview Transcript — ${track}</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; color: #1e293b; background: #fff; padding: 32px; }
-    .header { border-bottom: 2px solid #3b82f6; padding-bottom: 16px; margin-bottom: 24px; }
-    .header h1 { font-size: 20px; font-weight: 700; color: #1e40af; text-transform: capitalize; }
-    .header .meta { margin-top: 6px; color: #64748b; font-size: 11px; display: flex; gap: 16px; flex-wrap: wrap; }
-    .meta span { display: inline-flex; align-items: center; gap: 4px; }
-    .meta strong { color: #334155; }
-    .messages { display: flex; flex-direction: column; gap: 16px; }
-    .msg { display: flex; flex-direction: column; max-width: 85%; }
-    .msg.user { align-self: flex-end; align-items: flex-end; }
-    .msg.ai { align-self: flex-start; align-items: flex-start; }
-    .speaker { font-size: 10px; font-weight: 600; color: #94a3b8; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-    .time { font-weight: 400; }
-    .bubble { padding: 10px 14px; border-radius: 14px; line-height: 1.6; font-size: 12px; }
-    .msg.user .bubble { background: #3b82f6; color: #fff; border-bottom-right-radius: 4px; }
-    .msg.ai .bubble { background: #f1f5f9; color: #1e293b; border-bottom-left-radius: 4px; }
-    .footer { margin-top: 32px; padding-top: 12px; border-top: 1px solid #e2e8f0; font-size: 10px; color: #94a3b8; text-align: center; }
-    @media print { body { padding: 20px; } @page { margin: 1.5cm; } }
-  </style>
-</head>
-<body>
-  <div class="header">
-    <h1>Interview Transcript — ${track}</h1>
-    <div class="meta">
-      <span><strong>Date:</strong> ${sessionDate}</span>
-      <span><strong>Difficulty:</strong> ${session.difficulty ?? ''}</span>
-      <span><strong>Company Style:</strong> ${session.company_style ?? ''}</span>
-      <span><strong>Messages:</strong> ${filtered.length}</span>
-    </div>
-  </div>
-  <div class="messages">${bubbles}</div>
-  <div class="footer">Generated by IntervIQ · Session #${session.id}</div>
-  <script>window.onload = () => { window.print(); }<\/script>
-</body>
-</html>`;
+      // Wrap text inside bubble width
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      const wrappedLines = doc.splitTextToSize(rawText, maxBubbleW - bubblePadX * 2);
+      const lineH = 14;
+      const bubbleH = bubblePadY * 2 + wrappedLines.length * lineH;
 
-    const win = window.open('', '_blank');
-    if (win) {
-      win.document.write(html);
-      win.document.close();
+      newPageIfNeeded(bubbleH + 30);
+
+      // Speaker label + time
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      const labelX = isUser ? pageW - margin - maxBubbleW : margin;
+      doc.setTextColor(isUser ? 59 : 100, isUser ? 130 : 116, isUser ? 246 : 139); // blue / slate
+      doc.text(speaker, labelX, y);
+      if (time) {
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(148, 163, 184);  // slate-400
+        doc.text(time, labelX + doc.getTextWidth(speaker) + 6, y);
+      }
+      y += 6;
+
+      // Bubble background
+      const bubbleX = isUser ? pageW - margin - maxBubbleW : margin;
+      if (isUser) {
+        doc.setFillColor(37, 99, 235);   // blue-600
+      } else {
+        doc.setFillColor(241, 245, 249); // slate-100
+      }
+      doc.roundedRect(bubbleX, y, maxBubbleW, bubbleH, 8, 8, 'F');
+
+      // Bubble text
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(isUser ? 255 : 30, isUser ? 255 : 41, isUser ? 255 : 59);
+      doc.text(wrappedLines, bubbleX + bubblePadX, y + bubblePadY + lineH - 4);
+
+      y += bubbleH + 14;
     }
+
+    // ── Footer ─────────────────────────────────────────────────────────────────
+    const totalPages = (doc.internal as any).getNumberOfPages();
+    for (let i = 1; i <= totalPages; i++) {
+      doc.setPage(i);
+      doc.setDrawColor(226, 232, 240);
+      doc.line(margin, pageH - 28, pageW - margin, pageH - 28);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(148, 163, 184);
+      doc.text('Generated by IntervIQ', margin, pageH - 14);
+      doc.text(`Page ${i} of ${totalPages}`, pageW - margin, pageH - 14, { align: 'right' });
+    }
+
+    doc.save(`interview-transcript-${session.id}.pdf`);
+    setDownloading(false);
   };
 
   return (
@@ -107,10 +159,11 @@ function TranscriptModal({
             {messages.length > 0 && (
               <button
                 onClick={handleDownload}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg transition-colors"
+                disabled={downloading}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {Icons.download}
-                Download PDF
+                {downloading ? <span className="animate-spin">{Icons.spinner}</span> : Icons.download}
+                {downloading ? 'Generating...' : 'Download PDF'}
               </button>
             )}
             <button
