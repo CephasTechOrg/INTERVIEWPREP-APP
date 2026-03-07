@@ -2,6 +2,7 @@
 
 import { Component, useEffect, useMemo, useState } from 'react';
 import { useSessionStore } from '@/lib/stores/sessionStore';
+import { useAuthStore } from '@/lib/stores/authStore';
 import { analyticsService } from '@/lib/services/analyticsService';
 import { feedbackService } from '@/lib/services/feedbackService';
 import { LevelCalibrationSection } from '@/components/sections/LevelCalibrationSection';
@@ -229,6 +230,7 @@ const FeedbackModal = ({
 // ─── Main component ────────────────────────────────────────────────────────────
 export const ResultsSection = () => {
   const { currentSession, evaluation, messages, setEvaluation, setLoading, setError } = useSessionStore();
+  const user = useAuthStore(s => s.user);
   const [levelOutcome, setLevelOutcome] = useState<InterviewLevelOutcome | null>(null);
   const [levelLoading, setLevelLoading] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
@@ -262,36 +264,303 @@ export const ResultsSection = () => {
     }
   };
 
-  // Download conversation transcript as a plain text file
-  const downloadTranscript = () => {
-    if (!messages.length || !currentSession) return;
-    const header = [
-      'IntervIQ — Interview Transcript',
-      `Session #${currentSession.id}`,
-      `Role: ${currentSession.track?.replace(/_/g, ' ')}`,
-      `Company Style: ${currentSession.company_style}`,
-      `Difficulty: ${currentSession.difficulty}`,
-      `Score: ${evaluation?.overall_score ?? 'N/A'} / 100`,
-      '─'.repeat(50),
-      '',
-    ].join('\n');
+  const [downloading, setDownloading] = useState(false);
 
-    const body = messages
-      .filter(m => m.role !== 'system')
-      .map(m => {
-        const speaker = m.role === 'interviewer' ? 'INTERVIEWER' : 'YOU';
-        const time = m.created_at ? new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
-        return `[${time}] ${speaker}\n${m.content}\n`;
-      })
-      .join('\n');
+  // Download full session report as PDF
+  const downloadTranscript = async () => {
+    if (!currentSession || !evaluation) return;
+    setDownloading(true);
 
-    const blob = new Blob([header + body], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `interviq-session-${currentSession.id}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
+    try {
+      const { jsPDF } = await import('jspdf');
+      const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+      const pageW  = doc.internal.pageSize.getWidth();
+      const pageH  = doc.internal.pageSize.getHeight();
+      const margin = 50;
+      const cW     = pageW - margin * 2;   // content width
+
+      // ── Data (sourced locally so closures are always current) ──────────────
+      const score        = evaluation.overall_score ?? null;
+      const summ         = evaluation.summary as any;
+      const narrativeTxt = summ?.narrative         as string | undefined;
+      const hireSignalTxt= summ?.hire_signal       as string | undefined;
+      const strengthsTxt = summ?.strengths         as string[] | undefined;
+      const weaknessesTxt= summ?.weaknesses        as string[] | undefined;
+      const patternsTxt  = summ?.patterns_observed as string[] | undefined;
+      const standoutsTxt = summ?.standout_moments  as string[] | undefined;
+      const evalComments = (evaluation.rubric as any)?.comments as string | undefined;
+
+      const rubricData   = evaluation.rubric
+        ? Object.entries(evaluation.rubric)
+            .filter(([k]) => !k.startsWith('_') && k !== 'comments')
+            .map(([k, v]) => ({
+              label: k,
+              score: typeof v === 'number' ? v : (v as any)?.score ?? 0,
+              max: 10,
+            }))
+        : [];
+
+      const trackName   = (currentSession.track?.replace(/_/g, ' ') ?? 'Interview').replace(/\b\w/g, c => c.toUpperCase());
+      const dateStr     = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      const candidateName = user?.full_name?.trim() || user?.email || 'Candidate';
+      const perfLabel  = score === null ? 'Pending' : score >= 80 ? 'Excellent' : score >= 60 ? 'Good' : score >= 40 ? 'Needs Improvement' : 'Keep Practicing';
+      const scoreRGB: [number,number,number] = score === null ? [100,116,139] : score >= 80 ? [16,185,129] : score >= 60 ? [59,130,246] : score >= 40 ? [245,158,11] : [239,68,68];
+
+      const HIRE_MAP: Record<string, { label: string; rgb: [number,number,number]; bg: [number,number,number] }> = {
+        strong_yes: { label: 'Strong Hire',       rgb: [5,150,105],   bg: [236,253,245] },
+        yes:        { label: 'Hire',              rgb: [37,99,235],   bg: [239,246,255] },
+        borderline: { label: 'Borderline',        rgb: [180,83,9],    bg: [255,251,235] },
+        no:         { label: 'No Hire',           rgb: [185,28,28],   bg: [254,242,242] },
+        strong_no:  { label: 'Strong No Hire',    rgb: [127,29,29],   bg: [254,242,242] },
+      };
+
+      // ── Layout helpers ────────────────────────────────────────────────────
+      let y = 0;
+
+      const ensureSpace = (need: number) => {
+        if (y + need > pageH - 64) { doc.addPage(); y = margin + 16; }
+      };
+
+      const divider = () => {
+        y += 6;
+        doc.setDrawColor(226, 232, 240);
+        doc.setLineWidth(0.5);
+        doc.line(margin, y, pageW - margin, y);
+        y += 18;
+      };
+
+      // Accent-bar section header
+      const sectionHeader = (title: string, r: number, g: number, b: number) => {
+        ensureSpace(44);
+        doc.setFillColor(r, g, b);
+        doc.rect(margin, y, 4, 18, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(12);
+        doc.setTextColor(15, 23, 42);
+        doc.text(title, margin + 12, y + 13);
+        y += 28;
+      };
+
+      // Bullet list item with wrapping
+      const bulletItem = (text: string, dotRGB: [number,number,number], marker?: string) => {
+        const lines = doc.splitTextToSize(text, cW - 18);
+        ensureSpace(lines.length * 14 + 6);
+        if (marker) {
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(10);
+          doc.setTextColor(...dotRGB);
+          doc.text(marker, margin + 2, y + 10);
+        } else {
+          doc.setFillColor(...dotRGB);
+          doc.circle(margin + 4, y + 6, 3, 'F');
+        }
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9.5);
+        doc.setTextColor(51, 65, 85);
+        lines.forEach((ln: string, li: number) => {
+          doc.text(ln, margin + 16, y + (li === 0 ? 10 : 10 + li * 14));
+        });
+        y += Math.max(20, lines.length * 14 + 4);
+      };
+
+      const addFooters = () => {
+        const total = (doc.internal as any).getNumberOfPages();
+        for (let i = 1; i <= total; i++) {
+          doc.setPage(i);
+          doc.setDrawColor(226, 232, 240);
+          doc.setLineWidth(0.5);
+          doc.line(margin, pageH - 36, pageW - margin, pageH - 36);
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(8);
+          doc.setTextColor(148, 163, 184);
+          doc.text('Generated by IntervIQ · Confidential', margin, pageH - 18);
+          doc.text(`Page ${i} of ${total}`, pageW - margin, pageH - 18, { align: 'right' });
+        }
+      };
+
+      // ── 1. HEADER ──────────────────────────────────────────────────────────
+      const headerH = 128;
+
+      // Background
+      doc.setFillColor(15, 23, 42);
+      doc.rect(0, 0, pageW, headerH, 'F');
+
+      // Left indigo accent stripe
+      doc.setFillColor(99, 102, 241);
+      doc.rect(0, 0, 5, headerH, 'F');
+
+      // Brand name
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(99, 102, 241);
+      doc.text('INTERVIQ', margin + 4, 26);
+
+      // Report title
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(22);
+      doc.setTextColor(255, 255, 255);
+      doc.text('Session Report', margin + 4, 56);
+
+      // Candidate name
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(11);
+      doc.setTextColor(203, 213, 225);
+      doc.text(candidateName, margin + 4, 74);
+
+      // Metadata row
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(100, 116, 139);
+      const metaParts = [trackName, currentSession.difficulty, currentSession.company_style].filter(Boolean);
+      doc.text(metaParts.join('  ·  '), margin + 4, 88);
+      doc.text(`Session #${currentSession.id}  ·  ${dateStr}`, margin + 4, 102);
+
+      // Score panel (right)
+      const panelW = 130;
+      const panelX = pageW - margin - panelW;
+      doc.setFillColor(30, 41, 59);
+      doc.roundedRect(panelX, 10, panelW, headerH - 20, 10, 10, 'F');
+
+      // Score number
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(score !== null && score >= 100 ? 30 : 38);
+      doc.setTextColor(...scoreRGB);
+      doc.text(score !== null ? `${score}` : '—', panelX + panelW / 2, 66, { align: 'center' });
+
+      // "/100"
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(100, 116, 139);
+      doc.text('out of 100', panelX + panelW / 2, 80, { align: 'center' });
+
+      // Performance label
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8);
+      doc.setTextColor(...scoreRGB);
+      doc.text(perfLabel.toUpperCase(), panelX + panelW / 2, 96, { align: 'center' });
+
+      y = headerH + 26;
+
+      // ── 2. HIRE SIGNAL BANNER ────────────────────────────────────────────
+      if (hireSignalTxt) {
+        const hireInfo = HIRE_MAP[hireSignalTxt] ?? HIRE_MAP.borderline;
+        ensureSpace(40);
+        doc.setFillColor(...hireInfo.bg);
+        doc.roundedRect(margin, y, cW, 32, 6, 6, 'F');
+        // Left accent bar
+        doc.setFillColor(...hireInfo.rgb);
+        doc.roundedRect(margin, y, 5, 32, 3, 3, 'F');
+
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(9.5);
+        doc.setTextColor(...hireInfo.rgb);
+        const labelText = 'Hiring Recommendation:';
+        doc.text(labelText, margin + 16, y + 21);
+
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(51, 65, 85);
+        doc.text(hireInfo.label, margin + 16 + doc.getTextWidth(labelText) + 5, y + 21);
+
+        y += 48;
+      }
+
+      // ── 3. SUMMARY ──────────────────────────────────────────────────────
+      if (narrativeTxt) {
+        sectionHeader('Summary', 99, 102, 241);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(51, 65, 85);
+        const lines = doc.splitTextToSize(narrativeTxt, cW);
+        lines.forEach((ln: string) => { ensureSpace(15); doc.text(ln, margin, y); y += 15; });
+        divider();
+      }
+
+      // ── 4. RUBRIC BREAKDOWN ──────────────────────────────────────────────
+      if (rubricData.length > 0) {
+        sectionHeader('Performance Breakdown', 59, 130, 246);
+
+        const barTrackW = cW * 0.48;
+        const barH      = 9;
+        const labelW    = cW * 0.38;
+        const barX      = margin + labelW;
+
+        for (const item of rubricData) {
+          ensureSpace(28);
+          const label    = item.label.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+          const pct      = Math.min(1, Math.max(0, item.score / item.max));
+          const pctNum   = Math.round(pct * 100);
+          const barRGB: [number,number,number] = pctNum >= 80 ? [16,185,129] : pctNum >= 60 ? [59,130,246] : pctNum >= 40 ? [245,158,11] : [239,68,68];
+
+          // Label
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(9.5);
+          doc.setTextColor(71, 85, 105);
+          doc.text(label, margin, y + 10);
+
+          // Track
+          doc.setFillColor(226, 232, 240);
+          doc.roundedRect(barX, y + 3, barTrackW, barH, 4, 4, 'F');
+
+          // Fill
+          if (pct > 0) {
+            doc.setFillColor(...barRGB);
+            doc.roundedRect(barX, y + 3, barTrackW * pct, barH, 4, 4, 'F');
+          }
+
+          // Score (e.g. "7/10")
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9.5);
+          doc.setTextColor(...barRGB);
+          doc.text(`${item.score}/${item.max}`, pageW - margin, y + 10, { align: 'right' });
+
+          y += 24;
+        }
+        divider();
+      }
+
+      // ── 5. STRENGTHS ────────────────────────────────────────────────────
+      if (strengthsTxt && strengthsTxt.length > 0) {
+        sectionHeader('Strengths', 16, 185, 129);
+        strengthsTxt.forEach(s => bulletItem(s, [16, 185, 129]));
+        divider();
+      }
+
+      // ── 6. AREAS TO IMPROVE ──────────────────────────────────────────────
+      if (weaknessesTxt && weaknessesTxt.length > 0) {
+        sectionHeader('Areas to Improve', 245, 158, 11);
+        weaknessesTxt.forEach(w => bulletItem(w, [245, 158, 11]));
+        divider();
+      }
+
+      // ── 7. PATTERNS OBSERVED ─────────────────────────────────────────────
+      if (patternsTxt && patternsTxt.length > 0) {
+        sectionHeader('Patterns Observed', 99, 102, 241);
+        patternsTxt.forEach(p => bulletItem(p, [99, 102, 241]));
+        divider();
+      }
+
+      // ── 8. STANDOUT MOMENTS ──────────────────────────────────────────────
+      if (standoutsTxt && standoutsTxt.length > 0) {
+        sectionHeader('Standout Moments', 245, 158, 11);
+        standoutsTxt.forEach(s => bulletItem(s, [245, 158, 11], '★'));
+        divider();
+      }
+
+      // ── 9. EVALUATOR COMMENTS ────────────────────────────────────────────
+      if (evalComments) {
+        sectionHeader('Evaluator Comments', 100, 116, 139);
+        doc.setFont('helvetica', 'italic');
+        doc.setFontSize(9.5);
+        doc.setTextColor(71, 85, 105);
+        const lines = doc.splitTextToSize(evalComments, cW);
+        lines.forEach((ln: string) => { ensureSpace(14); doc.text(ln, margin, y); y += 14; });
+      }
+
+      addFooters();
+      doc.save(`interviq-report-${currentSession.id}.pdf`);
+    } finally {
+      setDownloading(false);
+    }
   };
 
   const rubricItems = useMemo(() => {
@@ -362,10 +631,13 @@ export const ResultsSection = () => {
                 <div className="flex items-center gap-2 flex-shrink-0">
                   {hasTranscript && (
                     <button onClick={downloadTranscript}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-blue-700 text-blue-200 hover:bg-blue-800 hover:text-white text-xs font-medium transition-colors"
-                      title="Download transcript">
-                      <DownloadIcon />
-                      <span className="hidden sm:inline">Transcript</span>
+                      disabled={downloading}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-blue-700 text-blue-200 hover:bg-blue-800 hover:text-white text-xs font-medium transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                      title="Download transcript as PDF">
+                      {downloading
+                        ? <svg className="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/></svg>
+                        : <DownloadIcon />}
+                      <span className="hidden sm:inline">{downloading ? 'Generating...' : 'Transcript PDF'}</span>
                     </button>
                   )}
                   <button onClick={() => setShowFeedback(true)}

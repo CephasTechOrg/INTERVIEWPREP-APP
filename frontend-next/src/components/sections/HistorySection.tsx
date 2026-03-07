@@ -78,7 +78,7 @@ function TranscriptModal({
     };
 
     for (const m of filtered) {
-      const isUser = m.role === 'user';
+      const isUser = m.role === 'student' || m.role === 'user';
       const speaker = isUser ? 'You' : 'AI Interviewer';
       const time = m.created_at
         ? new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -190,15 +190,19 @@ function TranscriptModal({
             messages
               .filter(m => m.role !== 'system')
               .map((m) => {
-                const isUser = m.role === 'user';
+                const isUser = m.role === 'student' || m.role === 'user';
+                const label = isUser ? 'You' : 'AI Interviewer';
                 return (
                   <div key={m.id} className={`flex gap-3 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
                     <div className={`w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold text-white ${
-                      isUser ? 'bg-blue-600' : 'bg-gradient-to-br from-blue-500 to-blue-600'
+                      isUser ? 'bg-blue-600' : 'bg-slate-500 dark:bg-slate-600'
                     }`}>
-                      {isUser ? 'Y' : 'I'}
+                      {isUser ? 'Y' : 'AI'}
                     </div>
                     <div className={`max-w-[80%] ${isUser ? 'items-end' : 'items-start'} flex flex-col gap-1`}>
+                      <span className={`text-[10px] font-semibold px-1 ${isUser ? 'text-blue-500' : 'text-slate-400'}`}>
+                        {label}
+                      </span>
                       <div className={`px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                         isUser
                           ? 'bg-blue-600 text-white rounded-br-sm'
