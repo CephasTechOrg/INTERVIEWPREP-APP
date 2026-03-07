@@ -230,13 +230,21 @@ export const Sidebar = () => {
           </div>
 
           {/* Admin (only for admin users) */}
-          {adminNavItems.length > 0 && (
+          {user?.is_admin && (
             <div className="mt-4">
               {!sidebarCollapsed && (
                 <p className="px-3 mb-2 text-[10px] font-semibold text-blue-200 uppercase tracking-wider">Admin</p>
               )}
               <div className="space-y-0.5">
-                {adminNavItems.map(item => <NavButton key={item.id} item={item} />)}
+                <button
+                  onClick={() => router.push('/admin/dashboard')}
+                  title={sidebarCollapsed ? 'Admin Portal' : undefined}
+                  className={`group relative w-full flex items-center transition-all duration-200 rounded-lg text-[13px] font-medium text-blue-100 hover:text-white hover:bg-blue-800/40 ${sidebarCollapsed ? 'justify-center px-2 py-2.5' : 'gap-3 px-3.5 py-2'}`}
+                >
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full bg-transparent group-hover:bg-blue-700 transition-all duration-200" />
+                  <span className="flex-shrink-0 text-blue-100 group-hover:text-white">{Icons.admin}</span>
+                  {!sidebarCollapsed && <span className="flex-1 text-left">Admin Portal</span>}
+                </button>
               </div>
             </div>
           )}

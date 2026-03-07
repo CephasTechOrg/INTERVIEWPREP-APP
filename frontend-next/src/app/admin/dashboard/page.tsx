@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { adminService } from '@/lib/services/adminService';
+import { adminService, SystemHealth } from '@/lib/services/adminService';
 import {
   UsersIcon,
   CheckCircleIcon,
@@ -18,6 +18,104 @@ interface Stats {
   banned_users: number;
   active_interviews: number;
   total_questions: number;
+}
+
+function SystemHealthPanel() {
+  const [health, setHealth] = useState<SystemHealth | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const fetch = async () => {
+    setLoading(true);
+    try {
+      const data = await adminService.getSystemHealth();
+      setHealth(data);
+    } catch {
+      setHealth(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { fetch(); }, []);
+
+  const llmStatus = health?.llm;
+  const statusColor =
+    !llmStatus ? 'text-slate-400' :
+    llmStatus.status === 'online' ? 'text-emerald-500' :
+    llmStatus.fallback_mode ? 'text-amber-500' : 'text-red-500';
+
+  const statusLabel =
+    !llmStatus ? 'Unknown' :
+    llmStatus.status === 'online' ? 'Online' :
+    llmStatus.fallback_mode ? 'Fallback Mode' : 'Offline';
+
+  const dotColor =
+    !llmStatus ? 'bg-slate-400' :
+    llmStatus.status === 'online' ? 'bg-emerald-500' :
+    llmStatus.fallback_mode ? 'bg-amber-500' : 'bg-red-500';
+
+  return (
+    <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-semibold text-slate-800 dark:text-white">System Health</h3>
+        <button
+          onClick={fetch}
+          className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors"
+        >
+          <RefreshIcon className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+        </button>
+      </div>
+
+      <div className="space-y-3">
+        {/* AI / LLM */}
+        <div className="flex items-center justify-between py-2 border-b border-slate-100 dark:border-slate-700">
+          <div>
+            <p className="text-sm font-medium text-slate-700 dark:text-slate-300">AI Model</p>
+            <p className="text-xs text-slate-400">{llmStatus?.model || llmStatus?.base_url || 'DeepSeek'}</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className={`w-2.5 h-2.5 rounded-full ${dotColor} ${llmStatus?.status === 'online' ? 'animate-pulse' : ''}`} />
+            <span className={`text-sm font-semibold ${statusColor}`}>{loading ? '...' : statusLabel}</span>
+          </div>
+        </div>
+
+        {/* Fallback mode warning */}
+        {llmStatus?.fallback_mode && (
+          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg px-3 py-2 text-xs text-amber-700 dark:text-amber-400">
+            Fallback mode active — AI responses may be limited or unavailable.
+          </div>
+        )}
+
+        {/* Last error */}
+        {llmStatus?.last_error && (
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg px-3 py-2">
+            <p className="text-xs font-medium text-red-700 dark:text-red-400 mb-0.5">Last Error</p>
+            <p className="text-xs text-red-600 dark:text-red-400 break-all">{llmStatus.last_error}</p>
+            {llmStatus.last_error_at && (
+              <p className="text-xs text-red-400 mt-0.5">{new Date(llmStatus.last_error_at * 1000).toLocaleString()}</p>
+            )}
+          </div>
+        )}
+
+        {/* Database */}
+        <div className="flex items-center justify-between py-2">
+          <p className="text-sm font-medium text-slate-700 dark:text-slate-300">Database</p>
+          <div className="flex items-center gap-2">
+            <span className={`w-2.5 h-2.5 rounded-full ${health?.database === 'online' ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`} />
+            <span className={`text-sm font-semibold ${health?.database === 'online' ? 'text-emerald-500' : 'text-red-500'}`}>
+              {loading ? '...' : health?.database === 'online' ? 'Online' : (health?.database || 'Unknown')}
+            </span>
+          </div>
+        </div>
+
+        {health?.timestamp && (
+          <p className="text-xs text-slate-400 text-right">
+            Checked {new Date(health.timestamp).toLocaleTimeString()}
+          </p>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default function AdminDashboard() {
@@ -208,6 +306,9 @@ export default function AdminDashboard() {
           </div>
         </div>
       </div>
+
+      {/* System Health */}
+      <SystemHealthPanel />
     </div>
   );
 }
