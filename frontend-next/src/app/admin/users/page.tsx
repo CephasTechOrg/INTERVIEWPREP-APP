@@ -367,7 +367,7 @@ export default function AdminUsersPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-slate-800 dark:text-white">User Management</h1>
-          <p className="text-slate-600 dark:text-slate-400">View and manage user accounts</p>
+          <p className="text-slate-600 dark:text-slate-400">View and manage user accounts — <span className="text-blue-500">click any row</span> to see sessions, usage & rate limits</p>
         </div>
         <button
           onClick={fetchUsers}
@@ -476,7 +476,13 @@ export default function AdminUsersPage() {
                     {new Date(user.created_at).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4 text-sm" onClick={(e) => e.stopPropagation()}>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 flex-wrap">
+                      <button
+                        onClick={() => setDetailUserId(user.id)}
+                        className="px-3 py-1.5 rounded-lg text-sm font-medium bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+                      >
+                        Details
+                      </button>
                       <button
                         onClick={() => handleBanClick(user)}
                         className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${

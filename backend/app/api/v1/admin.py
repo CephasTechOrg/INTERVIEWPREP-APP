@@ -234,19 +234,103 @@ def reset_user_usage(
 
 @router.get("/system/health")
 def get_system_health(admin: User = Depends(get_admin), db: Session = Depends(get_db)):
-    """Get system health status including AI/LLM status."""
-    llm = get_llm_status()
+    """Get comprehensive system health status for all external services."""
+    import sqlalchemy
 
-    # Quick DB health check
+    from app.core.config import settings
+
+    services: dict = {}
+
+    # ── 1. Database ────────────────────────────────────────────────────────────
     try:
-        db.execute(__import__("sqlalchemy").text("SELECT 1"))
-        db_status = "online"
-    except Exception as e:
-        db_status = f"error: {e}"
+        db.execute(sqlalchemy.text("SELECT 1"))
+        db_type = "supabase" if (settings.DATABASE_URL or "").startswith("postgresql") else "local"
+        services["database"] = {"status": "online", "type": db_type, "error": None}
+    except Exception as exc:
+        services["database"] = {"status": "offline", "type": "unknown", "error": str(exc)}
+
+    # ── 2. AI / DeepSeek ───────────────────────────────────────────────────────
+    llm = get_llm_status()
+    services["ai"] = {
+        "status": llm.get("status", "offline"),
+        "configured": llm.get("configured", False),
+        "fallback_mode": llm.get("fallback_mode", False),
+        "model": llm.get("model", settings.DEEPSEEK_MODEL),
+        "last_error": llm.get("last_error"),
+        "last_error_at": llm.get("last_error_at"),
+        "last_ok_at": llm.get("last_ok_at"),
+    }
+
+    # ── 3. SendGrid ────────────────────────────────────────────────────────────
+    sendgrid_key = getattr(settings, "SENDGRID_API_KEY", None)
+    if sendgrid_key:
+        try:
+            import httpx as _httpx
+            resp = _httpx.get(
+                "https://api.sendgrid.com/v3/user/profile",
+                headers={"Authorization": f"Bearer {sendgrid_key}"},
+                timeout=8,
+            )
+            if resp.status_code == 200:
+                services["sendgrid"] = {"status": "online", "configured": True, "error": None}
+            else:
+                services["sendgrid"] = {
+                    "status": "error",
+                    "configured": True,
+                    "error": f"HTTP {resp.status_code}",
+                }
+        except Exception as exc:
+            services["sendgrid"] = {"status": "offline", "configured": True, "error": str(exc)}
+    else:
+        smtp_host = getattr(settings, "SMTP_HOST", None)
+        if smtp_host:
+            services["sendgrid"] = {
+                "status": "online",
+                "configured": True,
+                "error": None,
+                "note": f"SMTP ({smtp_host})",
+            }
+        else:
+            services["sendgrid"] = {
+                "status": "unconfigured",
+                "configured": False,
+                "error": "No email provider set — dev console mode",
+            }
+
+    # ── 4. Supabase Storage ────────────────────────────────────────────────────
+    supabase_url = getattr(settings, "SUPABASE_URL", None)
+    supabase_key = getattr(settings, "SUPABASE_SERVICE_ROLE_KEY", None)
+    if supabase_url and supabase_key:
+        try:
+            import httpx as _httpx
+            resp = _httpx.get(
+                f"{supabase_url}/rest/v1/",
+                headers={
+                    "apikey": supabase_key,
+                    "Authorization": f"Bearer {supabase_key}",
+                },
+                timeout=8,
+            )
+            if resp.status_code < 500:
+                services["supabase"] = {"status": "online", "configured": True, "url": supabase_url, "error": None}
+            else:
+                services["supabase"] = {
+                    "status": "error",
+                    "configured": True,
+                    "url": supabase_url,
+                    "error": f"HTTP {resp.status_code}",
+                }
+        except Exception as exc:
+            services["supabase"] = {"status": "offline", "configured": True, "url": supabase_url, "error": str(exc)}
+    else:
+        services["supabase"] = {
+            "status": "unconfigured",
+            "configured": False,
+            "error": "Supabase not configured — using local storage",
+        }
 
     return {
-        "llm": llm,
-        "database": db_status,
+        "services": services,
         "timestamp": datetime.now(UTC).isoformat(),
     }
 

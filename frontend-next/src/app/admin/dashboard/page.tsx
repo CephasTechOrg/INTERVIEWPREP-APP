@@ -20,98 +20,174 @@ interface Stats {
   total_questions: number;
 }
 
+type ServiceKey = 'database' | 'ai' | 'sendgrid' | 'supabase';
+
+const SERVICE_META: Record<ServiceKey, { label: string; sub: (s: NonNullable<SystemHealth['services'][ServiceKey]>) => string }> = {
+  database: {
+    label: 'Database',
+    sub: (s) => s.type === 'supabase' ? 'Supabase PostgreSQL' : 'Local PostgreSQL',
+  },
+  ai: {
+    label: 'AI Model (DeepSeek)',
+    sub: (s) => s.fallback_mode ? 'Fallback mode active' : (s.model || 'deepseek-chat'),
+  },
+  sendgrid: {
+    label: 'Email (SendGrid)',
+    sub: (s) => s.note || (s.configured ? 'SendGrid API' : 'Dev console mode'),
+  },
+  supabase: {
+    label: 'Supabase Storage',
+    sub: (s) => s.url ? s.url.replace('https://', '').split('.')[0] + '.supabase.co' : 'Not configured',
+  },
+};
+
+function StatusDot({ status }: { status: string }) {
+  const styles: Record<string, string> = {
+    online: 'bg-emerald-500 animate-pulse shadow-emerald-500/50 shadow-sm',
+    offline: 'bg-red-500',
+    error: 'bg-red-400',
+    unconfigured: 'bg-slate-400',
+  };
+  return <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${styles[status] || 'bg-slate-400'}`} />;
+}
+
+function StatusBadge({ status }: { status: string }) {
+  const styles: Record<string, string> = {
+    online: 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400',
+    offline: 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400',
+    error: 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400',
+    unconfigured: 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400',
+  };
+  const labels: Record<string, string> = {
+    online: 'Online',
+    offline: 'Offline',
+    error: 'Error',
+    unconfigured: 'Not Configured',
+  };
+  return (
+    <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${styles[status] || styles.unconfigured}`}>
+      {labels[status] || status}
+    </span>
+  );
+}
+
 function SystemHealthPanel() {
   const [health, setHealth] = useState<SystemHealth | null>(null);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(false);
 
-  const fetch = async () => {
+  const doFetch = async () => {
     setLoading(true);
+    setFetchError(false);
     try {
       const data = await adminService.getSystemHealth();
       setHealth(data);
     } catch {
-      setHealth(null);
+      setFetchError(true);
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => { fetch(); }, []);
+  useEffect(() => { doFetch(); }, []);
 
-  const llmStatus = health?.llm;
-  const statusColor =
-    !llmStatus ? 'text-slate-400' :
-    llmStatus.status === 'online' ? 'text-emerald-500' :
-    llmStatus.fallback_mode ? 'text-amber-500' : 'text-red-500';
-
-  const statusLabel =
-    !llmStatus ? 'Unknown' :
-    llmStatus.status === 'online' ? 'Online' :
-    llmStatus.fallback_mode ? 'Fallback Mode' : 'Offline';
-
-  const dotColor =
-    !llmStatus ? 'bg-slate-400' :
-    llmStatus.status === 'online' ? 'bg-emerald-500' :
-    llmStatus.fallback_mode ? 'bg-amber-500' : 'bg-red-500';
+  const services = health?.services;
+  const allOnline = services && Object.values(services).every(s => s.status === 'online');
+  const anyOffline = services && Object.values(services).some(s => s.status === 'offline' || s.status === 'error');
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-slate-800 dark:text-white">System Health</h3>
-        <button
-          onClick={fetch}
-          className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors"
-        >
-          <RefreshIcon className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-        </button>
+    <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-700">
+        <div className="flex items-center gap-3">
+          <h3 className="text-lg font-semibold text-slate-800 dark:text-white">System Health</h3>
+          {!loading && services && (
+            <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${
+              allOnline
+                ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400'
+                : anyOffline
+                  ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400'
+                  : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400'
+            }`}>
+              {allOnline ? 'All Systems Operational' : anyOffline ? 'Degraded' : 'Partial'}
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-3">
+          {health?.timestamp && (
+            <span className="text-xs text-slate-400">
+              Checked {new Date(health.timestamp).toLocaleTimeString()}
+            </span>
+          )}
+          <button
+            onClick={doFetch}
+            disabled={loading}
+            className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors"
+            title="Refresh health"
+          >
+            <RefreshIcon className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+          </button>
+        </div>
       </div>
 
-      <div className="space-y-3">
-        {/* AI / LLM */}
-        <div className="flex items-center justify-between py-2 border-b border-slate-100 dark:border-slate-700">
-          <div>
-            <p className="text-sm font-medium text-slate-700 dark:text-slate-300">AI Model</p>
-            <p className="text-xs text-slate-400">{llmStatus?.model || llmStatus?.base_url || 'DeepSeek'}</p>
+      {/* Service rows */}
+      <div className="divide-y divide-slate-100 dark:divide-slate-700">
+        {fetchError ? (
+          <div className="px-6 py-4 text-sm text-red-600 dark:text-red-400">
+            Failed to load health status.{' '}
+            <button onClick={doFetch} className="underline">Retry</button>
           </div>
-          <div className="flex items-center gap-2">
-            <span className={`w-2.5 h-2.5 rounded-full ${dotColor} ${llmStatus?.status === 'online' ? 'animate-pulse' : ''}`} />
-            <span className={`text-sm font-semibold ${statusColor}`}>{loading ? '...' : statusLabel}</span>
-          </div>
-        </div>
+        ) : (
+          (['database', 'ai', 'sendgrid', 'supabase'] as ServiceKey[]).map((key) => {
+            const svc = services?.[key];
+            const meta = SERVICE_META[key];
+            return (
+              <div key={key} className="px-6 py-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <StatusDot status={loading ? 'unconfigured' : (svc?.status || 'unconfigured')} />
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium text-slate-800 dark:text-white">{meta.label}</p>
+                      <p className="text-xs text-slate-400 truncate">
+                        {loading ? 'Checking...' : svc ? meta.sub(svc) : '—'}
+                      </p>
+                    </div>
+                  </div>
+                  {loading ? (
+                    <span className="text-xs text-slate-400 animate-pulse">...</span>
+                  ) : (
+                    <StatusBadge status={svc?.status || 'unconfigured'} />
+                  )}
+                </div>
 
-        {/* Fallback mode warning */}
-        {llmStatus?.fallback_mode && (
-          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg px-3 py-2 text-xs text-amber-700 dark:text-amber-400">
-            Fallback mode active — AI responses may be limited or unavailable.
-          </div>
-        )}
-
-        {/* Last error */}
-        {llmStatus?.last_error && (
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg px-3 py-2">
-            <p className="text-xs font-medium text-red-700 dark:text-red-400 mb-0.5">Last Error</p>
-            <p className="text-xs text-red-600 dark:text-red-400 break-all">{llmStatus.last_error}</p>
-            {llmStatus.last_error_at && (
-              <p className="text-xs text-red-400 mt-0.5">{new Date(llmStatus.last_error_at * 1000).toLocaleString()}</p>
-            )}
-          </div>
-        )}
-
-        {/* Database */}
-        <div className="flex items-center justify-between py-2">
-          <p className="text-sm font-medium text-slate-700 dark:text-slate-300">Database</p>
-          <div className="flex items-center gap-2">
-            <span className={`w-2.5 h-2.5 rounded-full ${health?.database === 'online' ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`} />
-            <span className={`text-sm font-semibold ${health?.database === 'online' ? 'text-emerald-500' : 'text-red-500'}`}>
-              {loading ? '...' : health?.database === 'online' ? 'Online' : (health?.database || 'Unknown')}
-            </span>
-          </div>
-        </div>
-
-        {health?.timestamp && (
-          <p className="text-xs text-slate-400 text-right">
-            Checked {new Date(health.timestamp).toLocaleTimeString()}
-          </p>
+                {/* Warnings / errors */}
+                {!loading && svc?.status === 'online' && key === 'ai' && svc.fallback_mode && (
+                  <div className="mt-2 ml-5 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg px-3 py-1.5 text-xs text-amber-700 dark:text-amber-400">
+                    Fallback mode active — AI responses may be limited.
+                  </div>
+                )}
+                {!loading && (svc?.status === 'offline' || svc?.status === 'error') && svc?.error && (
+                  <div className="mt-2 ml-5 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg px-3 py-1.5 text-xs text-red-600 dark:text-red-400 break-all">
+                    {svc.error}
+                  </div>
+                )}
+                {!loading && key === 'ai' && svc?.last_error && svc.status !== 'online' && (
+                  <div className="mt-2 ml-5 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg px-3 py-1.5">
+                    <p className="text-xs font-medium text-red-700 dark:text-red-400">Last error</p>
+                    <p className="text-xs text-red-500 break-all">{svc.last_error}</p>
+                    {svc.last_error_at && (
+                      <p className="text-xs text-red-400 mt-0.5">{new Date(svc.last_error_at * 1000).toLocaleString()}</p>
+                    )}
+                  </div>
+                )}
+                {!loading && svc?.status === 'unconfigured' && (
+                  <div className="mt-1 ml-5 text-xs text-slate-400">
+                    {svc.error || 'Not configured in environment'}
+                  </div>
+                )}
+              </div>
+            );
+          })
         )}
       </div>
     </div>

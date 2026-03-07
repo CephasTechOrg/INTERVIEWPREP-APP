@@ -86,18 +86,27 @@ export interface UserFullDetail extends User {
   feedback_count: number;
 }
 
+export interface ServiceStatus {
+  status: 'online' | 'offline' | 'error' | 'unconfigured';
+  configured?: boolean;
+  error?: string | null;
+  note?: string;
+  fallback_mode?: boolean;
+  model?: string;
+  last_error?: string | null;
+  last_error_at?: number | null;
+  last_ok_at?: number | null;
+  type?: string;
+  url?: string;
+}
+
 export interface SystemHealth {
-  llm: {
-    configured: boolean;
-    status: string;
-    fallback_mode: boolean;
-    last_error?: string | null;
-    last_error_at?: number | null;
-    last_ok_at?: number | null;
-    model?: string;
-    base_url?: string;
+  services: {
+    database: ServiceStatus;
+    ai: ServiceStatus;
+    sendgrid: ServiceStatus;
+    supabase: ServiceStatus;
   };
-  database: string;
   timestamp: string;
 }
 
